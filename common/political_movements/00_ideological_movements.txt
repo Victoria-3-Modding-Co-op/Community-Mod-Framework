@@ -14,6 +14,7 @@
 	on_disbanded = {}
 	
 	creation_trigger = {
+		#NOT = { has_variable = disable_movement_anti_slavery_var } #Disable movement
 		NOT = { has_law = law_type:law_slavery_banned }
 		has_technology_researched = empiricism
 	}

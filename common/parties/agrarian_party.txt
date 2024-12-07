@@ -306,20 +306,19 @@ agrarian_party = {
 					has_ideology = ideology:ideology_reactionary
 
 					# ANZFP
-					trigger = {
-						trigger_if = {
-							limit = {
-								anzfp_is_active = yes
-							}
-							OR = {
-								has_ideology = ideology:ideology_unt_populist
-								has_ideology = ideology:ideology_unt_reactionary
-							}
+					trigger_if = {
+						limit = {
+							anzfp_is_active = yes
 						}
-						trigger_else = { 
-							always = no
+						OR = {
+							has_ideology = ideology:ideology_unt_populist
+							has_ideology = ideology:ideology_unt_reactionary
 						}
 					}
+					trigger_else = { 
+						always = no
+					}
+					
 				}
 				owner = {
 					has_law = law_type:law_no_migration_controls
@@ -359,19 +358,17 @@ agrarian_party = {
 					}
 
 					# ANZFP
-                    trigger = {
-                        trigger_if = {
-                            limit = {
-                                anzfp_is_active = yes
-                            }
-							leader = { 
-								has_ideology = ideology:ideology_anz_georgist
-							}
-                        }
-                        trigger_else = { 
-                            always = no
-                        }
-                    }
+					trigger_if = {
+						limit = {
+							anzfp_is_active = yes
+						}
+						leader = { 
+							has_ideology = ideology:ideology_anz_georgist
+						}
+					}
+					trigger_else = { 
+						always = no
+					}
 
                 }
 
@@ -392,16 +389,14 @@ agrarian_party = {
 					has_ideology = ideology:ideology_paternalistic
 
 					# ANZFP
-					trigger = {
-						trigger_if = {
-							limit = {
-								anzfp_is_active = yes
-							}
-							has_ideology = ideology:ideology_tribal_traditionalist
+					trigger_if = {
+						limit = {
+							anzfp_is_active = yes
 						}
-						trigger_else = { 
-							always = no
-						}
+						has_ideology = ideology:ideology_tribal_traditionalist
+					}
+					trigger_else = { 
+						always = no
 					}
 
 				}
@@ -414,18 +409,16 @@ agrarian_party = {
 					}
 
 					# ANZFP
-					trigger = {
-						trigger_if = {
-							limit = {
-								anzfp_is_active = yes
-							}
-							leader = { 
-								has_ideology = ideology:ideology_anz_georgist
-							}
+					trigger_if = {
+						limit = {
+							anzfp_is_active = yes
 						}
-						trigger_else = { 
-							always = no
+						leader = { 
+							has_ideology = ideology:ideology_anz_georgist
 						}
+					}
+					trigger_else = { 
+						always = no
 					}
 
 				}

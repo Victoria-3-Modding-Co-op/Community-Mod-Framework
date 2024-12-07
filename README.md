@@ -1,7 +1,7 @@
 # Community-Mod-Framework
 Framework mod to support compatibility between including GUI, Political Movements, Parties and mod detection triggers
 
-### Political Movements ###
+## Political Movements ##
 
 Overwrites vanilla Political Movement definitions with scripted triggers to aid in mod compatibility
 
@@ -11,7 +11,7 @@ Add dummy ideologies from mods into political movements, allowing them to spawn 
 * Load this mod below any other mod
 * Your mod will overwrite the ideology definition and allow it to spawn in the specified political movements
 
-### GUI Framework ###
+## GUI Framework ##
 
 Current Scope:
 1) A "sidebar" scripted widget to deconflict mods that want to add custom sidebar buttons. (Done in cooperation with LordR)
@@ -28,7 +28,7 @@ Usage Notes:
 * "Superevent" windows activated by including in event: gui_window = (event_window_crisis/event_window_newspaper/event_window_fullscreen)
 
 
-### Community Mod Triggers ###
+## Community Mod Triggers ##
 
 Usage
 1) Place the file 00_community_mod_compatibility_triggers.txt  in the /common/scripted_triggers folder of your mod. This file will contain the scripted triggers all set to return false by default. This is intentional.

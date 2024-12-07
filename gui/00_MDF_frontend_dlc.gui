@@ -1,0 +1,106 @@
+types dlc_types {
+	type dlc_collection = hbox {
+		layoutpolicy_horizontal = expanding
+		layoutpolicy_vertical = expanding
+		margin_left = 20
+		spacing = 16
+
+		text_single = {
+			max_width = 150
+			minimumsize = { 0 25 }
+
+			text = "DLC"
+			align = nobaseline
+			using = Font_Size_Medium
+		}
+
+        # Vanilla
+		hbox = {
+			# datamodel = "[GetDlcCollection]" # MDF
+            datamodel = "[DataModelFirst( GetDlcCollection, '(int32)6' )]" # MDF - Set arg 2 to current number of real DLCs in menu
+			spacing = 10
+
+			item = {
+				hbox = {
+					widget = {
+						visible = "[Dlc.IsMajor]"
+						size = { 80 80 }
+						dlc_button = {}
+					}
+
+					widget = {
+						visible = "[Not( Dlc.IsMajor )]"
+						size = { 65 65 }
+						dlc_button = {}
+					}
+				}
+			}
+		}
+        
+        vertical_divider = {
+            visible = "[GreaterThan_int32( GetDataModelSize(GetDlcCollection), '(int32)6' )]" # MDF - Set arg 2 to # of real DLCs
+        }
+        
+        # Mods
+        hbox = {
+			# datamodel = "[GetDlcCollection]" # MDF
+            datamodel = "[DataModelSkipFirst( GetDlcCollection, '(int32)6' )]" # MDF - Set arg 2 to # of real DLCs
+			spacing = 10
+
+			item = {
+				hbox = {
+					widget = {
+						visible = "[Dlc.IsMajor]"
+						size = { 80 80 }
+						dlc_button = {
+                            blockoverride "button_params" {
+                                tooltip = "MDF_MOD_DLC_BUTTON_TOOLTIP"
+                            }
+                        }
+					}
+
+					widget = {
+						visible = "[Not( Dlc.IsMajor )]"
+						size = { 65 65 }
+						dlc_button = {
+                            blockoverride "button_params" {
+                                tooltip = "MDF_MOD_DLC_BUTTON_TOOLTIP"
+                            }
+                        }
+					}
+				}
+			}
+		}
+
+		expand = {}
+	}
+
+	type dlc_button = button {
+		size = { 100% 100% }
+		# alpha = "[TransparentIfFalse( Dlc.IsEnabled )]" # MDF
+		# onclick = "[Dlc.ShowInStore]" # MDF
+		# tooltip = "DLC_BUTTON_TOOLTIP" # MDF
+		using = tooltip_ne
+        
+        # MDF
+        block "button_params" { # MDF
+            alpha   = "[TransparentIfFalse( Dlc.IsEnabled )]"
+            onclick = "[Dlc.ShowInStore]"
+            tooltip = "DLC_BUTTON_TOOLTIP"
+        }
+
+		icon = {
+			size = { 100% 100% }
+			texture = "gfx/interface/backgrounds/round_frame_dec.dds"
+
+			icon = {
+				size = { 100% 100% }
+				position = { 3 -3 }
+
+				texture = "[Dlc.GetIcon]"
+				parentanchor = center
+
+			}
+		}
+	}
+}

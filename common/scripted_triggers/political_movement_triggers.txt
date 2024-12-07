@@ -1,0 +1,205 @@
+﻿character_is_anti_slavery = {
+	OR = {
+		has_ideology = ideology:ideology_abolitionist
+		has_ideology = ideology:ideology_humanitarian
+		law_stance = {
+			law = law_type:law_slavery_banned
+			value >= neutral
+		}
+	}
+}
+
+character_is_pro_slavery = {
+	OR = {
+		has_ideology = ideology:ideology_slaver
+		has_ideology = ideology:ideology_jacksonian_democrat
+		law_stance = {
+			law = law_type:law_slavery_banned
+			value <= disapprove
+		}
+	}
+}
+
+character_is_pro_religious_majority = {
+	OR = {
+		has_ideology = ideology:ideology_traditionalist
+		has_ideology = ideology:ideology_theocrat
+		has_ideology = ideology:ideology_integralist
+		law_stance = {
+			law = law_type:law_state_religion
+			value = strongly_approve
+		}
+	}
+}
+
+character_is_pro_religious_minority = {
+	OR = {
+		has_ideology = ideology:ideology_traditionalist_minoritarian
+		has_ideology = ideology:ideology_usfp_universalist
+	}
+}
+
+character_hates_state_atheism = {
+	OR = {
+		has_ideology = ideology:ideology_traditionalist
+		has_ideology = ideology:ideology_theocrat
+		law_stance = {
+			law = law_type:law_state_atheism
+			value = strongly_disapprove
+		}
+	}
+}
+
+character_is_pro_fascist = {
+	OR = {
+		has_ideology = ideology:ideology_fascist
+		has_ideology = ideology:ideology_integralist
+		has_ideology = ideology:ideology_corporatist_leader
+		has_ideology = ideology:ideology_ethno_nationalist
+		has_ideology = ideology:ideology_usfp_social_darwinist_leader
+		law_stance = {
+			law = law_type:law_ethnostate
+			value >= approve
+		}
+	}
+}
+
+character_is_pro_cultural_majority = {
+	OR = {
+		has_ideology = ideology:ideology_fascist
+		has_ideology = ideology:ideology_jingoist_leader		
+		has_ideology = ideology:ideology_ethno_nationalist
+		law_stance = {
+			law = law_type:law_ethnostate
+			value >= approve
+		}
+	}
+}
+
+character_is_pro_labor_movement = {
+	OR = {
+		has_ideology = ideology:ideology_reformer
+		has_ideology = ideology:ideology_radical
+		has_ideology = ideology:ideology_social_democrat
+		law_stance = {
+			law = law_type:law_regulatory_bodies
+			value >= approve
+		}
+	}
+}
+
+character_is_pro_socialist_movement = {
+	OR = {
+		has_ideology = ideology:ideology_communist
+		has_ideology = ideology:ideology_anarchist
+		has_ideology = ideology:ideology_social_democrat
+		has_ideology = ideology:ideology_vanguardist
+		law_stance = {
+			law = law_type:law_council_republic
+			value >= approve
+		}
+	}
+}
+
+character_is_pro_liberal_movement = {
+	OR = {
+		has_ideology = ideology:ideology_market_liberal
+		has_ideology = ideology:ideology_liberal_leader
+		has_ideology = ideology:ideology_republican_leader
+		has_ideology = ideology:ideology_radical
+		has_ideology = ideology:ideology_humanitarian
+		law_stance = {
+			law = law_type:law_censorship
+			value <= disapprove
+		}				
+	}
+}
+
+character_is_pro_radical_movement = {
+	OR = {
+		has_ideology = ideology:ideology_radical
+		has_ideology = ideology:ideology_atheist
+		has_ideology = ideology:ideology_republican_leader
+		law_stance = {
+			law = law_type:law_guaranteed_liberties
+			value >= approve
+		}	
+	}
+}
+
+character_is_pro_nihilism_movement = {
+	OR = {
+		has_ideology = ideology:ideology_atheist
+		has_ideology = ideology:ideology_positivist
+		has_ideology = ideology:ideology_communist # If you somehow get communists and friends early
+		has_ideology = ideology:ideology_vanguardist
+		has_ideology = ideology:ideology_anarchist
+		law_stance = {
+			law = law_type:law_state_atheism
+			value >= approve
+		}
+	}
+}
+
+character_is_pro_land_reform_movement = {
+	OR = {
+		has_ideology = ideology:ideology_land_reformer
+		has_ideology = ideology:ideology_luddite
+		has_ideology = ideology:ideology_anarchist
+		has_ideology = ideology:ideology_communist
+		has_ideology = ideology:ideology_vanguardist
+		has_ideology = ideology:ideology_abolitionist
+		law_stance = {
+			law = law_type:law_homesteading
+			value >= approve
+		}
+		law_stance = {
+			law = law_type:law_collectivized_agriculture
+			value >= approve
+		}
+		law_stance = {
+			law = law_type:law_serfdom
+			value = strongly_disapprove
+		}
+	}
+}
+
+character_is_pro_feminist_movement = {
+	OR = {
+		has_ideology = ideology:ideology_feminist
+		has_ideology = ideology:ideology_humanitarian
+		has_ideology = ideology:ideology_reformer
+		law_stance = {
+			law = law_type:law_womens_suffrage
+			value = strongly_approve
+		}
+	}
+}
+
+character_is_pro_reactionary_movement = {
+	OR = {
+		has_ideology = ideology:ideology_traditionalist
+		has_ideology = ideology:ideology_protectionist
+		has_ideology = ideology:ideology_authoritarian
+		has_ideology = ideology:ideology_luddite
+		law_stance = {
+			law = law_type:law_traditionalism
+			value >= approve
+		}
+	}
+}
+
+character_is_pro_modernizer_movement = {
+	OR = {
+		has_ideology = ideology:ideology_reformer
+		has_ideology = ideology:ideology_protectionist
+		has_ideology = ideology:ideology_positivist
+		has_ideology = ideology:ideology_abolitionist
+		has_ideology = ideology:ideology_market_liberal
+		has_ideology = ideology:ideology_sovereignist
+		law_stance = {
+			law = law_type:law_serfdom
+			value = strongly_disapprove
+		}
+	}
+}

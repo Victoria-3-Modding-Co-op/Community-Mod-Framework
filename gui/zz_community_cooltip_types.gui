@@ -1,0 +1,20 @@
+##########################
+# COMMUNITY GUI COOLTIPS #
+##########################
+
+# Types defined here only exist for the modded cooltip definitions to point to something to prevent errors.
+# Actual typedefs should be defined by their respective mods unless if the cooltip is meant to be shared.
+
+types TooltipTypes {
+    
+    #### UNSHARED ####
+    
+    ## Western Clothes: Redux ##
+    type WCR_conservative_IG_list_tooltip = TooltipWidgetType {}
+    type WCR_progressive_IG_list_tooltip = TooltipWidgetType {}
+    
+    #### ========================================================================================================== ####
+    
+    #### SHARED ####
+    
+}

@@ -1,0 +1,195 @@
+﻿ideology_usfp_abolitionist_radical = {
+	icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_no_ideology.dds"
+	
+	show_in_list = no
+	
+	character_ideology = yes
+
+	country_trigger = {
+		always = no
+	}
+
+	interest_group_leader_trigger = {
+		always = no
+	}
+	
+	non_interest_group_leader_trigger = {
+		always = no
+	}
+	
+	interest_group_leader_weight = {
+		value = 0 #dummy ideology
+	}
+	
+	non_interest_group_leader_weight = {
+		value = 0 #dummy ideology
+	}	
+}
+
+ideology_usfp_progressive = {
+	icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_no_ideology.dds"
+	
+	show_in_list = no
+	
+	character_ideology = yes
+
+	country_trigger = {
+		always = no
+	}
+
+	interest_group_leader_trigger = {
+		always = no
+	}
+	
+	non_interest_group_leader_trigger = {
+		always = no
+	}
+	
+	interest_group_leader_weight = {
+		value = 0 #dummy ideology
+	}
+	
+	non_interest_group_leader_weight = {
+		value = 0 #dummy ideology
+	}	
+}
+
+ideology_usfp_social_gospel_leader = {
+	icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_no_ideology.dds"
+	
+	show_in_list = no
+	
+	character_ideology = yes
+
+	country_trigger = {
+		always = no
+	}
+
+	interest_group_leader_trigger = {
+		always = no
+	}
+	
+	non_interest_group_leader_trigger = {
+		always = no
+	}
+	
+	interest_group_leader_weight = {
+		value = 0 #dummy ideology
+	}
+	
+	non_interest_group_leader_weight = {
+		value = 0 #dummy ideology
+	}	
+}
+
+ideology_usfp_strongman_populist = {
+	icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_no_ideology.dds"
+	
+	show_in_list = no
+	
+	character_ideology = yes
+
+	country_trigger = {
+		always = no
+	}
+
+	interest_group_leader_trigger = {
+		always = no
+	}
+	
+	non_interest_group_leader_trigger = {
+		always = no
+	}
+	
+	interest_group_leader_weight = {
+		value = 0 #dummy ideology
+	}
+	
+	non_interest_group_leader_weight = {
+		value = 0 #dummy ideology
+	}	
+}
+
+ideology_usfp_georgist_leader = {
+	icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_no_ideology.dds"
+	
+	show_in_list = no
+	
+	character_ideology = yes
+
+	country_trigger = {
+		always = no
+	}
+
+	interest_group_leader_trigger = {
+		always = no
+	}
+	
+	non_interest_group_leader_trigger = {
+		always = no
+	}
+	
+	interest_group_leader_weight = {
+		value = 0 #dummy ideology
+	}
+	
+	non_interest_group_leader_weight = {
+		value = 0 #dummy ideology
+	}	
+}
+
+ideology_usfp_social_darwinist_leader = {
+	icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_no_ideology.dds"
+	
+	show_in_list = no
+	
+	character_ideology = yes
+
+	country_trigger = {
+		always = no
+	}
+
+	interest_group_leader_trigger = {
+		always = no
+	}
+	
+	non_interest_group_leader_trigger = {
+		always = no
+	}
+	
+	interest_group_leader_weight = {
+		value = 0 #dummy ideology
+	}
+	
+	non_interest_group_leader_weight = {
+		value = 0 #dummy ideology
+	}	
+}
+
+ideology_usfp_universalist = {
+	icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_no_ideology.dds"
+	
+	show_in_list = no
+	
+	character_ideology = yes
+
+	country_trigger = {
+		always = no
+	}
+
+	interest_group_leader_trigger = {
+		always = no
+	}
+	
+	non_interest_group_leader_trigger = {
+		always = no
+	}
+	
+	interest_group_leader_weight = {
+		value = 0 #dummy ideology
+	}
+	
+	non_interest_group_leader_weight = {
+		value = 0 #dummy ideology
+	}	
+}

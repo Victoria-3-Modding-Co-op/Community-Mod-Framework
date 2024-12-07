@@ -1,0 +1,69 @@
+﻿has_liberal_ideology = {
+	OR = {
+		has_ideology = ideology:ideology_republican_leader
+		has_ideology = ideology:ideology_radical
+		has_ideology = ideology:ideology_reformer
+		has_ideology = ideology:ideology_abolitionist
+		has_ideology = ideology:ideology_market_liberal
+		has_ideology = ideology:ideology_usfp_abolitionist_radical #usfp
+		has_ideology = ideology:ideology_usfp_georgist_leader #usfp
+	}
+}
+
+has_progressive_ideology = {
+	OR = {
+		has_ideology = ideology:ideology_atheist
+		has_ideology = ideology:ideology_radical
+		has_ideology = ideology:ideology_feminist
+		has_ideology = ideology:ideology_social_democrat
+		has_ideology = ideology:ideology_humanitarian
+		has_ideology = ideology:ideology_humanitarian_royalist
+		has_ideology = ideology:ideology_usfp_progressive #usfp
+		has_ideology = ideology:ideology_usfp_georgist_leader #usfp
+		has_ideology = ideology:ideology_usfp_social_gospel_leader #usfp
+	}
+}
+
+has_socialist_ideology = {
+	OR = {
+		has_ideology = ideology:ideology_communist
+		has_ideology = ideology:ideology_vanguardist
+		has_ideology = ideology:ideology_anarchist
+	}
+}
+
+has_reactionary_ideology = {
+	OR = {
+		has_ideology = ideology:ideology_traditionalist
+		has_ideology = ideology:ideology_fascist
+		has_ideology = ideology:ideology_integralist
+		has_ideology = ideology:ideology_ethno_nationalist
+		has_ideology = ideology:ideology_theocrat
+		has_ideology = ideology:ideology_legitimist
+		has_ideology = ideology:ideology_luddite
+		has_ideology = ideology:ideology_corporatist_leader
+		has_ideology = ideology:ideology_usfp_social_darwinist_leader #usfp
+		has_ideology = ideology:ideology_usfp_strongman_populist #usfp
+	}
+}
+
+has_conservative_ideology = {
+	OR = {
+		has_ideology = ideology:ideology_traditionalist
+		has_ideology = ideology:ideology_slaver
+		has_ideology = ideology:ideology_royalist
+		has_ideology = ideology:ideology_orleanist
+		has_ideology = ideology:ideology_bonapartist
+		has_ideology = ideology:ideology_theocrat
+		has_ideology = ideology:ideology_corporatist_leader
+	}
+}
+
+has_monarchist_ideology = {
+	OR = {
+		has_ideology = ideology:ideology_royalist
+		has_ideology = ideology:ideology_orleanist
+		has_ideology = ideology:ideology_bonapartist
+		has_ideology = ideology:ideology_legitimist	
+	}
+}

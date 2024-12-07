@@ -1,0 +1,26 @@
+﻿#ideologies defined here are only for Political Movement spawning capability and should never appear on their own
+#a mod that provides one of these ideologies will overwrite the definition causing them to show up in Political Movements
+
+# ideology_dummy = {
+# 	icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_no_ideology.dds"
+	
+# 	show_in_list = no
+	
+# 	character_ideology = yes
+
+# 	interest_group_leader_trigger = {
+# 		always = no
+# 	}
+	
+# 	non_interest_group_leader_trigger = {
+# 		always = no
+# 	}
+	
+# 	interest_group_leader_weight = {
+# 		value = 0 #dummy ideology
+# 	}
+	
+# 	non_interest_group_leader_weight = {
+# 		value = 0 #dummy ideology
+# 	}	
+# }

@@ -1,0 +1,152 @@
+#################################################
+# COMMUNITY MOD COMPATIBILITY SCRIPTED TRIGGERS #
+#################################################
+# FILE USAGE:
+# Copy this file into the /common/scripted_triggers folder of your mod.
+#
+# If a mod contained in this file is not loaded, its trigger will return false.
+#
+# If any of the compatibility triggers in this file belong to an active mod, the trigger definition from this file should be overwritten by the one from that mod.
+#
+# For example, to overwrite the trigger in this file for Morgenrote and make your script think it is active, insert the following in a scripted_trigger file:
+#  
+# morgenrote_is_active = {
+#		always = yes
+# {
+#
+# Make sure your scripted trigger file is loaded AFTER this one. You can do this by adding zz_ to the filename.
+#
+
+anno1836_is_active = { # Anno 1836
+	always = no
+}
+
+anzfp_is_active = { # Australia & New Zealand Flavor Pack
+	always = no
+}
+
+basileia_is_active = { # Basileia Romaion
+    always = no
+}
+
+betterdecrees_is_active = { # Better Decrees
+    always = no
+}
+
+BPM_is_active_trigger = { # Better Politics Mod
+    always = no
+}
+
+com_is_active = { # Community Outfit Mod
+	always = no
+}
+
+community_gui_is_active = { # Community GUI Framework Detection
+	always = no
+}
+
+EACP_is_active_trigger = { # East Asian Clothes Patch
+    always = no
+}
+
+ecchi_r_is_active = { # ECCHI Redux
+    always = no
+}
+
+GGGG_is_active_trigger = { # Gas, Guns, Garb, & Grub
+    always = no
+}
+
+gilded_age_is_active_trigger = { # Gilded Age
+    always = no
+}
+
+grefm_is_active = { # Greece, Byzantium, & the Balkans Flavor
+	always = no
+}
+
+IEX_is_active_trigger = { # Industry Expanded
+	always = no
+}
+
+is_usfp_active = { # Hail, Columbia!
+    always = no
+}
+
+JKFP_is_active_trigger = { # James's Korea Flavor Pack
+	always = no
+}
+
+mandate_o_h_is_active = { # Mandate of Heaven
+    always = no
+}
+
+morgenrote_is_active = { # Morgenrote: Dawn of Flavor
+	always = no
+}
+
+newspapers_is_active_triger = { # Newspapers Mod
+    always = no
+}
+
+PCT_is_active_trigger = { # James's Pop Clothing Tweaks
+    always = no
+}
+
+RRK_is_active_trigger = { # Rally Round the King
+	always = no
+}
+
+STMS_is_active_trigger = { # States That Make Sense
+    always = no
+}
+
+vtm_is_active_trigger = { # Victoria Tweaks Mod
+    always = no
+}
+
+WCR_is_active_trigger = { # Western Clothes: Redux
+	always = no
+}
+
+#### Grey's Little Reworks ####
+
+Grey_CIR_is_active = { # Clothing Industry Rework
+    always = no
+}
+
+Grey_FIR_is_active = { # Food Industry Rework
+    always = no
+}
+
+Grey_MIR_is_active = { # Military Industry Rework
+    always = no
+}
+
+Grey_PLP_is_active = { # Populist Legal Power
+    always = no
+}
+
+Grey_RPR_is_active = { # Ranch Production Rework
+    always = no
+}
+
+Grey_SEA_is_active = { # Soft Econ Adjustments
+    always = no
+}
+
+Grey_SPA_is_active = { # Soft Pop Adjustments
+    always = no
+}
+
+Grey_SIS_is_active = { # Subject Interaction Suite
+    always = no
+}
+
+Grey_TSC_is_active = { # Tweaked Start Conditions
+    always = no
+}
+
+Grey_USU_is_active = { # Urban Synergy Unleashed
+    always = no
+}

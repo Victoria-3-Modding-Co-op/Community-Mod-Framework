@@ -27,6 +27,9 @@ Usage Notes:
 * The Objective header can be hidden by setting the global variable community_gui_objective_var
 * "Superevent" windows activated by including in event: gui_window = (event_window_crisis/event_window_newspaper/event_window_fullscreen)
 
+## Parties ##
+### Should we include parties at all? ###
+Just Agrarian party included now as example. Use your mod detection triggers
 
 ## Community Mod Triggers ##
 

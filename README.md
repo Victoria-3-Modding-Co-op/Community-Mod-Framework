@@ -42,22 +42,22 @@ YOURMODNAME_is_active_trigger = {
 }
 
 Currently Included:
-Anno 1836
-Australia & New Zealand Flavor Pack
-Basileia Romaion
-Better Decrees
-Better Politics Mod
-Community Outfit Mod
-East Asian Clothes Patch
-Gas, Guns, Garb, & Grub
-Gilded Age
-Greece, Byzantium, & the Balkans Flavor
-Grey's Little Reworks
-Hail, Columbia!
-James's Korea Flavor Pack
-James's Pop Clothing Tweaks
-Morgenrote: Dawn of Flavor
-Newspapers Mod
-Rally Round the King
-States That Make Sense
-Western Clothes: Redux
+* Anno 1836
+* Australia & New Zealand Flavor Pack
+* Basileia Romaion
+* Better Decrees
+* Better Politics Mod
+* Community Outfit Mod
+* East Asian Clothes Patch
+* Gas, Guns, Garb, & Grub
+* Gilded Age
+* Greece, Byzantium, & the Balkans Flavor
+* Grey's Little Reworks
+* Hail, Columbia!
+* James's Korea Flavor Pack
+* James's Pop Clothing Tweaks
+* Morgenrote: Dawn of Flavor
+* Newspapers Mod
+* Rally Round the King
+* States That Make Sense
+* Western Clothes: Redux

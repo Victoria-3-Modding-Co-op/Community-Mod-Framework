@@ -1,6 +1,5 @@
-﻿# Fallback party for Rural Folk
-# Occasionally used for an anti-serfdom alliance
-# More popular in Nordic countries
+﻿# ANZFP - Australia & New Zealand Flavor Pack
+# USFP etc..
 
 agrarian_party = {
 	color = { 64 173 59 }

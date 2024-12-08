@@ -84,6 +84,7 @@
 				}
 			}
 		}
+		
 		else_if = {
 			limit = {
 				strata = middle
@@ -187,6 +188,24 @@
 			multiply = {
 				value = 3.0
 				desc = "je_acw_countdown"
+			}
+		}
+
+		if = { # ANZFP
+			limit = {
+				trigger_if = {
+					limit = {
+						anzfp_is_active = yes
+					}
+				}
+				owner = {
+					country_has_primary_culture = cu:australian
+					has_law = law_type:law_debt_slavery
+				}
+			}
+			multiply = {
+				value = 3.0
+				desc = "anz_penal_colony_debate"
 			}
 		}
 
@@ -446,57 +465,49 @@ movement_pro_slavery = {
 			}
 		}
 		else_if = {	# ANZFP
-			limit = {
-				trigger_if = {
-					limit = {
-						anzfp_is_active = yes
+			trigger_if = {
+				limit = {
+					anzfp_is_active = yes
+				}
+			}
+			if = {
+				limit = {
+					is_pop_type = farmers
+					owner = {
+						country_has_primary_culture = cu:australian
+						has_law = law_type:law_debt_slavery
 					}
 				}
-				is_pop_type = farmers
-				owner = {
-					country_has_primary_culture = cu:australian
-					has_law = law_type:law_debt_slavery
+				add = {
+					value = -3
+					desc = "POP_FARMERS"
 				}
 			}
-			add = {
-				value = -3
-				desc = "POP_FARMERS"
-			}
-		}
-		else_if = {	# ANZFP
-			limit = {
-				trigger_if = {
-					limit = {
-						anzfp_is_active = yes
+			else_if = {
+				limit = {
+					is_pop_type = laborers
+					owner = {
+						country_has_primary_culture = cu:australian
+						has_law = law_type:law_debt_slavery
 					}
 				}
-				is_pop_type = laborers
-				owner = {
-					country_has_primary_culture = cu:australian
-					has_law = law_type:law_debt_slavery
+				add = {
+					value = -9
+					desc = "POP_LABORERS"
 				}
 			}
-			add = {
-				value = -9
-				desc = "POP_LABORERS"
-			}
-		}
-		else_if = {	# ANZFP
-			limit = {
-				trigger_if = {
-					limit = {
-						anzfp_is_active = yes
+			else_if = {
+				limit = {
+					is_pop_type = peasants
+					owner = {
+						country_has_primary_culture = cu:australian
+						has_law = law_type:law_debt_slavery
 					}
 				}
-				is_pop_type = peasants
-				owner = {
-					country_has_primary_culture = cu:australian
-					has_law = law_type:law_debt_slavery
+				add = {
+					value = -6
+					desc = "POP_PEASANTS"
 				}
-			}
-			add = {
-				value = -6
-				desc = "POP_PEASANTS"
 			}
 		}
 		else_if = {

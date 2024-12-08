@@ -297,7 +297,7 @@ radical_party = {
 			is_interest_group_type = ig_devout
 		}
 		leader = { # fascists and conservatives hate radicals
-			NOT = { #this should be NOR, right?
+			NOT = { 
 				has_ideology = ideology:ideology_fascist
 				has_ideology = ideology:ideology_integralist
 				has_ideology = ideology:ideology_ethno_nationalist

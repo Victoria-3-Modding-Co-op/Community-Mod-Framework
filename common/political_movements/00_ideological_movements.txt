@@ -337,10 +337,7 @@
 		if = {
 			limit = {
 				owner.ruler ?= {
-					OR = {
-						has_ideology = ideology:ideology_jacksonian_democrat
-						has_ideology = ideology:ideology_slaver
-					}
+					character_is_pro_slavery = yes #Compatibility Trigger
 				}
 			}
 			
@@ -650,7 +647,9 @@ movement_pro_slavery = {
 	additional_radicalism_factors = {
 		if = {
 			limit = {
-				owner.ruler ?= { has_ideology = ideology:ideology_abolitionist }
+				owner.ruler ?= {
+					character_is_anti_slavery = yes #Compatibility Trigger
+				}
 			}
 			
 			add = {

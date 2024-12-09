@@ -1,0 +1,15 @@
+﻿VIC = { # Victoria
+	color = { 114 165 203 }
+	country_type = colonial
+	tier = principality
+	capital = STATE_VICTORIA
+	cultures = { australian }
+}
+
+QLD = { # Queensland
+	color = { 114 165 203 }
+	country_type = colonial
+	tier = principality
+	capital = STATE_QUEENSLAND
+	cultures = { australian }
+}

@@ -158,6 +158,16 @@ fascist_party = {
 			triggered_desc = {
 				desc = party_silver_legion
 				trigger = {
+					is_usfp_active = no
+					exists = c:USA
+					THIS = c:USA
+				}
+			}
+			#USFP
+			triggered_desc = {
+				desc = party_american_party
+				trigger = {
+					is_usfp_active = yes
 					exists = c:USA
 					THIS = c:USA
 				}
@@ -344,6 +354,7 @@ fascist_party = {
 						has_ideology = ideology:ideology_fascist
 						has_ideology = ideology:ideology_ethno_nationalist
 						has_ideology = ideology:ideology_integralist
+						has_ideology = ideology:ideology_usfp_social_darwinist_leader #USFP
 					}
 				}
 			}
@@ -359,6 +370,7 @@ fascist_party = {
 					OR = {
 						has_ideology = ideology:ideology_fascist
 						has_ideology = ideology:ideology_integralist
+						has_ideology = ideology:ideology_usfp_social_darwinist_leader #USFP
 					}
 				}
 			}
@@ -406,6 +418,7 @@ fascist_party = {
 							OR = {
 								has_ideology = ideology:ideology_fascist
 								has_ideology = ideology:ideology_integralist
+								has_ideology = ideology:ideology_usfp_social_darwinist_leader #USFP
 							}
 						}
 					}
@@ -441,10 +454,11 @@ fascist_party = {
 						has_ideology = ideology:ideology_atheist
 						has_ideology = ideology:ideology_feminist
 						has_ideology = ideology:ideology_reformer
-						has_ideology = ideology:ideology_abolitionist
+						character_is_anti_slavery = yes
 						has_ideology = ideology:ideology_pacifist
 						has_ideology = ideology:ideology_humanitarian
 						has_ideology = ideology:ideology_humanitarian_royalist
+						has_ideology = ideology:ideology_usfp_progressive #USFP
 					}	
 				}
 			}

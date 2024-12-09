@@ -28,8 +28,7 @@ Usage Notes:
 * "Superevent" windows activated by including in event: gui_window = (event_window_crisis/event_window_newspaper/event_window_fullscreen)
 
 ## Parties ##
-### Should we include parties at all? ###
-Just Agrarian party included now as example. Use your mod detection triggers
+For naming, you need to include loc keys to avoid load-up error. These can be blank and overwritten by your own mod. 
 
 ## Community Mod Triggers ##
 

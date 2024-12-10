@@ -92,11 +92,43 @@ free_trade_party = {
 			triggered_desc = {
 				desc = party_constitutional_union_party
 				trigger = {
+					is_usfp_active = no
 					exists = c:USA
 					THIS = c:USA
 					NOT = {
 						has_global_variable = american_civil_war
 					}
+				}
+			}
+			#USFP
+			triggered_desc = {
+				desc = party_constitutional_union_party
+				trigger = {
+					is_usfp_active = yes
+					exists = c:USA
+					THIS = c:USA
+					exists = owner.py:liberal_party
+					NOT = { has_global_variable = american_civil_war }
+				}
+			}
+			#USFP
+			triggered_desc = {
+				desc = party_liberal_republican_party
+				trigger = {
+					is_usfp_active = yes
+					exists = c:USA
+					THIS = c:USA
+					exists = owner.py:liberal_party
+				}
+			}
+			#USFP
+			triggered_desc = {
+				desc = party_republicans
+				trigger = {
+					is_usfp_active = yes
+					exists = c:USA
+					THIS = c:USA
+					NOT = { exists = owner.py:liberal_party }
 				}
 			}
 			triggered_desc = {
@@ -196,9 +228,10 @@ free_trade_party = {
 				desc = "south_america_two_party_system"
 			}
 		}
-		
+		#Vanilla US weights
 		if = {
 			limit = {
+				is_usfp_active = no
 				owner = {
 					country_is_in_north_america = yes
 					OR = {
@@ -211,6 +244,126 @@ free_trade_party = {
 			add = {
 				value = -10
 				desc = "usa_two_party_system"
+			}
+		}
+		#USFP Two-Party System Handling
+		if = {
+			limit = {
+				is_usfp_active = yes
+				owner = {
+					country_is_in_north_america = yes
+					usfp_country_is_american = yes
+					has_law = law_type:law_presidential_republic
+				}
+			}
+			if = { # If IT+Whig Party is around, business as usual
+				limit = {
+					OR = {
+						AND = {
+							exists = owner.py:liberal_party
+							owner = {
+								ig:ig_intelligentsia = {
+									is_member_of_party = owner.py:liberal_party
+								}
+							}
+						}
+						year < 1837
+					}
+				}
+				add = {
+					value = -20
+					desc = "usa_two_party_system"
+				}
+			}
+			else = { # otherwise...
+				if = { # whig leaders will like orange party more
+					limit = {
+						leader = {
+							NOR = {
+								has_reactionary_ideology = yes
+								has_conservative_ideology = yes
+								has_socialist_ideology = yes
+							}
+						}
+					}
+					add = {
+						value = 20
+						desc = "usa_two_party_system"
+					}
+				}
+				if = { # ID-PB alliance with dethroned IT in toe
+					limit = {
+						OR = {
+							is_interest_group_type = ig_industrialists
+							is_interest_group_type = ig_petty_bourgeoisie
+							is_interest_group_type = ig_intelligentsia
+						}
+						leader = {
+							has_socialist_ideology = no
+						}
+					}
+					add = {
+						value = 20
+						desc = "usa_two_party_system"
+					}
+				}
+				if = { # pro-abolitionist
+					limit = { leader = { has_ideology = ideology:ideology_slaver } }
+					add = {
+						value = -100
+						desc = "from_slaver_leader"
+					}					
+				}	
+				else_if = {
+					limit = { leader = { character_is_anti_slavery = yes } }
+					add = {
+						value = 100
+						desc = "from_abolitionist_leader"
+					}					
+				}
+				#USFP: American IGs should prefer to join a party even if its not their preferred
+				if = {
+					limit = {
+						has_party = no
+						exists = owner.py:free_trade_party
+					}
+					add = {
+						value = 20
+						desc = "join_existing_party"
+					}
+				}
+
+			}
+		}
+		#USFP: Bourbon Democrats
+		#LF Industrialists might switch to the Democratic party post civil war
+		if = {
+			limit = {
+				is_usfp_active = yes
+				owner = {
+					OR = {
+						exists = py:conservative_party
+						exists = py:agrarian_party
+					}
+					OR = {
+						country_has_primary_culture = cu:yankee
+						country_has_primary_culture = cu:usfp_american
+					}
+					ig:ig_landowners = {
+						NOT = {
+							has_ideology = ideology:ideology_pro_slavery
+						}
+					}
+				}
+				is_interest_group_type = ig_industrialists
+				law_stance = {
+					law = law_type:law_free_trade
+					value >= approve
+				}
+			}
+			add = {
+				value = -75
+				desc = "usfp_bourbon_democrats"
 			}
 		}
 		
@@ -696,6 +849,24 @@ free_trade_party = {
 			add = {
 				value = -10
 				desc = "from_two_party_system"
+			}
+		}
+		if = { # USFP: Progressives shouldn't join the Free Trade Party (if the Industrialists are in it)
+			limit = {
+				is_usfp_active = yes
+				leader = {
+					has_ideology = ideology:ideology_usfp_progressive
+				}
+				owner = {
+					ig:ig_industrialists = {
+						has_party = yes
+						party = py:free_trade_party
+					}
+				}
+			}
+			add = {
+				value = -50
+				desc = from_progressive_leader
 			}
 		}
 	}

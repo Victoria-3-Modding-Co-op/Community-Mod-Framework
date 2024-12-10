@@ -4,7 +4,11 @@
 		has_ideology = ideology:ideology_humanitarian
 		law_stance = {
 			law = law_type:law_slavery_banned
-			value >= neutral
+			value >= approve
+		}
+		law_stance = {
+			law = law_type:law_slave_trade
+			value <= disapprove
 		}
 	}
 }

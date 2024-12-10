@@ -1,5 +1,5 @@
 ﻿# ANZFP - Australia & New Zealand Flavor Pack
-# USFP etc..
+# USFP - Hail, Columbia!
 
 agrarian_party = {
 	color = { 64 173 59 }
@@ -112,11 +112,26 @@ agrarian_party = {
 					THIS = c:HUN
 				}
 			}
+			#USFP
 			triggered_desc = {
 				desc = party_peoples_party
 				trigger = {
 					exists = c:USA
 					THIS = c:USA
+					OR = {
+						is_usfp_active = no
+						exists = owner.py:conservative_party
+					}
+				}
+			}
+			#USFP
+			triggered_desc = {
+				desc = party_us_democrats
+				trigger = {
+					is_usfp_active = yes
+					exists = c:USA
+					THIS = c:USA
+					NOT = { exists = owner.py:conservative_party }
 				}
 			}
 			triggered_desc = {
@@ -224,8 +239,10 @@ agrarian_party = {
 				desc = "south_america_two_party_system"
 			}
 		}
+		#Vanilla two party system
 		if = {
 			limit = {
+				is_usfp_active = no
 				owner = {
 					country_is_in_north_america = yes
 					OR = {
@@ -240,9 +257,157 @@ agrarian_party = {
 				desc = "usa_two_party_system"
 			}
 		}
+		#USFP: Two Party System Handling
+		if = {
+			limit = {
+				is_usfp_active = yes
+				owner = {
+					country_is_in_north_america = yes
+					usfp_country_is_american = yes
+					has_law = law_type:law_presidential_republic
+				}
+			}
+			if = { # If LO+Democratic Party is around, business as usual
+				limit = {
+					OR = {
+						AND = {
+							exists = owner.py:conservative_party
+							owner = {
+								ig:ig_landowners = {
+									is_member_of_party = owner.py:conservative_party
+								}
+							}
+						}
+						year < 1837
+					}
+				}
+				add = {
+					value = -20
+					desc = "usa_two_party_system"
+				}
+			}
+			else = { # otherwise...
+				if = { # non-whig leaders will like green party more
+					limit = {
+						leader = {
+							OR = {
+								has_reactionary_ideology = yes
+								has_conservative_ideology = yes
+							}
+							has_socialist_ideology = no #USFP
+						}
+					}
+					add = {
+						value = 20
+						desc = "usa_two_party_system"
+					}
+				}
+				if = { # RF-TU alliance with dethroned LO in toe
+					limit = {
+						OR = {
+							is_interest_group_type = ig_rural_folk
+							is_interest_group_type = ig_trade_unions
+							is_interest_group_type = ig_landowners
+						}
+						leader = {
+							has_socialist_ideology = no #USFP
+						}
+					}
+					add = {
+						value = 20
+						desc = "usa_two_party_system"
+					}
+				}
+				if = { #pro-slaver
+					limit = { leader = { has_ideology = ideology:ideology_slaver } }
+					add = {
+						value = 100
+						desc = "from_slaver_leader"
+					}					
+				}	
+				else_if = {
+					limit = { leader = { character_is_anti_slavery = yes } }
+					add = {
+						value = -100
+						desc = "from_abolitionist_leader"
+					}					
+				}
+				if = { # If DP is around but LO isn't in it, then it is time to JUMP SHIP!
+					limit = {
+						exists = owner.py:conservative_party
+						owner = {
+							ig:ig_landowners = {
+								NOT = { is_member_of_party = owner.py:conservative_party }
+							}
+						}
+					}
+					multiply = {
+						value = 100
+						desc = "usa_two_party_system"
+					}
+				}
+				if = {
+					limit = {
+						leader = {
+							has_ideology = ideology:ideology_jacksonian_democrat
+						}
+					}
+					add = {
+						value = 1000
+						desc = "from_jacksonian_democrat"
+					}
+				}
+			}
+		}
+		#USFP: Bourbon Democrats
+		#LF Industrialists might switch to the Democratic party post civil war
+		if = {
+			limit = {
+				is_usfp_active = yes
+				owner = {
+					NOT = {
+						exists = py:conservative_party
+					}
+					OR = {
+						country_has_primary_culture = cu:yankee
+						country_has_primary_culture = cu:usfp_american
+					}
+					ig:ig_landowners = {
+						NOT = {
+							has_ideology = ideology:ideology_pro_slavery
+						}
+					}
+				}
+				is_interest_group_type = ig_industrialists
+				law_stance = {
+					law = law_type:law_free_trade
+					value >= approve
+				}
+			}
+			add = {
+				value = 75
+				desc = "usfp_bourbon_democrats"
+			}
+		}
+		#USFP: American IGs should prefer to join an existing party even if its not their preferred
+		if = {
+			limit = {
+				is_usfp_active = yes
+				owner = {usfp_country_is_american = yes}
+				has_party = no
+				exists = owner.py:agrarian_party
+			}
+			add = {
+				value = 20
+				desc = "join_existing_party"
+			}
+		}
 		if = { # a party for powerful farmers
 			limit = {
-				has_ideology = ideology:ideology_agrarian
+				OR = {
+					has_ideology = ideology:ideology_agrarian_jeffersonian #vanilla bugfix
+					has_ideology = ideology:ideology_agrarian
+				}
 				is_powerful = yes
 			}
 			add = {
@@ -486,7 +651,7 @@ agrarian_party = {
 					has_ideology = ideology:ideology_laissez_faire
 					has_ideology = ideology:ideology_particularist
 					leader = {
-						has_ideology = ideology:ideology_abolitionist
+						character_is_anti_slavery = yes
 						has_ideology = ideology:ideology_social_democrat
 						has_ideology = ideology:ideology_communist
 					}
@@ -505,7 +670,7 @@ agrarian_party = {
 				OR = {
 					has_ideology = ideology:ideology_anti_slavery
 					leader = {
-						has_ideology = ideology:ideology_abolitionist
+						character_is_anti_slavery = yes
 					}
 				}
 			}

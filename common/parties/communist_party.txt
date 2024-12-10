@@ -270,6 +270,7 @@ communist_party = {
 			triggered_desc = {
 				desc = party_workingmens_party
 				trigger = {
+					is_usfp_active = no
 					AND = {
 						OR = {
 							country_has_primary_culture = cu:yankee
@@ -279,6 +280,24 @@ communist_party = {
 							is_powerful = yes
 							leader = {
 								has_ideology = ideology:ideology_vanguardist
+							}
+						}
+					}
+				}
+			}
+			#USFP
+			triggered_desc = {
+				desc = party_socialist_labor_party
+				trigger = {
+					is_usfp_active = yes
+					AND = {
+						usfp_country_is_american = yes
+						NOT = {
+							any_interest_group = {
+								is_powerful = yes
+								leader = {
+									has_ideology = ideology:ideology_vanguardist
+								}
 							}
 						}
 					}

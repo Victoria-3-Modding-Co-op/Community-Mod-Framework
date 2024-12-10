@@ -562,10 +562,15 @@ conservative_party = {
 		if = {
 			limit = {
 				leader = {
-					has_ideology = ideology:ideology_abolitionist
+					character_is_anti_slavery = yes
 				}
 				owner = {
-					NOT = { has_law = law_type:law_slavery_banned }
+					OR = {
+						this ?= c:USA
+						NOT = { 
+							has_law = law_type:law_slavery_banned 
+						}
+					}
 				}
 			}
 			add = {
@@ -722,7 +727,7 @@ conservative_party = {
 					leader = { has_ideology = ideology:ideology_authoritarian }
 				}
 				owner = {
-					NOR = {
+					OR = { #vanilla bugfix
 						has_law = law_type:law_no_home_affairs
 						has_law = law_type:law_guaranteed_liberties
 					}
@@ -846,12 +851,75 @@ conservative_party = {
 				}					
 			}	
 			else_if = {
-				limit = { leader = { has_ideology = ideology:ideology_abolitionist } }
+				limit = { leader = { character_is_anti_slavery = yes } }
 				add = {
 					value = -100
 					desc = "from_abolitionist_leader"
 				}					
 			}				
+			#USFP: Ensure Democratic Party endures
+			if = {
+				limit = {
+					is_usfp_active = yes
+					has_ideology = ideology:ideology_pro_slavery
+				}
+				add = {
+					value = 1000
+					desc = "from_southern_interests"
+				}
+			}
+			if = {
+				limit = {
+					is_usfp_active = yes
+					is_interest_group_type = ig_rural_folk
+					NOT = {
+						leader = { usfp_anti_slavery_leader_trigger = yes }
+					}
+				}
+				add = {
+					value = 100
+					desc = "from_archetype_party"
+				}
+			}				
+		}
+		#USFP: Bourbon Democrats
+		#LF Industrialists might switch to the Democratic party post civil war
+		if = {
+			limit = {
+				is_usfp_active = yes
+				owner = {
+					OR = {
+						country_has_primary_culture = cu:yankee
+						country_has_primary_culture = cu:usfp_american
+					}
+					ig:ig_landowners = {
+						NOT = {
+							has_ideology = ideology:ideology_pro_slavery
+						}
+					}
+				}
+				is_interest_group_type = ig_industrialists
+				law_stance = {
+					law = law_type:law_free_trade
+					value >= approve
+				}
+			}
+			add = {
+				value = 75
+				desc = "usfp_bourbon_democrats"
+			}
+		}
+		#USFP: American IGs should prefer to join an existing party even if its not their preferred
+		if = {
+			limit = {
+				owner = {usfp_country_is_american = yes}
+				has_party = no
+				exists = owner.py:conservative_party
+			}
+			add = {
+				value = 20
+				desc = "join_existing_party"
+			}
 		}
 
 		if = {
@@ -1035,8 +1103,10 @@ conservative_party = {
 				desc = "caudillo_support"
 			}
 		}
+		#Vanilla weights
 		if = {
 			limit = {
+				is_usfp_active = no
 				owner = {
 					OR = {
 						country_has_primary_culture = cu:yankee
@@ -1060,6 +1130,7 @@ conservative_party = {
 		}
 		if = {
 			limit = {
+				is_usfp_active = no
 				owner = {
 					OR = {
 						country_has_primary_culture = cu:yankee
@@ -1078,6 +1149,55 @@ conservative_party = {
 			}
 			add = {
 				value = 3
+				desc = "from_southern_interests"
+			}
+		}
+		#USFP weights
+		if = {
+			limit = {
+				is_usfp_active = yes
+				owner = {
+					usfp_country_is_american = yes
+					OR = {
+						NOT = {
+							has_law = law_type:law_slavery_banned
+						}
+						has_journal_entry = je_acw_countdown
+					}
+				}
+				OR = {
+					leader = {
+						culture = cu:yankee
+					}
+					is_interest_group_type = ig_petty_bourgeoisie
+				}
+			}
+			add = {
+				value = -15
+				desc = "from_northern_interests"
+			}
+		}
+		if = {
+			limit = {
+				is_usfp_active = yes
+				owner = {
+					usfp_country_is_american = yes
+					OR = {
+						NOT = {
+							has_law = law_type:law_slavery_banned
+						}
+						has_journal_entry = je_acw_countdown
+					}
+				}
+				OR = {
+					leader = {
+						culture = cu:dixie
+					}
+					is_interest_group_type = ig_landowners
+				}
+			}
+			add = {
+				value = 5
 				desc = "from_southern_interests"
 			}
 		}

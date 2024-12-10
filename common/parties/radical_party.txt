@@ -167,6 +167,18 @@ radical_party = {
 					}
 				}
 			}
+			#USFP
+			triggered_desc = {
+				desc = party_radical_democracy_party
+				trigger = {
+					is_usfp_active = yes
+					exists = c:USA
+					THIS = c:USA
+					NOT = {
+						has_global_variable = had_progressive_era
+					}
+				}
+			}
 			triggered_desc = {
 				desc = party_progressive_party
 				trigger = {
@@ -178,6 +190,10 @@ radical_party = {
 						AND = {
 							exists = c:USA
 							THIS = c:USA
+							OR = {
+								is_usfp_active = no
+								has_global_variable = had_progressive_era #USFP
+							}
 						}
 					}
 				}

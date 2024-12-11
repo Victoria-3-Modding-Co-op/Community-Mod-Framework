@@ -680,6 +680,22 @@ movement_pro_slavery = {
 				limit = { 
 					owner ?= { has_journal_entry = je_acw_countdown }
 				}
+
+				#USFP: Deep South and Upper South more inclined to join
+				if = {
+					limit = {
+						is_usfp_active = yes
+						has_modifier = usfp_deep_south_modifier
+					}
+					multiply = 5.0
+				}
+				if = {
+					limit = {
+						is_usfp_active = yes
+						has_modifier = usfp_upper_south_modifier
+					}
+					multiply = 2.0
+				}
 				
 				if = { # Ensure the union retains Washington DC/Maryland/Delaware in case of southern secession
 					limit = {
@@ -698,6 +714,21 @@ movement_pro_slavery = {
 					}
 					
 					multiply = 10.0
+				}
+				else_if = { #USFP: West Virginia goes with real Virginia
+					limit = {
+						is_usfp_active = yes
+						state_region = s:STATE_WEST_VIRGINIA
+					}
+					multiply = 10.0
+				}
+				#USFP: Missouri is less likely
+				else_if = {
+					limit = {
+						is_usfp_active = yes 
+						state_region = s:STATE_MISSOURI
+					}
+					multiply = 0.5
 				}	
 			}	
 		}	

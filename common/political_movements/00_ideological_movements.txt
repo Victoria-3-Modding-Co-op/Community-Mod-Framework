@@ -193,19 +193,15 @@
 
 		if = { # ANZFP
 			limit = {
-				trigger_if = {
-					limit = {
-						anzfp_is_active = yes
-					}
-				}
+				anzfp_is_active = yes
 				owner = {
 					country_has_primary_culture = cu:australian
 					has_law = law_type:law_debt_slavery
 				}
 			}
 			multiply = {
-				value = 3.0
-				desc = "anz_penal_colony_debate"
+				value = 3.5
+				desc = "anz_antitransportation"
 			}
 		}
 
@@ -453,22 +449,11 @@ movement_pro_slavery = {
 		add = {
 			value = 9
 			desc = "SLAVE_STATE"
-		}	
-	
-		if = {
-			limit = {
-				is_pop_type = aristocrats
-			}
-			add = {
-				value = 45
-				desc = "POP_ARISTOCRATS"
-			}
 		}
-		else_if = {	# ANZFP
-			trigger_if = {
-				limit = {
-					anzfp_is_active = yes
-				}
+
+		if = {	# ANZFP
+			limit = {
+				anzfp_is_active = yes
 			}
 			if = {
 				limit = {
@@ -479,8 +464,8 @@ movement_pro_slavery = {
 					}
 				}
 				add = {
-					value = -3
-					desc = "POP_FARMERS"
+					value = -18 #compensate, -3
+					desc = "anz_antitransportation"
 				}
 			}
 			else_if = {
@@ -493,7 +478,7 @@ movement_pro_slavery = {
 				}
 				add = {
 					value = -9
-					desc = "POP_LABORERS"
+					desc = "anz_antitransportation"
 				}
 			}
 			else_if = {
@@ -506,8 +491,18 @@ movement_pro_slavery = {
 				}
 				add = {
 					value = -6
-					desc = "POP_PEASANTS"
+					desc = "anz_antitransportation"
 				}
+			}
+		}
+
+		if = {
+			limit = {
+				is_pop_type = aristocrats
+			}
+			add = {
+				value = 45
+				desc = "POP_ARISTOCRATS"
 			}
 		}
 		else_if = {
@@ -518,7 +513,7 @@ movement_pro_slavery = {
 				value = 15
 				desc = "POP_FARMERS"
 			}
-		}		
+		}
 		else_if = {
 			limit = {
 				is_pop_type = clergymen

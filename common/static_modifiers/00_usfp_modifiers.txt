@@ -1,4 +1,14 @@
 ﻿usfp_second_party_system_modifier = {
 	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	#dummy modifier
+}
 
+usfp_deep_south_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	#dummy modifier
+}
+
+usfp_upper_south_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	#dummy modifier
 }

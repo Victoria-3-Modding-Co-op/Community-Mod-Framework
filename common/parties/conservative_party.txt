@@ -873,7 +873,7 @@ conservative_party = {
 					is_usfp_active = yes
 					is_interest_group_type = ig_rural_folk
 					NOT = {
-						leader = { usfp_anti_slavery_leader_trigger = yes }
+						leader = { character_is_anti_slavery = yes }
 					}
 				}
 				add = {

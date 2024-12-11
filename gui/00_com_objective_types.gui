@@ -56,11 +56,8 @@ types objective_types
 				scrollarea = {
 					layoutpolicy_horizontal = expanding
 					layoutpolicy_vertical = preferred
-					margin_top = 10
-					margin_bottom = 10
 					minimumsize = { 1400 60 }
 					maximumsize = { 1700 -1 }
-					spacing = 8
 					
 					autoresizescrollarea = no
 					scrollbarpolicy_vertical = always_off
@@ -688,7 +685,7 @@ types objective_types
 					widget = {
 						size = { 260 100 }
 						visible = "[Not(GameSetup.HasSelectedObjective)]"
-						parentanchor = vcenter|bottom
+						parentanchor = top
 
 						background = {
 								texture = "gfx/interface/icons/objectives/sandbox.dds"

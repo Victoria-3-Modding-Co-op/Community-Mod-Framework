@@ -1484,6 +1484,27 @@ movement_labor = { # Explicitly non-socialist labour movement
 				value = 2
 			}
 		}
+		if = { # Communists will support the labour movement if they really, really have to
+			limit = {
+				owner = {
+					any_political_movement = {
+						OR = {
+							is_political_movement_type = movement_anarchist
+							is_political_movement_type = movement_socialist
+							is_political_movement_type = movement_communist
+						}
+					}
+				}
+				OR = {
+					has_ideology = ideology:ideology_anarchist
+					has_ideology = ideology:ideology_vanguardist
+					has_ideology = ideology:ideology_communist
+				}
+			}
+			multiply = {
+				value = 0.01
+			}
+		}
 	}
 	
 	pop_support_trigger = {
@@ -2082,6 +2103,9 @@ movement_socialist = {
 movement_anarchist = {
 	category = movement_category_ideological
 	
+	# Anarchists care about a lot of law groups, so the impact of each should be lesser
+	active_law_radicalism_multiplier = 0.5
+	
 	ideology = ideology_anarchist_movement
 	character_ideologies = {
 		ideology_anarchist
@@ -2604,6 +2628,9 @@ movement_communist = {
 
 movement_fascist = {
 	category = movement_category_ideological
+
+	# Fascists care about a lot of law groups, so the impact of each should be lesser
+	active_law_radicalism_multiplier = 0.5
 	
 	ideology = ideology_fascist
 	character_ideologies = {
@@ -2626,7 +2653,7 @@ movement_fascist = {
 		character_is_pro_fascist = yes
 	}
 	character_support_weight = {
-		value = 100 #bugfix
+		value = 200
 		if = {
 			limit = {
 				OR = {
@@ -4560,6 +4587,7 @@ movement_feminist = {
 				OR = {
 					has_ideology = ideology:ideology_feminist
 					has_ideology = ideology:ideology_humanitarian
+					has_ideology = ideology:ideology_humanitarian_royalist
 				}
 			}
 			multiply = {
@@ -4726,12 +4754,31 @@ movement_reactionary = {
 		}
 		has_law = law_type:law_slavery_banned
 		country_has_voting_franchise = yes
+		NOT = { # Reactionary and Legitimist movements cannot co-exist
+			OR = {
+				c:FRA ?= this
+				civil_war_origin_country ?= c:FRA
+			}
+			any_political_movement = {
+				is_political_movement_type = movement_legitimist
+			}
+		}
 	}	
 	creation_weight = {
 		value = 100
 	}	
 	on_created = {
 		add_movement_enthusiasm_modifier = yes
+	}
+
+	disband_trigger = {
+		OR = {
+			c:FRA ?= this
+			civil_war_origin_country ?= c:FRA
+		}
+		any_political_movement = {
+			is_political_movement_type = movement_legitimist
+		}
 	}
 	
 	character_support_trigger = {
@@ -4987,7 +5034,7 @@ movement_reactionary = {
 		owner ?= {
 			add = {
 				value = country_turmoil
-				divide = 0.5
+				divide = 0.25
 				desc = "COUNTRY_TURMOIL"
 			}	
 		}

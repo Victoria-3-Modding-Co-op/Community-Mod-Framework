@@ -1,0 +1,13 @@
+gui_sidebar_example_button = {
+	scope = country
+
+	# This trigger determines whether the button is enabled or disabled
+	is_valid = {
+		always = yes
+	}
+
+	# This effect is triggered when the button is clicked
+	effect = {
+
+	}
+}

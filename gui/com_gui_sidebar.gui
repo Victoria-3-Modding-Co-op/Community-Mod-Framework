@@ -1,71 +1,117 @@
-# By LordR & Alexedishi
+# By Chris Kaiser | Bahmut
+
+# Heavily modified from original implementation
+# by LordR & Alexedishi
 
 vbox = {
 	name = "com_gui_sidebar"
-	layer = top
 	parentanchor = bottom|left
-	
+	max_update_rate = 8
+
 	layoutpolicy_vertical = expanding
-	margin_bottom = 50
+	margin_bottom = 100
 	spacing = 0
 	max_width = 50
-	
-	ignoreinvisible = yes
-	
-	using = hud_visibility
-	
-	visible = "[And( 
-		IsInGame, 
-		And( 
-			Not( IsPauseMenuShown ), 
-			And( 
-				Not( IsGameOverScreenShown ), 
-				GetScriptedGui('community_sgui_sidebar_sgui').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End) 
-			)
-		)
-	)]"
-	
+
+	# Are there registered custom buttons?
+	# And is the pause menu shown?
+	visible = "[And(Not(IsDataModelEmpty(GetGlobalList('custom_button_list'))),And( IsInGame, And( Not( IsPauseMenuShown ), Not( IsGameOverScreenShown ))))]"
+
 	expand = {}
-	
+
 	widget = {
 		size = { 50 50 }
-		
 		icon = {
 			using = hud_shiny_effect
 			size = { 50 50 }
-			
-			position = { 0 25 }
-			
-			texture = "gfx/interface/community_gui/com_sidebar_bg_top.dds"
+			framesize = { 100 100 }
+			frame = 0
+
+			position = { 0 77 }
+
+			texture = "gfx/interface/main_hud/sidebar_skin_bg_1.dds"
 		}
 	}
-	
-	## MORGENROTE
-	mr_button_type = {}
-	
-	## GREECE, BYZANTIUM, & THE BALKANS
-	grefm_button_type = {}
 
-	com_possible_button_1_type = {}
-	com_possible_button_2_type = {}
-	com_possible_button_3_type = {}
-	com_possible_button_4_type = {}
-	com_possible_button_5_type = {}
-	com_possible_button_6_type = {}
-	com_possible_button_7_type = {}
-	com_possible_button_8_type = {}
-	com_possible_button_9_type = {}
-	com_possible_button_10_type = {}
-	
-	widget = {
-		size = { 50 50 }
-		icon = {
-			using = hud_shiny_effect
+	vbox = {
+		# Add lower sidebar end
+		# Produces error: Widget cannot have a position in a layout
+		# Error comes from: parentanchor = bottom
+		# But the parentanchor works and is needed so it is at the end of the button list
+		widget = {
 			size = { 50 50 }
-			
-			position = { 0 -26 }
-			
-			texture = "gfx/interface/community_gui/com_sidebar_bg_bottom.dds"
+			parentanchor = bottom
+
+			icon = {
+				using = hud_shiny_effect
+				size = { 50 50 }
+				framesize = { 100 100 }
+				frame = 0
+
+				position = { 0 23 }
+
+				mirror = vertical
+
+				texture = "gfx/interface/main_hud/sidebar_skin_bg_1.dds"
+
+			}
+		}
+
+		# For each registered button
+		vbox = {
+			datamodel = "[GetGlobalList('custom_button_list')]" # Get registered custom buttons
+
+			item = {
+				widget = {
+				    datacontext = "[GetScriptedGui(Scope.GetIdeology.GetNameNoFormatting)]"
+
+					size = { 50 50 }
+
+					icon = {
+						texture = "gfx/interface/main_hud/sidebar_skin_bg_2.dds"
+
+						parentanchor = center
+						size = { 50 50 }
+						using = hud_shiny_effect
+					}
+
+					button_icon_round = {
+						name = "[Scope.GetIdeology.GetNameNoFormatting]"
+
+						parentanchor = center
+						size = { 47 47 }
+						position = { 0 1 }
+
+						enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+						onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+						tooltip = "[Scope.GetIdeology.GetDesc]"
+
+
+						blockoverride "icon" {
+							texture = "[Scope.GetIdeology.GetTexture]"
+						}
+
+						blockoverride "icon_size" {
+							size = { 35 35 }
+						}
+
+						state = {
+							name = _mouse_enter
+							alpha = 1
+							duration = 0.7
+							using = Animation_Curve_Default
+						}
+
+						state = {
+							name = _mouse_leave
+							alpha = 0.7
+							duration = 0.2
+							using = Animation_Curve_Default
+						}
+					}
+				}
+			}
 		}
 	}
 	

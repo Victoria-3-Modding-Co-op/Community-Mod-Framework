@@ -27,6 +27,25 @@ Usage Notes:
 * The Objective header can be hidden by setting the global variable community_gui_objective_var
 * "Superevent" windows activated by including in event: gui_window = (event_window_crisis/event_window_newspaper/event_window_fullscreen)
 
+## Sidebar ##
+
+How to add a new button to the sidebar.
+
+First create an ideology in the `common/ideologies/` folder (See [example_button.txt](common/ideologies/example_button.txt)).
+The icon set on the ideology is the icon shown on your button.
+**Important here is that this ideology is never triggered or shown!**
+
+Then we need a scripted gui in the `common/scripted_guis/` folder corresponding to the button (See [example_button_sgui.txt](common/scripted_guis/example_button_sgui.txt))
+
+We then link those two via the localization of the ideology.
+Localizations can be found in `localization/<language>/`.
+Ideologies have two localization keys: \<ideology\> and \<ideology\>_desc
+
+The key <ideology> should contain the name of your scripted_gui.
+And the key <ideology>_desc contains the tooltip shown when hovering over the button (See [com_gui_l_english.yml](localization/english/com_gui_l_english.yml)).
+**Good practice here is to name the ideology and the scripted gui the same so even if you do not set the localization key for a language, the correct scripted gui is triggered!**
+
+
 ## Parties ##
 For naming, you need to include loc keys to avoid load-up error. These can be blank and overwritten by your own mod. 
 

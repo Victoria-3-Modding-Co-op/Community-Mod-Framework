@@ -183,7 +183,6 @@ types objective_overwrites {
                     layoutpolicy_vertical = expanding
 
                     scrollbarpolicy_vertical = always_off
-                    scrollbarpolicy_horizontal = always_on
 
                     scrollbar_horizontal = {
                         using = horizontal_scrollbar

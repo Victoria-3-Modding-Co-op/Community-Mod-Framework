@@ -14,9 +14,9 @@ Add dummy ideologies from mods into political movements, allowing them to spawn 
 ## GUI Framework ##
 
 Current Scope:
-1) A "sidebar" scripted widget to deconflict mods that want to add custom sidebar buttons. (Done in cooperation with LordR)
+1) A "sidebar" scripted widget to deconflict mods that want to add custom sidebar buttons. (Credit to Bahmut, LordR and Alexedishi)
 2) Modification to the GUI template fullscreen_hide to hide the outliner whenever a scripted widget window is open. (Already done by myself)
-3) Modification to objective_types to add a scrollbar to the objectives screens. (Credit to KarafuruAmamiya and Xier)
+3) Modification to objective_types to add a scrollbar to the objectives screens. (Credit to Bahmut, KarafuruAmamiya and Xier)
 4) Integration of the "Modded DLC Framework" (Credit to 1230James)
 5) Unified system for cooltip types (Credit to 1230James)
 6) Modification to the outliner and journal GUIs to hide custom objectives during gameplay (Credit to Taylor)

@@ -306,7 +306,7 @@ movement_religious_minority = {
 	}
 	
 	creation_trigger = {
-		NOT = {
+		NAND = {
 			c:BIC ?= this
 			has_technology_researched = pan-nationalism
 		}

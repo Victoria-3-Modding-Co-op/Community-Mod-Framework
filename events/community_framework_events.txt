@@ -1,19 +1,19 @@
-﻿########################
-# COMMUNITY GUI EVENTS #
-########################
+﻿##################################
+# COMMUNITY MOD FRAMEWORK EVENTS #
+##################################
 
 # This file is here to shut up the error log. It has no other purpose. Do NOT call this event.
 
 ####################
 
-namespace = com_gui_events
+namespace = community_framework_events
 
 ####################
 
-com_gui_events.1 = {
+community_framework_events.1 = {
     type = country_event
     placement = root
-    hidden = yes # Sorry, Doodlez
+    hidden = yes 
 	
 	trigger = {
 		# DO NOT CALL THIS EVENT
@@ -27,10 +27,14 @@ com_gui_events.1 = {
 		set_variable = mr_main_window_is_active_var
 		set_variable = mr_main_window_last_active_tab_var
 		set_variable = eocfm_window_is_active_var
+		set_variable = community_gui_objective_var
+		set_variable = had_progressive_era
 		
 		remove_variable = mr_main_window_is_active_var
 		remove_variable = mr_main_window_last_active_tab_var
 		remove_variable = eocfm_window_is_active_var
+		remove_variable = community_gui_objective_var
+		remove_variable = had_progressive_era
 	}
 	
 	orphan = yes

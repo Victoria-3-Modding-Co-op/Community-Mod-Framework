@@ -87,6 +87,7 @@ Currently Included:
 * Hail, Columbia!
 * James's Korea Flavor Pack
 * James's Pop Clothing Tweaks
+* Magic Gate
 * Morgenrote: Dawn of Flavor
 * Newspapers Mod
 * Rally Round the King

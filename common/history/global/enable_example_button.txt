@@ -1,0 +1,10 @@
+﻿# This script is run on game creation
+GLOBAL = {
+
+    # Add example button to sidebar
+#    add_to_global_variable_list = {
+#        name = custom_button_list
+#        target = ideology:gui_sidebar_example_button
+#    }
+
+}

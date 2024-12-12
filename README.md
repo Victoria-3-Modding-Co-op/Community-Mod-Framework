@@ -45,6 +45,16 @@ The key <ideology> should contain the name of your scripted_gui.
 And the key <ideology>_desc contains the tooltip shown when hovering over the button (See [com_gui_l_english.yml](localization/english/com_gui_l_english.yml)).
 **Good practice here is to name the ideology and the scripted gui the same so even if you do not set the localization key for a language, the correct scripted gui is triggered!**
 
+And at last we need to add the button to the sidebar.
+This is done via the following effect (but with your ideology):
+```
+add_to_global_variable_list = {
+    name = custom_button_list
+    target = ideology:gui_sidebar_example_button
+}
+```
+This effect can be run wherever you want, like a journal entry or an event.
+On possibility is to run it in `common/history/global/` (See [enable_example_button.txt](common/history/global/enable_example_button.txt)).
 
 ## Parties ##
 For naming, you need to include loc keys to avoid load-up error. These can be blank and overwritten by your own mod. 

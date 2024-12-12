@@ -41,8 +41,8 @@ We then link those two via the localization of the ideology.
 Localizations can be found in `localization/<language>/`.
 Ideologies have two localization keys: \<ideology\> and \<ideology\>_desc
 
-The key <ideology> should contain the name of your scripted_gui.
-And the key <ideology>_desc contains the tooltip shown when hovering over the button (See [com_gui_l_english.yml](localization/english/com_gui_l_english.yml)).
+The key \<ideology\> should contain the name of your scripted_gui.
+And the key \<ideology\>_desc contains the tooltip shown when hovering over the button (See [com_gui_l_english.yml](localization/english/com_gui_l_english.yml)).
 **Good practice here is to name the ideology and the scripted gui the same so even if you do not set the localization key for a language, the correct scripted gui is triggered!**
 
 And at last we need to add the button to the sidebar.
@@ -54,7 +54,7 @@ add_to_global_variable_list = {
 }
 ```
 This effect can be run wherever you want, like a journal entry or an event.
-On possibility is to run it in `common/history/global/` (See [enable_example_button.txt](common/history/global/enable_example_button.txt)).
+One possibility is to run it in `common/history/global/` (See [enable_example_button.txt](common/history/global/enable_example_button.txt)).
 
 ## Parties ##
 For naming, you need to include loc keys to avoid load-up error. These can be blank and overwritten by your own mod. 

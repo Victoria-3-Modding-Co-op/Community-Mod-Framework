@@ -9,7 +9,7 @@ vbox = {
 	max_update_rate = 8
 
 	layoutpolicy_vertical = expanding
-	margin_bottom = 100
+	margin_bottom = 50
 	spacing = 0
 	max_width = 50
 

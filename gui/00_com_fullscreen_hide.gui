@@ -1,25 +1,22 @@
-# Modification done by Alexedishi
+# Modification done by Alexedishi and Bahmut
 
 template fullscreen_hide {
-	visible = "[Not( 
-		Or(
-			Or(
-				Or(
+    visible = "[Not(
 					Or(
 						Or(
 							Or(
-								InformationPanelBar.IsPanelOpen('politics'), 
-								InformationPanelBar.IsPanelOpen('politics_panel_change_law')
-							), 
-							InformationPanelBar.IsPanelOpen('tech_tree')
-						), 
-						InformationPanelBar.IsPanelOpen('pop_browser')
-					), 
-					InformationPanelBar.IsPanelOpen('building_browser')
-				), 
-				InformationPanelBar.IsPanelOpen('countries')
-			), 
-			GetScriptedGui('community_gui_fullscreen_sgui').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)
-		)
-	)]"
+								Or(
+									Or(
+										InformationPanelBar.IsPanelOpen('politics'),
+										InformationPanelBar.IsPanelOpen('politics_panel_change_law')
+									),
+									InformationPanelBar.IsPanelOpen('tech_tree')
+								),
+								InformationPanelBar.IsPanelOpen('pop_browser')
+							),
+							InformationPanelBar.IsPanelOpen('building_browser')
+						),
+						GetGlobalVariable('com_gui_fullscreen_active').IsSet
+					)
+				)]"
 }

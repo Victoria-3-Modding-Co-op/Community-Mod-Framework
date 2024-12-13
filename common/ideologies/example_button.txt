@@ -1,4 +1,4 @@
-gui_sidebar_example_button = {
+﻿gui_sidebar_example_button = {
     # This is the icon used for the example button
     icon = "gfx/interface/main_hud/pol_btn.dds"
 

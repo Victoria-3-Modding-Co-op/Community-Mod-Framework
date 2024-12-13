@@ -56,6 +56,13 @@ add_to_global_variable_list = {
 This effect can be run wherever you want, like a journal entry or an event.
 One possibility is to run it in `common/history/global/` (See [enable_example_button.txt](common/history/global/enable_example_button.txt)).
 
+If your GUI is fullscreen you will also need to set and remove the following global variable in your scripted gui:
+```
+set_global_variable = com_gui_fullscreen_active
+remove_global_variable = com_gui_fullscreen_active
+```
+Setting it will hide the base game GUI and removing it will show the base game GUI again 
+
 ## Parties ##
 For naming, you need to include loc keys to avoid load-up error. These can be blank and overwritten by your own mod. 
 

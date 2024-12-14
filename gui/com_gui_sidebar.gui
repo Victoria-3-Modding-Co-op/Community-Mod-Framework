@@ -7,15 +7,28 @@ vbox = {
 	name = "com_gui_sidebar"
 	parentanchor = bottom|left
 	max_update_rate = 8
-
+	
+	parentanchor = bottom|left
 	layoutpolicy_vertical = expanding
 	margin_bottom = 50
 	spacing = 0
 	max_width = 50
-
+	
 	# Are there registered custom buttons?
 	# And is the pause menu shown?
-	visible = "[And(Not(IsDataModelEmpty(GetGlobalList('custom_button_list'))),And( IsInGame, And( Not( IsPauseMenuShown ), Not( IsGameOverScreenShown ))))]"
+	visible = "[And( 
+		GetMetaPlayer.GetPlayedOrObservedCountry.IsValid, 
+		And(
+			Not( IsDataModelEmpty(GetGlobalList('custom_button_list'))), 
+			And( 
+				IsInGame, 
+				And( 
+					Not( IsPauseMenuShown ), 
+					Not( IsGameOverScreenShown )
+				)
+			)
+		)
+	)]"
 
 	expand = {}
 
@@ -63,7 +76,7 @@ vbox = {
 
 			item = {
 				widget = {
-				    datacontext = "[GetScriptedGui(Scope.GetIdeology.GetNameNoFormatting)]"
+					datacontext = "[GetScriptedGui(Scope.GetIdeology.GetNameNoFormatting)]"
 
 					size = { 50 50 }
 

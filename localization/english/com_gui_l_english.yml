@@ -3,5 +3,5 @@
  gui_sidebar_example_button: "gui_sidebar_example_button" # Scripted gui used by button
  gui_sidebar_example_button_desc: "Manage Example Stuff" # Description of button that is shown as a tooltip
  
- eocfm_sidebar_button_sgui: ""
- eocfm_sidebar_button_sgui_desc: ""
+ eocfm_sidebar_button_sgui: "eocfm_sidebar_button_sgui"
+ eocfm_sidebar_button_sgui_desc: "eocfm_sidebar_button_sgui"

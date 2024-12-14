@@ -77,6 +77,10 @@ JKFP_is_active_trigger = { # James's Korea Flavor Pack
 	always = no
 }
 
+magic_gate_is_active = { # Magic Gate
+	always = no
+}
+
 mandate_o_h_is_active = { # Mandate of Heaven
     always = no
 }

@@ -82,7 +82,7 @@ vbox = {
 						size = { 47 47 }
 						position = { 0 1 }
 
-						enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+						enabled = "[And(Not(IsObserver), ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
 
 						onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 						tooltip = "[Scope.GetIdeology.GetDesc]"

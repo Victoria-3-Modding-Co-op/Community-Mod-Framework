@@ -1,0 +1,32 @@
+﻿########################################
+# COMMUNITY GUI PLACEHOLDER IDEOLOGIES #
+########################################
+
+# Credit to Chris Kaiser | Bahmut
+
+## See the readme for more information.
+
+####################
+
+eocfm_sidebar_button_sgui = { # Greece, Byzantium, and the Balkans Orthodox widget
+    icon = "gfx/interface/icons/gui_icons/eocfm_sidebar_button.dds"
+
+    show_in_list = no
+
+    priority = 0
+
+    character_ideology = no
+
+    non_interest_group_leader_trigger = {
+        always = no
+    }
+
+    interest_group_leader_trigger = {
+        always = no
+    }
+
+    country_trigger = {
+        always = no
+    }
+}
+

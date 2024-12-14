@@ -1,0 +1,24 @@
+﻿#######################
+# COMMUNITY GUI SGUIS #
+#######################
+
+# Credit to Chris Kaiser | Bahmut
+
+## Make sure your sgui matches the name key of your placeholder ideology!
+## See the readme for more information.
+
+####################
+
+eocfm_sidebar_button_sgui = {
+	scope = country 
+	
+	is_shown = {
+	}
+	
+	is_valid = {
+	}
+	
+	effect = {
+	}
+	
+}

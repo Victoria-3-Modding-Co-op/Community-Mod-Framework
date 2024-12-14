@@ -8,7 +8,6 @@ vbox = {
 	parentanchor = bottom|left
 	max_update_rate = 8
 	
-	parentanchor = bottom|left
 	layoutpolicy_vertical = expanding
 	margin_bottom = 50
 	spacing = 0
@@ -16,18 +15,14 @@ vbox = {
 	
 	# Are there registered custom buttons?
 	# And is the pause menu shown?
-	visible = "[And( 
+	# Are we in observer mod?
+	visible = "[And6( 
 		GetMetaPlayer.GetPlayedOrObservedCountry.IsValid, 
-		And(
-			Not( IsDataModelEmpty(GetGlobalList('custom_button_list'))), 
-			And( 
-				IsInGame, 
-				And( 
-					Not( IsPauseMenuShown ), 
-					Not( IsGameOverScreenShown )
-				)
-			)
-		)
+		Not(IsObserver), 
+		Not( IsDataModelEmpty(GetGlobalList('custom_button_list'))), 
+		IsInGame, 
+		Not( IsPauseMenuShown ), 
+		Not( IsGameOverScreenShown )
 	)]"
 
 	expand = {}

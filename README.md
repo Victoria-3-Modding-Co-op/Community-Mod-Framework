@@ -56,12 +56,30 @@ add_to_global_variable_list = {
 This effect can be run wherever you want, like a journal entry or an event.
 One possibility is to run it in `common/history/global/` (See [enable_example_button.txt](common/history/global/enable_example_button.txt)).
 
-If your GUI is fullscreen you will also need to set and remove the following global variable in your scripted gui:
+### GUI Window Visibility ###
+
+When a sidebar button is clicked the following GUI variable is set to your scripted gui name: `com_open_window`
+In your custom window you should check for it like this (with your scripted gui name):
 ```
-set_global_variable = com_gui_fullscreen_active
-remove_global_variable = com_gui_fullscreen_active
+visible = "[GetVariableSystem.HasValue('com_open_window', 'gui_sidebar_example_button')]"
 ```
-Setting it will hide the base game GUI and removing it will show the base game GUI again 
+
+### Fullscreen GUI ###
+
+If your GUI is fullscreen you will also need to set and remove the following GUI variable: `com_fullscreen`
+The best solution is to use the GUI state system like this:
+```
+state = {
+    name = _show
+    # Toggle doesn't work here as it is still toggled on reload, so I have to set it instead
+    on_finish = "[GetVariableSystem.Set('com_fullscreen', 'com_fullscreen')]" 
+}
+state = {
+    name = _hide
+    on_finish = "[GetVariableSystem.Clear('com_fullscreen')]"
+}
+```
+Setting it will hide the base game GUI and removing it will show the base game GUI again.
 
 ## Parties ##
 For naming, you need to include loc keys to avoid load-up error. These can be blank and overwritten by your own mod. 

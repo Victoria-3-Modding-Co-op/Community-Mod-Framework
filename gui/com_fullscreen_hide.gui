@@ -1,0 +1,14 @@
+# Modification done by Alexedishi and Bahmut
+
+template fullscreen_hide {
+    visible = "[Not(
+					Or6(
+                        InformationPanelBar.IsPanelOpen('politics'),
+                        InformationPanelBar.IsPanelOpen('politics_panel_change_law'),
+                        InformationPanelBar.IsPanelOpen('tech_tree'),
+                        InformationPanelBar.IsPanelOpen('pop_browser'),
+                        InformationPanelBar.IsPanelOpen('building_browser'),
+                        GetVariableSystem.Exists('com_fullscreen')
+					)
+				)]"
+}

@@ -15,14 +15,14 @@ vbox = {
 	
 	# Are there registered custom buttons?
 	# And is the pause menu shown?
-	# Are we in observer mod?
+	# Are we in observer mode?
 	visible = "[And6( 
 		GetMetaPlayer.GetPlayedOrObservedCountry.IsValid, 
 		Not(IsObserver), 
-		Not( IsDataModelEmpty(GetGlobalList('custom_button_list'))), 
+		Not(IsDataModelEmpty(GetGlobalList('custom_button_list'))),
 		IsInGame, 
-		Not( IsPauseMenuShown ), 
-		Not( IsGameOverScreenShown )
+		Not(IsPauseMenuShown),
+		Not(IsGameOverScreenShown)
 	)]"
 
 	expand = {}
@@ -92,7 +92,9 @@ vbox = {
 
 						enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 
+						onclick = "[GetVariableSystem.Set('com_open_window', Scope.GetIdeology.GetNameNoFormatting)]"
 						onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
 						tooltip = "[Scope.GetIdeology.GetDesc]"
 
 

@@ -100,3 +100,12 @@ Currently Included:
 * Rally Round the King
 * States That Make Sense
 * Western Clothes: Redux
+
+## Keybinds ##
+
+You can take a free keybind by doing this:
+1) Check default.profile and see which keybind is still free. You can find free keybinds at the bottom of the file.
+2) Add input_action = "input_$your_input$" to the button you want to use it for.
+3) Add a localization for your button to "localization/language_x/replace" and use the name of the input_action.
+
+Note: It is possible to add additional keybinds if there are no keybinds left.

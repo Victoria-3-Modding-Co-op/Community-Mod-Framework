@@ -14,9 +14,9 @@ Add dummy ideologies from mods into political movements, allowing them to spawn 
 ## GUI Framework ##
 
 Current Scope:
-1) A "sidebar" scripted widget to deconflict mods that want to add custom sidebar buttons. (Done in cooperation with LordR)
+1) A "sidebar" scripted widget to deconflict mods that want to add custom sidebar buttons. (Credit to Bahmut, LordR and Alexedishi)
 2) Modification to the GUI template fullscreen_hide to hide the outliner whenever a scripted widget window is open. (Already done by myself)
-3) Modification to objective_types to add a scrollbar to the objectives screens. (Credit to KarafuruAmamiya and Xier)
+3) Modification to objective_types to add a scrollbar to the objectives screens. (Credit to Bahmut, KarafuruAmamiya and Xier)
 4) Integration of the "Modded DLC Framework" (Credit to 1230James)
 5) Unified system for cooltip types (Credit to 1230James)
 6) Modification to the outliner and journal GUIs to hide custom objectives during gameplay (Credit to Taylor)
@@ -26,6 +26,42 @@ Current Scope:
 Usage Notes:
 * The Objective header can be hidden by setting the global variable community_gui_objective_var
 * "Superevent" windows activated by including in event: gui_window = (event_window_crisis/event_window_newspaper/event_window_fullscreen)
+
+## Sidebar ##
+
+How to add a new button to the sidebar.
+
+First create an ideology in the `common/ideologies/` folder (See [example_button.txt](common/ideologies/example_button.txt)).
+The icon set on the ideology is the icon shown on your button.
+**Important here is that this ideology is never triggered or shown!**
+
+Then we need a scripted gui in the `common/scripted_guis/` folder corresponding to the button (See [example_button_sgui.txt](common/scripted_guis/example_button_sgui.txt))
+
+We then link those two via the localization of the ideology.
+Localizations can be found in `localization/<language>/`.
+Ideologies have two localization keys: \<ideology\> and \<ideology\>_desc
+
+The key \<ideology\> should contain the name of your scripted_gui.
+And the key \<ideology\>_desc contains the tooltip shown when hovering over the button (See [com_gui_l_english.yml](localization/english/com_gui_l_english.yml)).
+**Good practice here is to name the ideology and the scripted gui the same so even if you do not set the localization key for a language, the correct scripted gui is triggered!**
+
+And at last we need to add the button to the sidebar.
+This is done via the following effect (but with your ideology):
+```
+add_to_global_variable_list = {
+    name = custom_button_list
+    target = ideology:gui_sidebar_example_button
+}
+```
+This effect can be run wherever you want, like a journal entry or an event.
+One possibility is to run it in `common/history/global/` (See [enable_example_button.txt](common/history/global/enable_example_button.txt)).
+
+If your GUI is fullscreen you will also need to set and remove the following global variable in your scripted gui:
+```
+set_global_variable = com_gui_fullscreen_active
+remove_global_variable = com_gui_fullscreen_active
+```
+Setting it will hide the base game GUI and removing it will show the base game GUI again 
 
 ## Parties ##
 For naming, you need to include loc keys to avoid load-up error. These can be blank and overwritten by your own mod. 
@@ -58,6 +94,7 @@ Currently Included:
 * Hail, Columbia!
 * James's Korea Flavor Pack
 * James's Pop Clothing Tweaks
+* Magic Gate
 * Morgenrote: Dawn of Flavor
 * Newspapers Mod
 * Rally Round the King

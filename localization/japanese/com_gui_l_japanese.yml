@@ -1,0 +1,6 @@
+﻿l_japanese:
+  # Scripted gui used by button
+  gui_sidebar_example_button: "gui_sidebar_example_button"
+  # Description of button that is shown as a tooltip
+  gui_sidebar_example_button_desc: "Manage Example Stuff"
+ 

@@ -12,3 +12,32 @@ usfp_upper_south_modifier = {
 	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
 	#dummy modifier
 }
+
+
+# Shut up error log
+pakeha_standard_of_living_modifier_positive = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	#dummy modifier
+}
+pakeha_standard_of_living_modifier_negative = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	#dummy modifier
+}
+
+usfp_american_standard_of_living_modifier_positive = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	#dummy modifier
+}
+usfp_american_standard_of_living_modifier_negative = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	#dummy modifier
+}
+
+usfp_american_indian_standard_of_living_modifier_positive = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	#dummy modifier
+}
+usfp_american_indian_standard_of_living_modifier_negative = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	#dummy modifier
+}

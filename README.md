@@ -63,6 +63,10 @@ In your custom window you should check for it like this (with your scripted gui 
 ```
 visible = "[GetVariableSystem.HasValue('com_open_window', 'gui_sidebar_example_button')]"
 ```
+If you want to close your window again you can do it by clearing the variable like this:
+```
+onclick = "[GetVariableSystem.Clear('com_open_window')]"
+```
 
 ### Fullscreen GUI ###
 

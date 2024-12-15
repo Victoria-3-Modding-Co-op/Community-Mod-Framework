@@ -828,6 +828,7 @@ movement_royalist_absolutist = {
 	character_ideologies = {
 		ideology_royalist
 		ideology_authoritarian
+		ideology_bavarocrat # GBBF
 	}
 
 	disband_trigger = {
@@ -1166,6 +1167,7 @@ movement_royalist_constitutional = {
 	character_ideologies = {
 		ideology_royalist
 		ideology_humanitarian_royalist
+		ideology_grefm_constitutionalist # GBBF
 	}
 	
 	disband_trigger = {
@@ -1467,6 +1469,8 @@ movement_labor = { # Explicitly non-socialist labour movement
 		ideology_reformer
 		ideology_radical
 		ideology_social_democrat
+		ideology_grefm_constitutionalist # GBBF
+		ideology_venizelist # GBBF
 	}
 	
 	creation_trigger = {
@@ -3215,6 +3219,9 @@ movement_liberal = {
 		ideology_republican_leader
 		ideology_radical
 		ideology_humanitarian
+		ideology_grefm_constitutionalist # GBBF
+		ideology_venizelist # GBBF
+		ideology_dacianist # GBBF
 	}
 	
 	creation_trigger = {
@@ -4025,6 +4032,7 @@ movement_positivist = {
 	ideology = ideology_positivist
 	character_ideologies = {
 		ideology_positivist
+		ideology_kogalnitchanism # GBBF
 	}
 	
 	creation_trigger = {

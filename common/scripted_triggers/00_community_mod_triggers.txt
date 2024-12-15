@@ -1,6 +1,6 @@
-﻿#################################################
-# COMMUNITY MOD COMPATIBILITY SCRIPTED TRIGGERS #
-#################################################
+﻿##########################
+# COMMUNITY MOD TRIGGERS #
+##########################
 # FILE USAGE:
 # Copy this file into the /common/scripted_triggers folder of your mod.
 #

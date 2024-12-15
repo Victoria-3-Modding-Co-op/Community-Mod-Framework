@@ -1,8 +1,0 @@
-﻿###################################
-# COMMUNITY GUI DETECTION TRIGGER #
-###################################
-# In a separate file so it have override community mod triggers
-
-community_gui_is_active = {
-	always = yes
-}

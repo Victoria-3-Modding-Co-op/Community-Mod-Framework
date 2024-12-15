@@ -1,0 +1,196 @@
+﻿ideology_bavarocrat = {
+	icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_no_ideology.dds"
+	
+	show_in_list = no
+	
+	character_ideology = yes
+
+	country_trigger = {
+		always = no
+	}
+
+	interest_group_leader_trigger = {
+		always = no
+	}
+	
+	non_interest_group_leader_trigger = {
+		always = no
+	}
+	
+	interest_group_leader_weight = {
+		value = 0 #dummy ideology
+	}
+	
+	non_interest_group_leader_weight = {
+		value = 0 #dummy ideology
+	}	
+}
+
+ideology_grefm_constitutionalist = {
+	icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_no_ideology.dds"
+	
+	show_in_list = no
+	
+	character_ideology = yes
+
+	country_trigger = {
+		always = no
+	}
+
+	interest_group_leader_trigger = {
+		always = no
+	}
+	
+	non_interest_group_leader_trigger = {
+		always = no
+	}
+	
+	interest_group_leader_weight = {
+		value = 0 #dummy ideology
+	}
+	
+	non_interest_group_leader_weight = {
+		value = 0 #dummy ideology
+	}	
+}
+
+ideology_venizelos = {
+	icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_no_ideology.dds"
+	
+	show_in_list = no
+	
+	character_ideology = yes
+
+	country_trigger = {
+		always = no
+	}
+
+	interest_group_leader_trigger = {
+		always = no
+	}
+	
+	non_interest_group_leader_trigger = {
+		always = no
+	}
+	
+	interest_group_leader_weight = {
+		value = 0 #dummy ideology
+	}
+	
+	non_interest_group_leader_weight = {
+		value = 0 #dummy ideology
+	}	
+}
+
+ideology_venizelist = {
+	icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_no_ideology.dds"
+	
+	show_in_list = no
+	
+	character_ideology = yes
+
+	country_trigger = {
+		always = no
+	}
+
+	interest_group_leader_trigger = {
+		always = no
+	}
+	
+	non_interest_group_leader_trigger = {
+		always = no
+	}
+	
+	interest_group_leader_weight = {
+		value = 0 #dummy ideology
+	}
+	
+	non_interest_group_leader_weight = {
+		value = 0 #dummy ideology
+	}	
+}
+
+ideology_kogalnitchanism = {
+	icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_no_ideology.dds"
+	
+	show_in_list = no
+	
+	character_ideology = yes
+
+	country_trigger = {
+		always = no
+	}
+
+	interest_group_leader_trigger = {
+		always = no
+	}
+	
+	non_interest_group_leader_trigger = {
+		always = no
+	}
+	
+	interest_group_leader_weight = {
+		value = 0 #dummy ideology
+	}
+	
+	non_interest_group_leader_weight = {
+		value = 0 #dummy ideology
+	}	
+}
+
+ideology_junimist = {
+	icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_no_ideology.dds"
+	
+	show_in_list = no
+	
+	character_ideology = yes
+
+	country_trigger = {
+		always = no
+	}
+
+	interest_group_leader_trigger = {
+		always = no
+	}
+	
+	non_interest_group_leader_trigger = {
+		always = no
+	}
+	
+	interest_group_leader_weight = {
+		value = 0 #dummy ideology
+	}
+	
+	non_interest_group_leader_weight = {
+		value = 0 #dummy ideology
+	}	
+}
+
+ideology_dacianist = {
+	icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_no_ideology.dds"
+	
+	show_in_list = no
+	
+	character_ideology = yes
+
+	country_trigger = {
+		always = no
+	}
+
+	interest_group_leader_trigger = {
+		always = no
+	}
+	
+	non_interest_group_leader_trigger = {
+		always = no
+	}
+	
+	interest_group_leader_weight = {
+		value = 0 #dummy ideology
+	}
+	
+	non_interest_group_leader_weight = {
+		value = 0 #dummy ideology
+	}	
+}
+

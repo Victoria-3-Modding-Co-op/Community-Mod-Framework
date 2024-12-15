@@ -1,0 +1,7 @@
+﻿#########################################
+# COMMUNITY FRAMEWORK DETECTION TRIGGER #
+#########################################
+
+community_framework_is_active = {
+	always = yes
+}

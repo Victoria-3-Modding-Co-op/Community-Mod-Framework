@@ -1,6 +1,7 @@
 ﻿l_french:
   # Scripted gui used by button
   gui_sidebar_example_button: "gui_sidebar_example_button"
-  # Description of button that is shown as a tooltip
-  gui_sidebar_example_button_desc: "Manage Example Stuff"
- 
+  # Name of the button that is shown in the hover popout
+  gui_sidebar_example_button_desc: "Example"
+  # Tooltip shown when hovering over the button
+  gui_sidebar_example_button_tooltip: "When clicking this button nothing happens"

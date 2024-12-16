@@ -39,10 +39,11 @@ Then we need a scripted gui in the `common/scripted_guis/` folder corresponding 
 
 We then link those two via the localization of the ideology.
 Localizations can be found in `localization/<language>/`.
-Ideologies have two localization keys: \<ideology\> and \<ideology\>_desc
+Button ideologies have three localization keys: \<ideology\>, \<ideology\>_desc and \<ideology\>_tooltip
 
 The key \<ideology\> should contain the name of your scripted_gui.
-And the key \<ideology\>_desc contains the tooltip shown when hovering over the button (See [com_gui_l_english.yml](localization/english/com_gui_l_english.yml)).
+And the key \<ideology\>_desc contains the name shown when hovering over the button.
+The \<ideology\>_tooltip is optional and will be shown as a tooltip if you hover over the button (See [com_gui_l_english.yml](localization/english/com_gui_l_english.yml)).
 **Good practice here is to name the ideology and the scripted gui the same so even if you do not set the localization key for a language, the correct scripted gui is triggered!**
 
 And at last we need to add the button to the sidebar.

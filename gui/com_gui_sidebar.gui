@@ -166,6 +166,12 @@ vbox = {
                         }
                     }
 
+                    sidebar_tooltip_area = {
+                        # Only show tooltip when there is one defined
+                        visible = "[Not(ObjectsEqual(Localize(Concatenate(Scope.GetIdeology.GetNameNoFormatting, '_tooltip')), Concatenate(Scope.GetIdeology.GetNameNoFormatting, '_tooltip')))]"
+                        tooltip = "[Localize(Concatenate(Scope.GetIdeology.GetNameNoFormatting, '_tooltip'))]"
+                    }
+
 				}
 			}
 		}

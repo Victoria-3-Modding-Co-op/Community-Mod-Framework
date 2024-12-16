@@ -12,6 +12,7 @@ vbox = {
 	margin_bottom = 50
 	spacing = 0
 	max_width = 50
+    margin_left = -25
 	
 	# Are there registered custom buttons?
 	# And is the pause menu shown?
@@ -25,6 +26,13 @@ vbox = {
 		Not(IsGameOverScreenShown)
 	)]"
 
+    # Close custom panels when a base game panel is opened
+    # Same behavior as base game
+    state = {
+        trigger_when = "[InformationPanelBar.IsAnyPanelOpen]"
+        on_finish = "[GetVariableSystem.Clear('com_open_window')]"
+    }
+
 	expand = {}
 
 	widget = {
@@ -35,7 +43,7 @@ vbox = {
 			framesize = { 100 100 }
 			frame = 0
 
-			position = { 0 77 }
+			position = { -75 77 }
 
 			texture = "gfx/interface/main_hud/sidebar_skin_bg_1.dds"
 		}
@@ -56,7 +64,7 @@ vbox = {
 				framesize = { 100 100 }
 				frame = 0
 
-				position = { 0 23 }
+				position = { -75 23 }
 
 				mirror = vertical
 
@@ -68,58 +76,96 @@ vbox = {
 		# For each registered button
 		vbox = {
 			datamodel = "[GetGlobalList('custom_button_list')]" # Get registered custom buttons
+            onmousehierarchyenter = "[PdxGuiInterruptThenTriggerAllAnimations('hide_custom_sidebar_labels','show_custom_sidebar_labels')]"
+            onmousehierarchyleave = "[PdxGuiInterruptThenTriggerAllAnimations('show_custom_sidebar_labels','hide_custom_sidebar_labels')]"
 
 			item = {
-				widget = {
+				container = {
 					datacontext = "[GetScriptedGui(Scope.GetIdeology.GetNameNoFormatting)]"
+                    enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 
-					size = { 50 50 }
+                    icon = {
+                        texture = "gfx/interface/main_hud/sidebar_skin_bg_2.dds"
+                        parentanchor = center
+                        size = { 50 50 }
+                        position = { -75 0 }
+                        using = hud_shiny_effect
+                    }
 
-					icon = {
-						texture = "gfx/interface/main_hud/sidebar_skin_bg_2.dds"
+                    margin_widget = {
+                        margin_left = 40
+                        enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+                        alpha = 0
+                        size = { 250 50 }
 
-						parentanchor = center
-						size = { 50 50 }
-						using = hud_shiny_effect
-					}
+                        using = sidepanel_label_background
 
-					button_icon_round = {
-						name = "[Scope.GetIdeology.GetNameNoFormatting]"
+                        button = {
+                            onclick = "[GetVariableSystem.Set('com_open_window', Scope.GetIdeology.GetNameNoFormatting)]"
+                            onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+                            size = { 100% 100% }
+                            using = glow_button
+                            parentanchor = vcenter
+                        }
 
-						parentanchor = center
-						size = { 47 47 }
-						position = { 0 1 }
+                        state = {
+                            name = show_custom_sidebar_labels
+                            alpha = 1
+                            duration = 0.15
+                            using = Animation_Curve_Default
+                        }
+                        state = {
+                            name = hide_custom_sidebar_labels
+                            alpha = 0
+                            duration = 0.15
+                            using = Animation_Curve_Default
+                        }
 
-						enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+                        textbox = {
+                            margin_left = 50
+                            size = { -1 50 }
 
-						onclick = "[GetVariableSystem.Set('com_open_window', Scope.GetIdeology.GetNameNoFormatting)]"
-						onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+                            align = left
+                            default_format "#bold"
+                            raw_text = "[Scope.GetIdeology.GetDesc]"
+                        }
+                    }
 
-						tooltip = "[Scope.GetIdeology.GetDesc]"
+                    button_icon_round = {
+                        name = "[Scope.GetIdeology.GetNameNoFormatting]"
+
+                        parentanchor = center
+                        size = { 47 47 }
+                        position = { -75 0 }
+
+                        enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+                        onclick = "[GetVariableSystem.Set('com_open_window', Scope.GetIdeology.GetNameNoFormatting)]"
+                        onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 
 
-						blockoverride "icon" {
-							texture = "[Scope.GetIdeology.GetTexture]"
-						}
+                        blockoverride "icon" {
+                            texture = "[Scope.GetIdeology.GetTexture]"
+                        }
 
-						blockoverride "icon_size" {
-							size = { 35 35 }
-						}
+                        blockoverride "icon_size" {
+                            size = { 35 35 }
+                        }
 
-						state = {
-							name = _mouse_enter
-							alpha = 1
-							duration = 0.7
-							using = Animation_Curve_Default
-						}
+                        state = {
+                            name = _mouse_enter
+                            alpha = 1
+                            duration = 0.7
+                            using = Animation_Curve_Default
+                        }
+                        state = {
+                            name = _mouse_leave
+                            alpha = 0.7
+                            duration = 0.2
+                            using = Animation_Curve_Default
+                        }
+                    }
 
-						state = {
-							name = _mouse_leave
-							alpha = 0.7
-							duration = 0.2
-							using = Animation_Curve_Default
-						}
-					}
 				}
 			}
 		}

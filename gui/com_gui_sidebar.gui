@@ -781,6 +781,13 @@ types com_sidebar_overwrite {
             Not(IsDataModelEmpty(GetGlobalList('custom_button_list')))
         )]"
 
+        # Close custom panels when a base game panel is opened
+        # Same behavior as base game
+        state = {
+            trigger_when = "[InformationPanelBar.IsAnyPanelOpen]"
+            on_finish = "[GetVariableSystem.Clear('com_open_window')]"
+        }
+
         #widget needed to prevent you from clicking on the map
         widget = {
             using = clickthrough_blocker

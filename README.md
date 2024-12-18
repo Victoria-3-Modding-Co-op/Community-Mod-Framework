@@ -17,15 +17,27 @@ Current Scope:
 1) A "sidebar" scripted widget to deconflict mods that want to add custom sidebar buttons. (Credit to Bahmut, LordR and Alexedishi)
 2) Modification to the GUI template fullscreen_hide to hide the outliner whenever a scripted widget window is open. (Already done by myself)
 3) Modification to objective_types to add a scrollbar to the objectives screens. (Credit to Bahmut, KarafuruAmamiya and Xier)
-4) Integration of the "Modded DLC Framework" (Credit to 1230James)
-5) Unified system for cooltip types (Credit to 1230James)
-6) Modification to the outliner and journal GUIs to hide custom objectives during gameplay (Credit to Taylor)
-7) Several "superevent" windows for extra flavor (Credit to Bananaman & Klein for the Newspaper window)
-8) Modification to journal.gui to allow players to show a character icon in a journal entry (Credit to Mori)
+4) Modification to society_panel to add the ability to use custom social hierarchies. (Credit to Bahmut)
+5) Integration of the "Modded DLC Framework" (Credit to 1230James)
+6) Unified system for cooltip types (Credit to 1230James)
+7) Modification to the outliner and journal GUIs to hide custom objectives during gameplay (Credit to Taylor)
+8) Several "superevent" windows for extra flavor (Credit to Bananaman & Klein for the Newspaper window)
+9) Modification to journal.gui to allow players to show a character icon in a journal entry (Credit to Mori)
 
 Usage Notes:
 * The Objective header can be hidden by setting the global variable community_gui_objective_var
 * "Superevent" windows activated by including in event: gui_window = (event_window_crisis/event_window_newspaper/event_window_fullscreen)
+
+## Custom Social Hierarchies ##
+
+To enable a custom social hierachy you have to execute this effect in a countries scope:
+```
+set_variable = {
+    name = custom_social_hieracy
+    value = active_law:lawgroup_of_your_hierachy
+}
+```
+**I recommend doing this in the history file of a country `common/history/countries`**
 
 ## Sidebar ##
 

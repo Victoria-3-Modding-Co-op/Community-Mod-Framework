@@ -484,4 +484,22 @@ input_context={
 		text = "SETTING_INPUT_ACTION_Y"
 		scancode = 28			# Y
 	}
+
+	input_action = {
+		name = "input_ctrl_g"
+		text = "SETTING_INPUT_ACTION_CTRL_G" # Reserved for Magic Gate
+		binding = { # ctrl + g
+			scancode = 10
+			modifier = ctrl
+		}
+	}
+
+	input_action = {
+		name = "input_ctrl_t"
+		text = "SETTING_INPUT_ACTION_CTRL_T" # Reserved for Magic Gate
+		binding = { # ctrl + t
+			scancode = 23
+			modifier = ctrl
+		}
+	}
 }

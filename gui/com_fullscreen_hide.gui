@@ -8,7 +8,7 @@ template fullscreen_hide {
                         InformationPanelBar.IsPanelOpen('tech_tree'),
                         InformationPanelBar.IsPanelOpen('pop_browser'),
                         InformationPanelBar.IsPanelOpen('building_browser'),
-                        GetVariableSystem.Exists('com_open_window')
+                        GetVariableSystem.Exists('com_fullscreen')
 					)
 				)]"
 }

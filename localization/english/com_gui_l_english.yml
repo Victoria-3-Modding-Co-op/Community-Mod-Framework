@@ -1,8 +1,9 @@
 ﻿l_english:
-  # Scripted gui used by button
-  gui_sidebar_example_button: "gui_sidebar_example_button"
-  # Name of the button that is shown in the hover popout
-  gui_sidebar_example_button_desc: "Example"
-  # Tooltip shown when hovering over the button
-  gui_sidebar_example_button_tooltip: "When clicking this button nothing happens"
- 
+ # Scripted gui used by button
+ gui_sidebar_example_button: "gui_sidebar_example_button"
+ # Name of the button that is shown in the hover popout
+ gui_sidebar_example_button_desc: "Example"
+ # Tooltip shown when hovering over the button
+ gui_sidebar_example_button_tooltip: "When clicking this button nothing happens"
+ # Example Opinion Loc Key
+ gui_character_opinion_example: "Example Opinion"

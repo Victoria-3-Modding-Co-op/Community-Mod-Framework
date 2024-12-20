@@ -827,6 +827,13 @@ types com_sidebar_overwrite {
                         }
                     }
 
+                    widget = {
+                        size = { 50 40 }
+                        background = {
+                            texture = "gfx/interface/main_hud/sidebar_skin_bg_4.dds"
+                        }
+                    }
+
                     sidebar_label_button_small = {
                         position = { -100 0 }
                         blockoverride "onclick" {
@@ -848,9 +855,6 @@ types com_sidebar_overwrite {
                         using = selected_sidepanel_animation_small
                         blockoverride "selected_visibility" {
                             visible = "[GetVariableSystem.HasValue('com_open_window', Scope.GetIdeology.GetNameNoFormatting)]"
-                        }
-                        background = {
-                            texture = "gfx/interface/main_hud/sidebar_skin_bg_4.dds"
                         }
                         sidepanel_button_small = {
                             position = { -4 0 }

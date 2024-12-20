@@ -22,7 +22,7 @@ Current Scope:
 6) Unified system for cooltip types (Credit to 1230James)
 7) Modification to the outliner and journal GUIs to hide custom objectives during gameplay (Credit to Taylor)
 8) Several "superevent" windows for extra flavor (Credit to Bananaman & Klein for the Newspaper window)
-9) Modification to journal.gui to allow players to show a character icon in a journal entry (Credit to Mori)
+9) Modification to Journal Entry GUI to allow players to show characters (Credit to Bahmut and Mori)
 
 Usage Notes:
 * The Objective header can be hidden by setting the global variable community_gui_objective_var
@@ -39,7 +39,9 @@ set_variable = {
 ```
 **I recommend doing this in the history file of a country `common/history/countries`**
 
-## Sidebar ##
+## Sidebar Button ##
+
+Screenshot: [Example](docs/example_sidebar_01.png)
 
 How to add a new button to the sidebar.
 
@@ -97,6 +99,52 @@ state = {
 }
 ```
 Setting it will hide the base game GUI and removing it will show the base game GUI again.
+
+## Characters in Journal Entry ##
+
+Screenshots: [Single Character with Opinion](docs/example_journal_entry_character_01.png), [Multiple Characters without Opinions](docs/example_journal_entry_character_02.png)
+
+To add one or more characters to a journal entry you need
+to add them to a variable list called `com_journal_characters` in
+the immediate block of a journal entry.
+
+Here is an example where a countries ruler is added to a journal entry, but theoretically you can add whoever you want:
+```
+je_example_entry = {
+	...
+	immediate = {
+		every_scope_character = {
+			limit = {
+				exists = this
+				is_character_alive = yes
+				is_ruler = yes
+			}
+			save_temporary_scope_as = list_character
+			scope:journal_entry = {
+				add_to_variable_list = {
+					name = com_journal_characters
+					target = scope:list_character
+				}
+			}
+		}
+	}
+	...
+}
+```
+
+### Opinions ###
+
+Characters in journal entries can also have opinions.
+To define them, you need to set the flag variable `com_opinion` on the character.
+```
+set_variable = {
+    name = com_opinion
+    value = flag:gui_character_opinion_example
+}
+```
+The text behind `flag:` is a localization key (See [com_gui_l_english.yml](localization/english/com_gui_l_english.yml)).
+
+**NOTE: Only one opinion can be set on a character at a time. So if you are using a character in multiple journal entries be aware of this.**
 
 ## Parties ##
 For naming, you need to include loc keys to avoid load-up error. These can be blank and overwritten by your own mod. 

@@ -1,9 +1,12 @@
-# Community-Mod-Framework
+# Community-Mod-Framework #
 Framework mod to support compatibility between including GUI, Political Movements, Parties and mod detection triggers
+
+## Steam Page ##
+https://steamcommunity.com/sharedfiles/filedetails/?id=3385002128
 
 # Setting Dependency #
 
-To set this mod as a dependency to your own mod, you will need to this to your `metadata.json` file:
+To set this mod as a dependency to your own mod, you will need to add this to your `metadata.json` file:
 ```
   "relationships" : [
     {
@@ -15,6 +18,7 @@ To set this mod as a dependency to your own mod, you will need to this to your `
     }
   ]
 ```
+**Also remember to add the mod to your required items on your own mods steam page.**
 
 # Political Movements #
 

@@ -1,7 +1,22 @@
 # Community-Mod-Framework
 Framework mod to support compatibility between including GUI, Political Movements, Parties and mod detection triggers
 
-## Political Movements ##
+# Setting Dependency #
+
+To set this mod as a dependency to your own mod, you will need to this to your `metadata.json` file:
+```
+  "relationships" : [
+    {
+      "rel_type" : "dependency",
+      "id" : "com.github.Victoria-3-Modding-Co-op.Community-Mod-Framework",
+      "display_name" : "Community Mod Framework",
+      "resource_type" : "mod",
+      "version" : "1.*"
+    }
+  ]
+```
+
+# Political Movements #
 
 Overwrites vanilla Political Movement definitions with scripted triggers to aid in mod compatibility
 
@@ -11,7 +26,7 @@ Add dummy ideologies from mods into political movements, allowing them to spawn 
 * Load this mod below any other mod
 * Your mod will overwrite the ideology definition and allow it to spawn in the specified political movements
 
-## GUI Framework ##
+# GUI Framework #
 
 Current Scope:
 1) A "sidebar" scripted widget to deconflict mods that want to add custom sidebar buttons. (Credit to Bahmut, LordR and Alexedishi)
@@ -24,9 +39,19 @@ Current Scope:
 8) Several "superevent" windows for extra flavor (Credit to Bananaman & Klein for the Newspaper window)
 9) Modification to Journal Entry GUI to allow players to show characters (Credit to Bahmut and Mori)
 
-Usage Notes:
-* The Objective header can be hidden by setting the global variable community_gui_objective_var
-* "Superevent" windows activated by including in event: gui_window = (event_window_crisis/event_window_newspaper/event_window_fullscreen)
+## Alternative Event Windows ##
+
+"Superevent" windows activated by including in event:
+```
+gui_window = (event_window_crisis/event_window_newspaper/event_window_fullscreen)
+```
+
+## Hiding Objective Header ##
+
+The Objective header can be hidden by setting the global variable `community_gui_objective_var` like this:
+```
+set_global_variable = community_gui_objective_var
+```
 
 ## Custom Social Hierarchies ##
 
@@ -146,10 +171,11 @@ The text behind `flag:` is a localization key (See [com_gui_l_english.yml](local
 
 **NOTE: Only one opinion can be set on a character at a time. So if you are using a character in multiple journal entries be aware of this.**
 
-## Parties ##
+# Parties #
+
 For naming, you need to include loc keys to avoid load-up error. These can be blank and overwritten by your own mod. 
 
-## Community Mod Triggers ##
+# Community Mod Triggers #
 
 Usage
 1) Place the file 00_community_mod_compatibility_triggers.txt  in the /common/scripted_triggers folder of your mod. This file will contain the scripted triggers all set to return false by default. This is intentional.

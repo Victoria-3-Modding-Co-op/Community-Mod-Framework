@@ -33,15 +33,16 @@ Add dummy ideologies from mods into political movements, allowing them to spawn 
 # GUI Framework #
 
 Current Scope:
-1) A "sidebar" scripted widget to deconflict mods that want to add custom sidebar buttons. (Credit to Bahmut, LordR and Alexedishi)
-2) Modification to the GUI template fullscreen_hide to hide the outliner whenever a scripted widget window is open. (Already done by myself)
-3) Modification to objective_types to add a scrollbar to the objectives screens. (Credit to Bahmut, KarafuruAmamiya and Xier)
+1) A "sidebar" scripted widget to deconflict mods that want to add custom sidebar buttons. (Credit to Bahmut, LordR, & Alexedishi)
+2) Modification to the GUI template fullscreen_hide to hide the outliner whenever a scripted widget window is open. (Credit to Bahmut & Alexedishi)
+3) Modification to objective_types to add a scrollbar to the objectives screens. (Credit to Bahmut, KarafuruAmamiya, & Xier)
 4) Modification to society_panel to add the ability to use custom social hierarchies. (Credit to Bahmut)
 5) Integration of the "Modded DLC Framework" (Credit to 1230James)
 6) Unified system for cooltip types (Credit to 1230James)
 7) Modification to the outliner and journal GUIs to hide custom objectives during gameplay (Credit to Taylor)
-8) Several "superevent" windows for extra flavor (Credit to Bananaman & Klein for the Newspaper window)
+8) Several "superevent" windows for extra flavor (Credit to Bananaman & Klein for the Newspaper window, Credit to Alexedishi for all others)
 9) Modification to Journal Entry GUI to allow players to show characters (Credit to Bahmut and Mori)
+10) Integration of the "Multi-line PM Framework" (Credit to 1230James)
 
 ## Alternative Event Windows ##
 
@@ -175,6 +176,17 @@ The text behind `flag:` is a localization key (See [com_gui_l_english.yml](local
 
 **NOTE: Only one opinion can be set on a character at a time. So if you are using a character in multiple journal entries be aware of this.**
 
+## Multi-line Production Methods ##
+
+MPM edits certain panels in the UI to make them display extra PM groups by wrapping them around instead of adding the extra ones on the same line and causing them to appear off the edge of the panel or under other text and buttons. MPM provides changes to the following files:
+```
+gui/building_details_panel.gui
+gui/goods_state_panel.gui
+gui/production_methods.gui
+gui/building_browser_panel.gui
+```
+**Note: Note that military buildings, such as barracks and naval bases, are NOT INTENDED TO BE USED WITH MPM due to the new unit graphics being displayed alongside the PMGs which now take up most of the space that the extra PMGs would overflow into.
+
 # Parties #
 
 For naming, you need to include loc keys to avoid load-up error. These can be blank and overwritten by your own mod. 
@@ -222,3 +234,8 @@ You can take a free keybind by doing this:
 3) Add a localization for your button to "localization/language_x/replace" and use the name of the input_action.
 
 Note: It is possible to add additional keybinds if there are no keybinds left.
+
+## Additional Modifier Icons ##
+
+Over 100 new modifier icons for more variety. Credit to Caelreader. PSD template available in docs.
+Screenshot: [Example](docs/timed_modifier_icons.png)

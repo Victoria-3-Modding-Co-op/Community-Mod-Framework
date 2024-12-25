@@ -729,7 +729,6 @@ types journal_entry_overwrites {
 
 			# Character Opinion
 			flowcontainer = {
-				#visible = "[Not(StringIsEmpty(Character.MakeScope.GetFlagName('investigate_gate_decision')))]"
 				position = { 180 50 }
 				margin = { 10 10 }
 				tooltipwidget = {
@@ -783,6 +782,9 @@ types journal_entry_overwrites {
 			com_journal_entry_character_grid = {
 				blockoverride "datamodel" {
 					datamodel = "[DataModelLast(JournalEntry.MakeScope.GetList('com_journal_characters'), '(int32)1')]"
+				}
+				blockoverride "grid_visible" {
+					visible = "[IsOdd_int32(GetDataModelSize(JournalEntry.MakeScope.GetList('com_journal_characters')))]"
 				}
 				blockoverride "character_size" {
 					size = { @panel_width 290 }

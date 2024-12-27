@@ -801,6 +801,13 @@ types com_sidebar_overwrite {
                 frame = 1
                 scale = 0.5
             }
+
+            # Close custom panels when ledger panel is opened
+            # Same behavior as base game
+            state = {
+                trigger_when = "[MapListPanelManager.IsVisible]"
+                on_finish = "[GetVariableSystem.Clear('com_open_window')]"
+            }
         }
 
         flowcontainer = {

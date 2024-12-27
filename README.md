@@ -43,6 +43,7 @@ Current Scope:
 8) Several "superevent" windows for extra flavor (Credit to Bananaman & Klein for the Newspaper window, Credit to Alexedishi for all others)
 9) Modification to Journal Entry GUI to allow players to show characters (Credit to Bahmut and Mori)
 10) Integration of the "Multi-line PM Framework" (Credit to 1230James)
+11) Alerts can now open custom windows (Credit to Bahmut)
 
 ## Alternative Event Windows ##
 
@@ -130,6 +131,16 @@ state = {
 ```
 Setting it will hide the base game GUI and removing it will show the base game GUI again.
 
+### Custom Alerts ###
+
+When you create an alert, you also need to define an action in a loc key.
+This action string will be written into the GUI variable `com_alert_action`.
+
+You can then check for this in your custom GUI like this:
+```
+visible = "[GetVariableSystem.HasValue('com_alert_action', 'Example Panel')]"
+```
+
 ## Characters in Journal Entry ##
 
 Screenshots: [Single Character with Opinion](docs/example_journal_entry_character_01.png), [Multiple Characters without Opinions](docs/example_journal_entry_character_02.png)
@@ -185,7 +196,7 @@ gui/goods_state_panel.gui
 gui/production_methods.gui
 gui/building_browser_panel.gui
 ```
-**Note: Note that military buildings, such as barracks and naval bases, are NOT INTENDED TO BE USED WITH MPM due to the new unit graphics being displayed alongside the PMGs which now take up most of the space that the extra PMGs would overflow into.
+**NOTE: Note that military buildings, such as barracks and naval bases, are NOT INTENDED TO BE USED WITH MPM due to the new unit graphics being displayed alongside the PMGs which now take up most of the space that the extra PMGs would overflow into.**
 
 # Parties #
 

@@ -1,0 +1,20 @@
+﻿com_toggle_debug = {
+    scope = country
+
+    effect = {
+        if = {
+            limit = {
+                NOT = {
+                    has_global_variable = com_debug
+                }
+            }
+            set_global_variable = com_debug
+        }
+        else_if = {
+            limit = {
+                has_global_variable = com_debug
+            }
+            remove_global_variable = com_debug
+        }
+    }
+}

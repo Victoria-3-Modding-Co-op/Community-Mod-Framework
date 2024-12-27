@@ -414,6 +414,16 @@ input_context={
 	#Put the localization of it into the replace folder localization/*language*/replace
 
 	input_action = {
+		name = "input_ctrl_alt_d"
+		text = "SETTING_INPUT_ACTION_CTRL_ALT_D" # Activate Debug
+		binding = { # ctrl + alt + d
+			scancode = 7
+			modifier = ctrl
+			modifier = alt
+		}
+	}
+
+	input_action = {
 		name = "input_h"
 		text = "SETTING_INPUT_ACTION_H"
 		scancode = 11			# H

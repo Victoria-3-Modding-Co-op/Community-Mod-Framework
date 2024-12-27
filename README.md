@@ -30,6 +30,12 @@ Add dummy ideologies from mods into political movements, allowing them to spawn 
 * Load this mod below any other mod
 * Your mod will overwrite the ideology definition and allow it to spawn in the specified political movements
 
+# Debug Mode #
+
+The keybinding `CTRL + ALT + D` toggles the global variable `com_debug`.
+
+This can be used to enable or disable debug content like debug Decisions or Events.
+
 # GUI Framework #
 
 Current Scope:

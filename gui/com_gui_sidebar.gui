@@ -852,7 +852,6 @@ types com_sidebar_overwrite {
 
                     sidebar_label_text_small = {
                         position = { -100 0 }
-                        maximumsize = { -1 40 }
                         raw_text = "[Scope.GetIdeology.GetDesc]"
                     }
 

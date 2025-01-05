@@ -414,6 +414,14 @@ liberal_party = {
 					has_ideology = ideology:ideology_liberal
 					has_ideology = ideology:ideology_liberal_modern
 					has_ideology = ideology:ideology_laissez_faire
+
+					# ANZFP
+					trigger_if = {
+						limit = {
+							anzfp_is_active = yes
+						}
+						anz_laissez_faire_ideologies = yes
+					}
 				}
 			}
 			add = {
@@ -628,6 +636,17 @@ liberal_party = {
 							has_ideology = ideology:ideology_radical
 						}
 					}
+
+					# ANZFP
+					trigger_if = {
+						limit = {
+							anzfp_is_active = yes
+						}
+						or = {
+							anz_republican_ideologies = yes
+							anz_populist_ideologies = yes
+						}
+					}
 				}
 				owner = {
 					OR = {
@@ -651,6 +670,14 @@ liberal_party = {
 					leader = {
 						character_is_anti_slavery = yes
 					}
+
+					# ANZFP
+					trigger_if = {
+						limit = {
+							anzfp_is_active = yes
+						}
+						anz_particularist_ideologies = yes
+					}
 				}
 			}
 			add = {
@@ -670,6 +697,14 @@ liberal_party = {
 					has_ideology = ideology:ideology_anti_slavery
 					leader = {
 						character_is_anti_slavery = yes
+					}
+
+					# ANZFP
+					trigger_if = {
+						limit = {
+							anzfp_is_active = yes
+						}
+						anz_anti_slavery_ideologies = yes
 					}
 				}
 			}

@@ -67,3 +67,13 @@ has_monarchist_ideology = {
 		has_ideology = ideology:ideology_legitimist	
 	}
 }
+
+has_paternalist_ideology = {
+	OR = {
+		has_ideology = ideology:ideology_paternalistic
+		has_ideology = ideology:ideology_scholar_paternalistic
+		has_ideology = ideology:ideology_junker_paternalistic
+		has_ideology = ideology:ideology_papal_paternalistic
+		has_ideology = ideology:ideology_anz_elitist #anzfp
+	}
+}

@@ -1,0 +1,47 @@
+﻿anz_country_is_pakeha = {
+	always = no
+}
+
+# Interest Group Ideologies
+anz_paternalistic_ideologies = {
+	always = no
+}
+anz_stratocratic_ideologies = {
+	always = no
+}
+anz_moralist_ideologies = {
+	always = no
+}
+anz_laissez_faire_ideologies = {
+	always = no
+}
+anz_anti_slavery_ideologies = { 
+	always = no
+}
+anz_pro_slavery_ideologies = {
+	always = no
+}
+anz_agrarian_ideologies = {
+	always = no
+}
+anz_plutocratic_ideologies = {
+	always = no
+}
+anz_republican_ideologies = {
+	always = no
+}
+anz_populist_ideologies = {
+	always = no
+}
+anz_patriarchal_ideologies = {
+	always = no
+}
+anz_isolationist_ideologies = {
+	always = no
+}
+anz_particularist_ideologies = {
+	always = no
+}
+anz_reactionary_ideologies = {
+	always = no
+}

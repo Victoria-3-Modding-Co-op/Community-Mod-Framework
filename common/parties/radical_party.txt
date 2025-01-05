@@ -19,9 +19,6 @@ radical_party = {
 						}
 						country_has_primary_culture = cu:australian
 					}
-					trigger_else = { 
-                    	always = no
-               		}
 				}
 			}
 
@@ -324,17 +321,6 @@ radical_party = {
 				has_ideology = ideology:ideology_legitimist
 				has_ideology = ideology:ideology_theocrat
 				has_ideology = ideology:ideology_slaver
-
-				# ANZFP
-				trigger_if = {
-					limit = {
-						anzfp_is_active = yes
-					}
-					has_ideology = ideology:ideology_unt_traditionalist
-				}
-				trigger_else = { 
-					always = no
-				}
 			}
 		}
 	}
@@ -518,12 +504,9 @@ radical_party = {
 							anzfp_is_active = yes
 						}
 						OR = {
-							has_ideology = ideology:ideology_unt_republican 
-							has_ideology = ideology:ideology_unt_populist 
+							anz_republican_ideologies = yes
+							anz_populist_ideologies = yes
 						}
-					}
-					trigger_else = { 
-						always = no
 					}
 
 					leader = {
@@ -548,7 +531,17 @@ radical_party = {
 		}
 		if = {
 			limit = { # particularists will join in when their issues are relevant
-				has_ideology = ideology:ideology_particularist
+				OR = {
+					has_ideology = ideology:ideology_particularist
+
+					# ANZFP
+					trigger_if = {
+						limit = {
+							anzfp_is_active = yes
+						}
+						anz_particularist_ideologies = yes
+					}
+				}
 				owner = {
 					OR = {
 						has_law = law_type:law_serfdom
@@ -587,14 +580,11 @@ radical_party = {
 							anzfp_is_active = yes
 						}
 						OR = {
-							has_ideology = ideology:ideology_unt_republican 
-							has_ideology = ideology:ideology_unt_populist 
+							anz_republican_ideologies = yes
+							anz_populist_ideologies = yes
 						}
 					}
 					
-					trigger_else = { 
-						always = no
-					}
 					leader = {
 						OR = {
 							has_ideology = ideology:ideology_radical
@@ -685,6 +675,14 @@ radical_party = {
 					has_ideology = ideology:ideology_anti_slavery
 					leader = {
 						has_ideology = ideology:ideology_abolitionist
+					}
+
+					# ANZFP
+					trigger_if = {
+						limit = {
+							anzfp_is_active = yes
+						}
+						anz_anti_slavery_ideologies = yes
 					}
 				}
 			}

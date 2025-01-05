@@ -25,9 +25,6 @@ communist_party = {
 							}
 						}
 					}
-					trigger_else = { 
-                    	always = no
-               		}
 				}
 			}
 
@@ -482,6 +479,14 @@ communist_party = {
 		if = { # reactionary ig's don't like communism
 			limit = {
 				has_ideology = ideology:ideology_reactionary
+
+				# ANZFP
+				trigger_if = {
+					limit = {
+						anzfp_is_active = yes
+					}
+					anz_reactionary_ideologies = yes
+				}
 			}
 			add = {
 				value = -3
@@ -522,14 +527,13 @@ communist_party = {
 						limit = {
 							anzfp_is_active = yes
 						}
-						leader = { 
-							has_ideology = ideology:ideology_anz_georgist
+						or = {
+							anz_agrarian_ideologies = yes
+							leader = { 
+								has_ideology = ideology:ideology_anz_georgist
+							}
 						}
 					}
-					trigger_else = { 
-						always = no
-					}
-
 				}
 				owner = {
 					has_law = law_type:law_land_based_taxation
@@ -576,14 +580,13 @@ communist_party = {
 						limit = {
 							anzfp_is_active = yes
 						}
-						leader = { 
-							has_ideology = ideology:ideology_anz_georgist
+						or = {
+							anz_agrarian_ideologies = yes
+							leader = { 
+								has_ideology = ideology:ideology_anz_georgist
+							}
 						}
 					}
-					trigger_else = { 
-						always = no
-					}
-
 				}
 			}
 			add = {
@@ -598,6 +601,19 @@ communist_party = {
 					has_ideology = ideology:ideology_agrarian
 					leader = {
 						has_ideology = ideology:ideology_protectionist
+					}
+
+					# ANZFP
+					trigger_if = {
+						limit = {
+							anzfp_is_active = yes
+						}
+						or = {
+							anz_agrarian_ideologies = yes
+							leader = { 
+								has_ideology = ideology:ideology_anz_georgist
+							}
+						}
 					}
 				}
 				owner = {
@@ -631,10 +647,6 @@ communist_party = {
 							has_ideology = ideology:ideology_anz_georgist
 						}
 					}
-					trigger_else = { 
-						always = no
-					}
-
 					AND = {
 						has_ideology = ideology:ideology_loyalist
 						owner = {
@@ -672,6 +684,13 @@ communist_party = {
 						has_ideology = ideology:ideology_social_democrat
 						has_ideology = ideology:ideology_communist
 					}
+					# ANZFP
+					trigger_if = {
+						limit = {
+							anzfp_is_active = yes
+						}
+						anz_particularist_ideologies = yes
+					}
 				}
 			}
 			add = {
@@ -691,6 +710,14 @@ communist_party = {
 					has_ideology = ideology:ideology_anti_slavery
 					leader = {
 						has_ideology = ideology:ideology_abolitionist
+					}
+
+					# ANZFP
+					trigger_if = {
+						limit = {
+							anzfp_is_active = yes
+						}
+						anz_anti_slavery_ideologies = yes
 					}
 				}
 			}

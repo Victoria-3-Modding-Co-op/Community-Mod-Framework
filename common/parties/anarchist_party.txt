@@ -14,11 +14,8 @@ anarchist_party = {
 						limit = {
 							anzfp_is_active = yes
 						}
-						country_has_primary_culture = cu:pakeha
+						anz_country_is_pakeha = yes
 					}
-					trigger_else = { 
-                    	always = no
-               		}
 				}
 			}
 			triggered_desc = {
@@ -30,9 +27,6 @@ anarchist_party = {
 						}
 						country_has_primary_culture = cu:australian
 					}
-					trigger_else = { 
-                    	always = no
-               		}
 				}
 			}
 
@@ -255,15 +249,13 @@ anarchist_party = {
 						limit = {
 							anzfp_is_active = yes
 						}
-					leader = { 
-							has_ideology = ideology:ideology_anz_georgist
+						or = {
+							anz_agrarian_ideologies = yes
+							leader = { 
+								has_ideology = ideology:ideology_anz_georgist
+							}
 						}
 					}
-					trigger_else = { 
-						always = no
-					}
-
-
 				}
 				owner = {
 					has_law = law_type:law_land_based_taxation
@@ -303,6 +295,14 @@ anarchist_party = {
 							has_ideology = ideology:ideology_pacifist
 						}
 					}
+
+					# ANZFP
+					trigger_if = {
+						limit = {
+							anzfp_is_active = yes
+						}
+						anz_particularist_ideologies = yes
+					}
 				}
 				owner = {
 					has_law = law_type:law_peasant_levies
@@ -325,6 +325,14 @@ anarchist_party = {
 					has_ideology = ideology:ideology_anti_slavery
 					leader = {
 						has_ideology = ideology:ideology_abolitionist
+					}
+
+					# ANZFP
+					trigger_if = {
+						limit = {
+							anzfp_is_active = yes
+						}
+						anz_anti_slavery_ideologies = yes
 					}
 				}
 			}

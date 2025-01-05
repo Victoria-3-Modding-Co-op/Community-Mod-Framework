@@ -19,9 +19,6 @@ free_trade_party = {
 						}
 						country_has_primary_culture = cu:australian
 					}
-					trigger_else = { 
-                    	always = no
-               		}
 				}
 			}
 			triggered_desc = {
@@ -31,11 +28,8 @@ free_trade_party = {
 						limit = {
 							anzfp_is_active = yes
 						}
-						country_has_primary_culture = cu:pakeha
+						anz_country_is_pakeha = yes
 					}
-					trigger_else = { 
-                    	always = no
-               		}
 				}
 			}
 
@@ -487,9 +481,6 @@ free_trade_party = {
 							has_ideology = ideology:ideology_anz_georgist
 						}
 					}
-					trigger_else = { 
-						always = no
-					}
 
 					has_ideology = ideology:ideology_laissez_faire
 				}
@@ -507,7 +498,17 @@ free_trade_party = {
 						has_law = law_type:law_wealth_voting
 					}
 				}
-				has_ideology = ideology:ideology_plutocratic
+				OR = {
+					has_ideology = ideology:ideology_plutocratic
+
+					# ANZFP
+					trigger_if = {
+						limit = {
+							anzfp_is_active = yes
+						}
+						anz_plutocratic_ideologies = yes
+					}
+				}
 			}
 			add = {
 				value = 3
@@ -527,12 +528,8 @@ free_trade_party = {
 						limit = {
 							anzfp_is_active = yes
 						}
-						has_ideology = ideology:ideology_unt_republican 
-					}
-					trigger_else = { 
-						always = no
-					}
-					
+						anz_republican_ideologies = yes
+					}	
 				}
 			}
 			add = {
@@ -553,6 +550,13 @@ free_trade_party = {
 					leader = {
 						has_ideology = ideology:ideology_integralist
 					}
+					# ANZFP
+					trigger_if = {
+						limit = {
+							anzfp_is_active = yes
+						}
+						anz_paternalistic_ideologies = yes
+					}
 				}
 			}
 			add = {
@@ -570,6 +574,14 @@ free_trade_party = {
 				OR = {
 					has_ideology = ideology:ideology_plutocratic
 					has_ideology = ideology:ideology_meritocratic
+
+					# ANZFP
+					trigger_if = {
+						limit = {
+							anzfp_is_active = yes
+						}
+						anz_plutocratic_ideologies = yes
+					}
 				}
 
 				# ANZFP
@@ -579,10 +591,6 @@ free_trade_party = {
 					}
 					NOT = { leader = { has_ideology = ideology:ideology_anz_georgist } }
 				}
-				trigger_else = { 
-					always = no
-				}
-
 			}
 			add = {
 				value = 3
@@ -661,10 +669,11 @@ free_trade_party = {
 						limit = {
 							anzfp_is_active = yes
 						}
-						has_ideology = ideology:ideology_tribal_traditionalist
-					}
-					trigger_else = { 
-						always = no
+						OR = {
+							anz_paternalistic_ideologies = yes
+							anz_laissez_faire_ideologies = yes
+							anz_agrarian_ideologies = yes
+						}
 					}
 
 					leader = {

@@ -11,6 +11,7 @@
 			country_has_primary_culture = cu:british
 			country_has_primary_culture = cu:anglo_canadian
 			country_has_primary_culture = cu:australian
+			anz_country_is_pakeha = yes #anzfp
 		}
 	}
 	creation_weight = {

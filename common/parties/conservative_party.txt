@@ -22,9 +22,6 @@ conservative_party = {
 							c:WAS ?= this
 						}
 					}
-					trigger_else = { 
-                    	always = no
-               		}
 				}
 			}
 			triggered_desc = {
@@ -36,9 +33,6 @@ conservative_party = {
 						}
 						country_has_primary_culture = cu:australian
 					}
-					trigger_else = { 
-                    	always = no
-               		}
 				}
 			}
 			triggered_desc = {
@@ -48,11 +42,8 @@ conservative_party = {
 						limit = {
 							anzfp_is_active = yes
 						}
-						country_has_primary_culture = cu:pakeha
+						anz_country_is_pakeha = yes
 					}
-					trigger_else = { 
-                    	always = no
-               		}
 				}
 			}
 
@@ -498,12 +489,12 @@ conservative_party = {
 						limit = {
 							anzfp_is_active = yes
 						}
-						leader = { 
-							has_ideology = ideology:ideology_tribal_traditionalist 
+						OR = {
+							anz_paternalistic_ideologies = yes
+							anz_stratocratic_ideologies = yes
+							anz_moralist_ideologies = yes
+							anz_patriarchal_ideologies = yes
 						}
-					}
-					trigger_else = { 
-						always = no
 					}
 				}
 			}
@@ -592,6 +583,17 @@ conservative_party = {
 				OR = {
 					has_ideology = ideology:ideology_plutocratic
 					has_ideology = ideology:ideology_paternalistic
+
+					# ANZFP
+					trigger_if = {
+						limit = {
+							anzfp_is_active = yes
+						}
+						OR = {
+							anz_paternalistic_ideologies = yes
+							anz_plutocratic_ideologies = yes
+						}
+					}
 				}
 				owner = {
 					has_law = law_type:law_universal_suffrage
@@ -607,6 +609,17 @@ conservative_party = {
 				OR = {
 					has_ideology = ideology:ideology_plutocratic
 					has_ideology = ideology:ideology_stratocratic
+
+					# ANZFP
+					trigger_if = {
+						limit = {
+							anzfp_is_active = yes
+						}
+						OR = {
+							anz_plutocratic_ideologies = yes
+							anz_stratocratic_ideologies = yes
+						}
+					}
 				}
 				owner = {
 					has_law = law_type:law_graduated_taxation
@@ -646,7 +659,15 @@ conservative_party = {
 		}
 		if = { # devout more likely to join conservatives with total separation
 			limit = {
-				has_ideology = ideology:ideology_moralist
+				OR = {
+					has_ideology = ideology:ideology_moralist
+					trigger_if = { # ANZFP
+						limit = {
+							anzfp_is_active = yes
+						}
+						anz_moralist_ideologies = yes
+					}
+				}
 				owner = {
 					has_law = law_type:law_total_separation
 				}
@@ -658,7 +679,15 @@ conservative_party = {
 		}
 		if = { # devout more likely to join conservatives with freedom of conscience
 			limit = {
-				has_ideology = ideology:ideology_moralist
+				OR = {
+					has_ideology = ideology:ideology_moralist
+					trigger_if = { # ANZFP
+						limit = {
+							anzfp_is_active = yes
+						}
+						anz_moralist_ideologies = yes
+					}
+				}
 				owner = {
 					has_law = law_type:law_freedom_of_conscience
 				}
@@ -674,6 +703,14 @@ conservative_party = {
 				owner = {
 					has_law = law_type:law_womens_suffrage
 				}
+
+				# ANZFP
+				trigger_if = {
+					limit = {
+						anzfp_is_active = yes
+					}
+					anz_patriarchal_ideologies = yes
+				}
 			}
 			add = {
 				value = 3
@@ -685,6 +722,14 @@ conservative_party = {
 				has_ideology = ideology:ideology_patriarchal
 				owner = {
 					has_law = law_type:law_women_in_the_workplace
+				}
+
+				# ANZFP
+				trigger_if = {
+					limit = {
+						anzfp_is_active = yes
+					}
+					anz_patriarchal_ideologies = yes
 				}
 			}
 			add = {
@@ -702,12 +747,7 @@ conservative_party = {
 						limit = {
 							anzfp_is_active = yes
 						}
-						leader = { 
-							has_ideology = ideology:ideology_unt_reactionary
-						}
-					}
-					trigger_else = { 
-						always = no
+						anz_reactionary_ideologies = yes
 					}
 				}
 				owner = {
@@ -751,6 +791,14 @@ conservative_party = {
 					has_ideology = ideology:ideology_patriarchal
 					has_ideology = ideology:ideology_patriotic
 					leader = { has_ideology = ideology:ideology_authoritarian }
+
+					# ANZFP
+					trigger_if = {
+						limit = {
+							anzfp_is_active = yes
+						}
+						anz_patriarchal_ideologies = yes
+					}
 				}
 			}
 			add = {
@@ -763,6 +811,17 @@ conservative_party = {
 				OR = {
 					has_ideology = ideology:ideology_moralist
 					has_ideology = ideology:ideology_paternalistic
+
+					# ANZFP
+					trigger_if = {
+						limit = {
+							anzfp_is_active = yes
+						}
+						or = {
+							anz_paternalistic_ideologies = yes
+							anz_moralist_ideologies = yes
+						}
+					}
 				}
 				owner = {
 					NOR = {
@@ -781,6 +840,17 @@ conservative_party = {
 				OR = {
 					has_ideology = ideology:ideology_stratocratic
 					has_ideology = ideology:ideology_laissez_faire
+
+					# ANZFP
+					trigger_if = {
+						limit = {
+							anzfp_is_active = yes
+						}
+						OR = {
+							anz_laissez_faire_ideologies = yes
+							anz_stratocratic_ideologies = yes
+						}
+					}
 				}
 				OR = {
 					owner = {
@@ -799,6 +869,14 @@ conservative_party = {
 				OR = {
 					has_ideology = ideology:ideology_stratocratic
 					has_ideology = ideology:ideology_individualist
+
+					# ANZFP
+					trigger_if = {
+						limit = {
+							anzfp_is_active = yes
+						}
+						anz_stratocratic_ideologies = yes
+					}
 				}
 				OR = {
 					owner = {
@@ -817,6 +895,14 @@ conservative_party = {
 				OR = {
 					has_paternalist_ideology = yes
 					has_ideology = ideology:ideology_patriotic
+
+					# ANZFP
+					trigger_if = {
+						limit = {
+							anzfp_is_active = yes
+						}
+						anz_paternalistic_ideologies = yes
+					}
 				}
 				owner = {
 					has_technology_researched = law_enforcement

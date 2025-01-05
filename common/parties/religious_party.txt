@@ -20,9 +20,6 @@ religious_party = {
 						country_has_primary_culture = cu:australian
 						country_has_state_religion = rel:catholic 
 					}
-					trigger_else = { 
-                    	always = no
-               		}
 				}
 			}
 			triggered_desc = {
@@ -34,9 +31,6 @@ religious_party = {
 						}
 						country_has_primary_culture = cu:australian
 					}
-					trigger_else = { 
-                    	always = no
-               		}
 				}
 			}
 
@@ -393,7 +387,17 @@ religious_party = {
 		}
 		if = { # patriarchs more likely to join conservatives with women's suffrage
 			limit = {
-				has_ideology = ideology:ideology_patriarchal
+				OR = {
+					has_ideology = ideology:ideology_patriarchal
+
+					# ANZFP
+					trigger_if = {
+						limit = {
+							anzfp_is_active = yes
+						}
+						anz_particularist_ideologies = yes
+					}
+				}
 				owner = {
 					has_law = law_type:law_womens_suffrage
 				}

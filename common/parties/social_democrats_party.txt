@@ -21,9 +21,6 @@ social_democrat_party = {
 						}
 						c:NSW ?= THIS
 					}
-					trigger_else = { 
-                    	always = no
-               		}
 				}
 			}
 			triggered_desc = {
@@ -35,9 +32,6 @@ social_democrat_party = {
 						}
 						country_has_primary_culture = cu:australian
 					}
-					trigger_else = { 
-                    	always = no
-               		}
 				}
 			}
 			triggered_desc = {
@@ -47,11 +41,8 @@ social_democrat_party = {
 						limit = {
 							anzfp_is_active = yes
 						}
-						country_has_primary_culture = cu:pakeha
+						anz_country_is_pakeha = yes
 					}
-					trigger_else = { 
-                    	always = no
-               		}
 				}
 			}
 
@@ -508,9 +499,6 @@ social_democrat_party = {
 							has_ideology = ideology:ideology_anz_georgist
 						}
 					}
-					trigger_else = { 
-						always = no
-					}
 
 				}
 				owner = {
@@ -546,12 +534,9 @@ social_democrat_party = {
 							anzfp_is_active = yes
 						}
 						OR = {
-							has_ideology = ideology:ideology_unt_republican #anzfp
-							has_ideology = ideology:ideology_unt_populist #anzfp
+							anz_republican_ideologies = yes
+							anz_populist_ideologies = yes
 						}
-					}
-					trigger_else = { 
-						always = no
 					}
 
 					leader = {
@@ -598,6 +583,17 @@ social_democrat_party = {
 					has_ideology = ideology:ideology_proletarian
 					has_ideology = ideology:ideology_agrarian
 					has_ideology = ideology:ideology_paternalistic
+					
+					# ANZFP
+					trigger_if = {
+						limit = {
+							anzfp_is_active = yes
+						}
+						OR = {
+							anz_paternalistic_ideologies = yes
+							anz_agrarian_ideologies = yes
+						}
+					}
 				}
 				owner = {
 					has_law = law_type:law_free_trade
@@ -614,9 +610,6 @@ social_democrat_party = {
 						leader = { 
 							has_ideology = ideology:ideology_anz_georgist
 						}
-					}
-					trigger_else = { 
-						always = no
 					}
 				}
 			}
@@ -664,9 +657,6 @@ social_democrat_party = {
 						leader = { 
 							has_ideology = ideology:ideology_anz_georgist
 						}
-					}
-					trigger_else = { 
-						always = no
 					}
 
 					AND = {
@@ -754,6 +744,14 @@ social_democrat_party = {
 				OR = {
 					has_ideology = ideology:ideology_socialist
 					has_ideology = ideology:ideology_isolationist
+
+					# ANZFP
+					trigger_if = {
+						limit = {
+							anzfp_is_active = yes
+						}
+						anz_isolationist_ideologies = yes
+					}
 				}
 			}
 			add = {

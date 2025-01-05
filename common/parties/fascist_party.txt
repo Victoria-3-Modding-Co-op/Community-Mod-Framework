@@ -16,9 +16,6 @@ fascist_party = {
 						}
 						country_has_primary_culture = cu:australian
 					}
-					trigger_else = { 
-                    	always = no
-               		}
 				}
 			}
 			triggered_desc = {
@@ -28,11 +25,8 @@ fascist_party = {
 						limit = {
 							anzfp_is_active = yes
 						}
-						country_has_primary_culture = cu:pakeha
+						anz_country_is_pakeha = yes
 					}
-					trigger_else = { 
-                    	always = no
-               		}
 				}
 			}
 
@@ -389,10 +383,7 @@ fascist_party = {
 						limit = {
 							anzfp_is_active = yes
 						}
-						has_ideology = ideology:ideology_unt_reactionary
-					}
-					trigger_else = { 
-						always = no
+						anz_reactionary_ideologies = yes
 					}
 				}
 			}
@@ -534,7 +525,17 @@ fascist_party = {
 		}
 		if = { # rural folk will ally with anti-migration faction
 			limit = {
-				has_ideology = ideology:ideology_isolationist
+				OR = {
+					has_ideology = ideology:ideology_isolationist
+
+					# ANZFP
+					trigger_if = {
+						limit = {
+							anzfp_is_active = yes
+						}
+						anz_isolationist_ideologies = yes
+					}
+				}
 				owner = {
 					has_law = law_type:law_no_migration_controls
 				}
@@ -549,6 +550,14 @@ fascist_party = {
 				OR = {
 					has_paternalist_ideology = yes
 					has_ideology = ideology:ideology_patriotic
+
+					# ANZFP
+					trigger_if = {
+						limit = {
+							anzfp_is_active = yes
+						}
+						anz_paternalistic_ideologies = yes
+					}
 				}
 				owner = {
 					has_technology_researched = law_enforcement
@@ -571,6 +580,14 @@ fascist_party = {
 							has_ideology = ideology:ideology_fascist
 							has_ideology = ideology:ideology_jingoist_leader
 						}
+					}
+
+					# ANZFP
+					trigger_if = {
+						limit = {
+							anzfp_is_active = yes
+						}
+						anz_particularist_ideologies = yes
 					}
 				}
 				owner = {

@@ -16,12 +16,9 @@ agrarian_party = {
 						}
 						OR = {
 							country_has_primary_culture = cu:australian
-							country_has_primary_culture = cu:pakeha
+							anz_country_is_pakeha = yes
 						}
 					}
-					trigger_else = { 
-                    	always = no
-               		}
 				}
 			}
 
@@ -407,6 +404,14 @@ agrarian_party = {
 				OR = {
 					has_ideology = ideology:ideology_agrarian_jeffersonian #vanilla bugfix
 					has_ideology = ideology:ideology_agrarian
+
+					# ANZFP
+					trigger_if = {
+						limit = {
+							anzfp_is_active = yes
+						}
+						anz_agrarian_ideologies = yes
+					}
 				}
 				is_powerful = yes
 			}
@@ -475,14 +480,11 @@ agrarian_party = {
 							anzfp_is_active = yes
 						}
 						OR = {
-							has_ideology = ideology:ideology_unt_populist
-							has_ideology = ideology:ideology_unt_reactionary
+							anz_isolationist_ideologies = yes
+							anz_populist_ideologies = yes
+							anz_reactionary_ideologies = yes
 						}
-					}
-					trigger_else = { 
-						always = no
-					}
-					
+					}		
 				}
 				owner = {
 					has_law = law_type:law_no_migration_controls
@@ -499,6 +501,14 @@ agrarian_party = {
 					has_ideology = ideology:ideology_liberal
 					has_ideology = ideology:ideology_liberal_modern
 					has_ideology = ideology:ideology_particularist
+
+					# ANZFP
+					trigger_if = {
+						limit = {
+							anzfp_is_active = yes
+						}
+						anz_particularist_ideologies = yes
+					}	
 				}
 				owner = {
 					OR = {	
@@ -526,14 +536,13 @@ agrarian_party = {
 						limit = {
 							anzfp_is_active = yes
 						}
-						leader = { 
-							has_ideology = ideology:ideology_anz_georgist
+						or = {
+							anz_agrarian_ideologies = yes
+							leader = { 
+								has_ideology = ideology:ideology_anz_georgist
+							}
 						}
 					}
-					trigger_else = { 
-						always = no
-					}
-
                 }
 
 				owner = {
@@ -557,12 +566,11 @@ agrarian_party = {
 						limit = {
 							anzfp_is_active = yes
 						}
-						has_ideology = ideology:ideology_tribal_traditionalist
+						OR = {
+							anz_paternalistic_ideologies = yes
+							anz_agrarian_ideologies = yes
+						}
 					}
-					trigger_else = { 
-						always = no
-					}
-
 				}
 				owner = {
 					has_law = law_type:law_free_trade
@@ -581,10 +589,6 @@ agrarian_party = {
 							has_ideology = ideology:ideology_anz_georgist
 						}
 					}
-					trigger_else = { 
-						always = no
-					}
-
 				}
 			}
 			add = {
@@ -599,6 +603,13 @@ agrarian_party = {
 					has_ideology = ideology:ideology_agrarian
 					leader = {
 						has_ideology = ideology:ideology_protectionist
+					}
+					# ANZFP
+					trigger_if = {
+						limit = {
+							anzfp_is_active = yes
+						}
+						anz_agrarian_ideologies = yes
 					}
 				}
 				owner = {
@@ -628,6 +639,14 @@ agrarian_party = {
 							has_ideology = ideology:ideology_pacifist
 							has_ideology = ideology:ideology_jingoist_leader
 						}
+					}
+
+					# ANZFP
+					trigger_if = {
+						limit = {
+							anzfp_is_active = yes
+						}
+						anz_particularist_ideologies = yes
 					}
 				}
 				owner = {
@@ -671,6 +690,13 @@ agrarian_party = {
 					has_ideology = ideology:ideology_anti_slavery
 					leader = {
 						character_is_anti_slavery = yes
+					}
+					# ANZFP
+					trigger_if = {
+						limit = {
+							anzfp_is_active = yes
+						}
+						anz_anti_slavery_ideologies = yes
 					}
 				}
 			}

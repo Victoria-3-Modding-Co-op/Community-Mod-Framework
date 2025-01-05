@@ -5105,6 +5105,10 @@ movement_modernizer = {
 			}
 			has_law = law_type:law_compulsory_primary_school
 		}
+		NOR = {
+			country_has_primary_culture = cu:australian #anzfp
+			anz_country_is_pakeha = yes #anzfp
+		}
 	}	
 	creation_weight = {
 		value = 100

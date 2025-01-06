@@ -136,6 +136,7 @@ agrarian_party = {
 			triggered_desc = {
 				desc = party_divide_land_party
 				trigger = {
+					mandate_o_h_is_active = yes
 					exists = c:CHI
 					THIS = c:CHI
 				}

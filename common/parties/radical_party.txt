@@ -170,6 +170,7 @@ radical_party = {
 				desc = party_kuomintang
 				trigger = {
 					AND = {
+						mandate_o_h_is_active = yes
 						OR = {
 							country_has_primary_culture = cu:han
 							country_has_primary_culture = cu:hakka

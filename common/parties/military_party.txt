@@ -55,6 +55,7 @@ military_party = {
 			triggered_desc = {
 				desc = party_nbis
 				trigger = {
+					mandate_o_h_is_active = yes
 					exists = c:CHI
 					THIS = c:CHI
 					NOT = {
@@ -68,6 +69,7 @@ military_party = {
 			triggered_desc = {
 				desc = party_fengtian
 				trigger = {
+					mandate_o_h_is_active = yes
 					exists = c:MCH
 					THIS = c:MCH
 				}

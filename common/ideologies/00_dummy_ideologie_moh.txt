@@ -1,0 +1,49 @@
+﻿# Mandate of Heaven
+
+ideology_moh_revolutionary = {
+	icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_no_ideology.dds"
+	
+	show_in_list = no
+	
+	character_ideology = yes
+
+	interest_group_leader_trigger = {
+		always = no
+	}
+	
+	non_interest_group_leader_trigger = {
+		always = no
+	}
+	
+	interest_group_leader_weight = {
+		value = 0 #dummy ideology
+	}
+	
+	non_interest_group_leader_weight = {
+		value = 0 #dummy ideology
+	}	
+}
+
+ideology_moh_kmt = {
+	icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_no_ideology.dds"
+	
+	show_in_list = no
+	
+	character_ideology = yes
+
+	interest_group_leader_trigger = {
+		always = no
+	}
+	
+	non_interest_group_leader_trigger = {
+		always = no
+	}
+	
+	interest_group_leader_weight = {
+		value = 0 #dummy ideology
+	}
+	
+	non_interest_group_leader_weight = {
+		value = 0 #dummy ideology
+	}	
+}

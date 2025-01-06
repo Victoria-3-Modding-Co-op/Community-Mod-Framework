@@ -3,6 +3,7 @@
 
 # ANZFP - Australia & New Zealand Flavor Pack
 # USFP etc..
+# MoH - Mandate of Heaven
 
 radical_party = {
 	color = { 255 102 0 }
@@ -161,6 +162,26 @@ radical_party = {
 							country_has_primary_culture = cu:yue
 						}
 						NOT = { has_law = law_type:law_monarchy }
+					}
+				}
+			}
+			# MoH
+			triggered_desc = {
+				desc = party_kuomintang
+				trigger = {
+					AND = {
+						OR = {
+							country_has_primary_culture = cu:han
+							country_has_primary_culture = cu:hakka
+							country_has_primary_culture = cu:miao
+							country_has_primary_culture = cu:min
+							country_has_primary_culture = cu:zhuang
+							country_has_primary_culture = cu:yi
+							country_has_primary_culture = cu:yue
+						}
+						NOT = { 
+							has_law = law_type:law_monarchy
+						}
 					}
 				}
 			}

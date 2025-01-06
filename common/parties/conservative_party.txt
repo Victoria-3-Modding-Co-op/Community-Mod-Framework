@@ -3,6 +3,7 @@
 
 # ANZFP - Australia & New Zealand Flavor Pack
 # USFP etc..
+# MoH - Mandate of Heaven
 
 conservative_party = {
 	color = { 108 64 179 }
@@ -290,6 +291,29 @@ conservative_party = {
 					exists = c:CHI
 					THIS = c:CHI
 					has_law = law_type:law_monarchy
+				}
+			}
+			triggered_desc = {
+				desc = party_right_kmt
+				trigger = {
+					exists = c:CHI
+					THIS = c:CHI
+					NOT = {
+						has_law = law_type:law_monarchy
+						has_law = law_type:law_council_republic
+					}
+					has_law = law_type:law_single_party_state
+				}
+			}
+			triggered_desc = {
+				desc = party_empire_reform_association
+				trigger = {
+					exists = c:CHI
+					THIS = c:CHI
+					NOT = {
+						has_law = law_type:law_monarchy
+						has_law = law_type:law_council_republic
+					}
 				}
 			}
 			triggered_desc = {

@@ -1,0 +1,45 @@
+﻿l_simp_chinese:
+
+ pakeha:0 "新西兰白人"
+
+ ### PARTIES ###
+ #fascist_party
+ anz_party_ast_fascist:0 "新守卫运动"
+ anz_party_nz_legion:0 "新西兰军团党"
+
+#conservative_party
+ anz_party_protectionists:0 "贸易保护党"
+ anz_party_ministerialists:0 "部长党"
+ anz_party_reform:0 "改革党"
+
+#free_trade_party
+ anz_party_ast_freetrade:0 "澳大利亚贸易自由党"
+
+#liberal_party
+ anz_party_uap:0 "统一澳大利亚党"
+
+#military_party
+ anz_party_adf:0 "澳大利亚国防军"
+ anz_party_nationalists:0 "民族主义党"
+
+#radical_party
+ anz_party_ast_radical:0 "澳大利亚党"
+
+#religious_party
+ anz_party_dlp:0 "民主劳工党"
+ anz_party_call_to_australia:0 "澳大利亚呼唤党"
+
+#social_democrats_party
+ anz_party_labour_electoral_league:0 "劳工选举联盟"
+ anz_party_alp:0 "澳大利亚工党"
+ party_nz_labour_party:0 "工党"
+
+#communist_party
+ anz_party_cpa:0 "澳大利亚共产党"
+
+#agrarian_party
+ anz_party_country:0 "祖国党"
+
+#anarchist_party
+ anz_party_anarchistclub:0 "无政府社团"
+ anz_party_freedom_group:0 "自由社"

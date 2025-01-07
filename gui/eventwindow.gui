@@ -150,38 +150,40 @@ types event_window_types {
 					}
 
 					### CONTENT DESIGNATION ICON
-					flowcontainer = {
-						visible = "[Event.IsDLCContent]"
-						tooltip = "EVENT_DLC_TOOLTIP"
-						spacing = 10
-						parentanchor = bottom|left
-						position = { 10 -10 }
-
-						icon = {
-							size = { 40 40 }
-							texture = "gfx/interface/backgrounds/round_frame_dec.dds"
+					block "event_dlc_icon" {
+						flowcontainer = {
+							visible = "[Event.IsDLCContent]"
+							tooltip = "EVENT_DLC_TOOLTIP"
+							spacing = 10
 							parentanchor = bottom|left
+							position = { 10 -10 }
 
 							icon = {
 								size = { 40 40 }
-								position = { 3 -3 }
+								texture = "gfx/interface/backgrounds/round_frame_dec.dds"
+								parentanchor = bottom|left
 
-								texture = "[Event.GetDLCIcon]"
-								parentanchor = center
+								icon = {
+									size = { 40 40 }
+									position = { 3 -3 }
 
+									texture = "[Event.GetDLCIcon]"
+									parentanchor = center
+
+								}
 							}
-						}
 
-						textbox = {
-							size = { 150 20 }
-							align = left|vcenter
-							parentanchor = left|vcenter
-							elide = right
-							using = fontsize_large
-							fontsize_min = 12
-							alpha = 0.7
+							textbox = {
+								size = { 150 20 }
+								align = left|vcenter
+								parentanchor = left|vcenter
+								elide = right
+								using = fontsize_large
+								fontsize_min = 12
+								alpha = 0.7
 
-							text = "[Event.GetDLCName]"
+								text = "[Event.GetDLCName]"
+							}
 						}
 					}
 
@@ -741,6 +743,415 @@ event_window = { # taken from the Newpaper mod by Bananaman & Klein648
 	}
 }
 
+### FULLSCREEN WINDOW
+event_window = {
+	name = "event_window_struggle"
+	
+	blockoverride "event_size" {
+		size = { 1280 100% }
+		parentanchor = center
+	}
+	
+	blockoverride "event_inner_shading" {
+		icon = {
+			texture = "gfx/interface/event_window/event_inner_frame_fullscreen_horizontal.dds"
+			size = { 100% 100% }
+			spriteType = Corneredstretched
+			spriteborder = { 0 0 }
+			spriteborder_right = 0
+			spriteborder_top = 0
+			texture_density = 2
+		
+			modify_texture = {
+				texture = "gfx/interface/backgrounds/default_bg_shading.dds"
+				spriteType = Corneredstretched
+				spriteborder = { 0 0 }
+				blend_mode = overlay
+			}
+			modify_texture = {
+				using = texture_velvet
+			}
+		}
+	}	
+	
+	blockoverride "event_title_text_options" {
+		flowcontainer = {
+			minimumsize = { -1 606 }
+			direction = vertical
+			spacing = 20
+			parentanchor = right|vcenter
+			margin = { 25 40 }
+
+			background = {
+				texture = "gfx/interface/backgrounds/tutorial_bg.dds"
+				spriteType = Corneredtiled
+				spriteborder = { 20 20 }
+				alpha = 0.94
+				
+				modify_texture = {
+					texture = "gfx/interface/backgrounds/gradient_overlay.dds"
+					spriteType = Corneredstretched
+					spriteborder = { 0 0 }
+					blend_mode = overlay
+					alpha = 0.7
+				}
+				margin = { -15 -20 }
+			}
+
+			textbox = {
+				name = "description"
+				multiline = yes
+				autoresize = yes
+				minimumsize = { 480 -1 }
+				maximumsize = { 480 -1 }
+				parentanchor = top|hcenter
+				align = hcenter|nobaseline
+				raw_text = "#bold [EventWindow.GetDescription]#!"
+				margin = { 10 0 }
+				using = fontsize_large
+			}
+
+			divider_decorative = {}
+
+			textbox = {
+				name = "flavortext"
+				multiline = yes
+				autoresize = yes
+				minimumsize = { 480 -1 }
+				maximumsize = { 480 -1 }
+				parentanchor = top|hcenter
+				align = top|left
+				raw_text = "#lore [EventWindow.GetFlavor]#!"
+				margin = { 30 10 }
+			}
+
+			widget = { size = { 20 10 }}
+
+			flowcontainer = {
+				direction = vertical
+				using = default_list_position
+				datamodel = "[EventWindow.GetOptions]"
+				spacing = 5
+
+				item = {
+					container = {
+						
+						widget = {
+							visible = "[EventOption.IsHighlightedOption]"
+							
+							button = {
+								size = { 96% 100% }
+								parentanchor = hcenter
+								using = default_button_primary_action
+								onclick = "[EventOption.Select]"
+								tooltip = "[EventOption.GetDesc]"
+								using = tooltip_ws
+								enabled = "[EventOption.IsEnabled]"
+								using = confirm_button_sound
+							}
+
+							textbox = {
+								resizeparent = yes
+								minimumsize = { 500 42 }
+								maximumsize = { 500 -1 }
+								text = "[EventOption.GetText]"
+								multiline = yes
+								align = hcenter|nobaseline
+								autoresize = yes
+								margin = { 30 10 }
+							}
+						}
+
+						widget = {
+							visible = "[Not(EventOption.IsHighlightedOption)]"
+							
+							button = {
+								size = { 96% 100% }
+								parentanchor = hcenter
+								using = default_button_action
+								onclick = "[EventOption.Select]"
+								tooltip = "EVENT_OPTION_TOOLTIP"
+								using = tooltip_ws
+								enabled = "[EventOption.IsEnabled]"
+								using = confirm_button_sound
+							}
+
+							textbox = {
+								resizeparent = yes
+								minimumsize = { 500 42 }
+								maximumsize = { 500 -1 }
+								text = "[EventOption.GetText]"
+								multiline = yes
+								align = hcenter|nobaseline
+								autoresize = yes
+								margin = { 30 10 }
+							}
+
+							### Time until the default option will be picked
+							round_progress_default = {
+								visible = "[EventOption.IsDefaultOption]"
+								parentanchor = right|vcenter
+								position = { 0 0.5 }
+								size = { 27 27 }
+								tooltip = "DEFAULT_EVENT_OPTION"
+								value = "[Event.GetPercentageRemainingDays]"
+
+								icon = {
+									size = { 26 26 }
+									position = { -0.2 -0.2 }
+									parentanchor = center
+									texture = "gfx/interface/icons/generic_icons/event_default_option.dds"
+								}
+							}
+						}
+					}
+				}
+			}
+
+			button = {
+				parentanchor = hcenter
+				visible = "[InDebugMode]"
+				size = { 480 62 }
+				using = default_button
+				raw_text = "DEBUG: Open Event in text editor"
+				onclick = "[EventWindow.AccessEvent.OpenInEditor]"
+			}
+
+			textbox = {
+				background = {
+					using = default_background
+				}
+				parentanchor = hcenter
+				size = { 480 62 }
+				visible = "[InDebugMode]"
+				raw_text = "DEBUG: Trigger description"
+				tooltip = "[Event.GetTriggerDesc]"
+				align = hcenter|nobaseline
+			}
+
+			textbox = {
+				visible = [InDebugMode]
+				parentanchor = hcenter
+				align = hcenter
+				raw_text = "Event ID: [Event.GetKey|v]"
+			}
+		}
+	}
+	
+}
+
+### HIGHLANDER DUEL WINDOW ###
+event_window = {
+	name = "event_window_highlander"
+
+	blockoverride "event_size" {
+		size = { 1280 600 }
+		parentanchor = center
+	}
+
+	blockoverride "event_content" {
+		# image
+		icon = {
+			visible = "[Event.HasTexture]"
+			texture = "[Event.GetTexture]"
+			alwaystransparent = yes
+			size = { 100% 100% }
+		}
+
+		# animated video
+		video_icon = {
+			visible = "[Event.HasVideo]"
+			video = "[Event.GetVideo]"
+			size = { 100% 100% }
+			alwaystransparent = yes
+			loop = no
+		}
+
+		# 1st char
+		container = {
+			parentanchor = center
+			position = { -300 300 }
+			datacontext = "[Event.GetIcon('left_icon')]"
+
+			character_portrait_base = {
+				visible = "[EventIcon.IsPortrait]"
+				datacontext = "[EventIcon.GetCharacter]"
+				blockoverride "show_hat" {}
+				blockoverride "portrait_mask" {
+					mask = "gfx/event_pictures/2characters_mask.dds"
+				}
+				blockoverride "portrait_icons" {}
+				blockoverride "portrait_size" {
+					size = { 520 650 }
+				}
+				blockoverride "portrait_texture" {
+					portrait_texture = "[Character.GetAnimatedPortrait('environment_front_generals_left', 'camera_event_left', 'commander_vs_left', GetPortraitRenderSize(PdxGuiWidget.Self))]"
+				}
+			}
+		}
+
+		# 2nd char
+		container = {
+			parentanchor = center
+			position = { 300 300 }
+			datacontext = "[Event.GetIcon('right_icon')]"
+
+			character_portrait_base = {
+				visible = "[EventIcon.IsPortrait]"
+				datacontext = "[EventIcon.GetCharacter]"
+				blockoverride "show_hat" {}
+				blockoverride "portrait_mask" {
+					mask = "gfx/event_pictures/2characters_mask.dds"
+				}
+				blockoverride "portrait_icons" {}
+				blockoverride "portrait_size" {
+					size = { 520 650 }
+				}
+				blockoverride "portrait_texture" {
+					portrait_texture = "[Character.GetAnimatedPortrait('environment_front_generals_right', 'camera_event_right', 'commander_vs_right', GetPortraitRenderSize(PdxGuiWidget.Self))]"
+				}
+			}
+		}
+	}
+	
+	blockoverride "event_inner_shading" {
+		icon = {
+			texture = "gfx/interface/event_window/event_inner_frame_fullscreen_horizontal.dds"
+			size = { 100% 100% }
+			spriteType = Corneredstretched
+			spriteborder = { 0 0 }
+			spriteborder_right = 0
+			spriteborder_top = 0
+			texture_density = 2
+		
+			modify_texture = {
+				texture = "gfx/interface/backgrounds/default_bg_shading.dds"
+				spriteType = Corneredstretched
+				spriteborder = { 0 0 }
+				blend_mode = overlay
+			}
+			modify_texture = {
+				using = texture_velvet
+			}
+		}
+	}
+	
+	blockoverride "event_dlc_icon" {
+	}
+	
+	blockoverride "event_title_text_options" {
+		flowcontainer = {
+			minimumsize = { -1 200 }
+			direction = horizontal
+			spacing = 20
+			parentanchor = hcenter|bottom
+			margin = { 25 40 }
+
+			background = {
+				texture = "gfx/interface/backgrounds/tutorial_bg.dds"
+				spriteType = Corneredtiled
+				spriteborder = { 20 20 }
+#				alpha = 0.94
+				
+				modify_texture = {
+					texture = "gfx/interface/backgrounds/gradient_overlay.dds"
+					spriteType = Corneredstretched
+					spriteborder = { 0 0 }
+					blend_mode = overlay
+					alpha = 0.7
+				}
+				margin = { -15 -20 }
+			}
+
+			textbox = {
+				name = "flavortext"
+				multiline = yes
+				autoresize = yes
+				minimumsize = { 600 -1 }
+				maximumsize = { 600 -1 }
+				parentanchor = top|hcenter
+				align = top|hcenter
+				raw_text = "[EventWindow.GetFlavor]#!"
+				margin = { 30 10 }
+			}
+
+			flowcontainer = {
+				direction = vertical
+				using = default_list_position
+				datamodel = "[EventWindow.GetOptions]"
+				spacing = 5
+				margin = {20 30}
+
+				item = {
+					container = {
+						widget = {
+							visible = "yes"
+							
+							button = {
+								size = { 100% 100% }
+								parentanchor = hcenter|bottom
+								using = default_button_action
+								onclick = "[EventOption.Select]"
+								tooltip = "EVENT_OPTION_TOOLTIP"
+								using = tooltip_ws
+								enabled = "[EventOption.IsEnabled]"
+								using = confirm_button_sound
+								texture = "gfx/interface/backgrounds/tutorial_bg.dds"
+							}
+
+							textbox = {
+								resizeparent = yes
+								minimumsize = { 400 42 }
+								maximumsize = { 400 -1 }
+								text = "[EventOption.GetText]"
+								multiline = yes
+								align = hcenter|nobaseline
+								autoresize = yes
+								margin = { 30 10 }
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	flowcontainer = {
+		visible = "[Event.IsDLCContent]"
+		tooltip = "EVENT_DLC_TOOLTIP"
+		spacing = 10
+		parentanchor = bottom|left
+		position = { 30 -20 }
+
+		icon = {
+			size = { 40 40 }
+			texture = "gfx/interface/backgrounds/round_frame_dec.dds"
+			parentanchor = bottom|left
+
+			icon = {
+				size = { 40 40 }
+				position = { 2 -2 }
+
+				texture = "[Event.GetDLCIcon]"
+				parentanchor = center
+
+			}
+		}
+
+		textbox = {
+			size = { 150 20 }
+			align = left|vcenter
+			parentanchor = left|vcenter
+			elide = right
+			using = fontsize_large
+			fontsize_min = 12
+			alpha = 0.7
+
+			text = "[Event.GetDLCName]"
+		}
+	}
+}
+
 
 ### CRISIS FULLSCREEN WINDOW
 event_window = {
@@ -748,7 +1159,7 @@ event_window = {
 	
 	blockoverride "event_size" {
 		position = { 0 0 }
-		size = { 1920 850 }
+		size = { 1280 100% }
 	}
 	
 	blockoverride "event_content" {

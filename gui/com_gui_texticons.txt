@@ -1,0 +1,8 @@
+﻿texticon = {
+  icon = divider_decorative
+  iconsize = {
+    offset = { 0 3 }
+    texture = "gfx/interface/tooltip/tooltip_divider_decorative.dds"
+    fontsize = 20
+  }
+}

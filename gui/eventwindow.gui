@@ -602,45 +602,20 @@ event_window = {
 	}
 }
 
-### FULLSCREEN WINDOW
-event_window = {
-	name = "event_window_fullscreen"
-	
-	blockoverride "event_size" {
-		position = { 0 0 }
-		size = { 1920 850 }
-	}
-	
-	blockoverride "event_inner_shading" {
-		icon = {
-			texture = "gfx/interface/event_window/event_inner_frame_fullscreen.dds"
-			size = {1920 850}
-			spriteType = Corneredstretched
-			spriteborder = { 0 0 }
-			spriteborder_right = 0
-			spriteborder_top = 0
-			texture_density = 2
-		
-			modify_texture = {
-				texture = "gfx/interface/backgrounds/default_bg_shading.dds"
-				spriteType = Corneredstretched
-				spriteborder = { 0 0 }
-				blend_mode = overlay
-			}
-			modify_texture = {
-				using = texture_velvet
-			}
-		}
-	}
-}
+########################
+# MODDED EVENT WINDOWS #
+########################
+# All superevent windows are capped at 1280x800, the resolution of the Steam Deck
+# It currently doesn't seem possible to make an event window automatically stretch to the whole screen; this seems to be from the behavior of default_popup_two_lines
+# event_window_newspaper modified from the Newpapers mod by Bananaman & Klein648
 
-#### NEWSPAPER WINDOW
-event_window = { # taken from the Newpaper mod by Bananaman & Klein648
+### NEWSPAPER WINDOW
+event_window = {
 	name = "event_window_newspaper"
 	
 	blockoverride "event_size" {
-		position = { 0 0 }
-		size = { 1920 850 }
+		size = { 1280 800 }
+		parentanchor = center
 	}
 	
 	blockoverride "event_inner_shading" {
@@ -745,10 +720,42 @@ event_window = { # taken from the Newpaper mod by Bananaman & Klein648
 
 ### FULLSCREEN WINDOW
 event_window = {
+	name = "event_window_superevent"
+	
+	blockoverride "event_size" {
+		size = { 1280 800 }
+		parentanchor = center
+	}
+	
+	blockoverride "event_inner_shading" {
+		icon = {
+			texture = "gfx/interface/event_window/event_inner_frame_fullscreen_horizontal.dds"
+			size = { 100% 100% }
+			spriteType = Corneredstretched
+			spriteborder = { 0 0 }
+			spriteborder_right = 0
+			spriteborder_top = 0
+			texture_density = 2
+		
+			modify_texture = {
+				texture = "gfx/interface/backgrounds/default_bg_shading.dds"
+				spriteType = Corneredstretched
+				spriteborder = { 0 0 }
+				blend_mode = overlay
+			}
+			modify_texture = {
+				using = texture_velvet
+			}
+		}
+	}
+}
+
+### FULLSCREEN WINDOW
+event_window = {
 	name = "event_window_struggle"
 	
 	blockoverride "event_size" {
-		size = { 1280 100% }
+		size = { 1280 800 }
 		parentanchor = center
 	}
 	
@@ -1158,127 +1165,14 @@ event_window = {
 	name = "event_window_crisis"
 	
 	blockoverride "event_size" {
-		position = { 0 0 }
-		size = { 1280 100% }
-	}
-	
-	blockoverride "event_content" {
-		# image
-		icon = {
-			visible = "[Event.HasTexture]"
-			texture = "[Event.GetTexture]"
-			alwaystransparent = yes
-			size = { 100% 100% }
-		}
-
-		# animated video
-		video_icon = {
-			visible = "[Event.HasVideo]"
-			video = "[Event.GetVideo]"
-			size = { 100% 100% }
-			alwaystransparent = yes
-			loop = no
-		}
-		
-		#6char texture
-		icon = {
-			texture = "gfx/event_pictures/6characters.dds"
-			alwaystransparent = yes
-			size = { 1340 800 }
-			parentanchor = center
-			alpha = 0.9
-		}
-		
-		# 1st Character
-		container = {
-			position = { 342 27 }
-			datacontext = "[GetPlayer.MakeScope.Var('crisis_character_1').GetCharacter]"
-
-			character_portrait_duel_01 = {
-				blockoverride "show_hat" {}
-				blockoverride "portrait_mask" {
-					mask = "gfx/event_pictures/2characters_mask.dds"
-				}
-				blockoverride "portrait_icons" {}
-			}
-		}
-		
-		#2nd Character
-		container = {
-			position = { 574 235 }
-			datacontext = "[GetPlayer.MakeScope.Var('crisis_character_2').GetCharacter]"
-
-			character_portrait_duel_01 = {
-				blockoverride "show_hat" {}
-				blockoverride "portrait_mask" {
-					mask = "gfx/event_pictures/2characters_mask.dds"
-				}
-				blockoverride "portrait_icons" {}
-			}
-		}
-		
-		#3rd Character
-		container = {
-			position = { 313 435 }
-			datacontext = "[GetPlayer.MakeScope.Var('crisis_character_3').GetCharacter]"
-
-			character_portrait_duel_01 = {
-				blockoverride "show_hat" {}
-				blockoverride "portrait_mask" {
-					mask = "gfx/event_pictures/2characters_mask.dds"
-				}
-				blockoverride "portrait_icons" {}
-			}
-		}
-		
-		# 4th Character
-		container = {
-			position = { 1318 27 }
-			datacontext = "[GetPlayer.MakeScope.Var('crisis_character_4').GetCharacter]"
-
-			character_portrait_duel_02 = {
-				blockoverride "show_hat" {}
-				blockoverride "portrait_mask" {
-					mask = "gfx/event_pictures/2characters_mask.dds"
-				}
-				blockoverride "portrait_icons" {}
-			}
-		}
-		
-		
-		# 5th Character
-		container = {
-			position = { 1086 235 }
-			datacontext = "[GetPlayer.MakeScope.Var('crisis_character_5').GetCharacter]"
-
-			character_portrait_duel_02 = {
-				blockoverride "show_hat" {}
-				blockoverride "portrait_mask" {
-					mask = "gfx/event_pictures/2characters_mask.dds"
-				}
-				blockoverride "portrait_icons" {}
-			}
-		}
-		
-		#6th Character
-		container = {
-			position = { 1350 435 }
-			datacontext = "[GetPlayer.MakeScope.Var('crisis_character_6').GetCharacter]"
-
-			character_portrait_duel_02 = {
-				blockoverride "show_hat" {}
-				blockoverride "portrait_mask" {
-					mask = "gfx/event_pictures/2characters_mask.dds"
-				}
-				blockoverride "portrait_icons" {}
-			}
-		}
+		size = { 1280 800 }
+		parentanchor = center
 	}
 	
 	blockoverride "event_inner_shading" {
 		icon = {
-			texture = "gfx/interface/event_window/event_inner_frame_fullscreen_clear.dds"
-			size = {1920 850}
+			texture = "gfx/interface/event_window/event_inner_frame_fullscreen_horizontal.dds"
+			size = { 100% 100% }
 			spriteType = Corneredstretched
 			spriteborder = { 0 0 }
 			spriteborder_right = 0
@@ -1297,7 +1191,118 @@ event_window = {
 		}
 	}
 	
-	blockoverride "event_title_text_options" { # taken from the Newpaper mod by Bananaman & Klein648
+	widget = {
+		size = { 1280 800 }
+		parentanchor = center
+	
+		#6char texture
+		icon = {
+			texture = "gfx/event_pictures/6characters.dds"
+			alwaystransparent = yes
+			size = { 1280 800 }
+			parentanchor = center
+			alpha = 0.9
+		}
+		
+		# 1st Character
+		container = {
+			position = { -466 -201 }
+			parentanchor = center
+			
+			datacontext = "[GetPlayer.MakeScope.Var('crisis_character_1').GetCharacter]"
+
+			character_portrait_duel_01 = {
+				blockoverride "show_hat" {}
+				blockoverride "portrait_mask" {
+					mask = "gfx/event_pictures/2characters_mask.dds"
+				}
+				blockoverride "portrait_icons" {}
+			}
+		}
+		
+		#2nd Character
+		container = {
+			position = { -246 4 }
+			parentanchor = center
+			
+			datacontext = "[GetPlayer.MakeScope.Var('crisis_character_2').GetCharacter]"
+
+			character_portrait_duel_01 = {
+				blockoverride "show_hat" {}
+				blockoverride "portrait_mask" {
+					mask = "gfx/event_pictures/2characters_mask.dds"
+				}
+				blockoverride "portrait_icons" {}
+			}
+		}
+		
+		#3rd Character
+		container = {
+			position = { -494 206 }
+			parentanchor = center
+			
+			datacontext = "[GetPlayer.MakeScope.Var('crisis_character_3').GetCharacter]"
+
+			character_portrait_duel_01 = {
+				blockoverride "show_hat" {}
+				blockoverride "portrait_mask" {
+					mask = "gfx/event_pictures/2characters_mask.dds"
+				}
+				blockoverride "portrait_icons" {}
+			}
+		}
+		
+		# 4th Character
+		container = {
+			position = { 457 -201 }
+			parentanchor = center 
+			
+			datacontext = "[GetPlayer.MakeScope.Var('crisis_character_4').GetCharacter]"
+
+			character_portrait_duel_02 = {
+				blockoverride "show_hat" {}
+				blockoverride "portrait_mask" {
+					mask = "gfx/event_pictures/2characters_mask.dds"
+				}
+				blockoverride "portrait_icons" {}
+			}
+		}
+		
+		
+		# 5th Character
+		container = {
+			position = { 240 4 }
+			parentanchor = center
+			
+			datacontext = "[GetPlayer.MakeScope.Var('crisis_character_5').GetCharacter]"
+
+			character_portrait_duel_02 = {
+				blockoverride "show_hat" {}
+				blockoverride "portrait_mask" {
+					mask = "gfx/event_pictures/2characters_mask.dds"
+				}
+				blockoverride "portrait_icons" {}
+			}
+		}
+		
+		#6th Character
+		container = {
+			position = { 488 207 }
+			parentanchor = center
+			
+			datacontext = "[GetPlayer.MakeScope.Var('crisis_character_6').GetCharacter]"
+
+			character_portrait_duel_02 = {
+				blockoverride "show_hat" {}
+				blockoverride "portrait_mask" {
+					mask = "gfx/event_pictures/2characters_mask.dds"
+				}
+				blockoverride "portrait_icons" {}
+			}
+		}
+	}
+	
+	blockoverride "event_title_text_options" {
 		flowcontainer = {
 			minimumsize = { -1 200 }
 			direction = vertical

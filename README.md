@@ -53,10 +53,26 @@ Current Scope:
 
 ## Alternative Event Windows ##
 
-"Superevent" windows activated by including in event:
+Modded event windows are available and can be used by passing this in your event:
 ```
-gui_window = (event_window_crisis/event_window_newspaper/event_window_fullscreen)
+gui_window = <event_window_key>
 ```
+The following modded event windows are available:
+[event_window_newspaper](docs/event windows/event_window_newspaper.png)
+[event_window_superevent](docs/event windows/event_window_newspaper.png)
+[event_window_struggle](docs/event windows/event_window_newspaper.png)
+[event_window_1char_adventure](docs/event windows/event_window_1char_adventure.png)
+[event_window_2char_adventure](docs/event windows/event_window_2char_adventure.png)
+[event_window_2char_duel](docs/event windows/event_window_2char_duel.png)
+[event_window_highlander](docs/event windows/event_window_highlander.png)
+[event_window_crisis](docs/event windows/event_window_crisis.png)
+
+**Usage Notes**
+- For ease of use, any modded windows with characters will expect a character scope for the arguments left_icon = and right_icon = just like the vanilla events do.
+- event_window_duel also has an optional progress that will display below the flavor text
+-- this is activated by setting the variable com_event_window_2char_duel_var
+-- the progress bar will pull the value from this variable; it has a max of 100 and minimum of 0
+- event_window_crisis uses six character scopes saved as variables; documentation is provided in the eventwindow.gui file
 
 ## Hiding Objective Header ##
 
@@ -256,4 +272,4 @@ Note: It is possible to add additional keybinds if there are no keybinds left.
 ## Additional Modifier Icons ##
 
 Over 100 new modifier icons for more variety. Credit to Caelreader. PSD template available in docs.
-Screenshot: [Example](docs/timed_modifier_icons.png)
+Screenshot: [Modifier Icons](docs/timed_modifier_icons.png)

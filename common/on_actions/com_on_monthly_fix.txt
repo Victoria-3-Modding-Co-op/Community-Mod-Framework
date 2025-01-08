@@ -1,0 +1,23 @@
+﻿# Root = any
+on_monthly_pulse = {
+    on_actions = {
+        on_monthly_cmf_fix_buttons
+    }
+}
+
+on_monthly_cmf_fix_buttons = {
+    effect = {
+        if = {
+            limit = {
+                is_target_in_global_variable_list = {
+                    name = custom_button_list
+                    target = ideology:ideology_pluralist_movement_3
+                }
+            }
+            remove_list_global_variable = {
+                name = custom_button_list
+                target = ideology:ideology_pluralist_movement_3
+            }
+        }
+    }
+}

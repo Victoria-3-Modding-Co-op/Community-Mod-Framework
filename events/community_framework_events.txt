@@ -70,8 +70,6 @@ community_framework_events.2 = { # GUI window testing
 	
 	duration = 3
 	
-	dlc = dlc_grefm
-	
 	trigger = {
 		# Testing only
 	}
@@ -122,8 +120,6 @@ community_framework_events.3 = { # GUI window testing
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	
 	duration = 3
-	
-	dlc = dlc_grefm
 	
 	trigger = {
 		# Testing only

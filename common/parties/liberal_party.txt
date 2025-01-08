@@ -203,6 +203,44 @@ liberal_party = {
 				}
 			}
 			triggered_desc = {
+				desc = party_up
+				trigger = {
+					mandate_o_h_is_active = yes
+					OR = {
+						country_has_primary_culture = cu:han
+						country_has_primary_culture = cu:hakka
+						country_has_primary_culture = cu:miao
+						country_has_primary_culture = cu:min
+						country_has_primary_culture = cu:zhuang
+						country_has_primary_culture = cu:yi
+						country_has_primary_culture = cu:yue
+					}
+					NOT = {
+						has_law = law_type:law_monarchy
+					}
+					year < 1923
+				}
+			}
+			triggered_desc = {
+				desc = party_ycp
+				trigger = {
+					mandate_o_h_is_active = yes
+					OR = {
+						country_has_primary_culture = cu:han
+						country_has_primary_culture = cu:hakka
+						country_has_primary_culture = cu:miao
+						country_has_primary_culture = cu:min
+						country_has_primary_culture = cu:zhuang
+						country_has_primary_culture = cu:yi
+						country_has_primary_culture = cu:yue
+					}
+					NOT = {
+						has_law = law_type:law_monarchy
+					}
+					year >= 1923
+				}
+			}
+			triggered_desc = {
 				desc = party_freedom_and_accord_party
 				trigger = {
 					exists = c:TUR

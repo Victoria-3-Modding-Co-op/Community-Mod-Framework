@@ -2,6 +2,7 @@
 
 # ANZFP - Australia & New Zealand Flavor Pack
 # USFP etc..
+# MoH - Mandate of Heaven
 
 military_party = {
 	color = { 132 100 53 }
@@ -48,6 +49,29 @@ military_party = {
 					exists = c:CHI
 					THIS = c:CHI
 					has_law = law_type:law_monarchy
+				}
+			}
+			# MoH
+			triggered_desc = {
+				desc = party_nbis
+				trigger = {
+					mandate_o_h_is_active = yes
+					exists = c:CHI
+					THIS = c:CHI
+					NOT = {
+						has_law = law_type:law_monarchy
+						has_law = law_type:law_council_republic
+						has_law = law_type:law_peasant_levies
+					}
+					has_law = law_type:law_secret_police
+				}
+			}
+			triggered_desc = {
+				desc = party_fengtian
+				trigger = {
+					mandate_o_h_is_active = yes
+					exists = c:MCH
+					THIS = c:MCH
 				}
 			}
 			triggered_desc = {

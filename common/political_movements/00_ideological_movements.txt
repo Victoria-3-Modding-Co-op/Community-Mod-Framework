@@ -3222,6 +3222,8 @@ movement_liberal = {
 		ideology_grefm_constitutionalist # GBBF
 		ideology_venizelist # GBBF
 		ideology_dacianist # GBBF
+		ideology_moh_revolutionary # MoH Revolutionary
+		ideology_moh_kmt # MoH Kuomintang Nationalist
 	}
 	
 	creation_trigger = {
@@ -3517,6 +3519,8 @@ movement_radical = {
 	character_ideologies = {
 		ideology_radical
 		ideology_atheist
+		ideology_moh_revolutionary # MoH Revolutionary
+		ideology_moh_kmt # MoH Kuomintang Nationalist
 	}
 	
 	creation_trigger = {

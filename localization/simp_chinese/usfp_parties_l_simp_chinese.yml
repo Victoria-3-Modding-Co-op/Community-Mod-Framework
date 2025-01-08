@@ -1,0 +1,12 @@
+﻿l_simp_chinese:
+
+party_american_party: "美国党"
+party_free_soil_party: "自由土地党"
+party_radical_democracy_party: "激进民主党"
+party_socialist: "社会主义劳工党"
+
+intelligentsia_missing: "自由党缺失$ig_intelligentsia$"
+industrialists_missing: "自由贸易党缺失$ig_industrialists$"
+join_existing_party: "我们应该加入[concept_party]"
+usfp_bourbon_democrats: "波旁民主党"
+from_progressive_leader: "进步领袖"

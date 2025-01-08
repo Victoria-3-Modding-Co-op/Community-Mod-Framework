@@ -1692,6 +1692,13 @@ event_window = {
 
 
 ### CRISIS FULLSCREEN WINDOW
+# event_window_crisis uses six character scopes saved as variables
+# You need to save each character scope into the variable "crisis_scope_x" ("x" can be 1 thru 6)
+# The characters are pulled from the variables and placed in this layout:
+# 1   4
+#  2 5
+# 3   6
+
 event_window = {
 	name = "event_window_crisis"
 	

@@ -14,12 +14,8 @@ radical_party = {
 			triggered_desc = {
 				desc = anz_party_ast_radical
 				trigger = {
-					trigger_if = {
-						limit = {
-							anzfp_is_active = yes
-						}
-						country_has_primary_culture = cu:australian
-					}
+					anzfp_is_active = yes
+					country_has_primary_culture = cu:australian
 				}
 			}
 

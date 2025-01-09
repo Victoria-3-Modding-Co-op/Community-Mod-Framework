@@ -14,37 +14,25 @@ conservative_party = {
 			triggered_desc = {
 				desc = anz_party_ministerialists
 				trigger = {
-					trigger_if = {
-						limit = {
-							anzfp_is_active = yes
-						}
-						OR = {
-							c:QLD ?= this
-							c:WAS ?= this
-						}
+					anzfp_is_active = yes
+					OR = {
+						c:QLD ?= this
+						c:WAS ?= this
 					}
 				}
 			}
 			triggered_desc = {
 				desc = anz_party_protectionists
 				trigger = {
-					trigger_if = {
-						limit = {
-							anzfp_is_active = yes
-						}
-						country_has_primary_culture = cu:australian
-					}
+					anzfp_is_active = yes
+					country_has_primary_culture = cu:australian
 				}
 			}
 			triggered_desc = {
 				desc = anz_party_reform
 				trigger = {
-					trigger_if = {
-						limit = {
-							anzfp_is_active = yes
-						}
-						anz_country_is_pakeha = yes
-					}
+					anzfp_is_active = yes
+					anz_country_is_pakeha = yes
 				}
 			}
 

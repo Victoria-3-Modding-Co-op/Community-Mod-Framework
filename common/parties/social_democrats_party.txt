@@ -15,34 +15,22 @@ social_democrat_party = {
 			triggered_desc = {
 				desc = anz_party_labour_electoral_league
 				trigger = {
-					trigger_if = {
-						limit = {
-							anzfp_is_active = yes
-						}
-						c:NSW ?= THIS
-					}
+					anzfp_is_active = yes
+					c:NSW ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = anz_party_alp
 				trigger = {
-					trigger_if = {
-						limit = {
-							anzfp_is_active = yes
-						}
-						country_has_primary_culture = cu:australian
-					}
+					anzfp_is_active = yes
+					country_has_primary_culture = cu:australian
 				}
 			}
 			triggered_desc = {
 				desc = party_nz_labour_party
 				trigger = {
-					trigger_if = {
-						limit = {
-							anzfp_is_active = yes
-						}
-						anz_country_is_pakeha = yes
-					}
+					anzfp_is_active = yes
+					anz_country_is_pakeha = yes
 				}
 			}
 

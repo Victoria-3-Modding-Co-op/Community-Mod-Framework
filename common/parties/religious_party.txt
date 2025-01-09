@@ -13,24 +13,16 @@ religious_party = {
 			triggered_desc = {
 				desc = anz_party_dlp
 				trigger = {
-					trigger_if = {
-						limit = {
-							anzfp_is_active = yes
-						}
-						country_has_primary_culture = cu:australian
-						country_has_state_religion = rel:catholic 
-					}
+					anzfp_is_active = yes
+					country_has_primary_culture = cu:australian
+					country_has_state_religion = rel:catholic 
 				}
 			}
 			triggered_desc = {
 				desc = anz_party_call_to_australia
 				trigger = {
-					trigger_if = {
-						limit = {
-							anzfp_is_active = yes
-						}
-						country_has_primary_culture = cu:australian
-					}
+					anzfp_is_active = yes
+					country_has_primary_culture = cu:australian
 				}
 			}
 

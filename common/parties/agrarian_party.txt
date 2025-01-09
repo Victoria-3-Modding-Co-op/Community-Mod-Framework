@@ -11,14 +11,10 @@ agrarian_party = {
 			triggered_desc = {
 				desc = anz_party_country
 				trigger = {
-					trigger_if = {
-						limit = {
-							anzfp_is_active = yes
-						}
-						OR = {
-							country_has_primary_culture = cu:australian
-							anz_country_is_pakeha = yes
-						}
+					anzfp_is_active = yes
+					OR = {
+						country_has_primary_culture = cu:australian
+						anz_country_is_pakeha = yes
 					}
 				}
 			}

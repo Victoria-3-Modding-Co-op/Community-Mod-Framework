@@ -11,23 +11,15 @@ anarchist_party = {
 			triggered_desc = {
 				desc = anz_party_freedom_group
 				trigger = {
-					trigger_if = {
-						limit = {
-							anzfp_is_active = yes
-						}
-						anz_country_is_pakeha = yes
-					}
+					anzfp_is_active = yes
+					anz_country_is_pakeha = yes
 				}
 			}
 			triggered_desc = {
 				desc = anz_party_anarchistclub
 				trigger = {
-					trigger_if = {
-						limit = {
-							anzfp_is_active = yes
-						}
-						country_has_primary_culture = cu:australian
-					}
+					anzfp_is_active = yes
+					country_has_primary_culture = cu:australian
 				}
 			}
 

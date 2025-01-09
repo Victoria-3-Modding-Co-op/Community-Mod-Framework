@@ -1,0 +1,523 @@
+# COPY-PASTED FOR NOW
+@panel_width_minus_10 = 530			# used to be 450
+@panel_width = 540  				# used to be 460
+@panel_width_half = 270				# used to be 230
+@panel_width_plus_10 = 550  		# used to be 470
+@panel_width_plus_14 = 554			# used to be 474
+@panel_width_plus_14_half = 277		# used to be 237
+@panel_width_plus_20 = 560			# used to be 480
+@panel_width_plus_30 = 570			# used to be 490
+@panel_width_plus_70 = 610			# used to be 530
+
+types com_state_panel_buildings_overwrites {
+	# Overwritten because:
+	# Added custom owner buildings
+	# See types below this one
+	type state_panel_buildings_content = flowcontainer {
+		ignoreinvisible = yes
+		direction = vertical
+		using = default_list_position
+		spacing = 10
+
+
+		default_header_2texts = {
+			visible = no
+			blockoverride "text1" {
+				text = "BUILDINGS"
+			}
+		}
+
+		default_header = {
+			blockoverride "text" {
+				text = "URBAN_PART_OF_STATE"
+			}
+
+			# grid/list toggle
+			button_icon_round_toggle = {
+				size = { 29 29 }
+				parentanchor = right|vcenter
+				position = { -10 0 }
+
+				blockoverride "on_click" {
+					onclick = "[GetVariableSystem.Toggle('buildings_list')]"
+				}
+				blockoverride "view_1" {
+					visible = "[Not(GetVariableSystem.Exists('buildings_list'))]"
+				}
+				blockoverride "view_2" {
+					visible = "[GetVariableSystem.Exists('buildings_list')]"
+				}
+				blockoverride "icon_1" {
+					texture = "gfx/interface/buttons/button_icons/grid.dds"
+				}
+				blockoverride "icon_2" {
+					texture = "gfx/interface/buttons/button_icons/list.dds"
+				}
+				blockoverride "tooltip_1" {
+					tooltip = "TOOLTIP_VIEW_LIST"
+				}
+				blockoverride "tooltip_2" {
+					tooltip = "TOOLTIP_VIEW_GRID"
+				}
+			}
+		}
+
+		### URBAN BUILDINGS
+		flowcontainer = {
+			parentanchor = hcenter
+			direction = vertical
+			visible = "[Not(GetVariableSystem.Exists('buildings_list'))]"
+			using = default_content_fade
+			spacing = 10
+
+			flowcontainer = {
+				parentanchor = hcenter
+				direction = vertical
+
+				divider_clean = {}
+
+				header_building_item = {
+					datacontext = "[StatesPanel.AccessBuilding('building_urban_center')]"
+
+					tooltipwidget = {
+						FancyTooltip_Building = {}
+					}
+
+					blockoverride "text" {
+						text = "TOTAL_URBAN_CENTERS"
+					}
+				}
+
+				divider_clean = {
+					visible = "[GreaterThan_int32(StatesPanel.AccessBuilding('building_trade_center').GetExpansionLevel, '(int32)0')]"
+				}
+
+				header_building_item = {
+					visible = "[GreaterThan_int32(Building.GetExpansionLevel, '(int32)0')]"
+					datacontext = "[StatesPanel.AccessBuilding('building_trade_center')]"
+
+					tooltipwidget = {
+						FancyTooltip_Building = {}
+					}
+
+					blockoverride "text" {
+						text = "TOTAL_TRADE_CENTER"
+					}
+				}
+
+				divider_clean = {
+					visible = "[GreaterThan_int32(StatesPanel.AccessBuilding('building_manor_house').GetExpansionLevel, '(int32)0')]"
+				}
+
+				header_building_item = {
+					visible = "[GreaterThan_int32(Building.GetExpansionLevel, '(int32)0')]"
+					datacontext = "[StatesPanel.AccessBuilding('building_manor_house')]"
+
+					tooltipwidget = {
+						FancyTooltip_Building = {}
+					}
+
+					blockoverride "text" {
+						text = "TOTAL_MANOR_HOUSE"
+					}
+				}
+
+				divider_clean = {
+					visible = "[GreaterThan_int32(StatesPanel.AccessBuilding('building_financial_district').GetExpansionLevel, '(int32)0')]"
+				}
+
+				header_building_item = {
+					visible = "[GreaterThan_int32(Building.GetExpansionLevel, '(int32)0')]"
+					datacontext = "[StatesPanel.AccessBuilding('building_financial_district')]"
+
+					tooltipwidget = {
+						FancyTooltip_Building = {}
+					}
+
+					blockoverride "text" {
+						text = "TOTAL_FINANCIAL_DISTRICT"
+					}
+				}
+
+				com_owner_building_header_list = {}
+
+				divider_clean = {}
+			}
+
+			### URBAN BUILDINGS
+			container = {
+				datamodel = "[State.AccessCappedRuralBuildings]"
+
+				dynamicgridbox = {
+					name = "urban_building_list"
+					datamodel = "[State.AccessUrbanBuildings]"
+					datamodel_wrap = 4
+					flipdirection = yes
+
+					item = {
+						building_item = {}
+					}
+				}
+
+				widget = {
+					size = { 135 180 }
+					visible = "[GetPlayer.HasForeignInvestmentRights(State.GetOwner)]"
+					enabled = "[GreaterThan_int32( StatesPanel.AccessState.GetNumConstructableUrbanBuildings,'(int32)0')]"
+					position = "[StatesPanel.CalcBuildUrbanBuildingsButtonPosition]"
+
+					button_icon_plus_square = {
+						enabled = "[Not(IsDataModelEmpty(StatesPanel.GetState.GetPotentialUrbanBuildings))]"
+						size = { 135 170 }
+						tooltip = "BUILD_URBAN_BUILDING"
+						onclick = "[StatesPanel.ToggleBuildUrbanBuildingsMenu(PdxGuiWidget.AccessSelf)]"
+
+
+						blockoverride "icon_size" {
+							size = { 80 80 }
+						}
+					}
+
+					textbox = {
+						using = fontsize_mega
+						raw_text = "#BOLD [StatesPanel.AccessState.GetNumConstructableUrbanBuildings|+]#!"
+						parentanchor = right
+						align = hcenter|nobaseline
+						autoresize = yes
+						position = { -12 4 }
+
+						background = {
+							using = blurry_dark_background
+						}
+					}
+				}
+			}
+		}
+
+		### URBAN BUILDINGS LIST VERSION
+		flowcontainer = {
+			visible = "[GetVariableSystem.Exists('buildings_list')]"
+			parentanchor = hcenter
+			direction = vertical
+			using = default_content_fade
+
+			buildings_list_item = {
+				datacontext = "[StatesPanel.AccessBuilding('building_urban_center')]"
+			}
+
+			buildings_list_item = {
+				visible = "[GreaterThan_int32(Building.GetExpansionLevel, '(int32)0')]"
+				datacontext = "[StatesPanel.AccessBuilding('building_trade_center')]"
+			}
+
+			buildings_list_item = {
+				visible = "[GreaterThan_int32(Building.GetExpansionLevel, '(int32)0')]"
+				datacontext = "[StatesPanel.AccessBuilding('building_manor_house')]"
+			}
+
+			buildings_list_item = {
+				visible = "[GreaterThan_int32(Building.GetExpansionLevel, '(int32)0')]"
+				datacontext = "[StatesPanel.AccessBuilding('building_financial_district')]"
+			}
+
+			com_owner_building_list = {}
+
+			buildings_list = {
+				blockoverride "datamodel" {
+					datamodel = "[State.AccessUrbanBuildings]"
+				}
+			}
+
+			button_icon_plus_square = {
+				visible = "[State.GetCountry.IsLocalPlayer]"
+				enabled = "[GreaterThan_int32( StatesPanel.AccessState.GetNumConstructableUrbanBuildings,'(int32)0')]"
+				size = { @panel_width 45 }
+				tooltip = "BUILD_URBAN_BUILDING"
+				onclick = "[StatesPanel.ToggleBuildUrbanBuildingsMenu(PdxGuiWidget.AccessSelf)]"
+				blockoverride "icon_size" {
+					size = { 45 100% }
+				}
+
+				textbox = {
+					using = fontsize_large
+					raw_text = "#BOLD [StatesPanel.AccessState.GetNumConstructableUrbanBuildings|+]#!"
+					parentanchor = right
+					align = hcenter|nobaseline
+					autoresize = yes
+					position = { -10 2 }
+
+					background = {
+						using = blurry_dark_background
+					}
+				}
+			}
+		}
+
+		### RESOURCE BUILDINGS
+		default_header = {
+			visible = "[Not(IsDataModelEmpty( State.AccessCappedRuralBuildings ))]"
+			blockoverride "text" {
+				text = "RESOURCE"
+			}
+		}
+
+		flowcontainer = {
+			visible = "[Not(GetVariableSystem.Exists('buildings_list'))]"
+			parentanchor = hcenter
+			minimumsize = { @panel_width -1 }
+			direction = vertical
+			using = default_content_fade
+
+			fixedgridbox = {
+				datamodel = "[State.AccessCappedRuralBuildings]"
+				addcolumn = 135
+				addrow = 210
+				datamodel_wrap = 4
+				flipdirection = yes
+
+				item = {
+					building_item = {}
+				}
+			}
+		}
+
+		### RESOURCE LIST VERSION
+		flowcontainer = {
+			visible = "[And( GetVariableSystem.Exists('buildings_list'), Not(IsDataModelEmpty(State.AccessCappedRuralBuildings)))]"
+			using = default_content_fade
+			parentanchor = hcenter
+			direction = vertical
+
+			buildings_list = {
+				blockoverride "datamodel" {
+					datamodel = "[State.AccessCappedRuralBuildings]"
+				}
+			}
+		}
+
+		### AGRICULTURE
+		default_header = {
+			blockoverride "text" {
+				text = "AGRICULTURE"
+			}
+		}
+
+		flowcontainer = {
+			visible = "[Not(GetVariableSystem.Exists('buildings_list'))]"
+			using = default_content_fade
+			minimumsize = { @panel_width -1 }
+			using = default_list_position
+			direction = vertical
+			spacing = 10
+
+			flowcontainer = {
+				parentanchor = hcenter
+				direction = vertical
+
+				divider_clean = {}
+
+				### UNUSED ARABLE LAND
+				header_building_item = {
+					datacontext = "[StatesPanel.AccessSubsistenceBuilding]"
+
+					tooltipwidget = {
+						FancyTooltip_Building = {}
+					}
+
+					blockoverride "text" {
+						text = "UNUSED_ARABLE"
+					}
+				}
+
+				divider_clean = {}
+			}
+
+			fixedgridbox = {
+				datamodel = "[State.AccessUncappedRuralBuildings]"
+				addcolumn = 135
+				addrow = 210
+				datamodel_wrap = 4
+				flipdirection = yes
+
+				item = {
+					building_item = {}
+				}
+			}
+		}
+
+		### AGRICULTURE LIST VERSION
+		flowcontainer = {
+			direction = vertical
+			using = default_list_position
+			visible = "[GetVariableSystem.Exists('buildings_list')]"
+			using = default_content_fade
+
+			buildings_list = {
+				blockoverride "datamodel" {
+					datamodel = "[State.AccessUncappedRuralBuildings]"
+				}
+			}
+
+			buildings_list_item = {
+				datacontext = "[StatesPanel.AccessSubsistenceBuilding]"
+			}
+		}
+
+		### DEVELOPMENT
+		default_header = {
+			blockoverride "text" {
+				text = "INFRA_PART_OF_STATE"
+			}
+		}
+
+		state_panel_button_unclickable = {
+			visible = "[Not(GetVariableSystem.Exists('buildings_list'))]"
+			using = default_list_position
+			using = default_content_fade
+
+			container = {
+				minimumsize = { @panel_width -1 }
+				resizeparent = yes
+
+				flowcontainer = {
+					direction = vertical
+					spacing = 10
+
+					flowcontainer = {
+						parentanchor = hcenter
+						direction = vertical
+
+						divider_clean = {
+							visible = no
+						}
+
+						header_building_item = {
+							visible = no
+							datacontext = "[StatesPanel.AccessBuilding('building_barracks')]"
+
+							tooltipwidget = {
+								FancyTooltip_Building = {}
+							}
+
+							blockoverride "text" {
+								text = "TOTAL_BARRACKS"
+							}
+						}
+
+						divider_clean = {}
+
+						header_building_item = {
+							datacontext = "[StatesPanel.AccessBuilding('building_conscription_center')]"
+
+							tooltipwidget = {
+								FancyTooltip_Building = {}
+							}
+
+							blockoverride "text" {
+								text = "TOTAL_CONSCRIPTION_CENTER"
+							}
+						}
+
+						divider_clean = {}
+
+						header_building_item = {
+							visible = no
+							datacontext = "[StatesPanel.AccessBuilding('building_naval_base')]"
+
+							tooltipwidget = {
+								FancyTooltip_Building = {}
+							}
+
+							blockoverride "text" {
+								text = "TOTAL_NAVAL_BASE"
+							}
+						}
+
+						divider_clean = {
+							visible = no
+						}
+					}
+
+					fixedgridbox = {
+						datamodel = "[State.AccessDevelopmentBuildings]"
+						addcolumn = 135
+						addrow = 210
+						datamodel_wrap = 4
+						flipdirection = yes
+
+						item = {
+							building_item = {}
+						}
+					}
+				}
+			}
+		}
+
+		### DEVELOPMENT LIST VERSION
+		flowcontainer = {
+			visible = "[GetVariableSystem.Exists('buildings_list')]"
+			using = default_content_fade
+			margin_top = 5
+			margin_bottom = 10
+			direction = vertical
+			parentanchor = hcenter
+
+			buildings_list_item = {
+				datacontext = "[StatesPanel.AccessBuilding('building_barracks')]"
+			}
+
+			buildings_list_item = {
+				datacontext = "[StatesPanel.AccessBuilding('building_conscription_center')]"
+			}
+
+			buildings_list_item = {
+				datacontext = "[StatesPanel.AccessBuilding('building_naval_base')]"
+			}
+
+			buildings_list = {
+				blockoverride "datamodel" {
+					datamodel = "[State.AccessDevelopmentBuildings]"
+				}
+			}
+		}
+	}
+
+	type com_owner_building_header_list = container {
+		visible = "[DataModelHasItems(GetGlobalList('com_custom_owner_buildings'))]"
+		datamodel = "[GetGlobalList('com_custom_owner_buildings')]"
+
+		item = {
+			container = {
+				datacontext = "[StatesPanel.AccessBuilding(Scope.GetBuildingType.GetKey)]"
+				divider_clean = {
+					visible = "[GreaterThan_int32(Building.GetExpansionLevel, '(int32)0')]"
+				}
+
+				header_building_item = {
+					visible = "[GreaterThan_int32(Building.GetExpansionLevel, '(int32)0')]"
+
+					tooltipwidget = {
+						FancyTooltip_Building = {}
+					}
+
+					blockoverride "text" {
+						text = com_gui_total_building
+					}
+				}
+			}
+		}
+	}
+
+	type com_owner_building_list = container {
+		visible = "[DataModelHasItems(GetGlobalList('com_custom_owner_buildings'))]"
+		datamodel = "[GetGlobalList('com_custom_owner_buildings')]"
+
+		item = {
+			container = {
+				datacontext = "[StatesPanel.AccessBuilding(Scope.GetBuildingType.GetKey)]"
+				buildings_list_item = {
+					visible = "[GreaterThan_int32(Building.GetExpansionLevel, '(int32)0')]"
+				}
+			}
+		}
+	}
+}

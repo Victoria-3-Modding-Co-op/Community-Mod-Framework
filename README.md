@@ -209,6 +209,17 @@ The text behind `flag:` is a localization key (See [com_gui_l_english.yml](local
 
 **NOTE: Only one opinion can be set on a character at a time. So if you are using a character in multiple journal entries be aware of this.**
 
+## Custom Owner Buildings ##
+
+To add a new custom owner building type just add it to the global list `com_custom_owner_buildings` like this:
+```
+add_to_global_variable_list = {
+    name = com_custom_owner_buildings
+    target = bt:building_university # Use your building here
+}
+```
+This can be done in history global or wherever you want this effect to run.
+
 ## Multi-line Production Methods ##
 
 MPM edits certain panels in the UI to make them display extra PM groups by wrapping them around instead of adding the extra ones on the same line and causing them to appear off the edge of the panel or under other text and buttons. MPM provides changes to the following files:

@@ -486,7 +486,7 @@ types event_window_types {
 
 
 #### Vanilla Event Window Variants ####
-default_event_window = {}
+event_window_default = {}
 event_window_1char_tabloid = {}
 event_window_1char_propaganda = {}
 event_window_1char_lord_kitchener = {}
@@ -497,11 +497,11 @@ event_window_big_icon_center = {}
 
 #### Community Mod Framework Window Variants ####
 
-newspaper_event_window = {}
-superevent_event_window = {}
-struggle_event_window = {}
-1char_adventure_event_window = {}
-2char_adventure_event_window = {}
-2char_duel_event_window = {}
-highlander_event_window = {}
-crisis_event_window = {}
+event_window_newspaper = {}
+event_window_superevent = {}
+event_window_struggle = {}
+event_window_1char_adventure = {}
+event_window_2char_adventure = {}
+event_window_2char_duel = {}
+event_window_highlander = {}
+event_window_crisis = {}

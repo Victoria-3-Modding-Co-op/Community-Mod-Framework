@@ -27,7 +27,7 @@
 types com_window_types {
 
 	### NEWSPAPER WINDOW
-	type newspaper_event_window = event_window {
+	type event_window_newspaper = event_window {
 		name = "event_window_newspaper"
 		
 		blockoverride "event_image_size" {
@@ -196,7 +196,7 @@ types com_window_types {
 	}
 
 	### SUPEREVENT WINDOW
-	type superevent_event_window = event_window {
+	type event_window_superevent = event_window {
 		name = "event_window_superevent"
 		
 		blockoverride "event_image_size" {
@@ -228,7 +228,7 @@ types com_window_types {
 	}
 
 	### STRUGGLE WINDOW
-	type struggle_event_window = event_window {
+	type event_window_struggle = event_window {
 		name = "event_window_struggle"
 		
 		blockoverride "event_image_size" {
@@ -425,7 +425,7 @@ types com_window_types {
 	}
 
 	### 1 CHARACTER ADVENTURE WINDOW
-	type 1char_adventure_event_window = event_window {
+	type event_window_1char_adventure = event_window {
 		name = "event_window_1char_adventure"
 		
 		blockoverride "event_image_size" {
@@ -501,7 +501,7 @@ types com_window_types {
 	}
 
 	### 2 CHARACTER ADVENTURE WINDOW
-	type 2char_adventure_event_window = event_window {
+	type event_window_2char_adventure = event_window {
 		name = "event_window_2char_adventure"
 		
 		blockoverride "event_image_size" {
@@ -605,7 +605,7 @@ types com_window_types {
 	# Set the variable com_event_window_2char_duel_var on the country
 	# Adjust your value to be out of 100; this progressbar goes from 0 to 100
 
-	type 2char_duel_event_window = event_window {
+	type event_window_2char_duel = event_window {
 		name = "event_window_2char_duel"
 		
 		blockoverride "event_image_size" {
@@ -875,7 +875,7 @@ types com_window_types {
 	}
 
 	### HIGHLANDER DUEL WINDOW ###
-	type highlander_event_window = event_window {
+	type event_window_highlander = event_window {
 		name = "event_window_highlander"
 
 		blockoverride "event_image_size" {
@@ -1116,7 +1116,7 @@ types com_window_types {
 	#  2 5
 	# 3   6
 
-	type crisis_event_window = event_window {
+	type event_window_crisis = event_window {
 		name = "event_window_crisis"
 		
 		blockoverride "event_image_size" {

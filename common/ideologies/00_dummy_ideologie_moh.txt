@@ -7,6 +7,10 @@ ideology_moh_revolutionary = {
 	
 	character_ideology = yes
 
+	country_trigger = {
+		always = no
+	}
+
 	interest_group_leader_trigger = {
 		always = no
 	}
@@ -30,6 +34,10 @@ ideology_moh_kmt = {
 	show_in_list = no
 	
 	character_ideology = yes
+	
+	country_trigger = {
+		always = no
+	}
 
 	interest_group_leader_trigger = {
 		always = no

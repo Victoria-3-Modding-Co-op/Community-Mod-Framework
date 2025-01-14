@@ -61,7 +61,7 @@ community_framework_events.2 = { # GUI window testing
 	gui_window = event_window_struggle
 	
 	event_image = {
-		video = "unspecific_contract_signed"
+		video = "unspecific_ruler_speaking_to_people"
 	}
 	
 	icon = "gfx/interface/icons/event_icons/event_default.dds"
@@ -75,6 +75,12 @@ community_framework_events.2 = { # GUI window testing
 	}
 	
 	immediate = {
+		ruler = {
+			save_scope_as = left_icon
+		}
+		ruler = {
+			save_scope_as = right_icon
+		}
 	}
 	
 	option = {
@@ -112,12 +118,13 @@ community_framework_events.3 = { # GUI window testing
 	gui_window = event_window_struggle
 	
 	event_image = {
-		video = "event_window_highlander"
+		texture = "gfx/loadingscreens/victoria3_load_0.dds"
 	}
 	
 	icon = "gfx/interface/icons/event_icons/event_default.dds"
 	
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	on_opened_soundeffect = "event:/SFX/Events/misc/1Character_Banner"
 	
 	duration = 3
 	
@@ -147,9 +154,9 @@ community_framework_events.3 = { # GUI window testing
 		name = community_framework_events.2.c
 	}
 	
-#	option = {
-#		name = community_framework_events.2.e
-#	}
+	option = {
+		name = community_framework_events.2.e
+	}
 	
 	orphan = yes
 

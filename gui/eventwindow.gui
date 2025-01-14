@@ -511,4 +511,4 @@ event_window_superevent_modern_full = {}
 event_window_superevent_crisis = {}
 
 #### CMF Special Window Variants ####
-# None yet...
+event_window_special = {} # placeholder

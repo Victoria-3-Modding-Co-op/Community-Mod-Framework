@@ -1,8 +1,8 @@
-#######################################
-# COMMUNITY GUI VANILLA EVENT WINDOWS #
-#######################################
+####################################
+# VICTORIA 3 VANILLA EVENT WINDOWS #
+####################################
 
-# These are separated from the main file to streamline the main file
+# These are separated from eventwindow.gui to simplify script maintenance
 
 ########################################
 
@@ -19,7 +19,7 @@
 
 ########################################
 
-types victoria_window_types {
+types com_victoria_window_types {
 	
 	### DEFAULT WINDOW (with video image)
 	type event_window_default = event_window {

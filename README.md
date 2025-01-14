@@ -57,15 +57,21 @@ Modded event windows are available and can be used by passing this in your event
 ```
 gui_window = <event_window_key>
 ```
-The following modded event windows are available:
-[event_window_newspaper](docs/event_windows/event_window_newspaper.png)
-[event_window_superevent](docs/event_windows/event_window_newspaper.png)
-[event_window_struggle](docs/event_windows/event_window_newspaper.png)
-[event_window_1char_adventure](docs/event_windows/event_window_1char_adventure.png)
-[event_window_2char_adventure](docs/event_windows/event_window_2char_adventure.png)
-[event_window_2char_duel](docs/event_windows/event_window_2char_duel.png)
-[event_window_highlander](docs/event_windows/event_window_highlander.png)
-[event_window_crisis](docs/event_windows/event_window_crisis.png)
+*The following modded event windows are available:*
+Character Windows:
+- [event_window_1char_adventure](docs/event_windows/event_window_1char_adventure.png)
+- [event_window_2char_adventure](docs/event_windows/event_window_2char_adventure.png)
+- [event_window_2char_duel](docs/event_windows/event_window_2char_duel.png)
+- [event_window_highlander](docs/event_windows/event_window_highlander.png)
+
+Superevent Windows:
+- [event_window_superevent_newspaper](docs/event_windows/event_window_superevent_newspaper.png)
+- [event_window_superevent_newspaper_full](docs/event_windows/event_window_superevent_newspaper_full.png)
+- [event_window_superevent_classic](docs/event_windows/event_window_superevent_classic.png)
+- [event_window_superevent_classic_full](docs/event_windows/event_window_superevent_classic_full.png)
+- [event_window_superevent_modern](docs/event_windows/event_window_superevent_modern.png)
+- [event_window_superevent_modern_full](docs/event_windows/event_window_superevent_modern_full.png)
+- [event_window_superevent_crisis](docs/event_windows/event_window_superevent_crisis.png)
 
 **Usage Notes**
 - For ease of use, any modded windows with characters will expect a character scope for the arguments left_icon = and right_icon = just like the vanilla events do.

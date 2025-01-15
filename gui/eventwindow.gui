@@ -512,3 +512,4 @@ event_window_superevent_crisis = {}
 
 #### CMF Special Window Variants ####
 event_window_special = {} # placeholder
+event_window_ethics = {}

@@ -778,7 +778,7 @@ types com_sidebar_overwrite {
         visible = "[And3(
             GetMetaPlayer.GetPlayedOrObservedCountry.IsValid,
             Not(IsObserver),
-            OR(
+            Or(
                 Not(IsDataModelEmpty(GetGlobalList('custom_button_list'))),
                 Not(IsDataModelEmpty(GetGlobalList('custom_button_list_flag')))
             )

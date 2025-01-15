@@ -136,8 +136,8 @@ And at last we need to add the button to the sidebar.
 This is done via the following effect (but with your ideology):
 ```
 add_to_global_variable_list = {
-    name = custom_button_list
-    target = ideology:gui_sidebar_example_button
+    name = custom_button_list_flag
+    target = flag:gui_sidebar_example_button
 }
 ```
 This effect can be run wherever you want, like a journal entry or an event.

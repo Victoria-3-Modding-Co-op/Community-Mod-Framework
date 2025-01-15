@@ -27,6 +27,7 @@ community_framework_events.1 = { # Error supression
 	immediate = {
 		set_variable = community_gui_objective_var
 		set_variable = custom_button_list
+		set_variable = custom_button_list_flag
 		set_variable = had_progressive_era
 		set_variable = custom_social_hieracy
 		set_variable = com_journal_characters
@@ -40,6 +41,7 @@ community_framework_events.1 = { # Error supression
 
 		remove_variable = community_gui_objective_var
 		remove_variable = custom_button_list
+		remove_variable = custom_button_list_flag
 		remove_variable = had_progressive_era
 		remove_variable = custom_social_hieracy
 		remove_variable = com_journal_characters

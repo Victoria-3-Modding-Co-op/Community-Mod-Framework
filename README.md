@@ -73,12 +73,25 @@ Superevent Windows:
 - [event_window_superevent_modern_full](docs/event_windows/event_window_superevent_modern_full.png)
 - [event_window_superevent_crisis](docs/event_windows/event_window_superevent_crisis.png)
 
+Ethics Style Window:
+- [event_window_ethics](docs/event_windows/event_window_ethics.png)
+
 **Usage Notes**
 - For ease of use, any modded windows with characters will expect a character scope for the arguments left_icon = and right_icon = just like the vanilla events do.
 - event_window_duel also has an optional progress that will display below the flavor text
 -- this is activated by setting the variable com_event_window_2char_duel_var
 -- the progress bar will pull the value from this variable; it has a max of 100 and minimum of 0
 - event_window_crisis uses six character scopes saved as variables; documentation is provided in the eventwindow.gui file
+
+**Ethic Events**
+- Ethic events can have up to 9 buttons
+- This is the order they are created in:
+  - Center Button (Required)
+  - Top & Bottom
+  - Left & Right
+  - Bottom Right & Top Left
+  - Bottom Left & Top Right
+- The Buttons do not support classical text but are optimized for texticons (i.e. @innovation!)
 
 ## Hiding Objective Header ##
 

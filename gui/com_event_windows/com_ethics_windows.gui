@@ -1,0 +1,434 @@
+######################################
+# COMMUNITY GUI MODDED EVENT WINDOWS #
+######################################
+
+
+types com_window_types {
+
+    #### Ethics Event Window ####
+    # Ethic events can have up to 9 buttons
+    #
+    # This is the order they are created in:
+    # Center Button (Required)
+    # Top & Bottom
+    # Left & Right
+    # Bottom Right & Top Left
+    # Bottom Left & Top Right
+    #
+    # The Buttons do not support classical text
+    # but are optimized for texticons (i.e. @innovation!)
+    type event_window_ethics = default_popup {
+        datacontext = "[EventWindow.GetEvent]"
+        size = { 1120 700 }
+        name = "event_window_ethics"
+
+        alpha = 0
+
+        blockoverride "minimize" {
+            minimize_button_large = {
+                onclick = "[PopupManager.HideOpenEvent(Event.Self)]"
+                parentanchor = center
+                shortcut = "close_window"
+            }
+        }
+        blockoverride "header_close_button_visibility" {
+            visible = yes
+        }
+
+        blockoverride "window_header_name" {
+            raw_text = "#BOLD [EventWindow.GetTitle]#!"
+        }
+        blockoverride "content" {}
+
+        blockoverride "second_text" {
+            text = "EVENT_WINDOW_EVENT_LOCATION"
+        }
+
+        blockoverride "goto_visibility" {
+            visible = yes
+        }
+
+        blockoverride "goto_properties" {
+            onclick = "[EventWindow.AccessEvent.AccessState.ZoomToCapital]"
+            tooltip = "ZOOM_TO_EVENT_WINDOW_STATE"
+            enabled = "[Not( EventWindow.AccessEvent.AccessState.IsZoomingToCapital )]"
+        }
+
+        state = {
+            trigger_on_create = yes
+            name = 1
+            duration = 0.3
+            using = Animation_Curve_EaseOut
+            alpha = 1
+            using = Snapshot_Mute_World_100
+            using = Snapshot_Mute_Vfx_War_100
+            start_sound = {
+                soundeffect = "[Event.GetOnOpenedSoundEvent]"
+            }
+        }
+
+        ### SETTING SIZE OF WINDOW
+        flowcontainer = {
+            resizeparent = yes
+            margin = { 35 0 }
+            margin_bottom = 25
+
+            ### VIDEO/IMAGE + TEXT/OPTIONS
+            container = {
+                container = {
+                    minimumsize = { 1120 -1 }
+                    position = { 0 90 }
+
+                    ### EVENT IMAGE / CONTENT
+                    widget = {
+                        position = { 3 3 }
+                        size = { 1120 600 }
+
+                        # image in case we have no video?
+                        icon = {
+                            visible = "[Event.HasTexture]"
+                            texture = "[Event.GetTexture]"
+                            alwaystransparent = yes
+                            size = { 100% 100% }
+                        }
+
+                        # animated video ( most images should have this )
+                        video_icon = {
+                            visible = "[Event.HasVideo]"
+                            video = "[Event.GetVideo]"
+                            size = { 100% 100% }
+                            alwaystransparent = yes
+                            loop = no
+                        }
+                    }
+
+                    ### INNER FRAME + FADE OVER THE IMAGE
+                    icon = {
+                        texture = "gfx/interface/event_window/event_inner_frame_fullscreen_horizontal.dds"
+                        size = { 100% 100% }
+                        spriteType = Corneredtiled
+                        spriteborder = { 25 25 }
+                        texture_density = 2
+                        #visible = no
+
+                        modify_texture = {
+                            texture = "gfx/interface/backgrounds/default_bg_shading.dds"
+                            spriteType = Corneredstretched
+                            spriteborder = { 0 0 }
+                            blend_mode = overlay
+                        }
+                        modify_texture = {
+                            using = texture_velvet
+                        }
+                    }
+
+                    ### CONTENT DESIGNATION ICON
+                    flowcontainer = {
+                        visible = "[Event.IsDLCContent]"
+                        tooltip = "EVENT_DLC_TOOLTIP"
+                        spacing = 10
+                        parentanchor = bottom|left
+                        position = { 10 -10 }
+
+                        icon = {
+                            size = { 40 40 }
+                            texture = "gfx/interface/backgrounds/round_frame_dec.dds"
+                            parentanchor = bottom|left
+
+                            icon = {
+                                size = { 40 40 }
+                                position = { 3 -3 }
+
+                                texture = "[Event.GetDLCIcon]"
+                                parentanchor = center
+
+                            }
+                        }
+
+                        textbox = {
+                            size = { 150 20 }
+                            align = left|vcenter
+                            parentanchor = left|vcenter
+                            elide = right
+                            using = fontsize_large
+                            fontsize_min = 12
+                            alpha = 0.7
+
+                            text = "[Event.GetDLCName]"
+                        }
+                    }
+
+                    flowcontainer = {
+                        direction = horizontal
+                        spacing = 0
+                        widget = {
+                            size = { 560 600 }
+                            widget = {
+                                size = { 100% 94% }
+
+                                background = {
+                                    texture = "gfx/interface/backgrounds/tutorial_bg.dds"
+                                    spriteType = Corneredtiled
+                                    spriteborder = { 20 20 }
+                                    alpha = 0.94
+
+                                    modify_texture = {
+                                        texture = "gfx/interface/backgrounds/gradient_overlay.dds"
+                                        spriteType = Corneredstretched
+                                        spriteborder = { 0 0 }
+                                        blend_mode = overlay
+                                        alpha = 0.7
+                                    }
+                                    margin = { -15 -20 }
+                                }
+
+                                flowcontainer = {
+                                    direction = vertical
+                                    using = default_list_position
+                                    spacing = 5
+                                    margin = { 50 50 }
+
+                                    textbox = {
+                                        name = "description"
+                                        multiline = yes
+                                        autoresize = yes
+                                        minimumsize = { 420 -1 }
+                                        maximumsize = { 420 -1 }
+                                        parentanchor = top|hcenter
+                                        align = hcenter|nobaseline
+                                        raw_text = "[EventWindow.GetDescription]"
+                                        margin = { 20 10 }
+                                    }
+
+                                    divider_decorative = {
+                                        minimumsize = { 420 -1 }
+                                        maximumsize = { 420 -1 }
+                                    }
+
+                                    textbox = {
+                                        name = "flavortext"
+                                        multiline = yes
+                                        autoresize = yes
+                                        minimumsize = { 420 -1 }
+                                        maximumsize = { 420 -1 }
+                                        parentanchor = top|hcenter
+                                        align = top|hcenter
+                                        raw_text = "#lore [EventWindow.GetFlavor]#!"
+                                        margin = { 30 10 }
+                                    }
+                                }
+                            }
+                        }
+                        widget = {
+                            size = { 560 600 }
+                            widget = {
+                                size = { 100% 94% }
+
+                                background = {
+                                    texture = "gfx/interface/backgrounds/tutorial_bg.dds"
+                                    spriteType = Corneredtiled
+                                    spriteborder = { 20 20 }
+                                    alpha = 0.94
+
+                                    modify_texture = {
+                                        texture = "gfx/interface/backgrounds/gradient_overlay.dds"
+                                        spriteType = Corneredstretched
+                                        spriteborder = { 0 0 }
+                                        blend_mode = overlay
+                                        alpha = 0.7
+                                    }
+                                    margin = { -15 -20 }
+                                }
+
+                                flowcontainer = {
+                                    direction = vertical
+                                    using = default_list_position
+                                    spacing = 5
+                                    margin = { 50 50 }
+
+                                    textbox = {
+                                        name = "sub_title"
+                                        multiline = yes
+                                        autoresize = yes
+                                        minimumsize = { 420 -1 }
+                                        maximumsize = { 420 -1 }
+                                        parentanchor = top|hcenter
+                                        align = hcenter|nobaseline
+                                        text = "[Localize(Concatenate(Event.GetKey, '.st'))]"
+                                        default_format = "#header"
+                                        margin = { 20 0 }
+                                    }
+
+                                    divider_decorative = {
+                                        minimumsize = { 420 -1 }
+                                        maximumsize = { 420 -1 }
+                                    }
+                                }
+
+                                widget = {
+                                    size = { 100% 100% }
+                                    widget = {
+                                        size = { 250 250 }
+                                        parentanchor = vcenter|hcenter
+                                        datamodel = "[EventWindow.GetOptions]"
+
+                                        item = {
+                                            widget = {
+                                                size = { 250 250 }
+                                                parentanchor = vcenter|hcenter
+                                                com_ethic_button = {
+                                                    visible = "[EqualTo_int32('(int32)0', PdxGuiWidget.GetIndexInDataModel)]"
+                                                    position = { 0 0 }
+                                                }
+                                                com_ethic_button = {
+                                                    visible = "[EqualTo_int32('(int32)1', PdxGuiWidget.GetIndexInDataModel)]"
+                                                    position = { 0 -100 }
+                                                    com_ethic_line = {
+                                                        blockoverride "line_points" {
+                                                            points = {
+                                                                { 30 60 }
+                                                                { 30 100 }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                                com_ethic_button = {
+                                                    visible = "[EqualTo_int32('(int32)2', PdxGuiWidget.GetIndexInDataModel)]"
+                                                    position = { 0 100 }
+                                                    com_ethic_line = {
+                                                        blockoverride "line_points" {
+                                                            points = {
+                                                                { 30 0 }
+                                                                { 30 -40 }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                                com_ethic_button = {
+                                                    visible = "[EqualTo_int32('(int32)3', PdxGuiWidget.GetIndexInDataModel)]"
+                                                    position = { -100 0 }
+                                                    com_ethic_line = {
+                                                        blockoverride "line_points" {
+                                                            points = {
+                                                                { 60 30 }
+                                                                { 100 30 }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                                com_ethic_button = {
+                                                    visible = "[EqualTo_int32('(int32)4', PdxGuiWidget.GetIndexInDataModel)]"
+                                                    position = { 100 0 }
+                                                    com_ethic_line = {
+                                                        blockoverride "line_points" {
+                                                            points = {
+                                                                { 0 30 }
+                                                                { -40 30 }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                                com_ethic_button = {
+                                                    visible = "[EqualTo_int32('(int32)5', PdxGuiWidget.GetIndexInDataModel)]"
+                                                    position = { 75 75 }
+                                                    com_ethic_line = {
+                                                        blockoverride "line_points" {
+                                                            points = {
+                                                                { 10 10 }
+                                                                { -25 -25 }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                                com_ethic_button = {
+                                                    visible = "[EqualTo_int32('(int32)6', PdxGuiWidget.GetIndexInDataModel)]"
+                                                    position = { -75 -75 }
+                                                    com_ethic_line = {
+                                                        blockoverride "line_points" {
+                                                            points = {
+                                                                { 50 50 }
+                                                                { 85 85 }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                                com_ethic_button = {
+                                                    visible = "[EqualTo_int32('(int32)7', PdxGuiWidget.GetIndexInDataModel)]"
+                                                    position = { 75 -75 }
+                                                    com_ethic_line = {
+                                                        blockoverride "line_points" {
+                                                            points = {
+                                                                { 10 50 }
+                                                                { -25 85 }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                                com_ethic_button = {
+                                                    visible = "[EqualTo_int32('(int32)8', PdxGuiWidget.GetIndexInDataModel)]"
+                                                    position = { -75 75 }
+                                                    com_ethic_line = {
+                                                        blockoverride "line_points" {
+                                                            points = {
+                                                                { 50 10 }
+                                                                { 85 -25 }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    type com_ethic_button = widget {
+        parentanchor = vcenter|hcenter
+        size = { 60 60 }
+        tooltip = "[EventOption.GetDesc]"
+
+        sidepanel_button_small = {
+            position = { 0 0 }
+            size = { 60 60 }
+            blockoverride "icon" {
+                textbox = {
+                    size = { 60 60 }
+                    scale = 1.8
+                    align = vcenter|hcenter
+                    parentanchor = vcenter|hcenter
+                    text = "[EventOption.GetText]"
+                }
+            }
+            blockoverride "button_selected" {
+                visible = "[EventOption.IsHighlightedOption]"
+            }
+            enabled = "[EventOption.IsEnabled]"
+            onclick = "[EventOption.Select]"
+        }
+    }
+
+    type com_ethic_line = line {
+        position = { 0 0 }
+        gfxtype = linegfx
+        line_type = BSpline
+        block "tech_line_texture" {
+            texture = "gfx/interface/tech_tree/tech_line_research_locked.dds"
+        }
+        mask = "gfx/interface/tech_tree/tech_line_mask.dds"
+        width = 4
+        alpha = 0.8
+
+        block "line_points" {
+            points = {
+                { 0 0 }
+                { 0 0 }
+            }
+        }
+    }
+}

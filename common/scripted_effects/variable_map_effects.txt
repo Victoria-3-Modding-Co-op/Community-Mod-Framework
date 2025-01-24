@@ -4,11 +4,25 @@ add_to_variable_map = {
 			NOT = { has_global_variable = variable_map_$name$_existence_flag }
 		}
 		set_global_variable = variable_map_$name$_existence_flag 
-		set_global_variable = { name = 0 value = variable_map_$name$_size }
+		set_global_variable = { name = variable_map_$name$_size value = 0 }
 	}
 	add_to_variable_map_dispatch = {
 		name = $name$
 		value = $value$
+		key = $key$
 		index = global_var:variable_map_$name$_size
+	}
+	change_global_variable = {
+		name = variable_map_$name$_size
+		add = 1
+	}
+}
+
+# Front facing effect
+target_in_map = {
+	target_in_map_dispatch = {
+		name = $name$
+		key = $key$
+		save_as = $save_as$
 	}
 }

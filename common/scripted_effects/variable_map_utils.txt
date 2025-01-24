@@ -12,11 +12,8 @@ variable_map_get_last_in_list = {
 		if = {
 			limit = {
 				global_var:variable_map_counter = 2
-			}			
-			save_scope_value_as = {
-				name = $save_as$
-				value = this
-			}
+			}		
+			save_scope_as = $save_as$	
 		}
 	}
 }

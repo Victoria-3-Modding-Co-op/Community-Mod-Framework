@@ -1,0 +1,22 @@
+variable_map_get_last_in_list = {
+	set_global_variable = {
+		name = variable_map_counter
+		value = 0
+	}
+	every_in_global_list = {
+		variable = variable_map_$name$_index_$index$
+		change_global_variable = {
+			name = variable_map_counter
+			add = 1
+		}
+		if = {
+			limit = {
+				global_var:variable_map_counter = 2
+			}			
+			save_scope_value_as = {
+				name = $save_as$
+				value = this
+			}
+		}
+	}
+}

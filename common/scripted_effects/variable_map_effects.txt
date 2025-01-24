@@ -1,0 +1,14 @@
+add_to_variable_map = {
+	if = {
+		limit = {
+			NOT = { has_global_variable = variable_map_$name$_existence_flag }
+		}
+		set_global_variable = variable_map_$name$_existence_flag 
+		set_global_variable = { name = 0 value = variable_map_$name$_size }
+	}
+	add_to_variable_map_dispatch = {
+		name = $name$
+		value = $value$
+		index = global_var:variable_map_$name$_size
+	}
+}

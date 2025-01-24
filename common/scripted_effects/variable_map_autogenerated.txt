@@ -1,0 +1,911 @@
+add_to_variable_map_dispatch = {
+    if = {
+        limit = {
+            $index$ = 0
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_0
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 1
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_1
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 2
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_2
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 3
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_3
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 4
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_4
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 5
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_5
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 6
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_6
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 7
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_7
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 8
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_8
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 9
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_9
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 10
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_10
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 11
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_11
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 12
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_12
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 13
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_13
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 14
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_14
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 15
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_15
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 16
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_16
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 17
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_17
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 18
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_18
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 19
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_19
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 20
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_20
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 21
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_21
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 22
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_22
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 23
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_23
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 24
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_24
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 25
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_25
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 26
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_26
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 27
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_27
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 28
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_28
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 29
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_29
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 30
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_30
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 31
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_31
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 32
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_32
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 33
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_33
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 34
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_34
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 35
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_35
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 36
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_36
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 37
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_37
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 38
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_38
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 39
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_39
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 40
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_40
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 41
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_41
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 42
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_42
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 43
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_43
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 44
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_44
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 45
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_45
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 46
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_46
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 47
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_47
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 48
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_48
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 49
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_49
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 50
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_50
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 51
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_51
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 52
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_52
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 53
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_53
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 54
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_54
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 55
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_55
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 56
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_56
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 57
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_57
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 58
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_58
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 59
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_59
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 60
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_60
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 61
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_61
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 62
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_62
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 63
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_63
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 64
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_64
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 65
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_65
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 66
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_66
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 67
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_67
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 68
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_68
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 69
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_69
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 70
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_70
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 71
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_71
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 72
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_72
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 73
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_73
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 74
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_74
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 75
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_75
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 76
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_76
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 77
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_77
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 78
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_78
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 79
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_79
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 80
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_80
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 81
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_81
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 82
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_82
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 83
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_83
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 84
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_84
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 85
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_85
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 86
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_86
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 87
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_87
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 88
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_88
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 89
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_89
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 90
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_90
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 91
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_91
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 92
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_92
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 93
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_93
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 94
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_94
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 95
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_95
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 96
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_96
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 97
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_97
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 98
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_98
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 99
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_99
+            value = $value$
+        }
+    }
+    else_if = {
+        limit = {
+            $index$ = 100
+        }
+        set_global_variable = {
+            name = variable_map_$name$_index_100
+            value = $value$
+        }
+    }
+}

@@ -250,6 +250,44 @@ gui/building_browser_panel.gui
 ```
 **NOTE: Note that military buildings, such as barracks and naval bases, are NOT INTENDED TO BE USED WITH MPM due to the new unit graphics being displayed alongside the PMGs which now take up most of the space that the extra PMGs would overflow into.**
 
+# Structs
+
+CMF now allows for structs that can be used to categorize variables. They are especially meant to be used with GUI but can be used anywhere.
+
+## Creating a new Struct
+This command needs to run in a country scope:
+```
+create_struct = {
+	struct_scope = test_struct
+	struct_type = 1
+}
+```
+The `struct_scope` is the output scope of the created struct that you can use to add variables or add the struct to a list.
+The `struct_type` is a type that can be set on the struct. To use "names" here, you can define Script Values to use as a `struct_type`.
+
+## Setting Variables on a Struct
+After creating a struct, you can use its scope to set variables on it. Or use it as a variable in another scope:
+```
+scope:test_struct = {
+	set_variable = {
+		name = some_example_variable
+		value = 42
+	}
+	set_variable = another_example_variable
+}
+```
+```
+# Country Scope Example
+c:GBR = {
+	set_variable = {
+		name = some_variable_with_a_struct
+		value = scope:test_struct
+	}
+}
+```
+
+**NOTE: Internally structs are immortal Characters in the void. This means potential textures for the GUI could be set using a Characters ideology.**
+
 # Parties #
 
 For naming, you need to include loc keys to avoid load-up error. These can be blank and overwritten by your own mod. 

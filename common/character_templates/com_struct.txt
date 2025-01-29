@@ -1,0 +1,13 @@
+﻿struct_template = {
+	# I am building my own struct system
+	# with Blackjack and Hookers
+	first_name = Blackjack
+	last_name = and_Hookers
+
+	# We do not want our struct to die ;)
+	on_created = {
+		place_character_in_void = 10000
+		set_variable = is_struct
+		set_character_immortal = yes
+	}
+}

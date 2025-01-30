@@ -2,7 +2,7 @@
 # COMMUNITY MOD FRAMEWORK EVENTS #
 ##################################
 
-# This file is here for error supression and event window testing. It has no other purpose. Do NOT call these events.
+# This file is here for error suppression and event window testing. It has no other purpose. Do NOT call these events.
 
 ####################
 
@@ -34,6 +34,8 @@ community_framework_events.1 = { # Error supression
 		set_variable = com_opinion
 		set_variable = com_gui_progressbar_var
 		set_variable = ccp_land_revolution_ig
+		set_variable = is_struct
+		set_variable = com_type
 		add_to_global_variable_list = {
 			name = com_custom_owner_buildings
 			target = bt:building_manor_house
@@ -48,6 +50,8 @@ community_framework_events.1 = { # Error supression
 		remove_variable = com_opinion
 		remove_variable = com_gui_progressbar_var
 		remove_variable = ccp_land_revolution_ig
+		remove_variable = is_struct
+		remove_variable = com_type
 		clear_global_variable_list = com_custom_owner_buildings
 	}
 	

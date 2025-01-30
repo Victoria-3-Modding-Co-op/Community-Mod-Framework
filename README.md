@@ -57,12 +57,14 @@ Modded event windows are available and can be used by passing this in your event
 ```
 gui_window = <event_window_key>
 ```
-*The following modded event windows are available:*
+### Available Event Windows
+
 Character Windows:
 - [event_window_1char_adventure](docs/event_windows/event_window_1char_adventure.png)
 - [event_window_2char_adventure](docs/event_windows/event_window_2char_adventure.png)
 - [event_window_2char_duel](docs/event_windows/event_window_2char_duel.png)
 - [event_window_highlander](docs/event_windows/event_window_highlander.png)
+- [event_window_3char_selection](docs/event_windows/event_window_3char_selection.png)
 
 Superevent Windows:
 - [event_window_superevent_newspaper](docs/event_windows/event_window_superevent_newspaper.png)
@@ -76,14 +78,14 @@ Superevent Windows:
 Ethics Style Window:
 - [event_window_ethics](docs/event_windows/event_window_ethics.png)
 
-**Usage Notes**
-- For ease of use, any modded windows with characters will expect a character scope for the arguments left_icon = and right_icon = just like the vanilla events do.
-- event_window_duel also has an optional progress that will display below the flavor text
--- this is activated by setting the variable com_event_window_2char_duel_var
--- the progress bar will pull the value from this variable; it has a max of 100 and minimum of 0
-- event_window_crisis uses six character scopes saved as variables; documentation is provided in the eventwindow.gui file
+### Usage Notes
+- For ease of use, any modded windows with characters will expect a character scope for the arguments `left_icon = scope:some_character`, `right_icon = scope:some_character` and `center_icon = scope:some_character` if the event has three characters. Just like the vanilla events do.
+- `event_window_duel` also has an optional progress bar that will display below the flavor text
+  - This is activated by setting the variable com_event_window_2char_duel_var
+  - The progress bar will pull the value from this variable; it has a maximum of 100 and a minimum of 0
+- `event_window_crisis` uses six character scopes saved as variables; documentation is provided in the `eventwindow.gui` file
 
-**Ethic Events**
+### Ethic Events
 - Ethic events can have up to 9 buttons
 - This is the order they are created in:
   - Center Button (Required)
@@ -91,7 +93,7 @@ Ethics Style Window:
   - Left & Right
   - Bottom Right & Top Left
   - Bottom Left & Top Right
-- The Buttons do not support classical text but are optimized for texticons (i.e. @innovation!)
+- The Buttons do not support classical text but are optimized for texticons (i.e. `@innovation!`)
 
 ## Hiding Objective Header ##
 
@@ -250,6 +252,44 @@ gui/building_browser_panel.gui
 ```
 **NOTE: Note that military buildings, such as barracks and naval bases, are NOT INTENDED TO BE USED WITH MPM due to the new unit graphics being displayed alongside the PMGs which now take up most of the space that the extra PMGs would overflow into.**
 
+# Structs
+
+CMF now allows for structs that can be used to categorize variables. They are especially meant to be used with GUI but can be used anywhere.
+
+## Creating a new Struct
+This command needs to run in a country scope:
+```
+create_struct = {
+	struct_scope = test_struct
+	struct_type = 1
+}
+```
+The `struct_scope` is the output scope of the created struct that you can use to add variables or add the struct to a list.
+The `struct_type` is a type that can be set on the struct. To use "names" here, you can define Script Values to use as a `struct_type`.
+
+## Setting Variables on a Struct
+After creating a struct, you can use its scope to set variables on it. Or use it as a variable in another scope:
+```
+scope:test_struct = {
+	set_variable = {
+		name = some_example_variable
+		value = 42
+	}
+	set_variable = another_example_variable
+}
+```
+```
+# Country Scope Example
+c:GBR = {
+	set_variable = {
+		name = some_variable_with_a_struct
+		value = scope:test_struct
+	}
+}
+```
+
+**NOTE: Internally structs are immortal Characters in the void. This means potential textures for the GUI could be set using a Characters ideology.**
+
 # Parties #
 
 For naming, you need to include loc keys to avoid load-up error. These can be blank and overwritten by your own mod. 
@@ -257,15 +297,18 @@ For naming, you need to include loc keys to avoid load-up error. These can be bl
 # Community Mod Triggers #
 
 Usage
-1) Place the file 00_community_mod_compatibility_triggers.txt  in the /common/scripted_triggers folder of your mod. This file will contain the scripted triggers all set to return false by default. This is intentional.
+1) Place the file `00_community_mod_compatibility_triggers.txt` in the `/common/scripted_triggers` folder of your mod. This file will contain the scripted triggers all set to return false by default. This is intentional.
+```
 YOURMODNAME_is_active_trigger = {
-  always = no
+   always = no
 }
-
-2) Create another file with the name zz_YOURMODNAME_compatibility_triggers.txt that contains the following:
+```
+2) Create another file with the name `zz_YOURMODNAME_compatibility_triggers.txt` that contains the following:
+```
 YOURMODNAME_is_active_trigger = {
-  always = yes
+   always = yes
 }
+```
 
 Currently Included:
 * Anno 1836

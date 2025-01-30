@@ -1,0 +1,12 @@
+﻿create_struct = {
+	create_character = {
+		template = struct_template
+		save_scope_as = $struct_scope$
+	}
+	scope:$struct_scope$ = {
+		set_variable = {
+			name = com_type
+			value = $struct_type$
+		}
+	}
+}

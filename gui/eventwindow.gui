@@ -500,6 +500,7 @@ event_window_1char_adventure = {}
 event_window_2char_adventure = {}
 event_window_2char_duel = {}
 event_window_highlander = {}
+event_window_3char_selection = {}
 
 #### CMF Superevent Window Variants ####
 event_window_superevent_newspaper = {}

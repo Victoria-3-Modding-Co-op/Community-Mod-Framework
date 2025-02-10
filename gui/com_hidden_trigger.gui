@@ -6,6 +6,7 @@ widget = {
     name = com_hidden_trigger
     allow_outside = yes
     alpha = 0
+    max_update_rate = 1
 
     button = {
         size = { 0 0 }

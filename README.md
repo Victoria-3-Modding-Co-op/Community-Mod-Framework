@@ -50,6 +50,7 @@ Current Scope:
 9) Modification to Journal Entry GUI to allow players to show characters (Credit to Bahmut and Mori)
 10) Integration of the "Multi-line PM Framework" (Credit to 1230James)
 11) Alerts can now open custom windows (Credit to Bahmut)
+12) More than three local goods can now be shown in state building panel correctly (Credit to Bahmut)
 
 ## Alternative Event Windows ##
 

@@ -1,0 +1,15 @@
+﻿com_add_local_good = {
+    scope = state
+
+    # scope:local_good = local good to be added
+    effect = {
+        add_to_variable_list = {
+            name = com_local_goods
+            target = scope:local_good
+        }
+    }
+
+    saved_scopes = {
+        local_good
+    }
+}

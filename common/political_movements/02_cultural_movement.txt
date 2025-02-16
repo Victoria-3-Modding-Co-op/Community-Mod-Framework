@@ -53,8 +53,23 @@
 	}
 	
 	pop_support_trigger = {
-		culture = {
-			is_primary_culture_of = root.owner
+		OR = {
+			culture = {
+				is_primary_culture_of = root.owner
+			}
+			trigger_if = { #anzfp
+				limit = {
+					anzfp_is_active = yes
+					pop_acceptance > acceptance_status_4 
+					owner = {
+						or = {
+							country_has_primary_culture = cu:australian
+							anz_country_is_pakeha = yes
+						}
+					}
+				}
+				has_pop_culture = british
+			}
 		}
 	}
 
@@ -220,6 +235,18 @@
 				desc = "POP_RADICAL_MOVEMENT_LOSSES"
 				value = 1
 				subtract = pop_radical_fraction
+			}
+		}
+
+		if = {
+			limit = {
+				anzfp_is_active = yes
+				has_pop_culture = british
+				pop_acceptance < acceptance_status_5 
+			}
+			multiply = {
+				value = 0.1
+				desc = "anz_POP_NOT_T5"
 			}
 		}
 	}	

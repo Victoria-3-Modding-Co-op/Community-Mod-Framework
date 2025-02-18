@@ -1,0 +1,69 @@
+﻿# Up to date as of 1.8.6
+# Root = Character
+on_heir_born = {
+    effect = {
+        if = {
+            limit = {
+                owner = {
+                    has_variable = no_heirs
+                }
+            }
+            kill_character = {
+                value  = yes
+                hidden = yes
+            }
+        }
+        else = { # Vanilla logic sits in this else block
+            post_notification = heir_born_notification
+            if = {
+                limit = {
+                    owner = {
+                        c:FRA ?= this
+                        ruler = {
+                            has_variable = orleanist_leader
+                        }
+                    }
+                }
+                owner = {
+                    heir = {
+                        set_variable = { name = orleanist_leader }
+                        set_ideology = ideology:ideology_orleanist
+                    }
+                }
+            }
+            if = {
+                limit = {
+                    owner = {
+                        c:FRA ?= this
+                        ruler = {
+                            has_variable = legitimist_leader
+                        }
+                    }
+                }
+                owner = {
+                    heir = {
+                        set_variable = { name = legitimist_leader }
+                        set_ideology = ideology:ideology_legitimist
+                    }
+                }
+            }
+
+            if = {
+                limit = {
+                    owner = {
+                        c:FRA ?= this
+                        ruler = {
+                            has_variable = bonapartist_leader
+                        }
+                    }
+                }
+                owner = {
+                    heir = {
+                        set_variable = { name = bonapartist_leader }
+                        set_ideology = ideology:ideology_bonapartist
+                    }
+                }
+            }
+        }
+    }
+}

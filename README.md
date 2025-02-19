@@ -347,3 +347,21 @@ Note: It is possible to add additional keybinds if there are no keybinds left.
 
 Over 100 new modifier icons for more variety. Credit to Caelreader. PSD template available in docs.
 Screenshot: [Modifier Icons](docs/timed_modifier_icons.png)
+
+## Heir Blocker
+
+Mods interested in having specially generated heirs (especially for things like historical heirs) in countries with hereditary transfers of power can utilize the Heir Blocking Framework's feature to prevent the visual appearance of an heir. That is, while the heir technically is generated (as there is no useful way to prevent that), we can intercept the new heir and remove them whilst blocking the "Heir Born" message at the same time, giving the *appearance* to the user that no heirs are actually being born.
+
+To use it, just set a variable named `no_heirs` in the country that should have its heirs blocked; e.g.,
+```
+c:GBR = {
+    set_variable = no_heirs
+}
+```
+Modified on action logic for heir births will take care of the rest automatically.
+
+To allow randomly-generated heirs again, simply remove the variable.
+
+Note:
+1. No considerations have been made regarding any failsafes. You are solely responsible for unblocking heirs later, even if the country switches away from a government type with hereditary transfer of power.
+2. Heirs created via `create_character` and heirs set via `set_heir` are *not* blocked, as they do not count as a "natural" heir birth. This means the variable does not need to be briefly unset when generating or setting heirs via script, such as for historical heirs.

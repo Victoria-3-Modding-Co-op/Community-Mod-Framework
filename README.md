@@ -4,6 +4,27 @@ Framework mod to support compatibility between including GUI, Political Movement
 ## Steam Page ##
 https://steamcommunity.com/sharedfiles/filedetails/?id=3385002128
 
+## Contents
+* [Setting Dependency](#setting-dependency)
+* [Political Movements](#political-movements)
+* [Debug Mode](#debug-mode)
+* [GUI Framework](#gui-framework)
+    * [Alternative Event Windows](#alternative-event-windows)
+    * [Hiding Objective Header](#hiding-objective-header)
+    * [Custom Social Hierarchies](#custom-social-hierarchies)
+    * [Sidebar Button](#sidebar-button)
+    * [Characters in Journal Entry](#characters-in-journal-entry)
+    * [Custom Owner Buildings](#custom-owner-buildings)
+    * [Multi-line Production Methods](#multi-line-production-methods)
+* [Structs](#structs)
+    * [Creating a new Struct](#creating-a-new-struct)
+    * [Setting Variables on a Struct](#setting-variables-on-a-struct)
+* [Parties](#parties)
+* [Community Mod Triggers](#community-mod-triggers)
+* [Keybinds](#keybinds)
+* [Additional Modifier Icons](#additional-modifier-icons)
+* [Heir Blocker](#heir-blocker)
+
 # Setting Dependency #
 
 To set this mod as a dependency to your own mod, you will need to add this to your `metadata.json` file:

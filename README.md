@@ -1,10 +1,31 @@
-# Community-Mod-Framework #
+# Community-Mod-Framework
 Framework mod to support compatibility between including GUI, Political Movements, Parties and mod detection triggers
 
-## Steam Page ##
+## Steam Page
 https://steamcommunity.com/sharedfiles/filedetails/?id=3385002128
 
-# Setting Dependency #
+## Contents
+* [Setting Dependency](#setting-dependency)
+* [Political Movements](#political-movements)
+* [Debug Mode](#debug-mode)
+* [GUI Framework](#gui-framework)
+    * [Alternative Event Windows](#alternative-event-windows)
+    * [Hiding Objective Header](#hiding-objective-header)
+    * [Custom Social Hierarchies](#custom-social-hierarchies)
+    * [Sidebar Button](#sidebar-button)
+    * [Characters in Journal Entry](#characters-in-journal-entry)
+    * [Custom Owner Buildings](#custom-owner-buildings)
+    * [Multi-line Production Methods](#multi-line-production-methods)
+* [Structs](#structs)
+    * [Creating a new Struct](#creating-a-new-struct)
+    * [Setting Variables on a Struct](#setting-variables-on-a-struct)
+* [Parties](#parties)
+* [Community Mod Triggers](#community-mod-triggers)
+* [Keybinds](#keybinds)
+* [Additional Modifier Icons](#additional-modifier-icons)
+* [Heir Blocker](#heir-blocker)
+
+# Setting Dependency
 
 To set this mod as a dependency to your own mod, you will need to add this to your `metadata.json` file:
 ```
@@ -20,7 +41,7 @@ To set this mod as a dependency to your own mod, you will need to add this to yo
 ```
 **Also remember to add the mod to your required items on your own mods steam page.**
 
-# Political Movements #
+# Political Movements
 
 Overwrites vanilla Political Movement definitions with scripted triggers to aid in mod compatibility
 
@@ -30,13 +51,13 @@ Add dummy ideologies from mods into political movements, allowing them to spawn 
 * Load this mod below any other mod
 * Your mod will overwrite the ideology definition and allow it to spawn in the specified political movements
 
-# Debug Mode #
+# Debug Mode
 
 The keybinding `CTRL + ALT + D` toggles the global variable `com_debug`.
 
 This can be used to enable or disable debug content like debug Decisions or Events.
 
-# GUI Framework #
+# GUI Framework
 
 Current Scope:
 1) A "sidebar" scripted widget to deconflict mods that want to add custom sidebar buttons. (Credit to Bahmut, LordR, & Alexedishi)
@@ -52,7 +73,7 @@ Current Scope:
 11) Alerts can now open custom windows (Credit to Bahmut)
 12) More than three local goods can now be shown in state building panel correctly (Credit to Bahmut)
 
-## Alternative Event Windows ##
+## Alternative Event Windows
 
 Modded event windows are available and can be used by passing this in your event:
 ```
@@ -96,14 +117,14 @@ Ethics Style Window:
   - Bottom Left & Top Right
 - The Buttons do not support classical text but are optimized for texticons (i.e. `@innovation!`)
 
-## Hiding Objective Header ##
+## Hiding Objective Header
 
 The Objective header can be hidden by setting the global variable `community_gui_objective_var` like this:
 ```
 set_global_variable = community_gui_objective_var
 ```
 
-## Custom Social Hierarchies ##
+## Custom Social Hierarchies
 
 To enable a custom social hierachy you have to execute this effect in a countries scope:
 ```
@@ -114,7 +135,7 @@ set_variable = {
 ```
 **I recommend doing this in the history file of a country `common/history/countries`**
 
-## Sidebar Button ##
+## Sidebar Button
 
 Screenshot: [Example](docs/example_sidebar_01.png)
 
@@ -146,7 +167,7 @@ add_to_global_variable_list = {
 This effect can be run wherever you want, like a journal entry or an event.
 One possibility is to run it in `common/history/global/` (See [enable_example_button.txt](common/history/global/enable_example_button.txt)).
 
-### GUI Window Visibility ###
+### GUI Window Visibility
 
 When a sidebar button is clicked the following GUI variable is set to your scripted gui name: `com_open_window`
 In your custom window you should check for it like this (with your scripted gui name):
@@ -158,7 +179,7 @@ If you want to close your window again you can do it by clearing the variable li
 onclick = "[GetVariableSystem.Clear('com_open_window')]"
 ```
 
-### Fullscreen GUI ###
+### Fullscreen GUI
 
 If your GUI is fullscreen you will also need to set and remove the following GUI variable: `com_fullscreen`
 The best solution is to use the GUI state system like this:
@@ -175,7 +196,7 @@ state = {
 ```
 Setting it will hide the base game GUI and removing it will show the base game GUI again.
 
-### Custom Alerts ###
+### Custom Alerts
 
 When you create an alert, you also need to define an action in a loc key.
 This action string will be written into the GUI variable `com_alert_action`.
@@ -185,7 +206,7 @@ You can then check for this in your custom GUI like this:
 visible = "[GetVariableSystem.HasValue('com_alert_action', 'Example Panel')]"
 ```
 
-## Characters in Journal Entry ##
+## Characters in Journal Entry
 
 Screenshots: [Single Character with Opinion](docs/example_journal_entry_character_01.png), [Multiple Characters without Opinions](docs/example_journal_entry_character_02.png)
 
@@ -217,7 +238,7 @@ je_example_entry = {
 }
 ```
 
-### Opinions ###
+### Opinions
 
 Characters in journal entries can also have opinions.
 To define them, you need to set the flag variable `com_opinion` on the character.
@@ -231,7 +252,7 @@ The text behind `flag:` is a localization key (See [com_gui_l_english.yml](local
 
 **NOTE: Only one opinion can be set on a character at a time. So if you are using a character in multiple journal entries be aware of this.**
 
-## Custom Owner Buildings ##
+## Custom Owner Buildings
 
 To add a new custom owner building type just add it to the global list `com_custom_owner_buildings` like this:
 ```
@@ -242,7 +263,7 @@ add_to_global_variable_list = {
 ```
 This can be done in history global or wherever you want this effect to run.
 
-## Multi-line Production Methods ##
+## Multi-line Production Methods
 
 MPM edits certain panels in the UI to make them display extra PM groups by wrapping them around instead of adding the extra ones on the same line and causing them to appear off the edge of the panel or under other text and buttons. MPM provides changes to the following files:
 ```
@@ -291,13 +312,13 @@ c:GBR = {
 
 **NOTE: Internally structs are immortal Characters in the void. This means potential textures for the GUI could be set using a Characters ideology.**
 
-# Parties #
+# Parties
 
 For naming, you need to include loc keys to avoid load-up error. These can be blank and overwritten by your own mod. 
 
-# Community Mod Triggers #
+# Community Mod Triggers
 
-Usage
+## Usage
 1) Place the file `00_community_mod_compatibility_triggers.txt` in the `/common/scripted_triggers` folder of your mod. This file will contain the scripted triggers all set to return false by default. This is intentional.
 ```
 YOURMODNAME_is_active_trigger = {
@@ -311,7 +332,7 @@ YOURMODNAME_is_active_trigger = {
 }
 ```
 
-Currently Included:
+## Currently Included:
 * Anno 1836
 * Australia & New Zealand Flavor Pack
 * Basileia Romaion
@@ -334,7 +355,7 @@ Currently Included:
 * States That Make Sense
 * Western Clothes: Redux
 
-## Keybinds ##
+# Keybinds
 
 You can take a free keybind by doing this:
 1) Check default.profile and see which keybind is still free. You can find free keybinds at the bottom of the file.
@@ -343,12 +364,12 @@ You can take a free keybind by doing this:
 
 Note: It is possible to add additional keybinds if there are no keybinds left.
 
-## Additional Modifier Icons ##
+# Additional Modifier Icons
 
 Over 100 new modifier icons for more variety. Credit to Caelreader. PSD template available in docs.
 Screenshot: [Modifier Icons](docs/timed_modifier_icons.png)
 
-## Heir Blocker
+# Heir Blocker
 
 Mods interested in having specially generated heirs (especially for things like historical heirs) in countries with hereditary transfers of power can utilize the Heir Blocking Framework's feature to prevent the visual appearance of an heir. That is, while the heir technically is generated (as there is no useful way to prevent that), we can intercept the new heir and remove them whilst blocking the "Heir Born" message at the same time, giving the *appearance* to the user that no heirs are actually being born.
 

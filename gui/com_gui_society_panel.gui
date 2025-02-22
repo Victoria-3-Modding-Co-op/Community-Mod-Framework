@@ -192,12 +192,12 @@ types society_panel_overwrites {
                 {
                     ## CUSTOM BLOCK START ##
                     law_item_small = {
-                        visible = "[And(GetPlayer.HasSpecialSocialHierarchy, GetPlayer.MakeScope.Var('custom_social_hieracy').IsSet)]"
-                        datacontext = "[GetPlayer.MakeScope.Var('custom_social_hieracy').GetLaw.GetActiveGroupLaw]"
+                        visible = "[And(GetPlayer.HasSpecialSocialHierarchy, GetPlayer.MakeScope.Var('custom_social_hierarchy').IsSet)]"
+                        datacontext = "[GetPlayer.MakeScope.Var('custom_social_hierarchy').GetLaw.GetActiveGroupLaw]"
                     }
 
                     law_item_small = {
-                        visible = "[And(GetPlayer.HasSpecialSocialHierarchy, Not(GetPlayer.MakeScope.Var('custom_social_hieracy').IsSet))]"
+                        visible = "[And(GetPlayer.HasSpecialSocialHierarchy, Not(GetPlayer.MakeScope.Var('custom_social_hierarchy').IsSet))]"
                         datacontext = "[AccessPlayer.AccessActiveLawFromGroup('lawgroup_caste_hegemony')]"
                     }
                     ## CUSTOM BLOCK END ##

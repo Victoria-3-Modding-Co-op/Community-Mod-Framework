@@ -1168,6 +1168,7 @@ movement_royalist_constitutional = {
 		ideology_royalist
 		ideology_humanitarian_royalist
 		ideology_grefm_constitutionalist # GBBF
+		ideology_turkfm_ottomanist # GBBF
 	}
 	
 	disband_trigger = {
@@ -3221,6 +3222,7 @@ movement_liberal = {
 		ideology_humanitarian
 		ideology_grefm_constitutionalist # GBBF
 		ideology_venizelist # GBBF
+		ideology_turkfm_ottomanist # GBBF
 		ideology_dacianist # GBBF
 		ideology_moh_revolutionary # MoH Revolutionary
 		ideology_moh_kmt # MoH Kuomintang Nationalist
@@ -4797,6 +4799,7 @@ movement_reactionary = {
 		ideology_protectionist
 		ideology_authoritarian
 		ideology_luddite
+		ideology_turkfm_islamist # GBBF
 	}
 	
 	creation_trigger = {
@@ -5102,6 +5105,7 @@ movement_modernizer = {
 		ideology_protectionist
 		ideology_market_liberal
 		ideology_abolitionist
+		ideology_turkfm_ottomanist # GBBF
 	}
 	
 	creation_trigger = {

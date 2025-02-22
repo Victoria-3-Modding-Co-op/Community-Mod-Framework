@@ -196,6 +196,253 @@ types com_character_window_types {
 		}
 		
 	}
+	
+	### 2 CHARACTER DISCUSSION WINDOW
+	type event_window_2char_duel = event_window {
+		name = "event_window_2char_discussion"
+		
+		blockoverride "event_image_size" {
+			size = { 100% 100% }
+			parentanchor = center
+		}
+		
+			blockoverride "event_image_content" {
+			# image
+			icon = {
+				visible = "[Event.HasTexture]"
+				texture = "[Event.GetTexture]"
+				alwaystransparent = yes
+				size = { 100% 100% }
+			}
+
+			# animated video
+			video_icon = {
+				visible = "[Event.HasVideo]"
+				video = "[Event.GetVideo]"
+				size = { 100% 100% }
+				alwaystransparent = yes
+				loop = no
+			}
+
+			# 1st char
+			container = {
+				parentanchor = center
+				position = { -325 300 }
+				datacontext = "[Event.GetIcon('left_icon')]"
+
+				character_portrait_base = {
+					visible = "[EventIcon.IsPortrait]"
+					datacontext = "[EventIcon.GetCharacter]"
+					blockoverride "show_hat" {}
+					blockoverride "portrait_icons" {}
+					blockoverride "portrait_size" {
+						size = { 520 650 }
+					}
+					blockoverride "portrait_texture" {
+						portrait_texture = "[Character.GetAnimatedPortrait('environment_standard', 'camera_event_left', 'idle', GetPortraitRenderSize(PdxGuiWidget.Self))]"
+					}
+				}
+			}
+
+			# 2nd char
+			container = {
+				parentanchor = center
+				position = { 325 300 }
+				datacontext = "[Event.GetIcon('right_icon')]"
+
+				character_portrait_base = {
+					visible = "[EventIcon.IsPortrait]"
+					datacontext = "[EventIcon.GetCharacter]"
+					blockoverride "show_hat" {}
+					blockoverride "portrait_icons" {}
+					blockoverride "portrait_size" {
+						size = { 520 650 }
+					}
+					blockoverride "portrait_texture" {
+						portrait_texture = "[Character.GetAnimatedPortrait('environment_standard', 'camera_event_right', 'idle', GetPortraitRenderSize(PdxGuiWidget.Self))]"
+					}
+				}
+			}
+			
+		}
+		
+		blockoverride "event_inner_shading" {
+			icon = {
+				texture = "gfx/interface/event_window/event_inner_frame_fullscreen_horizontal.dds"
+				size = { 100% 100% }
+				spriteType = Corneredstretched
+				spriteborder = { 0 0 }
+				spriteborder_right = 0
+				spriteborder_top = 0
+				texture_density = 2
+			
+				modify_texture = {
+					texture = "gfx/interface/backgrounds/default_bg_shading.dds"
+					spriteType = Corneredstretched
+					spriteborder = { 0 0 }
+					blend_mode = overlay
+				}
+				modify_texture = {
+					using = texture_velvet
+				}
+			}
+		}
+		
+		blockoverride "event_title_text_options" {
+			flowcontainer = {
+				minimumsize = { -1 606 }
+				maximumsize = { 400 -1 }
+				direction = vertical
+				spacing = 20
+				parentanchor = hcenter|top
+				margin = { 20 40 }
+
+				background = {
+					using = entry_bg_simple_solid
+					margin = { -15 -20 }
+					alpha = 0.94
+				}
+
+				textbox = {
+					name = "description"
+					multiline = yes
+					autoresize = yes
+					minimumsize = { 300 -1 }
+					maximumsize = { 360 -1 }
+					parentanchor = top|hcenter
+					align = hcenter|nobaseline
+					raw_text = "#bold [EventWindow.GetDescription]#!"
+					margin = { 10 0 }
+					using = fontsize_large
+				}
+
+				divider_decorative = {}
+
+				textbox = {
+					name = "flavortext"
+					multiline = yes
+					autoresize = yes
+					minimumsize = { 00 -1 }
+					maximumsize = { 360 -1 }
+					parentanchor = top|hcenter
+					align = top|left
+					raw_text = "#lore [EventWindow.GetFlavor]#!"
+					margin = { 30 10 }
+				}
+
+				flowcontainer = {
+					parentanchor = hcenter|top
+					direction = vertical
+					using = default_list_position
+					datamodel = "[EventWindow.GetOptions]"
+					spacing = 5
+
+					item = {
+						container = {
+							
+							widget = {
+								visible = "[EventOption.IsHighlightedOption]"
+								
+								button = {
+									size = { 60% 100% }
+									parentanchor = hcenter
+									using = default_button_primary_action
+									onclick = "[EventOption.Select]"
+									tooltip = "[EventOption.GetDesc]"
+									using = tooltip_ws
+									enabled = "[EventOption.IsEnabled]"
+									using = confirm_button_sound
+								}
+
+								textbox = {
+									resizeparent = yes
+									minimumsize = { 500 42 }
+									maximumsize = { 500 -1 }
+									text = "[EventOption.GetText]"
+									multiline = yes
+									align = hcenter|nobaseline
+									autoresize = yes
+									margin = { 30 10 }
+								}
+							}
+
+							widget = {
+								visible = "[Not(EventOption.IsHighlightedOption)]"
+								
+								button = {
+									size = { 60% 100% }
+									parentanchor = hcenter
+									using = default_button_action
+									onclick = "[EventOption.Select]"
+									tooltip = "EVENT_OPTION_TOOLTIP"
+									using = tooltip_ws
+									enabled = "[EventOption.IsEnabled]"
+									using = confirm_button_sound
+								}
+
+								textbox = {
+									resizeparent = yes
+									minimumsize = { 500 42 }
+									maximumsize = { 500 -1 }
+									text = "[EventOption.GetText]"
+									multiline = yes
+									align = hcenter|nobaseline
+									autoresize = yes
+									margin = { 30 10 }
+								}
+
+								### Time until the default option will be picked
+								round_progress_default = {
+									visible = "[EventOption.IsDefaultOption]"
+									parentanchor = right|vcenter
+									position = { 0 0.5 }
+									size = { 27 27 }
+									tooltip = "DEFAULT_EVENT_OPTION"
+									value = "[Event.GetPercentageRemainingDays]"
+
+									icon = {
+										size = { 26 26 }
+										position = { -0.2 -0.2 }
+										parentanchor = center
+										texture = "gfx/interface/icons/generic_icons/event_default_option.dds"
+									}
+								}
+							}
+						}
+					}
+				}
+
+				button = {
+					parentanchor = hcenter
+					visible = "[InDebugMode]"
+					size = { 480 62 }
+					using = default_button
+					raw_text = "DEBUG: Open Event in text editor"
+					onclick = "[EventWindow.AccessEvent.OpenInEditor]"
+				}
+
+				textbox = {
+					background = {
+						using = default_background
+					}
+					parentanchor = hcenter
+					size = { 480 62 }
+					visible = "[InDebugMode]"
+					raw_text = "DEBUG: Trigger description"
+					tooltip = "[Event.GetTriggerDesc]"
+					align = hcenter|nobaseline
+				}
+
+				textbox = {
+					visible = [InDebugMode]
+					parentanchor = hcenter
+					align = hcenter
+					raw_text = "Event ID: [Event.GetKey|v]"
+				}
+			}
+		}
+		
+	}
 
 	### 2 CHARACTER DUEL WINDOW
 	# This event window has an optional progress bar that can be shown under its flavor text

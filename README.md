@@ -129,8 +129,8 @@ set_global_variable = community_gui_objective_var
 To enable a custom social hierachy you have to execute this effect in a countries scope:
 ```
 set_variable = {
-    name = custom_social_hieracy
-    value = active_law:lawgroup_of_your_hierachy
+    name = custom_social_hierarchy
+    value = active_law:lawgroup_of_your_hierarchy
 }
 ```
 **I recommend doing this in the history file of a country `common/history/countries`**

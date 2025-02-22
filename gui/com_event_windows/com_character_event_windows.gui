@@ -198,7 +198,7 @@ types com_character_window_types {
 	}
 	
 	### 2 CHARACTER DISCUSSION WINDOW
-	type event_window_2char_duel = event_window {
+	type event_window_2char_discussion = event_window {
 		name = "event_window_2char_discussion"
 		
 		blockoverride "event_image_size" {
@@ -443,7 +443,7 @@ types com_character_window_types {
 		}
 		
 	}
-
+	
 	### 2 CHARACTER DUEL WINDOW
 	# This event window has an optional progress bar that can be shown under its flavor text
 	# Set the variable com_event_window_2char_duel_var on the country
@@ -717,8 +717,8 @@ types com_character_window_types {
 		}
 		
 	}
-
-	### HIGHLANDER DUEL WINDOW ###
+	
+	### HIGHLANDER DUEL WINDOW
 	type event_window_highlander = event_window {
 		name = "event_window_highlander"
 
@@ -950,7 +950,73 @@ types com_character_window_types {
 			}
 		}
 	}
+	
+	### 3 CHARACTER WINDOW
+	# This event window is in the style of event_window_1char_tabloid and event_window_2char
+	type event_window_3char = event_window {
+		name = "event_window_3char"
 
+		blockoverride "event_image_content" {
+
+			# bg
+			icon = {
+				texture = "gfx/event_pictures/3characters.dds"
+				alwaystransparent = yes
+				size = { 620 600 }
+				alpha = 0.9
+			}
+
+			# 1st char
+			container = {
+				position = { 24 -2 }
+				datacontext = "[Event.GetIcon('left_icon')]"
+
+				character_portrait_duel_01 = {
+					visible = "[EventIcon.IsPortrait]"
+					datacontext = "[EventIcon.GetCharacter]"
+					blockoverride "show_hat" {}
+					blockoverride "portrait_mask" {
+						mask = "gfx/event_pictures/2characters_mask.dds"
+					}
+					blockoverride "portrait_icons" {}
+				}
+			}
+			
+			# 2nd char
+			container = {
+				position = { 251 198 }
+				datacontext = "[Event.GetIcon('center_icon')]"
+
+				character_portrait_duel_02 = {
+					visible = "[EventIcon.IsPortrait]"
+					datacontext = "[EventIcon.GetCharacter]"
+					blockoverride "show_hat" {}
+					blockoverride "portrait_mask" {
+						mask = "gfx/event_pictures/2characters_mask.dds"
+					}
+					blockoverride "portrait_icons" {}
+				}
+			}
+
+			# 3rd char
+			container = {
+				position = { 251 198 }
+				datacontext = "[Event.GetIcon('right_icon')]"
+
+				character_portrait_duel_02 = {
+					visible = "[EventIcon.IsPortrait]"
+					datacontext = "[EventIcon.GetCharacter]"
+					blockoverride "show_hat" {}
+					blockoverride "portrait_mask" {
+						mask = "gfx/event_pictures/2characters_mask.dds"
+					}
+					blockoverride "portrait_icons" {}
+				}
+			}
+		}
+	}
+	
+	### 3 CHARACTER SELECTION WINDOW
 	type event_window_3char_selection = event_window {
 		name = "event_window_3char_selection"
 

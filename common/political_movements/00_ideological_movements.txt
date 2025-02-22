@@ -3224,6 +3224,7 @@ movement_liberal = {
 		ideology_dacianist # GBBF
 		ideology_moh_revolutionary # MoH Revolutionary
 		ideology_moh_kmt # MoH Kuomintang Nationalist
+		ideology_anz_atsi_pluralist_character #anzfp
 	}
 	
 	creation_trigger = {

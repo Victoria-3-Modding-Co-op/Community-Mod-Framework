@@ -1,0 +1,25 @@
+﻿# IMPORTANT: If you want to add a new event, add a new file with this on_monthly_pulse block,
+# using your own set_weekly_on_action with a unique name.
+# Otherwise, you will interfere with other mods using the same system.
+
+on_monthly_pulse = {
+    on_actions = {
+        #set_weekly_on_action_example
+    }
+}
+
+
+set_weekly_on_action_example = { # Example setter of weekly on actions
+    effect = {
+        com_run_weekly_event_example = yes
+    }
+}
+
+example_on_action_weekly = { # Example on action, replace with your own
+    effect = {
+        set_variable = {
+            name = example_on_action_weekly_run_date
+            value = game_date
+        }
+    }
+}

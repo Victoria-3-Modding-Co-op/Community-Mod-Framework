@@ -1,0 +1,138 @@
+﻿com_calculate_added_days = {
+    value = 7
+    add = local_var:weekday
+    subtract = com_day_of_the_week
+    modulo = 7
+}
+
+# Returns current day of the week, with 0 being Sunday and 6 being Saturday.
+com_day_of_the_week = {
+    # Determining the day of the week:
+    value = year
+    subtract = 1836 # one day added per year, since v3 has no leap years
+    add = 3 # wednesday start date
+
+    # add offset for different months
+    if = {
+        limit = {
+            OR = {
+                month = 1
+                month = 2
+                month = 10
+            }
+        }
+        add = 3
+    }
+    else_if = {
+        limit = {
+            OR = {
+                month = 3
+                month = 6
+            }
+        }
+        add = 6
+    }
+    else_if = {
+        limit = {
+            month = 4
+        }
+        add = 1
+    }
+    else_if = {
+        limit = {
+            month = 5
+        }
+        add = 4
+    }
+    else_if = {
+        limit = {
+            month = 7
+        }
+        add = 2
+    }
+    else_if = {
+        limit = {
+            OR = {
+                month = 8
+                month = 11
+            }
+        }
+        add = 5
+    }
+    modulo = 7
+}
+
+com_month_length = {
+    if = {
+        limit = {
+            month = 0
+        }
+        value = 31
+    }
+    else_if = {
+        limit = {
+            month = 1
+        }
+        value = 28
+    }
+    else_if = {
+        limit = {
+            month = 2
+        }
+        value = 31
+    }
+    else_if = {
+        limit = {
+            month = 3
+        }
+        value = 30
+    }
+    else_if = {
+        limit = {
+            month = 4
+        }
+        value = 31
+    }
+    else_if = {
+        limit = {
+            month = 5
+        }
+        value = 30
+    }
+    else_if = {
+        limit = {
+            month = 6
+        }
+        value = 31
+    }
+    else_if = {
+        limit = {
+            month = 7
+        }
+        value = 31
+    }
+    else_if = {
+        limit = {
+            month = 8
+        }
+        value = 30
+    }
+    else_if = {
+        limit = {
+            month = 9
+        }
+        value = 31
+    }
+    else_if = {
+        limit = {
+            month = 10
+        }
+        value = 30
+    }
+    else_if = {
+        limit = {
+            month = 11
+        }
+        value = 31
+    }
+}

@@ -24,6 +24,7 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=3385002128
 * [Keybinds](#keybinds)
 * [Additional Modifier Icons](#additional-modifier-icons)
 * [Heir Blocker](#heir-blocker)
+* [Weekly Event Framework](#weekly-event-framework)
 
 # Setting Dependency
 
@@ -386,3 +387,14 @@ To allow randomly-generated heirs again, simply remove the variable.
 Note:
 1. No considerations have been made regarding any failsafes. You are solely responsible for unblocking heirs later, even if the country switches away from a government type with hereditary transfer of power.
 2. Heirs created via `create_character` and heirs set via `set_heir` are *not* blocked, as they do not count as a "natural" heir birth. This means the variable does not need to be briefly unset when generating or setting heirs via script, such as for historical heirs.
+
+# Weekly Event Framework
+
+This is a framework to allow for a weekly firing script event on any day of the week, without a hidden journal entry being used.
+
+To use:
+1. In `com_weekly_on_action.txt`, rename `set_weekly_on_action_example` to a name of your choice and add this to the `on_monthly_pulse` on_actions block.
+2. In the same file, rename the `com_run_weekly_event_example` to a relevant name
+3. In `com_weekly_event.txt`, rename `com_run_weekly_event_example` to the same as what you named it above. Set weekday to your required day, rename the global variable `com_added_days` and replace `example_on_action_weekly` with your weekly on action.
+4. Go back to `com_weekly_on_action.txt` and add your weekly on action as a new on action.
+5. Rename `com_weekly_on_action.txt` and `com_weekly_event.txt` to something that won't conflict with other mods using this framework.

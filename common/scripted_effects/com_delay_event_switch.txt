@@ -1,0 +1,101 @@
+﻿com_delay_event_switch = {
+    switch = {
+        trigger = $num_days$
+        0 = {
+            my_trigger_event = {on_action_name = $on_action_name$ num_days = 0 }
+        }
+        1 = {
+            my_trigger_event = {on_action_name = $on_action_name$ num_days = 1 }
+        }
+        2 = {
+            my_trigger_event = {on_action_name = $on_action_name$ num_days = 2 }
+        }
+        3 = {
+            my_trigger_event = {on_action_name = $on_action_name$ num_days = 3 }
+        }
+        4 = {
+            my_trigger_event = {on_action_name = $on_action_name$ num_days = 4 }
+        }
+        5 = {
+            my_trigger_event = {on_action_name = $on_action_name$ num_days = 5 }
+        }
+        6 = {
+            my_trigger_event = {on_action_name = $on_action_name$ num_days = 6 }
+        }
+        7 = {
+            my_trigger_event = {on_action_name = $on_action_name$ num_days = 7 }
+        }
+        8 = {
+            my_trigger_event = {on_action_name = $on_action_name$ num_days = 8 }
+        }
+        9 = {
+            my_trigger_event = {on_action_name = $on_action_name$ num_days = 9 }
+        }
+        10 = {
+            my_trigger_event = {on_action_name = $on_action_name$ num_days = 10 }
+        }
+        11 = {
+            my_trigger_event = {on_action_name = $on_action_name$ num_days = 11 }
+        }
+        12 = {
+            my_trigger_event = {on_action_name = $on_action_name$ num_days = 12 }
+        }
+        13 = {
+            my_trigger_event = {on_action_name = $on_action_name$ num_days = 13 }
+        }
+        14 = {
+            my_trigger_event = {on_action_name = $on_action_name$ num_days = 14 }
+        }
+        15 = {
+            my_trigger_event = {on_action_name = $on_action_name$ num_days = 15 }
+        }
+        16 = {
+            my_trigger_event = {on_action_name = $on_action_name$ num_days = 16 }
+        }
+        17 = {
+            my_trigger_event = {on_action_name = $on_action_name$ num_days = 17 }
+        }
+        18 = {
+            my_trigger_event = {on_action_name = $on_action_name$ num_days = 18 }
+        }
+        19 = {
+            my_trigger_event = {on_action_name = $on_action_name$ num_days = 19 }
+        }
+        20 = {
+            my_trigger_event = {on_action_name = $on_action_name$ num_days = 20 }
+        }
+        21 = {
+            my_trigger_event = {on_action_name = $on_action_name$ num_days = 21 }
+        }
+        22 = {
+            my_trigger_event = {on_action_name = $on_action_name$ num_days = 22 }
+        }
+        23 = {
+            my_trigger_event = {on_action_name = $on_action_name$ num_days = 23 }
+        }
+        24 = {
+            my_trigger_event = {on_action_name = $on_action_name$ num_days = 24 }
+        }
+        25 = {
+            my_trigger_event = {on_action_name = $on_action_name$ num_days = 25 }
+        }
+        26 = {
+            my_trigger_event = {on_action_name = $on_action_name$ num_days = 26 }
+        }
+        27 = {
+            my_trigger_event = {on_action_name = $on_action_name$ num_days = 27 }
+        }
+        28 = {
+            my_trigger_event = {on_action_name = $on_action_name$ num_days = 28 }
+        }
+        29 = {
+            my_trigger_event = {on_action_name = $on_action_name$ num_days = 29 }
+        }
+        30 = {
+            my_trigger_event = {on_action_name = $on_action_name$ num_days = 30 }
+        }
+        31 = {
+            my_trigger_event = {on_action_name = $on_action_name$ num_days = 31 }
+        }
+    }
+}

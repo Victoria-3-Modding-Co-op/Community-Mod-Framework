@@ -1,0 +1,34 @@
+﻿com_run_weekly_event_example = {
+    set_local_variable = {
+        name = weekday
+        value = 1 # Set value for weekday you want the event to fire on, 0-6 is Sunday-Saturday.
+                  # Here, I have set the value to monday, which is 1
+    }
+    set_global_variable = {
+        name = com_added_days
+        value = com_calculate_added_days
+    }
+    every_country = { # This example event is running for every country - can be per state, or scopeless/global, etc.
+        set_local_variable = {
+            name = event_day
+            value = global_var:com_added_days
+        }
+        set_local_variable = {
+            name = month_length
+            value = com_month_length
+        }
+        while = {
+            limit = {
+                local_var:event_day < local_var:month_length
+            }
+            com_delay_event_switch = {
+                on_action_name = example_on_action_weekly # Replace with your on action that you want to run weekly
+                num_days = local_var:event_day
+            }
+            change_local_variable = {
+                name = event_day
+                add = 7
+            }
+        }
+    }
+}

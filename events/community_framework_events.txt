@@ -37,6 +37,8 @@ community_framework_events.1 = { # Error supression
 		set_variable = is_struct
 		set_variable = com_type
 		set_variable = com_local_goods
+		set_variable = example_on_action_weekly_run_date
+		set_variable = no_heirs
 		add_to_global_variable_list = {
 			name = com_custom_owner_buildings
 			target = bt:building_manor_house
@@ -54,6 +56,8 @@ community_framework_events.1 = { # Error supression
 		remove_variable = is_struct
 		remove_variable = com_type
 		remove_variable = com_local_goods
+		remove_variable = example_on_action_weekly_run_date
+		remove_variable = no_heirs
 		clear_global_variable_list = com_custom_owner_buildings
 	}
 	

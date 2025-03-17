@@ -955,20 +955,25 @@ types com_character_window_types {
 	# This event window is in the style of event_window_1char_tabloid and event_window_2char
 	type event_window_3char = event_window {
 		name = "event_window_3char"
-
+		
+		blockoverride "event_image_size" {
+			position = { 3 3 }
+			size = { 850 680 }
+		}
+		
 		blockoverride "event_image_content" {
-
 			# bg
 			icon = {
 				texture = "gfx/event_pictures/3characters.dds"
 				alwaystransparent = yes
-				size = { 620 600 }
+				position = { 49 40 }
+				size = { 550 600 }
 				alpha = 0.9
 			}
 
 			# 1st char
 			container = {
-				position = { 24 -2 }
+				position = { 76 -52 }
 				datacontext = "[Event.GetIcon('left_icon')]"
 
 				character_portrait_duel_01 = {
@@ -984,7 +989,7 @@ types com_character_window_types {
 			
 			# 2nd char
 			container = {
-				position = { 251 198 }
+				position = { 259 105 }
 				datacontext = "[Event.GetIcon('center_icon')]"
 
 				character_portrait_duel_02 = {
@@ -1000,10 +1005,10 @@ types com_character_window_types {
 
 			# 3rd char
 			container = {
-				position = { 251 198 }
+				position = { 50 255 }
 				datacontext = "[Event.GetIcon('right_icon')]"
 
-				character_portrait_duel_02 = {
+				character_portrait_duel_01 = {
 					visible = "[EventIcon.IsPortrait]"
 					datacontext = "[EventIcon.GetCharacter]"
 					blockoverride "show_hat" {}

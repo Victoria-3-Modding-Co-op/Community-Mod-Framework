@@ -41,16 +41,16 @@ com_is_active = { # Community Outfit Mod
 	always = no
 }
 
-community_gui_is_active = { # Community GUI Framework Detection
-	always = no
-}
-
 EACP_is_active_trigger = { # East Asian Clothes Patch
     always = no
 }
 
 ecchi_r_is_active = { # ECCHI Redux
     always = no
+}
+
+eocfm_is_active_trigger = { # Eastern Orthodox Flavor
+	always = no
 }
 
 GGGG_is_active_trigger = { # Gas, Guns, Garb, & Grub
@@ -61,7 +61,7 @@ gilded_age_is_active_trigger = { # Gilded Age
     always = no
 }
 
-grefm_is_active = { # Greece, Byzantium, & the Balkans Flavor
+grefm_is_active = { # Gates of the Bosphorus
 	always = no
 }
 
@@ -71,6 +71,10 @@ IEX_is_active_trigger = { # Industry Expanded
 
 is_usfp_active = { # Hail, Columbia!
     always = no
+}
+
+jotn_is_active_trigger = { # Jewel of the Nile
+	always = no
 }
 
 JKFP_is_active_trigger = { # James's Korea Flavor Pack
@@ -106,6 +110,10 @@ RRK_is_active_trigger = { # Rally Round the King
 }
 
 STMS_is_active_trigger = { # States That Make Sense
+    always = no
+}
+
+tlim_is_active_trigger = { # This Land is Mine
     always = no
 }
 

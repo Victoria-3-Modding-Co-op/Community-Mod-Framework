@@ -49,6 +49,10 @@ ecchi_r_is_active = { # ECCHI Redux
     always = no
 }
 
+eocfm_is_active_trigger = { # Eastern Orthodox Flavor
+	always = no
+}
+
 GGGG_is_active_trigger = { # Gas, Guns, Garb, & Grub
     always = no
 }
@@ -57,7 +61,7 @@ gilded_age_is_active_trigger = { # Gilded Age
     always = no
 }
 
-grefm_is_active = { # Greece, Byzantium, & the Balkans Flavor
+grefm_is_active = { # Gates of the Bosphorus
 	always = no
 }
 

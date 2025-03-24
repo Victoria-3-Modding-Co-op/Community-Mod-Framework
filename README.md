@@ -25,6 +25,7 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=3385002128
 * [Additional Modifier Icons](#additional-modifier-icons)
 * [Heir Blocker](#heir-blocker)
 * [Weekly Event Framework](#weekly-event-framework)
+* [Hide/Show Journal Entry Groups](#hideshow-journal-entry-groups)
 
 # Setting Dependency
 

@@ -398,3 +398,15 @@ To use:
 3. In `com_weekly_event.txt`, rename `com_run_weekly_event_example` to the same as what you named it above. Set weekday to your required day, rename the global variable `com_added_days` and replace `example_on_action_weekly` with your weekly on action.
 4. Go back to `com_weekly_on_action.txt` and add your weekly on action as a new on action.
 5. Rename `com_weekly_on_action.txt` and `com_weekly_event.txt` to something that won't conflict with other mods using this framework.
+
+
+# Hide/Show Journal Entry Groups
+
+This allows for hiding and showing any Journal Entry Group.
+
+Usage:
+`com_hide_journal_entry_group = { name = je_group_historical_content }` 
+This would hide all National Agenda (`je_group_historical_content`) Journal Entries.
+
+`com_show_journal_entry_group = { name = je_group_historical_content }` 
+This would show them again.

@@ -26,39 +26,52 @@ community_framework_events.1 = { # Error supression
 
 	immediate = {
 		set_variable = community_gui_objective_var
-		set_variable = custom_button_list
-		set_variable = custom_button_list_flag
-		set_variable = had_progressive_era
-		set_variable = custom_social_hierarchy
-		set_variable = com_journal_characters
-		set_variable = com_opinion
-		set_variable = com_gui_progressbar_var
-		set_variable = ccp_land_revolution_ig
-		set_variable = is_struct
-		set_variable = com_type
-		set_variable = com_local_goods
-		set_variable = example_on_action_weekly_run_date
-		set_variable = no_heirs
-		add_to_global_variable_list = {
-			name = com_custom_owner_buildings
-			target = bt:building_manor_house
-		}
-
 		remove_variable = community_gui_objective_var
+
+		set_variable = custom_button_list
 		remove_variable = custom_button_list
+
+		set_variable = custom_button_list_flag
 		remove_variable = custom_button_list_flag
+
+		set_variable = had_progressive_era
 		remove_variable = had_progressive_era
+
+		set_variable = custom_social_hierarchy
 		remove_variable = custom_social_hierarchy
+
+		set_variable = com_journal_characters
 		remove_variable = com_journal_characters
+
+		set_variable = com_opinion
 		remove_variable = com_opinion
+
+		set_variable = com_gui_progressbar_var
 		remove_variable = com_gui_progressbar_var
+
+		set_variable = ccp_land_revolution_ig
 		remove_variable = ccp_land_revolution_ig
+
+		set_variable = is_struct
 		remove_variable = is_struct
+
+		set_variable = com_type
 		remove_variable = com_type
+
+		set_variable = com_local_goods
 		remove_variable = com_local_goods
+
+		set_variable = example_on_action_weekly_run_date
 		remove_variable = example_on_action_weekly_run_date
+
+		set_variable = no_heirs
 		remove_variable = no_heirs
-		clear_global_variable_list = com_custom_owner_buildings
+
+		set_variable = com_hidden_journal_groups
+		remove_variable = com_hidden_journal_groups
+
+		set_variable = com_custom_owner_buildings
+		remove_variable = com_custom_owner_buildings
 	}
 	
 	orphan = yes

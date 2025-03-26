@@ -1,4 +1,4 @@
-com_journal_entry_group_hidden = {
+﻿com_journal_entry_group_hidden = {
 	scope = country
     saved_scopes = {
         group_name

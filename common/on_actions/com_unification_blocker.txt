@@ -5,7 +5,7 @@ on_country_formed = {
         if = {
             limit = {
                 NOT = {
-					has_variable = cmf_no_unification_events
+					has_variable = com_no_unification_events
 				}
             }
 			if = {

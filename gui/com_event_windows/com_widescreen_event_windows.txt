@@ -66,6 +66,11 @@ types com_widescreen_window_types {
 					}
 				}
 				
+				state = {
+				  trigger_when = "[Not(TimeKeeper.IsPaused)]"
+				  on_finish = "[TimeKeeper.TogglePause]"
+				}
+				
 				icon = {
 					position = { -1% 0 }
 					size = { 102% 100% }
@@ -363,6 +368,11 @@ types com_widescreen_window_types {
 					start_sound = {
 						soundeffect = "[Event.GetOnOpenedSoundEvent]"
 					}
+				}
+				
+				state = {
+				  trigger_when = "[Not(TimeKeeper.IsPaused)]"
+				  on_finish = "[TimeKeeper.TogglePause]"
 				}
 				
 				icon = {

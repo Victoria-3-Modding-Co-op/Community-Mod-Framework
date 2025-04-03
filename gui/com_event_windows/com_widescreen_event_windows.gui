@@ -153,20 +153,9 @@ types com_widescreen_window_types {
 					margin = { 25 40 }
 
 					background = {
-					texture = "gfx/interface/backgrounds/tutorial_bg.dds"
-					spriteType = Corneredtiled
-					spriteborder = { 20 20 }
-					alpha = 0.94
-					
-					modify_texture = {
-						texture = "gfx/interface/backgrounds/gradient_overlay.dds"
-						spriteType = Corneredstretched
-						spriteborder = { 0 0 }
-						blend_mode = overlay
-						alpha = 0.7
+						using = entry_bg_simple_solid
+						margin = { -15 -20 }
 					}
-					margin = { -15 -20 }
-				}
 					
 					default_header_clean_faded = {
 						size = { 500 50 }

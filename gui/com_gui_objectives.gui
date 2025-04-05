@@ -3,6 +3,127 @@
 # Adds a scrollbar for non-sandbox objectives
 
 types objective_overwrites {
+    type game_rules_hbox = hbox {
+
+        ### GAME RULES
+        layoutpolicy_horizontal = preferred
+        spacing = 15
+        margin = { 15 0 }
+        using = default_fade_in_out
+
+        background = {
+            using = dark_area_rounded
+            alpha = 0.3
+        }
+
+        button_standard = {
+            name = "game_rules_button"
+            size = { 200 45 }
+
+            text = "GAME_RULES"
+            onclick = "[OpenGameRules]"
+
+            button_rules = {
+                size = { 25 25 }
+                parentanchor = left|vcenter
+                position = { 5 0 }
+                alwaystransparent = yes
+            }
+        }
+
+        divider_light = {
+            layoutpolicy_vertical = expanding
+        }
+
+        flowcontainer_game_rules_mini = {
+            name = "game_rules_mini"
+        }
+
+        divider_light = {
+            layoutpolicy_vertical = expanding
+        }
+
+        widget = {
+            size = { 180 60 }
+
+            hbox = {
+                name = "buttons"
+                visible = "[Not( IsInGame )]"
+
+                button_checkbox_label = {
+                    visible = "[Not( IsIronmanEnabled )]"
+                    onclick = "[SetIronmanEnabledStatus( '(bool)yes' )]"
+
+                    blockoverride "checkbox"
+                    {
+                        checked = "[IsIronmanEnabled]"
+                    }
+
+                    blockoverride "text"
+                    {
+                        text = "BOOKMARK_IRONMAN_DISABLED"
+                    }
+                }
+
+                button_checkbox_label = {
+                    visible = "[IsIronmanEnabled]"
+                    onclick = "[SetIronmanEnabledStatus( '(bool)no' )]"
+
+                    blockoverride "checkbox"
+                    {
+                        checked = "[IsIronmanEnabled]"
+                    }
+
+                    blockoverride "text"
+                    {
+                        text = "BOOKMARK_IRONMAN_ENABLED"
+                    }
+                }
+            }
+        }
+
+        divider_light = {
+            layoutpolicy_vertical = expanding
+        }
+
+        widget = {
+            size = { 180 80 }
+
+            hbox_achievements_info = {
+                using = tooltip_ne
+                blockoverride "ai_background" {}
+
+                blockoverride "ai_icon_size"
+                {
+                    size = { 36 36 }
+                }
+            }
+        }
+
+        divider_light = {
+            visible = "[Not(GameSetup.HasSelectedObjective)]"
+            layoutpolicy_vertical = expanding
+        }
+
+        button_standard = {
+            visible = "[Not(GameSetup.HasSelectedObjective)]"
+            name = "sandbox_button"
+            size = { 200 45 }
+
+            text = "SANDBOX"
+            onclick = "[GameSetup.OnStart]"
+
+            button_play = {
+                size = { 25 25 }
+                parentanchor = left|vcenter
+                position = { 5 0 }
+                alwaystransparent = yes
+            }
+
+            tooltip = START_GAME_NO_OBJECTIVE_NO_TAG
+        }
+    }
+
     type objective_selection_menu = widget {
         size = { 100% 100% }
 

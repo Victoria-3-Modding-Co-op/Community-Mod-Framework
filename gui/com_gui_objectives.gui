@@ -1,129 +1,8 @@
 # By Chris Kaiser | Bahmut
 
-# Adds a scrollbar and moves sandbox option to a normal button
+# Adds a scrollbar for non-sandbox objectives
 
 types objective_overwrites {
-    type game_rules_hbox = hbox {
-
-        ### GAME RULES
-        layoutpolicy_horizontal = preferred
-        spacing = 15
-        margin = { 15 0 }
-        using = default_fade_in_out
-
-        background = {
-            using = dark_area_rounded
-            alpha = 0.3
-        }
-
-        button_standard = {
-            name = "game_rules_button"
-            size = { 200 45 }
-
-            text = "GAME_RULES"
-            onclick = "[OpenGameRules]"
-
-            button_rules = {
-                size = { 25 25 }
-                parentanchor = left|vcenter
-                position = { 5 0 }
-                alwaystransparent = yes
-            }
-        }
-
-        divider_light = {
-            layoutpolicy_vertical = expanding
-        }
-
-        flowcontainer_game_rules_mini = {
-            name = "game_rules_mini"
-        }
-
-        divider_light = {
-            layoutpolicy_vertical = expanding
-        }
-
-        widget = {
-            size = { 180 60 }
-
-            hbox = {
-                name = "buttons"
-                visible = "[Not( IsInGame )]"
-
-                button_checkbox_label = {
-                    visible = "[Not( IsIronmanEnabled )]"
-                    onclick = "[SetIronmanEnabledStatus( '(bool)yes' )]"
-
-                    blockoverride "checkbox"
-                    {
-                        checked = "[IsIronmanEnabled]"
-                    }
-
-                    blockoverride "text"
-                    {
-                        text = "BOOKMARK_IRONMAN_DISABLED"
-                    }
-                }
-
-                button_checkbox_label = {
-                    visible = "[IsIronmanEnabled]"
-                    onclick = "[SetIronmanEnabledStatus( '(bool)no' )]"
-
-                    blockoverride "checkbox"
-                    {
-                        checked = "[IsIronmanEnabled]"
-                    }
-
-                    blockoverride "text"
-                    {
-                        text = "BOOKMARK_IRONMAN_ENABLED"
-                    }
-                }
-            }
-        }
-
-        divider_light = {
-            layoutpolicy_vertical = expanding
-        }
-
-        widget = {
-            size = { 180 80 }
-
-            hbox_achievements_info = {
-                using = tooltip_ne
-                blockoverride "ai_background" {}
-
-                blockoverride "ai_icon_size"
-                {
-                    size = { 36 36 }
-                }
-            }
-        }
-
-        divider_light = {
-            visible = "[Not(GameSetup.HasSelectedObjective)]"
-            layoutpolicy_vertical = expanding
-        }
-
-        button_standard = {
-            visible = "[Not(GameSetup.HasSelectedObjective)]"
-            name = "sandbox_button"
-            size = { 200 45 }
-
-            text = "SANDBOX"
-            onclick = "[GameSetup.OnStart]"
-
-            button_play = {
-                size = { 25 25 }
-                parentanchor = left|vcenter
-                position = { 5 0 }
-                alwaystransparent = yes
-            }
-
-            tooltip = START_GAME_NO_OBJECTIVE_NO_TAG
-        }
-    }
-
     type objective_selection_menu = widget {
         size = { 100% 100% }
 
@@ -175,133 +54,297 @@ types objective_overwrites {
                     }
                 }
 
-
-                scrollarea = {
+                hbox = {
                     minimumsize = { 1400 60 }
                     maximumsize = { 1700 610 }
                     layoutpolicy_horizontal = expanding
                     layoutpolicy_vertical = expanding
+                    spacing = 7 # CMF - Matches vanilla spacing between objectives and sandbox button
 
-                    scrollbarpolicy_vertical = always_off
+                    # Objectives
+                    scrollarea = {
+                        minimumsize = { 1400 60 }
+                        maximumsize = { 1400 610 }
 
-                    scrollbar_horizontal = {
-                        using = horizontal_scrollbar
-                    }
+                        scrollbarpolicy_vertical = always_off
 
-                    scrollwidget = {
-                        hbox = {
-                            margin_bottom = 20
-                            layoutpolicy_horizontal = expanding
-                            layoutpolicy_vertical = preferred
-                            spacing = 5
-                            datamodel = "[GameSetup.GetObjectives]"
+                        scrollbar_horizontal = {
+                            using = horizontal_scrollbar
+                        }
 
-                            item = {
-                                widget = {
-                                    layoutpolicy_horizontal = preferred
-                                    layoutpolicy_vertical = preferred
-                                    minimumsize = { 270 82 }
-                                    maximumsize = { 270 600 }
+                        scrollwidget = {
+                            hbox = {
+                                margin_bottom = 20
+                                layoutpolicy_horizontal = expanding
+                                layoutpolicy_vertical = preferred
+                                spacing = 12 # Matches vanilla spacing
+                                datamodel = "[GameSetup.GetObjectives]"
 
-                                    enabled = "[ObjectiveType.IsAvailable]"
-
+                                item = {
                                     widget = {
-                                        size = { 100% 100% }
+                                        layoutpolicy_horizontal = preferred
+                                        layoutpolicy_vertical = preferred
+                                        minimumsize = { 270 82 }
+                                        maximumsize = { 270 600 }
 
-                                        background = {
-                                            texture = "[ObjectiveType.GetDisabledBackground]"
-                                            visible = "[Not(ObjectiveType.IsAvailable)]"
-                                            fittype = centercrop
-                                        }
-                                        background = {
-                                            texture = "[ObjectiveType.GetEnabledBackground]"
-                                            visible = "[ObjectiveType.IsAvailable]"
-                                            fittype = centercrop
-                                        }
+                                        enabled = "[ObjectiveType.IsAvailable]"
 
                                         widget = {
-                                            size = { 100% 77 }
-                                            parentanchor = hcenter|bottom
+                                            size = { 100% 100% }
+
+                                            background = {
+                                                texture = "[ObjectiveType.GetDisabledBackground]"
+                                                visible = "[Not(ObjectiveType.IsAvailable)]"
+                                                fittype = centercrop
+                                            }
+                                            background = {
+                                                texture = "[ObjectiveType.GetEnabledBackground]"
+                                                visible = "[ObjectiveType.IsAvailable]"
+                                                fittype = centercrop
+                                            }
 
                                             widget = {
-                                                size = { 100% 62 }
+                                                size = { 100% 77 }
                                                 parentanchor = hcenter|bottom
 
-                                                icon = {
-                                                    size = { 100% 5% }
-                                                    texture = "gfx/interface/backgrounds/divider_gold.dds"
-                                                }
+                                                widget = {
+                                                    size = { 100% 62 }
+                                                    parentanchor = hcenter|bottom
 
-                                                background = {
-                                                    #visible = "[Not(GameSetup.HasSelectedObjective)]"
-                                                    using = dark_area
-                                                    alpha = 0.7
-
-                                                    modify_texture = {
-                                                        texture = "gfx/interface/masks/fade_horizontal_center.dds"
-                                                        spriteType = Corneredstretched
-                                                        spriteborder = { 0 0 }
-                                                        blend_mode = alphamultiply
-                                                        alpha = 0.5
-                                                    }
-                                                }
-                                            }
-
-                                            vbox = {
-                                                icon = {
-                                                    size = { 47 47 }
-                                                    texture = "gfx/interface/backgrounds/round_button_bg.dds"
                                                     icon = {
-                                                        size = { 82% 82% }
-                                                        parentanchor = center
-                                                        texture = "[ObjectiveType.GetIcon]"
+                                                        size = { 100% 5% }
+                                                        texture = "gfx/interface/backgrounds/divider_gold.dds"
+                                                    }
+
+                                                    background = {
+                                                        #visible = "[Not(GameSetup.HasSelectedObjective)]"
+                                                        using = dark_area
+                                                        alpha = 0.7
+
+                                                        modify_texture = {
+                                                            texture = "gfx/interface/masks/fade_horizontal_center.dds"
+                                                            spriteType = Corneredstretched
+                                                            spriteborder = { 0 0 }
+                                                            blend_mode = alphamultiply
+                                                            alpha = 0.5
+                                                        }
                                                     }
                                                 }
 
-                                                textbox = {
-                                                    layoutpolicy_horizontal = expanding
-                                                    layoutpolicy_vertical = expanding
-                                                    text = "[ObjectiveType.GetName]"
-                                                    margin_bottom = 10
+                                                vbox = {
+                                                    icon = {
+                                                        size = { 47 47 }
+                                                        texture = "gfx/interface/backgrounds/round_button_bg.dds"
+                                                        icon = {
+                                                            size = { 82% 82% }
+                                                            parentanchor = center
+                                                            texture = "[ObjectiveType.GetIcon]"
+                                                        }
+                                                    }
 
-                                                    align = center|nobaseline
-                                                    using = fontsize_xl
-                                                    alwaystransparent = yes
-                                                    elide = right
-                                                    autoresize = yes
-                                                    minimumsize = { 250 -1 }
-                                                    maximumsize = { 250 -1 }
-                                                    fontsize_min = 14
+                                                    textbox = {
+                                                        layoutpolicy_horizontal = expanding
+                                                        layoutpolicy_vertical = expanding
+                                                        text = "[ObjectiveType.GetName]"
+                                                        margin_bottom = 10
+
+                                                        align = center|nobaseline
+                                                        using = fontsize_xl
+                                                        alwaystransparent = yes
+                                                        elide = right
+                                                        autoresize = yes
+                                                        minimumsize = { 250 -1 }
+                                                        maximumsize = { 250 -1 }
+                                                        fontsize_min = 14
+                                                    }
                                                 }
+                                            }
+
+                                            button = {
+                                                using = glow_button_border
+                                                alpha = 0.65
+                                                size = { 100% 100% }
+                                                onclick = "[GameSetup.ToggleObjective(ObjectiveType.AccessSelf)]"
+
+
+                                                tooltip = "[ObjectiveType.GetIsAvailableDescription]"
                                             }
                                         }
 
-                                        button = {
-                                            using = glow_button_border
-                                            alpha = 0.65
+                                        icon = {
                                             size = { 100% 100% }
-                                            onclick = "[GameSetup.ToggleObjective(ObjectiveType.AccessSelf)]"
-
-
-                                            tooltip = "[ObjectiveType.GetIsAvailableDescription]"
+                                            using = entry_bg_unit_dark
                                         }
-                                    }
 
-                                    icon = {
-                                        size = { 100% 100% }
-                                        using = entry_bg_unit_dark
-                                    }
-
-                                    icon = {
-                                        using = highlighted_square_selection
-                                        visible = "[ObjectsEqual(ObjectiveType.AccessSelf, GameSetup.GetSelectedObjective)]"
+                                        icon = {
+                                            using = highlighted_square_selection
+                                            visible = "[ObjectsEqual(ObjectiveType.AccessSelf, GameSetup.GetSelectedObjective)]"
+                                        }
                                     }
                                 }
                             }
                         }
                     }
-                }
 
+                    # Sandbox
+                    hbox = { # CMF - Encased in hbox to get a bottom margin to match size of objective buttons
+                        layoutpolicy_horizontal = expanding
+                        layoutpolicy_vertical = preferred
+                        margin_bottom = 18 # CMF - Aligns to vanilla spacing (even though scrollwidget hbox uses 20?)
+
+                        widget = {
+                            maximumsize = { 285 610 }
+                            layoutpolicy_horizontal = expanding
+                            layoutpolicy_vertical = preferred
+
+                            background = {
+                                texture = "gfx/interface/icons/objectives/sandbox.dds"
+                                fittype = centercrop
+                                using = frame_small_mask
+                            }
+
+                            default_header_clean = {
+                                visible = "[Not(GameSetup.HasSelectedObjective)]" # CMF
+                                blockoverride "text" {
+                                    text = "SANDBOX"
+                                }
+                                blockoverride "header_mask" {
+                                    using = frame_small_mask_top
+                                }
+                                blockoverride "size" {
+                                    size = { 100% 42 }
+                                }
+                            }
+
+                            widget = {
+                                size = { 100% 100 }
+                                parentanchor = hcenter|bottom
+                                visible = "[Not(GameSetup.HasSelectedObjective)]" # CMF
+
+                                vbox = {
+                                    background = {
+                                        using = dark_area
+                                        alpha = 0.7
+                                        using = frame_small_mask
+
+                                        modify_texture = {
+                                            texture = "gfx/interface/masks/fade_horizontal_center.dds"
+                                            spriteType = Corneredstretched
+                                            spriteborder = { 0 0 }
+                                            blend_mode = alphamultiply
+                                        }
+                                    }
+
+                                    textbox = {
+                                        text = "START_GAME"
+                                        margin_top = 2
+                                        align = center|nobaseline
+                                        minimumsize = { 280 -1 }
+                                        maximumsize = { 280 -1 }
+                                        autoresize = yes
+                                        multiline = yes
+                                        using = fontsize_xxl
+                                    }
+
+                                    textbox = {
+                                        text = "START_GAME_NO_OBJECTIVE_NO_TAG"
+                                        align = hcenter|nobaseline
+                                        default_format = "#instruction"
+                                        margin_bottom = 15
+                                        minimumsize = { 260 -1 }
+                                        maximumsize = { 260 -1 }
+                                        fontsize_min = 10
+                                        autoresize = yes
+                                        multiline = yes
+                                        using = fontsize_medium
+                                    }
+                                }
+                            }
+
+                            # CMF - Adjusted dark area behind text that looks better in the smaller space
+                            widget = {
+                                size = { 100% 100 }
+                                parentanchor = hcenter|bottom
+                                visible = "[GameSetup.HasSelectedObjective]"
+
+                                vbox = {
+                                    background = {
+                                        using = dark_area
+                                        alpha = 0.75
+                                        using = frame_small_mask
+                                    }
+
+                                    textbox = {
+                                        text = "com_no_sandbox_warning"
+                                        align = hcenter|nobaseline
+                                        default_format = "#red;bold;italic;shadow"
+                                        margin_top = 20
+                                        minimumsize = { 260 -1 }
+                                        maximumsize = { 260 -1 }
+                                        autoresize = yes
+                                        multiline = yes
+                                        using = fontsize_medium
+                                    }
+                                }
+                            }
+
+                            # CMF - Duplicate header for when an objective is selected
+                            # Compared to the vanilla header, it's dimmed & will sit above the text area instead of below
+                            default_header_clean = {
+                                visible = "[GameSetup.HasSelectedObjective]"
+                                blockoverride "text" {
+                                    text = "SANDBOX"
+                                }
+                                blockoverride "header_mask" {
+                                    using = frame_small_mask_top
+                                }
+                                blockoverride "size" {
+                                    size = { 100% 42 }
+                                }
+                                blockoverride "header_background" { # Darken header
+                                    background = {
+                                        using = default_header_bg
+                                        modify_texture = {
+                                            texture    = "gfx/interface/backgrounds/paper_bg_dark.dds"
+                                            blend_mode = overlay
+                                        }
+                                    }
+                                }
+                            }
+
+                            button = {
+                                using = glow_button_border
+                                size = { 100% 100% }
+                                onclick = "[GameSetup.OnStart]"
+                                using = frame_small_mask
+                                using = start_game_button_sound
+
+                                enabled = "[Not(GameSetup.HasSelectedObjective)]" # CMF
+
+                                state = {
+                                    trigger_on_create = yes
+                                    name = 1
+                                    next = 2
+                                    alpha = 0.3
+                                    duration = 0.5
+                                    using = Animation_Curve_Default
+                                }
+                                state = {
+                                    name = 2
+                                    next = 1
+                                    alpha = 1
+                                    duration = 0.5
+                                    using = Animation_Curve_Default
+                                }
+                            }
+
+                            icon = {
+                                size = { 100% 100% }
+                                using = frame_small
+                            }
+                        }
+                    }
+                }
 
                 flowcontainer = {
                     spacing = 5

@@ -5,6 +5,7 @@
 	character_ideologies = {
 		ideology_theocrat
 		ideology_traditionalist
+		ideology_turkfm_islamist # GBBF
 	}
 	
 	creation_trigger = {

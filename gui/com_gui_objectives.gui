@@ -60,7 +60,7 @@ types objective_overwrites {
                     layoutpolicy_horizontal = expanding
                     layoutpolicy_vertical = expanding
                     spacing = 7 # CMF - Matches vanilla spacing between objectives and sandbox button
-                    
+
                     # Objectives
                     scrollarea = {
                         minimumsize = { 1400 60 }
@@ -191,12 +191,12 @@ types objective_overwrites {
                         layoutpolicy_horizontal = expanding
                         layoutpolicy_vertical = preferred
                         margin_bottom = 18 # CMF - Aligns to vanilla spacing (even though scrollwidget hbox uses 20?)
-                        
+
                         widget = {
                             maximumsize = { 285 610 }
                             layoutpolicy_horizontal = expanding
                             layoutpolicy_vertical = preferred
-                            
+
                             background = {
                                 texture = "gfx/interface/icons/objectives/sandbox.dds"
                                 fittype = centercrop
@@ -204,6 +204,7 @@ types objective_overwrites {
                             }
 
                             default_header_clean = {
+                                visible = "[Not(GameSetup.HasSelectedObjective)]" # CMF
                                 blockoverride "text" {
                                     text = "SANDBOX"
                                 }
@@ -225,7 +226,7 @@ types objective_overwrites {
                                         using = dark_area
                                         alpha = 0.7
                                         using = frame_small_mask
-                                        
+
                                         modify_texture = {
                                             texture = "gfx/interface/masks/fade_horizontal_center.dds"
                                             spriteType = Corneredstretched
@@ -259,7 +260,7 @@ types objective_overwrites {
                                     }
                                 }
                             }
-                            
+
                             # CMF - Adjusted dark area behind text that looks better in the smaller space
                             widget = {
                                 size = { 100% 100 }
@@ -269,29 +270,17 @@ types objective_overwrites {
                                 vbox = {
                                     background = {
                                         using = dark_area
-                                        alpha = 0.6
+                                        alpha = 0.75
                                         using = frame_small_mask
                                     }
 
                                     textbox = {
-                                        text = "START_GAME"
-                                        margin_top = 2
-                                        align = center|nobaseline
-                                        minimumsize = { 280 -1 }
-                                        maximumsize = { 280 -1 }
-                                        autoresize = yes
-                                        multiline = yes
-                                        using = fontsize_xxl
-                                    }
-
-                                    textbox = {
-                                        text = "START_GAME_NO_OBJECTIVE_NO_TAG"
+                                        text = "com_no_sandbox_warning"
                                         align = hcenter|nobaseline
-                                        default_format = "#instruction"
-                                        margin_bottom = 15
+                                        default_format = "#red;bold;italic;shadow"
+                                        margin_top = 20
                                         minimumsize = { 260 -1 }
                                         maximumsize = { 260 -1 }
-                                        fontsize_min = 10
                                         autoresize = yes
                                         multiline = yes
                                         using = fontsize_medium
@@ -299,14 +288,39 @@ types objective_overwrites {
                                 }
                             }
 
+                            # CMF - Duplicate header for when an objective is selected
+                            # Compared to the vanilla header, it's dimmed & will sit above the text area instead of below
+                            default_header_clean = {
+                                visible = "[GameSetup.HasSelectedObjective]"
+                                blockoverride "text" {
+                                    text = "SANDBOX"
+                                }
+                                blockoverride "header_mask" {
+                                    using = frame_small_mask_top
+                                }
+                                blockoverride "size" {
+                                    size = { 100% 42 }
+                                }
+                                blockoverride "header_background" { # Darken header
+                                    background = {
+                                        using = default_header_bg
+                                        modify_texture = {
+                                            texture    = "gfx/interface/backgrounds/paper_bg_dark.dds"
+                                            blend_mode = overlay
+                                        }
+                                    }
+                                }
+                            }
+
                             button = {
                                 using = glow_button_border
                                 size = { 100% 100% }
-                                onclick = "[GameSetup.ToggleObjective(GameSetup.GetSelectedObjective)]" # CMF - Always go to Sandbox via the Sandbox button
                                 onclick = "[GameSetup.OnStart]"
                                 using = frame_small_mask
                                 using = start_game_button_sound
-                                
+
+                                enabled = "[Not(GameSetup.HasSelectedObjective)]" # CMF
+
                                 state = {
                                     trigger_on_create = yes
                                     name = 1

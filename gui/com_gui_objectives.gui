@@ -55,15 +55,16 @@ types objective_overwrites {
                 }
 
                 hbox = {
-                    minimumsize = { 1665 60 }
-                    maximumsize = { 1665 610 }
+                    minimumsize = { 1400 60 }
+                    maximumsize = { 1700 610 }
                     layoutpolicy_horizontal = expanding
                     layoutpolicy_vertical = expanding
+                    spacing = 7 # CMF - Matches vanilla spacing between objectives and sandbox button
                     
                     # Objectives
                     scrollarea = {
-                        minimumsize = { 1370 60 }
-                        maximumsize = { 1370 610 }
+                        minimumsize = { 1400 60 }
+                        maximumsize = { 1400 610 }
 
                         scrollbarpolicy_vertical = always_off
 
@@ -76,7 +77,7 @@ types objective_overwrites {
                                 margin_bottom = 20
                                 layoutpolicy_horizontal = expanding
                                 layoutpolicy_vertical = preferred
-                                spacing = 5
+                                spacing = 12 # Matches vanilla spacing
                                 datamodel = "[GameSetup.GetObjectives]"
 
                                 item = {
@@ -186,141 +187,147 @@ types objective_overwrites {
                     }
 
                     # Sandbox
-                    widget = {
+                    hbox = { # CMF - Encased in hbox to get a bottom margin to match size of objective buttons
                         layoutpolicy_horizontal = expanding
                         layoutpolicy_vertical = preferred
-                        maximumsize = { 285 610 }
-
-                        background = {
-                            texture = "gfx/interface/icons/objectives/sandbox.dds"
-                            fittype = centercrop
-                            using = frame_small_mask
-                        }
-
-                        default_header_clean = {
-                            blockoverride "text" {
-                                text = "SANDBOX"
-                            }
-                            blockoverride "header_mask" {
-                                using = frame_small_mask_top
-                            }
-                            blockoverride "size" {
-                                size = { 100% 42 }
-                            }
-                        }
-
+                        margin_bottom = 18 # CMF - Aligns to vanilla spacing (even though scrollwidget hbox uses 20?)
+                        
                         widget = {
-                            size = { 100% 100 }
-                            parentanchor = hcenter|bottom
-                            visible = "[Not(GameSetup.HasSelectedObjective)]" # COM
+                            maximumsize = { 285 610 }
+                            layoutpolicy_horizontal = expanding
+                            layoutpolicy_vertical = preferred
+                            
+                            background = {
+                                texture = "gfx/interface/icons/objectives/sandbox.dds"
+                                fittype = centercrop
+                                using = frame_small_mask
+                            }
 
-                            vbox = {
-                                background = {
-                                    using = dark_area
-                                    alpha = 0.7
-                                    using = frame_small_mask
-                                    
-                                    modify_texture = {
-                                        texture = "gfx/interface/masks/fade_horizontal_center.dds"
-                                        spriteType = Corneredstretched
-                                        spriteborder = { 0 0 }
-                                        blend_mode = alphamultiply
+                            default_header_clean = {
+                                blockoverride "text" {
+                                    text = "SANDBOX"
+                                }
+                                blockoverride "header_mask" {
+                                    using = frame_small_mask_top
+                                }
+                                blockoverride "size" {
+                                    size = { 100% 42 }
+                                }
+                            }
+
+                            widget = {
+                                size = { 100% 100 }
+                                parentanchor = hcenter|bottom
+                                visible = "[Not(GameSetup.HasSelectedObjective)]" # CMF
+
+                                vbox = {
+                                    background = {
+                                        using = dark_area
+                                        alpha = 0.7
+                                        using = frame_small_mask
+                                        
+                                        modify_texture = {
+                                            texture = "gfx/interface/masks/fade_horizontal_center.dds"
+                                            spriteType = Corneredstretched
+                                            spriteborder = { 0 0 }
+                                            blend_mode = alphamultiply
+                                        }
+                                    }
+
+                                    textbox = {
+                                        text = "START_GAME"
+                                        margin_top = 2
+                                        align = center|nobaseline
+                                        minimumsize = { 280 -1 }
+                                        maximumsize = { 280 -1 }
+                                        autoresize = yes
+                                        multiline = yes
+                                        using = fontsize_xxl
+                                    }
+
+                                    textbox = {
+                                        text = "START_GAME_NO_OBJECTIVE_NO_TAG"
+                                        align = hcenter|nobaseline
+                                        default_format = "#instruction"
+                                        margin_bottom = 15
+                                        minimumsize = { 260 -1 }
+                                        maximumsize = { 260 -1 }
+                                        fontsize_min = 10
+                                        autoresize = yes
+                                        multiline = yes
+                                        using = fontsize_medium
                                     }
                                 }
-
-                                textbox = {
-                                    text = "START_GAME"
-                                    margin_top = 2
-                                    align = center|nobaseline
-                                    minimumsize = { 280 -1 }
-                                    maximumsize = { 280 -1 }
-                                    autoresize = yes
-                                    multiline = yes
-                                    using = fontsize_xxl
-                                }
-
-                                textbox = {
-                                    text = "START_GAME_NO_OBJECTIVE_NO_TAG"
-                                    align = hcenter|nobaseline
-                                    default_format = "#instruction"
-                                    margin_bottom = 15
-                                    minimumsize = { 260 -1 }
-                                    maximumsize = { 260 -1 }
-                                    fontsize_min = 10
-                                    autoresize = yes
-                                    multiline = yes
-                                    using = fontsize_medium
-                                }
                             }
-                        }
-                        
-                        # COM - Adjusted dark area behind text that looks better in the smaller space
-                        widget = {
-                            size = { 100% 100 }
-                            parentanchor = hcenter|bottom
-                            visible = "[GameSetup.HasSelectedObjective]"
-
-                            vbox = {
-                                background = {
-                                    using = dark_area
-                                    alpha = 0.6
-                                    using = frame_small_mask
-                                }
-
-                                textbox = {
-                                    text = "START_GAME"
-                                    margin_top = 2
-                                    align = center|nobaseline
-                                    minimumsize = { 280 -1 }
-                                    maximumsize = { 280 -1 }
-                                    autoresize = yes
-                                    multiline = yes
-                                    using = fontsize_xxl
-                                }
-
-                                textbox = {
-                                    text = "START_GAME_NO_OBJECTIVE_NO_TAG"
-                                    align = hcenter|nobaseline
-                                    default_format = "#instruction"
-                                    margin_bottom = 15
-                                    minimumsize = { 260 -1 }
-                                    maximumsize = { 260 -1 }
-                                    fontsize_min = 10
-                                    autoresize = yes
-                                    multiline = yes
-                                    using = fontsize_medium
-                                }
-                            }
-                        }
-
-                        button = {
-                            using = glow_button_border
-                            size = { 100% 100% }
-                            onclick = "[GameSetup.ToggleObjective(GameSetup.GetSelectedObjective)]" # COM - Always go to Sandbox via the Sandbox button
-                            onclick = "[GameSetup.OnStart]"
-                            using = frame_small_mask
-                            using = start_game_button_sound
                             
-                            state = {
-                                trigger_on_create = yes
-                                name = 1
-                                next = 2
-                                alpha = 0.3
-                                duration = 0.5
-                                using = Animation_Curve_Default
-                            }
-                            state = {
-                                name = 2
-                                next = 1
-                                alpha = 1
-                                duration = 0.5
-                                using = Animation_Curve_Default
-                            }
-                        }
+                            # CMF - Adjusted dark area behind text that looks better in the smaller space
+                            widget = {
+                                size = { 100% 100 }
+                                parentanchor = hcenter|bottom
+                                visible = "[GameSetup.HasSelectedObjective]"
 
-                        icon = {
-                            size = { 100% 100% }
-                            using = frame_small
+                                vbox = {
+                                    background = {
+                                        using = dark_area
+                                        alpha = 0.6
+                                        using = frame_small_mask
+                                    }
+
+                                    textbox = {
+                                        text = "START_GAME"
+                                        margin_top = 2
+                                        align = center|nobaseline
+                                        minimumsize = { 280 -1 }
+                                        maximumsize = { 280 -1 }
+                                        autoresize = yes
+                                        multiline = yes
+                                        using = fontsize_xxl
+                                    }
+
+                                    textbox = {
+                                        text = "START_GAME_NO_OBJECTIVE_NO_TAG"
+                                        align = hcenter|nobaseline
+                                        default_format = "#instruction"
+                                        margin_bottom = 15
+                                        minimumsize = { 260 -1 }
+                                        maximumsize = { 260 -1 }
+                                        fontsize_min = 10
+                                        autoresize = yes
+                                        multiline = yes
+                                        using = fontsize_medium
+                                    }
+                                }
+                            }
+
+                            button = {
+                                using = glow_button_border
+                                size = { 100% 100% }
+                                onclick = "[GameSetup.ToggleObjective(GameSetup.GetSelectedObjective)]" # CMF - Always go to Sandbox via the Sandbox button
+                                onclick = "[GameSetup.OnStart]"
+                                using = frame_small_mask
+                                using = start_game_button_sound
+                                
+                                state = {
+                                    trigger_on_create = yes
+                                    name = 1
+                                    next = 2
+                                    alpha = 0.3
+                                    duration = 0.5
+                                    using = Animation_Curve_Default
+                                }
+                                state = {
+                                    name = 2
+                                    next = 1
+                                    alpha = 1
+                                    duration = 0.5
+                                    using = Animation_Curve_Default
+                                }
+                            }
+
+                            icon = {
+                                size = { 100% 100% }
+                                using = frame_small
+                            }
                         }
                     }
                 }

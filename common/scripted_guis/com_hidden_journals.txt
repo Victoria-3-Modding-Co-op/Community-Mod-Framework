@@ -1,0 +1,12 @@
+﻿com_journal_entry_group_hidden = {
+	scope = country
+    saved_scopes = {
+        group_name
+    }
+    is_shown = {
+        is_target_in_global_variable_list = {
+            name = com_hidden_journal_groups
+            target = scope:group_name
+        }
+    }
+}

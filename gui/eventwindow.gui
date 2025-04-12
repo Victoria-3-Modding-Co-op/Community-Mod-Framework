@@ -499,7 +499,9 @@ event_window_big_icon_center = {}
 event_window_1char_adventure = {}
 event_window_2char_adventure = {}
 event_window_2char_duel = {}
+event_window_2char_discussion = {}
 event_window_highlander = {}
+event_window_3char = {}
 event_window_3char_selection = {}
 
 #### CMF Superevent Window Variants ####

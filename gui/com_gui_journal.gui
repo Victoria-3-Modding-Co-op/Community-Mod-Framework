@@ -172,6 +172,7 @@ types journal_overwrites {
 
 						item = {
 							flowcontainer = {
+								visible = "[Not(GetScriptedGui('com_journal_entry_group_hidden').IsShown(GuiScope.SetRoot(AccessPlayer.MakeScope).AddScope('group_name', MakeScopeFlag(JournalEntryGroup.GetKey)).End))]"
 								direction = vertical
 								textbox = {
 									text = "[JournalEntryGroup.GetName]"
@@ -262,6 +263,7 @@ types journal_overwrites {
 					item = {
 						flowcontainer = {
 							direction = vertical
+							visible = "[Not(GetScriptedGui('com_journal_entry_group_hidden').IsShown(GuiScope.SetRoot(AccessPlayer.MakeScope).AddScope('group_name', MakeScopeFlag(JournalEntryGroup.GetKey)).End))]"
 							textbox = {
 								text = "[JournalEntryGroup.GetName]"
 								autoresize = yes

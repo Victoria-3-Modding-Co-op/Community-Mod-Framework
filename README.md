@@ -6,8 +6,9 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=3385002128
 
 ## Contents
 * [Setting Dependency](#setting-dependency)
-* [Political Movements](#political-movements)
 * [Debug Mode](#debug-mode)
+* [Variable Prefixing](#variable-prefixing)
+* [Political Movements](#political-movements)
 * [GUI Framework](#gui-framework)
     * [Alternative Event Windows](#alternative-event-windows)
     * [Hiding Objective Header](#hiding-objective-header)
@@ -26,6 +27,7 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=3385002128
 * [Heir Blocker](#heir-blocker)
 * [Weekly Event Framework](#weekly-event-framework)
 * [Hide/Show Journal Entry Groups](#hideshow-journal-entry-groups)
+* [Formation Event Blocker](#formation-event-blocker)
 
 # Setting Dependency
 
@@ -43,6 +45,17 @@ To set this mod as a dependency to your own mod, you will need to add this to yo
 ```
 **Also remember to add the mod to your required items on your own mods steam page.**
 
+# Debug Mode
+
+The keybinding `CTRL + ALT + D` toggles the global variable `com_debug`.
+
+This can be used to enable or disable debug content like debug Decisions or Events.
+
+
+# Variable Prefixing
+
+If you add a variable, list, effect, trigger, etc. for use in CMF, please prefix it using `com_`. This is to prevent conflicts with both basegame and other mods.
+
 # Political Movements
 
 Overwrites vanilla Political Movement definitions with scripted triggers to aid in mod compatibility
@@ -52,12 +65,6 @@ Add dummy ideologies from mods into political movements, allowing them to spawn 
 * Assign the ideology to the appropiate political movements (and scripted triggers if needed)
 * Load this mod below any other mod
 * Your mod will overwrite the ideology definition and allow it to spawn in the specified political movements
-
-# Debug Mode
-
-The keybinding `CTRL + ALT + D` toggles the global variable `com_debug`.
-
-This can be used to enable or disable debug content like debug Decisions or Events.
 
 # GUI Framework
 
@@ -411,3 +418,20 @@ This would hide all National Agenda (`je_group_historical_content`) Journal Entr
 
 `com_show_journal_entry_group = { name = je_group_historical_content }` 
 This would show them again.
+
+# Formation Event Blocker
+
+This allows for blocking the formation events that occur whenever the player forms a country. This can be used for blocking the events' effect of adding claims to all homeland states which is vanilla behavior.
+
+To use it, just set a variable named `com_no_formation_events` in the country that should have formation events blocked; e.g.,
+```
+c:GRE = {
+    set_variable = com_no_formation_events
+}
+```
+
+To allow formation events again, simply remove the variable.
+
+Notes:
+1. No considerations have been made regarding any failsafes. You are solely responsible for unblocking formation events later, even if the country successfully completes additional formations.
+2. Changing country via the `change_tag` effect will **not** remove the `com_no_formation_events`variable.

@@ -190,7 +190,6 @@ types objective_overwrites {
                     hbox = { # CMF - Encased in hbox to get a bottom margin to match size of objective buttons
                         layoutpolicy_horizontal = expanding
                         layoutpolicy_vertical = preferred
-                        margin_bottom = 18 # CMF - Aligns to vanilla spacing (even though scrollwidget hbox uses 20?)
 
                         widget = {
                             maximumsize = { 285 610 }
@@ -263,7 +262,7 @@ types objective_overwrites {
 
                             # CMF - Adjusted dark area behind text that looks better in the smaller space
                             widget = {
-                                size = { 100% 100 }
+                                size = { 100% 100% }
                                 parentanchor = hcenter|bottom
                                 visible = "[GameSetup.HasSelectedObjective]"
 
@@ -278,7 +277,7 @@ types objective_overwrites {
                                         text = "com_no_sandbox_warning"
                                         align = hcenter|nobaseline
                                         default_format = "#red;bold;italic;shadow"
-                                        margin_top = 20
+                                        margin_top = 35
                                         minimumsize = { 260 -1 }
                                         maximumsize = { 260 -1 }
                                         autoresize = yes

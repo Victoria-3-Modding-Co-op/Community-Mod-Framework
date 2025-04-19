@@ -1,0 +1,627 @@
+##########################################
+# COMMUNITY GUI WIDESCREEN EVENT WINDOWS #
+##########################################
+
+# All fullscreen event windows will resize to cover x = 100%, y = 70% of the screen in a style similar to CK3 struggle events
+# These event windows will stretch the event texture/video to fit the entire window- keep this in mind when making your assests
+
+########################################
+
+# Copied over from default window
+@panel_width_minus_10 = 530			# used to be 450
+@panel_width = 540  				# used to be 460
+@panel_width_half = 270				# used to be 230
+@panel_width_plus_10 = 550  		# used to be 470
+@panel_width_plus_14 = 554			# used to be 474
+@panel_width_plus_14_half = 277		# used to be 237
+@panel_width_plus_20 = 560			# used to be 480
+@panel_width_plus_30 = 570			# used to be 490
+@panel_width_plus_70 = 610			# used to be 530
+
+########################################
+
+types com_widescreen_window_types {
+
+    ## CLASSIC WIDESCREEN WINDOW
+    # This window uses the background from the vanilla event window
+
+    type event_window_widescreen_classic = event_window {
+        name = "event_window_widescreen_classic"
+
+        using = hud_visibility
+        using = Animation_ShowHide_Standard
+
+        blockoverride "event_window_full_block" {
+            icon = {
+                parentanchor = center
+                size = { 100% 100% }
+                texture = "gfx/interface/backgrounds/not_yet_initialized.dds"
+                using = clickthrough_blocker
+            }
+
+            widget = {
+                alpha = 0
+                using = Animation_ShowHide_Standard
+                size = { 100% 70% }
+                parentanchor = center
+                layer = popups
+
+                datacontext = "[EventWindow.GetEvent]"
+
+                state = {
+                    name = sound
+                    trigger_on_create = yes
+                    start_sound = {
+                        using = ui_sfx_global_popup
+                    }
+                }
+
+                state = {
+                    trigger_on_create = yes
+                    name = 1
+                    duration = 0.3
+                    using = Animation_Curve_EaseOut
+                    alpha = 1
+                    using = Snapshot_Mute_World_100
+                    using = Snapshot_Mute_Vfx_War_100
+                    start_sound = {
+                        soundeffect = "[Event.GetOnOpenedSoundEvent]"
+                    }
+                }
+
+                state = {
+                    trigger_when = "[Not(TimeKeeper.IsPaused)]"
+                    on_finish = "[TimeKeeper.TogglePause]"
+                }
+
+                icon = {
+                    position = { -1% 0 }
+                    size = { 102% 100% }
+                    spriteType = Corneredtiled
+                    spriteborder = { 14 14 }
+                    texture = "gfx/interface/backgrounds/rounded_bg.dds"
+                    texture_density = 2
+
+                    modify_texture = {
+                        texture = "gfx/interface/backgrounds/default_bg_shading.dds"
+                        spriteType = Corneredstretched
+                        spriteborder = { 0 0 }
+                        blend_mode = overlay
+                        alpha = 0.8
+                    }
+                    modify_texture = {
+                        using = texture_velvet
+                    }
+                    modify_texture = {
+                        using = texture_cloth
+                        alpha = 0.7
+                    }
+                    modify_texture = {
+                        texture = "gfx/interface/masks/fade_top_illus.dds"
+                        translate_uv = { 0 0 }
+                        blend_mode = alphamultiply
+                    }
+                }
+
+                widget = {
+                    # image in case we have no video?
+                    position = { 0 0 }
+                    size = { 100% 100% }
+                    parentanchor = center
+
+                    icon = {
+                        visible = "[Event.HasTexture]"
+                        texture = "[Event.GetTexture]"
+                        alwaystransparent = yes
+                        size = { 100% 100% }
+                        parentanchor = center
+
+                        modify_texture = {
+                            using = texture_cloth
+                            alpha = 0.8
+                        }
+                        modify_texture = {
+                            texture = "gfx/interface/masks/fade_vertical_center.dds"
+                            translate_uv = { 0 0 }
+                            blend_mode = alphamultiply
+                        }
+                    }
+
+                    # animated video ( most images should have this )
+                    video_icon = {
+                        visible = "[Event.HasVideo]"
+                        video = "[Event.GetVideo]"
+                        size = { 100% 100% }
+                        alwaystransparent = yes
+                        loop = no
+                        parentanchor = center
+
+                        modify_texture = {
+                            using = texture_cloth
+                            alpha = 0.8
+                        }
+                        modify_texture = {
+                            texture = "gfx/interface/masks/fade_vertical_center.dds"
+                            translate_uv = { 0 0 }
+                            blend_mode = alphamultiply
+                        }
+                    }
+                }
+
+                flowcontainer = {
+                    minimumsize = { -1 606 }
+                    direction = vertical
+                    spacing = 20
+                    parentanchor = right|vcenter
+                    margin = { 25 40 }
+
+                    background = {
+                        using = entry_bg_simple_solid
+                        margin = { -15 -20 }
+                    }
+
+                    default_header_clean_faded = {
+                        size = { 500 50 }
+                        position = { 0 0 }
+                        parentanchor = center
+                        blockoverride "text" {}
+                        textbox = {
+                            raw_text = "#BOLD [EventWindow.GetTitle]#!"
+                            parentanchor = center
+                            position = { 0 -2 }
+                            autoresize = yes
+                            max_width = 500
+                            elide = right
+                            using = fontsize_mega
+                        }
+                    }
+
+                    textbox = {
+                        name = "description"
+                        multiline = yes
+                        autoresize = yes
+                        minimumsize = { 480 -1 }
+                        maximumsize = { 520 -1 }
+                        parentanchor = top|hcenter
+                        align = hcenter|nobaseline
+                        raw_text = "#bold [EventWindow.GetDescription]#!"
+                        margin = { 10 0 }
+                        using = fontsize_large
+                    }
+
+                    divider_decorative = {}
+
+                    textbox = {
+                        name = "flavortext"
+                        multiline = yes
+                        autoresize = yes
+                        minimumsize = { 480 -1 }
+                        maximumsize = { 480 -1 }
+                        parentanchor = top|hcenter
+                        align = top|left
+                        raw_text = "#lore [EventWindow.GetFlavor]#!"
+                        margin = { 30 10 }
+                    }
+
+                    widget = { size = { 20 10 }}
+
+                    flowcontainer = {
+                        direction = vertical
+                        using = default_list_position
+                        datamodel = "[EventWindow.GetOptions]"
+                        spacing = 5
+
+                        item = {
+                            container = {
+
+                                widget = {
+                                    visible = "[EventOption.IsHighlightedOption]"
+
+                                    button = {
+                                        size = { 96% 100% }
+                                        parentanchor = hcenter
+                                        using = default_button_primary_action
+                                        onclick = "[EventOption.Select]"
+                                        tooltip = "[EventOption.GetDesc]"
+                                        using = tooltip_ws
+                                        enabled = "[EventOption.IsEnabled]"
+                                        using = confirm_button_sound
+                                    }
+
+                                    textbox = {
+                                        resizeparent = yes
+                                        minimumsize = { 500 42 }
+                                        maximumsize = { 500 -1 }
+                                        text = "[EventOption.GetText]"
+                                        multiline = yes
+                                        align = hcenter|nobaseline
+                                        autoresize = yes
+                                        margin = { 30 10 }
+                                    }
+                                }
+
+                                widget = {
+                                    visible = "[Not(EventOption.IsHighlightedOption)]"
+
+                                    button = {
+                                        size = { 96% 100% }
+                                        parentanchor = hcenter
+                                        using = default_button_action
+                                        onclick = "[EventOption.Select]"
+                                        tooltip = "EVENT_OPTION_TOOLTIP"
+                                        using = tooltip_ws
+                                        enabled = "[EventOption.IsEnabled]"
+                                        using = confirm_button_sound
+                                    }
+
+                                    textbox = {
+                                        resizeparent = yes
+                                        minimumsize = { 500 42 }
+                                        maximumsize = { 500 -1 }
+                                        text = "[EventOption.GetText]"
+                                        multiline = yes
+                                        align = hcenter|nobaseline
+                                        autoresize = yes
+                                        margin = { 30 10 }
+                                    }
+
+                                    ### Time until the default option will be picked
+                                    round_progress_default = {
+                                        visible = "[EventOption.IsDefaultOption]"
+                                        parentanchor = right|vcenter
+                                        position = { 0 0.5 }
+                                        size = { 27 27 }
+                                        tooltip = "DEFAULT_EVENT_OPTION"
+                                        value = "[Event.GetPercentageRemainingDays]"
+
+                                        icon = {
+                                            size = { 26 26 }
+                                            position = { -0.2 -0.2 }
+                                            parentanchor = center
+                                            texture = "gfx/interface/icons/generic_icons/event_default_option.dds"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    button = {
+                        parentanchor = hcenter
+                        visible = "[InDebugMode]"
+                        size = { 480 62 }
+                        using = default_button
+                        raw_text = "DEBUG: Open Event in text editor"
+                        onclick = "[EventWindow.AccessEvent.OpenInEditor]"
+                    }
+
+                    textbox = {
+                        background = {
+                            using = default_background
+                        }
+                        parentanchor = hcenter
+                        size = { 480 62 }
+                        visible = "[InDebugMode]"
+                        raw_text = "DEBUG: Trigger description"
+                        tooltip = "[Event.GetTriggerDesc]"
+                        align = hcenter|nobaseline
+                    }
+
+                    textbox = {
+                        visible = "[InDebugMode]"
+                        parentanchor = hcenter
+                        align = hcenter
+                        raw_text = "Event ID: [Event.GetKey|v]"
+                    }
+                }
+            }
+        }
+    }
+
+    ## NEWSPAPER WIDESCREEN WINDOW
+    # This window uses the background from the newspaper event window
+
+    type event_window_widescreen_newspaper = event_window {
+        name = "event_window_widescreen_newspaper"
+
+        using = hud_visibility
+        using = Animation_ShowHide_Standard
+
+        blockoverride "event_window_full_block" {
+            icon = {
+                parentanchor = center
+                size = { 100% 100% }
+                texture = "gfx/interface/backgrounds/not_yet_initialized.dds"
+                using = clickthrough_blocker
+            }
+
+            widget = {
+                alpha = 0
+                using = Animation_ShowHide_Standard
+                size = { 100% 70% }
+                parentanchor = center
+                layer = popups
+
+                datacontext = "[EventWindow.GetEvent]"
+
+                state = {
+                    name = sound
+                    trigger_on_create = yes
+                    start_sound = {
+                        using = ui_sfx_global_popup
+                    }
+                }
+
+                state = {
+                    trigger_on_create = yes
+                    name = 1
+                    duration = 0.3
+                    using = Animation_Curve_EaseOut
+                    alpha = 1
+                    using = Snapshot_Mute_World_100
+                    using = Snapshot_Mute_Vfx_War_100
+                    start_sound = {
+                        soundeffect = "[Event.GetOnOpenedSoundEvent]"
+                    }
+                }
+
+                state = {
+                    trigger_when = "[Not(TimeKeeper.IsPaused)]"
+                    on_finish = "[TimeKeeper.TogglePause]"
+                }
+
+                icon = {
+                    position = { -1% 0 }
+                    size = { 102% 100% }
+                    spriteType = Corneredtiled
+                    spriteborder = { 14 14 }
+                    texture = "gfx/interface/backgrounds/rounded_bg.dds"
+                    texture_density = 2
+
+                    modify_texture = {
+                        texture = "gfx/interface/backgrounds/default_bg_shading.dds"
+                        spriteType = Corneredstretched
+                        spriteborder = { 0 0 }
+                        blend_mode = overlay
+                        alpha = 0.8
+                    }
+                    modify_texture = {
+                        using = texture_velvet
+                    }
+                    modify_texture = {
+                        using = texture_cloth
+                        alpha = 0.7
+                    }
+                    modify_texture = {
+                        texture = "gfx/interface/masks/fade_top_illus.dds"
+                        translate_uv = { 0 0 }
+                        blend_mode = alphamultiply
+                    }
+                }
+
+                widget = {
+                    # image in case we have no video?
+                    position = { 0 0 }
+                    size = { 100% 100% }
+                    parentanchor = center
+
+                    icon = {
+                        visible = "[Event.HasTexture]"
+                        texture = "[Event.GetTexture]"
+                        alwaystransparent = yes
+                        size = { 100% 100% }
+                        parentanchor = center
+
+                        modify_texture = {
+                            using = texture_cloth
+                            alpha = 0.8
+                        }
+                        modify_texture = {
+                            texture = "gfx/interface/masks/fade_vertical_center.dds"
+                            translate_uv = { 0 0 }
+                            blend_mode = alphamultiply
+                        }
+                    }
+
+                    # animated video ( most images should have this )
+                    video_icon = {
+                        visible = "[Event.HasVideo]"
+                        video = "[Event.GetVideo]"
+                        size = { 100% 100% }
+                        alwaystransparent = yes
+                        loop = no
+                        parentanchor = center
+
+                        modify_texture = {
+                            using = texture_cloth
+                            alpha = 0.8
+                        }
+                        modify_texture = {
+                            texture = "gfx/interface/masks/fade_vertical_center.dds"
+                            translate_uv = { 0 0 }
+                            blend_mode = alphamultiply
+                        }
+                    }
+                }
+
+                flowcontainer = {
+                    minimumsize = { -1 606 }
+                    direction = vertical
+                    spacing = 20
+                    parentanchor = right|vcenter
+                    margin = { 25 40 }
+
+                    background = {
+                        texture = "gfx/interface/backgrounds/tutorial_bg.dds"
+                        spriteType = Corneredtiled
+                        spriteborder = { 20 20 }
+                        alpha = 0.9
+
+                        modify_texture = {
+                            texture = "gfx/interface/backgrounds/gradient_overlay.dds"
+                            spriteType = Corneredstretched
+                            spriteborder = { 0 0 }
+                            blend_mode = overlay
+                            alpha = 0.7
+                        }
+                        margin = { -15 -20 }
+                    }
+
+                    default_header_clean_faded = {
+                        size = { 500 50 }
+                        position = { 0 0 }
+                        parentanchor = center
+                        blockoverride "text" {}
+                        textbox = {
+                            raw_text = "#BOLD [EventWindow.GetTitle]#!"
+                            parentanchor = center
+                            position = { 0 -2 }
+                            autoresize = yes
+                            max_width = 500
+                            elide = right
+                            using = fontsize_mega
+                        }
+                    }
+
+                    textbox = {
+                        name = "description"
+                        multiline = yes
+                        autoresize = yes
+                        minimumsize = { 480 -1 }
+                        maximumsize = { 520 -1 }
+                        parentanchor = top|hcenter
+                        align = hcenter|nobaseline
+                        raw_text = "#bold [EventWindow.GetDescription]#!"
+                        margin = { 10 0 }
+                        using = fontsize_large
+                    }
+
+                    divider_decorative = {}
+
+                    textbox = {
+                        name = "flavortext"
+                        multiline = yes
+                        autoresize = yes
+                        minimumsize = { 480 -1 }
+                        maximumsize = { 480 -1 }
+                        parentanchor = top|hcenter
+                        align = top|left
+                        raw_text = "#lore [EventWindow.GetFlavor]#!"
+                        margin = { 30 10 }
+                    }
+
+                    widget = { size = { 20 10 }}
+
+                    flowcontainer = {
+                        direction = vertical
+                        using = default_list_position
+                        datamodel = "[EventWindow.GetOptions]"
+                        spacing = 5
+
+                        item = {
+                            container = {
+
+                                widget = {
+                                    visible = "[EventOption.IsHighlightedOption]"
+
+                                    button = {
+                                        size = { 96% 100% }
+                                        parentanchor = hcenter
+                                        using = default_button_primary_action
+                                        onclick = "[EventOption.Select]"
+                                        tooltip = "[EventOption.GetDesc]"
+                                        using = tooltip_ws
+                                        enabled = "[EventOption.IsEnabled]"
+                                        using = confirm_button_sound
+                                    }
+
+                                    textbox = {
+                                        resizeparent = yes
+                                        minimumsize = { 500 42 }
+                                        maximumsize = { 500 -1 }
+                                        text = "[EventOption.GetText]"
+                                        multiline = yes
+                                        align = hcenter|nobaseline
+                                        autoresize = yes
+                                        margin = { 30 10 }
+                                    }
+                                }
+
+                                widget = {
+                                    visible = "[Not(EventOption.IsHighlightedOption)]"
+
+                                    button = {
+                                        size = { 96% 100% }
+                                        parentanchor = hcenter
+                                        using = default_button_action
+                                        onclick = "[EventOption.Select]"
+                                        tooltip = "EVENT_OPTION_TOOLTIP"
+                                        using = tooltip_ws
+                                        enabled = "[EventOption.IsEnabled]"
+                                        using = confirm_button_sound
+                                    }
+
+                                    textbox = {
+                                        resizeparent = yes
+                                        minimumsize = { 500 42 }
+                                        maximumsize = { 500 -1 }
+                                        text = "[EventOption.GetText]"
+                                        multiline = yes
+                                        align = hcenter|nobaseline
+                                        autoresize = yes
+                                        margin = { 30 10 }
+                                    }
+
+                                    ### Time until the default option will be picked
+                                    round_progress_default = {
+                                        visible = "[EventOption.IsDefaultOption]"
+                                        parentanchor = right|vcenter
+                                        position = { 0 0.5 }
+                                        size = { 27 27 }
+                                        tooltip = "DEFAULT_EVENT_OPTION"
+                                        value = "[Event.GetPercentageRemainingDays]"
+
+                                        icon = {
+                                            size = { 26 26 }
+                                            position = { -0.2 -0.2 }
+                                            parentanchor = center
+                                            texture = "gfx/interface/icons/generic_icons/event_default_option.dds"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    button = {
+                        parentanchor = hcenter
+                        visible = "[InDebugMode]"
+                        size = { 480 62 }
+                        using = default_button
+                        raw_text = "DEBUG: Open Event in text editor"
+                        onclick = "[EventWindow.AccessEvent.OpenInEditor]"
+                    }
+
+                    textbox = {
+                        background = {
+                            using = default_background
+                        }
+                        parentanchor = hcenter
+                        size = { 480 62 }
+                        visible = "[InDebugMode]"
+                        raw_text = "DEBUG: Trigger description"
+                        tooltip = "[Event.GetTriggerDesc]"
+                        align = hcenter|nobaseline
+                    }
+
+                    textbox = {
+                        visible = "[InDebugMode]"
+                        parentanchor = hcenter
+                        align = hcenter
+                        raw_text = "Event ID: [Event.GetKey|v]"
+                    }
+                }
+            }
+        }
+    }
+}

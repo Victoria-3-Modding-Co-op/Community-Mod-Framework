@@ -215,6 +215,30 @@ types objective_overwrites {
                                     size = { 100% 42 }
                                 }
                             }
+                            
+                            # CMF - Duplicate header for when an objective is selected
+                            # Compared to the vanilla header, it's dimmed
+                            default_header_clean = {
+                                visible = "[GameSetup.HasSelectedObjective]"
+                                blockoverride "text" {
+                                    text = "SANDBOX"
+                                }
+                                blockoverride "header_mask" {
+                                    using = frame_small_mask_top
+                                }
+                                blockoverride "size" {
+                                    size = { 100% 42 }
+                                }
+                                blockoverride "header_background" { # Darken header
+                                    background = {
+                                        using = default_header_bg
+                                        modify_texture = {
+                                            texture    = "gfx/interface/backgrounds/paper_bg_dark.dds"
+                                            blend_mode = overlay
+                                        }
+                                    }
+                                }
+                            }
 
                             widget = {
                                 size = { 100% 100 }
@@ -263,7 +287,7 @@ types objective_overwrites {
 
                             # CMF - Adjusted dark area behind text that looks better in the smaller space
                             widget = {
-                                size = { 100% 100 }
+                                size = { 100% 100% } # Y size must be 100% (i.e. not absolutely sized)
                                 parentanchor = hcenter|bottom
                                 visible = "[GameSetup.HasSelectedObjective]"
 
@@ -284,30 +308,6 @@ types objective_overwrites {
                                         autoresize = yes
                                         multiline = yes
                                         using = fontsize_medium
-                                    }
-                                }
-                            }
-
-                            # CMF - Duplicate header for when an objective is selected
-                            # Compared to the vanilla header, it's dimmed & will sit above the text area instead of below
-                            default_header_clean = {
-                                visible = "[GameSetup.HasSelectedObjective]"
-                                blockoverride "text" {
-                                    text = "SANDBOX"
-                                }
-                                blockoverride "header_mask" {
-                                    using = frame_small_mask_top
-                                }
-                                blockoverride "size" {
-                                    size = { 100% 42 }
-                                }
-                                blockoverride "header_background" { # Darken header
-                                    background = {
-                                        using = default_header_bg
-                                        modify_texture = {
-                                            texture    = "gfx/interface/backgrounds/paper_bg_dark.dds"
-                                            blend_mode = overlay
-                                        }
                                     }
                                 }
                             }

@@ -190,6 +190,7 @@ types objective_overwrites {
                     hbox = { # CMF - Encased in hbox to get a bottom margin to match size of objective buttons
                         layoutpolicy_horizontal = expanding
                         layoutpolicy_vertical = preferred
+                        margin_bottom = 18 # CMF - Aligns to vanilla spacing (even though scrollwidget hbox uses 20?)
 
                         widget = {
                             maximumsize = { 285 610 }
@@ -203,7 +204,6 @@ types objective_overwrites {
                             }
 
                             default_header_clean = {
-                                visible = "[Not(GameSetup.HasSelectedObjective)]" # CMF
                                 blockoverride "text" {
                                     text = "SANDBOX"
                                 }
@@ -224,7 +224,7 @@ types objective_overwrites {
                                     background = {
                                         using = dark_area
                                         alpha = 0.7
-                                        using = frame_small_mask
+                                        # using = frame_small_mask # CMF - has no major impact + looks cleaner removed
 
                                         modify_texture = {
                                             texture = "gfx/interface/masks/fade_horizontal_center.dds"
@@ -262,52 +262,26 @@ types objective_overwrites {
 
                             # CMF - Adjusted dark area behind text that looks better in the smaller space
                             widget = {
-                                size = { 100% 100% }
+                                size = { 100% 100% } # Y size must be 100% (i.e. not absolutely sized)
                                 parentanchor = hcenter|bottom
                                 visible = "[GameSetup.HasSelectedObjective]"
 
-                                vbox = {
-                                    background = {
-                                        using = dark_area
-                                        alpha = 0.75
-                                        using = frame_small_mask
-                                    }
+                                background = {
+                                    using = dark_area
+                                    alpha = 0.8
+                                    using = frame_small_mask
+                                }
 
-                                    textbox = {
-                                        text = "com_no_sandbox_warning"
-                                        align = hcenter|nobaseline
-                                        default_format = "#red;bold;italic;shadow"
-                                        margin_top = 35
-                                        minimumsize = { 260 -1 }
-                                        maximumsize = { 260 -1 }
-                                        autoresize = yes
-                                        multiline = yes
-                                        using = fontsize_medium
-                                    }
-                                }
-                            }
-
-                            # CMF - Duplicate header for when an objective is selected
-                            # Compared to the vanilla header, it's dimmed & will sit above the text area instead of below
-                            default_header_clean = {
-                                visible = "[GameSetup.HasSelectedObjective]"
-                                blockoverride "text" {
-                                    text = "SANDBOX"
-                                }
-                                blockoverride "header_mask" {
-                                    using = frame_small_mask_top
-                                }
-                                blockoverride "size" {
-                                    size = { 100% 42 }
-                                }
-                                blockoverride "header_background" { # Darken header
-                                    background = {
-                                        using = default_header_bg
-                                        modify_texture = {
-                                            texture    = "gfx/interface/backgrounds/paper_bg_dark.dds"
-                                            blend_mode = overlay
-                                        }
-                                    }
+                                textbox = {
+                                    parentanchor = center
+                                    text = "com_no_sandbox_warning"
+                                    align = hcenter|nobaseline
+                                    default_format = "#red;bold;italic;shadow"
+                                    minimumsize = { 260 -1 }
+                                    maximumsize = { 260 -1 }
+                                    autoresize = yes
+                                    multiline = yes
+                                    using = fontsize_medium
                                 }
                             }
 

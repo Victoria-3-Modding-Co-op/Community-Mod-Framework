@@ -73,6 +73,15 @@ types com_widescreen_window_types {
                     trigger_when = "[Not(TimeKeeper.IsPaused)]"
                     on_finish = "[TimeKeeper.TogglePause]"
                 }
+				
+				widget = {
+					state = {
+						name = _show
+						start_sound = {
+							soundeffect = "snapshot:/Dynamic/mute_mx_100"
+						}
+					}
+				}
 
                 icon = {
                     position = { -1% 0 }
@@ -364,6 +373,15 @@ types com_widescreen_window_types {
                         soundeffect = "[Event.GetOnOpenedSoundEvent]"
                     }
                 }
+				
+				widget = {
+					state = {
+						name = _show
+						start_sound = {
+							soundeffect = "snapshot:/Dynamic/mute_mx_100"
+						}
+					}
+				}
 
                 state = {
                     trigger_when = "[Not(TimeKeeper.IsPaused)]"

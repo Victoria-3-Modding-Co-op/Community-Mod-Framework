@@ -106,6 +106,10 @@ Superevent Windows:
 - [event_window_superevent_modern_full](docs/event_windows/event_window_superevent_modern_full.png)
 - [event_window_superevent_crisis](docs/event_windows/event_window_superevent_crisis.png)
 
+Widescreen Windows:
+- [event_window_widescreen_classic](docs/event_windows/event_window_widescreen_classic.png)
+- [event_window_widescreen_newspaper](docs/event_windows/event_window_widescreen_newspaper.png)
+
 Ethics Style Window:
 - [event_window_ethics](docs/event_windows/event_window_ethics.png)
 

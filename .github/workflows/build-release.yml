@@ -1,4 +1,7 @@
-name: Build Release
+name: Publish Release
+
+permissions:
+  contents: write
 
 on:
   workflow_dispatch:
@@ -28,10 +31,8 @@ on:
 
 jobs:
   release:
-    name: "Create GitHub Release"
+    name: "Publish Release"
     runs-on: ubuntu-latest
-    outputs:
-      version: ${{ steps.increment-version.outputs.next-version }}
     
     steps:
       - name: Checkout
@@ -68,7 +69,7 @@ jobs:
 
       - name: Update Version
         run: |
-          sed -i 's/"version" : "${{ steps.project.outputs.last-version }}"/"version" : "${{ steps.increment-version.outputs.next-version }}"/g' mod/.metadata/metadata.json
+          sed -i 's/"version" : "${{ steps.project.outputs.last-version }}"/"version" : "${{ steps.increment-version.outputs.next-version }}"/g' .metadata/metadata.json
           git commit -am "Updated version to ${{ steps.increment-version.outputs.next-version }}"
           echo "# Versions" >> $GITHUB_STEP_SUMMARY
           echo "Last Version: **${{ steps.project.outputs.last-version }}**" >> $GITHUB_STEP_SUMMARY
@@ -80,25 +81,26 @@ jobs:
 
       - name: Clean Repository
         run: |
-          mkdir /steam-release
-          mv STEAM_PAGE.bbcode /steam-release/STEAM_PAGE.bbcode
-          mv script/create-release-vdf.sh /steam-release/create-release-vdf.sh
+          mkdir ../steam-release
+          mv STEAM_PAGE.bbcode ../steam-release/STEAM_PAGE.bbcode
+          mv script/create-release-vdf.sh ../steam-release/create-release-vdf.sh
           rm -rf .git/
           rm -rf .github/
           rm -rf docs/
+          rm -rf script/
           rm -f .gitattributes
           rm -f .gitignore
           rm -f README.md
 
       - name: Create Release Artifact
         run: |
-          (cd mod; zip -r release-${{ steps.increment-version.outputs.next-version }}.zip .)
+          zip -r release-${{ steps.increment-version.outputs.next-version }}.zip .
 
       - name: Upload Release Artifact
         uses: actions/upload-artifact@v4
         with:
           name: Release
-          path: mod/release-${{ steps.increment-version.outputs.next-version }}.zip
+          path: release-${{ steps.increment-version.outputs.next-version }}.zip
 
       - name: Publish GitHub Release
         id: create_release
@@ -107,7 +109,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           draft: false
           prerelease: false
-          files: mod/release-${{ steps.increment-version.outputs.next-version }}.zip
+          files: release-${{ steps.increment-version.outputs.next-version }}.zip
           tag_name: ${{ steps.increment-version.outputs.next-version }}
           name: ${{ steps.increment-version.outputs.next-version }}
           body: |
@@ -116,14 +118,19 @@ jobs:
             ### Commits:
             ${{ steps.commits.outputs.markdown }}
 
+
+      - name: Clean Release Artifact
+        run: |
+          rm -f release-${{ steps.increment-version.outputs.next-version }}.zip
+
       - name: Create Workshop Metadata
         if: ${{ inputs.publish == 'true' }}
         id: metadata
         shell: bash
         run: |
-          /steam-release/create-release-vdf.sh ${{ github.workspace }} /steam-release/STEAM_PAGE.bbcode "${{ inputs.workshop-id }}"
-          mv workshop.vdf /steam-release/workshop.vdf
-          echo "vdf=/steam-release/workshop.vdf" >> "$GITHUB_OUTPUT"
+          ../steam-release/create-release-vdf.sh ${{ github.workspace }} ../steam-release/STEAM_PAGE.bbcode "${{ inputs.workshop-id }}"
+          mv workshop.vdf ../steam-release/workshop.vdf
+          echo "vdf=$(realpath ../steam-release/workshop.vdf)" >> "$GITHUB_OUTPUT"
           echo "# Workflow Metadata" >> $GITHUB_STEP_SUMMARY
           echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
           echo "$(cat < /steam-release/workshop.vdf)" >> $GITHUB_STEP_SUMMARY

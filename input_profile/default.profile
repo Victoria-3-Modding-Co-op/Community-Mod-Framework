@@ -449,7 +449,7 @@ input_context={
 
 	input_action = {
 		name = "input_m"
-		text = "SETTING_INPUT_ACTION_M" #Reserved for Morgenröte
+		text = "SETTING_INPUT_ACTION_M" # Reserved for Morgenröte
 		scancode = 16			# M
 	}
 	
@@ -493,6 +493,24 @@ input_context={
 		name = "input_y"
 		text = "SETTING_INPUT_ACTION_Y"
 		scancode = 28			# Y
+	}
+
+	input_action = {
+		name = "input_ctrl_a"
+		text = "SETTING_INPUT_ACTION_CTRL_A" # Reserved for Morgenröte
+		binding = { # ctrl + a
+			scancode = 4
+			modifier = ctrl
+		}
+	}
+
+	input_action = {
+		name = "input_ctrl_s"
+		text = "SETTING_INPUT_ACTION_CTRL_S" # Reserved for Morgenröte
+		binding = { # ctrl + s
+			scancode = 22
+			modifier = ctrl
+		}
 	}
 
 	input_action = {

@@ -1,0 +1,71 @@
+[h1]Community Mod Framework[/h1]
+
+The [b]Community Mod Framework[/b] is a utility mod that aims to improve mod inter-operability while giving modders tools for GUI, Political Movements, Parties and mod detection. This framework makes several changes to GUI files, political movements, and parties. While generally scripted for compatibility, it will collide with other mods that touch these files.
+
+[b]This framework is structured to be load order agnostic by using Victoria 3's file loading behavior, but it is good practice to place this mod before/above any other mods in your mod loader.[/b]
+
+Documentation available on GitHub: https://github.com/Victoria-3-Modding-Co-op/Community-Mod-Framework
+
+Any questions, feel free to reach out via the Modding Co-op: https://discord.gg/EdQE3duh
+
+[h1]Compatibility[/h1]
+[list]
+[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=3410439297]Expanded Building Grid Compatch[/url]
+[/list]
+
+[h1]Current Scope[/h1]
+[h2]GUI Framework[/h2]
+This part of the framework intends to deconflict mods that require GUI changes which inherently lead to incompatibilities.
+[h3]Current Features:[/h3]
+[list]
+[*]A way to add new buttons to the Sidebar (Credit to Bahmut, LordR, & Alexedishi)
+[*]Modification to the GUI template fullscreen_hide to hide the outliner whenever a scripted widget window is open (Credit to Bahmut & Alexedishi)
+[*]Modification to objective_types to add a scrollbar to the objectives screens. (Credit to Bahmut, KarafuruAmamiya and Xier)
+[*]Integration of the "Modded DLC Framework" (Credit to 1230James)
+[*]Unified system for cooltip types (Credit to 1230James)
+[*]Modification to the outliner and journal GUIs to hide custom objectives during gameplay (Credit to Taylor)
+[*]Several "superevent" windows for extra flavor (Credit to Bananaman & Klein for the Newspaper window, credit to Alexedishi for all others)
+[*]Integration of the "Multi-line PM Framework" (Credit to 1230James)
+[*]Modification to Journal Entry GUI to allow players to show characters (Credit to Bahmut and Mori)
+[*]Alerts can now open custom windows (Credit to Bahmut)
+[*]More than three local goods can now be shown in state building panel correctly (Credit to Bahmut)
+[*]The ability to hide and show specific Journal Entry Groups (Credit to rskhm)
+[*]Additional Modifier Icons + PSD template (Credit to CaelReader)
+[/list]
+
+[h2]Scripting Framework[/h2]
+This part of the framework intends to provide helper functions to modders that by default are not part of the game.
+[h3]Current Features:[/h3]
+[list]
+[*]Simple Structs to manage Variables (Credit to Bahmut)
+[*]Unified Keybind configuration to allow multiple mods to define Keybinds (Credit to Lord R)
+[*]Ability to block Heir notifications (Credit to 1230James)
+[*]Ability to block Country Formation notifications (Credit to Alexedishi)
+[*]Community Mod triggers to detect other active mods
+[/list]
+
+[h2]Community Politics Framework[/h2]
+[list]
+[*]Shared Party definition to deconflict mods that change base game parties
+[*]Shared Political Movement to deconflict mods that change base game parties
+[/list]
+
+[h2]Community Mod Triggers[/h2]
+These triggers allow mods to detect each other. This [b] does not[/b] automatically make mods compatible, but rather is a tool to allow modders to build script around the presence of other mods.
+
+[b]Special Thanks to all to have contributed:[/b]
+[list]
+[*]Alexedishi
+[*]1230James
+[*]Bahmut
+[*]Bananaman
+[*]CaelReader
+[*]KarafuruAmamiya
+[*]Klein
+[*]LordR
+[*]MasterofGrey
+[*]Mori
+[*]Taylor
+[*]Xier
+[*]rskhm
+[/list]

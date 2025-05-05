@@ -599,7 +599,7 @@ types com_character_window_types {
 						blockoverride "values" {
 							min = 0
 							max = 100
-							value = "[Country.MakeScope.Var('com_event_window_2char_duel_var').GetValue]"
+							value = "[GetPlayer.MakeScope.Var('com_event_window_2char_duel_var').GetValue]"
 						}
 					}
 				}

@@ -13,6 +13,8 @@
  SETTING_INPUT_ACTION_U: "Input U (unused)"
  SETTING_INPUT_ACTION_V: "Input V (unused)"
  SETTING_INPUT_ACTION_Y: "Input Y (unused)"
+ SETTING_INPUT_ACTION_CTRL_A: "Input CTRL + A (unused)"
+ SETTING_INPUT_ACTION_CTRL_S: "Input CTRL + S (unused)"
  SETTING_INPUT_ACTION_CTRL_G: "Input CTRL + G (unused)"
  SETTING_INPUT_ACTION_CTRL_T: "Input CTRL + T (unused)"
  SETTING_INPUT_ACTION_CTRL_ALT_D: "Enable Mod Debug"

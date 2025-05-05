@@ -1,0 +1,141 @@
+name: Build Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      release-type:
+        description: 'Release Type'
+        default: 'feature'
+        required: false
+        type: choice
+        options:
+          - 'major'
+          - 'feature'
+          - 'patch'
+      publish:
+        description: 'Publish on Workshop'
+        required: false
+        default: 'false'
+        type: choice
+        options:
+          - 'true'
+          - 'false'
+      workshop-id:
+        description: 'Workshop Identifier'
+        required: false
+        default: '3385002128'
+        type: string
+
+jobs:
+  release:
+    name: "Create GitHub Release"
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.increment-version.outputs.next-version }}
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.2.2
+
+      - name: Checkout Tags
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch --prune --unshallow --tags
+
+      - name: Get Version
+        id: project
+        run: |
+          echo "last-version=$(git describe --tags $(git rev-list --tags --max-count=1))" >> $GITHUB_OUTPUT
+
+      - name: Increment Version
+        id: increment-version
+        uses: christian-draeger/increment-semantic-version@1.2.1
+        with:
+          current-version: ${{ steps.project.outputs.last-version }}
+          version-fragment: ${{ inputs.release-type }}
+
+      - name: Collect Changes
+        id: commits
+        run: |
+          {
+            echo 'markdown<<EOF'
+            echo "$(git log ${{ steps.project.outputs.last-version }}..HEAD --no-merges --pretty=format:' - %s')"
+            echo EOF
+          } >> "$GITHUB_OUTPUT"
+          echo "# Commits" >> $GITHUB_STEP_SUMMARY
+          echo "$(git log ${{ steps.project.outputs.last-version }}..HEAD --no-merges --pretty=format:' - %s')" >> $GITHUB_STEP_SUMMARY
+
+      - name: Update Version
+        run: |
+          sed -i 's/"version" : "${{ steps.project.outputs.last-version }}"/"version" : "${{ steps.increment-version.outputs.next-version }}"/g' mod/.metadata/metadata.json
+          git commit -am "Updated version to ${{ steps.increment-version.outputs.next-version }}"
+          echo "# Versions" >> $GITHUB_STEP_SUMMARY
+          echo "Last Version: **${{ steps.project.outputs.last-version }}**" >> $GITHUB_STEP_SUMMARY
+          echo "Next Version: **${{ steps.increment-version.outputs.next-version }}**" >> $GITHUB_STEP_SUMMARY
+
+      - name: Push Version
+        run: |
+          git push origin
+
+      - name: Clean Repository
+        run: |
+          mkdir /steam-release
+          mv STEAM_PAGE.bbcode /steam-release/STEAM_PAGE.bbcode
+          mv script/create-release-vdf.sh /steam-release/create-release-vdf.sh
+          rm -rf .git/
+          rm -rf .github/
+          rm -rf docs/
+          rm -f .gitattributes
+          rm -f .gitignore
+          rm -f README.md
+
+      - name: Create Release Artifact
+        run: |
+          (cd mod; zip -r release-${{ steps.increment-version.outputs.next-version }}.zip .)
+
+      - name: Upload Release Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Release
+          path: mod/release-${{ steps.increment-version.outputs.next-version }}.zip
+
+      - name: Publish GitHub Release
+        id: create_release
+        uses: softprops/action-gh-release@v2.2.1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          draft: false
+          prerelease: false
+          files: mod/release-${{ steps.increment-version.outputs.next-version }}.zip
+          tag_name: ${{ steps.increment-version.outputs.next-version }}
+          name: ${{ steps.increment-version.outputs.next-version }}
+          body: |
+            Released a new version of the **Community Mod Framework**.
+
+            ### Commits:
+            ${{ steps.commits.outputs.markdown }}
+
+      - name: Create Workshop Metadata
+        if: ${{ inputs.publish == 'true' }}
+        id: metadata
+        shell: bash
+        run: |
+          /steam-release/create-release-vdf.sh ${{ github.workspace }} /steam-release/STEAM_PAGE.bbcode "${{ inputs.workshop-id }}"
+          mv workshop.vdf /steam-release/workshop.vdf
+          echo "vdf=/steam-release/workshop.vdf" >> "$GITHUB_OUTPUT"
+          echo "# Workflow Metadata" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          echo "$(cat < /steam-release/workshop.vdf)" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+
+      - name: Setup SteamCMD
+        if: ${{ inputs.publish == 'true' }}
+        uses: buildalon/setup-steamcmd@v1.0.4
+
+      - name: Publish to Workshop
+        if: ${{ inputs.publish == 'true' }}
+        shell: bash
+        run: |
+          steamcmd +login ${{ secrets.WORKSHOP_USERNAME }} ${{ secrets.WORKSHOP_PASSWORD }} +workshop_build_item ${{ steps.metadata.outputs.vdf }} +quit
+

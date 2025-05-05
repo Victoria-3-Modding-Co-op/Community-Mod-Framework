@@ -133,7 +133,7 @@ jobs:
           echo "vdf=$(realpath ../steam-release/workshop.vdf)" >> "$GITHUB_OUTPUT"
           echo "# Workflow Metadata" >> $GITHUB_STEP_SUMMARY
           echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
-          echo "$(cat < /steam-release/workshop.vdf)" >> $GITHUB_STEP_SUMMARY
+          echo "$(cat < ../steam-release/workshop.vdf)" >> $GITHUB_STEP_SUMMARY
           echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
 
       - name: Setup SteamCMD

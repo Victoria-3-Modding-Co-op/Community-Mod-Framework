@@ -44,6 +44,8 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git fetch --prune --unshallow --tags
 
+        # Get the latest tag from git
+        # Tag is used as the last version
       - name: Get Version
         id: project
         run: |
@@ -56,6 +58,9 @@ jobs:
           current-version: ${{ steps.project.outputs.last-version }}
           version-fragment: ${{ inputs.release-type }}
 
+        # Collect commits since the last tag
+        # Format them as a Markdown list and put them into the summary
+        # Report: Commit list
       - name: Collect Changes
         id: commits
         run: |
@@ -67,6 +72,9 @@ jobs:
           echo "# Commits" >> $GITHUB_STEP_SUMMARY
           echo "$(git log ${{ steps.project.outputs.last-version }}..HEAD --no-merges --pretty=format:' - %s')" >> $GITHUB_STEP_SUMMARY
 
+        # Replace the old version in metadata.json with the new one
+        # Commit the metadata.json
+        # Report: Last and Next version
       - name: Update Version
         run: |
           sed -i 's/"version" : "${{ steps.project.outputs.last-version }}"/"version" : "${{ steps.increment-version.outputs.next-version }}"/g' .metadata/metadata.json
@@ -79,6 +87,8 @@ jobs:
         run: |
           git push origin
 
+        # Move files relevant for the steam release into a separate folder
+        # Remove all other folders and files that should not be in the release
       - name: Clean Repository
         run: |
           mkdir ../steam-release
@@ -92,16 +102,21 @@ jobs:
           rm -f .gitignore
           rm -f README.md
 
+        # Package clean mod folder into a zip file
       - name: Create Release Artifact
         run: |
           zip -r release-${{ steps.increment-version.outputs.next-version }}.zip .
 
+        # Attach mod package to the workflow run
       - name: Upload Release Artifact
         uses: actions/upload-artifact@v4
         with:
           name: Release
           path: release-${{ steps.increment-version.outputs.next-version }}.zip
 
+        # Create a GitHub release
+        # Includes the list of commits
+        # Includes the mod package
       - name: Publish GitHub Release
         id: create_release
         uses: softprops/action-gh-release@v2.2.1
@@ -119,10 +134,14 @@ jobs:
             ${{ steps.commits.outputs.markdown }}
 
 
+        # Delete mod package so it is not published to steam
       - name: Clean Release Artifact
         run: |
           rm -f release-${{ steps.increment-version.outputs.next-version }}.zip
 
+        # Create mod metadata for the steam release
+        # Uses STEAM_PAGE.bbcode to update steam description
+        # Report: Generated metadata
       - name: Create Workshop Metadata
         if: ${{ inputs.publish == 'true' }}
         id: metadata
@@ -140,6 +159,8 @@ jobs:
         if: ${{ inputs.publish == 'true' }}
         uses: buildalon/setup-steamcmd@v1.0.4
 
+        # Publish to steam workshop
+        # Uses generated metadata and configured workshop user
       - name: Publish to Workshop
         if: ${{ inputs.publish == 'true' }}
         shell: bash

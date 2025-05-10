@@ -6,8 +6,9 @@
 
 	# We do not want our struct to die ;)
 	on_created = {
-		place_character_in_void = 10000
 		set_variable = is_struct
 		set_character_immortal = yes
+		exile_character = yes
+		place_character_in_void = 10000
 	}
 }

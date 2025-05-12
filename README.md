@@ -334,7 +334,7 @@ You can use `set_dict_id` to create unique IDs in other scopes which support var
 Keys can be any number from 0 to 2047  
 Values can be any number from -45035996273.70496 to 45035996273.70495  
 
-⚠️ Dictionaries storing both the key and value in a single number using bit shifts, you must be careful to ensure your keys and values do not overflow.
+⚠️ Dictionaries store both the key and value in a single number using bit shifts, you must be careful to ensure your keys and values do not overflow.
 For performance reasons there are no internal saftey checks. Using numbers outside of these ranges will result in undefined behaviour.
 
 ## Set

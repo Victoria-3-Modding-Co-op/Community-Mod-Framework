@@ -20,6 +20,7 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=3385002128
 * [Structs](#structs)
     * [Creating a new Struct](#creating-a-new-struct)
     * [Setting Variables on a Struct](#setting-variables-on-a-struct)
+* [Dictionaries](#dictionaries)
 * [Parties](#parties)
 * [Community Mod Triggers](#community-mod-triggers)
 * [Keybinds](#keybinds)
@@ -324,6 +325,56 @@ c:GBR = {
 ```
 
 **NOTE: Internally structs are immortal Characters in the void. This means potential textures for the GUI could be set using a Characters ideology.**
+
+# Dictionaries
+
+Dictionaries store numeric key value pairs.
+You can use `set_dict_id` to create unique IDs in other scopes which support variables which can then be safely used as dictionary keys.
+
+Keys can be any number from 0 to 2047  
+Values can be any number from -45035996273.70496 to 45035996273.70495  
+
+⚠️ Dictionaries storing both the key and value in a single number using bit shifts, you must be careful to ensure your keys and values do not overflow.
+For performance reasons there are no internal saftey checks. Using numbers outside of these ranges will result in undefined behaviour.
+
+## Set
+```
+add_to_dict = {
+  dict  = dictionary_name
+  key   = numeric_key
+  value = numeric_value
+}
+```
+## Get
+```
+every_in_list = {
+  variable = dictionary_name
+  limit = {
+    dict_key_for_kvp = {
+      lookup_key = numeric_key
+    }
+  }
+  save_temporary_scope_value_as = {
+    name = kvp
+    value = this
+  }
+  multiply = kvp_to_value
+}
+```
+## IDs
+```
+every_country = {
+  set_dict_id = yes # Generates a new ID for this scope if one does not already exist
+  save_temporary_scope_as = country
+  every_scope_culture = {
+    add_to_dict = {
+      dict  = dictionary_name
+      key   = scope:country.var:dict_id # The generated ID is safe to use as a unique key
+      value = numeric_value
+    }
+  }
+}
+```
 
 # Parties
 

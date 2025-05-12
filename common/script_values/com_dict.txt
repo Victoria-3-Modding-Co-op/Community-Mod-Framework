@@ -1,0 +1,42 @@
+﻿## Key value pairs
+# Numbers are stored as 64 bit signed fixed point integers with 5 base 10 decimal places
+# Sign  - 1 bit
+# Key   - 11 bits (max 2047, enough for each defined country in the game to exist and spawn two dynamic tags)
+# Value - 52 bits (max 45035996273.70495, min -45035996273.70496)
+
+key_shift = 45035996273.70496 # 2^52/10000
+
+# scope:kvp_key
+# scope:kvp_value
+key_value_to_kvp = {
+    value = scope:kvp_key
+    # Shift key 52 bits
+    multiply = key_shift
+    # Store value
+    add = scope:kvp_value
+}
+
+# scope:kvp
+kvp_to_key = {
+    value = scope:kvp
+    divide = key_shift
+}
+
+# scope:kvp
+kvp_to_value = {
+    value = scope:kvp
+    subtract = {
+        value = kvp_to_key
+        multiply = key_shift
+    }
+}
+
+# scope:kvp
+# scope:kvp_key
+kvp_key_to_value = {
+    value = scope:kvp
+    subtract = {
+        value = scope:kvp_key
+        multiply = key_shift
+    }
+}

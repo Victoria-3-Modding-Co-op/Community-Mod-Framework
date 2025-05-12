@@ -1,0 +1,87 @@
+﻿# Maps numeric keys to numeric values
+# 
+## Usage
+### Set
+# add_to_dict = {
+#     dict  = dictionary_name
+#     key   = numeric_key
+#     value = numeric_value
+# }
+### Get
+# every_in_list = {
+#     variable = dictionary_name
+#     limit = {
+#         dict_key_for_kvp = {
+#             lookup_key = numeric_key
+#         }
+#     }
+#     save_temporary_scope_value_as = {
+#         name = kvp
+#         value = this
+#     }
+#     multiply = kvp_to_value
+# }
+
+add_to_dict = {
+    save_temporary_scope_value_as = {
+        name = kvp_key
+        value = $key$
+    }
+    save_temporary_scope_value_as = {
+        name = kvp_value
+        value = $value$
+    }
+
+    # Clear current value for key (if any)
+    if = {
+        limit = {
+            has_variable_list = $dict$
+        }
+
+        every_in_list = {
+            variable = $dict$
+            limit = {
+                dict_key_for_kvp = {
+                    lookup_key = $key$
+                }
+            }
+            save_temporary_scope_value_as = {
+                name = old_kvp
+                value = this
+            }
+        }
+
+        remove_list_variable = {
+            name = $dict$
+            target = scope:old_kvp
+        }
+    }
+
+    # Create new entry
+    set_local_variable = {
+        name = kvp
+        value = key_value_to_kvp
+    }
+    add_to_variable_list = {
+        name = $dict$
+        target = local_var:kvp
+    }
+}
+
+set_dict_id = {
+    if = {
+        limit = {
+            NOT = {
+                has_variable = dict_id
+            }
+        }
+        set_variable = {
+            name = dict_id
+            value = global_var:next_dict_id
+        }
+        change_global_variable = {
+            name = next_dict_id
+            add = 1
+        }
+    }
+}

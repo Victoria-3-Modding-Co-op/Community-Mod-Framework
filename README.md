@@ -20,6 +20,7 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=3385002128
 * [Structs](#structs)
     * [Creating a new Struct](#creating-a-new-struct)
     * [Setting Variables on a Struct](#setting-variables-on-a-struct)
+* [Fixing Variable Errors](#fixing-variable-errors)
 * [Dictionaries](#dictionaries)
 * [Parties](#parties)
 * [Community Mod Triggers](#community-mod-triggers)
@@ -325,6 +326,18 @@ c:GBR = {
 ```
 
 **NOTE: Internally structs are immortal Characters in the void. This means potential textures for the GUI could be set using a Characters ideology.**
+
+# Fixing Variable Errors
+When you are using a variable only in the GUI or in localizations, the game creates errors and spams the error log.
+To avoid this, there is a helper scripted effect in CMF that suppresses these types of errors.
+```
+fix_variable_error = {
+	variable = variable_or_flag_name
+}
+```
+Usage examples can be found [here](events/community_framework_events.txt).
+
+**NOTE**: This works for both **variables** and **flags**.
 
 # Dictionaries
 

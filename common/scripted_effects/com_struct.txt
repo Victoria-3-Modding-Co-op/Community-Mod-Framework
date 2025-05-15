@@ -10,3 +10,10 @@
 		}
 	}
 }
+
+destroy_struct = {
+	$struct$ ?= {
+		kill_character = yes
+		free_character_from_void = yes
+	}
+}

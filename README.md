@@ -325,6 +325,22 @@ c:GBR = {
 }
 ```
 
+## Destroying a Struct
+A struct will live **forever** and can become a performance issue.
+So you need to manage their lifetime if you are using them for temporary applications.
+
+You can destroy them using this scripted effect:
+```
+destroy_struct = {
+	struct = var:some_struct
+}
+```
+```
+destroy_struct = {
+	struct = scope:some_struct
+}
+```
+
 **NOTE: Internally structs are immortal Characters in the void. This means potential textures for the GUI could be set using a Characters ideology.**
 
 # Fixing Variable Errors

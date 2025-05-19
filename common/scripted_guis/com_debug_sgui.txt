@@ -1,5 +1,5 @@
 ﻿com_toggle_debug = {
-    scope = country
+    scope = none
 
     effect = {
         if = {

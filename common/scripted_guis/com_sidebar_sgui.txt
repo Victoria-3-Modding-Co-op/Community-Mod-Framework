@@ -1,0 +1,71 @@
+﻿com_sidebar_add_visible_item = {
+    scope = none
+
+    saved_scopes = {
+        flag
+    }
+
+    effect = {
+        add_to_global_variable_list = {
+            name = com_sidebar_visible_items
+            target = scope:flag
+        }
+    }
+}
+
+com_sidebar_remove_hidden_item = {
+    scope = none
+
+    saved_scopes = {
+        flag
+    }
+
+    effect = {
+        remove_list_global_variable = {
+            name = com_sidebar_visible_items
+            target = scope:flag
+        }
+    }
+}
+
+com_sidebar_add_visible_country_item = {
+    scope = country
+
+    saved_scopes = {
+        flag
+    }
+
+    effect = {
+        add_to_variable_list = {
+            name = com_sidebar_visible_items
+            target = scope:flag
+        }
+    }
+}
+
+com_sidebar_remove_hidden_country_item = {
+    scope = country
+
+    saved_scopes = {
+        flag
+    }
+
+    effect = {
+        remove_list_variable = {
+            name = com_sidebar_visible_items
+            target = scope:flag
+        }
+    }
+}
+
+com_sidebar_has_visible_items = {
+    scope = country
+
+    is_shown = {
+        OR = {
+            has_variable_list = com_sidebar_visible_items
+            has_global_variable_list = com_sidebar_visible_items
+        }
+    }
+
+}

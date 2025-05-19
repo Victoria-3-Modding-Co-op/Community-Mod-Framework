@@ -2,16 +2,16 @@
 # This allows triggering state events
 # and shortcuts.
 widget = {
+    datacontext = "[GetMetaPlayer.GetPlayedOrObservedCountry]"
     size = { 0 0 }
     name = com_hidden_trigger
     allow_outside = yes
     alpha = 0
-    max_update_rate = 1
 
     button = {
         size = { 0 0 }
-        enabled = "[GetMetaPlayer.GetPlayedOrObservedCountry.IsValid]"
+        enabled = "[Country.IsValid]"
         input_action = "input_ctrl_alt_d"
-        onclick = "[GetScriptedGui('com_toggle_debug').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        onclick = "[GetScriptedGui('com_toggle_debug').Execute(GuiScope.End)]"
     }
 }

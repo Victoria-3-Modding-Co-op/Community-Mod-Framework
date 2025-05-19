@@ -20,6 +20,7 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=3385002128
 * [Structs](#structs)
     * [Creating a new Struct](#creating-a-new-struct)
     * [Setting Variables on a Struct](#setting-variables-on-a-struct)
+    * [Destroying a Struct](#destroying-a-struct)
 * [Fixing Variable Errors](#fixing-variable-errors)
 * [Dictionaries](#dictionaries)
 * [Parties](#parties)
@@ -169,16 +170,33 @@ Button ideologies have three localization keys: \<ideology\>, \<ideology\>_desc 
 The key \<ideology\> should contain the name of your scripted_gui.
 And the key \<ideology\>_desc contains the name shown when hovering over the button.
 The \<ideology\>_tooltip is optional and will be shown as a tooltip if you hover over the button (See [com_gui_l_english.yml](localization/english/com_gui_l_english.yml)).
-**Good practice here is to name the ideology and the scripted gui the same so even if you do not set the localization key for a language, the correct scripted gui is triggered!**
+**Good practice here is to name the ideology and the scripted gui the same, so even if you do not set the localization key for a language, the correct scripted gui is triggered!**
+
+### Adding the Button
 
 And at last we need to add the button to the sidebar.
-This is done via the following effect (but with your ideology):
+This is done by adding your ideology as a flag to a list.
+
+#### Global
+
+To add the buttons for all countries:
 ```
 add_to_global_variable_list = {
     name = custom_button_list_flag
     target = flag:gui_sidebar_example_button
 }
 ```
+
+#### Country
+
+To add the button for only one country:
+```
+add_to_variable_list = {
+    name = custom_button_list_flag
+    target = flag:gui_sidebar_example_button
+}
+```
+
 This effect can be run wherever you want, like a journal entry or an event.
 One possibility is to run it in `common/history/global/` (See [enable_example_button.txt](common/history/global/enable_example_button.txt)).
 

@@ -768,6 +768,7 @@ types com_sidebar_overwrite {
     # It is referenced above in the changes
     # base game type
     type custom_sidebar = flowcontainer {
+        datacontext = "[GetMetaPlayer.GetPlayedOrObservedCountry]"
         position = { 0 @maplist_position }
         parentanchor = top|left
         direction = vertical
@@ -775,24 +776,28 @@ types com_sidebar_overwrite {
 
         # Don't show in observer mode
         # or when there are no buttons
-        visible = "[And3(
-            GetMetaPlayer.GetPlayedOrObservedCountry.IsValid,
-            Not(IsObserver),
-            Or(
-                Not(IsDataModelEmpty(GetGlobalList('custom_button_list'))),
-                Not(IsDataModelEmpty(GetGlobalList('custom_button_list_flag')))
-            )
-        )]"
+        visible = "[Country.IsValid]"
 
         # Close custom panels when a base game panel is opened
         # Same behavior as base game
-        state = {
-            trigger_when = "[InformationPanelBar.IsAnyPanelOpen]"
-            on_finish = "[GetVariableSystem.Clear('com_open_window')]"
+        widget = {
+            state = {
+                trigger_when = "[InformationPanelBar.IsAnyPanelOpen]"
+                on_finish = "[GetVariableSystem.Clear('com_open_window')]"
+            }
+        }
+        # Close custom panels when ledger panel is opened
+        # Same behavior as base game
+        widget = {
+            state = {
+                trigger_when = "[MapListPanelManager.IsVisible]"
+                on_finish = "[GetVariableSystem.Clear('com_open_window')]"
+            }
         }
 
         #widget needed to prevent you from clicking on the map
         widget = {
+            visible = "[GetScriptedGui('com_sidebar_has_visible_items').IsShown(GuiScope.SetRoot(Country.MakeScope).End)]"
             using = clickthrough_blocker
             position = { 0 0 }
             size = { 100% 60 }
@@ -804,12 +809,61 @@ types com_sidebar_overwrite {
                 frame = 1
                 scale = 0.5
             }
+        }
 
-            # Close custom panels when ledger panel is opened
-            # Same behavior as base game
-            state = {
-                trigger_when = "[MapListPanelManager.IsVisible]"
-                on_finish = "[GetVariableSystem.Clear('com_open_window')]"
+        widget = {
+            size = { 0 0 }
+            alpha = 0
+            flowcontainer = {
+                datamodel = "[GetGlobalList('custom_button_list_flag')]" # Get registered custom buttons
+                item = {
+                    widget = {
+                        widget = {
+                            state = {
+                                trigger_when = "[GetScriptedGui(Scope.GetFlagName).IsShown(GuiScope.SetRoot(Country.MakeScope).End)]"
+                                on_finish = "[GetScriptedGui('com_sidebar_add_visible_item').Execute(GuiScope.AddScope('flag', GetIdeology(Scope.GetFlagName).MakeScope).End)]"
+                            }
+                        }
+                        widget = {
+                            state = {
+                                trigger_when = "[Not(GetScriptedGui(Scope.GetFlagName).IsShown(GuiScope.SetRoot(Country.MakeScope).End))]"
+                                on_finish = "[GetScriptedGui('com_sidebar_remove_hidden_item').Execute(GuiScope.AddScope('flag', GetIdeology(Scope.GetFlagName).MakeScope).End)]"
+                            }
+                        }
+                    }
+                }
+            }
+            flowcontainer = {
+                datamodel = "[Country.MakeScope.GetList('custom_button_list_flag')]" # Get registered custom buttons
+                item = {
+                    widget = {
+                        datacontext = "[GetIdeology(Scope.GetFlagName)]"
+                        widget = {
+                            visible = "[GetScriptedGui(Scope.GetFlagName).IsShown(GuiScope.SetRoot(Country.MakeScope).End)]"
+                            state = {
+                                trigger_on_create = yes
+                                name = _show
+                                on_finish = "[GetScriptedGui('com_sidebar_add_visible_country_item').Execute(GuiScope
+                                    .SetRoot(Country.MakeScope)
+                                    .AddScope('flag', Ideology.MakeScope)
+                                    .End
+                                )]"
+                            }
+                        }
+                        widget = {
+                            visible = "[Not(GetScriptedGui(Scope.GetFlagName).IsShown(GuiScope.SetRoot(Country.MakeScope).End))]"
+                            state = {
+                                trigger_on_create = yes
+                                name = _show
+                                on_finish = "[GetScriptedGui('com_sidebar_remove_hidden_country_item').Execute(GuiScope
+                                    .SetRoot(Country.MakeScope)
+                                    .AddScope('flag', Ideology.MakeScope)
+                                    .End
+                                )]"
+                            }
+                        }
+                    }
+                }
             }
         }
 
@@ -820,77 +874,91 @@ types com_sidebar_overwrite {
             position = { 0 -100 }
 
             item = {
-                container = {
-                    datacontext = "[GetIdeology(Scope.GetFlagName)]"
-                    datacontext = "[GetScriptedGui(Scope.GetFlagName)]"
-                    enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-
-                    widget = {
-                        parentanchor = bottom|left
-                        icon = {
-                            parentanchor = bottom|left
-                            position = { 0 20 }
-                            texture = "gfx/interface/main_hud/sidebar_skin_bg_1.dds"
-                            framesize = { 100 100 }
-                            size = { 100 100 }
-                            scale = 0.42
-                            frame = 1
-                            mirror = vertical
-                        }
-                    }
-
-                    widget = {
-                        size = { 50 40 }
-                        background = {
-                            texture = "gfx/interface/main_hud/sidebar_skin_bg_4.dds"
-                        }
-                    }
-
-                    sidebar_label_button_small = {
-                        position = { -100 0 }
-                        blockoverride "onclick" {
-                            enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-                            onclick = "[GetVariableSystem.Set('com_open_window', Scope.GetFlagName)]"
-                            onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-                        }
-                    }
-
-                    sidebar_label_text_small = {
-                        position = { -100 0 }
-                        raw_text = "[Ideology.GetDesc]"
-                    }
-
-                    widget = {
-                        size = { 50 40 }
-                        using = clickthrough_blocker
-                        using = sidebar_button_size_small
-                        using = selected_sidepanel_animation_small
-                        blockoverride "selected_visibility" {
-                            visible = "[GetVariableSystem.HasValue('com_open_window', Scope.GetFlagName)]"
-                        }
-                        sidepanel_button_small = {
-                            position = { -4 0 }
-                            blockoverride "icon" {
-                                scale = 0.7
-                                texture = "[Ideology.GetTexture]"
-                            }
-                            blockoverride "button_selected" {
-                                visible = "[GetVariableSystem.HasValue('com_open_window', Scope.GetFlagName)]"
-                            }
-                            enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-                            onclick = "[GetVariableSystem.Set('com_open_window', Scope.GetFlagName)]"
-                            onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-                        }
-                    }
-
-                    sidebar_tooltip_area_small = {
-                        position = { 0 0 }
-                        # Only show tooltip when there is one defined
-                        visible = "[Not(ObjectsEqual(Localize(Concatenate(Scope.GetFlagName, '_tooltip')), Concatenate(Scope.GetFlagName, '_tooltip')))]"
-                        tooltip = "[Localize(Concatenate(Scope.GetFlagName, '_tooltip'))]"
-                    }
-                }
+                com_sidebar_button = {}
             }
+        }
+
+        flowcontainer = {
+            name = tutorial_highlight_com_sidebar_country
+            direction = vertical
+            datamodel = "[Country.MakeScope.GetList('custom_button_list_flag')]" # Get registered custom buttons
+            position = { 0 -100 }
+
+            item = {
+                com_sidebar_button = {}
+            }
+        }
+    }
+
+    type com_sidebar_button = container {
+        datacontext = "[GetIdeology(Scope.GetFlagName)]"
+        datacontext = "[GetScriptedGui(Scope.GetFlagName)]"
+        enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(Country.MakeScope).End)]"
+        visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(Country.MakeScope).End)]"
+
+        widget = {
+            parentanchor = bottom|left
+            icon = {
+                parentanchor = bottom|left
+                position = { 0 20 }
+                texture = "gfx/interface/main_hud/sidebar_skin_bg_1.dds"
+                framesize = { 100 100 }
+                size = { 100 100 }
+                scale = 0.42
+                frame = 1
+                mirror = vertical
+            }
+        }
+
+        widget = {
+            size = { 50 40 }
+            background = {
+                texture = "gfx/interface/main_hud/sidebar_skin_bg_4.dds"
+            }
+        }
+
+        sidebar_label_button_small = {
+            position = { -100 0 }
+            blockoverride "onclick" {
+                enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(Country.MakeScope).End)]"
+                onclick = "[GetVariableSystem.Set('com_open_window', Scope.GetFlagName)]"
+                onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(Country.MakeScope).End)]"
+            }
+        }
+
+        sidebar_label_text_small = {
+            position = { -100 0 }
+            raw_text = "[Ideology.GetDesc]"
+        }
+
+        widget = {
+            size = { 50 40 }
+            using = clickthrough_blocker
+            using = sidebar_button_size_small
+            using = selected_sidepanel_animation_small
+            blockoverride "selected_visibility" {
+                visible = "[GetVariableSystem.HasValue('com_open_window', Scope.GetFlagName)]"
+            }
+            sidepanel_button_small = {
+                position = { -4 0 }
+                blockoverride "icon" {
+                    scale = 0.7
+                    texture = "[Ideology.GetTexture]"
+                }
+                blockoverride "button_selected" {
+                    visible = "[GetVariableSystem.HasValue('com_open_window', Scope.GetFlagName)]"
+                }
+                enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(Country.MakeScope).End)]"
+                onclick = "[GetVariableSystem.Set('com_open_window', Scope.GetFlagName)]"
+                onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(Country.MakeScope).End)]"
+            }
+        }
+
+        sidebar_tooltip_area_small = {
+            position = { 0 0 }
+            # Only show tooltip when there is one defined
+            visible = "[Not(ObjectsEqual(Localize(Concatenate(Scope.GetFlagName, '_tooltip')), Concatenate(Scope.GetFlagName, '_tooltip')))]"
+            tooltip = "[Localize(Concatenate(Scope.GetFlagName, '_tooltip'))]"
         }
     }
 }

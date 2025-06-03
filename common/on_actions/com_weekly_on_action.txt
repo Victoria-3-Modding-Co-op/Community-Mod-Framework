@@ -4,18 +4,22 @@
 
 on_monthly_pulse = {
     on_actions = {
-        #set_weekly_on_action_example
+        #set_weekly_on_action_example <-- Add your own on_action to a on_monthly_pulse in your mod.
     }
 }
 
-
+#Add this effect to the new on_action
 set_weekly_on_action_example = { # Example setter of weekly on actions
     effect = {
-        com_run_weekly_event_example = yes
+        com_run_weekly_event_country_effect = {
+            weekday = 1 # <-- This decides the weekday 0 = Sunday, 6 = Saturday, 1 = Monday
+            on_action = example_on_action_weekly # <-- this is the on_action you want to fire each week
+        }
     }
 }
-
-example_on_action_weekly = { # Example on action, replace with your own
+#Example on action, replace with your own
+# You can add everything a normal on action can use.
+example_on_action_weekly = {
     effect = {
         set_variable = {
             name = example_on_action_weekly_run_date

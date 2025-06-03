@@ -503,11 +503,11 @@ Note:
 This is a framework to allow for a weekly firing script event on any day of the week, without a hidden journal entry being used.
 
 To use:
-1. In `com_weekly_on_action.txt`, rename `set_weekly_on_action_example` to a name of your choice and add this to the `on_monthly_pulse` on_actions block.
-2. In the same file, rename the `com_run_weekly_event_example` to a relevant name
-3. In `com_weekly_event.txt`, rename `com_run_weekly_event_example` to the same as what you named it above. Set weekday to your required day, rename the global variable `com_added_days` and replace `example_on_action_weekly` with your weekly on action.
-4. Go back to `com_weekly_on_action.txt` and add your weekly on action as a new on action.
-5. Rename `com_weekly_on_action.txt` and `com_weekly_event.txt` to something that won't conflict with other mods using this framework.
+1. Create a new `on_monthly_pulse` or reuse an existing one.
+2. Set it up like in `com_weekly_on_action.txt`:
+3. Add your own `on_action` to the `on_monthly_pulse` from step 1.
+4. Add the `com_run_weekly_event_country_effect` into this new on_action and set the two parameters. Example: `com_run_weekly_event_country_effect = { weekday = 1 on_action = another_on_action }`. Weekday decides the weekday ranging from 0 (Sunday) to 6 (Saturday).
+5. Define your new on_action (`another_on_action` in the example in 4.)
 
 
 # Hide/Show Journal Entry Groups

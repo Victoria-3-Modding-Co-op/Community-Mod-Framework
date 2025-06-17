@@ -3,6 +3,7 @@
 # and shortcuts.
 widget = {
     datacontext = "[GetMetaPlayer.GetPlayedOrObservedCountry]"
+    visible = "[GetMetaPlayer.GetPlayedOrObservedCountry.IsValid]"
     size = { 0 0 }
     name = com_hidden_trigger
     allow_outside = yes

@@ -3521,7 +3521,7 @@ movement_radical = {
 	ideology = ideology_radical_movement
 	character_ideologies = {
 		ideology_radical
-		ideology_atheist
+		ideology_nihilist
 		ideology_moh_revolutionary # MoH Revolutionary
 		ideology_moh_kmt # MoH Kuomintang Nationalist
 	}
@@ -3582,7 +3582,7 @@ movement_radical = {
 			limit = {
 				OR = {
 					has_ideology = ideology:ideology_radical
-					has_ideology = ideology:ideology_atheist
+					has_ideology = ideology:ideology_nihilist
 				}
 			}
 			multiply = {
@@ -3846,9 +3846,9 @@ movement_nihilist = {
 	# Nihilists pretty much only care about their atheist thing
 	law_enactment_radicalism_multiplier = 1.5 
 	
-	ideology = ideology_atheist
+	ideology = ideology_nihilist
 	character_ideologies = {
-		ideology_atheist
+		ideology_nihilist
 	}
 	
 	creation_trigger = {
@@ -3894,7 +3894,7 @@ movement_nihilist = {
 		value = 200
 		if = {
 			limit = {
-				has_ideology = ideology:ideology_atheist
+				has_ideology = ideology:ideology_nihilist
 			}
 			multiply = {
 				value = 5
@@ -4076,7 +4076,7 @@ movement_positivist = {
 			}
 			OR = {
 				has_ideology = ideology:ideology_positivist
-				has_ideology = ideology:ideology_atheist
+				has_ideology = ideology:ideology_nihilist
 				has_ideology = ideology:ideology_republican_leader
 				is_interest_group_type = ig_armed_forces
 			}
@@ -4084,7 +4084,7 @@ movement_positivist = {
 		trigger_else = {
 			OR = {
 				has_ideology = ideology:ideology_positivist
-				has_ideology = ideology:ideology_atheist
+				has_ideology = ideology:ideology_nihilist
 				has_ideology = ideology:ideology_republican_leader
 				interest_group ?= {
 					OR = {

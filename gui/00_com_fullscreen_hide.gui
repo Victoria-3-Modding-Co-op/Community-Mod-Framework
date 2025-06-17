@@ -1,14 +1,43 @@
 # Modification done by Alexedishi and Bahmut
 
+# If the widget should NOT be visible in fullscreens, not taking the Treaty Draft panel into account.
 template fullscreen_hide {
     visible = "[Not(
-					Or6(
-                        InformationPanelBar.IsPanelOpen('politics'),
-                        InformationPanelBar.IsPanelOpen('politics_panel_change_law'),
-                        InformationPanelBar.IsPanelOpen('tech_tree'),
-                        InformationPanelBar.IsPanelOpen('pop_browser'),
-                        InformationPanelBar.IsPanelOpen('building_browser'),
-                        GetVariableSystem.Exists('com_fullscreen')
-					)
-				)]"
+        Or6(
+            InformationPanelBar.IsPanelOpen('politics'),
+            InformationPanelBar.IsPanelOpen('politics_panel_change_law'),
+            InformationPanelBar.IsPanelOpen('tech_tree'),
+            InformationPanelBar.IsPanelOpen('pop_browser'),
+            InformationPanelBar.IsPanelOpen('building_browser'),
+            GetVariableSystem.Exists('com_fullscreen')
+        )
+    )]"
+}
+
+# If the widget should be visible when ANY fullscreen is open, including the Treaty Draft panel.
+template half_and_fullscreen_show {
+	visible = "[Or7(
+	    InformationPanelBar.IsPanelOpen('politics'),
+	    InformationPanelBar.IsPanelOpen('politics_panel_change_law'),
+	    InformationPanelBar.IsPanelOpen('tech_tree'),
+	    InformationPanelBar.IsPanelOpen('pop_browser'),
+	    InformationPanelBar.IsPanelOpen('building_browser'),
+	    InformationPanelBar.IsPanelOpen('treaty_draft_panel'),
+	    GetVariableSystem.Exists('com_fullscreen')
+	)]"
+}
+
+### If the widget should NOT be visible when ANY fullscreen is open, including the Treaty Draft panel.
+template half_and_fullscreen_hide {
+	visible = "[Not(
+	    Or7(
+	        InformationPanelBar.IsPanelOpen('politics'),
+	        InformationPanelBar.IsPanelOpen('politics_panel_change_law'),
+	        InformationPanelBar.IsPanelOpen('tech_tree'),
+	        InformationPanelBar.IsPanelOpen('pop_browser'),
+	        InformationPanelBar.IsPanelOpen('building_browser'),
+	        InformationPanelBar.IsPanelOpen('treaty_draft_panel'),
+	        GetVariableSystem.Exists('com_fullscreen')
+	    )
+	 )]"
 }

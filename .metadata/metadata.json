@@ -4,7 +4,9 @@
   "version" : "1.14.0",
   "supported_game_version" : "1.8.*",
   "short_description" : "This is a framework to enable easy integration between mods.",
-  "tags" : [],
+  "tags" : [
+    "1.9"
+  ],
   "relationships" : [],
   "game_custom_data" : {
     "multiplayer_synchronized" : true

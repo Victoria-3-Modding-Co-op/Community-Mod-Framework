@@ -772,7 +772,13 @@ types com_sidebar_overwrite {
 
         # Don't show in observer mode
         # or when there are no buttons
-        visible = "[Country.IsValid]"
+        visible = "[And(
+            Country.IsValid,
+            Or(
+                DataModelHasItems(GetGlobalList('custom_button_list_flag')),
+                DataModelHasItems(Country.MakeScope.GetList('custom_button_list_flag'))
+            )
+        )]"
 
         # Close custom panels when a base game panel is opened
         # Same behavior as base game
@@ -793,7 +799,7 @@ types com_sidebar_overwrite {
 
         #widget needed to prevent you from clicking on the map
         widget = {
-            visible = "[GetScriptedGui('com_sidebar_has_visible_items').IsShown(GuiScope.SetRoot(Country.MakeScope).End)]"
+            #visible = "[GetScriptedGui('com_sidebar_has_visible_items').IsShown(GuiScope.SetRoot(Country.MakeScope).End)]"
             using = clickthrough_blocker
             position = { 0 0 }
             size = { 100% 60 }

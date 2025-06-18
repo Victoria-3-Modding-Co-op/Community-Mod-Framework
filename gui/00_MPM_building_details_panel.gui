@@ -67,18 +67,17 @@ types building_panels
 				block "state_name_button" {
 					button = {
 						layoutpolicy_horizontal = expanding
-						layoutpolicy_vertical = expanding
+						size = { 0 30 }
 						using = default_button
 						onclick = "[InformationPanelBar.OpenBuildingDetailsPanel(Building.AccessSelf)]"
 						tooltip = "GO_TO_BUTTON_BUILDING"
 						using = tooltip_ne
-						maximumsize = { 170 -1 }
 
 						textbox = {
 							size = { 100% 100% }
 							margin = { 10 0 }
 							datacontext = "[Building.GetState]"
-							text = "STATE_NAME_WITH_FOREIGN_FLAG"
+							text = "STATE_NAME_WITH_FOREIGN_FLAG_NO_FORMAT"
 							parentanchor = vcenter
 							align = nobaseline
 							elide =  right
@@ -95,12 +94,28 @@ types building_panels
 						visible = "[Building.IsSubsidized]"
 					}
 
+					building_country_monopoly_icon = {
+						visible = "[BuildingType.HasCountryMonopoly]"
+						datacontext = "[Building.GetBuildingType]"
+					}
+
 					building_privatize_icon = {
 						visible = "[Building.CanBePrivatized]"
 					}
+
+					### AUTO DOWNSIZE WARNING
+					icon = {
+						visible = "[Building.IsAutoDownsizing]"
+						size = { 30 30 }
+						using = tooltip_ne
+						tooltip = "[Building.GetAutoDownsizeTooltip]"
+						texture = "gfx/interface/production_methods/auto_downsize.dds"
+					}
 				}
 
-				expand = {}
+				expand = {
+					visible = "[Not(Building.IsBuildingType('building_company_headquarter'))]"
+				}
 
 				block "action_buttons" {
 					building_auto_expand_toggle = {}
@@ -109,6 +124,11 @@ types building_panels
 
 					building_privatize_toggle = {}
 
+					building_country_monopoly_icon = {
+						visible = "[BuildingType.HasCountryMonopoly]"
+						datacontext = "[Building.GetBuildingType]"
+					}
+
 					building_nationalize_button = {}
 				}
 
@@ -116,7 +136,28 @@ types building_panels
 					layoutpolicy_horizontal = preferred
 					layoutpolicy_vertical = expanding
 					spacing = 10
-					margin_right = 2
+					margin_right = 5
+
+					block "company_owned_button" {
+						button = {
+							visible = "[Building.IsBuildingType('building_company_headquarter')]"
+							layoutpolicy_horizontal = expanding
+							size = { 0 30 }
+							datacontext = "[Building.GetCompany]"
+							using = default_button
+							onclick = "[InformationPanelBar.OpenCompanyPanel(Company.Self)]"
+							tooltip = "GO_TO_BUTTON_COMPANY"
+							using = tooltip_ne
+							
+							textbox = {
+								size = { 100% 100% }
+								align = hcenter|nobaseline
+								using = elide_fontsize_min
+								margin = { 10 0 }
+								text = "BUILDING_OWNED_BY_COMPANY"
+							}
+						}
+					}
 
 					expand = {}
 
@@ -127,7 +168,7 @@ types building_panels
 
 						item = {
 							icon = {
-								size = { 35 35 }
+								size = { 30 30 }
 								tooltip = "TOOLTIP_STATE_TRAIT"
 								using = tooltip_ne
 								onmousehierarchyenter = "[AccessHighlightManager.HighlightStateTrait(StateTrait.Self)]"
@@ -166,7 +207,7 @@ types building_panels
 					}
 
 					button_icon_round = {
-						size = { 36 36 }
+						size = { 30 30 }
 						onclick = "[RightClickMenuManager.ToggleBuildingActions(Building.AccessSelf, PdxGuiWidget.AccessSelf)]"
 						enabled = "[ObjectsEqual(Building.GetState.GetOwner.Self, GetPlayer.Self)]"
 						tooltip = "SHOW_BUILDING_ACTIONS"
@@ -212,14 +253,18 @@ types building_panels
 					}
 				}
 
-				block "extra_items_in_production_methods_list" {}
-                
-                building_progressbars = { # MPM - Moved inside of the container
-                    position = { -5 0 }
-                    parentanchor = right|vcenter
+				block "extra_items_in_production_methods_list" {
+                    
+                    # MPM - move progress bars in here to not clip with PMs
+                    block "building_progressbars" {
+                        building_progressbars = {
+                            position = { -5 0 }
+                            parentanchor = right|vcenter
 
-                    blockoverride "progressbar_size" {
-                        size = { 230 26 }
+                            blockoverride "progressbar_size" {
+                                size = { 230 26 }
+                            }
+                        }
                     }
                 }
 			}
@@ -252,154 +297,229 @@ types building_panels
 		}
 	}
     
-    type condensed_building_information_pms = fixedgridbox {
-		name = "tutorial_highlight_condensed_production_methods"
-		datamodel = "[DataModelFirst(Building.AccessProductionMethodGroups, '(int32)4')]" # MPM - Only first 4
-		flipdirection = yes
+    type condensed_building_information_pms = container {
+        fixedgridbox = {
+            name = "tutorial_highlight_condensed_production_methods"
+            datamodel = "[DataModelFirst(Building.AccessProductionMethodGroups, '(int32)4')]" # MPM - Only first 4
+            flipdirection = yes
 
-		block "pms_slot_sizes" {
-			addcolumn = 52
-			addrow = 50
-		}
-		parentanchor = vcenter
+            block "pms_slot_sizes" {
+                addcolumn = 52
+                addrow = 50
+            }
+            parentanchor = vcenter
 
-		block "pms_minimumsize" {
-			minimumsize = { 208 -1 }
-		}
+            block "pms_minimumsize" {
+                minimumsize = { 208 -1 }
+            }
 
-		item = {
-			widget = {
-				block "pms_item_size" {
-					size = { 50 50 }
-				}
-				datacontext = "[Building.AccessProductionMethod(ProductionMethodGroup.Self)]"
-				datacontext = "[ProductionMethod]"
-				datacontext = "[Building]"
-				datacontext = "[ProductionMethodGroup]"
-				using = tooltip_ne
-				tooltip = "CHANGE_FROM_CURRENT_PRODUCTION_METHOD_TOOLTIP"
+            item = {
+                widget = {
+                    block "pms_item_size" {
+                        size = { 50 50 }
+                    }
+                    datacontext = "[Building.AccessProductionMethod(ProductionMethodGroup.Self)]"
+                    datacontext = "[ProductionMethod]"
+                    datacontext = "[Building]"
+                    datacontext = "[ProductionMethodGroup]"
+                    using = tooltip_ne
+                    tooltip = "CHANGE_FROM_CURRENT_PRODUCTION_METHOD_TOOLTIP"
 
-				button = {
-					visible = "[NotEqualTo_int32( GetDataModelSize( ProductionMethodGroup.AccessBuildingProductionMethods( Building.Self ) ), '(int32)1' )]"
-					using = expand_button_bg_dropdown
-					size = { 100% 100% }
-					onclick = "[RightClickMenuManager.ToggleSwitchProductionMethodMenu(Building.AccessSelf, ProductionMethodGroup.AccessSelf, PdxGuiWidget.AccessSelf)]"
-				}
+                    button = {
+                        visible = "[NotEqualTo_int32( GetDataModelSize( ProductionMethodGroup.AccessBuildingProductionMethods( Building.Self ) ), '(int32)1' )]"
+                        onclick = "[RightClickMenuManager.ToggleSwitchProductionMethodMenu(Building.AccessSelf, ProductionMethodGroup.AccessSelf, PdxGuiWidget.AccessSelf)]"
+                        using = expand_button_bg_dropdown
+                        size = { 100% 100% }
+                    }
 
-				icon = {
-					size = { 80% 80% }
-					parentanchor = center
-					texture = "[ProductionMethod.GetTexture]"
-				}
+                    icon = {
+                        texture = "[ProductionMethod.GetTexture]"
+                        size = { 80% 80% }
+                        parentanchor = center
+                    }
 
-				### new pm
-				has_new_pm_icon = {
-					position = { -2 2 }
-					parentanchor = bottom|left
-					blockoverride "visible" {
-						visible = "[And(Building.IsOwner( GetPlayer.Self ), GetPlayer.HasNewProductionMethodInSameGroup( Building.GetBuildingType.Self, ProductionMethod.Self ))]"
-					}
-				}
+                    ### new pm
+                    has_new_pm_icon = {
+                        position = { -2 2 }
+                        parentanchor = bottom|left
+                        blockoverride "visible" {
+                            visible = "[And(Building.IsOwner( GetPlayer.Self ), GetPlayer.HasNewProductionMethodInSameGroup( Building.GetBuildingType.Self, ProductionMethod.Self ))]"
+                        }
+                    }
 
-				### nr available
-				textbox = {
-					raw_text = "#P #bold [ProductionMethodGroup.GetNumAvailableOptions(Building.AccessSelf)]#!#!"
-					parentanchor = top|right
-					position = { -5 0 }
-					autoresize = yes
-					align = right|nobaseline
-					block "pms_number_visibility" {
-						visible = "[NotEqualTo_int32( ProductionMethodGroup.GetNumAvailableOptions(Building.AccessSelf), '(int32)1')]"
-					}
-					tooltip = "PRODUCTION_METHOD_OPTIONS"
-					using = tooltip_above
-					using = fontsize_small
+                    ### nr available
+                    textbox = {
+                        raw_text = "#P #bold [ProductionMethodGroup.GetNumAvailableOptions(Building.AccessSelf)]#!#!"
+                        parentanchor = top|right
+                        position = { -5 0 }
+                        autoresize = yes
+                        align = right|nobaseline
+                        block "pms_number_visibility" {
+                            visible = "[NotEqualTo_int32( ProductionMethodGroup.GetNumAvailableOptions(Building.AccessSelf), '(int32)1')]"
+                        }
+                        tooltip = "PRODUCTION_METHOD_OPTIONS"
+                        using = tooltip_above
+                        using = fontsize_small
 
-					background = {
-						using = default_background
-						margin = { 8 4 }
+                        background = {
+                            using = default_background
+                            margin = { 8 4 }
 
-					}
-				}
-			}
-		}
-	}
-    
-    # Duplicate of `condensed_building_information_pms` but skips first 4 instead
-    type MPM_condensed_building_information_pms_row_2 = fixedgridbox {
-        name = "tutorial_highlight_condensed_production_methods"
-		datamodel = "[DataModelSkipFirst(Building.AccessProductionMethodGroups, '(int32)4')]" # MPM - Skip first 4
-		flipdirection = yes
-        
-        block "pm_wrap" {
-            datamodel_wrap = 7 # MPM
+                        }
+                    }
+                }
+            }
         }
 
-		block "pms_slot_sizes" {
-			addcolumn = 52
-			addrow = 50
-		}
-		parentanchor = vcenter
+        flowcontainer = {
+            block "trade_center_extra_info_visibility" {
+                visible = "[ObjectsEqual(Building.GetBuildingType, GetBuildingType('building_trade_center').Self)]"
+            }
 
-		block "pms_minimumsize" {
-			minimumsize = { 208 -1 }
-		}
+            block "trade_center_extra_info_position" {
+                position = { 150 0 }
+            }
 
-		item = {
-			widget = {
-				block "pms_item_size" {
-					size = { 50 50 }
-				}
-				datacontext = "[Building.AccessProductionMethod(ProductionMethodGroup.Self)]"
-				datacontext = "[ProductionMethod]"
-				datacontext = "[Building]"
-				datacontext = "[ProductionMethodGroup]"
-				using = tooltip_above
-				tooltip = "CHANGE_FROM_CURRENT_PRODUCTION_METHOD_TOOLTIP"
+            direction = vertical
+            parentanchor = vcenter
 
-				button = {
-					visible = "[NotEqualTo_int32( GetDataModelSize( ProductionMethodGroup.AccessBuildingProductionMethods( Building.Self ) ), '(int32)1' )]"
-					using = expand_button_bg_dropdown
-					size = { 100% 100% }
-					onclick = "[RightClickMenuManager.ToggleSwitchProductionMethodMenu(Building.AccessSelf, ProductionMethodGroup.AccessSelf, PdxGuiWidget.AccessSelf)]"
-				}
+            block "trade_center_extra_info_line_spacing" {
+                spacing = 4
+            }
 
-				icon = {
-					size = { 80% 80% }
-					parentanchor = center
-					texture = "[ProductionMethod.GetTexture]"
-				}
+            flowcontainer = {
+                spacing = 5
 
-				### new pm
-				has_new_pm_icon = {
-					position = { -2 2 }
-					parentanchor = bottom|left
-					blockoverride "visible" {
-						visible = "[And(Building.IsOwner( GetPlayer.Self ), GetPlayer.HasNewProductionMethodInSameGroup( Building.GetBuildingType.Self, ProductionMethod.Self ))]"
-					}
-				}
+                icon = {
+                    texture = "gfx/interface/icons/trade_icons/imports.dds"
+                    size = { 23 23 }
+                }
 
-				### nr available
-				textbox = {
-					raw_text = "#P #bold [ProductionMethodGroup.GetNumAvailableOptions(Building.AccessSelf)]#!#!"
-					parentanchor = top|right
-					position = { -5 0 }
-					autoresize = yes
-					align = right|nobaseline
-					block "pms_number_visibility" {
-						visible = "[NotEqualTo_int32( ProductionMethodGroup.GetNumAvailableOptions(Building.AccessSelf), '(int32)1')]"
-					}
-					tooltip = "PRODUCTION_METHOD_OPTIONS"
-					using = tooltip_above
-					using = fontsize_small
+                vertical_divider = {}
 
-					background = {
-						using = default_background
-						margin = { 8 4 }
+                overlappingitembox = {
+                    block "trade_center_extra_info_size" {
+                        size = { 110 23 }
+                    }
+                    
+                    datamodel = "[Building.AccessState.GetImports]"
+                    
+                    item = {
+                        small_goods_button = {
+                            blockoverride "tooltip" {
+                                tooltip = "[Goods.GetStateImportsDesc]"
+                            }
+                        }       
+                    }
+                }
+            }
 
-					}
-				}
-			}
-		}
+            flowcontainer = {
+                spacing = 5
+
+                icon = {
+                    texture = "gfx/interface/icons/trade_icons/exports.dds"
+                    size = { 23 23 }
+                }
+
+                vertical_divider = {}
+
+                overlappingitembox = {
+                    block "trade_center_extra_info_size" {
+                        size = { 110 23 }
+                    }
+                    
+                    datamodel = "[Building.AccessState.GetExports]"
+                    
+                    item = {
+                        small_goods_button = {
+                            blockoverride "tooltip" {
+                                tooltip = "[Goods.GetStateExportsDesc]"
+                            }
+                        }       
+                    }
+                }
+            }
+        }
+    }
+    
+    # Duplicate of `condensed_building_information_pms` but skips first 4 instead
+    type MPM_condensed_building_information_pms_row_2 = container {
+        fixedgridbox = {
+            name = "tutorial_highlight_condensed_production_methods"
+            datamodel = "[DataModelSkipFirst(Building.AccessProductionMethodGroups, '(int32)4')]" # MPM - Skip first 4
+            flipdirection = yes
+            
+            block "pm_wrap" {
+                datamodel_wrap = 7 # MPM
+            }
+
+            block "pms_slot_sizes" {
+                addcolumn = 52
+                addrow = 50
+            }
+            parentanchor = vcenter
+
+            block "pms_minimumsize" {
+                minimumsize = { 208 -1 }
+            }
+
+            item = {
+                widget = {
+                    block "pms_item_size" {
+                        size = { 50 50 }
+                    }
+                    datacontext = "[Building.AccessProductionMethod(ProductionMethodGroup.Self)]"
+                    datacontext = "[ProductionMethod]"
+                    datacontext = "[Building]"
+                    datacontext = "[ProductionMethodGroup]"
+                    using = tooltip_ne
+                    tooltip = "CHANGE_FROM_CURRENT_PRODUCTION_METHOD_TOOLTIP"
+
+                    button = {
+                        visible = "[NotEqualTo_int32( GetDataModelSize( ProductionMethodGroup.AccessBuildingProductionMethods( Building.Self ) ), '(int32)1' )]"
+                        onclick = "[RightClickMenuManager.ToggleSwitchProductionMethodMenu(Building.AccessSelf, ProductionMethodGroup.AccessSelf, PdxGuiWidget.AccessSelf)]"
+                        using = expand_button_bg_dropdown
+                        size = { 100% 100% }
+                    }
+
+                    icon = {
+                        texture = "[ProductionMethod.GetTexture]"
+                        size = { 80% 80% }
+                        parentanchor = center
+                    }
+
+                    ### new pm
+                    has_new_pm_icon = {
+                        position = { -2 2 }
+                        parentanchor = bottom|left
+                        blockoverride "visible" {
+                            visible = "[And(Building.IsOwner( GetPlayer.Self ), GetPlayer.HasNewProductionMethodInSameGroup( Building.GetBuildingType.Self, ProductionMethod.Self ))]"
+                        }
+                    }
+
+                    ### nr available
+                    textbox = {
+                        raw_text = "#P #bold [ProductionMethodGroup.GetNumAvailableOptions(Building.AccessSelf)]#!#!"
+                        parentanchor = top|right
+                        position = { -5 0 }
+                        autoresize = yes
+                        align = right|nobaseline
+                        block "pms_number_visibility" {
+                            visible = "[NotEqualTo_int32( ProductionMethodGroup.GetNumAvailableOptions(Building.AccessSelf), '(int32)1')]"
+                        }
+                        tooltip = "PRODUCTION_METHOD_OPTIONS"
+                        using = tooltip_above
+                        using = fontsize_small
+
+                        background = {
+                            using = default_background
+                            margin = { 8 4 }
+
+                        }
+                    }
+                }
+            }
+        }
 	}
 }

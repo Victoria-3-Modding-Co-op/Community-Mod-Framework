@@ -120,14 +120,19 @@ types building_browser_panel_types {
             container = {
                 parentanchor = hcenter
                 condensed_building_information_pms = {
-                    
+                    blockoverride "trade_center_extra_info_position" {
+                        position = { 110 0 }
+                    }
+
+                    blockoverride "trade_center_extra_info_size" {
+                        size = { 60 23 }
+                    }
                 }
             }
-            flowcontainer = {
+            flowcontainer = { # MPM
                 visible = "[GreaterThan_int32(GetDataModelSize(Building.AccessProductionMethodGroups), '(int32)4')]"
                 parentanchor = hcenter
                 MPM_condensed_building_information_pms_row_2 = {
-                    
                     blockoverride "pm_wrap" {
                         datamodel_wrap = @MPM_max_PMs_per_line
                     }
@@ -333,6 +338,12 @@ types building_browser_panel_types {
 
 						building_privatize_toggle = {
 							parentanchor = center 
+						}
+
+						building_country_monopoly_icon = {
+							visible = "[BuildingType.HasCountryMonopoly]"
+							datacontext = "[Building.GetBuildingType]"
+							size = { 35 35 }
 						}
 					}
 
@@ -642,8 +653,8 @@ types building_browser_panel_types {
 							widget = {
 								size = { 35 35 }
 								
-								building_type_privatize_toggle = {
-									parentanchor = center
+								building_type_privatize_or_monopolize = {
+									size = { 35 35 }
 								}
 							}
 
@@ -690,38 +701,42 @@ types building_browser_panel_types {
 
 						building_browser_building_item = {
 							blockoverride "first_info" {
-
 								button = {
+									onclick = "[InformationPanelBar.OpenBuildingDetailsPanel(Building.AccessSelf)]"
 									onrightclick = "[RightClickMenuManager.ShowForBuilding(Building.AccessSelf)]"
 									size = { 170 @spreadsheet_height }
+									using = default_button
                                     
                                     parentanchor = vcenter # MPM
 
-									textbox = {
-										datacontext = "[Building.GetState]"
-										
-										size = { 100% 100% }
-										align = nobaseline
+									hbox = {
+										layoutpolicy_horizontal = expanding
+										layoutpolicy_vertical = expanding
+										spacing = 5
 										margin = { 10 0 }
-										elide = right
-										fontsize_min = 12
-										
-										using = fontsize_large
 
-										text = "STATE_NAME_WITH_FOREIGN_FLAG_NO_FORMAT"
+										textbox = {
+											layoutpolicy_horizontal = expanding
+											size = { 0 30 }
+											datacontext = "[Building.GetState]"
+											align = nobaseline
+											elide = right
+											fontsize_min = 12
+											using = fontsize_large
+											text = "STATE_NAME_WITH_FOREIGN_FLAG_NO_FORMAT"
+										}
 
 										### AUTO DOWNSIZE WARNING
 										icon = {
-											size = { 32 32 }
-											position = { 153 0 }
-											parentanchor = vcenter
 											visible = "[Building.IsAutoDownsizing]"
-											texture = "gfx/interface/production_methods/auto_downsize.dds"
+											size = { 32 32 }
+											using = tooltip_ne
 											tooltip = "[Building.GetAutoDownsizeTooltip]"
-										}									
+											texture = "gfx/interface/production_methods/auto_downsize.dds"
+										}
 									}
 								}
-
+								
 								vertical_divider = {}
 
 								widget = {

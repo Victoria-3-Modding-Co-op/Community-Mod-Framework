@@ -258,8 +258,11 @@ types production_methods
 
 				### privatize
 				building_type_privatize_toggle = {
+					visible = no
 					size = { 40 40 }
 				}
+
+				building_type_privatize_or_monopolize = {}
 
 				### subsidize
 				building_type_subsidize_toggle = {
@@ -322,6 +325,25 @@ types production_methods
 
 							blockoverride "unit_number_margins" {
 								margin = { 6 3 }
+							}
+						}
+					}
+
+					blockoverride "company_owned_button" {
+						button_icon_round = {
+							visible = "[Building.IsBuildingType('building_company_headquarter')]"
+							size = { 30 30 }
+							datacontext = "[Building.GetCompany]"
+							onclick = "[InformationPanelBar.OpenCompanyPanel(Company.Self)]"
+							tooltip = "GO_TO_BUTTON_COMPANY"
+							using = tooltip_ne
+							
+							blockoverride "icon" {
+								texture = "[Company.GetCompanyType.GetIcon]"
+							}
+
+							blockoverride "icon_size" {
+								size = { 75% 75% }
 							}
 						}
 					}

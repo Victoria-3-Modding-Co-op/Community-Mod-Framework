@@ -1,7 +1,7 @@
 ﻿movement_religious_majority = {
 	category = movement_category_religious
 	
-	ideology = ideology_traditionalist
+	ideology = ideology_traditionalist_movement
 	character_ideologies = {
 		ideology_theocrat
 		ideology_traditionalist
@@ -87,6 +87,45 @@
 	}
 
 	pop_support_weight = {
+		if = {
+			limit = {
+				owner ?= {
+					any_political_movement = {
+						is_political_movement_type = movement_religious_majority
+						OR = {
+							is_being_suppressed = yes
+							is_being_bolstered = yes
+						}
+						save_temporary_scope_as = affected_movement
+					}
+				}
+			}
+			if = {
+				limit = {
+					scope:affected_movement = {
+						is_being_suppressed = yes
+					}
+				}
+				add = {
+					value = 10
+					multiply = {
+						value = -0.5
+						add = owner.modifier:country_suppression_attraction_factor
+					}
+					desc = "concept_suppressed"
+				}
+			}
+			else = {
+				add = {
+					value = 10
+					multiply = {
+						value = 0.5
+						add = owner.modifier:country_bolster_attraction_factor
+					}
+					desc = "concept_bolstered"
+				}
+			}
+		}
 		add = {
 			desc = "URBAN_STATE" # Increases support in rural states, decreases in urban
 			value = 0.5
@@ -300,7 +339,7 @@
 movement_religious_minority = {
 	category = movement_category_religious
 	
-	ideology = ideology_traditionalist_minoritarian	
+	ideology = ideology_traditionalist_minoritarian_movement
 	character_ideologies = {
 		ideology_traditionalist_minoritarian
 		ideology_usfp_universalist #USFP
@@ -322,6 +361,12 @@ movement_religious_minority = {
 			scope:political_movement ?= {
 				religion = {
 					is_state_religion = root
+				}
+				root = {
+					religion_percent_country = {
+						target = scope:political_movement.religion
+						value <= 0.08
+					}
 				}
 			}
 			AND = {
@@ -372,7 +417,7 @@ movement_religious_minority = {
 		scope:country = {
 			religion_percent_country = {
 				target = root
-				value >= 0.05
+				value >= 0.1
 			}
 		}		
 	}
@@ -451,6 +496,46 @@ movement_religious_minority = {
 	}
 
 	pop_support_weight = {
+		if = {
+			limit = {
+				owner ?= {
+					any_political_movement = {
+						is_political_movement_type = movement_religious_minority
+						religion ?= root.religion
+						OR = {
+							is_being_suppressed = yes
+							is_being_bolstered = yes
+						}
+						save_temporary_scope_as = affected_movement
+					}
+				}
+			}
+			if = {
+				limit = {
+					scope:affected_movement = {
+						is_being_suppressed = yes
+					}
+				}
+				add = {
+					value = 10
+					multiply = {
+						value = -0.5
+						add = owner.modifier:country_suppression_attraction_factor
+					}
+					desc = "concept_suppressed"
+				}
+			}
+			else = {
+				add = {
+					value = 10
+					multiply = {
+						value = 0.5
+						add = owner.modifier:country_bolster_attraction_factor
+					}
+					desc = "concept_bolstered"
+				}
+			}
+		}
 		add = {
 			value = 10
 			desc = "POP_BASE_SUPPORT"
@@ -580,7 +665,6 @@ movement_religious_minority = {
 	
 	secession = {
 		possible = {
-			political_movement_identity_support >= 0.25
 			owner ?= {
 				any_scope_state = {
 					religion_percent_state = {
@@ -659,6 +743,13 @@ movement_religious_minority = {
 			max = 0.5
 			min = 0
 			desc = "STANDARD_OF_LIVING_FOR_RELIGION"
+		}
+
+		subtract = {
+			value = 0.5
+			subtract = political_movement_identity_support
+			min = 0
+			desc = "LOW_MOVEMENT_IDENTITY_SUPPORT"
 		}
 	}
 }

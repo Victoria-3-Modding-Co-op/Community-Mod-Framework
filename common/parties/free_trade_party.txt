@@ -187,6 +187,7 @@ free_trade_party = {
 					OR = {
 						has_modifier = modifier_india_crown_rule
 						has_modifier = modifier_india_company_rule
+						has_modifier = modifier_india_company_rule_upgraded
 					}
 				}
 				OR = {
@@ -352,8 +353,7 @@ free_trade_party = {
 				desc = "usfp_bourbon_democrats"
 			}
 		}
-		
-		if = { # capitalists like capitalism
+		if = { # # industrialists/market liberals split from liberals as the economy modernises
 			limit = {
 				OR = {
 					leader = {
@@ -363,8 +363,48 @@ free_trade_party = {
 				}
 			}
 			add = {
-				value = 5
-				desc = "from_capitalism"
+				desc = "from_liberal_economy_laws"
+				if = {
+					limit = {
+						owner = {
+							OR = {
+								has_law = law_type:law_laissez_faire
+								has_law = law_type:law_interventionism
+							}
+						}
+					}
+					add = 2
+				}
+				if = {
+					limit = {
+						owner = {
+							OR = {
+								has_law = law_type:law_free_trade
+								has_law = law_type:law_protectionism
+							}
+						}
+					}
+					add = 1
+				}
+				if = {
+					limit = {
+						owner = {
+							OR = {
+								has_law = law_type:law_tenant_farmers
+								has_law = law_type:law_commercialized_agriculture
+							}
+						}
+					}
+					add = 1
+				}
+				if = {
+					limit = {
+						owner = {
+							has_law = law_type:law_slavery_banned
+						}
+					}
+					add = 1
+				}
 			}
 		}
 		# powerful capitalists likely to form their own party
@@ -376,6 +416,11 @@ free_trade_party = {
 						has_ideology = ideology:ideology_market_liberal
 					}
 					has_ideology = ideology:ideology_laissez_faire
+				}
+				NOT = {
+					owner = {
+						has_law = law_type:law_universal_suffrage
+					}
 				}
 			}
 			add = {
@@ -536,6 +581,7 @@ free_trade_party = {
 				}
 				OR = {
 					has_ideology = ideology:ideology_paternalistic
+					has_ideology = ideology:ideology_magnatial
 					leader = {
 						has_ideology = ideology:ideology_fascist
 					}
@@ -653,6 +699,7 @@ free_trade_party = {
 				}
 				OR = {
 					has_ideology = ideology:ideology_paternalistic
+					has_ideology = ideology:ideology_magnatial
 					has_ideology = ideology:ideology_laissez_faire
 					has_ideology = ideology:ideology_agrarian
 				
@@ -706,6 +753,37 @@ free_trade_party = {
 			add = {
 				value = -10
 				desc = from_protectionist_leader
+			}
+		}
+		if = { # universal suffrage Industrialists - prevents forming of impotent parties
+			limit = {
+				scope:number <= 1
+				is_interest_group_type = ig_industrialists
+				owner = {
+					OR = {
+						has_law = law_type:law_universal_suffrage
+						has_law = law_type:law_census_voting
+					}
+				}
+			}
+			add = {
+				desc = "from_late_industrialists"
+				if = {
+					limit = {
+						owner = {
+							has_law = law_type:law_universal_suffrage
+						}
+					}
+					add = -10
+				}
+				if = {
+					limit = {
+						owner = {
+							has_law = law_type:law_census_voting
+						}
+					}
+					add = -5
+				}
 			}
 		}
 		if = {

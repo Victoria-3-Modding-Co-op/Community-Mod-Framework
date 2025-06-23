@@ -1,0 +1,142 @@
+@secondary_icon_size = 26
+
+types com_topbar_types {
+
+    type com_topbar = flowcontainer {
+        direction = vertical
+        layer = layer_ingame_menu
+        datacontext = "[GetMetaPlayer.GetPlayedOrObservedCountry]"
+        minimumsize = { 650 -1 }
+        maximumsize = { 650 80 }
+        position = { 0 0 }
+        margin = { 80 0 }
+        margin_bottom = 10
+        max_update_rate = 8
+        spacing = 0
+        using = fullscreen_hide
+        using = clickthrough_blocker
+        using = default_fade_in_out
+        visible = "[And(
+            Not(Or4(
+                InformationPanelBar.IsAnyPanelOpen,
+                MapListPanelManager.IsVisible,
+                GetVariableSystem.Exists('com_open_window'),
+                GetVariableSystem.Exists('com_alert_action')
+            )),
+            Or(
+                DataModelHasItems(Country.MakeScope.GetList('com_topbar_first_line')),
+                DataModelHasItems(Country.MakeScope.GetList('com_topbar_second_line'))
+            )
+        )]"
+
+        background = {
+            texture = "gfx/interface/main_hud/topbar_bg.dds"
+            shaderfile = "gfx/FX/pdxgui_default.shader"
+            spriteType = Corneredstretched
+            spriteborder = { 0 0 }
+            spriteborder_bottom = 94
+            spriteborder_right = 100
+            texture_density = 2
+            using = hud_elements_alpha
+
+            modify_texture = {
+                texture = "gfx/interface/backgrounds/default_bg_shading.dds"
+                spriteType = Corneredstretched
+                spriteborder = { 0 0 }
+                blend_mode = overlay
+                alpha = 0.5
+            }
+            modify_texture = {
+                using = texture_velvet
+            }
+            modify_texture = {
+                using = fancy_pattern
+            }
+        }
+
+        background = {
+            texture = "gfx/interface/main_hud/topbar_side_dec.dds"
+            size = { 100% 100% }
+            spriteType = Corneredstretched
+            spriteborder = { 0 0 }
+            spriteborder_bottom = 94
+            spriteborder_right = 110
+            texture_density = 2
+
+            using = hud_shiny_effect
+        }
+
+        com_topbar_row = {
+            datamodel = "[Country.MakeScope.GetList('com_topbar_first_line')]"
+            visible = "[DataModelHasItems(Country.MakeScope.GetList('com_topbar_first_line'))]"
+        }
+
+        com_topbar_row = {
+            datamodel = "[Country.MakeScope.GetList('com_topbar_second_line')]"
+            visible = "[DataModelHasItems(Country.MakeScope.GetList('com_topbar_second_line'))]"
+        }
+
+    }
+
+    type com_topbar_row = flowcontainer {
+        margin = { 5 0 }
+        spacing = 10
+        maximumsize = { 520 34 }
+        minimumsize = { 520 34 }
+        #datamodel = "[Country.MakeScope.GetList('com_topbar_first_line')]"
+        #visible = "[DataModelHasItems(Country.MakeScope.GetList('com_topbar_first_line'))]"
+
+        background = {
+            using = dark_area_rounded
+            margin_top = -8
+            margin_bottom = -8
+            margin_left = 5
+            margin_right = 20
+        }
+
+        item = {
+            com_topbar_element = {}
+        }
+    }
+
+    type com_topbar_element = flowcontainer {
+        minimumsize = { -1 30 }
+        margin_left = 5
+        spacing = 5
+        using = tooltip_below
+        tooltip = "[Localize(Concatenate(Scope.Var('com_name').GetFlagName, '_tooltip'))]"
+
+        button = {
+            parentanchor = top|left
+            using = glow_button
+            size = { 100% 100% }
+            block "element_click" {
+                # Only enable map mode if it is set
+                visible = "[Not(ObjectsEqual(
+                        Localize(Concatenate(Scope.Var('com_name').GetFlagName, '_window')),
+                        Concatenate(Scope.Var('com_name').GetFlagName, '_window')
+                    ))]"
+                onclick = "[GetVariableSystem.Set('com_open_window', Localize(Concatenate(Scope.Var('com_name').GetFlagName, '_window')))]"
+            }
+        }
+
+        textbox = {
+            parentanchor = vcenter
+            text = "[Localize(Concatenate(Scope.Var('com_name').GetFlagName, '_icon'))]"
+            autoresize = yes
+            align = left|nobaseline
+            elide = right
+            fontsize = @secondary_icon_size
+        }
+
+        textbox = {
+            parentanchor = vcenter
+            text = "[Localize(Concatenate(Scope.Var('com_name').GetFlagName, '_value'))]"
+            autoresize = yes
+            align = left|nobaseline
+            elide = right
+            fontsize_min = 12
+        }
+    }
+
+}

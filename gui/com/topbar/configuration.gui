@@ -1,0 +1,305 @@
+@secondary_icon_size = 26
+
+types com_topbar_types {
+
+    type com_topbar_configuration_button = button_icon_settings {
+        size = { 26 26 }
+        onclick = "[GetVariableSystem.Toggle('com_topbar_configuration')]"
+        tooltip = com_topbar_configuration_button_tooltip
+    }
+
+    type com_topbar_configuration = window {
+        layer = popups
+        using = clickthrough_blocker
+        filter_mouse = all
+        allow_outside = yes
+        parentanchor = hcenter|vcenter
+        visible = "[GetVariableSystem.Exists('com_topbar_configuration')]"
+        size = { 700 700 }
+
+        widget = {
+            size = { 100% 100% }
+
+            background = {
+                texture = "gfx/interface/backgrounds/popup_bg.dds"
+                spriteType = Corneredstretched
+                spriteborder = { 90 90 }
+                texture_density = 2
+
+                modify_texture = {
+                    texture = "gfx/interface/backgrounds/default_bg_shading.dds"
+                    spriteType = Corneredstretched
+                    spriteborder = { 0 0 }
+                    blend_mode = overlay
+                }
+                modify_texture = {
+                    using = texture_velvet
+                }
+            }
+        }
+
+        # Header
+        widget = {
+            size = { 100% 82 }
+
+            popup_top_header = {}
+
+            textbox = {
+                block "first_line_position" {
+                    position = { 0 24 }
+                }
+                size = { 75% 40 }
+                block "title" {
+                    text = com_topbar_configuration_title
+                }
+                elide = right
+                fontsize_min = 14
+                parentanchor = hcenter
+                align = hcenter|nobaseline
+                using = header_font
+                using = header_font_size
+                default_format = "#header"
+            }
+
+            block "second_line" {}
+        }
+
+        # Frame
+        popup_bg_frame = {}
+
+        # Actual stuff
+        flowcontainer = {
+            direction = vertical
+            position = { 30 90 }
+            minimumsize = { 640 280 }
+            maximumsize = { 640 -1 }
+            spacing = 20
+
+            flowcontainer = {
+                direction = vertical
+                minimumsize = { 640 -1 }
+                maximumsize = { 640 -1 }
+                background = {
+                    using = simple_frame
+                }
+                spacing = 5
+                margin_bottom = 10
+
+                default_header_clean_faded = {
+                    layoutpolicy_horizontal = expanding
+                    blockoverride "text" {
+                        text = com_topbar_configuration_current
+                    }
+                    blockoverride "text_size" {
+                        using = fontsize_large
+                    }
+                    blockoverride "size" {
+                        size = { 100% 40 }
+                    }
+                }
+
+                flowcontainer = {
+                    direction = vertical
+                    minimumsize = { 640 -1 }
+                    maximumsize = { 640 -1 }
+                    com_topbar_row = {
+                        parentanchor = hcenter
+                        datamodel = "[Country.MakeScope.GetList('com_topbar_first_line')]"
+                        blockoverride "element_click" {}
+                    }
+
+                    com_topbar_row = {
+                        parentanchor = hcenter
+                        datamodel = "[Country.MakeScope.GetList('com_topbar_second_line')]"
+                        blockoverride "element_click" {}
+                    }
+                }
+            }
+
+            flowcontainer = {
+                direction = vertical
+                minimumsize = { 640 -1 }
+                maximumsize = { 640 -1 }
+                background = {
+                    using = simple_frame
+                }
+                spacing = 5
+                margin = { 10 0 }
+                margin_bottom = 10
+
+                default_header_clean_faded = {
+                    layoutpolicy_horizontal = expanding
+                    blockoverride "text" {
+                        text = com_topbar_configuration_add
+                    }
+                    blockoverride "text_size" {
+                        using = fontsize_large
+                    }
+                    blockoverride "size" {
+                        size = { 100% 40 }
+                    }
+                }
+
+                textbox = {
+                    text = com_topbar_configuration_add_explanation
+                    minimumsize = { 640 -1 }
+                    maximumsize = { 640 -1 }
+                    align = center
+                    multiline = yes
+                    autoresize = yes
+                }
+
+                flowcontainer = {
+                    minimumsize = { 620 -1 }
+                    maximumsize = { 620 -1 }
+                    margin_left = 30
+                    margin_right = 5
+                    spacing = 15
+
+                    background = {
+                        using = simple_frame
+                    }
+                    textbox = {
+                        text = com_topbar_configuration_add_header_element
+                        minimumsize = { 415 50 }
+                        align = left
+                        multiline = yes
+                        autoresize = yes
+                        parentanchor = vcenter
+                    }
+                    vertical_divider = {}
+                    textbox = {
+                        text = com_topbar_configuration_add_header_first
+                        minimumsize = { 50 50 }
+                        align = center
+                        multiline = yes
+                        autoresize = yes
+                    }
+                    vertical_divider = {}
+                    textbox = {
+                        text = com_topbar_configuration_add_header_second
+                        minimumsize = { 50 50 }
+                        align = center
+                        multiline = yes
+                        autoresize = yes
+                    }
+                }
+
+                scrollarea = {
+                    minimumsize = { 640 290 }
+                    scrollbarpolicy_horizontal = always_off
+                    scrollbar_vertical = {
+                        using = vertical_scrollbar
+                    }
+
+                    flowcontainer = {
+                        direction = vertical
+                        datamodel = "[GetGlobalList('com_topbar_items')]"
+                        spacing = 5
+                        item = {
+                            com_topbar_configuration_add_element = {}
+                        }
+                    }
+                }
+            }
+
+        }
+
+        # Close button
+        close_button_large = {
+            parentanchor = top|right
+            size = { 42 42 }
+            position = { -5 13 }
+            shortcut = "close_window"
+
+            onclick = "[GetVariableSystem.Clear('com_topbar_configuration')]"
+
+            blockoverride "icon" {
+                texture = "gfx/interface/buttons/button_icons/close.dds"
+            }
+            blockoverride "icon_size" {
+                size = { 100% 100% }
+            }
+        }
+    }
+
+
+    type com_topbar_configuration_add_element = flowcontainer {
+        minimumsize = { 620 60 }
+        margin_left = 30
+        margin_right = 10
+        spacing = 15
+
+        background = {
+            using = simple_frame
+        }
+
+        flowcontainer = {
+            minimumsize = { 415 60 }
+            flowcontainer = {
+                parentanchor = vcenter
+                background = {
+                    using = dark_area_rounded
+                    margin_top = -8
+                    margin_bottom = -8
+                    margin_left = 5
+                    margin_right = 20
+                }
+
+                com_topbar_element = {}
+            }
+        }
+
+        vertical_divider = {}
+
+        button = {
+            parentanchor = vcenter
+            using = default_button
+            size = { 50 50 }
+            tooltip = com_topbar_configuration_add_first_tooltip
+            datacontext = "[GetScriptedGui('com_topbar_toggle_element_first_line')]"
+            onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(Country.MakeScope).AddScope('element', Scope.GetCharacter.MakeScope).End)]"
+            flowcontainer = {
+                tooltip = com_topbar_configuration_add_second_tooltip
+                direction = vertical
+                parentanchor = center
+                icon = {
+                    visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(Country.MakeScope).AddScope('element', Scope.GetCharacter.MakeScope).End)]"
+                    size = { 30 30 }
+                    texture = gfx/interface/icons/generic_icons/ig_suppress.dds
+                }
+                icon = {
+                    visible = "[Not(ScriptedGui.IsShown(GuiScope.SetRoot(Country.MakeScope).AddScope('element', Scope.GetCharacter.MakeScope).End))]"
+                    size = { 30 30 }
+                    texture = gfx/interface/icons/generic_icons/ig_bolster.dds
+                }
+            }
+        }
+
+        vertical_divider = {}
+
+        button = {
+            parentanchor = vcenter
+            using = default_button
+            size = { 50 50 }
+            datacontext = "[GetScriptedGui('com_topbar_toggle_element_second_line')]"
+            onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(Country.MakeScope).AddScope('element', Scope.GetCharacter.MakeScope).End)]"
+            flowcontainer = {
+                tooltip = com_topbar_configuration_add_second_tooltip
+                direction = vertical
+                parentanchor = center
+                icon = {
+                    visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(Country.MakeScope).AddScope('element', Scope.GetCharacter.MakeScope).End)]"
+                    size = { 30 30 }
+                    texture = gfx/interface/icons/generic_icons/ig_suppress.dds
+                }
+                icon = {
+                    visible = "[Not(ScriptedGui.IsShown(GuiScope.SetRoot(Country.MakeScope).AddScope('element', Scope.GetCharacter.MakeScope).End))]"
+                    size = { 30 30 }
+                    texture = gfx/interface/icons/generic_icons/ig_bolster.dds
+                }
+            }
+        }
+    }
+
+}

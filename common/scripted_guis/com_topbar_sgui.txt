@@ -1,0 +1,71 @@
+﻿com_topbar_toggle_element_first_line = {
+	scope = country
+
+	saved_scopes = {
+		element
+	}
+
+	effect = {
+		if = {
+			limit = {
+				is_target_in_variable_list = {
+					name = com_topbar_first_line
+					target = scope:element
+				}
+			}
+			remove_list_variable = {
+				name = com_topbar_first_line
+				target = scope:element
+			}
+		}
+		else = {
+			add_to_variable_list = {
+				name = com_topbar_first_line
+				target = scope:element
+			}
+		}
+	}
+
+	is_shown = {
+		is_target_in_variable_list = {
+			name = com_topbar_first_line
+			target = scope:element
+		}
+	}
+}
+
+com_topbar_toggle_element_second_line = {
+	scope = country
+
+	saved_scopes = {
+		element
+	}
+
+	effect = {
+		if = {
+			limit = {
+				is_target_in_variable_list = {
+					name = com_topbar_second_line
+					target = scope:element
+				}
+			}
+			remove_list_variable = {
+				name = com_topbar_second_line
+				target = scope:element
+			}
+		}
+		else = {
+			add_to_variable_list = {
+				name = com_topbar_second_line
+				target = scope:element
+			}
+		}
+	}
+
+	is_shown = {
+		is_target_in_variable_list = {
+			name = com_topbar_second_line
+			target = scope:element
+		}
+	}
+}

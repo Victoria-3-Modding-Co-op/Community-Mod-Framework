@@ -1,0 +1,2 @@
+﻿gui/com/topbar/scripted_widget.gui = com_topbar
+gui/com/topbar/scripted_widget.gui = com_topbar_popup

@@ -1,0 +1,31 @@
+widget = {
+    name = "com_topbar"
+    layer = layer_ingame_menu
+    size = { 100% 100% }
+    datacontext = "[GetMetaPlayer.GetPlayedOrObservedCountry]"
+    visible = "[Country.IsValid]"
+
+
+    container = {
+        parentanchor = top|left
+        position = { 0 75 }
+        com_topbar = {}
+    }
+
+    container = {
+    }
+}
+
+widget = {
+    name = "com_topbar_popup"
+    allow_outside = yes
+    size = { 100% 100% }
+    layer = popups
+    datacontext = "[GetMetaPlayer.GetPlayedOrObservedCountry]"
+    visible = "[Country.IsValid]"
+
+    com_topbar_configuration_button = {
+        position = { 650 10 }
+    }
+    com_topbar_configuration = {}
+}

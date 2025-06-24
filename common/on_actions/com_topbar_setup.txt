@@ -1,0 +1,143 @@
+﻿on_game_started_after_lobby = {
+	on_actions = {
+		com_topbar_setup
+	}
+}
+
+com_topbar_setup = {
+	effect = {
+		random_country = {
+			limit = {
+				country_rank >= rank_value:great_power
+			}
+
+			# Prestige Icon
+			create_struct = {
+				struct_type = 0
+				struct_scope = topbar_com_prestige
+			}
+			scope:topbar_com_prestige = {
+				set_variable = {
+					name = com_name
+					value = flag:gg_topbar_com_prestige
+				}
+			}
+			add_to_global_variable_list = {
+				name = com_topbar_items
+				target = scope:topbar_com_prestige
+			}
+
+			# Power Bloc Prestige Icon
+			create_struct = {
+				struct_type = 0
+				struct_scope = topbar_com_bloc_prestige
+			}
+			scope:topbar_com_bloc_prestige = {
+				set_variable = {
+					name = com_name
+					value = flag:gg_topbar_com_bloc_prestige
+				}
+			}
+			add_to_global_variable_list = {
+				name = com_topbar_items
+				target = scope:topbar_com_bloc_prestige
+			}
+
+			# Power Bloc Cohesion Icon
+			create_struct = {
+				struct_type = 0
+				struct_scope = topbar_com_bloc_cohesion
+			}
+			scope:topbar_com_bloc_cohesion = {
+				set_variable = {
+					name = com_name
+					value = flag:gg_topbar_com_bloc_cohesion
+				}
+			}
+			add_to_global_variable_list = {
+				name = com_topbar_items
+				target = scope:topbar_com_bloc_cohesion
+			}
+
+			# Legitimacy Icon
+			create_struct = {
+				struct_type = 0
+				struct_scope = topbar_com_legitimacy
+			}
+			scope:topbar_com_legitimacy = {
+				set_variable = {
+					name = com_name
+					value = flag:gg_topbar_com_legitimacy
+				}
+			}
+			add_to_global_variable_list = {
+				name = com_topbar_items
+				target = scope:topbar_com_legitimacy
+			}
+
+			# Innovation Icon
+			create_struct = {
+				struct_type = 0
+				struct_scope = topbar_com_innovation
+			}
+			scope:topbar_com_innovation = {
+				set_variable = {
+					name = com_name
+					value = flag:gg_topbar_com_innovation
+				}
+			}
+			add_to_global_variable_list = {
+				name = com_topbar_items
+				target = scope:topbar_com_innovation
+			}
+
+			# Companies Icon
+			create_struct = {
+				struct_type = 0
+				struct_scope = topbar_com_companies
+			}
+			scope:topbar_com_companies = {
+				set_variable = {
+					name = com_name
+					value = flag:gg_topbar_com_companies
+				}
+			}
+			add_to_global_variable_list = {
+				name = com_topbar_items
+				target = scope:topbar_com_companies
+			}
+
+			# Army Size Icon
+			create_struct = {
+				struct_type = 0
+				struct_scope = topbar_com_army_size
+			}
+			scope:topbar_com_army_size = {
+				set_variable = {
+					name = com_name
+					value = flag:gg_topbar_com_army_size
+				}
+			}
+			add_to_global_variable_list = {
+				name = com_topbar_items
+				target = scope:topbar_com_army_size
+			}
+
+			# Navy Size Icon
+			create_struct = {
+				struct_type = 0
+				struct_scope = topbar_com_navy_size
+			}
+			scope:topbar_com_navy_size = {
+				set_variable = {
+					name = com_name
+					value = flag:gg_topbar_com_navy_size
+				}
+			}
+			add_to_global_variable_list = {
+				name = com_topbar_items
+				target = scope:topbar_com_navy_size
+			}
+		}
+	}
+}

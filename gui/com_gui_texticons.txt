@@ -6,3 +6,21 @@
     fontsize = 20
   }
 }
+
+texticon = {
+  icon = com_power_bloc
+  iconsize = {
+    offset = { 0 32 }
+    texture = "gfx/interface/icons/generic_icons/number_of_countries.dds"
+    fontsize = 82
+  }
+}
+
+texticon = {
+  icon = com_company
+  iconsize = {
+    offset = { 0 32 }
+    texture = "gfx/interface/main_hud/companies_btn.dds"
+    fontsize = 82
+  }
+}

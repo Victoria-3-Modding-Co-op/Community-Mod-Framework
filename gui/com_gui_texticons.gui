@@ -1,5 +1,5 @@
-﻿texticon = {
-  icon = divider_decorative
+texticon = {
+  icon = com_divider_decorative
   iconsize = {
     offset = { 0 3 }
     texture = "gfx/interface/tooltip/tooltip_divider_decorative.dds"
@@ -12,7 +12,7 @@ texticon = {
   iconsize = {
     offset = { 0 32 }
     texture = "gfx/interface/icons/generic_icons/number_of_countries.dds"
-    fontsize = 82
+    fontsize = 32
   }
 }
 
@@ -21,6 +21,6 @@ texticon = {
   iconsize = {
     offset = { 0 32 }
     texture = "gfx/interface/main_hud/companies_btn.dds"
-    fontsize = 82
+    fontsize = 32
   }
 }

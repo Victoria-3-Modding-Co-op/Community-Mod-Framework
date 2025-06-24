@@ -46,6 +46,7 @@ community_framework_events.1 = { # Error supression
 		fix_variable_error = { variable = kvp_key }
 		fix_variable_error = { variable = kvp_value }
 		fix_variable_error = { variable = kvp }
+		fix_variable_error = { variable = whigs_party }
 	}
 	
 	orphan = yes

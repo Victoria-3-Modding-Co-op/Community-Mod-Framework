@@ -4617,6 +4617,12 @@ movement_positivist = {
 	creation_trigger = {
 		has_global_variable = positivism_invented
 		has_technology_researched = empiricism
+		trigger_if = { #USFP: Positivism isn't a thing for USA
+			limit = {
+				is_usfp_active = yes
+			}
+			usfp_country_is_american = no
+		}
 	}	
 	creation_weight = {
 		value = 10

@@ -334,7 +334,7 @@ liberal_party = {
 						AND = {
 							exists = c:USA
 							THIS = c:USA
-							has_modifier = usfp_second_party_system_modifier
+							has_variable = whigs_party
 						}
 					}
 				}

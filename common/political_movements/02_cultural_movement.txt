@@ -529,11 +529,11 @@ movement_cultural_minority = {
 					}
 				}
 				AND = {
-				culture_percent_country = {
-					target = root
-						value >= 0.1
-					}
-					cultural_acceptance_base = { target = root value <= acceptance_status_2 }
+					culture_percent_country = {
+						target = root
+							value >= 0.1
+						}
+						cultural_acceptance_base = { target = root value <= acceptance_status_2 }
 				}
 			}
 		}
@@ -542,13 +542,22 @@ movement_cultural_minority = {
 		value = 100
 	}
 	
-	character_support_trigger = {	
-		culture = scope:culture
+	character_support_trigger = {
+		trigger_if = { #USFP: White Radical Abolitionists can join the Afro-American movement
+			limit = {
+				is_usfp_active = yes
+			}
+			scope:culture = cu:afro_american
+		}	
+		trigger_else = {
+			culture = scope:culture
+		}
 		OR = {
 			has_ideology = ideology:ideology_humanitarian		
 			has_ideology = ideology:ideology_humanitarian_royalist	
 			has_ideology = ideology:ideology_sovereignist_leader			
-			has_ideology = ideology:ideology_reformer		
+			has_ideology = ideology:ideology_reformer
+			has_ideology = ideology:ideology_usfp_abolitionist_radical		
 		}		
 	}
 	character_support_weight = {
@@ -570,6 +579,16 @@ movement_cultural_minority = {
 			}
 			multiply = {
 				value = 2
+			}
+		}
+		if = {
+			limit = {
+				is_usfp_active = yes
+				scope:culture = cu:afro_american
+				has_ideology = ideology:ideology_usfp_abolitionist_radical
+			}
+			multiply = {
+				value = 5
 			}
 		}
 	}

@@ -60,7 +60,7 @@ liberal_party = {
 						}
 					}
 					NOT = {
-						has_modifier = usfp_second_party_system_modifier
+						has_variable = whigs_party
 					}
 				}
 			}

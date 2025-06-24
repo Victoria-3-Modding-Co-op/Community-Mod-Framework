@@ -7,12 +7,13 @@
 
 #### COMMUNITY GUI COOLTIPS ####
 
-## Western Clothes: Redux ##
-WCR_conservative_IG_list_tooltip = {
-    name = "WCR_conservative_IGs_tooltip"
-}
-WCR_progressive_IG_list_tooltip = {
-    name = "WCR_progressive_IGs_tooltip"
+## Sample
+COM_sample_cooltip = {
+    # Identifier of a cooltip entry must have a corresponding GUI type.
+    #
+    # `name` parameter is the identifier fed into a `#tooltip` formatting tag in localization.
+    # It does not need to match the name of the cooltip GUI type, or any GUI type at all. It just needs to be unique.
+    name = "COM_sample_cooltip_name"
 }
 
 #### VANILLA COOLTIPS BELOW HERE ####

@@ -1,0 +1,764 @@
+# COPY-PASTED FOR NOW
+@panel_width_minus_10 = 530			# used to be 450
+@panel_width = 540  				# used to be 460
+@panel_width_half = 270				# used to be 230
+@panel_width_plus_10 = 550  		# used to be 470
+@panel_width_plus_14 = 554			# used to be 474
+@panel_width_plus_14_half = 277		# used to be 237
+@panel_width_plus_20 = 560			# used to be 480
+@panel_width_plus_30 = 570			# used to be 490
+@panel_width_plus_70 = 610			# used to be 530
+
+types map_list_panel_types {
+	type construction_interaction_item_full = flowcontainer {
+		margin_bottom = 10
+		
+		direction = vertical
+
+		background = {
+			using = entry_bg_simple
+			margin_bottom = -5		# Workaround to separate spacing between items in build_building_map_list_panel. (We do not want the spacing for construction_interaction_item_condensed).
+		}
+
+		datacontext = "[MapListOption.AccessBuildingData.AccessState]"
+		datacontext = "[MapListOption.AccessBuildingData.AccessBuilding]"
+		datacontext = "[MapListOption.AccessBuildingData.GetMilitaryFormation]"
+		datacontext = "[MapListOption.AccessBuildingData.GetCombatUnitType]"
+
+		onmousehierarchyenter = "[AccessHighlightManager.HighlightState(State.Self)]"
+		onmousehierarchyleave = "[AccessHighlightManager.RemoveHighlight]"
+		onmousehierarchyenter = "[PdxGuiWidget.FindChild('building_goto').InterruptThenTriggerAnimation('hide_building_goto','show_building_goto')]"
+		onmousehierarchyleave = "[PdxGuiWidget.FindChild('building_goto').InterruptThenTriggerAnimation('show_building_goto','hide_building_goto')]"
+		alwaystransparent = no
+
+		onmousehierarchyenter = "[MapListOption.OnMouseEnter]"
+		onmousehierarchyleave = "[MapListOption.OnMouseLeave]"
+
+
+		tooltipwidget = {
+			FancyTooltip_Building = {}
+		}
+
+		icon = {
+			using = highlighted_square_selection
+			visible = "[MapListOption.IsMapTargetHighlighted]"
+		}
+
+		widget = {
+			size = { @panel_width 40 }
+
+			block "background" {
+				background = {
+					name = "map_list_status_bg"
+					texture = "gfx/interface/map_list/map_list_status_bg.dds"
+					framesize = { 600 80 }
+					size = { 600 40 }
+					alpha = "[TransparentIfFalse(Building.IsActive)]"
+					position = { -5 0 }
+					frame = "[MapListOption.GetBackgroundStatusFrame]"
+					parentanchor = vcenter
+					alwaystransparent = yes
+				}
+			}
+
+			hbox = {
+				spacing = 5
+				margin_right = 5
+				
+				textbox = {
+					text = "[Building.GetState.GetName]"
+					autoresize = yes
+					align = nobaseline
+					margin_left = 10
+					margin_right = 2
+				}
+
+				button_icon_goto = {
+					name = building_goto
+					visible = "[Building.IsValid]"
+					alpha = 0
+
+					size = { 25 25 }
+
+					state = {
+						name = show_building_goto
+						delay = 0.15
+						alpha = 1
+						duration = 0.15
+						using = Animation_Curve_Default
+					}
+
+					state = {
+						name = hide_building_goto
+						alpha = 0
+						duration = 0
+						using = Animation_Curve_Default
+					}
+
+					onclick = "[InformationPanelBar.OpenBuildingDetailsPanel(Building.AccessSelf)]"
+					tooltip = "GO_TO_BUTTON_BUILDING"
+				}
+
+				widget = {
+					layoutpolicy_horizontal = expanding
+				}
+
+				### ACTION BUTTONS
+
+				### TIMED MODIFIERS
+				hbox = {
+					margin = { 5 0 }
+					visible = "[Not(IsDataModelEmpty(Building.GetTimedModifiers))]"
+
+					datamodel = "[Building.GetTimedModifiers]"
+					spacing = 5
+
+					item = {
+						icon = {
+							tooltip = "[TimedModifier.GetTooltip]"
+							texture = "[TimedModifier.GetIcon]"
+							size = { 30 30 }
+						}
+					}
+				}
+
+				hbox = {
+					visible = "[Not(IsDataModelEmpty(State.AccessStateRegion.AccessTraits))]"
+					datamodel = "[State.AccessStateRegion.AccessTraits]"
+					spacing = 5
+					righttoleft = yes
+
+					item = {
+						icon = {
+							size = { 30 30 }
+							tooltip = TOOLTIP_STATE_TRAIT
+							onmousehierarchyenter = "[AccessHighlightManager.HighlightStateTrait(StateTrait.Self)]"
+							onmousehierarchyleave = "[AccessHighlightManager.RemoveHighlight]"
+							alwaystransparent = no
+							texture = "[StateTrait.GetTexture]"
+						}
+					}
+				}
+				
+				icon = {
+					visible = "[And(State.IsUnincorporated, Not(State.IsIncorporating))]"
+					size = { 30 30 }
+					texture = "gfx/interface/icons/state_status_icons/unincorporated_state.dds"
+				}
+
+				building_level_controls_with_military = {
+					minimumsize = { 184 30 }
+
+					blockoverride "controller_size" {
+						size = { 184 30 }
+					}
+
+					blockoverride "button_size" {
+						size = { 30 30 }
+					}
+
+					blockoverride "downsize_button_visibility" {
+						visible = "[And( IsValid( Building.Downsize ), Not( ShouldAskConfirmation( Building.Downsize ) ) )]"
+					}
+
+					blockoverride "downsize_with_confirmation_button_visibility" {
+						visible = "[And( IsValid( Building.Downsize ), ShouldAskConfirmation( Building.Downsize ) )]"
+					}
+
+					blockoverride "cancel_button_visibility" {
+						visible = "[IsValid(Building.CancelConstruction)]"
+					}
+
+					blockoverride "building_size_small_ownership_chart"
+					{
+						#no space for the building ownership chart
+					}
+				}
+			}
+		}
+
+		widget = {
+			size = { 535 40 }
+
+			alpha = "[TransparentIfFalse(Building.IsActive)]"
+
+			state = {
+				name = _mouse_enter
+				on_start = "[PdxGuiWidget.FindChild('map_list_status_bg').TriggerAnimation('map_list_status_mouse_enter')]"
+			}
+
+			state = {
+				name = _mouse_release
+				on_start = "[PdxGuiWidget.FindChild('map_list_status_bg').TriggerAnimation('map_list_status_mouse_release')]"
+			}
+
+			hbox = {
+				layoutpolicy_horizontal = expanding
+				layoutpolicy_vertical = expanding
+				spacing = 10
+				margin_top = 5
+				margin_bottom = 5
+
+				# Country flag
+				margin_widget = {
+					min_width = 35
+					margin_left = 14
+
+					tiny_flag = {
+						datacontext = "[State.GetOwner]"
+						parentanchor = vcenter
+					}
+				}
+
+				### SETTING - JOBSEEKERS
+				textbox = {
+					visible = "[GetVariableSystem.HasValue('show_jobseekers', 'true')]"
+
+					layoutpolicy_horizontal = expanding
+					layoutstretchfactor_horizontal = 1
+					min_width = 85
+
+					datacontext = "[MapListOption.GetBuildingData.GetState]"
+					align = right|nobaseline
+					text = "MAP_LIST_STATE_AVAILABLE_LABOR"
+					elide = right
+					tooltip = "STATE_AVAILABLE_LABOR_TOOLTIP"
+				}
+
+				### SETTING - PEASANTS
+				textbox = {
+					visible = "[Not(GetVariableSystem.HasValue('hide_peasants', 'true'))]"
+
+					layoutpolicy_horizontal = expanding
+					layoutstretchfactor_horizontal = 1
+					min_width = 85
+
+					datacontext = "[MapListOption.GetBuildingData.GetState]"
+					align = right|nobaseline
+					text = "[State.GetNumSubsistenceWorkingAdults|Dv] [SelectLocalization(State.HasInsufficientQualificationsForAvailablePositions, '@red_cross!', '@green_checkmark!')]"
+					elide = right
+					tooltip = "STATE_AVAILABLE_LABOR_TOOLTIP"
+				}
+
+				### SETTING - UNEMPLOYED
+				textbox = {
+					visible = "[GetVariableSystem.HasValue('show_unemployed', 'true')]"
+
+					layoutpolicy_horizontal = expanding
+					layoutstretchfactor_horizontal = 1
+					min_width = 85
+
+					datacontext = "[MapListOption.GetBuildingData.GetState]"
+					align = right|nobaseline
+					raw_text = "#variable [State.GetNumUnemployedWorkingAdults|D]#! [SelectLocalization(State.HasInsufficientQualificationsForAvailablePositions, '@red_cross!', '@green_checkmark!')]"
+					elide = right
+					tooltip = "STATE_AVAILABLE_LABOR_TOOLTIP"
+				}
+
+				box_vertical_divider = {
+					visible = "[Not(MapListBuildingPanel.GetBuildingType.IsMilitaryBuilding)]"
+				}
+
+				# Infrastructure Balance
+				textbox = {
+					visible = "[Not(MapListBuildingPanel.GetBuildingType.IsMilitaryBuilding)]"
+
+					layoutpolicy_horizontal = expanding
+					layoutstretchfactor_horizontal = 1
+					margin_right = 5
+					align = right|nobaseline
+
+					datacontext = "[MapListOption.GetBuildingData.GetState]"
+					raw_text = "#v [State.GetInfrastructureBalance|0+=]#!"
+					tooltip = "STATE_INFRASTRUCTURE_DESC"
+					elide = right
+				}
+
+				box_vertical_divider = {}
+
+				hbox = {
+					size = { 140 25 }
+					visible = "[Not(MapListBuildingPanel.GetBuildingType.IsMilitaryBuilding)]"
+					
+					productivity_or_other_information = {
+						blockoverride "productivity_info_datacontext" {
+							datacontext = "[MapListOption.GetBuildingData.GetBuilding]"
+							datacontext = "[Building.GetState]"
+						}
+
+						blockoverride "productivity_info_text_style" {
+							size = { 65 25 }
+							margin_right = 10
+							align = right|nobaseline
+							parentanchor = vcenter
+						}
+					}
+
+					widget = {
+						layoutpolicy_horizontal = preferred
+						layoutpolicy_vertical = expanding
+						vertical_divider = {}
+					}
+
+					textbox = {
+						visible = "[Not(ObjectsEqual(Building.GetBuildingType, GetBuildingType('building_trade_center').Self))]"
+						margin_right = 10
+						size = { 80 25 }
+						align = right|nobaseline
+						datacontext = "[MapListOption.GetBuildingData.GetBuilding]"
+						raw_text = "#v [Building.GetBuildingType.GetExpansionRevenueImpact(Building.Self, Building.GetState)|K+=]#!"
+						tooltip = "[Building.GetBuildingType.GetExpansionRevenueImpactDesc(Building.Self, Building.GetState)]"
+						elide = right
+					}
+
+					textbox = {
+						visible = "[ObjectsEqual(Building.GetBuildingType, GetBuildingType('building_trade_center').Self)]"
+						margin_right = 10
+						size = { 80 25 }
+						align = right|nobaseline
+						datacontext = "[MapListOption.GetBuildingData.GetBuilding]"
+						datacontext = "[MapListOption.GetBuildingData.GetBuilding.GetState]"
+						raw_text = "TRADE_POTENTIAL_VALUE"
+						tooltip = "TRADE_POTENTIAL_TOOLTIP"
+						elide = right
+					}
+				}
+
+				box_vertical_divider = {
+					visible = "[Not(MapListBuildingPanel.GetBuildingType.IsMilitaryBuilding)]"
+				}
+
+				# Military units provided text
+				textbox = {
+					visible = "[And(MapListOption.GetBuildingData.GetBuilding.GetBuildingType.IsMilitaryBuilding, NotZero(Building.GetExpansionLevel))]"
+					
+					min_width = 85
+					align = right|nobaseline
+
+					datacontext = "[MapListOption.AccessBuildingData.AccessBuilding]"
+					datacontext = "[MapListOption.AccessBuildingData.GetMilitaryFormation]"
+					text = "UNITS_PROVIDED_FROM_BUILDING"
+					tooltip = "UNITS_PROVIDED_FROM_BUILDING_TOOLTIP"
+					elide = right
+					alpha = "[TransparentIfZero_int32(Building.GetNumActiveUnitsProvidedToFormation(MilitaryFormation.Self))]"
+				}
+
+				# Military units not available text
+				textbox = {
+					visible = "[And(MapListOption.GetBuildingData.GetBuilding.GetBuildingType.IsMilitaryBuilding, IsZero(Building.GetExpansionLevel))]"
+					alpha = "[TransparentIfTrue('(bool)yes')]"
+
+					min_width = 85
+					align = right|nobaseline
+
+					datacontext = "[MapListOption.AccessBuildingData.AccessBuilding]"
+					datacontext = "[MapListOption.AccessBuildingData.GetMilitaryFormation]"
+					text = "NOT_AVAILABLE"
+					elide = right
+				}
+
+				box_vertical_divider = {
+					visible = "[MapListOption.GetBuildingData.GetBuilding.GetBuildingType.IsMilitaryBuilding]"
+				}
+
+				# Region name
+				textbox = {
+					min_width = 78
+					align = right|nobaseline
+
+					datacontext = "[MapListOption.GetBuildingData.GetBuilding]"
+					raw_text = "#v [Building.GetState.GetStateRegion.GetStrategicRegion.GetName]#!"
+					elide = right
+					visible = "[MapListOption.GetBuildingData.GetBuilding.GetBuildingType.IsMilitaryBuilding]"
+				}
+
+				box_vertical_divider = {
+					visible = "[MapListOption.GetBuildingData.GetBuilding.GetBuildingType.IsMilitaryBuilding]"
+				}
+
+				# Construction efficiency text
+				textbox = {
+					min_width = 56
+					align = right|nobaseline
+
+					text = "[State.GetConstructionEfficiency|%1+=]"
+					tooltip = "[State.GetConstructionEfficiencyTooltip]"
+					elide = right
+				}
+
+				# Progress bars
+				vbox = {
+					layoutpolicy_horizontal = expanding
+					layoutstretchfactor_horizontal = 2
+					margin_left = 5
+					min_width = 72
+					spacing = 6
+
+					default_progressbar_horizontal = {
+						visible = "[Building.IsActive]"
+						size = { 65 10 }
+						layoutpolicy_horizontal = expanding
+
+						tooltip = "TOOLTIP_BUILDING_EMPLOYMENT"
+
+						blockoverride "values" {
+							value = "[FixedPointToFloat(Building.GetEmploymentPercentage)]"
+							min = 0
+							max = 1
+						}
+					}
+
+					widget = {
+						alpha = "[TransparentIfFalse(Building.IsActive)]"
+						visible = "[And(GreaterThan_CFixedPoint(Building.GetMaxCashReserves, '(CFixedPoint)0'), Building.IsActive)]"
+						size = { 65 10 }
+						layoutpolicy_horizontal = expanding
+
+						using = cash_reserves_tooltip_with_graph
+
+						gold_progressbar_horizontal = {
+							size = { 100% 100% }
+							alpha = "[TransparentIfFalse(Building.IsActive)]"
+							visible = "[And(GreaterThan_CFixedPoint(Building.GetMaxCashReserves, '(CFixedPoint)0'), Building.IsActive)]"
+
+							blockoverride "glow_size" {
+								size = { 40 100% }
+							}
+
+							parentanchor = vcenter
+							blockoverride "values" {
+								min = 0
+								max = "[FixedPointToFloat(Building.GetMaxCashReserves)]"
+								value = "[FixedPointToFloat(Building.GetCurrentCashReserves)]"
+							}
+						}
+
+						changed_value_decreased_progressbar_horizontal = {
+							size = { 100% 100% }
+							visible = "[GreaterThan_CFixedPoint(GetPrevTrendValue(Building.GetCashReservesTrend), GetTrendValue(Building.GetCashReservesTrend))]"
+
+							blockoverride "second_progressbar" {}
+
+							blockoverride "values" {
+								min = 0
+								max = "[FixedPointToFloat(Building.GetMaxCashReserves)]"
+								value = "[FixedPointToFloat(Building.GetCurrentCashReserves)]"
+							}
+							blockoverride "glow_size" {
+								size = { 40 100% }
+							}
+							blockoverride "arrow_texture_density" {
+								texture_density = 14 #use to match height of progressbar
+							}
+						}
+
+						changed_value_increased_progressbar_horizontal = {
+							size = { 100% 100% }
+							visible = "[GreaterThan_CFixedPoint(GetTrendValue(Building.GetCashReservesTrend), GetPrevTrendValue(Building.GetCashReservesTrend))]"
+
+							blockoverride "second_progressbar" {}
+
+							blockoverride "values" {
+								min = 0
+								max = "[FixedPointToFloat(Building.GetMaxCashReserves)]"
+								value = "[FixedPointToFloat(Building.GetCurrentCashReserves)]"
+							}
+							blockoverride "glow_size" {
+								size = { 40 100% }
+							}
+							blockoverride "arrow_texture_density" {
+								texture_density = 14 #use to match height of progressbar
+							}
+						}
+					}
+				}
+
+				# Employment indicator icon
+				employment_indicator_icon = {
+					blockoverride "indicator_icon_size" {
+						size = { 28 28 }
+					}
+				}
+			}
+		}
+
+		divider_clean = {
+			parentanchor = hcenter
+			size = { 520 1 }
+			visible = "[Building.IsActive]"
+		}
+
+		margin_widget = {
+			visible = "[Building.IsActive]"
+			size = { 520 43 }
+			margin_bottom = 10
+			margin_left = 10
+
+			hbox = {
+				minimumsize = { 520 43 }
+				spacing = 10
+
+				# widget = { # MPM - Replace PMs widget with scrollarea
+					# layoutpolicy_horizontal = expanding
+					# layoutpolicy_vertical = expanding
+
+					# condensed_building_information_pms = {
+						# parentanchor = vcenter
+						# blockoverride "pms_slot_sizes" {
+							# addcolumn = 32
+							# addrow = 33
+						# }
+
+						# blockoverride "pms_item_size" {
+							# size = { 33 33 }
+						# }
+
+						# blockoverride "pms_minimumsize" {
+							# minimumsize = { 160 30 }
+						# }
+
+						# blockoverride "pms_number_visibility" {
+							# visible = no
+						# }
+
+						# blockoverride "trade_center_extra_info_position" {
+							# position = { 75 0 }
+						# }
+
+						# blockoverride "trade_center_extra_info_size" {
+							# size = { 280 23 }
+						# }
+
+						# blockoverride "trade_center_extra_info_line_spacing" {}
+					# }
+				# }
+                
+                # MPM - Replace PMs widget with scrollarea
+                scrollarea = { # MPM - mostly copied from goods_state_panel
+                    layoutpolicy_horizontal = expanding
+                    layoutpolicy_vertical = expanding
+                    # size = { 141 43 }
+
+                    scrollbarpolicy_vertical = always_off
+
+                    scrollbar_horizontal = {
+                        scrollbar = {
+                            name = "horizontal_scrollbar"
+                            size = { 8 6 }
+                            wheelstep = 60
+                            direction = horizontal
+                            
+                            track = {
+                                button = {
+                                    texture = "gfx/interface/scrollbars/scrollbar_track_horizontal.dds"
+                                    spriteType = Corneredtiled
+                                    gfxtype = buttongfx
+                                    spriteborder = { 3 0 }
+                                    size = { 8 4 }
+                                    effectname = "NoHighlight"
+                                    intersectionmask = yes		
+                                }
+                            }
+                            
+                            slider = {
+                                button = {
+                                    name = sliderbutton
+                                    texture = "gfx/interface/scrollbars/scrollbar_slider_horizontal.dds"
+                                    gfxtype = framedbuttongfx
+                                    effectname = "NoHighlight"
+                                    framesize = { 40 6 }
+                                    upframe = 1
+                                    overframe = 2
+                                    downframe = 2
+                                    intersectionmask = yes
+                                }
+                            }
+                            
+                            # delete these to instantly crash the game
+                            dec_button = {
+                                button = {
+                                }
+                            }
+                            
+                            inc_button = {
+                                button = {
+                                }
+                            }
+                        }
+                    }
+
+                    scrollwidget = {
+                        flowcontainer = {
+                            datamodel = "[Building.AccessProductionMethodGroups]"
+                            # spacing = 4
+                            margin_top = 6
+
+                            item = {
+                                widget = {
+                                    size = { 33 33 }
+                                    datacontext = "[Building.AccessProductionMethod(ProductionMethodGroup.Self)]"
+                                    datacontext = "[ProductionMethod]"
+                                    datacontext = "[Building]"
+                                    datacontext = "[ProductionMethodGroup]"
+                                    using = tooltip_above
+
+                                    tooltip = "CHANGE_FROM_CURRENT_PRODUCTION_METHOD_TOOLTIP"
+
+                                    button = {
+                                        visible = "[NotEqualTo_int32( GetDataModelSize( ProductionMethodGroup.AccessBuildingProductionMethods( Building.Self ) ), '(int32)1' )]"
+                                        using = expand_button_bg_dropdown
+                                        size = { 33 33 }
+                                        enabled = "[Building.IsOwner( GetPlayer.Self )]"
+                                        onclick = "[RightClickMenuManager.ToggleSwitchProductionMethodMenu(Building.AccessSelf, ProductionMethodGroup.AccessSelf, PdxGuiWidget.AccessSelf)]"
+                                    }
+
+                                    icon = {
+                                        size = { 35 35 }
+                                        parentanchor = center
+                                        texture = "[ProductionMethod.GetTexture]"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+				hbox = {
+					visible = "[LessThan_int32(GetDataModelSize(Building.AccessConsumedGoods), '(int32)4')]"
+					datamodel = "[Building.AccessConsumedGoods]"
+					spacing = 5
+
+					item = {
+						margin_widget = {
+							size = { 40 30 }
+							margin_right = 10
+							tooltip = "[Goods.GetStatePriceDesc]"
+
+							icon = {
+								size = { 30 30 }
+								texture = "[Goods.GetTexture]"
+
+								textbox = {
+									text = "[Goods.GetCompareIconAgainstBasePriceNoTooltip( Goods.GetStatePrice )]"
+									align = nobaseline
+									autoresize = yes
+									parentanchor = bottom|right
+									position = { 5 2 }
+								}
+							}
+						}
+					}
+				}
+
+				overlappingitembox = {
+					visible = "[GreaterThanOrEqualTo_int32(GetDataModelSize(Building.AccessConsumedGoods), '(int32)4')]"
+					minimumsize = { 170 30 }
+					datamodel = "[Building.AccessConsumedGoods]"
+
+					item = {
+						widget = {
+							size = { 40 30 }
+							parentanchor = vcenter
+							tooltip = "[Goods.GetStatePriceDesc]"
+
+							icon = {
+								size = { 30 30 }
+								texture = "[Goods.GetTexture]"
+								parentanchor = vcenter
+
+								textbox = {
+									text = "[Goods.GetCompareIconAgainstBasePriceNoTooltip( Goods.GetStatePrice )]"
+									align = nobaseline
+									autoresize = yes
+									parentanchor = bottom|right
+									position = { 5 2 }
+								}
+							}
+						}
+					}
+				}
+
+				widget = {
+					size = { 30 30 }
+					visible = "[Or(And(Not(IsDataModelEmpty(Building.AccessConsumedGoods)), Not(IsDataModelEmpty(Building.AccessProducedGoods))), Building.IsMilitaryBuilding )]"
+
+					icon = {
+						size = { 20 20 }
+						texture = "gfx/interface/icons/generic_icons/turns_into.dds"
+						parentanchor = center
+					}
+				}
+
+				hbox = {
+					margin_right = 5
+					
+					visible = "[LessThan_int32(GetDataModelSize(Building.AccessProducedGoods), '(int32)4')]"
+					datamodel = "[Building.AccessProducedGoods]"
+					
+					spacing = 5
+
+					item = {
+						widget = {
+							size = { 40 30 }
+							tooltip = "[Goods.GetStatePriceDesc]"
+
+							icon = {
+								size = { 30 30 }
+								texture = "[Goods.GetTexture]"
+								parentanchor = vcenter
+
+								textbox = {
+									text = "[Goods.GetCompareIconAgainstBasePriceNoTooltip( Goods.GetStatePrice )]"
+									align = nobaseline
+									autoresize = yes
+									parentanchor = bottom|right
+									position = { 5 2 }
+								}
+							}
+						}
+					}
+				}
+
+				overlappingitembox = {
+					visible = "[GreaterThanOrEqualTo_int32(GetDataModelSize(Building.AccessProducedGoods), '(int32)4')]"
+					size = { 170 30 }
+					datamodel = "[Building.AccessProducedGoods]"
+
+					item = {
+						widget = {
+							size = { 40 30 }
+							tooltip = "[Goods.GetStatePriceDesc]"
+
+							icon = {
+								size = { 30 30 }
+								texture = "[Goods.GetTexture]"
+								parentanchor = vcenter
+
+								textbox = {
+									text = "[Goods.GetCompareIconAgainstBasePriceNoTooltip( Goods.GetStatePrice )]"
+									align = nobaseline
+									autoresize = yes
+									parentanchor = bottom|right
+									position = { 5 2 }
+								}
+							}
+						}
+					}
+				}
+
+				textbox = {
+					autoresize = yes
+					align = nobaseline
+					datacontext = "[MapListOption.AccessBuildingData.AccessBuilding]"
+					datacontext = "[MapListOption.AccessBuildingData.GetMilitaryFormation]"
+					text = "UNITS_PROVIDED_FROM_BUILDING"
+					tooltip = "UNITS_PROVIDED_FROM_BUILDING_TOOLTIP"
+					elide = right
+					margin_right = 10
+					visible = "[Building.IsMilitaryBuilding]"
+					alpha = "[TransparentIfZero_int32(Building.GetNumActiveUnitsProvidedToFormation(MilitaryFormation.Self))]"
+				}
+			}
+		}
+	}
+}

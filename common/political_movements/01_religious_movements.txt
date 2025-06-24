@@ -668,7 +668,7 @@ movement_religious_minority = {
 			owner ?= {
 				any_scope_state = {
 					religion_percent_state = {
-						target = scope:political_movement.religion
+						target = root.religion
 						value >= 0.10
 					}
 				}

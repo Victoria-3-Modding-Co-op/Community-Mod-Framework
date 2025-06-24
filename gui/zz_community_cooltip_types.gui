@@ -9,9 +9,9 @@ types TooltipTypes {
     
     #### UNSHARED ####
     
-    ## Western Clothes: Redux ##
-    type WCR_conservative_IG_list_tooltip = TooltipWidgetType {}
-    type WCR_progressive_IG_list_tooltip = TooltipWidgetType {}
+    ## Sample
+    ## Identifier of the type must match an entry in cooltip.gui
+    type COM_sample_cooltip = TooltipWidgetType {}
     
     #### ========================================================================================================== ####
     

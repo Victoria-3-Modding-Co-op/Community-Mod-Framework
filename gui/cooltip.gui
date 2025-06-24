@@ -53,6 +53,30 @@ FancyTooltip_DecreeType = {
 	name = "DecreeTypeTooltip"
 }
 
+FancyTooltip_Treaty = {
+	name = "TreatyTooltip"
+}
+
+FancyTooltip_ArticleType = {
+	name = "ArticleTypeTooltip"
+}
+
+FancyTooltip_Article = {
+	name = "ArticleTooltip"
+}
+
+FancyTooltip_ArticleWithCountryContext = {
+	name = "ArticleWithCountryContextTooltip"
+}
+
+FancyTooltip_ArticleDraft = {
+	name = "ArticleDraftTooltip"
+}
+
+FancyTooltip_ArticleDraftWithCountryContext = {
+	name = "ArticleDraftWithCountryContextTooltip"
+}
+
 FancyTooltip_IG = {
 	name = "IGTooltip"
 }
@@ -105,8 +129,20 @@ FancyTooltip_Pop = {
 	name = "PopTooltip"
 }
 
+FancyTooltip_Company = {
+	name = "CompanyTooltip"
+}
+
 FancyTooltip_CompanyType = {
 	name = "CompanyTypeTooltip"
+}
+
+FancyTooltip_CompanyCharter = {
+	name = "CompanyCharterTooltip"
+}
+
+FancyTooltip_CompanyCharterType = {
+	name = "CompanyCharterTypeTooltip"
 }
 
 FancyTooltip_Country = {
@@ -229,8 +265,20 @@ FancyTooltip_PoliticalMovement = {
 	name = "PoliticalMovementTooltip"
 }
 
+FancyTooltip_PoliticalMovementType = {
+	name = "PoliticalMovementTypeTooltip"
+}
+
 FancyTooltip_StrategicRegion = {
 	name = "StrategicRegionTooltip"
+	state = {
+		name = _show
+		on_start = "[AccessHighlightManager.HighlightStrategicRegion(StrategicRegion.Self)]"
+	}
+	state = {
+		name = _hide
+		on_start = "[AccessHighlightManager.RemoveHighlight]"
+	}
 }
 
 FancyTooltip_CanalType = {
@@ -458,6 +506,10 @@ GraphTooltip_ConstructionGoodsExpense = {
 
 GraphTooltip_SubsidiesExpense = {
 	name = "SubsidiesExpenseTooltip"
+}
+
+GraphTooltip_SubventionsExpense = {
+	name = "SubventionsExpenseTooltip"
 }
 
 GraphTooltip_InterestExpense = {

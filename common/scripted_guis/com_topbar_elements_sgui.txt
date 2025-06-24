@@ -1,0 +1,63 @@
+﻿com_topbar_element_prestige = {
+	scope = country
+
+	is_shown = {
+		always = yes
+	}
+}
+
+com_topbar_element_bloc_prestige = {
+	scope = country
+
+	is_shown = {
+		exists = power_bloc
+	}
+}
+
+com_topbar_element_bloc_cohesion = {
+	scope = country
+
+	is_shown = {
+		exists = power_bloc
+	}
+}
+
+com_topbar_element_legitimacy = {
+	scope = country
+
+	is_shown = {
+		always = yes
+	}
+}
+
+com_topbar_element_innovation = {
+	scope = country
+
+	is_shown = {
+		always = yes
+	}
+}
+
+com_topbar_element_companies = {
+	scope = country
+
+	is_shown = {
+		always = yes
+	}
+}
+
+com_topbar_element_army_size = {
+	scope = country
+
+	is_shown = {
+		always = yes
+	}
+}
+
+com_topbar_element_navy_size = {
+	scope = country
+
+	is_shown = {
+		always = yes
+	}
+}

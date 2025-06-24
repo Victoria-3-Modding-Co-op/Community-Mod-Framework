@@ -10,17 +10,17 @@ texticon = {
 texticon = {
   icon = com_power_bloc
   iconsize = {
-    offset = { 0 32 }
+    offset = { 0 15 }
     texture = "gfx/interface/icons/generic_icons/number_of_countries.dds"
-    fontsize = 32
+    fontsize = 80
   }
 }
 
 texticon = {
   icon = com_company
   iconsize = {
-    offset = { 0 32 }
+    offset = { 0 15 }
     texture = "gfx/interface/main_hud/companies_btn.dds"
-    fontsize = 32
+    fontsize = 43
   }
 }

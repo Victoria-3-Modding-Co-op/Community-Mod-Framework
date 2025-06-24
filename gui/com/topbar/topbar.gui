@@ -1,4 +1,4 @@
-@secondary_icon_size = 26
+@secondary_icon_size = 18
 
 types com_topbar_types {
 
@@ -13,21 +13,28 @@ types com_topbar_types {
         margin_bottom = 10
         max_update_rate = 8
         spacing = 0
-        using = fullscreen_hide
         using = clickthrough_blocker
         using = default_fade_in_out
-        visible = "[And(
-            Not(Or4(
-                InformationPanelBar.IsAnyPanelOpen,
-                MapListPanelManager.IsVisible,
-                GetVariableSystem.Exists('com_open_window'),
-                GetVariableSystem.Exists('com_alert_action')
-            )),
-            Or(
-                DataModelHasItems(Country.MakeScope.GetList('com_topbar_first_line')),
-                DataModelHasItems(Country.MakeScope.GetList('com_topbar_second_line'))
-            )
-        )]"
+
+        block "animation" {
+            position = { 0 0 }
+            alpha = 0
+
+            state = {
+                name = show_topbar_secondary_stats
+                alpha = 1
+                position_y = 75
+                duration = 0.15
+                using = Animation_Curve_Default
+            }
+            state = {
+                name = hide_topbar_secondary_stats
+                alpha = 0
+                position_y = 0
+                duration = 0.15
+                using = Animation_Curve_Default
+            }
+        }
 
         background = {
             texture = "gfx/interface/main_hud/topbar_bg.dds"
@@ -95,7 +102,9 @@ types com_topbar_types {
         }
 
         item = {
-            com_topbar_element = {}
+            com_topbar_element = {
+                parentanchor = vcenter
+            }
         }
     }
 
@@ -105,6 +114,7 @@ types com_topbar_types {
         spacing = 5
         using = tooltip_below
         tooltip = "[Localize(Concatenate(Scope.Var('com_name').GetFlagName, '_tooltip'))]"
+        visible = "[GetScriptedGui(Localize(Scope.Var('com_name').GetFlagName)).IsShown(GuiScope.SetRoot(Country.MakeScope).End)]"
 
         button = {
             parentanchor = top|left

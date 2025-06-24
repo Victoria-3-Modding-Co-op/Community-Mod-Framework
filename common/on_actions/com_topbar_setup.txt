@@ -19,7 +19,7 @@ com_topbar_setup = {
 			scope:topbar_com_prestige = {
 				set_variable = {
 					name = com_name
-					value = flag:gg_topbar_com_prestige
+					value = flag:com_topbar_element_prestige
 				}
 			}
 			add_to_global_variable_list = {
@@ -35,7 +35,7 @@ com_topbar_setup = {
 			scope:topbar_com_bloc_prestige = {
 				set_variable = {
 					name = com_name
-					value = flag:gg_topbar_com_bloc_prestige
+					value = flag:com_topbar_element_bloc_prestige
 				}
 			}
 			add_to_global_variable_list = {
@@ -51,7 +51,7 @@ com_topbar_setup = {
 			scope:topbar_com_bloc_cohesion = {
 				set_variable = {
 					name = com_name
-					value = flag:gg_topbar_com_bloc_cohesion
+					value = flag:com_topbar_element_bloc_cohesion
 				}
 			}
 			add_to_global_variable_list = {
@@ -67,7 +67,7 @@ com_topbar_setup = {
 			scope:topbar_com_legitimacy = {
 				set_variable = {
 					name = com_name
-					value = flag:gg_topbar_com_legitimacy
+					value = flag:com_topbar_element_legitimacy
 				}
 			}
 			add_to_global_variable_list = {
@@ -83,7 +83,7 @@ com_topbar_setup = {
 			scope:topbar_com_innovation = {
 				set_variable = {
 					name = com_name
-					value = flag:gg_topbar_com_innovation
+					value = flag:com_topbar_element_innovation
 				}
 			}
 			add_to_global_variable_list = {
@@ -99,7 +99,7 @@ com_topbar_setup = {
 			scope:topbar_com_companies = {
 				set_variable = {
 					name = com_name
-					value = flag:gg_topbar_com_companies
+					value = flag:com_topbar_element_companies
 				}
 			}
 			add_to_global_variable_list = {
@@ -107,7 +107,7 @@ com_topbar_setup = {
 				target = scope:topbar_com_companies
 			}
 
-			# Army Size Icon
+			# Army Size Icona
 			create_struct = {
 				struct_type = 0
 				struct_scope = topbar_com_army_size
@@ -115,7 +115,7 @@ com_topbar_setup = {
 			scope:topbar_com_army_size = {
 				set_variable = {
 					name = com_name
-					value = flag:gg_topbar_com_army_size
+					value = flag:com_topbar_element_army_size
 				}
 			}
 			add_to_global_variable_list = {
@@ -131,7 +131,7 @@ com_topbar_setup = {
 			scope:topbar_com_navy_size = {
 				set_variable = {
 					name = com_name
-					value = flag:gg_topbar_com_navy_size
+					value = flag:com_topbar_element_navy_size
 				}
 			}
 			add_to_global_variable_list = {

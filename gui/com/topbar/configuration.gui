@@ -2,10 +2,13 @@
 
 types com_topbar_types {
 
-    type com_topbar_configuration_button = button_icon_settings {
+    type com_topbar_configuration_button = button_icon_round {
         size = { 26 26 }
         onclick = "[GetVariableSystem.Toggle('com_topbar_configuration')]"
         tooltip = com_topbar_configuration_button_tooltip
+        blockoverride "icon" {
+            texture = "gfx/interface/buttons/button_icons/menu.dds"
+        }
     }
 
     type com_topbar_configuration = window {
@@ -188,16 +191,20 @@ types com_topbar_types {
                 scrollarea = {
                     minimumsize = { 640 290 }
                     scrollbarpolicy_horizontal = always_off
+                    scrollbarpolicy_vertical = always_on
                     scrollbar_vertical = {
                         using = vertical_scrollbar
                     }
 
-                    flowcontainer = {
-                        direction = vertical
-                        datamodel = "[GetGlobalList('com_topbar_items')]"
-                        spacing = 5
-                        item = {
-                            com_topbar_configuration_add_element = {}
+                    scrollwidget = {
+                        flowcontainer = {
+                            direction = vertical
+                            datamodel = "[GetGlobalList('com_topbar_items')]"
+                            spacing = 5
+                            minimumsize = { 640 290 }
+                            item = {
+                                com_topbar_configuration_add_element = {}
+                            }
                         }
                     }
                 }
@@ -225,6 +232,7 @@ types com_topbar_types {
 
 
     type com_topbar_configuration_add_element = flowcontainer {
+        visible = "[GetScriptedGui(Localize(Scope.Var('com_name').GetFlagName)).IsShown(GuiScope.SetRoot(Country.MakeScope).End)]"
         minimumsize = { 620 60 }
         margin_left = 30
         margin_right = 10
@@ -266,12 +274,12 @@ types com_topbar_types {
                 icon = {
                     visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(Country.MakeScope).AddScope('element', Scope.GetCharacter.MakeScope).End)]"
                     size = { 30 30 }
-                    texture = gfx/interface/icons/generic_icons/ig_suppress.dds
+                    texture = gfx/interface/icons/generic_icons/red_cross.dds
                 }
                 icon = {
                     visible = "[Not(ScriptedGui.IsShown(GuiScope.SetRoot(Country.MakeScope).AddScope('element', Scope.GetCharacter.MakeScope).End))]"
                     size = { 30 30 }
-                    texture = gfx/interface/icons/generic_icons/ig_bolster.dds
+                    texture = gfx/interface/icons/generic_icons/green_checkmark.dds
                 }
             }
         }
@@ -291,12 +299,12 @@ types com_topbar_types {
                 icon = {
                     visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(Country.MakeScope).AddScope('element', Scope.GetCharacter.MakeScope).End)]"
                     size = { 30 30 }
-                    texture = gfx/interface/icons/generic_icons/ig_suppress.dds
+                    texture = gfx/interface/icons/generic_icons/red_cross.dds
                 }
                 icon = {
                     visible = "[Not(ScriptedGui.IsShown(GuiScope.SetRoot(Country.MakeScope).AddScope('element', Scope.GetCharacter.MakeScope).End))]"
                     size = { 30 30 }
-                    texture = gfx/interface/icons/generic_icons/ig_bolster.dds
+                    texture = gfx/interface/icons/generic_icons/green_checkmark.dds
                 }
             }
         }

@@ -5,14 +5,40 @@ widget = {
     datacontext = "[GetMetaPlayer.GetPlayedOrObservedCountry]"
     visible = "[Country.IsValid]"
 
-
     container = {
+        using = hud_visibility
         parentanchor = top|left
-        position = { 0 75 }
-        com_topbar = {}
-    }
+        container = {
+            visible = "[And(
+                Not(Or4(
+                    InformationPanelBar.IsAnyPanelOpen,
+                    MapListPanelManager.IsVisible,
+                    GetVariableSystem.Exists('com_open_window'),
+                    GetVariableSystem.Exists('com_alert_action')
+                )),
+                Or(
+                    DataModelHasItems(Country.MakeScope.GetList('com_topbar_first_line')),
+                    DataModelHasItems(Country.MakeScope.GetList('com_topbar_second_line'))
+                )
+            )]"
 
-    container = {
+            onmousehierarchyenter = "[PdxGuiInterruptThenTriggerAllAnimations('hide_topbar_secondary_stats','show_topbar_secondary_stats')]"
+            onmousehierarchyleave = "[PdxGuiInterruptThenTriggerAllAnimations('show_topbar_secondary_stats','hide_topbar_secondary_stats')]"
+
+            #shows only on hover
+            com_topbar = {
+                visible = "[GetVariableSystem.Exists('more_topbar_info')]"
+            }
+
+            #locked
+            com_topbar = {
+                visible = "[Not(GetVariableSystem.Exists('more_topbar_info'))]"
+
+                blockoverride "animation" {
+                    position = { 0 75 }
+                }
+            }
+        }
     }
 }
 
@@ -24,8 +50,56 @@ widget = {
     datacontext = "[GetMetaPlayer.GetPlayedOrObservedCountry]"
     visible = "[Country.IsValid]"
 
-    com_topbar_configuration_button = {
-        position = { 650 10 }
+    widget = {
+        using = hud_visibility
+        allow_outside = yes
+        size = { 100% 100% }
+        com_topbar_configuration = {}
     }
-    com_topbar_configuration = {}
+
+    container = {
+        using = hud_visibility
+        com_topbar_configuration_button = {
+            visible = "[GreaterThanZero_CFixedPoint(GetPlayer.GetSupplyNetworkStrength)]"
+            onmousehierarchyenter = "[PdxGuiInterruptThenTriggerAllAnimations('hide_topbar_secondary_stats','show_topbar_secondary_stats')]"
+            onmousehierarchyleave = "[PdxGuiInterruptThenTriggerAllAnimations('show_topbar_secondary_stats','hide_topbar_secondary_stats')]"
+            state = {
+                name = show_topbar_secondary_stats
+                delay = 0.15
+                alpha = 1
+                duration = 0.15
+                using = Animation_Curve_Default
+            }
+            state = {
+                name = hide_topbar_secondary_stats
+                alpha = 0
+                duration = 0
+                using = Animation_Curve_Default
+            }
+            alpha = 0
+            position = { 690 10 }
+        }
+
+        com_topbar_configuration_button = {
+            visible = "[Not(GreaterThanZero_CFixedPoint(GetPlayer.GetSupplyNetworkStrength))]"
+            onmousehierarchyenter = "[PdxGuiInterruptThenTriggerAllAnimations('hide_topbar_secondary_stats','show_topbar_secondary_stats')]"
+            onmousehierarchyleave = "[PdxGuiInterruptThenTriggerAllAnimations('show_topbar_secondary_stats','hide_topbar_secondary_stats')]"
+            using = hud_visibility
+            state = {
+                name = show_topbar_secondary_stats
+                delay = 0.15
+                alpha = 1
+                duration = 0.15
+                using = Animation_Curve_Default
+            }
+            state = {
+                name = hide_topbar_secondary_stats
+                alpha = 0
+                duration = 0
+                using = Animation_Curve_Default
+            }
+            alpha = 0
+            position = { 670 10 }
+        }
+    }
 }

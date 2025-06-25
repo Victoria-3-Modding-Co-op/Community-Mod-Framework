@@ -1268,11 +1268,21 @@ liberal_party = {
 			if = {
 				limit = {
 					has_party = no
-					exists = owner.py:free_trade_party
+					exists = owner.py:liberal_party
 				}
 				add = {
 					value = 20
 					desc = "join_existing_party"
+				}
+			}
+			#USFP: Intelligentsia should ALWAYS join the Whigs/Republicans
+			if = {
+				limit = {
+					is_interest_group_type = ig_intelligentsia
+				}
+				add  = {
+					value = 100
+					desc = "from_archetype_party"
 				}
 			}
 		}

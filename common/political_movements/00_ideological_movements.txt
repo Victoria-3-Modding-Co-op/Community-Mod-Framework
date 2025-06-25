@@ -5881,7 +5881,7 @@ movement_modernizer = {
 			is_country_type = unrecognized
 		}
 		NAND = {
-			has_law = law_type:law_protectionism
+			has_law_or_variant = law_type:law_protectionism
 			has_law = law_type:law_compulsory_primary_school
 			has_law = law_type:law_public_schools
 			OR = {
@@ -5907,7 +5907,7 @@ movement_modernizer = {
 	}
 	disband_trigger = {
 		AND = {
-			has_law = law_type:law_protectionism
+			has_law_or_variant = law_type:law_protectionism
 			OR = {
 				has_law = law_type:law_interventionism
 				has_law = law_type:law_command_economy

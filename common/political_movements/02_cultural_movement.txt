@@ -492,24 +492,24 @@ movement_cultural_minority = {
 					is_primary_culture_of = root
 				}
 				NOT = {
-				root = {
-						any_scope_state = {
-							state_region = {
-								is_homeland = scope:political_movement.culture
-							}
-							culture_percent_state = {
-								target = scope:political_movement.culture
-								value >= 0.18
+					root = {
+							any_scope_state = {
+								state_region = {
+									is_homeland = scope:political_movement.culture
+								}
+								culture_percent_state = {
+									target = scope:political_movement.culture
+									value >= 0.18
+								}
 							}
 						}
-					}
-				}
-				root = {
-					culture_percent_country = {
-						target = scope:political_movement.culture
-							value <= 0.08
-					}
-					cultural_acceptance_base = { target = scope:political_movement.culture value > acceptance_status_2 }
+					root = { #vanilla bugfix to stop from instantly disbanding
+						culture_percent_country = {
+							target = scope:political_movement.culture
+								value <= 0.08
+						}
+						cultural_acceptance_base = { target = scope:political_movement.culture value > acceptance_status_2 }
+					}	
 				}
 			}
 		}

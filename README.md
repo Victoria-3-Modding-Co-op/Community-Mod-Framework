@@ -1,5 +1,8 @@
-# Community-Mod-Framework
-Framework mod to support compatibility between including GUI, Political Movements, Parties and mod detection triggers
+# Community Mod Framework
+![banner.png](docs/banner.png)
+
+The Community Mod Framework aims to support compatibility between different mods.
+Including GUI, Political Movements, Parties, Mod detection triggers and much more.
 
 ## Steam Page
 https://steamcommunity.com/sharedfiles/filedetails/?id=3385002128

@@ -387,8 +387,15 @@ liberal_party = {
 	available_for_interest_group = {
 		owner = {
 			country_has_voting_franchise = yes
-			ig:ig_intelligentsia = {
-				is_marginal = no
+			#USFP: Liberal party can exist without Intelligentsia
+			OR = {				
+				ig:ig_intelligentsia = {
+					is_marginal = no
+				}
+				AND = {
+					is_usfp_active = yes
+					usfp_country_is_american = yes
+				}
 			}
 		}
 		leader = { # far right and far left won't join liberal parties
@@ -1177,7 +1184,7 @@ liberal_party = {
 				desc = "from_southern_interests"
 			}
 		}
-		#USFP weights
+		### USFP weights ###
 		if = {
 			limit = {
 				is_usfp_active = yes
@@ -1282,6 +1289,16 @@ liberal_party = {
 				}
 				add  = {
 					value = 100
+					desc = "from_archetype_party"
+				}
+			}
+			#PB are natural whigs/republicans too
+			if = {
+				limit = {
+					is_interest_group_type = ig_petty_bourgeoisie
+				}
+				add  = {
+					value = 20
 					desc = "from_archetype_party"
 				}
 			}

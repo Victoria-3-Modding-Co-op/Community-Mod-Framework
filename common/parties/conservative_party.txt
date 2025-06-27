@@ -1322,6 +1322,20 @@ conservative_party = {
 				desc = "from_southern_interests"
 			}
 		}
+		#USFP: Intelligentsia should NEVER join the Democrats
+		if = {
+			limit = {
+				is_usfp_active = yes
+				owner = {
+					usfp_country_is_american = yes
+				}
+				is_interest_group_type = ig_intelligentsia
+			}
+			add = {
+				value = -100
+				desc = "from_northern_interests"
+			}
+		}
 		if = {
 			limit = {
 				leader = {

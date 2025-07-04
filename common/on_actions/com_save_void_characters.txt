@@ -1,0 +1,35 @@
+﻿on_monthly_pulse = {
+	on_actions = {
+		on_com_save_structs
+	}
+}
+
+on_com_save_structs = {
+	effect = {
+		ordered_country = {
+			order_by = prestige
+			position = 0
+			save_temporary_scope_as = com_internal_prestige_leader
+		}
+		if = {
+			limit = {
+				NOT = {
+					global_var:com_internal_prestige_leader_old ?= scope:com_internal_prestige_leader
+				}
+			}
+			every_character_in_void = {
+				limit = {
+					has_variable = is_struct
+					NOT = {
+						owner = scope:com_internal_prestige_leader
+					}
+				}
+				transfer_character = scope:com_internal_prestige_leader
+			}
+			set_global_variable = {
+				name = com_internal_prestige_leader_old
+				value = scope:com_internal_prestige_leader
+			}
+		}
+	}
+}

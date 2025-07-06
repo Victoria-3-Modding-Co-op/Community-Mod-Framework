@@ -1,0 +1,195 @@
+types MPM_types {
+    type MPM_production_methods_scrollarea_base = container {
+        scrollarea = { # MPM - mostly copied from goods_state_panel
+            layoutpolicy_horizontal = expanding
+            layoutpolicy_vertical = expanding
+
+            block scrollarea_size {
+                size = { 208 50 }
+            }
+
+            scrollbarpolicy_vertical = always_off
+
+            scrollbar_horizontal = {
+                scrollbar = {
+                    name = "horizontal_scrollbar"
+                    wheelstep = 60
+                    direction = horizontal
+
+                    block scrollbar_size {
+                        size = { 8 6 }
+                    }
+
+                    track = {
+                        button = {
+                            texture = "gfx/interface/scrollbars/scrollbar_track_horizontal.dds"
+                            spriteType = Corneredtiled
+                            gfxtype = buttongfx
+                            spriteborder = { 3 0 }
+                            effectname = "NoHighlight"
+                            intersectionmask = yes
+
+                            block track_size {
+                                size = { 8 4 }
+                            }
+                        }
+                    }
+
+                    slider = {
+                        button = {
+                            name = sliderbutton
+                            texture = "gfx/interface/scrollbars/scrollbar_slider_horizontal.dds"
+                            gfxtype = framedbuttongfx
+                            effectname = "NoHighlight"
+                            upframe = 1
+                            overframe = 2
+                            downframe = 2
+                            intersectionmask = yes
+
+                            block slider_size {
+                                framesize = { 40 6 }
+                            }
+                        }
+                    }
+
+                    # delete these to instantly crash the game
+                    dec_button = {
+                        button = {
+                        }
+                    }
+
+                    inc_button = {
+                        button = {
+                        }
+                    }
+                }
+            }
+
+            scrollwidget = {
+                flowcontainer = {
+                    block scroll_datamodel {}
+
+                    block pm_spacing {
+                        spacing = 0
+                    }
+
+                    block pm_margins {
+                        margin_top = 6
+                    }
+
+                    item = {
+                        widget = {
+                            block item_widget {}
+                        }
+                    }
+                }
+            }
+        }
+	}
+
+    type MPM_pms_area_building = MPM_production_methods_scrollarea_base {
+        blockoverride scroll_datamodel {
+            datamodel = "[Building.AccessProductionMethodGroups]"
+        }
+
+        blockoverride item_widget {
+            block pm_size {
+                size = { 50 50 }
+            }
+            datacontext = "[Building.AccessProductionMethod(ProductionMethodGroup.Self)]"
+            datacontext = "[ProductionMethod]"
+            datacontext = "[Building]"
+            datacontext = "[ProductionMethodGroup]"
+            using = tooltip_above
+
+            tooltip = "CHANGE_FROM_CURRENT_PRODUCTION_METHOD_TOOLTIP"
+
+            button = {
+                visible = "[NotEqualTo_int32( GetDataModelSize( ProductionMethodGroup.AccessBuildingProductionMethods( Building.Self ) ), '(int32)1' )]"
+                using = expand_button_bg_dropdown
+                size = { 100% 100% }
+                enabled = "[Building.IsOwner( GetPlayer.Self )]"
+                onclick = "[RightClickMenuManager.ToggleSwitchProductionMethodMenu(Building.AccessSelf, ProductionMethodGroup.AccessSelf, PdxGuiWidget.AccessSelf)]"
+            }
+
+            icon = {
+                block pm_icon_size {
+                    size = { 40 40 }
+                }
+                parentanchor = center
+                texture = "[ProductionMethod.GetTexture]"
+            }
+        }
+    }
+
+    type MPM_pms_area_building_type = MPM_production_methods_scrollarea_base {
+        blockoverride scroll_datamodel {
+            datamodel = "[BuildingBrowserBuildingTypeItem.GetBuildingType.AccessProductionMethodGroups]"
+        }
+
+        blockoverride item_widget {
+            block pm_size {
+                size = { 50 50 }
+            }
+            tooltip = "BUILDING_TYPE_BULK_CHANGE_TOOLTIP"
+            using = tooltip_above
+
+            button = {
+                visible = "[NotEqualTo_int32( GetDataModelSize( ProductionMethodGroup.AccessCountryProductionMethods( GetPlayer.Self ) ), '(int32)1' )]"
+                distribute_visual_state = no
+                inherit_visual_state = no
+                using = expand_button_bg_dropdown
+                size = { 100% 100% }
+                onclick = "[BuildingBrowserBuildingTypeItem.ToggleSwitchProductionMethodMenu( ProductionMethodGroup.AccessSelf, PdxGuiWidget.AccessSelf)]"
+                enabled = "[Not(IsDataModelEmpty(BuildingBrowserBuildingTypeItem.GetBuildingsInCountry))]"
+            }
+
+            ### pm icon
+            icon = {
+                visible = "[BuildingBrowserBuildingTypeItem.HasAllSameProductionMethod( ProductionMethodGroup.Self )]"
+                block pm_icon_size {
+                    size = { 40 40 }
+                }
+                parentanchor = center
+                texture = "[BuildingBrowserBuildingTypeItem.GetAllSameProductionMethodTexture( ProductionMethodGroup.Self )]"
+            }
+
+            ### mixed pm icon
+            icon = {
+                visible = "[Not( BuildingBrowserBuildingTypeItem.HasAllSameProductionMethod( ProductionMethodGroup.Self ) )]"
+                block pm_icon_mixed_size {
+                    size = { 35 35 }
+                }
+                parentanchor = center
+                texture = "[ProductionMethodGroup.GetMixedIcon]"
+            }
+
+            ### new pm
+            has_new_pm_icon = {
+                position = { -2 2 }
+                parentanchor = bottom|left
+                blockoverride "visible" {
+                    visible = "[And(GetPlayer.HasNewProductionMethodInGroup( ProductionMethodGroup.Self ), Not(IsDataModelEmpty(BuildingBrowserBuildingTypeItem.GetBuildingsInCountry)))]"
+                }
+            }
+
+            ### nr available
+            textbox = {
+                raw_text = "#bold [ProductionMethodGroup.GetNumAvailableOptionsForBuildingType(BuildingBrowserBuildingTypeItem.GetBuildingType.AccessSelf)]#!"
+                parentanchor = top|right
+                position = { -5 0 }
+                autoresize = yes
+                align = right|nobaseline
+                visible = "[GreaterThan_int32( ProductionMethodGroup.GetNumAvailableOptionsForBuildingType(BuildingBrowserBuildingTypeItem.GetBuildingType.AccessSelf), '(int32)1')]"
+                tooltip = "PRODUCTION_METHOD_OPTIONS_BULK"
+                using = tooltip_above
+                using = fontsize_small
+
+                background = {
+                    using = default_background
+                    margin = { 8 4 }
+                }
+            }
+        }
+    }
+}

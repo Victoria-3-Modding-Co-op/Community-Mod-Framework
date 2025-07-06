@@ -254,8 +254,8 @@ types building_panels
 				}
 
 				block "extra_items_in_production_methods_list" {}
-
-                # MPM - move progress bars in here to not clip with PMs
+                
+                # MPM - move progress bars into this container to not clip with PMs
                 block "building_progressbars" {
                     building_progressbars = {
                         position = { -5 0 }

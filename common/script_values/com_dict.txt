@@ -16,17 +16,17 @@ key_value_to_kvp = {
     add = scope:kvp_value
 }
 
-# scope:kvp
+# scope = kvp
 kvp_to_key = {
-    value = scope:kvp
+	value = this
     divide = key_shift
 }
 
-# scope:kvp
+# scope = kvp
 kvp_to_value = {
-    value = scope:kvp
+    value = this
     subtract = {
-        value = kvp_to_key
+        value = this.kvp_to_key
         multiply = key_shift
     }
 }

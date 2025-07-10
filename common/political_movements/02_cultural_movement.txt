@@ -89,26 +89,22 @@
 	pop_support_weight = {
 		if = {
 			limit = {
-				owner ?= {
-					any_political_movement = {
-						is_political_movement_type = movement_cultural_majority
-						culture ?= root.culture
+				exists = scope:political_movement
+				scope:political_movement ?= {
 						OR = {
 							is_being_suppressed = yes
 							is_being_bolstered = yes
-						}
-						save_temporary_scope_as = affected_movement
 					}
 				}
 			}
 			if = {
 				limit = {
-					scope:affected_movement = {
+					scope:political_movement = {
 						is_being_suppressed = yes
 					}
 				}
 				add = {
-					value = 10
+					value = suppression_base_value
 					multiply = {
 						value = -0.5
 						add = owner.modifier:country_suppression_attraction_factor
@@ -118,7 +114,7 @@
 			}
 			else = {
 				add = {
-					value = 10
+					value = bolstering_base_value
 					multiply = {
 						value = 0.5
 						add = owner.modifier:country_bolster_attraction_factor
@@ -127,6 +123,7 @@
 				}
 			}
 		}
+
 		add = {
 			value = 5
 			desc = "POP_BASE_SUPPORT"
@@ -491,8 +488,9 @@ movement_cultural_minority = {
 				culture = {
 					is_primary_culture_of = root
 				}
-				NOT = {
-					root = {
+				root = {
+					AND = {
+						NOT = {
 							any_scope_state = {
 								state_region = {
 									is_homeland = scope:political_movement.culture
@@ -503,12 +501,13 @@ movement_cultural_minority = {
 								}
 							}
 						}
-					root = { #vanilla bugfix to stop from instantly disbanding
-						culture_percent_country = {
-							target = scope:political_movement.culture
-								value <= 0.08
+						OR = {
+							culture_percent_country = {
+								target = scope:political_movement.culture
+									value <= 0.08
+							}
+							cultural_acceptance_base = { target = scope:political_movement.culture value > acceptance_status_2 }
 						}
-						cultural_acceptance_base = { target = scope:political_movement.culture value > acceptance_status_2 }
 					}	
 				}
 			}
@@ -533,7 +532,7 @@ movement_cultural_minority = {
 						target = root
 							value >= 0.1
 						}
-						cultural_acceptance_base = { target = root value <= acceptance_status_2 }
+					cultural_acceptance_base = { target = root value <= acceptance_status_2 }
 				}
 			}
 		}
@@ -614,25 +613,22 @@ movement_cultural_minority = {
 	pop_support_weight = {
 		if = {
 			limit = {
-				owner ?= {
-					any_political_movement = {
-						is_political_movement_type = movement_cultural_minority
+				exists = scope:political_movement
+				scope:political_movement ?= {
 						OR = {
 							is_being_suppressed = yes
 							is_being_bolstered = yes
-						}
-						save_temporary_scope_as = affected_movement
 					}
 				}
 			}
 			if = {
 				limit = {
-					scope:affected_movement = {
+					scope:political_movement = {
 						is_being_suppressed = yes
 					}
 				}
 				add = {
-					value = 10
+					value = suppression_base_value
 					multiply = {
 						value = -0.5
 						add = owner.modifier:country_suppression_attraction_factor
@@ -642,7 +638,7 @@ movement_cultural_minority = {
 			}
 			else = {
 				add = {
-					value = 10
+					value = bolstering_base_value
 					multiply = {
 						value = 0.5
 						add = owner.modifier:country_bolster_attraction_factor
@@ -1126,25 +1122,22 @@ movement_minority_rights = {
 	pop_support_weight = {
 		if = {
 			limit = {
-				owner ?= {
-					any_political_movement = {
-						is_political_movement_type = movement_minority_rights
+				exists = scope:political_movement
+				scope:political_movement ?= {
 						OR = {
 							is_being_suppressed = yes
 							is_being_bolstered = yes
-						}
-						save_temporary_scope_as = affected_movement
 					}
 				}
 			}
 			if = {
 				limit = {
-					scope:affected_movement = {
+					scope:political_movement = {
 						is_being_suppressed = yes
 					}
 				}
 				add = {
-					value = 10
+					value = suppression_base_value
 					multiply = {
 						value = -0.5
 						add = owner.modifier:country_suppression_attraction_factor
@@ -1154,7 +1147,7 @@ movement_minority_rights = {
 			}
 			else = {
 				add = {
-					value = 10
+					value = bolstering_base_value
 					multiply = {
 						value = 0.5
 						add = owner.modifier:country_bolster_attraction_factor
@@ -1163,6 +1156,7 @@ movement_minority_rights = {
 				}
 			}
 		}
+
 		add = {
 			value = 10
 			desc = "POP_BASE_SUPPORT"
@@ -1379,18 +1373,6 @@ movement_minority_rights = {
 			add = {
 				value = 0.25
 				desc = "law_national_supremacy"
-			}
-		}
-		else_if = {
-			limit = {
-				owner = {
-					has_technology_researched = nationalism
-					has_law = law_type:law_subjecthood
-				}
-			}
-			add = {
-				value = 0.2
-				desc = "law_subjecthood"
 			}
 		}
 		else_if = {

@@ -60,25 +60,22 @@
 	pop_support_weight = {
 		if = {
 			limit = {
-				owner ?= {
-					any_political_movement = {
-						is_political_movement_type = movement_anti_slavery
+				exists = scope:political_movement
+				scope:political_movement ?= {
 						OR = {
 							is_being_suppressed = yes
 							is_being_bolstered = yes
-						}
-						save_temporary_scope_as = affected_movement
 					}
 				}
 			}
 			if = {
 				limit = {
-					scope:affected_movement = {
+					scope:political_movement = {
 						is_being_suppressed = yes
 					}
 				}
 				add = {
-					value = 10
+					value = suppression_base_value
 					multiply = {
 						value = -0.5
 						add = owner.modifier:country_suppression_attraction_factor
@@ -88,7 +85,7 @@
 			}
 			else = {
 				add = {
-					value = 10
+					value = bolstering_base_value
 					multiply = {
 						value = 0.5
 						add = owner.modifier:country_bolster_attraction_factor
@@ -276,6 +273,18 @@
 			desc = "POP_LITERACY"
 			value = literacy_rate
 			add = 0.10
+		}
+		
+		if = {
+			limit = {
+				owner ?= {
+					has_law_commitment = law_type:law_slavery_banned
+				}
+			}
+			multiply = {
+				desc = "law_commitment"
+				value = 2.0
+			}
 		}
 	}
 
@@ -515,25 +524,22 @@ movement_pro_slavery = {
 	pop_support_weight = {
 		if = {
 			limit = {
-				owner ?= {
-					any_political_movement = {
-						is_political_movement_type = movement_pro_slavery
+				exists = scope:political_movement
+				scope:political_movement ?= {
 						OR = {
 							is_being_suppressed = yes
 							is_being_bolstered = yes
-						}
-						save_temporary_scope_as = affected_movement
 					}
 				}
 			}
 			if = {
 				limit = {
-					scope:affected_movement = {
+					scope:political_movement = {
 						is_being_suppressed = yes
 					}
 				}
 				add = {
-					value = 10
+					value = suppression_base_value
 					multiply = {
 						value = -0.5
 						add = owner.modifier:country_suppression_attraction_factor
@@ -543,7 +549,7 @@ movement_pro_slavery = {
 			}
 			else = {
 				add = {
-					value = 10
+					value = bolstering_base_value
 					multiply = {
 						value = 0.5
 						add = owner.modifier:country_bolster_attraction_factor
@@ -977,18 +983,11 @@ movement_royalist_absolutist = {
 	}
 	
 	character_support_trigger = {
-		trigger_if = {
-			limit = {
-				is_in_exile_pool = yes
-			}
-			has_ideology = ideology:ideology_royalist
-		}
-		trigger_else = {
 			OR = {
 				has_ideology = ideology:ideology_royalist
 				AND = {
 					has_ideology = ideology:ideology_authoritarian
-					interest_group ?= {
+					scope:interest_group ?= {
 						law_stance = {
 							law = law_type:law_monarchy
 							value > neutral
@@ -996,7 +995,7 @@ movement_royalist_absolutist = {
 					}
 				}
 				AND = {
-					interest_group ?= {
+					scope:interest_group ?= {
 						law_stance = {
 							law = law_type:law_monarchy
 							value > neutral
@@ -1010,7 +1009,6 @@ movement_royalist_absolutist = {
 						law_stance = {
 							law = law_type:law_autocracy
 							value < approve
-						}
 					}
 				}
 			}			
@@ -1048,25 +1046,22 @@ movement_royalist_absolutist = {
 	pop_support_weight = {	
 		if = {
 			limit = {
-				owner ?= {
-					any_political_movement = {
-						is_political_movement_type = movement_royalist_absolutist
+				exists = scope:political_movement
+				scope:political_movement ?= {
 						OR = {
 							is_being_suppressed = yes
 							is_being_bolstered = yes
-						}
-						save_temporary_scope_as = affected_movement
 					}
 				}
 			}
 			if = {
 				limit = {
-					scope:affected_movement = {
+					scope:political_movement = {
 						is_being_suppressed = yes
 					}
 				}
 				add = {
-					value = 10
+					value = suppression_base_value
 					multiply = {
 						value = -0.5
 						add = owner.modifier:country_suppression_attraction_factor
@@ -1076,7 +1071,7 @@ movement_royalist_absolutist = {
 			}
 			else = {
 				add = {
-					value = 10
+					value = bolstering_base_value
 					multiply = {
 						value = 0.5
 						add = owner.modifier:country_bolster_attraction_factor
@@ -1387,25 +1382,22 @@ movement_royalist_constitutional = {
 	pop_support_weight = {	
 		if = {
 			limit = {
-				owner ?= {
-					any_political_movement = {
-						is_political_movement_type = movement_royalist_constitutional
+				exists = scope:political_movement
+				scope:political_movement ?= {
 						OR = {
 							is_being_suppressed = yes
 							is_being_bolstered = yes
-						}
-						save_temporary_scope_as = affected_movement
 					}
 				}
 			}
 			if = {
 				limit = {
-					scope:affected_movement = {
+					scope:political_movement = {
 						is_being_suppressed = yes
 					}
 				}
 				add = {
-					value = 10
+					value = suppression_base_value
 					multiply = {
 						value = -0.5
 						add = owner.modifier:country_suppression_attraction_factor
@@ -1415,7 +1407,7 @@ movement_royalist_constitutional = {
 			}
 			else = {
 				add = {
-					value = 10
+					value = bolstering_base_value
 					multiply = {
 						value = 0.5
 						add = owner.modifier:country_bolster_attraction_factor
@@ -1745,29 +1737,25 @@ movement_labor = { # Explicitly non-socialist labour movement
 		movement_support_clerks
 		movement_support_peasants	
 	}
-	
 	pop_support_weight = {	
 		if = {
 			limit = {
-				owner ?= {
-					any_political_movement = {
-						is_political_movement_type = movement_labor
+				exists = scope:political_movement
+				scope:political_movement ?= {
 						OR = {
 							is_being_suppressed = yes
 							is_being_bolstered = yes
-						}
-						save_temporary_scope_as = affected_movement
 					}
 				}
 			}
 			if = {
 				limit = {
-					scope:affected_movement = {
+					scope:political_movement = {
 						is_being_suppressed = yes
 					}
 				}
 				add = {
-					value = 10
+					value = suppression_base_value
 					multiply = {
 						value = -0.5
 						add = owner.modifier:country_suppression_attraction_factor
@@ -1777,7 +1765,7 @@ movement_labor = { # Explicitly non-socialist labour movement
 			}
 			else = {
 				add = {
-					value = 10
+					value = bolstering_base_value
 					multiply = {
 						value = 0.5
 						add = owner.modifier:country_bolster_attraction_factor
@@ -2129,25 +2117,22 @@ movement_socialist = {
 	pop_support_weight = {	
 		if = {
 			limit = {
-				owner ?= {
-					any_political_movement = {
-						is_political_movement_type = movement_socialist
+				exists = scope:political_movement
+				scope:political_movement ?= {
 						OR = {
 							is_being_suppressed = yes
 							is_being_bolstered = yes
-						}
-						save_temporary_scope_as = affected_movement
 					}
 				}
 			}
 			if = {
 				limit = {
-					scope:affected_movement = {
+					scope:political_movement = {
 						is_being_suppressed = yes
 					}
 				}
 				add = {
-					value = 10
+					value = suppression_base_value
 					multiply = {
 						value = -0.5
 						add = owner.modifier:country_suppression_attraction_factor
@@ -2157,7 +2142,7 @@ movement_socialist = {
 			}
 			else = {
 				add = {
-					value = 10
+					value = bolstering_base_value
 					multiply = {
 						value = 0.5
 						add = owner.modifier:country_bolster_attraction_factor
@@ -2466,25 +2451,22 @@ movement_anarchist = {
 	pop_support_weight = {	
 		if = {
 			limit = {
-				owner ?= {
-					any_political_movement = {
-						is_political_movement_type = movement_anarchist
+				exists = scope:political_movement
+				scope:political_movement ?= {
 						OR = {
 							is_being_suppressed = yes
 							is_being_bolstered = yes
-						}
-						save_temporary_scope_as = affected_movement
 					}
 				}
 			}
 			if = {
 				limit = {
-					scope:affected_movement = {
+					scope:political_movement = {
 						is_being_suppressed = yes
 					}
 				}
 				add = {
-					value = 10
+					value = suppression_base_value
 					multiply = {
 						value = -0.5
 						add = owner.modifier:country_suppression_attraction_factor
@@ -2494,7 +2476,7 @@ movement_anarchist = {
 			}
 			else = {
 				add = {
-					value = 10
+					value = bolstering_base_value
 					multiply = {
 						value = 0.5
 						add = owner.modifier:country_bolster_attraction_factor
@@ -2503,7 +2485,6 @@ movement_anarchist = {
 				}
 			}
 		}
-
 		add = {
 			desc = "URBAN_STATE" # Increases support in rural states, decreases in urban
 			value = 0.5
@@ -2780,25 +2761,22 @@ movement_communist = {
 	pop_support_weight = {	
 		if = {
 			limit = {
-				owner ?= {
-					any_political_movement = {
-						is_political_movement_type = movement_communist
+				exists = scope:political_movement
+				scope:political_movement ?= {
 						OR = {
 							is_being_suppressed = yes
 							is_being_bolstered = yes
-						}
-						save_temporary_scope_as = affected_movement
 					}
 				}
 			}
 			if = {
 				limit = {
-					scope:affected_movement = {
+					scope:political_movement = {
 						is_being_suppressed = yes
 					}
 				}
 				add = {
-					value = 10
+					value = suppression_base_value
 					multiply = {
 						value = -0.5
 						add = owner.modifier:country_suppression_attraction_factor
@@ -2808,7 +2786,7 @@ movement_communist = {
 			}
 			else = {
 				add = {
-					value = 10
+					value = bolstering_base_value
 					multiply = {
 						value = 0.5
 						add = owner.modifier:country_bolster_attraction_factor
@@ -2817,6 +2795,7 @@ movement_communist = {
 				}
 			}
 		}
+
 		add = {
 			desc = "URBAN_STATE"
 			value = 10
@@ -3082,25 +3061,22 @@ movement_fascist = {
 	pop_support_weight = {	
 		if = {
 			limit = {
-				owner ?= {
-					any_political_movement = {
-						is_political_movement_type = movement_fascist
+				exists = scope:political_movement
+				scope:political_movement ?= {
 						OR = {
 							is_being_suppressed = yes
 							is_being_bolstered = yes
-						}
-						save_temporary_scope_as = affected_movement
 					}
 				}
 			}
 			if = {
 				limit = {
-					scope:affected_movement = {
+					scope:political_movement = {
 						is_being_suppressed = yes
 					}
 				}
 				add = {
-					value = 10
+					value = suppression_base_value
 					multiply = {
 						value = -0.5
 						add = owner.modifier:country_suppression_attraction_factor
@@ -3110,7 +3086,7 @@ movement_fascist = {
 			}
 			else = {
 				add = {
-					value = 10
+					value = bolstering_base_value
 					multiply = {
 						value = 0.5
 						add = owner.modifier:country_bolster_attraction_factor
@@ -3119,6 +3095,7 @@ movement_fascist = {
 				}
 			}
 		}
+
 		add = {
 			value = 3
 			desc = "POP_BASE_SUPPORT"
@@ -3453,25 +3430,22 @@ movement_corporatist = {
 	pop_support_weight = {	
 		if = {
 			limit = {
-				owner ?= {
-					any_political_movement = {
-						is_political_movement_type = movement_corporatist
+				exists = scope:political_movement
+				scope:political_movement ?= {
 						OR = {
 							is_being_suppressed = yes
 							is_being_bolstered = yes
-						}
-						save_temporary_scope_as = affected_movement
 					}
 				}
 			}
 			if = {
 				limit = {
-					scope:affected_movement = {
+					scope:political_movement = {
 						is_being_suppressed = yes
 					}
 				}
 				add = {
-					value = 10
+					value = suppression_base_value
 					multiply = {
 						value = -0.5
 						add = owner.modifier:country_suppression_attraction_factor
@@ -3481,7 +3455,7 @@ movement_corporatist = {
 			}
 			else = {
 				add = {
-					value = 10
+					value = bolstering_base_value
 					multiply = {
 						value = 0.5
 						add = owner.modifier:country_bolster_attraction_factor
@@ -3674,20 +3648,12 @@ movement_liberal = {
 	}
 	
 	character_support_trigger = {
-		trigger_if = {
-			limit = {
-				is_in_exile_pool = yes
-			}
+		OR = {
 			character_is_pro_liberal_movement = yes #Compatibility Trigger
-		}
-		trigger_else = {
-			OR = {
-				character_is_pro_liberal_movement = yes #Compatibility Trigger
-				interest_group ?= {
+			scope:interest_group ?= {
 					OR = {
 						has_ideology = ideology:ideology_liberal
 						has_ideology = ideology:ideology_liberal_modern
-					}
 				}
 			}
 		}
@@ -3742,7 +3708,7 @@ movement_liberal = {
 		}
 		if = { # Liberal agitators just inherently love liberalism
 			limit = {
-				interest_group ?= {
+				scope:interest_group ?= {
 					OR = {
 						has_ideology = ideology:ideology_liberal
 						has_ideology = ideology:ideology_liberal_modern
@@ -3784,25 +3750,22 @@ movement_liberal = {
 	pop_support_weight = {	
 		if = {
 			limit = {
-				owner ?= {
-					any_political_movement = {
-						is_political_movement_type = movement_liberal
+				exists = scope:political_movement
+				scope:political_movement ?= {
 						OR = {
 							is_being_suppressed = yes
 							is_being_bolstered = yes
-						}
-						save_temporary_scope_as = affected_movement
 					}
 				}
 			}
 			if = {
 				limit = {
-					scope:affected_movement = {
+					scope:political_movement = {
 						is_being_suppressed = yes
 					}
 				}
 				add = {
-					value = 10
+					value = suppression_base_value
 					multiply = {
 						value = -0.5
 						add = owner.modifier:country_suppression_attraction_factor
@@ -3812,7 +3775,7 @@ movement_liberal = {
 			}
 			else = {
 				add = {
-					value = 10
+					value = bolstering_base_value
 					multiply = {
 						value = 0.5
 						add = owner.modifier:country_bolster_attraction_factor
@@ -3821,6 +3784,7 @@ movement_liberal = {
 				}
 			}
 		}
+
 		add = {
 			value = 3
 			desc = "POP_BASE_SUPPORT"
@@ -4032,21 +3996,12 @@ movement_radical = {
 	}
 	
 	character_support_trigger = {
-		trigger_if = {
-			limit = {
-				is_in_exile_pool = yes
-			}
+		OR = {
 			character_is_pro_radical_movement = yes #Compatibility Trigger
-		}
-		trigger_else = {
-			OR = {
-				character_is_pro_radical_movement = yes #Compatibility Trigger
-				interest_group ?= {
+			scope:interest_group ?= {
 					has_ideology = ideology:ideology_republican
 				}
 			}
-		}
-
 	}
 	character_support_weight = {
 		value = 200
@@ -4079,7 +4034,7 @@ movement_radical = {
 			limit = {
 				OR = {
 					has_ideology = ideology:ideology_republican_leader
-					interest_group ?= {
+					scope:interest_group ?= {
 						has_ideology = ideology:ideology_republican
 					}
 				}
@@ -4118,25 +4073,22 @@ movement_radical = {
 	pop_support_weight = {	
 		if = {
 			limit = {
-				owner ?= {
-					any_political_movement = {
-						is_political_movement_type = movement_radical
+				exists = scope:political_movement
+				scope:political_movement ?= {
 						OR = {
 							is_being_suppressed = yes
 							is_being_bolstered = yes
-						}
-						save_temporary_scope_as = affected_movement
 					}
 				}
 			}
 			if = {
 				limit = {
-					scope:affected_movement = {
+					scope:political_movement = {
 						is_being_suppressed = yes
 					}
 				}
 				add = {
-					value = 10
+					value = suppression_base_value
 					multiply = {
 						value = -0.5
 						add = owner.modifier:country_suppression_attraction_factor
@@ -4146,7 +4098,7 @@ movement_radical = {
 			}
 			else = {
 				add = {
-					value = 10
+					value = bolstering_base_value
 					multiply = {
 						value = 0.5
 						add = owner.modifier:country_bolster_attraction_factor
@@ -4155,6 +4107,7 @@ movement_radical = {
 				}
 			}
 		}
+
 		add = {
 			desc = "URBAN_STATE"
 			value = 10
@@ -4451,25 +4404,22 @@ movement_nihilist = {
 	pop_support_weight = {	
 		if = {
 			limit = {
-				owner ?= {
-					any_political_movement = {
-						is_political_movement_type = movement_nihilist
+				exists = scope:political_movement
+				scope:political_movement ?= {
 						OR = {
 							is_being_suppressed = yes
 							is_being_bolstered = yes
-						}
-						save_temporary_scope_as = affected_movement
 					}
 				}
 			}
 			if = {
 				limit = {
-					scope:affected_movement = {
+					scope:political_movement = {
 						is_being_suppressed = yes
 					}
 				}
 				add = {
-					value = 10
+					value = suppression_base_value
 					multiply = {
 						value = -0.5
 						add = owner.modifier:country_suppression_attraction_factor
@@ -4479,7 +4429,7 @@ movement_nihilist = {
 			}
 			else = {
 				add = {
-					value = 10
+					value = bolstering_base_value
 					multiply = {
 						value = 0.5
 						add = owner.modifier:country_bolster_attraction_factor
@@ -4488,6 +4438,7 @@ movement_nihilist = {
 				}
 			}
 		}
+
 		add = {
 			desc = "URBAN_STATE"
 			value = 10
@@ -4651,27 +4602,14 @@ movement_positivist = {
 	}
 	
 	character_support_trigger = {
-		trigger_if = {
-			limit = {
-				is_in_exile_pool = yes
-			}
 			OR = {
 				has_ideology = ideology:ideology_positivist
 				has_ideology = ideology:ideology_nihilist
 				has_ideology = ideology:ideology_republican_leader
-				is_interest_group_type = ig_armed_forces
-			}
-		}
-		trigger_else = {
-			OR = {
-				has_ideology = ideology:ideology_positivist
-				has_ideology = ideology:ideology_nihilist
-				has_ideology = ideology:ideology_republican_leader
-				interest_group ?= {
+				scope:interest_group ?= {
 					OR = {
 						is_interest_group_type = ig_armed_forces
 						has_ideology = ideology:ideology_oligarchic
-					}
 				}
 			}
 		}
@@ -4699,7 +4637,7 @@ movement_positivist = {
 		}
 		if = {
 			limit = {
-				interest_group ?= {
+				scope:interest_group ?= {
 					OR = {
 						is_interest_group_type = ig_armed_forces
 						has_ideology = ideology:ideology_oligarchic
@@ -4738,25 +4676,22 @@ movement_positivist = {
 	pop_support_weight = {	
 		if = {
 			limit = {
-				owner ?= {
-					any_political_movement = {
-						is_political_movement_type = movement_positivist
+				exists = scope:political_movement
+				scope:political_movement ?= {
 						OR = {
 							is_being_suppressed = yes
 							is_being_bolstered = yes
-						}
-						save_temporary_scope_as = affected_movement
 					}
 				}
 			}
 			if = {
 				limit = {
-					scope:affected_movement = {
+					scope:political_movement = {
 						is_being_suppressed = yes
 					}
 				}
 				add = {
-					value = 10
+					value = suppression_base_value
 					multiply = {
 						value = -0.5
 						add = owner.modifier:country_suppression_attraction_factor
@@ -4766,7 +4701,7 @@ movement_positivist = {
 			}
 			else = {
 				add = {
-					value = 10
+					value = bolstering_base_value
 					multiply = {
 						value = 0.5
 						add = owner.modifier:country_bolster_attraction_factor
@@ -4775,6 +4710,7 @@ movement_positivist = {
 				}
 			}
 		}
+
 		add = {
 			desc = "URBAN_STATE"
 			value = 10
@@ -5032,7 +4968,7 @@ movement_land_reform = {
 		}
 		if = {
 			limit = {
-				interest_group ?= {
+				scope:interest_group ?= {
 					is_interest_group_type = ig_rural_folk
 				}
 			}
@@ -5061,25 +4997,22 @@ movement_land_reform = {
 	pop_support_weight = {	
 		if = {
 			limit = {
-				owner ?= {
-					any_political_movement = {
-						is_political_movement_type = movement_land_reform
+				exists = scope:political_movement
+				scope:political_movement ?= {
 						OR = {
 							is_being_suppressed = yes
 							is_being_bolstered = yes
-						}
-						save_temporary_scope_as = affected_movement
 					}
 				}
 			}
 			if = {
 				limit = {
-					scope:affected_movement = {
+					scope:political_movement = {
 						is_being_suppressed = yes
 					}
 				}
 				add = {
-					value = 10
+					value = suppression_base_value
 					multiply = {
 						value = -0.5
 						add = owner.modifier:country_suppression_attraction_factor
@@ -5089,7 +5022,7 @@ movement_land_reform = {
 			}
 			else = {
 				add = {
-					value = 10
+					value = bolstering_base_value
 					multiply = {
 						value = 0.5
 						add = owner.modifier:country_bolster_attraction_factor
@@ -5098,6 +5031,7 @@ movement_land_reform = {
 				}
 			}
 		}
+
 		add = {
 			desc = "URBAN_STATE" # Increases support in rural states, decreases in urban
 			value = 0.5
@@ -5283,20 +5217,12 @@ movement_feminist = {
 	}
 	
 	character_support_trigger = {
-		trigger_if = {
-			limit = {
-				is_in_exile_pool = yes
-			}
-			character_is_pro_feminist_movement = yes
-		}
-		trigger_else = {
-			OR = {
-				character_is_pro_feminist_movement = yes
-				interest_group ?= {
+		OR = {
+			character_is_pro_feminist_movement = yes #Compatibility Trigger
+			scope:interest_group ?= {
 					OR = {
 						has_ideology = ideology:ideology_egalitarian_modern
 						has_ideology = ideology:ideology_liberal_modern
-					}
 				}
 			}
 		}
@@ -5336,25 +5262,22 @@ movement_feminist = {
 	pop_support_weight = {	
 		if = {
 			limit = {
-				owner ?= {
-					any_political_movement = {
-						is_political_movement_type = movement_feminist
+				exists = scope:political_movement
+				scope:political_movement ?= {
 						OR = {
 							is_being_suppressed = yes
 							is_being_bolstered = yes
-						}
-						save_temporary_scope_as = affected_movement
 					}
 				}
 			}
 			if = {
 				limit = {
-					scope:affected_movement = {
+					scope:political_movement = {
 						is_being_suppressed = yes
 					}
 				}
 				add = {
-					value = 10
+					value = suppression_base_value
 					multiply = {
 						value = -0.5
 						add = owner.modifier:country_suppression_attraction_factor
@@ -5364,7 +5287,7 @@ movement_feminist = {
 			}
 			else = {
 				add = {
-					value = 10
+					value = bolstering_base_value
 					multiply = {
 						value = 0.5
 						add = owner.modifier:country_bolster_attraction_factor
@@ -5373,6 +5296,7 @@ movement_feminist = {
 				}
 			}
 		}
+
 		add = {
 			desc = "URBAN_STATE"
 			value = 10
@@ -5543,22 +5467,12 @@ movement_reactionary = {
 	}
 	
 	character_support_trigger = {
-		trigger_if = {
-			limit = {
-				is_in_exile_pool = yes
-			}
-			OR = {
-				character_is_pro_reactionary_movement = yes	#Compatibility Trigger			
-			}
-		}
-		trigger_else = {
-			OR = {
-				character_is_pro_reactionary_movement = yes	#Compatibility Trigger	
-				interest_group ?= {
+		OR = {
+			character_is_pro_reactionary_movement = yes	#Compatibility Trigger
+			scope:interest_group ?= {
 					OR = {
 						has_ideology = ideology:ideology_reactionary
 						has_ideology = ideology:ideology_patriarchal
-					}
 				}
 			}
 		}
@@ -5581,7 +5495,7 @@ movement_reactionary = {
 			limit = {
 				AND = {
 					has_ideology = ideology:ideology_authoritarian
-					interest_group ?= {
+					scope:interest_group ?= {
 						OR = {
 							is_interest_group_type = ig_intelligentsia
 							is_interest_group_type = ig_trade_unions
@@ -5595,7 +5509,7 @@ movement_reactionary = {
 		}
 		if = {
 			limit = {
-				interest_group ?= {
+				scope:interest_group ?= {
 					OR = {
 						has_ideology = ideology:ideology_reactionary
 						has_ideology = ideology:ideology_patriarchal
@@ -5610,7 +5524,7 @@ movement_reactionary = {
 			limit = {
 				AND = {
 					has_ideology = ideology:ideology_reformer
-					interest_group ?= {
+					scope:interest_group ?= {
 						has_ideology = ideology:ideology_reactionary
 					}
 				}
@@ -5642,25 +5556,22 @@ movement_reactionary = {
 	pop_support_weight = {	
 		if = {
 			limit = {
-				owner ?= {
-					any_political_movement = {
-						is_political_movement_type = movement_reactionary
+				exists = scope:political_movement
+				scope:political_movement ?= {
 						OR = {
 							is_being_suppressed = yes
 							is_being_bolstered = yes
-						}
-						save_temporary_scope_as = affected_movement
 					}
 				}
 			}
 			if = {
 				limit = {
-					scope:affected_movement = {
+					scope:political_movement = {
 						is_being_suppressed = yes
 					}
 				}
 				add = {
-					value = 10
+					value = suppression_base_value
 					multiply = {
 						value = -0.5
 						add = owner.modifier:country_suppression_attraction_factor
@@ -5670,7 +5581,7 @@ movement_reactionary = {
 			}
 			else = {
 				add = {
-					value = 10
+					value = bolstering_base_value
 					multiply = {
 						value = 0.5
 						add = owner.modifier:country_bolster_attraction_factor
@@ -5679,6 +5590,7 @@ movement_reactionary = {
 				}
 			}
 		}
+
 		add = {
 			value = 1
 			desc = "POP_BASE_SUPPORT"
@@ -5918,24 +5830,14 @@ movement_modernizer = {
 	}
 	
 	character_support_trigger = {
-		trigger_if = {
-			limit = {
-				is_in_exile_pool = yes
-			}
-			OR = {
-				character_is_pro_modernizer_movement = yes #Compatibility Trigger
-			}
-		}
-		trigger_else = {
-			OR = {
-				character_is_pro_modernizer_movement = yes #Compatibility Trigger
-				interest_group ?= {
+		OR = {
+			character_is_pro_modernizer_movement = yes #Compatibility Trigger
+			scope:interest_group ?= {
 					OR = {
 						has_ideology = ideology:ideology_modernizer
 						has_ideology = ideology:ideology_liberal
 						has_ideology = ideology:ideology_liberal_modern
 						has_ideology = ideology:ideology_plutocratic
-					}
 				}
 			}
 		}
@@ -5970,7 +5872,7 @@ movement_modernizer = {
 		}
 		if = {
 			limit = {
-				interest_group ?= {
+				scope:interest_group ?= {
 					OR = {
 						has_ideology = ideology:ideology_modernizer
 						has_ideology = ideology:ideology_liberal
@@ -6009,25 +5911,22 @@ movement_modernizer = {
 	pop_support_weight = {	
 		if = {
 			limit = {
-				owner ?= {
-					any_political_movement = {
-						is_political_movement_type = movement_modernizer
+				exists = scope:political_movement
+				scope:political_movement ?= {
 						OR = {
 							is_being_suppressed = yes
 							is_being_bolstered = yes
-						}
-						save_temporary_scope_as = affected_movement
 					}
 				}
 			}
 			if = {
 				limit = {
-					scope:affected_movement = {
+					scope:political_movement = {
 						is_being_suppressed = yes
 					}
 				}
 				add = {
-					value = 10
+					value = suppression_base_value
 					multiply = {
 						value = -0.5
 						add = owner.modifier:country_suppression_attraction_factor
@@ -6037,7 +5936,7 @@ movement_modernizer = {
 			}
 			else = {
 				add = {
-					value = 10
+					value = bolstering_base_value
 					multiply = {
 						value = 0.5
 						add = owner.modifier:country_bolster_attraction_factor
@@ -6046,6 +5945,7 @@ movement_modernizer = {
 				}
 			}
 		}
+
 		add = {
 			desc = "URBAN_STATE"
 			value = 10

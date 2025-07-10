@@ -2,6 +2,7 @@
 	OR = {
 		has_ideology = ideology:ideology_abolitionist
 		has_ideology = ideology:ideology_humanitarian
+		has_ideology = ideology:ideology_utopian
 		law_stance = {
 			law = law_type:law_slavery_banned
 			value >= approve
@@ -118,6 +119,8 @@ character_is_pro_liberal_movement = {
 		has_ideology = ideology:ideology_republican_leader
 		has_ideology = ideology:ideology_radical
 		has_ideology = ideology:ideology_humanitarian
+		has_ideology = ideology:ideology_humanitarian_royalist
+		has_ideology = ideology:ideology_reformer
 		has_ideology = ideology:ideology_utopian
 		has_ideology = ideology:ideology_modernizer_leader
 		law_stance = {

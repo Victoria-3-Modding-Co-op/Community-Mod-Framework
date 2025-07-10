@@ -44,7 +44,7 @@
 		value = 100
 		if = {
 			limit = {
-				interest_group ?= {
+				scope:interest_group ?= {
 					is_interest_group_type = ig_devout
 				}
 			}
@@ -89,25 +89,22 @@
 	pop_support_weight = {
 		if = {
 			limit = {
-				owner ?= {
-					any_political_movement = {
-						is_political_movement_type = movement_religious_majority
+				exists = scope:political_movement
+				scope:political_movement ?= {
 						OR = {
 							is_being_suppressed = yes
 							is_being_bolstered = yes
-						}
-						save_temporary_scope_as = affected_movement
 					}
 				}
 			}
 			if = {
 				limit = {
-					scope:affected_movement = {
+					scope:political_movement = {
 						is_being_suppressed = yes
 					}
 				}
 				add = {
-					value = 10
+					value = suppression_base_value
 					multiply = {
 						value = -0.5
 						add = owner.modifier:country_suppression_attraction_factor
@@ -117,7 +114,7 @@
 			}
 			else = {
 				add = {
-					value = 10
+					value = bolstering_base_value
 					multiply = {
 						value = 0.5
 						add = owner.modifier:country_bolster_attraction_factor
@@ -126,6 +123,7 @@
 				}
 			}
 		}
+
 		add = {
 			desc = "URBAN_STATE" # Increases support in rural states, decreases in urban
 			value = 0.5
@@ -441,7 +439,7 @@ movement_religious_minority = {
 		value = 200
 		if = {
 			limit = {
-				interest_group ?= {
+				scope:interest_group ?= {
 					is_interest_group_type = ig_devout
 				}
 			}
@@ -468,7 +466,7 @@ movement_religious_minority = {
 		else_if = {
 			limit = {
 				NOT = {
-					interest_group ?= {
+					scope:interest_group ?= {
 						is_interest_group_type = ig_devout
 					}
 				}
@@ -498,10 +496,8 @@ movement_religious_minority = {
 	pop_support_weight = {
 		if = {
 			limit = {
-				owner ?= {
-					any_political_movement = {
-						is_political_movement_type = movement_religious_minority
-						religion ?= root.religion
+				exists = scope:political_movement
+				scope:political_movement ?= {
 						OR = {
 							is_being_suppressed = yes
 							is_being_bolstered = yes
@@ -512,12 +508,12 @@ movement_religious_minority = {
 			}
 			if = {
 				limit = {
-					scope:affected_movement = {
+					scope:political_movement = {
 						is_being_suppressed = yes
 					}
 				}
 				add = {
-					value = 10
+					value = suppression_base_value
 					multiply = {
 						value = -0.5
 						add = owner.modifier:country_suppression_attraction_factor
@@ -527,7 +523,7 @@ movement_religious_minority = {
 			}
 			else = {
 				add = {
-					value = 10
+					value = bolstering_base_value
 					multiply = {
 						value = 0.5
 						add = owner.modifier:country_bolster_attraction_factor

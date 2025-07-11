@@ -1,26 +1,4 @@
 ﻿# Maps numeric keys to numeric values
-# 
-## Usage
-### Set
-# add_to_dict = {
-#     dict  = dictionary_name
-#     key   = numeric_key
-#     value = numeric_value
-# }
-### Get
-# every_in_list = {
-#     variable = dictionary_name
-#     limit = {
-#         dict_key_for_kvp = {
-#             lookup_key = numeric_key
-#         }
-#     }
-#     save_temporary_scope_value_as = {
-#         name = kvp
-#         value = this
-#     }
-#     multiply = kvp_to_value
-# }
 
 add_to_dict = {
     save_temporary_scope_value_as = {
@@ -38,22 +16,9 @@ add_to_dict = {
             has_variable_list = $dict$
         }
 
-        every_in_list = {
+        remove_dict_variable = {
             variable = $dict$
-            limit = {
-                dict_key_for_kvp = {
-                    lookup_key = $key$
-                }
-            }
-            save_temporary_scope_value_as = {
-                name = old_kvp
-                value = this
-            }
-        }
-
-        remove_list_variable = {
-            name = $dict$
-            target = scope:old_kvp
+            key = $key$
         }
     }
 
@@ -65,6 +30,25 @@ add_to_dict = {
     add_to_variable_list = {
         name = $dict$
         target = local_var:kvp
+    }
+}
+
+remove_dict_variable = {
+    every_in_list = {
+        variable = $variable$
+        limit = {
+			this.kvp_to_key = $key$
+        }
+        save_temporary_scope_value_as = {
+            name = kvp
+            value = this
+        }
+        PREV = {
+            remove_list_variable = {
+                name = $variable$
+                target = scope:kvp
+            }
+        }
     }
 }
 

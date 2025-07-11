@@ -1,7 +1,0 @@
-﻿dict_key_for_kvp = {
-    save_temporary_scope_value_as = {
-        name = kvp
-        value = this
-    }
-    kvp_to_key = $lookup_key$
-}

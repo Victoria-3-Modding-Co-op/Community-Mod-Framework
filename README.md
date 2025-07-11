@@ -400,15 +400,16 @@ add_to_dict = {
 every_in_list = {
   variable = dictionary_name
   limit = {
-    dict_key_for_kvp = {
-      lookup_key = numeric_key
-    }
+    this.kvp_to_key = numeric_key
   }
-  save_temporary_scope_value_as = {
-    name = kvp
-    value = this
-  }
-  multiply = kvp_to_value
+  multiply = this.kvp_to_value
+}
+```
+## Remove
+```
+remove_dict_variable = {
+  variable = dictionary_name
+  key = numeric_key
 }
 ```
 ## IDs

@@ -1,0 +1,1 @@
+﻿mog_plp_movement_cultural_minority_pop_support_weight_mult = 1

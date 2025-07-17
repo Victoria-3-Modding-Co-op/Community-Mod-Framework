@@ -1,4 +1,4 @@
-﻿movement_cultural_majority = {
+movement_cultural_majority = {
 	category = movement_category_cultural_majority
 	
 	ideology = ideology_ethno_nationalist_movement
@@ -504,7 +504,7 @@ movement_cultural_minority = {
 						OR = {
 							culture_percent_country = {
 								target = scope:political_movement.culture
-									value <= 0.08
+								value <= 0.08
 							}
 							cultural_acceptance_base = { target = scope:political_movement.culture value > acceptance_status_2 }
 						}
@@ -530,8 +530,8 @@ movement_cultural_minority = {
 				AND = {
 					culture_percent_country = {
 						target = root
-							value >= 0.1
-						}
+						value >= 0.1
+					}
 					cultural_acceptance_base = { target = root value <= acceptance_status_2 }
 				}
 			}
@@ -615,9 +615,9 @@ movement_cultural_minority = {
 			limit = {
 				exists = scope:political_movement
 				scope:political_movement ?= {
-						OR = {
-							is_being_suppressed = yes
-							is_being_bolstered = yes
+					OR = {
+						is_being_suppressed = yes
+						is_being_bolstered = yes
 					}
 				}
 			}
@@ -761,7 +761,12 @@ movement_cultural_minority = {
 				multiply = -5
 				desc = "POP_POVERTY"
 			}
-		}	
+		}
+
+		if = {
+			limit = { Grey_PLP_is_active = yes }
+			multiply = mog_plp_movement_cultural_minority_pop_support_weight_mult
+		}
 
 		if = {
 			limit = {
@@ -904,7 +909,7 @@ movement_cultural_minority = {
 					state_region = { is_homeland = root.culture }
 					culture_percent_state = {
 						target = root.culture
-						value >= 0.05
+						value >= com_movement_cultural_minority_secession_possible_culture_percent_state
 					}					
 				}
 			}
@@ -923,7 +928,7 @@ movement_cultural_minority = {
 					state_region = { is_homeland = scope:political_movement.culture }
 					culture_percent_state = {
 						target = scope:political_movement.culture
-						value >= 0.05
+						value >= com_movement_cultural_minority_secession_state_weight_culture_percent_state_0
 					}					
 				}
 				add = 10
@@ -959,7 +964,7 @@ movement_cultural_minority = {
 					limit = {
 						culture_percent_state = {
 							target = scope:political_movement.culture
-							value >= 0.1
+							value >= com_movement_cultural_minority_secession_state_weight_culture_percent_state_1
 						}
 					}
 					add = 50
@@ -971,8 +976,8 @@ movement_cultural_minority = {
 			value = political_movement_identity_support
 			add = scope:clout
 			multiply = 3
-			min = 0.15
-			max = 0.75
+			min = com_movement_cultural_minority_secession_target_fraction_of_states_min
+			max = com_movement_cultural_minority_secession_target_fraction_of_states_max
 		}
 	}
 	
@@ -989,7 +994,13 @@ movement_cultural_minority = {
 		}	
 	
 		add = {
-			value = "owner.average_sol"
+			if = {
+				limit = { Grey_PLP_is_active = yes } 
+				value = "owner.average_sol_for_primary_cultures"
+			}
+			else = { # Vanila
+				value = "owner.average_sol"
+			}
 			subtract = "owner.average_sol_for_culture(scope:culture)"
 			multiply = 0.05
 			max = 0.5

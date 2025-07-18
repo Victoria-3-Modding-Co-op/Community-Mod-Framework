@@ -241,7 +241,19 @@ You can then check for this in your custom GUI like this:
 ```
 visible = "[GetVariableSystem.HasValue('com_alert_action', 'Example Panel')]"
 ```
-
+OR
+```
+visible = "[GetVariableSystem.HasValue('com_alert_action', Localize('mod_alert_send_to_example_panel'))]"
+```
+If you have multiple alerts which should all open the same panel you can use full line substitution:
+```
+ alert_first_alert_name_action: "$mod_alert_send_to_example_panel$"
+ alert_second_alert_name_action: "$mod_alert_send_to_example_panel$"
+ alert_third_alert_name_action: "$mod_alert_send_to_example_panel$"
+ 
+ mod_alert_send_to_example_panel: "Example Panel"
+```
+> **NOTE:** If using this in a widget; you will need a scripted widget definition in `gui\scripted_widgets\` to load your widget.
 ## Characters in Journal Entry
 
 Screenshots: [Single Character with Opinion](docs/example_journal_entry_character_01.png), [Multiple Characters without Opinions](docs/example_journal_entry_character_02.png)
@@ -434,13 +446,13 @@ For naming, you need to include loc keys to avoid load-up error. These can be bl
 # Community Mod Triggers
 
 ## Usage
-1) Place the file `00_community_mod_compatibility_triggers.txt` in the `/common/scripted_triggers` folder of your mod. This file will contain the scripted triggers all set to return false by default. This is intentional.
+1) Request to have CMF add a trigger for your mod into into the CMF compatibility file `01_community_mod_compatibility_triggers.txt`. This file contains the scripted triggers all set to return false by default. This is intentional. Your trigger should look like this:
 ```
 YOURMODNAME_is_active_trigger = {
    always = no
 }
 ```
-2) Create another file with the name `zz_YOURMODNAME_compatibility_triggers.txt` that contains the following:
+2) Create another file with the name `zz_YOURMODNAME_compatibility_triggers.txt` in the `/common/scripted_triggers` folder of your mod, that contains the following:
 ```
 YOURMODNAME_is_active_trigger = {
    always = yes

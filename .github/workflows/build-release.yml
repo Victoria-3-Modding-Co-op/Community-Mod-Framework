@@ -166,4 +166,7 @@ jobs:
         shell: bash
         run: |
           steamcmd +login ${{ secrets.WORKSHOP_USERNAME }} ${{ secrets.WORKSHOP_PASSWORD }} +workshop_build_item ${{ steps.metadata.outputs.vdf }} +quit
+          rm -rf "$STEAM_CMD"
+          rm -rf "$STEAM_DIR"
+          rm -rf "$STEAM_TEMP"
 

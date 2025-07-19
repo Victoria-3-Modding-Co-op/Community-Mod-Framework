@@ -286,6 +286,19 @@
 				value = 2.0
 			}
 		}
+		#USFP: Human Rights tech doubles abolition support
+		if = {
+			limit = {
+				owner ?= {
+					is_usfp_active = yes
+					has_technology_researched = human_rights
+				}
+			}
+			multiply = {
+				desc = "human_rights"
+				value = 2.0
+			}
+		}
 	}
 
 	revolution = {
@@ -454,6 +467,19 @@
 			add = {
 				value = 0.2
 				desc = "je_acw_countdown"
+			}
+		}
+		#USFP: By the time you have Human Rights tech slavery should really be getting abolished
+		if = {
+			limit = {
+				owner ?= {
+					is_usfp_active = yes
+					has_technology_researched = human_rights
+				}
+			}
+			add = {
+				desc = "human_rights"
+				value = 0.2
 			}
 		}		
 	}
@@ -928,6 +954,25 @@ movement_pro_slavery = {
 			add = {
 				value = 0.2
 				desc = "je_acw_countdown"
+			}
+		}
+		#USFP: Powerful IG with anti-slavery leader spooks the slavers
+		if = {
+			limit = {
+				owner ?= {
+					is_usfp_active = yes
+					usfp_country_is_american = yes
+					any_interest_group = {
+						is_powerful = yes
+						leader = {
+							character_is_anti_slavery = yes
+						}
+					}
+				}
+			}
+			add = {
+				desc = "powerful_abolitionist"
+				value = 0.3
 			}
 		}		
 	}

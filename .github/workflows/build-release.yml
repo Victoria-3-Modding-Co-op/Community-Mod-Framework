@@ -157,7 +157,7 @@ jobs:
 
       - name: Setup SteamCMD
         if: ${{ inputs.publish == 'true' }}
-        uses: buildalon/setup-steamcmd@v1.0.4
+        uses: CyberAndrii/setup-steamcmd@v1
 
         # Publish to steam workshop
         # Uses generated metadata and configured workshop user
@@ -166,7 +166,4 @@ jobs:
         shell: bash
         run: |
           steamcmd +login ${{ secrets.WORKSHOP_USERNAME }} ${{ secrets.WORKSHOP_PASSWORD }} +workshop_build_item ${{ steps.metadata.outputs.vdf }} +quit
-          rm -rf "$STEAM_CMD"
-          rm -rf "$STEAM_DIR"
-          rm -rf "$STEAM_TEMP"
 

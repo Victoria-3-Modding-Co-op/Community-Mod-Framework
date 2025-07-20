@@ -1,0 +1,3 @@
+﻿turkfm_revolt_mechanics_trigger = {
+	always = no
+}

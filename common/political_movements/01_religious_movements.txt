@@ -336,13 +336,13 @@
 
 movement_religious_minority = {
 	category = movement_category_religious
-	
+
 	ideology = ideology_traditionalist_minoritarian_movement
 	character_ideologies = {
 		ideology_traditionalist_minoritarian
 		ideology_usfp_universalist #USFP
 	}
-	
+
 	creation_trigger = {
 		NAND = {
 			c:BIC ?= this
@@ -351,7 +351,7 @@ movement_religious_minority = {
 	}
 	creation_weight = {
 		value = 200
-	}		
+	}
 	on_created = {}
 
 	disband_trigger = {
@@ -381,8 +381,8 @@ movement_religious_minority = {
 					c:BIC ?= this
 					has_technology_researched = pan-nationalism
 					NOT = {
-						any_political_movement = { 
-						    is_political_movement_type = movement_muslim_nationalist
+						any_political_movement = {
+							is_political_movement_type = movement_muslim_nationalist
 						}
 					}
 				}
@@ -397,8 +397,8 @@ movement_religious_minority = {
 					c:BIC ?= this
 					has_technology_researched = pan-nationalism
 					NOT = {
-						any_political_movement = { 
-						    is_political_movement_type = movement_hindu_nationalist
+						any_political_movement = {
+							is_political_movement_type = movement_hindu_nationalist
 						}
 					}
 				}
@@ -408,7 +408,7 @@ movement_religious_minority = {
 			}
 		}
 	}
-	
+
 	religion_selection_trigger = {
 		NOT = { is_state_religion = scope:country }
 		NOT = { rel:atheist = this }
@@ -417,12 +417,12 @@ movement_religious_minority = {
 				target = root
 				value >= 0.1
 			}
-		}		
+		}
 	}
 	religion_selection_weight = {
 		value = 100
-	}	
-	
+	}
+
 	character_support_trigger = {
 		religion = scope:religion
 		OR = {
@@ -433,7 +433,7 @@ movement_religious_minority = {
 				character_hates_state_atheism = yes #Compatibility Trigger
 			}
 			character_is_pro_religious_minority = yes #Compatibility Trigger
-		}		
+		}
 	}
 	character_support_weight = {
 		value = 200
@@ -478,7 +478,7 @@ movement_religious_minority = {
 			multiply = 0.05
 		}
 	}
-	
+
 	pop_support_trigger = {
 		religion = scope:religion
 	}
@@ -498,12 +498,11 @@ movement_religious_minority = {
 			limit = {
 				exists = scope:political_movement
 				scope:political_movement ?= {
-						OR = {
-							is_being_suppressed = yes
-							is_being_bolstered = yes
-						}
-						save_temporary_scope_as = affected_movement
+					OR = {
+						is_being_suppressed = yes
+						is_being_bolstered = yes
 					}
+					save_temporary_scope_as = affected_movement
 				}
 			}
 			if = {
@@ -535,20 +534,20 @@ movement_religious_minority = {
 		add = {
 			value = 10
 			desc = "POP_BASE_SUPPORT"
-		}	
-		
+		}
+
 		if = {
-			limit = { 
+			limit = {
 				standard_of_living < 15
 			}
-			
+
 			add = {
-				value =	standard_of_living
+				value = standard_of_living
 				subtract = 15
 				multiply = -5
 				desc = "POP_POVERTY"
 			}
-		}	
+		}
 
 		if = {
 			limit = {
@@ -567,7 +566,7 @@ movement_religious_minority = {
 				value = 10
 				desc = "POP_ARISTOCRATS"
 			}
-		}	
+		}
 		else_if = {
 			limit = {
 				is_pop_type = peasants
@@ -576,9 +575,10 @@ movement_religious_minority = {
 				value = 10
 				desc = "POP_PEASANTS"
 			}
-		}	
+		}
 
-		add = { # Weakened by increasing literacy rates
+		add = {
+			# Weakened by increasing literacy rates
 			desc = "POP_LITERACY"
 			this = {
 				value = literacy_rate
@@ -598,11 +598,11 @@ movement_religious_minority = {
 				value = 0.05
 			}
 		}
-		
+
 		if = {
 			limit = {
 				state = {
-					state_religious_acceptance = {  
+					state_religious_acceptance = {
 						target = PREV.religion
 						value < religious_acceptance_high
 					}
@@ -613,9 +613,9 @@ movement_religious_minority = {
 				value = 100
 				subtract = pop_acceptance
 				divide = 25 # Maxes out at 4x at 0% acceptance, starts being a liability at 75% acceptance
-			}		
+			}
 		}
-		
+
 		if = {
 			limit = {
 				owner ?= {
@@ -631,11 +631,11 @@ movement_religious_minority = {
 		# Favor cultural movement if necessary
 		if = {
 			limit = {
-				owner = { 
+				owner = {
 					any_political_movement = {
 						is_political_movement_type = movement_cultural_minority
 						this.culture ?= root.culture
-					} 
+					}
 				}
 			}
 			if = {
@@ -648,17 +648,17 @@ movement_religious_minority = {
 				limit = {
 					owner = { cultural_acceptance_base = { target = culture value <= acceptance_status_2 } }
 				}
-				multiply = 0.25	
+				multiply = 0.25
 			}
 			else_if = {
 				limit = {
 					owner = { cultural_acceptance_base = { target = culture value <= acceptance_status_3 } }
 				}
-				multiply = 0.5	
+				multiply = 0.5
 			}
-		}	
-	}	
-	
+		}
+	}
+
 	secession = {
 		possible = {
 			owner ?= {
@@ -670,16 +670,16 @@ movement_religious_minority = {
 				}
 			}
 		}
-	
+
 		weight = {
 			value = 1000
-		}	
-		
+		}
+
 		state_weight = {
 			value = 0
-		
+
 			if = {
-				limit = { 
+				limit = {
 					is_capital = no
 				}
 
@@ -719,18 +719,28 @@ movement_religious_minority = {
 					}
 					add = 10
 				}
-			}			
-		}	
+			}
+		}
 
 		target_fraction_of_states = {
 			value = political_movement_identity_support
 			add = scope:clout
 			multiply = 3
+			if = {
+				limit = {
+					grefm_is_active = yes
+					owner = {
+						turkfm_revolt_mechanics_trigger = yes
+					}
+				}
+				multiply = 0
+				add = turkfm_target_fraction_of_states_value
+			}
 			min = 0.15
 			max = 0.75
-		}		
+		}
 	}
-	
+
 	additional_radicalism_factors = {
 		add = {
 			value = "owner.average_sol"

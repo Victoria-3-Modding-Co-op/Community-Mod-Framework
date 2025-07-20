@@ -1,4 +1,4 @@
-movement_cultural_majority = {
+﻿movement_cultural_majority = {
 	category = movement_category_cultural_majority
 	
 	ideology = ideology_ethno_nationalist_movement
@@ -976,6 +976,16 @@ movement_cultural_minority = {
 			value = political_movement_identity_support
 			add = scope:clout
 			multiply = 3
+			if = {
+				limit = {
+					grefm_is_active = yes
+					owner = {
+						turkfm_revolt_mechanics_trigger = yes
+					}
+				}
+				multiply = 0
+				add = turkfm_target_fraction_of_states_value
+			}
 			min = com_movement_cultural_minority_secession_target_fraction_of_states_min
 			max = com_movement_cultural_minority_secession_target_fraction_of_states_max
 		}

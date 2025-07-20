@@ -1,9 +1,7 @@
 ﻿##########################
 # COMMUNITY MOD TRIGGERS #
 ##########################
-# FILE USAGE:
-# Copy this file into the /common/scripted_triggers folder of your mod.
-#
+# USAGE:
 # If a mod contained in this file is not loaded, its trigger will return false.
 #
 # If any of the compatibility triggers in this file belong to an active mod, the trigger definition from this file should be overwritten by the one from that mod.

@@ -1,0 +1,5 @@
+﻿com_movement_cultural_minority_secession_possible_culture_percent_state = 0.05
+com_movement_cultural_minority_secession_state_weight_culture_percent_state_0 = 0.05
+com_movement_cultural_minority_secession_state_weight_culture_percent_state_1 = 0.1
+com_movement_cultural_minority_secession_target_fraction_of_states_min = 0.15
+com_movement_cultural_minority_secession_target_fraction_of_states_max = 0.75

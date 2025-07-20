@@ -18,7 +18,7 @@ on:
       publish:
         description: 'Publish on Workshop'
         required: false
-        default: 'false'
+        default: 'true'
         type: choice
         options:
           - 'true'

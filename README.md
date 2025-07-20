@@ -80,13 +80,12 @@ Current Scope:
 3) Modification to objective_types to add a scrollbar to the objectives screens. (Credit to Bahmut, KarafuruAmamiya, & Xier)
 4) Modification to society_panel to add the ability to use custom social hierarchies. (Credit to Bahmut)
 5) Integration of the "Modded DLC Framework" (Credit to 1230James)
-6) Unified system for cooltip types (Credit to 1230James)
-7) Modification to the outliner and journal GUIs to hide custom objectives during gameplay (Credit to Taylor)
-8) Several "superevent" windows for extra flavor (Credit to Bananaman & Klein for the Newspaper window, Credit to Alexedishi for all others)
-9) Modification to Journal Entry GUI to allow players to show characters (Credit to Bahmut and Mori)
-10) Integration of the "Multi-line PM Framework" (Credit to 1230James)
-11) Alerts can now open custom windows (Credit to Bahmut)
-12) More than three local goods can now be shown in state building panel correctly (Credit to Bahmut)
+6) Modification to the outliner and journal GUIs to hide custom objectives during gameplay (Credit to Taylor)
+7) Several "superevent" windows for extra flavor (Credit to Bananaman & Klein for the Newspaper window, Credit to Alexedishi for all others)
+8) Modification to Journal Entry GUI to allow players to show characters (Credit to Bahmut and Mori)
+9) Integration of the "Multi-line PM Framework" (Credit to 1230James)
+10) Alerts can now open custom windows (Credit to Bahmut)
+11) More than three local goods can now be shown in state building panel correctly (Credit to Bahmut)
 
 ## Alternative Event Windows
 

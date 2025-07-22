@@ -668,6 +668,12 @@ movement_religious_minority = {
 						value >= 0.10
 					}
 				}
+				trigger_if = {
+					limit = {
+						turkfm_revolt_mechanics_trigger = yes
+					}
+					turkfm_minority_revolt_possible_trigger = yes
+				}
 			}
 		}
 

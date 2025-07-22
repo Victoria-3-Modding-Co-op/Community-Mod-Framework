@@ -912,6 +912,12 @@ movement_cultural_minority = {
 						value >= com_movement_cultural_minority_secession_possible_culture_percent_state
 					}					
 				}
+				trigger_if = {
+					limit = {
+						turkfm_revolt_mechanics_trigger = yes
+					}
+					turkfm_minority_revolt_possible_trigger = yes
+				}
 			}
 		}
 	

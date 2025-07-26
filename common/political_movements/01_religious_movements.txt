@@ -6,6 +6,7 @@
 		ideology_theocrat
 		ideology_traditionalist
 		ideology_turkfm_islamist # GBBF
+		ideology_turkfm_theocrat # GBBF
 	}
 	
 	creation_trigger = {
@@ -57,6 +58,8 @@
 				OR = {
 					has_ideology = ideology:ideology_traditionalist
 					has_ideology = ideology:ideology_theocrat
+					has_ideology = ideology:ideology_turkfm_islamist # GBBF
+					has_ideology = ideology:ideology_turkfm_theocrat # GBBF
 				}
 			}
 			multiply = {
@@ -341,6 +344,7 @@ movement_religious_minority = {
 	character_ideologies = {
 		ideology_traditionalist_minoritarian
 		ideology_usfp_universalist #USFP
+		ideology_turkfm_ottomanist # GBBF
 	}
 
 	creation_trigger = {

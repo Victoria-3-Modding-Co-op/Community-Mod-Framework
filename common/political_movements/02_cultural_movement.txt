@@ -5,6 +5,7 @@
 	character_ideologies = {	
 		ideology_ethno_nationalist
 		ideology_usfp_social_darwinist_leader
+		ideology_turkfm_islamist # GOTB
 	}
 	
 	creation_trigger = {}
@@ -25,6 +26,7 @@
 			limit = {
 				has_ideology = ideology:ideology_ethno_nationalist
 				has_ideology = ideology:ideology_usfp_social_darwinist_leader #USFP
+				has_ideology = ideology:ideology_turkfm_islamist # GOTB
 			}
 			multiply = {
 				value = 5
@@ -416,6 +418,9 @@ movement_cultural_minority = {
 	ideology = ideology_pluralist_movement_1
 	character_ideologies = {
 		ideology_reformer
+		ideology_turkfm_reformer #GOTB
+		ideology_turkfm_ottomanist #GOTB
+
 	}
 	
 	creation_trigger = {}
@@ -556,8 +561,10 @@ movement_cultural_minority = {
 			has_ideology = ideology:ideology_humanitarian_royalist	
 			has_ideology = ideology:ideology_sovereignist_leader			
 			has_ideology = ideology:ideology_reformer
-			has_ideology = ideology:ideology_usfp_abolitionist_radical		
-		}		
+			has_ideology = ideology:ideology_usfp_abolitionist_radical
+			has_ideology = ideology:ideology_turkfm_reformer #GOTB
+			has_ideology = ideology:ideology_turkfm_ottomanist #GOTB
+		}
 	}
 	character_support_weight = {
 		value = 200
@@ -1070,6 +1077,8 @@ movement_minority_rights = {
 	ideology = ideology_pluralist_movement_3
 	character_ideologies = {
 		ideology_reformer
+		ideology_turkfm_reformer #GOTB
+		ideology_turkfm_ottomanist #GOTB
 	}
 
 	creation_trigger = {}
@@ -1101,6 +1110,8 @@ movement_minority_rights = {
 			has_ideology = ideology:ideology_humanitarian_royalist
 			has_ideology = ideology:ideology_sovereignist_leader
 			has_ideology = ideology:ideology_reformer
+			has_ideology = ideology:ideology_turkfm_reformer #GOTB
+			has_ideology = ideology:ideology_turkfm_ottomanist #GOTB
 		}
 	}
 	character_support_weight = {
@@ -1118,6 +1129,8 @@ movement_minority_rights = {
 				OR = {
 					has_ideology = ideology:ideology_humanitarian
 					has_ideology = ideology:ideology_reformer
+					has_ideology = ideology:ideology_turkfm_reformer #GOTB
+					has_ideology = ideology:ideology_turkfm_ottomanist #GOTB
 				}
 			}
 			multiply = {

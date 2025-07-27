@@ -1,81 +1,84 @@
 ﻿movement_religious_majority = {
-    category = movement_category_religious
+	category = movement_category_religious
+	
+	ideology = ideology_traditionalist_movement
+	character_ideologies = {
+		ideology_theocrat
+		ideology_traditionalist
+		ideology_turkfm_islamist #GOTB
+		ideology_turkfm_theocrat #GOTB
+	}
+	
+	creation_trigger = {
+		NOT = {
+			has_law = law_type:law_state_atheism
+		}
+	}	
+	creation_weight = {
+		value = 100
+	}	
+	on_created = {}
 
-    ideology = ideology_traditionalist_movement
-    character_ideologies = {
-        ideology_theocrat
-        ideology_traditionalist
-        ideology_turkfm_islamist # GBBF
-    }
-
-    creation_trigger = {
-        NOT = {
-            has_law = law_type:law_state_atheism
-        }
-    }
-    creation_weight = {
-        value = 100
-    }
-    on_created = {}
-
-    disband_trigger = {
-        scope:political_movement ?= {
-            religion = {
-                NOT = { is_state_religion = root }
-            }
-        }
-    }
-
-    religion_selection_trigger = {
-        is_state_religion = scope:country
-    }
-    religion_selection_weight = {
-        value = 100
-    }
-
-    character_support_trigger = {
-        religion = scope:religion
-        OR = {
-            is_interest_group_type = ig_devout
-            character_is_pro_religious_majority = yes #Compatibility Trigger
-        }
-    }
-    character_support_weight = {
-        value = 100
-        if = {
-            limit = {
-                scope:interest_group ?= {
-                    is_interest_group_type = ig_devout
-                }
-            }
-            multiply = {
-                value = 2
-            }
-        }
-        if = {
-            limit = {
-                OR = {
-                    has_ideology = ideology:ideology_traditionalist
-                    has_ideology = ideology:ideology_theocrat
-                }
-            }
-            multiply = {
-                value = 5
-            }
-        }
-        else_if = {
-            limit = {
-                has_ideology = ideology:ideology_integralist
-            }
-            multiply = {
-                value = 2
-            }
-        }
-    }
-
-    pop_support_trigger = {
-        religion = scope:religion
-    }
+	disband_trigger = {
+		scope:political_movement ?= {
+			religion = {
+				NOT = { is_state_religion = root }
+			}		
+		}
+	}
+	
+	religion_selection_trigger = {
+		is_state_religion = scope:country
+	}
+	religion_selection_weight = {
+		value = 100
+	}
+	
+	character_support_trigger = {
+		religion = scope:religion
+		OR = {
+			is_interest_group_type = ig_devout
+			character_is_pro_religious_majority = yes #Compatibility Trigger
+		}		
+	}
+	character_support_weight = {
+		value = 100
+		if = {
+			limit = {
+				scope:interest_group ?= {
+					is_interest_group_type = ig_devout
+				}
+			}
+			multiply = {
+				value = 2
+			}
+		}
+		if = {
+			limit = {
+				OR = {
+					has_ideology = ideology:ideology_traditionalist
+					has_ideology = ideology:ideology_theocrat
+					has_ideology = ideology:ideology_turkfm_islamist #GOTB
+					has_ideology = ideology:ideology_turkfm_theocrat #GOTB
+				}
+			}
+			multiply = {
+				value = 5
+			}
+		}
+		else_if = {
+			limit = {
+				has_ideology = ideology:ideology_integralist
+			}
+			multiply = {
+				value = 2
+			}
+		}
+	}	
+	
+	pop_support_trigger = {
+		religion = scope:religion
+	}
 
     pop_support_factors = {
         movement_support_low_urbanization
@@ -337,24 +340,25 @@
 }
 
 movement_religious_minority = {
-    category = movement_category_religious
+	category = movement_category_religious
 
-    ideology = ideology_traditionalist_minoritarian_movement
-    character_ideologies = {
-        ideology_traditionalist_minoritarian
-        ideology_usfp_universalist #USFP
-    }
+	ideology = ideology_traditionalist_minoritarian_movement
+	character_ideologies = {
+		ideology_traditionalist_minoritarian
+		ideology_usfp_universalist #USFP
+		ideology_turkfm_ottomanist #GOTB
+	}
 
-    creation_trigger = {
-        NAND = {
-            c:BIC ?= this
-            has_technology_researched = pan-nationalism
-        }
-    }
-    creation_weight = {
-        value = 200
-    }
-    on_created = {}
+	creation_trigger = {
+		NAND = {
+			c:BIC ?= this
+			has_technology_researched = pan-nationalism
+		}
+	}
+	creation_weight = {
+		value = 200
+	}
+	on_created = {}
 
     disband_trigger = {
         OR = {
@@ -376,114 +380,114 @@ movement_religious_minority = {
         }
     }
 
-    on_disbanded = {
-        if = {
-            limit = {
-                owner ?= {
-                    c:BIC ?= this
-                    has_technology_researched = pan-nationalism
-                    NOT = {
-                        any_political_movement = {
-                            is_political_movement_type = movement_muslim_nationalist
-                        }
-                    }
-                }
-            }
-            owner ?= {
-                create_political_movement = { type = movement_muslim_nationalist }
-            }
-        }
-        if = {
-            limit = {
-                owner ?= {
-                    c:BIC ?= this
-                    has_technology_researched = pan-nationalism
-                    NOT = {
-                        any_political_movement = {
-                            is_political_movement_type = movement_hindu_nationalist
-                        }
-                    }
-                }
-            }
-            owner ?= {
-                create_political_movement = { type = movement_hindu_nationalist }
-            }
-        }
-    }
+	on_disbanded = {
+		if = {
+			limit = {
+				owner ?= {
+					c:BIC ?= this
+					has_technology_researched = pan-nationalism
+					NOT = {
+						any_political_movement = {
+							is_political_movement_type = movement_muslim_nationalist
+						}
+					}
+				}
+			}
+			owner ?= {
+				create_political_movement = { type = movement_muslim_nationalist }
+			}
+		}
+		if = {
+			limit = {
+				owner ?= {
+					c:BIC ?= this
+					has_technology_researched = pan-nationalism
+					NOT = {
+						any_political_movement = {
+							is_political_movement_type = movement_hindu_nationalist
+						}
+					}
+				}
+			}
+			owner ?= {
+				create_political_movement = { type = movement_hindu_nationalist }
+			}
+		}
+	}
 
-    religion_selection_trigger = {
-        NOT = { is_state_religion = scope:country }
-        NOT = { rel:atheist = this }
-        scope:country = {
-            religion_percent_country = {
-                target = root
-                value >= 0.1
-            }
-        }
-    }
-    religion_selection_weight = {
-        value = 100
-    }
+	religion_selection_trigger = {
+		NOT = { is_state_religion = scope:country }
+		NOT = { rel:atheist = this }
+		scope:country = {
+			religion_percent_country = {
+				target = root
+				value >= 0.1
+			}
+		}
+	}
+	religion_selection_weight = {
+		value = 100
+	}
 
-    character_support_trigger = {
-        religion = scope:religion
-        OR = {
-            AND = {
-                owner ?= {
-                    has_law = law_type:law_state_atheism
-                }
-                character_hates_state_atheism = yes #Compatibility Trigger
-            }
-            character_is_pro_religious_minority = yes #Compatibility Trigger
-        }
-    }
-    character_support_weight = {
-        value = 200
-        if = {
-            limit = {
-                scope:interest_group ?= {
-                    is_interest_group_type = ig_devout
-                }
-            }
-            multiply = {
-                value = 2
-            }
-        }
-        if = {
-            limit = {
-                OR = {
-                    AND = {
-                        owner ?= {
-                            has_law = law_type:law_state_atheism
-                        }
-                        character_hates_state_atheism = yes #Compatibility Trigger
-                    }
-                    character_is_pro_religious_minority = yes #Compatibility Trigger
-                }
-            }
-            multiply = {
-                value = 5
-            }
-        }
-        else_if = {
-            limit = {
-                NOT = {
-                    scope:interest_group ?= {
-                        is_interest_group_type = ig_devout
-                    }
-                }
-                OR = {
-                    has_progressive_ideology = yes
-                    has_socialist_ideology = yes
-                }
-            }
-            multiply = 0.05
-        }
-    }
+	character_support_trigger = {
+		religion = scope:religion
+		OR = {
+			AND = {
+				owner ?= {
+					has_law = law_type:law_state_atheism
+				}
+				character_hates_state_atheism = yes #Compatibility Trigger
+			}
+			character_is_pro_religious_minority = yes #Compatibility Trigger
+		}
+	}
+	character_support_weight = {
+		value = 200
+		if = {
+			limit = {
+				scope:interest_group ?= {
+					is_interest_group_type = ig_devout
+				}
+			}
+			multiply = {
+				value = 2
+			}
+		}
+		if = {
+			limit = {
+				OR = {
+					AND = {
+						owner ?= {
+							has_law = law_type:law_state_atheism
+						}
+						character_hates_state_atheism = yes #Compatibility Trigger
+					}
+					character_is_pro_religious_minority = yes #Compatibility Trigger
+				}
+			}
+			multiply = {
+				value = 5
+			}
+		}
+		else_if = {
+			limit = {
+				NOT = {
+					scope:interest_group ?= {
+						is_interest_group_type = ig_devout
+					}
+				}
+				OR = {
+					has_progressive_ideology = yes
+					has_socialist_ideology = yes
+				}
+			}
+			multiply = 0.05
+		}
+	}
 
-    pop_support_trigger = {
-        religion = scope:religion
-    }
+	pop_support_trigger = {
+		religion = scope:religion
+	}
 
     pop_support_factors = {
         movement_support_poverty
@@ -495,252 +499,281 @@ movement_religious_minority = {
         movement_support_corporatism_tech
     }
 
-    pop_support_weight = {
-        if = {
-            limit = {
-                exists = scope:political_movement
-                scope:political_movement ?= {
-                    OR = {
-                        is_being_suppressed = yes
-                        is_being_bolstered = yes
-                    }
-                }
-            }
-            if = {
-                limit = {
-                    scope:political_movement = {
-                        is_being_suppressed = yes
-                    }
-                }
-                add = {
-                    value = suppression_base_value
-                    multiply = {
-                        value = -0.5
-                        add = owner.modifier:country_suppression_attraction_factor
-                    }
-                    desc = "concept_suppressed"
-                }
-            }
-            else = {
-                add = {
-                    value = bolstering_base_value
-                    multiply = {
-                        value = 0.5
-                        add = owner.modifier:country_bolster_attraction_factor
-                    }
-                    desc = "concept_bolstered"
-                }
-            }
-        }
-        add = {
-            value = 10
-            desc = "POP_BASE_SUPPORT"
-        }
+	pop_support_weight = {
+		if = {
+			limit = {
+				exists = scope:political_movement
+				scope:political_movement ?= {
+					OR = {
+						is_being_suppressed = yes
+						is_being_bolstered = yes
+					}
+					save_temporary_scope_as = affected_movement
+				}
+			}
+			if = {
+				limit = {
+					scope:political_movement = {
+						is_being_suppressed = yes
+					}
+				}
+				add = {
+					value = suppression_base_value
+					multiply = {
+						value = -0.5
+						add = owner.modifier:country_suppression_attraction_factor
+					}
+					desc = "concept_suppressed"
+				}
+			}
+			else = {
+				add = {
+					value = bolstering_base_value
+					multiply = {
+						value = 0.5
+						add = owner.modifier:country_bolster_attraction_factor
+					}
+					desc = "concept_bolstered"
+				}
+			}
+		}
+		add = {
+			value = 10
+			desc = "POP_BASE_SUPPORT"
+		}
 
-        if = {
-            limit = {
-                standard_of_living < 15
-            }
+		if = {
+			limit = {
+				standard_of_living < 15
+			}
 
-            add = {
-                value = standard_of_living
-                subtract = 15
-                multiply = -5
-                desc = "POP_POVERTY"
-            }
-        }
+			add = {
+				value = standard_of_living
+				subtract = 15
+				multiply = -5
+				desc = "POP_POVERTY"
+			}
+		}
 
-        if = {
-            limit = {
-                is_pop_type = clergymen
-            }
-            add = {
-                value = 45
-                desc = "POP_CLERGYMEN"
-            }
-        }
-        else_if = {
-            limit = {
-                is_pop_type = aristocrats
-            }
-            add = {
-                value = 10
-                desc = "POP_ARISTOCRATS"
-            }
-        }
-        else_if = {
-            limit = {
-                is_pop_type = peasants
-            }
-            add = {
-                value = 10
-                desc = "POP_PEASANTS"
-            }
-        }
+		if = {
+			limit = {
+				is_pop_type = clergymen
+			}
+			add = {
+				value = 45
+				desc = "POP_CLERGYMEN"
+			}
+		}
+		else_if = {
+			limit = {
+				is_pop_type = aristocrats
+			}
+			add = {
+				value = 10
+				desc = "POP_ARISTOCRATS"
+			}
+		}
+		else_if = {
+			limit = {
+				is_pop_type = peasants
+			}
+			add = {
+				value = 10
+				desc = "POP_PEASANTS"
+			}
+		}
 
-        add = {
-            # Weakened by increasing literacy rates
-            desc = "POP_LITERACY"
-            this = {
-                value = literacy_rate
-                multiply = -2
-            }
-        }
+		add = {
+			# Weakened by increasing literacy rates
+			desc = "POP_LITERACY"
+			this = {
+				value = literacy_rate
+				multiply = -2
+			}
+		}
 
-        if = {
-            limit = {
-                owner ?= {
-                    c:RUS ?= this
-                }
-                culture = cu:polish
-            }
-            multiply = {
-                desc = "POP_POLISH_NATIONALISM"
-                value = 0.05
-            }
-        }
+		if = {
+			limit = {
+				owner ?= {
+					c:RUS ?= this
+				}
+				culture = cu:polish
+			}
+			multiply = {
+				desc = "POP_POLISH_NATIONALISM"
+				value = 0.05
+			}
+		}
 
-        if = {
-            limit = {
-                state = {
-                    state_religious_acceptance = {
-                        target = PREV.religion
-                        value < religious_acceptance_high
-                    }
-                }
-            }
-            multiply = {
-                desc = "POP_RELIGIOUS_DISCRIMINATION"
-                value = 100
-                subtract = pop_acceptance
-                divide = 25 # Maxes out at 4x at 0% acceptance, starts being a liability at 75% acceptance
-            }
-        }
+		if = {
+			limit = {
+				state = {
+					state_religious_acceptance = {
+						target = PREV.religion
+						value < religious_acceptance_high
+					}
+				}
+			}
+			multiply = {
+				desc = "POP_RELIGIOUS_DISCRIMINATION"
+				value = 100
+				subtract = pop_acceptance
+				divide = 25 # Maxes out at 4x at 0% acceptance, starts being a liability at 75% acceptance
+			}
+		}
 
-        if = {
-            limit = {
-                owner ?= {
-                    has_technology_researched = corporatism
-                }
-            }
-            multiply = {
-                value = 1.5
-                desc = "CORPORATISM_TECH"
-            }
-        }
+		if = {
+			limit = {
+				owner ?= {
+					has_technology_researched = corporatism
+				}
+			}
+			multiply = {
+				value = 1.5
+				desc = "CORPORATISM_TECH"
+			}
+		}
 
-        # Favor cultural movement if necessary
-        if = {
-            limit = {
-                owner = {
-                    any_political_movement = {
-                        is_political_movement_type = movement_cultural_minority
-                        this.culture ?= root.culture
-                    }
-                }
-            }
-            if = {
-                limit = {
-                    owner = { cultural_acceptance_base = { target = culture value <= acceptance_status_1 } }
-                }
-                multiply = 0.1
-            }
-            else_if = {
-                limit = {
-                    owner = { cultural_acceptance_base = { target = culture value <= acceptance_status_2 } }
-                }
-                multiply = 0.25
-            }
-            else_if = {
-                limit = {
-                    owner = { cultural_acceptance_base = { target = culture value <= acceptance_status_3 } }
-                }
-                multiply = 0.5
-            }
-        }
-    }
+		# Favor cultural movement if necessary
+		if = {
+			limit = {
+				owner = {
+					any_political_movement = {
+						is_political_movement_type = movement_cultural_minority
+						this.culture ?= root.culture
+					}
+				}
+			}
+			if = {
+				limit = {
+					owner = { cultural_acceptance_base = { target = culture value <= acceptance_status_1 } }
+				}
+				multiply = 0.1
+			}
+			else_if = {
+				limit = {
+					owner = { cultural_acceptance_base = { target = culture value <= acceptance_status_2 } }
+				}
+				multiply = 0.25
+			}
+			else_if = {
+				limit = {
+					owner = { cultural_acceptance_base = { target = culture value <= acceptance_status_3 } }
+				}
+				multiply = 0.5
+			}
+		}
+	}
 
-    secession = {
-        possible = {
-            owner ?= {
-                any_scope_state = {
-                    religion_percent_state = {
-                        target = root.religion
-                        value >= 0.10
-                    }
-                }
-            }
-        }
+	secession = {
+		possible = {
+			owner ?= {
+				any_scope_state = {
+					religion_percent_state = {
+						target = root.religion
+						value >= 0.10
+					}
+				}
+				trigger_if = {
+					limit = {
+						turkfm_revolt_mechanics_trigger = yes
+					}
+					turkfm_minority_revolt_possible_trigger = yes
+				}
+			}
+		}
 
-        weight = {
-            value = 1000
-        }
+		weight = {
+			value = 1000
+		}
 
-        state_weight = {
-            value = 0
+		state_weight = {
+			value = 0
 
-            if = {
-                limit = {
-                    is_capital = no
-                }
+			if = {
+				limit = {
+					is_capital = no
+				}
 
-                if = {
-                    limit = {
-                        religion_percent_state = {
-                            target = scope:political_movement.religion
-                            value >= 0.75
-                        }
-                    }
-                    add = 250
-                }
-                else_if = {
-                    limit = {
-                        religion_percent_state = {
-                            target = scope:political_movement.religion
-                            value >= 0.5
-                        }
-                    }
-                    add = 150
-                }
-                else_if = {
-                    limit = {
-                        religion_percent_state = {
-                            target = scope:political_movement.religion
-                            value >= 0.25
-                        }
-                    }
-                    add = 50
-                }
-                else_if = {
-                    limit = {
-                        religion_percent_state = {
-                            target = scope:political_movement.religion
-                            value >= 0.1
-                        }
-                    }
-                    add = 10
-                }
-            }
-        }
+				if = {
+					limit = {
+						religion_percent_state = {
+							target = scope:political_movement.religion
+							value >= 0.75
+						}
+					}
+					add = 250
+				}
+				else_if = {
+					limit = {
+						religion_percent_state = {
+							target = scope:political_movement.religion
+							value >= 0.5
+						}
+					}
+					add = 150
+				}
+				else_if = {
+					limit = {
+						religion_percent_state = {
+							target = scope:political_movement.religion
+							value >= 0.25
+						}
+					}
+					add = 50
+				}
+				else_if = {
+					limit = {
+						religion_percent_state = {
+							target = scope:political_movement.religion
+							value >= 0.1
+						}
+					}
+					add = 10
+				}
+			}
+		}
 
-        target_fraction_of_states = {
-            value = political_movement_identity_support
-            add = scope:clout
-            multiply = 3
-            min = 0.15
-            max = 0.75
-        }
-    }
+		target_fraction_of_states = {
+			value = political_movement_identity_support
+			add = scope:clout
+			multiply = 3
+			if = {
+				limit = {
+					grefm_is_active = yes
+					owner = {
+						turkfm_revolt_mechanics_trigger = yes
+					}
+				}
+				multiply = 0
+				add = turkfm_target_fraction_of_states_value
+			}
+			min = {
+				value = com_movement_religious_minority_secession_target_fraction_of_states_min
+				if = {
+					limit = {
+						grefm_is_active = yes
+						owner = {
+							turkfm_revolt_mechanics_trigger = yes
+						}
+					}
+					multiply = 0
+					add = turkfm_movement_religious_minority_secession_target_fraction_of_states_min
+				}
+			}
+			max = com_movement_religious_minority_secession_target_fraction_of_states_max
+		}
+	}
 
-    additional_radicalism_factors = {
-        add = {
-            value = "owner.average_sol"
-            subtract = "owner.average_sol_for_religion(scope:religion)"
-            multiply = 0.05
-            max = 0.5
-            min = 0
-            desc = "STANDARD_OF_LIVING_FOR_RELIGION"
-        }
+	additional_radicalism_factors = {
+		add = {
+			value = "owner.average_sol"
+			subtract = "owner.average_sol_for_religion(scope:religion)"
+			multiply = 0.05
+			max = 0.5
+			min = 0
+			desc = "STANDARD_OF_LIVING_FOR_RELIGION"
+		}
 
         subtract = {
             value = 0.5

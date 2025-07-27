@@ -6,6 +6,7 @@
 		ideology_abolitionist
 		ideology_humanitarian
 		ideology_usfp_abolitionist_radical #USFP
+		ideology_turkfm_ottomanist #GOTB
 	}
 	
 	disband_trigger = {
@@ -985,7 +986,7 @@ movement_royalist_absolutist = {
 	character_ideologies = {
 		ideology_royalist
 		ideology_authoritarian
-		ideology_bavarocrat # GBBF
+		ideology_bavarocrat #GOTB
 	}
 
 	disband_trigger = {
@@ -1352,8 +1353,8 @@ movement_royalist_constitutional = {
 	character_ideologies = {
 		ideology_royalist
 		ideology_humanitarian_royalist
-		ideology_grefm_constitutionalist # GBBF
-		ideology_turkfm_ottomanist # GBBF
+		ideology_grefm_constitutionalist #GOTB
+		ideology_turkfm_ottomanist #GOTB
 	}
 	
 	disband_trigger = {
@@ -1376,6 +1377,8 @@ movement_royalist_constitutional = {
 		OR = {
 			has_ideology = ideology:ideology_royalist
 			has_ideology = ideology:ideology_humanitarian_royalist
+			has_ideology = ideology:ideology_grefm_constitutionalist # GOTB
+			has_ideology = ideology:ideology_turkfm_ottomanist # GOTB
 			AND = {
 				OR = {
 					is_interest_group_type = ig_landowners
@@ -1692,8 +1695,10 @@ movement_labor = { # Explicitly non-socialist labour movement
 		ideology_radical
 		ideology_social_democrat
 		ideology_utopian
-		ideology_grefm_constitutionalist # GBBF
-		ideology_venizelist # GBBF
+		ideology_grefm_constitutionalist #GOTB
+		ideology_venizelist #GOTB
+		ideology_turkfm_reformer #GOTB
+		ideology_turkfm_social_democrat #GOTB
 	}
 	
 	creation_trigger = {
@@ -1717,6 +1722,7 @@ movement_labor = { # Explicitly non-socialist labour movement
 		if = {
 			limit = {
 				has_ideology = ideology:ideology_social_democrat
+				has_ideology = ideology:ideology_turkfm_social_democrat
 			}
 			multiply = {
 				value = 5
@@ -1727,6 +1733,7 @@ movement_labor = { # Explicitly non-socialist labour movement
 				OR = {
 					has_ideology = ideology:ideology_reformer
 					has_ideology = ideology:ideology_radical
+					has_ideology = ideology:ideology_turkfm_reformer
 				}
 			}
 			multiply = {
@@ -2056,6 +2063,7 @@ movement_socialist = {
 		ideology_anarchist
 		ideology_social_democrat
 		ideology_vanguardist
+		ideology_turkfm_vanguardist #GOTB
 	}
 	
 	creation_trigger = {
@@ -2085,6 +2093,7 @@ movement_socialist = {
 			AND = {
 				is_interest_group_type = ig_trade_unions
 				has_ideology = ideology:ideology_humanitarian
+				has_ideology = ideology:ideology_turkfm_vanguardist
 			}
 		}
 	}
@@ -2125,7 +2134,10 @@ movement_socialist = {
 		}
 		else_if = {
 			limit = {
-				has_ideology = ideology:ideology_social_democrat
+				OR = {
+					has_ideology = ideology:ideology_social_democrat
+					has_ideology = ideology:ideology_turkfm_social_democrat # GOTB
+				}
 				NOT = {
 					owner ?= {
 						any_political_movement = {
@@ -3416,6 +3428,7 @@ movement_corporatist = {
 			has_ideology = ideology:ideology_fascist
 			has_ideology = ideology:ideology_integralist
 			has_ideology = ideology:ideology_social_democrat
+			has_ideology = ideology:ideology_turkfm_social_democrat #GOTB
 			has_ideology = ideology:ideology_utopian
 		}
 	}
@@ -3664,10 +3677,10 @@ movement_liberal = {
 		ideology_republican_leader
 		ideology_radical
 		ideology_humanitarian
-		ideology_grefm_constitutionalist # GBBF
-		ideology_venizelist # GBBF
-		ideology_turkfm_ottomanist # GBBF
-		ideology_dacianist # GBBF
+		ideology_grefm_constitutionalist #GOTB
+		ideology_venizelist #GOTB
+		ideology_turkfm_ottomanist #GOTB
+		ideology_dacianist #GOTB
 		ideology_moh_revolutionary # MoH Revolutionary
 		ideology_moh_kmt # MoH Kuomintang Nationalist
 		ideology_anz_atsi_pluralist_character #anzfp
@@ -4607,7 +4620,7 @@ movement_positivist = {
 	ideology = ideology_positivist_movement
 	character_ideologies = {
 		ideology_positivist
-		ideology_kogalnitchanism # GBBF
+		ideology_kogalnitchanism #GOTB
 	}
 	
 	creation_trigger = {
@@ -5474,7 +5487,8 @@ movement_reactionary = {
 		ideology_protectionist
 		ideology_authoritarian
 		ideology_luddite
-		ideology_turkfm_islamist # GBBF
+		ideology_turkfm_islamist #GOTB
+		ideology_turkfm_traditionalist #GOTB
 	}
 	
 	creation_trigger = {
@@ -5529,6 +5543,7 @@ movement_reactionary = {
 				OR = {
 					has_ideology = ideology:ideology_protectionist
 					has_ideology = ideology:ideology_traditionalist
+					has_ideology = ideology:ideology_turkfm_traditionalist #GOTB
 					has_ideology = ideology:ideology_luddite
 				}
 			}
@@ -5821,7 +5836,8 @@ movement_modernizer = {
 		ideology_protectionist
 		ideology_market_liberal
 		ideology_abolitionist
-		ideology_turkfm_ottomanist # GBBF
+		ideology_turkfm_ottomanist #GOTB
+		ideology_turkfm_modernizer_leader #GOTB
 	}
 	
 	creation_trigger = {
@@ -5880,6 +5896,7 @@ movement_modernizer = {
 			scope:interest_group ?= {
 					OR = {
 						has_ideology = ideology:ideology_modernizer
+						has_ideology = ideology:ideology_turkfm_modernizer_leader #GOTB
 						has_ideology = ideology:ideology_liberal
 						has_ideology = ideology:ideology_liberal_modern
 						has_ideology = ideology:ideology_plutocratic
@@ -5893,6 +5910,7 @@ movement_modernizer = {
 			limit = {
 				OR = {
 					has_ideology = ideology:ideology_modernizer_leader
+					has_ideology = ideology:ideology_turkfm_modernizer_leader #GOTB
 					has_ideology = ideology:ideology_protectionist
 					has_ideology = ideology:ideology_reformer
 					has_ideology = ideology:ideology_sovereignist
@@ -5920,6 +5938,7 @@ movement_modernizer = {
 				scope:interest_group ?= {
 					OR = {
 						has_ideology = ideology:ideology_modernizer
+						has_ideology = ideology:ideology_turkfm_modernizer_leader #GOTB
 						has_ideology = ideology:ideology_liberal
 						has_ideology = ideology:ideology_liberal_modern
 						has_ideology = ideology:ideology_plutocratic

@@ -5,6 +5,7 @@
 	character_ideologies = {	
 		ideology_ethno_nationalist
 		ideology_usfp_social_darwinist_leader
+		ideology_turkfm_islamist # GOTB
 	}
 	
 	creation_trigger = {}
@@ -25,6 +26,7 @@
 			limit = {
 				has_ideology = ideology:ideology_ethno_nationalist
 				has_ideology = ideology:ideology_usfp_social_darwinist_leader #USFP
+				has_ideology = ideology:ideology_turkfm_islamist # GOTB
 			}
 			multiply = {
 				value = 5
@@ -416,6 +418,9 @@ movement_cultural_minority = {
 	ideology = ideology_pluralist_movement_1
 	character_ideologies = {
 		ideology_reformer
+		ideology_turkfm_reformer #GOTB
+		ideology_turkfm_ottomanist #GOTB
+
 	}
 	
 	creation_trigger = {}
@@ -504,7 +509,7 @@ movement_cultural_minority = {
 						OR = {
 							culture_percent_country = {
 								target = scope:political_movement.culture
-									value <= 0.08
+								value <= 0.08
 							}
 							cultural_acceptance_base = { target = scope:political_movement.culture value > acceptance_status_2 }
 						}
@@ -530,8 +535,8 @@ movement_cultural_minority = {
 				AND = {
 					culture_percent_country = {
 						target = root
-							value >= 0.1
-						}
+						value >= 0.1
+					}
 					cultural_acceptance_base = { target = root value <= acceptance_status_2 }
 				}
 			}
@@ -569,8 +574,10 @@ movement_cultural_minority = {
 			has_ideology = ideology:ideology_humanitarian_royalist	
 			has_ideology = ideology:ideology_sovereignist_leader			
 			has_ideology = ideology:ideology_reformer
-			has_ideology = ideology:ideology_usfp_abolitionist_radical		
-		}		
+			has_ideology = ideology:ideology_usfp_abolitionist_radical
+			has_ideology = ideology:ideology_turkfm_reformer #GOTB
+			has_ideology = ideology:ideology_turkfm_ottomanist #GOTB
+		}
 	}
 	character_support_weight = {
 		value = 200
@@ -628,9 +635,9 @@ movement_cultural_minority = {
 			limit = {
 				exists = scope:political_movement
 				scope:political_movement ?= {
-						OR = {
-							is_being_suppressed = yes
-							is_being_bolstered = yes
+					OR = {
+						is_being_suppressed = yes
+						is_being_bolstered = yes
 					}
 				}
 			}
@@ -774,7 +781,12 @@ movement_cultural_minority = {
 				multiply = -5
 				desc = "POP_POVERTY"
 			}
-		}	
+		}
+
+		if = {
+			limit = { Grey_PLP_is_active = yes }
+			multiply = mog_plp_movement_cultural_minority_pop_support_weight_mult
+		}
 
 		if = {
 			limit = {
@@ -917,8 +929,14 @@ movement_cultural_minority = {
 					state_region = { is_homeland = root.culture }
 					culture_percent_state = {
 						target = root.culture
-						value >= 0.05
+						value >= com_movement_cultural_minority_secession_possible_culture_percent_state
 					}					
+				}
+				trigger_if = {
+					limit = {
+						turkfm_revolt_mechanics_trigger = yes
+					}
+					turkfm_minority_revolt_possible_trigger = yes
 				}
 			}
 		}
@@ -936,7 +954,7 @@ movement_cultural_minority = {
 					state_region = { is_homeland = scope:political_movement.culture }
 					culture_percent_state = {
 						target = scope:political_movement.culture
-						value >= 0.05
+						value >= com_movement_cultural_minority_secession_state_weight_culture_percent_state_0
 					}					
 				}
 				add = 10
@@ -972,7 +990,7 @@ movement_cultural_minority = {
 					limit = {
 						culture_percent_state = {
 							target = scope:political_movement.culture
-							value >= 0.1
+							value >= com_movement_cultural_minority_secession_state_weight_culture_percent_state_1
 						}
 					}
 					add = 50
@@ -984,8 +1002,30 @@ movement_cultural_minority = {
 			value = political_movement_identity_support
 			add = scope:clout
 			multiply = 3
-			min = 0.15
-			max = 0.75
+			if = {
+				limit = {
+					grefm_is_active = yes
+					owner = {
+						turkfm_revolt_mechanics_trigger = yes
+					}
+				}
+				multiply = 0
+				add = turkfm_target_fraction_of_states_value
+			}
+			min = {
+				value = com_movement_cultural_minority_secession_target_fraction_of_states_min
+				if = {
+					limit = {
+						grefm_is_active = yes
+						owner = {
+							turkfm_revolt_mechanics_trigger = yes
+						}
+					}
+					multiply = 0
+					add = turkfm_movement_cultural_minority_secession_target_fraction_of_states_min
+				}
+			}
+			max = com_movement_cultural_minority_secession_target_fraction_of_states_max
 		}
 	}
 	
@@ -1002,7 +1042,13 @@ movement_cultural_minority = {
 		}	
 	
 		add = {
-			value = "owner.average_sol"
+			if = {
+				limit = { Grey_PLP_is_active = yes } 
+				value = "owner.average_sol_for_primary_cultures"
+			}
+			else = { # Vanila
+				value = "owner.average_sol"
+			}
 			subtract = "owner.average_sol_for_culture(scope:culture)"
 			multiply = 0.05
 			max = 0.5
@@ -1056,6 +1102,8 @@ movement_minority_rights = {
 	ideology = ideology_pluralist_movement_3
 	character_ideologies = {
 		ideology_reformer
+		ideology_turkfm_reformer #GOTB
+		ideology_turkfm_ottomanist #GOTB
 	}
 
 	creation_trigger = {}
@@ -1087,6 +1135,8 @@ movement_minority_rights = {
 			has_ideology = ideology:ideology_humanitarian_royalist
 			has_ideology = ideology:ideology_sovereignist_leader
 			has_ideology = ideology:ideology_reformer
+			has_ideology = ideology:ideology_turkfm_reformer #GOTB
+			has_ideology = ideology:ideology_turkfm_ottomanist #GOTB
 		}
 	}
 	character_support_weight = {
@@ -1104,6 +1154,8 @@ movement_minority_rights = {
 				OR = {
 					has_ideology = ideology:ideology_humanitarian
 					has_ideology = ideology:ideology_reformer
+					has_ideology = ideology:ideology_turkfm_reformer #GOTB
+					has_ideology = ideology:ideology_turkfm_ottomanist #GOTB
 				}
 			}
 			multiply = {

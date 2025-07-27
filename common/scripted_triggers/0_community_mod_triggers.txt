@@ -12,7 +12,7 @@
 #  
 # morgenrote_is_active = {
 #		always = yes
-# {
+# }
 #
 # Make sure your scripted trigger file is loaded AFTER this one. You can do this by adding zz_ to the filename.
 #

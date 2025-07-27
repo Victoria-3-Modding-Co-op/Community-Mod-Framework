@@ -5,8 +5,8 @@
 	character_ideologies = {
 		ideology_theocrat
 		ideology_traditionalist
-		ideology_turkfm_islamist # GBBF
-		ideology_turkfm_theocrat # GBBF
+		ideology_turkfm_islamist #GOTB
+		ideology_turkfm_theocrat #GOTB
 	}
 	
 	creation_trigger = {
@@ -58,8 +58,8 @@
 				OR = {
 					has_ideology = ideology:ideology_traditionalist
 					has_ideology = ideology:ideology_theocrat
-					has_ideology = ideology:ideology_turkfm_islamist # GBBF
-					has_ideology = ideology:ideology_turkfm_theocrat # GBBF
+					has_ideology = ideology:ideology_turkfm_islamist #GOTB
+					has_ideology = ideology:ideology_turkfm_theocrat #GOTB
 				}
 			}
 			multiply = {
@@ -344,7 +344,7 @@ movement_religious_minority = {
 	character_ideologies = {
 		ideology_traditionalist_minoritarian
 		ideology_usfp_universalist #USFP
-		ideology_turkfm_ottomanist # GBBF
+		ideology_turkfm_ottomanist #GOTB
 	}
 
 	creation_trigger = {
@@ -746,8 +746,20 @@ movement_religious_minority = {
 				multiply = 0
 				add = turkfm_target_fraction_of_states_value
 			}
-			min = 0.15
-			max = 0.75
+			min = {
+				value = com_movement_religious_minority_secession_target_fraction_of_states_min
+				if = {
+					limit = {
+						grefm_is_active = yes
+						owner = {
+							turkfm_revolt_mechanics_trigger = yes
+						}
+					}
+					multiply = 0
+					add = turkfm_movement_religious_minority_secession_target_fraction_of_states_min
+				}
+			}
+			max = com_movement_religious_minority_secession_target_fraction_of_states_max
 		}
 	}
 

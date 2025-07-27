@@ -999,7 +999,19 @@ movement_cultural_minority = {
 				multiply = 0
 				add = turkfm_target_fraction_of_states_value
 			}
-			min = com_movement_cultural_minority_secession_target_fraction_of_states_min
+			min = {
+				value = com_movement_cultural_minority_secession_target_fraction_of_states_min
+				if = {
+					limit = {
+						grefm_is_active = yes
+						owner = {
+							turkfm_revolt_mechanics_trigger = yes
+						}
+					}
+					multiply = 0
+					add = turkfm_movement_cultural_minority_secession_target_fraction_of_states_min
+				}
+			}
 			max = com_movement_cultural_minority_secession_target_fraction_of_states_max
 		}
 	}

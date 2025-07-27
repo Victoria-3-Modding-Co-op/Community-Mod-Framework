@@ -6,7 +6,7 @@
 		ideology_abolitionist
 		ideology_humanitarian
 		ideology_usfp_abolitionist_radical #USFP
-		ideology_turkfm_ottomanist # GBBF
+		ideology_turkfm_ottomanist #GOTB
 	}
 	
 	disband_trigger = {
@@ -2018,7 +2018,7 @@ movement_socialist = {
 		ideology_anarchist
 		ideology_social_democrat
 		ideology_vanguardist
-		ideology_turkfm_vanguardist # GBBF
+		ideology_turkfm_vanguardist #GOTB
 	}
 	
 	creation_trigger = {

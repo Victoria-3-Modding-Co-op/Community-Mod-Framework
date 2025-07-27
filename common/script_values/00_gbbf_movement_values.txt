@@ -1,11 +1,5 @@
-turkfm_target_fraction_of_states_value = {
-	value = 0
-}
+turkfm_target_fraction_of_states_value = 0
 
-turkfm_movement_cultural_minority_secession_target_fraction_of_states_min = {
-	value = 0
-}
+turkfm_movement_cultural_minority_secession_target_fraction_of_states_min = 0
 
-turkfm_movement_religious_minority_secession_target_fraction_of_states_min = {
-	value = 0
-}
+turkfm_movement_religious_minority_secession_target_fraction_of_states_min = 0

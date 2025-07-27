@@ -547,11 +547,24 @@ movement_cultural_minority = {
 	}
 	
 	character_support_trigger = {
-		trigger_if = { #USFP: White Radical Abolitionists can join the Afro-American movement
+		trigger_if = { 
 			limit = {
 				is_usfp_active = yes
 			}
-			scope:culture = cu:afro_american
+			OR = {
+				culture = scope:culture
+				#USFP: White Radical Abolitionists can join the Afro-American movement, but only once Abolition is done
+				AND = {
+					scope:culture = cu:afro_american
+					owner = {
+						NOT = {
+							any_political_movement = {
+								is_political_movement_type = movement_anti_slavery
+							}
+						}
+					}
+				}
+			}
 		}	
 		trigger_else = {
 			culture = scope:culture

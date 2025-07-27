@@ -80,261 +80,263 @@
 		religion = scope:religion
 	}
 
-	pop_support_factors = {
-		movement_support_low_urbanization
-		movement_support_low_literacy
-		movement_support_clergymen
-		movement_support_aristocrats
-		movement_support_peasants
-		movement_support_corporatism_tech
-	}
+    pop_support_factors = {
+        movement_support_low_urbanization
+        movement_support_low_literacy
+        movement_support_clergymen
+        movement_support_aristocrats
+        movement_support_peasants
+        movement_support_corporatism_tech
+    }
 
-	pop_support_weight = {
-		if = {
-			limit = {
-				exists = scope:political_movement
-				scope:political_movement ?= {
-						OR = {
-							is_being_suppressed = yes
-							is_being_bolstered = yes
-					}
-				}
-			}
-			if = {
-				limit = {
-					scope:political_movement = {
-						is_being_suppressed = yes
-					}
-				}
-				add = {
-					value = suppression_base_value
-					multiply = {
-						value = -0.5
-						add = owner.modifier:country_suppression_attraction_factor
-					}
-					desc = "concept_suppressed"
-				}
-			}
-			else = {
-				add = {
-					value = bolstering_base_value
-					multiply = {
-						value = 0.5
-						add = owner.modifier:country_bolster_attraction_factor
-					}
-					desc = "concept_bolstered"
-				}
-			}
-		}
+    pop_support_weight = {
+        if = {
+            limit = {
+                exists = scope:political_movement
+                scope:political_movement ?= {
+                    OR = {
+                        is_being_suppressed = yes
+                        is_being_bolstered = yes
+                    }
+                }
+            }
+            if = {
+                limit = {
+                    scope:political_movement = {
+                        is_being_suppressed = yes
+                    }
+                }
+                add = {
+                    value = suppression_base_value
+                    multiply = {
+                        value = -0.5
+                        add = owner.modifier:country_suppression_attraction_factor
+                    }
+                    desc = "concept_suppressed"
+                }
+            }
+            else = {
+                add = {
+                    value = bolstering_base_value
+                    multiply = {
+                        value = 0.5
+                        add = owner.modifier:country_bolster_attraction_factor
+                    }
+                    desc = "concept_bolstered"
+                }
+            }
+        }
 
-		add = {
-			desc = "URBAN_STATE" # Increases support in rural states, decreases in urban
-			value = 0.5
-			subtract = state.state_urbanization_rate
-			multiply = 10
-		}
+        add = {
+            desc = "URBAN_STATE" # Increases support in rural states, decreases in urban
+            value = 0.5
+            subtract = state.state_urbanization_rate
+            multiply = 10
+        }
 
-		add = {
-			value = 10
-			desc = "POP_BASE_SUPPORT"
-		}
-		
-		if = {
-			limit = {
-				is_pop_type = clergymen
-			}
-			add = {
-				value = 45
-				desc = "POP_CLERGYMEN"
-			}
-		}
-		else_if = {
-			limit = {
-				is_pop_type = aristocrats
-			}
-			add = {
-				value = 15
-				desc = "POP_ARISTOCRATS"
-			}
-		}	
-		else_if = {
-			limit = {
-				is_pop_type = peasants
-			}
-			add = {
-				value = 10
-				desc = "POP_PEASANTS"
-			}
-		}	
+        add = {
+            value = 10
+            desc = "POP_BASE_SUPPORT"
+        }
 
-		add = { # Weakened by increasing literacy rates
-			desc = "POP_LITERACY"
-			this = {
-				value = literacy_rate
-				multiply = -2
-			}
-		}
+        if = {
+            limit = {
+                is_pop_type = clergymen
+            }
+            add = {
+                value = 45
+                desc = "POP_CLERGYMEN"
+            }
+        }
+        else_if = {
+            limit = {
+                is_pop_type = aristocrats
+            }
+            add = {
+                value = 15
+                desc = "POP_ARISTOCRATS"
+            }
+        }
+        else_if = {
+            limit = {
+                is_pop_type = peasants
+            }
+            add = {
+                value = 10
+                desc = "POP_PEASANTS"
+            }
+        }
 
-		if = { # Discriminated pops are less inclined to support the state church
-			limit = {
-				pop_acceptance < acceptance_status_5
-			}
-			multiply = {
-				desc = "POP_ACCEPTANCE"
-				value = pop_acceptance
-				divide = 100
-				add = 0.25						
-			}		
-		}
+        add = {
+            # Weakened by increasing literacy rates
+            desc = "POP_LITERACY"
+            this = {
+                value = literacy_rate
+                multiply = -2
+            }
+        }
 
-		if = {
-			limit = {
-				owner ?= {
-					has_technology_researched = corporatism
-				}
-			}
-			multiply = {
-				value = 1.5
-				desc = "CORPORATISM_TECH"
-			}
-		}
+        if = {
+            # Discriminated pops are less inclined to support the state church
+            limit = {
+                pop_acceptance < acceptance_status_5
+            }
+            multiply = {
+                desc = "POP_ACCEPTANCE"
+                value = pop_acceptance
+                divide = 100
+                add = 0.25
+            }
+        }
 
-		if = {
-			limit = {
-				owner ?= {
-					any_political_movement = {
-						is_political_movement_type = movement_legitimist
-					}
-				}
-			}
-			multiply = {
-				value = 0.25
-			}
-		}
-	}
-	
-	revolution = {	
-		weight = {
-			value = 100
-		}
+        if = {
+            limit = {
+                owner ?= {
+                    has_technology_researched = corporatism
+                }
+            }
+            multiply = {
+                value = 1.5
+                desc = "CORPORATISM_TECH"
+            }
+        }
 
-		state_weight = {
-			value = 1
+        if = {
+            limit = {
+                owner ?= {
+                    any_political_movement = {
+                        is_political_movement_type = movement_legitimist
+                    }
+                }
+            }
+            multiply = {
+                value = 0.25
+            }
+        }
+    }
 
-			if = {
-				limit = {
-					religion_percent_state = {
-						target = scope:political_movement.religion
-						value >= 0.75
-					}
-				}
-				add = 75
-			}
-			else_if = {
-				limit = {
-					religion_percent_state = {
-						target = scope:political_movement.religion
-						value >= 0.5
-					}
-				}
-				add = 50
-			}
-			else_if = {
-				limit = {
-					religion_percent_state = {
-						target = scope:political_movement.religion
-						value >= 0.25
-					}
-				}
-				add = 25
-			}
-			else_if = {
-				limit = {
-					religion_percent_state = {
-						target = scope:political_movement.religion
-						value >= 0.1
-					}
-				}
-				add = 10
-			}						
-		}
-	}
-	
-	secession = {
-		possible = {
-			political_movement_support >= 0.05
-			scope:clout <= 0
-		}
-		
-		weight = {
-			value = 1000
-		}
+    revolution = {
+        weight = {
+            value = 100
+        }
 
-		state_weight = {
-			value = 0
+        state_weight = {
+            value = 1
 
-			if = {
-				limit = {
-					religion_percent_state = {
-						target = scope:political_movement.religion
-						value >= 0.75
-					}
-				}
-				add = 250
-			}
-			else_if = {
-				limit = {
-					religion_percent_state = {
-						target = scope:political_movement.religion
-						value >= 0.5
-					}
-				}
-				add = 150
-			}
-			else_if = {
-				limit = {
-					religion_percent_state = {
-						target = scope:political_movement.religion
-						value >= 0.25
-					}
-				}
-				add = 50
-			}
-			else_if = {
-				limit = {
-					religion_percent_state = {
-						target = scope:political_movement.religion
-						value >= 0.1
-					}
-				}
-				add = 10
-			}			
-		}				
-	}	
-	
-	additional_radicalism_factors = {
-		if = {
-			limit = {
-				owner.ruler ?= {
-					NOT = { religion = root.religion }
-				}
-			}		
-			
-			add = {
-				value = 0.1
-				desc = "RULER_WRONG_RELIGION"
-			}			
-		}
-		
-		add = {
-			value = "owner.average_sol"
-			subtract = "owner.average_sol_for_religion(scope:religion)"
-			multiply = 0.05
-			max = 0.5
-			min = 0
-			desc = "STANDARD_OF_LIVING_FOR_RELIGION"
-		}
-	}
+            if = {
+                limit = {
+                    religion_percent_state = {
+                        target = scope:political_movement.religion
+                        value >= 0.75
+                    }
+                }
+                add = 75
+            }
+            else_if = {
+                limit = {
+                    religion_percent_state = {
+                        target = scope:political_movement.religion
+                        value >= 0.5
+                    }
+                }
+                add = 50
+            }
+            else_if = {
+                limit = {
+                    religion_percent_state = {
+                        target = scope:political_movement.religion
+                        value >= 0.25
+                    }
+                }
+                add = 25
+            }
+            else_if = {
+                limit = {
+                    religion_percent_state = {
+                        target = scope:political_movement.religion
+                        value >= 0.1
+                    }
+                }
+                add = 10
+            }
+        }
+    }
+
+    secession = {
+        possible = {
+            political_movement_support >= 0.05
+            scope:clout <= 0
+        }
+
+        weight = {
+            value = 1000
+        }
+
+        state_weight = {
+            value = 0
+
+            if = {
+                limit = {
+                    religion_percent_state = {
+                        target = scope:political_movement.religion
+                        value >= 0.75
+                    }
+                }
+                add = 250
+            }
+            else_if = {
+                limit = {
+                    religion_percent_state = {
+                        target = scope:political_movement.religion
+                        value >= 0.5
+                    }
+                }
+                add = 150
+            }
+            else_if = {
+                limit = {
+                    religion_percent_state = {
+                        target = scope:political_movement.religion
+                        value >= 0.25
+                    }
+                }
+                add = 50
+            }
+            else_if = {
+                limit = {
+                    religion_percent_state = {
+                        target = scope:political_movement.religion
+                        value >= 0.1
+                    }
+                }
+                add = 10
+            }
+        }
+    }
+
+    additional_radicalism_factors = {
+        if = {
+            limit = {
+                owner.ruler ?= {
+                    NOT = { religion = root.religion }
+                }
+            }
+
+            add = {
+                value = 0.1
+                desc = "RULER_WRONG_RELIGION"
+            }
+        }
+
+        add = {
+            value = "owner.average_sol"
+            subtract = "owner.average_sol_for_religion(scope:religion)"
+            multiply = 0.05
+            max = 0.5
+            min = 0
+            desc = "STANDARD_OF_LIVING_FOR_RELIGION"
+        }
+    }
 }
 
 movement_religious_minority = {
@@ -358,25 +360,25 @@ movement_religious_minority = {
 	}
 	on_created = {}
 
-	disband_trigger = {
-		OR = {
-			scope:political_movement ?= {
-				religion = {
-					is_state_religion = root
-				}
-				root = {
-					religion_percent_country = {
-						target = scope:political_movement.religion
-						value <= 0.08
-					}
-				}
-			}
-			AND = {
-				c:BIC ?= this
-				has_technology_researched = pan-nationalism
-			}
-		}
-	}
+    disband_trigger = {
+        OR = {
+            scope:political_movement ?= {
+                religion = {
+                    is_state_religion = root
+                }
+                root = {
+                    religion_percent_country = {
+                        target = scope:political_movement.religion
+                        value <= 0.08
+                    }
+                }
+            }
+            AND = {
+                c:BIC ?= this
+                has_technology_researched = pan-nationalism
+            }
+        }
+    }
 
 	on_disbanded = {
 		if = {
@@ -487,15 +489,15 @@ movement_religious_minority = {
 		religion = scope:religion
 	}
 
-	pop_support_factors = {
-		movement_support_poverty
-		movement_support_low_literacy
-		movement_support_religious_discrimination
-		movement_support_clergymen
-		movement_support_aristocrats
-		movement_support_peasants
-		movement_support_corporatism_tech
-	}
+    pop_support_factors = {
+        movement_support_poverty
+        movement_support_low_literacy
+        movement_support_religious_discrimination
+        movement_support_clergymen
+        movement_support_aristocrats
+        movement_support_peasants
+        movement_support_corporatism_tech
+    }
 
 	pop_support_weight = {
 		if = {
@@ -773,11 +775,11 @@ movement_religious_minority = {
 			desc = "STANDARD_OF_LIVING_FOR_RELIGION"
 		}
 
-		subtract = {
-			value = 0.5
-			subtract = political_movement_identity_support
-			min = 0
-			desc = "LOW_MOVEMENT_IDENTITY_SUPPORT"
-		}
-	}
+        subtract = {
+            value = 0.5
+            subtract = political_movement_identity_support
+            min = 0
+            desc = "LOW_MOVEMENT_IDENTITY_SUPPORT"
+        }
+    }
 }

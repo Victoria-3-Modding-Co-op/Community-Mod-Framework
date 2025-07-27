@@ -18,7 +18,7 @@ on:
       publish:
         description: 'Publish on Workshop'
         required: false
-        default: 'false'
+        default: 'true'
         type: choice
         options:
           - 'true'
@@ -157,7 +157,7 @@ jobs:
 
       - name: Setup SteamCMD
         if: ${{ inputs.publish == 'true' }}
-        uses: buildalon/setup-steamcmd@v1.0.4
+        uses: CyberAndrii/setup-steamcmd@v1
 
         # Publish to steam workshop
         # Uses generated metadata and configured workshop user

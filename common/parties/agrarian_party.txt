@@ -327,14 +327,24 @@ agrarian_party = {
 					}
 				}
 				if = { #pro-slaver
-					limit = { leader = { has_ideology = ideology:ideology_slaver } }
+					limit = { 
+						leader = { has_ideology = ideology:ideology_slaver }
+						NOT = {
+							owner = { has_law = law_type:law_slavery_banned }
+						} 
+					}
 					add = {
 						value = 100
 						desc = "from_slaver_leader"
 					}					
 				}	
 				else_if = {
-					limit = { leader = { character_is_anti_slavery = yes } }
+					limit = { 
+						leader = { character_is_anti_slavery = yes }
+						NOT = {
+							owner = { has_law = law_type:law_slavery_banned }
+						}  
+					}
 					add = {
 						value = -100
 						desc = "from_abolitionist_leader"

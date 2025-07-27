@@ -1,7 +1,9 @@
 ﻿##########################
 # COMMUNITY MOD TRIGGERS #
 ##########################
-# USAGE:
+# FILE USAGE:
+# DO NOT copy this file into your mod.
+#
 # If a mod contained in this file is not loaded, its trigger will return false.
 #
 # If any of the compatibility triggers in this file belong to an active mod, the trigger definition from this file should be overwritten by the one from that mod.
@@ -10,9 +12,11 @@
 #  
 # morgenrote_is_active = {
 #		always = yes
-# {
+# }
 #
 # Make sure your scripted trigger file is loaded AFTER this one. You can do this by adding zz_ to the filename.
+#
+# Your scripted trigger files goes in the /common/scripted_triggers folder of your mod.
 #
 
 anno1836_is_active = { # Anno 1836

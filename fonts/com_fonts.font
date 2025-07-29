@@ -1,0 +1,67 @@
+fontfiles = {
+    name = "com_handwritten_letter_regular"
+    always_load = yes
+
+    group = {
+        languages = { "l_english" "l_braz_por" "l_french" "l_german" "l_polish" "l_russian" "l_spanish" "l_turkish" }
+        files = {
+            "fonts/com_fonts/HomemadeApple-Regular.ttf"
+            "fonts/com_fonts/KimjungchulScript-Regular.ttf"
+			"fonts/com_fonts/KimjungchulScript-Regular.ttf"
+            "fonts/com_fonts/KimjungchulScript-Regular.ttf"
+            "fonts/com_fonts/KimjungchulScript-Regular.ttf"
+        }
+    }
+
+    group = {
+        languages = { "l_simp_chinese" }
+        files = {
+            "fonts/com_fonts/gangjian-handwriting.ttf"
+            "fonts/com_fonts/gangjian-handwriting.ttf"
+			"fonts/com_fonts/gangjian-handwriting.ttf"
+            "fonts/com_fonts/gangjian-handwriting.ttf"
+            "fonts/com_fonts/gangjian-handwriting.ttf"
+        }
+    }
+
+    group = {
+        languages = { "l_japanese" }
+        files = {
+            "fonts/com_fonts/japanese.ttf"
+            "fonts/com_fonts/KimjungchulScript-Regular.ttf"
+			"fonts/com_fonts/KimjungchulScript-Regular.ttf"
+            "fonts/com_fonts/KimjungchulScript-Regular.ttf"
+            "fonts/com_fonts/KimjungchulScript-Regular.ttf"
+        }
+    }
+
+    group = {
+        languages = { "l_korean" }
+        files = {
+            "fonts/com_fonts/KimjungchulScript-Regular.ttf" # GunglipbakmulgwanClassicM is used for ParadoxVictorian in Korean.
+            "fonts/com_fonts/KimjungchulScript-Regular.ttf"
+			"fonts/com_fonts/KimjungchulScript-Regular.ttf"
+            "fonts/com_fonts/KimjungchulScript-Regular.ttf"
+            "fonts/com_fonts/KimjungchulScript-Regular.ttf"
+        }
+    }
+}
+
+font = {
+    name = "ComHandwrittenLetter"
+
+    fontstyle = {
+        style = regular
+        fontfiles = "com_handwritten_letter_regular"
+    }
+
+    fontstyle = {
+        style = italic
+        fontfiles = "com_handwritten_letter_regular"
+    }
+
+    fontstyle = {
+        style = bold
+        fontfiles = "com_handwritten_letter_regular"
+    }
+}

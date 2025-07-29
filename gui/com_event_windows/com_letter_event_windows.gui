@@ -1,0 +1,390 @@
+######################################
+# COMMUNITY GUI MODDED EVENT WINDOWS #
+######################################
+
+
+types com_window_types {
+
+    type com_event_window_letter_simple = default_popup_two_lines {
+        block "event_name" {
+            name = "com_event_window_letter_simple"
+        }
+        datacontext = "[EventWindow.GetEvent]"
+
+        alpha = 0
+
+        block "additional_button" {}
+
+        blockoverride "minimize" {
+            minimize_button_large = {
+                onclick = "[PopupManager.HideOpenEvent(Event.Self)]"
+                parentanchor = center
+                shortcut = "close_window"
+            }
+        }
+        blockoverride "header_close_button_visibility" {
+            visible = yes
+        }
+
+        blockoverride "window_header_name" {
+            raw_text = "#BOLD [EventWindow.GetTitle]#!"
+        }
+        blockoverride "content" {}
+
+        blockoverride "second_text" {
+            text = "EVENT_WINDOW_EVENT_LOCATION"
+        }
+
+        blockoverride "goto_visibility" {
+            visible = yes
+        }
+
+        blockoverride "goto_properties" {
+            onclick = "[EventWindow.AccessEvent.AccessState.ZoomToCapital]"
+            tooltip = "ZOOM_TO_EVENT_WINDOW_STATE"
+            enabled = "[Not( EventWindow.AccessEvent.AccessState.IsZoomingToCapital )]"
+        }
+
+        state = {
+            trigger_on_create = yes
+            name = 1
+            duration = 0.3
+            using = Animation_Curve_EaseOut
+            alpha = 1
+            using = Snapshot_Mute_World_100
+            using = Snapshot_Mute_Vfx_War_100
+            start_sound = {
+                soundeffect = "[Event.GetOnOpenedSoundEvent]"
+            }
+        }
+
+        ### SETTING SIZE OF WINDOW
+        flowcontainer = {
+            resizeparent = yes
+            margin = { 10 0 }
+            margin_bottom = 25
+
+            ### VIDEO/IMAGE + TEXT/OPTIONS
+            container = {
+                ### HEADER FLAGS / PORTRAITS / ICONS
+                event_icon = {
+                    position = { 20 0 }
+                    datacontext = "[Event.GetIcon('minor_left_icon')]"
+                }
+                event_icon = {
+                    parentanchor = right
+                    position = { -25 0 }
+                    datacontext = "[Event.GetIcon('minor_right_icon')]"
+                }
+
+                container = {
+                    minimumsize = { 200 -1 }
+                    position = { 0 70 }
+
+                    ### TITLE / TEXT / OPTIONS
+                    flowcontainer = {
+                        minimumsize = { -1 -1 }
+                        direction = vertical
+                        spacing = 20
+                        parentanchor = right|vcenter
+                        margin = { 40 50 }
+
+                        block "text_background" {
+                            background = {
+                                using = entry_bg_simple_solid
+                                margin = { -15 -20 }
+                            }
+                        }
+
+                        textbox = {
+                            name = "description"
+                            multiline = yes
+                            autoresize = yes
+                            minimumsize = { 500 -1 }
+                            maximumsize = { 520 -1 }
+                            parentanchor = top|hcenter
+                            align = hcenter|nobaseline
+                            text = "[EventWindow.GetDescription]"
+                            block "text_format_description" {
+                                #default_format = "#bold"
+                            }
+                            margin = { 10 0 }
+                            using = fontsize_large
+                        }
+
+
+                        block "text_divider" {
+                            divider_decorative = {
+                                minimumsize = { 480 -1 }
+                                maximumsize = { 480 -1 }
+                            }
+                        }
+
+                        block "text_flavor" {
+                            textbox = {
+                                name = "flavortext"
+                                multiline = yes
+                                autoresize = yes
+                                minimumsize = { 500 -1 }
+                                maximumsize = { 500 -1 }
+                                parentanchor = top|hcenter
+                                block "text_format_flavor" {
+                                    default_format = "#lore"
+                                }
+                                align = top|left
+                                text = "[EventWindow.GetFlavor]"
+                                margin = { 30 10 }
+                            }
+                        }
+
+                        block "text_button_spacing" {
+                            widget = { size = { 20 10 }}
+                        }
+
+                        flowcontainer = {
+                            direction = vertical
+                            using = default_list_position
+                            datamodel = "[EventWindow.GetOptions]"
+                            spacing = 5
+                            margin_bottom = 10
+
+                            item = {
+                                container = {
+
+                                    widget = {
+                                        visible = "[EventOption.IsHighlightedOption]"
+
+                                        button = {
+                                            size = { 96% 100% }
+                                            parentanchor = hcenter
+                                            using = default_button_primary_action
+                                            onclick = "[EventOption.Select]"
+                                            tooltip = "[EventOption.GetDesc]"
+                                            using = tooltip_ws
+                                            enabled = "[EventOption.IsEnabled]"
+                                            using = confirm_button_sound
+                                        }
+
+                                        textbox = {
+                                            resizeparent = yes
+                                            minimumsize = { 500 42 }
+                                            maximumsize = { 500 -1 }
+                                            text = "[EventOption.GetText]"
+                                            multiline = yes
+                                            align = hcenter|nobaseline
+                                            autoresize = yes
+                                            margin = { 30 10 }
+                                        }
+                                    }
+
+                                    widget = {
+                                        visible = "[Not(EventOption.IsHighlightedOption)]"
+
+                                        button = {
+                                            size = { 96% 100% }
+                                            parentanchor = hcenter
+                                            using = default_button_action
+                                            onclick = "[EventOption.Select]"
+                                            tooltip = "EVENT_OPTION_TOOLTIP"
+                                            using = tooltip_ws
+                                            enabled = "[EventOption.IsEnabled]"
+                                            using = confirm_button_sound
+                                        }
+
+                                        textbox = {
+                                            resizeparent = yes
+                                            minimumsize = { 500 42 }
+                                            maximumsize = { 500 -1 }
+                                            text = "[EventOption.GetText]"
+                                            multiline = yes
+                                            align = hcenter|nobaseline
+                                            autoresize = yes
+                                            margin = { 30 10 }
+                                        }
+
+                                        ### Time until the default option will be picked
+                                        round_progress_default = {
+                                            visible = "[EventOption.IsDefaultOption]"
+                                            parentanchor = right|vcenter
+                                            position = { 0 0.5 }
+                                            size = { 27 27 }
+                                            tooltip = "DEFAULT_EVENT_OPTION"
+                                            value = "[Event.GetPercentageRemainingDays]"
+
+                                            icon = {
+                                                size = { 26 26 }
+                                                position = { -0.2 -0.2 }
+                                                parentanchor = center
+                                                texture = "gfx/interface/icons/generic_icons/event_default_option.dds"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        # button = {
+                        #     parentanchor = hcenter
+                        #     visible = "[InDebugMode]"
+                        #     size = { 480 62 }
+                        #     using = default_button
+                        #     raw_text = "DEBUG: Open Event in text editor"
+                        #     onclick = "[EventWindow.AccessEvent.OpenInEditor]"
+                        # }
+                        #
+                        # textbox = {
+                        #     background = {
+                        #         using = default_background
+                        #     }
+                        #     parentanchor = hcenter
+                        #     size = { 480 62 }
+                        #     visible = "[InDebugMode]"
+                        #     raw_text = "DEBUG: Trigger description"
+                        #     tooltip = "[Event.GetTriggerDesc]"
+                        #     align = hcenter|nobaseline
+                        # }
+                        #
+                        # textbox = {
+                        #     visible = [InDebugMode]
+                        #     parentanchor = hcenter
+                        #     align = hcenter
+                        #     raw_text = "Event ID: [Event.GetKey|v]"
+                        # }
+                    }
+
+                    ### CONTENT DESIGNATION ICON
+                    flowcontainer = {
+                        visible = "[Event.IsDLCContent]"
+                        tooltip = "EVENT_DLC_TOOLTIP"
+                        spacing = 10
+                        parentanchor = bottom|left
+                        position = { 25 0 }
+
+                        icon = {
+                            size = { 40 40 }
+                            texture = "gfx/interface/backgrounds/round_frame_dec.dds"
+                            parentanchor = bottom|left
+
+                            icon = {
+                                size = { 40 40 }
+                                position = { 3 -3 }
+
+                                texture = "[Event.GetDLCIcon]"
+                                parentanchor = center
+
+                            }
+                        }
+
+                        textbox = {
+                            size = { 150 20 }
+                            align = left|vcenter
+                            parentanchor = left|vcenter
+                            elide = right
+                            using = fontsize_large
+                            fontsize_min = 12
+                            alpha = 0.7
+                            block "text_format_dlc" {}
+
+                            text = "[Event.GetDLCName]"
+                        }
+                    }
+
+                }
+            }
+        }
+    }
+
+    type com_event_window_letter_image = com_event_window_letter_simple {
+        blockoverride "event_name" {
+            name = "com_event_window_letter_image"
+        }
+        blockoverride "text_background" {
+            background = {
+                using = entry_bg_simple_solid
+                margin = { -15 -20 }
+            }
+            background = {
+                visible = "[Event.HasTexture]"
+                texture = "[Event.GetTexture]"
+                alpha = 0.5
+
+                spriteType = Corneredtiled
+                spriteborder = { 0 0 }
+
+                modify_texture = {
+                    texture = "gfx/interface/masks/fade_vertical_center.dds"
+                    spriteType = Corneredstretched
+                    spriteborder = { 0 0 }
+                    blend_mode = alphamultiply
+                }
+
+                modify_texture = {
+                    texture = "gfx/interface/masks/fade_horizontal_center.dds"
+                    spriteType = Corneredstretched
+                    spriteborder = { 0 0 }
+                    blend_mode = alphamultiply
+                }
+            }
+        }
+    }
+
+    type com_event_window_letter_paper = com_event_window_letter_simple {
+        blockoverride "event_name" {
+            name = "com_event_window_letter_paper"
+        }
+        blockoverride "text_background" {
+            background = {
+                using = paper_bg_light
+                margin = { -30 -30 }
+            }
+        }
+        blockoverride "text_flavor" {
+            textbox = {
+                visible = "[Not(GetVariableSystem.Exists('com_letter_simple'))]"
+                name = "flavortext_fancy"
+                multiline = yes
+                autoresize = yes
+                minimumsize = { 480 -1 }
+                maximumsize = { 480 -1 }
+                parentanchor = top|hcenter
+                default_format = "#com_handwritten_letter"
+                align = top|left
+                text = "[EventWindow.GetFlavor]"
+                margin = { 30 10 }
+            }
+            textbox = {
+                visible = "[GetVariableSystem.Exists('com_letter_simple')]"
+                name = "flavortext_clean"
+                multiline = yes
+                autoresize = yes
+                minimumsize = { 480 -1 }
+                maximumsize = { 480 -1 }
+                parentanchor = top|hcenter
+                default_format = "#com_letter"
+                align = top|left
+                text = "[EventWindow.GetFlavor]"
+                margin = { 30 10 }
+            }
+        }
+        blockoverride "additional_button" {
+            button_icon_round = {
+                parentanchor = top|right
+                position = { -40 45 }
+                size = { 30 30 }
+                onclick = "[GetVariableSystem.Toggle('com_letter_simple')]"
+
+                blockoverride "icon" {
+                    texture = "gfx/interface/buttons/button_icons/reset.dds"
+                }
+            }
+        }
+        blockoverride "text_format_dlc" {
+            default_format = "#white;bold;shadow"
+        }
+        blockoverride "text_divider" {}
+        blockoverride "text_button_spacing" {}
+        blockoverride "text_format_description" {
+            default_format = "#com_letter_black;bold"
+        }
+    }
+}

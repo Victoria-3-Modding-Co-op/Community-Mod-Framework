@@ -1,0 +1,19 @@
+﻿textformatting = {
+
+    # Handwritten Letter
+    format = {
+        name = com_handwritten_letter
+        format = "size:14;FONT:ComHandwrittenLetter;com_letter_black"
+    }
+
+    # Transcribed Letter
+    format = {
+        name = com_letter
+        format = "size:17;com_letter_black"
+    }
+
+    format = {
+        name = com_letter_black
+        format = "color:{ 0.25, 0.25, 0.25}"
+    }
+}

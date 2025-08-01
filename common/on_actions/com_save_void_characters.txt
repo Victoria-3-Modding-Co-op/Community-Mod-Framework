@@ -13,6 +13,7 @@ on_com_save_structs = {
 		}
 		if = {
 			limit = {
+				exists = scope:com_internal_prestige_leader
 				NOT = {
 					global_var:com_internal_prestige_leader_old ?= scope:com_internal_prestige_leader
 				}
@@ -21,10 +22,23 @@ on_com_save_structs = {
 				limit = {
 					has_variable = is_struct
 					NOT = {
-						owner = scope:com_internal_prestige_leader
+						scope:com_internal_prestige_leader ?= owner
 					}
 				}
 				transfer_character = scope:com_internal_prestige_leader
+				set_variable = memento_mori_immunity
+				if = {
+					limit = {
+						is_in_void = no
+					}
+					place_character_in_void = 10000
+				}
+				if = {
+					limit = {
+						is_immortal = no
+					}
+					set_character_immortal = yes
+				}
 			}
 			set_global_variable = {
 				name = com_internal_prestige_leader_old

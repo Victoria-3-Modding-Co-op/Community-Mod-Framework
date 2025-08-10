@@ -720,7 +720,7 @@ types journal_entry_overwrites {
 				blockoverride "text" {}
 				parentanchor = hcenter
 				textbox = {
-					text = "[Character.GetFullNameNoFormatting]"
+					text = "[Character.GetCustom('GetUniversalFullNameNoFormatting')]"
 					parentanchor = vcenter|hcenter
 					position = { 0 -2 }
 					autoresize = yes

@@ -1309,7 +1309,7 @@ types com_character_window_types {
 			blockoverride "text" {}
 			parentanchor = top
 			textbox = {
-				text = "[Character.GetFullNameNoFormatting]"
+				text = "[Character.GetCustom('GetUniversalFullNameNoFormatting')]"
 				parentanchor = vcenter|hcenter
 				position = { 0 -2 }
 				autoresize = yes

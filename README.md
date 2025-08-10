@@ -34,6 +34,7 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=3385002128
 * [Weekly Event Framework](#weekly-event-framework)
 * [Hide/Show Journal Entry Groups](#hideshow-journal-entry-groups)
 * [Formation Event Blocker](#formation-event-blocker)
+* [Built-In Universal Names Compatibility](#built-in-universal-names-compatibility)
 
 # Setting Dependency
 
@@ -558,3 +559,28 @@ To allow formation events again, simply remove the variable.
 Notes:
 1. No considerations have been made regarding any failsafes. You are solely responsible for unblocking formation events later, even if the country successfully completes additional formations.
 2. Changing country via the `change_tag` effect will **not** remove the `com_no_formation_events`variable.
+
+# Built-In Universal Names Compatibility
+
+CMF sets up seamless compatibility with [FUN's Universal Names mod](https://steamcommunity.com/sharedfiles/filedetails/?id=2880875193) for its own use in certain GUI windows, but it can be used by any other mods as well.
+
+The Universal Names mod, among a few other things, corrects the display of full names for characters belonging to cultures whose full name order is `Last-First`, as opposed to `First-Last`, improving the presentation of relevant cultures, especially East Asian characters or Hungarians.
+
+Universal Names works by replacing `Character.GetFullName` calls in GUI and localization with a call to a customizable localization it defines. CMF defines clones of these custom locs in a manner that allows UN to overwrite them if UN is enabled; otherwise, CMF's definitions provide a fallback to the equivalent datafunctions. This allows seamless compatibility with compliant text - any applicable characters will either have their names displayed identically to vanilla, or their names will be fixed if the user has UN installed without any additional actions required on the user's part.
+
+In the interest of promoting this improved user experience, it is recommended to use the Universal Names custom locs for printing full names in any journals, events, GUIs, etc. whenever they are used. Below is a list of all the vanilla name datafunctions and their Universal Names custom locs counterparts which CMF provides seamless compatibility for:
+```
+Character.GetFullName                      => Character.GetCustom('GetUniversalFullName')
+Character.GetFullNameNoFormatting          => Character.GetCustom('GetUniversalFullNameNoFormatting')
+Character.GetFullNameWithTitle             => Character.GetCustom('GetUniversalFullNameWithTitle')
+Character.GetFullNameWithTitleNoFormatting => Character.GetCustom('GetUniversalFullNameWithTitleNoFormatting')
+Character.GetPrimaryRoleTitle              => Character.GetCustom('GetUniversalTitle')
+```
+Simple localization usage example:
+```
+original_text: "Hello, my name is [Character.GetFullNameNoFormatting]"
+improved_text: "Hello, my name is [Character.GetCustom('GetUniversalFullNameNoFormatting')]"
+```
+Consider a Korean character whose name in the real world would be written as `Yi Sun-sin`. Korean names are `Last-First` names, so `Sun-sin` is the given name and `Yi` is the surname.
+- With `original_text`, it would render as `Hello, my name is Sun-sin Yi`. In reality this would be *incorrect*.
+- With `improved_text`, it would render as `Hello, my name is Yi Sun-sin`. This is correct and improves character flavor!

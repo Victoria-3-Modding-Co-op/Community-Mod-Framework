@@ -11,6 +11,8 @@
 @panel_width_plus_30 = 570			# used to be 490
 @panel_width_plus_70 = 610			# used to be 530
 
+@COM_panel_width_plus_20_half = @[panel_width_plus_20 / 2]
+
 types journal_entry_overwrites {
 	type journal_entry_panel = default_block_window {
 		name = "journal_entry_panel"
@@ -689,11 +691,11 @@ types journal_entry_overwrites {
 		block "character_context" {}
 
 		block "character_size" {
-			size = { @panel_width_half 290 }
+			size = { @COM_panel_width_plus_20_half 290 }
 		}
 
 		widget = {
-			size = { @panel_width_half 290 }
+			size = { @COM_panel_width_plus_20_half 290 }
 			parentanchor = hcenter
 
 			# Character Tooltip
@@ -722,7 +724,7 @@ types journal_entry_overwrites {
 					parentanchor = vcenter|hcenter
 					position = { 0 -2 }
 					autoresize = yes
-					max_width = @panel_width_half
+					max_width = @COM_panel_width_plus_20_half
 					using = fontsize_large
 				}
 			}
@@ -789,7 +791,7 @@ types journal_entry_overwrites {
 					visible = "[IsOdd_int32(GetDataModelSize(JournalEntry.MakeScope.GetList('com_journal_characters')))]"
 				}
 				blockoverride "character_size" {
-					size = { @panel_width 290 }
+					size = { @panel_width_plus_20 290 }
 				}
 			}
 		}

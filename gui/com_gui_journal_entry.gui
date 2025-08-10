@@ -731,6 +731,8 @@ types journal_entry_overwrites {
 			flowcontainer = {
 				position = { 180 50 }
 				margin = { 10 10 }
+				visible = "[Character.MakeScope.Var('com_opinion').IsSet]"
+
 				tooltipwidget = {
 					RegularTooltip = {
 						blockoverride "text" {

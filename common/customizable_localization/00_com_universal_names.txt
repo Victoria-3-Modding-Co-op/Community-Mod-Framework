@@ -1,0 +1,49 @@
+﻿# Custom loc definitions to enable seamless compatibility with FUN's Universal Names mod
+# https://steamcommunity.com/sharedfiles/filedetails/?id=2880875193
+
+# GetUniversalHistoricalFigures and GetUniversalHistoricalFiguresFormatted are deprecated, so they are not supported
+
+GetUniversalFullName = {
+	type = character
+	random_valid = no
+
+	text = {
+		localization_key = com_universal_names_full_name
+	}
+}
+
+GetUniversalFullNameNoFormatting = {
+	type = character
+	random_valid = no
+
+	text = {
+		localization_key = com_universal_names_full_name_no_fmt
+	}
+}
+
+GetUniversalFullNameWithTitle = {
+	type = character
+	random_valid = no
+
+	text = {
+		localization_key = com_universal_names_full_name_w_title
+	}
+}
+
+GetUniversalFullNameWithTitleNoFormatting = {
+	type = character
+	random_valid = no
+
+	text = {
+		localization_key = com_universal_names_full_name_w_title_no_fmt
+	}
+}
+
+GetUniversalTitle = {
+	type = character
+	random_valid = no
+
+	text = {
+		localization_key = com_universal_names_title
+	}
+}

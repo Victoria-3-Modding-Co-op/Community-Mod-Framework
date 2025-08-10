@@ -14,7 +14,7 @@
 @COM_panel_width_plus_20_half = @[panel_width_plus_20 / 2]
 
 types journal_entry_overwrites {
-	type journal_entry_panel = default_block_window {
+	type journal_entry_panel = default_block_window_two_lines {
 		name = "journal_entry_panel"
 		datacontext = "[JournalEntryPanel.AccessJournalEntry]"
 
@@ -29,7 +29,7 @@ types journal_entry_overwrites {
 		
 		blockoverride "window_header_name"
 		{
-			text = "[JournalEntry.GetName]"
+			text = "[LabelingHelper.CapitalizeOnlyFirst(JournalEntry.GetName)]"
 		}
 
 		blockoverride "window_header_name_line_two" {

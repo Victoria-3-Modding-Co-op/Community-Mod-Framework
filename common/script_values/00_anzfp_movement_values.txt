@@ -1,0 +1,15 @@
+﻿anzfp_movement_anti_slavery_mult = {
+	if = {
+		limit = {
+			anzfp_is_active = yes
+			owner ?= {
+				country_has_primary_culture = cu:australian
+				has_law = law_type:law_debt_slavery
+			}
+		}
+		value = 3.5
+	}
+	else = {
+		value = 1
+	}
+}

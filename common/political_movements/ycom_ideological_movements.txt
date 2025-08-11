@@ -256,18 +256,10 @@
 			}
 		}
 
-		if = { # ANZFP
-			limit = {
-				anzfp_is_active = yes
-				owner = {
-					country_has_primary_culture = cu:australian
-					has_law = law_type:law_debt_slavery
-				}
-			}
-			multiply = {
-				value = 3.5
-				desc = "anz_antitransportation"
-			}
+		# ANZFP
+		multiply = {
+			value = anzfp_movement_anti_slavery_mult
+			desc = "anz_antitransportation"				# Desc only shows when value =/= 1
 		}
 
 		multiply = { # Illiterate pops participate at 1/10 the rate of fully literate pops
@@ -287,19 +279,12 @@
 				value = 2.0
 			}
 		}
-		#USFP: Human Rights tech doubles abolition support
-		if = {
-			limit = {
-				owner ?= {
-					is_usfp_active = yes
-					has_technology_researched = human_rights
-				}
-			}
-			multiply = {
-				desc = "human_rights"
-				value = 2.0
-			}
-		}
+		
+		# USFP
+		multiply = {
+			value = usfp_movement_anti_slavery_pop_support_mult
+			desc = "human_rights"					# Desc only shows when value =/= 1
+		}	
 	}
 
 	revolution = {
@@ -470,19 +455,11 @@
 				desc = "je_acw_countdown"
 			}
 		}
-		#USFP: By the time you have Human Rights tech slavery should really be getting abolished
-		if = {
-			limit = {
-				owner ?= {
-					is_usfp_active = yes
-					has_technology_researched = human_rights
-				}
-			}
-			add = {
-				desc = "human_rights"
-				value = 0.2
-			}
-		}		
+		# USFP
+		add = {
+			value = usfp_movement_anti_slavery_additional_radicalism_add
+			desc = "human_rights"
+		}
 	}
 }
 

@@ -1,4 +1,4 @@
-﻿anzfp_movement_anti_slavery_mult = {
+﻿anzfp_movement_anti_slavery_pop_support_mult = {
 	if = {
 		limit = {
 			anzfp_is_active = yes
@@ -10,6 +10,47 @@
 		value = 3.5
 	}
 	else = {
-		value = 1
+		value = 1	# Mult no change
+	}
+}
+
+anzfp_movement_pro_slavery_pop_support_add = {
+	if = {
+		limit = {
+			anzfp_is_active = yes
+		}
+		if = {
+			limit = {
+				is_pop_type = farmers
+				owner = {
+					country_has_primary_culture = cu:australian
+					has_law = law_type:law_debt_slavery
+				}
+			}
+			value = -18 #compensate, -3
+		}
+		else_if = {
+			limit = {
+				is_pop_type = laborers
+				owner = {
+					country_has_primary_culture = cu:australian
+					has_law = law_type:law_debt_slavery
+				}
+			}
+			value = -9
+		}
+		else_if = {
+			limit = {
+				is_pop_type = peasants
+				owner = {
+					country_has_primary_culture = cu:australian
+					has_law = law_type:law_debt_slavery
+				}
+			}
+			value = -6
+		}
+	}
+	else = {
+		value = 0	# Add no change
 	}
 }

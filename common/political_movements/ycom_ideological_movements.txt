@@ -258,7 +258,7 @@
 
 		# ANZFP
 		multiply = {
-			value = anzfp_movement_anti_slavery_mult
+			value = anzfp_movement_anti_slavery_pop_support_mult
 			desc = "anz_antitransportation"				# Desc only shows when value =/= 1
 		}
 
@@ -283,7 +283,7 @@
 		# USFP
 		multiply = {
 			value = usfp_movement_anti_slavery_pop_support_mult
-			desc = "human_rights"					# Desc only shows when value =/= 1
+			desc = "human_rights"						# Desc only shows when value =/= 1
 		}	
 	}
 
@@ -458,7 +458,7 @@
 		# USFP
 		add = {
 			value = usfp_movement_anti_slavery_additional_radicalism_add
-			desc = "human_rights"
+			desc = "human_rights"						# Desc only shows when value =/= 0
 		}
 	}
 }
@@ -566,50 +566,10 @@ movement_pro_slavery = {
 			value = 9
 			desc = "SLAVE_STATE"
 		}
-
-		if = {	# ANZFP
-			limit = {
-				anzfp_is_active = yes
-			}
-			if = {
-				limit = {
-					is_pop_type = farmers
-					owner = {
-						country_has_primary_culture = cu:australian
-						has_law = law_type:law_debt_slavery
-					}
-				}
-				add = {
-					value = -18 #compensate, -3
-					desc = "anz_antitransportation"
-				}
-			}
-			else_if = {
-				limit = {
-					is_pop_type = laborers
-					owner = {
-						country_has_primary_culture = cu:australian
-						has_law = law_type:law_debt_slavery
-					}
-				}
-				add = {
-					value = -9
-					desc = "anz_antitransportation"
-				}
-			}
-			else_if = {
-				limit = {
-					is_pop_type = peasants
-					owner = {
-						country_has_primary_culture = cu:australian
-						has_law = law_type:law_debt_slavery
-					}
-				}
-				add = {
-					value = -6
-					desc = "anz_antitransportation"
-				}
-			}
+		# ANZFP
+		add = {
+			value = anzfp_movement_pro_slavery_pop_support_add
+			desc = "anz_antitransportation"				# Desc only shows when value =/= 0
 		}
 
 		if = {
@@ -796,23 +756,6 @@ movement_pro_slavery = {
 				limit = { 
 					owner ?= { has_journal_entry = je_acw_countdown }
 				}
-
-				#USFP: Deep South and Upper South more inclined to join
-				if = {
-					limit = {
-						is_usfp_active = yes
-						has_modifier = usfp_deep_south_modifier
-					}
-					multiply = 5.0
-				}
-				if = {
-					limit = {
-						is_usfp_active = yes
-						has_modifier = usfp_upper_south_modifier
-					}
-					multiply = 2.0
-				}
-				
 				if = { # Ensure the union retains Washington DC/Maryland/Delaware in case of southern secession
 					limit = {
 						OR = {
@@ -831,21 +774,9 @@ movement_pro_slavery = {
 					
 					multiply = 10.0
 				}
-				else_if = { #USFP: West Virginia goes with real Virginia
-					limit = {
-						is_usfp_active = yes
-						state_region = s:STATE_WEST_VIRGINIA
-					}
-					multiply = 10.0
+				else = {
+					multiply = usfp_movement_pro_slavery_secession_state_weight_mult
 				}
-				#USFP: Missouri is less likely
-				else_if = {
-					limit = {
-						is_usfp_active = yes 
-						state_region = s:STATE_MISSOURI
-					}
-					multiply = 0.5
-				}	
 			}	
 		}	
 	}
@@ -934,25 +865,11 @@ movement_pro_slavery = {
 				desc = "je_acw_countdown"
 			}
 		}
-		#USFP: Powerful IG with anti-slavery leader spooks the slavers
-		if = {
-			limit = {
-				owner ?= {
-					is_usfp_active = yes
-					usfp_country_is_american = yes
-					any_interest_group = {
-						is_powerful = yes
-						leader = {
-							character_is_anti_slavery = yes
-						}
-					}
-				}
-			}
-			add = {
-				desc = "powerful_abolitionist"
-				value = 0.3
-			}
-		}		
+		# USFP
+		add = {
+			value = usfp_movement_pro_slavery_additional_radicalism_add
+			desc = "powerful_abolitionist"
+		}
 	}
 }
 

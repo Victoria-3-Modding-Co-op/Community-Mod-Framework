@@ -10,7 +10,6 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=3385002128
 ## Contents
 * [Setting Dependency](#setting-dependency)
 * [Debug Mode](#debug-mode)
-* [Variable Prefixing](#variable-prefixing)
 * [Political Movements](#political-movements)
 * [GUI Framework](#gui-framework)
     * [Alternative Event Windows](#alternative-event-windows)
@@ -57,11 +56,6 @@ To set this mod as a dependency to your own mod, you will need to add this to yo
 The keybinding `CTRL + ALT + D` toggles the global variable `com_debug`.
 
 This can be used to enable or disable debug content like debug Decisions or Events.
-
-
-# Variable Prefixing
-
-If you add a variable, list, effect, trigger, etc. for use in CMF, please prefix it using `com_`. This is to prevent conflicts with both basegame and other mods.
 
 # Political Movements
 

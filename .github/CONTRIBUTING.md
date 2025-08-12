@@ -7,10 +7,15 @@ In particular, this applies to things like Political Movements & Lobbies, where 
 So here's what you need to know to do this effectively.
 
 ## Contents
+* [Ground Rules](#ground-rules)
 * [File Categories](#file-categories)
 * [File Naming](#file-naming)
-* [Ground Rules](#ground-rules)
+* [Variable Prefixing](#variable-prefixing)
 * [Community Engagement](#community-engagement)
+
+## Ground Rules
+
+As a *community* mod framework - we endeavour to make the bar to accessibility as low as we can make it without compromising functionality. However, please remember that we are all volunteers doing this for fun so please be respectful of our time.
 
 ## File Categories
 
@@ -38,9 +43,9 @@ CMF universal receivers should be named with either a `ycom_` prefix for general
 
 Ensure that you know whether your files need to overwrite, or be overwritten, by CMF, and name them appropriately.
 
-## Ground Rules
+# Variable Prefixing
 
-As a *community* mod framework - we endeavour to make the bar to accessibility as low as we can make it without compromising functionality. However, please remember that we are all volunteers doing this for fun so please be respectful of our time.
+If you add a variable, list, effect, trigger, etc. for use in CMF, please prefix it using `com_`. This is to prevent conflicts with both basegame and other mods.
 
 ## Community Engagement
 

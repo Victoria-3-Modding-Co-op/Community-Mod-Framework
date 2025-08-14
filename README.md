@@ -405,11 +405,21 @@ Values can be any number from -45035996273.70496 to 45035996273.70495
 ⚠️ Dictionaries store both the key and value in a single number using bit shifts, you must be careful to ensure your keys and values do not overflow.
 For performance reasons there are no internal saftey checks. Using numbers outside of these ranges will result in undefined behaviour.
 
+Alternatively, you can use a more specialized scope value map. This allows mapping any scope to numeric values. It uses dictionaries behind
+the scenes, so is limited to 2048 keys and the same value range. Scope value maps do not support removing elements once they are added! Attempting
+to remove elements from the map will result in undefined behaviour.
+
 ## Set
 ```
 add_to_dict = {
   dict  = dictionary_name
   key   = numeric_key
+  value = numeric_value
+}
+
+add_to_scope_value_map = {
+  name  = map_name
+  key   = scope:any_scope
   value = numeric_value
 }
 ```
@@ -421,6 +431,40 @@ every_in_list = {
     this.kvp_to_key = numeric_key
   }
   multiply = this.kvp_to_value
+}
+
+# Where scripted effects are supported
+# `scope:key` and `scope:value` are available inside the limit and effect blocks
+every_in_scope_value_map = {
+  variable = map_name
+  limit = " # Quotes not braces
+    scope:key = {
+      ...
+    }
+  "
+  effects = " # Quotes not braces
+    add = scope:value
+  "
+}
+
+# Where scripted effects are not supported (eg: math blocks)
+save_temporary_scope_as = base
+every_in_list = {
+  variable = map_name
+  save_temporary_scope_as = kvp
+  scope:base = {
+    ordered_in_list = {
+      variable = map_name_keys
+      position = scope:kvp.kvp_to_key
+      save_temporary_scope_as = key
+    }
+  }
+  if = {
+    limit = {
+      scope:key = { ... }
+    }
+    subtract = scope:kvp.kvp_to_value
+  }
 }
 ```
 ## Remove

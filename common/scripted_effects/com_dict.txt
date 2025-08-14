@@ -1,4 +1,79 @@
-﻿# Maps numeric keys to numeric values
+﻿# Maps scopes to numeric values
+
+add_to_scope_value_map = {
+	set_local_variable = {
+		name = map_key_scope
+		value = $key$
+	}
+    save_temporary_scope_value_as = {
+        name = map_value
+        value = $value$
+    }
+	add_to_variable_list = {
+		name = $name$_keys
+		target = local_var:map_key_scope
+	}
+	
+	save_temporary_scope_value_as = {
+		name = map_key_index
+		value = {
+			every_in_list = {
+				variable = $name$_keys
+				if = {
+					limit = {
+						this = local_var:map_key_scope
+					}
+					save_temporary_value_as = __index
+				}
+				add = 1
+			}
+			value = scope:__index
+		}
+	}
+	
+	add_to_dict = {
+		dict = $name$
+		key = scope:map_key_index
+		value = scope:map_value
+	}
+	
+	remove_local_variable = map_key_scope
+	clear_saved_scope = map_key_index
+	clear_saved_scope = map_value
+	clear_saved_scope = __index
+}
+
+every_in_scope_value_map = {
+	every_in_list = {
+		variable = $variable$
+		save_temporary_scope_value_as = {
+			name = kvp_key
+			value = this.kvp_to_key
+		}
+		prev = {
+			ordered_in_list = {
+				variable = $variable$_keys
+				position = scope:kvp_key
+				save_temporary_scope_as = key
+			}
+		}
+		save_temporary_scope_value_as = {
+			name = value
+			value = this.kvp_to_value
+		}
+		clear_saved_scope = kvp_key
+		if = {
+			limit = {
+				$limit$
+			}
+			$effects$
+		}
+		clear_saved_scope = key
+		clear_saved_scope = value
+	}
+}
+
+# Maps numeric keys to numeric values
 
 add_to_dict = {
     save_temporary_scope_value_as = {
@@ -31,6 +106,9 @@ add_to_dict = {
         name = $dict$
         target = local_var:kvp
     }
+	clear_saved_scope = kvp_key
+	clear_saved_scope = kvp_value
+	remove_local_variable = kvp
 }
 
 remove_dict_variable = {
@@ -50,6 +128,7 @@ remove_dict_variable = {
             }
         }
     }
+	clear_saved_scope = kvp
 }
 
 set_dict_id = {

@@ -1360,39 +1360,65 @@ movement_minority_rights = {
 		if = { # If a more radical movement exists, it'll poach radicals from this one.
 			limit = {
 				owner ?= {
-					any_political_movement = {
-						is_political_movement_type = movement_cultural_minority
-						culture ?= root.culture
+					OR = {
+						any_political_movement = {
+							is_political_movement_type = movement_cultural_minority
+							culture ?= root.culture
+						}
+						any_scope_state = {
+							state_region = {
+								is_homeland = root.culture
+							}
+							turmoil > 0.25
+						}
 					}
 				}
 			}
 			multiply = {
 				desc = "POP_RADICAL_MOVEMENT_LOSSES"
 				value = 1
-				subtract = pop_radical_fraction
+				subtract = {
+					value = pop_radical_fraction
+					multiply = 2
+				}
+				min = 0
 			}
 		}
 
 		if = {
 			limit = {
 				owner ?= {
-					has_technology_researched = nationalism
+					has_variable = failed_tanzimat
 				}
+				culture = { has_discrimination_trait = european_heritage }
 			}
 			multiply = {
-				value = 2.0
-				desc = "NATIONALISM_TECH"
+				value = 0.1
+				desc = "FAILED_TANZIMAT_REFORMS"
 			}
 		}
+
 		if = {
 			limit = {
 				owner ?= {
-					has_technology_researched = pan-nationalism
+					has_journal_entry = je_dual_monarchy
 				}
+				culture = cu:hungarian
 			}
 			multiply = {
-				value = 1.5
-				desc = "PAN_NATIONALISM_TECH"
+				value = 0.1
+				desc = "je_dual_monarchy"
+			}
+		}
+
+		if = {
+			limit = {
+				owner ?= { has_journal_entry = je_springtime_of_the_peoples }
+				culture = { has_discrimination_trait = european_heritage }
+			}
+			multiply = {
+				value = 0.1
+				desc = "SPRINGTIME_OF_THE_PEOPLES_UNDERWAY"
 			}
 		}
 
@@ -1436,6 +1462,9 @@ movement_minority_rights = {
 		}
 	}
 
+	law_enactment_radicalism_multiplier = 2
+	active_law_radicalism_multiplier = 2
+
 	additional_radicalism_factors = {
 		if = {
 			limit = {
@@ -1469,6 +1498,20 @@ movement_minority_rights = {
 				value = 0.15
 				desc = "law_racial_segregation"
 			}
+		}
+	}
+
+	revolution = {
+		possible = {
+			political_movement_support >= 0.10
+		}
+
+		weight = {
+			value = 50
+		}
+
+		state_weight = {
+			value = 1
 		}
 	}
 }

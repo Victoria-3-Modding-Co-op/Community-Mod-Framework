@@ -47,6 +47,8 @@ Ensure that you know whether your files need to overwrite, or be overwritten, by
 
 If you add a variable, list, effect, trigger, etc. for use in CMF, please prefix it using `com_`. This is to prevent conflicts with both basegame and other mods.
 
+It should be noted that, for functions which effectively add new features, we prefer generalized solutions which can be used by many different mods for consistent outcomes.
+
 ## Community Engagement
 
 The absolute best place to connect with the project is via the Discord server: [Victoria 3 Mod Co-op](https://discord.gg/XJbqFbHdsM)

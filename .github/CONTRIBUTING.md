@@ -1,5 +1,5 @@
 # Community Mod Framework
-![banner.png](docs/banner.png)
+![banner.png](../docs/banner.png)
 
 As the Community Mod Framework aims to support compatibility between different mods - sometimes you have to add something to it so your mods can integrate successfully.
 In particular, this applies to things like Political Movements & Lobbies, where the script is very rigid.

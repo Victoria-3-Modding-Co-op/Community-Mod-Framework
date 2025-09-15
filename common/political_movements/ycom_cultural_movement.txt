@@ -2,7 +2,7 @@
 	category = movement_category_cultural_majority
 	
 	ideology = ideology_ethno_nationalist_movement
-	character_ideologies = {	
+	character_ideologies = {
 		ideology_ethno_nationalist
 		ideology_usfp_social_darwinist_leader
 		ideology_turkfm_islamist # GOTB
@@ -17,7 +17,7 @@
 	character_support_trigger = {
 		culture = {
 			is_primary_culture_of = root.owner
-		}	
+		}
 		character_is_pro_cultural_majority = yes #Compatibility Trigger
 	}
 	character_support_weight = {
@@ -93,9 +93,9 @@
 			limit = {
 				exists = scope:political_movement
 				scope:political_movement ?= {
-						OR = {
-							is_being_suppressed = yes
-							is_being_bolstered = yes
+					OR = {
+						is_being_suppressed = yes
+						is_being_bolstered = yes
 					}
 				}
 			}
@@ -288,7 +288,7 @@
 				desc = "anz_POP_NOT_T5"
 			}
 		}
-	}	
+	}
 	
 	revolution = {
 		possible = {
@@ -393,12 +393,12 @@
 				owner.ruler ?= {
 					NOT = { culture = { is_primary_culture_of = root.owner } }
 				}
-			}		
+			}
 			
 			add = {
 				value = 0.1
 				desc = "RULER_NOT_PRIMARY_CULTURE"
-			}			
+			}
 		}
 		
 		add = {
@@ -409,7 +409,7 @@
 			min = 0
 			desc = "STANDARD_OF_LIVING_FOR_PRIMARY_CULTURES"
 		}
-	}	
+	}
 }
 
 movement_cultural_minority = {
@@ -513,7 +513,7 @@ movement_cultural_minority = {
 							}
 							cultural_acceptance_base = { target = scope:political_movement.culture value > acceptance_status_2 }
 						}
-					}	
+					}
 				}
 			}
 		}
@@ -541,7 +541,7 @@ movement_cultural_minority = {
 				}
 			}
 		}
-	}	
+	}
 	culture_selection_weight = {
 		value = 100
 	}
@@ -570,9 +570,9 @@ movement_cultural_minority = {
 			culture = scope:culture
 		}
 		OR = {
-			has_ideology = ideology:ideology_humanitarian		
-			has_ideology = ideology:ideology_humanitarian_royalist	
-			has_ideology = ideology:ideology_sovereignist_leader			
+			has_ideology = ideology:ideology_humanitarian
+			has_ideology = ideology:ideology_humanitarian_royalist
+			has_ideology = ideology:ideology_sovereignist_leader
 			has_ideology = ideology:ideology_reformer
 			has_ideology = ideology:ideology_usfp_abolitionist_radical
 			has_ideology = ideology:ideology_turkfm_reformer #GOTB
@@ -671,7 +671,7 @@ movement_cultural_minority = {
 		add = {
 			value = 10
 			desc = "POP_BASE_SUPPORT"
-		}	
+		}
 		
 		if = {
 			limit = {
@@ -771,7 +771,7 @@ movement_cultural_minority = {
 		}
 		
 		if = {
-			limit = { 
+			limit = {
 				standard_of_living < 15
 			}
 			
@@ -794,25 +794,25 @@ movement_cultural_minority = {
 		if = {
 			limit = {
 				state = {
-					state_cultural_acceptance = {  
+					state_cultural_acceptance = {
 						target = PREV.culture
 						value < acceptance_status_5
-					}	
+					}
 				}
 			}
 			
 			multiply = {
-				desc = "POP_DISCRIMINATED"	
+				desc = "POP_DISCRIMINATED"
 				value = 100
-				subtract = pop_acceptance			
-				divide = 25	
-			}			
+				subtract = pop_acceptance
+				divide = 25
+			}
 		}
 		else = { # Non-discriminated pops are less likely to form separatist movements
 			multiply = {
-				desc = "POP_ACCEPTANCE"	
+				desc = "POP_ACCEPTANCE"
 				value = 0.10
-			}			
+			}
 		}
 		
 		if = {
@@ -914,8 +914,8 @@ movement_cultural_minority = {
 		}
 
 		if = {
-			limit = { 
-				owner ?= { has_journal_entry = je_springtime_of_the_peoples } 
+			limit = {
+				owner ?= { has_journal_entry = je_springtime_of_the_peoples }
 				culture = { has_discrimination_trait = european_heritage }
 			}
 			multiply = {
@@ -923,7 +923,7 @@ movement_cultural_minority = {
 				desc = "SPRINGTIME_OF_THE_PEOPLES_UNDERWAY"
 			}
 		}
-	}	
+	}
 	
 	secession = {
 		possible = {
@@ -945,20 +945,20 @@ movement_cultural_minority = {
 		}
 	
 		weight = {
-			value = 1000		
-		}	
+			value = 1000
+		}
 		
 		state_weight = {
 			value = 0
 		
 			if = {
-				limit = { 
+				limit = {
 					is_capital = no
 					state_region = { is_homeland = scope:political_movement.culture }
 					culture_percent_state = {
 						target = scope:political_movement.culture
 						value >= com_movement_cultural_minority_secession_state_weight_culture_percent_state_0
-					}					
+					}
 				}
 				add = 10
 
@@ -998,7 +998,7 @@ movement_cultural_minority = {
 					}
 					add = 50
 				}
-			}				
+			}
 		}
 
 		target_fraction_of_states = {
@@ -1034,15 +1034,15 @@ movement_cultural_minority = {
 	
 	additional_radicalism_factors = {
 		if = {
-			limit = { 
-				owner = { has_journal_entry = je_springtime_of_the_peoples } 
+			limit = {
+				owner = { has_journal_entry = je_springtime_of_the_peoples }
 				scope:culture = { has_discrimination_trait = european_heritage }
 			}
 			add = {
 				value = 0.25
 				desc = "SPRINGTIME_OF_THE_PEOPLES_UNDERWAY"
 			}
-		}	
+		}
 	
 		add = {
 			if = {
@@ -1065,9 +1065,9 @@ movement_cultural_minority = {
 			}
 			
 			add = {
-				value = 0.3	
+				value = 0.3
 				desc = "DISCRIMINATION_LEVEL_violent_hostility"
-			}			
+			}
 		}
 		else_if = {
 			limit = {
@@ -1077,7 +1077,7 @@ movement_cultural_minority = {
 			add = {
 				value = 0.2
 				desc = "DISCRIMINATION_LEVEL_cultural_erasure"
-			}			
+			}
 		}
 		else_if = {
 			limit = {
@@ -1088,7 +1088,7 @@ movement_cultural_minority = {
 				value = 0.1
 				desc = "DISCRIMINATION_LEVEL_open_prejudice"
 			}
-		}	
+		}
 
 		subtract = {
 			value = 0.5
@@ -1200,9 +1200,9 @@ movement_minority_rights = {
 			limit = {
 				exists = scope:political_movement
 				scope:political_movement ?= {
-						OR = {
-							is_being_suppressed = yes
-							is_being_bolstered = yes
+					OR = {
+						is_being_suppressed = yes
+						is_being_bolstered = yes
 					}
 				}
 			}

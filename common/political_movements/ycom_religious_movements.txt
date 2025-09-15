@@ -605,12 +605,10 @@ movement_religious_minority = {
 			}
 		}
 		
-		if = {
-			limit = { Grey_PLP_is_active = yes }
-			add = { 
-				value = mog_plp_movement_religious_minority_pop_support_weight_mult
-				desc = "STANDARD_OF_LIVING_FOR_RELIGION"
-			}
+		# Grey_PLP
+		multiply = {
+			value = mog_plp_movement_religious_minority_pop_support_weight_mult
+			desc = "STANDARD_OF_LIVING_FOR_RELIGION"								# Desc only shows when value =/= 1
 		}
 		
 		if = {

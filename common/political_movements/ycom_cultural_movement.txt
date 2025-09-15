@@ -783,12 +783,10 @@ movement_cultural_minority = {
 			}
 		}
 
-		if = {
-			limit = { Grey_PLP_is_active = yes }
-			multiply = { 
-				value = mog_plp_movement_cultural_minority_pop_support_weight_mult
-				desc = "STANDARD_OF_LIVING_FOR_CULTURE"
-			}
+		# Grey_PLP
+		multiply = {
+			value = mog_plp_movement_cultural_minority_pop_support_weight_mult
+			desc = "STANDARD_OF_LIVING_FOR_CULTURE"								# Desc only shows when value =/= 1
 		}
 
 		if = {
@@ -1097,12 +1095,10 @@ movement_cultural_minority = {
 			desc = "LOW_MOVEMENT_IDENTITY_SUPPORT"
 		}
 		
-		if = {
-			limit = { Grey_PLP_is_active = yes }
-			add = { 
-				value = mog_plp_movement_cultural_minority_additional_radicalism_factor_add
-				desc = "INSTITUTION_FUNDING_LEVEL_colonial_affairs"
-			}
+		# Grey_PLP
+		add = { 
+			value = mog_plp_movement_cultural_minority_additional_radicalism_factor_add
+			desc = "INSTITUTION_FUNDING_LEVEL_colonial_affairs"								# Desc only shows when value =/= 0
 		}
 	}
 }
@@ -1317,12 +1313,10 @@ movement_minority_rights = {
 			}
 		}
 		
-		if = {
-			limit = { Grey_PLP_is_active = yes }
-			add = { 
-				value = mog_plp_movement_minority_rights_pop_support_weight_mult
-				desc = "STANDARD_OF_LIVING_FOR_CULTURE"
-			}
+		# Grey_PLP
+		multiply = {
+			value = mog_plp_movement_minority_rights_pop_support_weight_mult
+			desc = "STANDARD_OF_LIVING_FOR_CULTURE"								# Desc only shows when value =/= 1
 		}
 		
 		if = {

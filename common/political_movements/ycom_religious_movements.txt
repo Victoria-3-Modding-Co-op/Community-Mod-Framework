@@ -679,7 +679,7 @@ movement_religious_minority = {
 				any_scope_state = {
 					religion_percent_state = {
 						target = root.religion
-						value >= com_movement_religious_minority_secession_possible_religion_percent_state
+						value >= com_movement_religious_minority_secession_possible_religion_percent_state #vanilla value: 0.10
 					}
 				}
 				trigger_if = {
@@ -707,7 +707,7 @@ movement_religious_minority = {
 					limit = {
 						religion_percent_state = {
 							target = scope:political_movement.religion
-							value >= com_movement_religious_minority_secession_state_weight_religion_percent_state_1
+							value >= com_movement_religious_minority_secession_state_weight_religion_percent_state_1 #vanilla value: 0.75
 						}
 					}
 					add = 250
@@ -716,7 +716,7 @@ movement_religious_minority = {
 					limit = {
 						religion_percent_state = {
 							target = scope:political_movement.religion
-							value >= com_movement_religious_minority_secession_state_weight_religion_percent_state_2
+							value >= com_movement_religious_minority_secession_state_weight_religion_percent_state_2 #vanilla value: 0.5
 						}
 					}
 					add = 150
@@ -725,7 +725,7 @@ movement_religious_minority = {
 					limit = {
 						religion_percent_state = {
 							target = scope:political_movement.religion
-							value >= com_movement_religious_minority_secession_state_weight_religion_percent_state_3
+							value >= com_movement_religious_minority_secession_state_weight_religion_percent_state_3 #vanilla value: 0.25
 						}
 					}
 					add = 50
@@ -734,7 +734,7 @@ movement_religious_minority = {
 					limit = {
 						religion_percent_state = {
 							target = scope:political_movement.religion
-							value >= com_movement_religious_minority_secession_state_weight_religion_percent_state_4
+							value >= com_movement_religious_minority_secession_state_weight_religion_percent_state_4 #vanilla value: 0.1
 						}
 					}
 					add = 10
@@ -757,7 +757,7 @@ movement_religious_minority = {
 				add = turkfm_target_fraction_of_states_value
 			}
 			min = {
-				value = com_movement_religious_minority_secession_target_fraction_of_states_min
+				value = com_movement_religious_minority_secession_target_fraction_of_states_min #vanilla value: 0.15
 				if = {
 					limit = {
 						grefm_is_active = yes
@@ -769,7 +769,7 @@ movement_religious_minority = {
 					add = turkfm_movement_religious_minority_secession_target_fraction_of_states_min
 				}
 			}
-			max = com_movement_religious_minority_secession_target_fraction_of_states_max
+			max = com_movement_religious_minority_secession_target_fraction_of_states_max #vanilla value: 0.75
 		}
 	}
 

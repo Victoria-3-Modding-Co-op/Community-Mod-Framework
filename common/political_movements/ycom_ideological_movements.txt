@@ -1,5 +1,6 @@
 ﻿movement_anti_slavery = {
 	category = movement_category_ideological
+	can_have_slave_supporters = yes
 
 	ideology = ideology_anti_slavery_movement
 	character_ideologies = {

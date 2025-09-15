@@ -1,0 +1,89 @@
+﻿
+company_vic3_mod_coop = {
+	icon = "gfx/interface/icons/company_icons/historical_company_icons/vic3_mod_coop.dds"
+	background = "gfx/interface/icons/company_icons/company_backgrounds/comp_illu_manufactering_light.dds"
+	flavored_company = yes
+	building_types = {
+		building_arts_academy
+	}
+	extension_building_types = {
+		building_paper_mills
+		building_electrics_industry
+		building_gold_mine
+	}
+	# possible_prestige_goods = {
+	# 	prestige_mod
+	# }
+	potential = {        
+        NOR = {
+            any_country = {
+                has_company = company_type:company_vic3_mod_coop
+            }
+            has_game_rule = no_fantastical_content
+        }
+		has_law = law_type:law_laissez_faire
+		any_scope_state = {
+			is_incorporated = yes
+			any_scope_building = {
+				is_building_type = building_arts_academy
+				level >= 20
+			}
+		}
+		has_technology_researched = telephone
+	}
+	attainable = {
+		hidden_trigger = {
+			NOR = {
+                any_country = {
+                    has_company = company_type:company_vic3_mod_coop
+                }
+			    has_game_rule = no_fantastical_content
+			}
+			any_scope_state = {
+				is_incorporated = yes
+				any_scope_building = {
+					is_building_type = building_arts_academy
+					level >= 20
+				}
+			}
+			has_law = law_type:law_laissez_faire
+		}
+	}
+	possible = {
+        NOR = {
+            any_country = {
+                has_company = company_type:company_vic3_mod_coop
+            }
+            has_game_rule = no_fantastical_content
+        }
+		any_scope_state = {
+			is_incorporated = yes
+			any_scope_building = {
+				is_building_type = building_arts_academy
+				level >= 20
+			}
+		}
+		has_law = law_type:law_laissez_faire
+	}
+	prosperity_modifier = {
+		state_education_access_add = 0.10
+		country_tech_research_speed_mult = 0.05
+	}
+	ai_weight = {
+		value = 3
+	}
+	ai_construction_targets = {
+		building_arts_academy = {
+			level = 20
+			state_trigger = {
+				is_incorporated = yes
+			}
+		}
+	}
+	ai_will_do = {
+		has_technology_researched = corporate_charters
+		any_scope_state = {
+			is_incorporated = yes
+		}
+	}
+}

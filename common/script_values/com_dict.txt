@@ -25,18 +25,5 @@ kvp_to_key = {
 # scope = kvp
 kvp_to_value = {
     value = this
-    subtract = {
-        value = this.kvp_to_key
-        multiply = key_shift
-    }
-}
-
-# scope:kvp
-# scope:kvp_key
-kvp_key_to_value = {
-    value = scope:kvp
-    subtract = {
-        value = scope:kvp_key
-        multiply = key_shift
-    }
+	modulo = key_shift
 }

@@ -67,7 +67,7 @@ CMF overwrites vanilla Political Movement definitions with versions that have sc
 To add dummy ideologies from your mods into political movements, allowing them to spawn with the appropiate mod enabled:
 * Add a dummy ideology to CMF with the same name as your mod ideology in a file named `00_dummy_ideologies_<your_mod>`.
 * Assign the ideology to the appropiate political movements (and scripted triggers if needed).
-* Ensure the ideologies in your mod are in a file that will overwrite the dummy one (see [File Naming](CONTRIBUTING.md)).
+* Ensure the ideologies in your mod are in a file that will overwrite the dummy one (see [File Naming](.github/CONTRIBUTING.md#file-naming)).
 * Your mod will overwrite the ideology definition and allow it to spawn in the specified political movements.
 
 ## Modifying Movement Weights
@@ -90,7 +90,7 @@ add/multiply = {
 > function: mult
 * Then; create a file in common\script_values called `00_<your_mod>_movement_values`.
 * Define all values you want added in this file, = 0 for `add` and = 1 for `mult` (as seen in `00_mog_plp_movement_values`)
-* Define the values again in your own mod, with all the maths for what you need, in a file that will overwrite the dummy one. (see [File Naming](CONTRIBUTING.md))
+* Define the values again in your own mod, with all the maths for what you need, in a file that will overwrite the dummy one. (see [File Naming](.github/CONTRIBUTING.md#file-naming))
 * *Optional:* If your mod will depend on CMF (cannot work without CMF) you can define the maths in your `00_<your_mod>_movement_values` file (as seen in `00_anzfp_movement_values`) as long as you have a scripted trigger for when your mod is active. (see [Community Mod Triggers](#community-mod-triggers))
 
 

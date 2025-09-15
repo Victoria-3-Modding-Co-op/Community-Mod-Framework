@@ -1,4 +1,7 @@
-﻿## Neutral maths Placeholders - replaced by PLP
+﻿##### Neutral maths Placeholders - replaced by PLP
+## Cultural Movement Values
 mog_plp_movement_cultural_minority_pop_support_weight_mult = 1
 mog_plp_movement_cultural_minority_additional_radicalism_factor_add = 0
 mog_plp_movement_minority_rights_pop_support_weight_mult = 1
+## Religious Movement Values
+mog_plp_movement_religious_minority_pop_support_weight_mult = 1

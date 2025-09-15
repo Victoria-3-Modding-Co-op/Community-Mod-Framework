@@ -966,7 +966,7 @@ movement_cultural_minority = {
 					limit = {
 						culture_percent_state = {
 							target = scope:political_movement.culture
-							value >= 0.75
+							value >= com_movement_cultural_minority_secession_state_weight_culture_percent_state_1
 						}
 					}
 					add = 1000
@@ -975,7 +975,7 @@ movement_cultural_minority = {
 					limit = {
 						culture_percent_state = {
 							target = scope:political_movement.culture
-							value >= 0.5
+							value >= com_movement_cultural_minority_secession_state_weight_culture_percent_state_2
 						}
 					}
 					add = 500
@@ -984,7 +984,7 @@ movement_cultural_minority = {
 					limit = {
 						culture_percent_state = {
 							target = scope:political_movement.culture
-							value >= 0.25
+							value >= com_movement_cultural_minority_secession_state_weight_culture_percent_state_3
 						}
 					}
 					add = 100
@@ -993,7 +993,7 @@ movement_cultural_minority = {
 					limit = {
 						culture_percent_state = {
 							target = scope:political_movement.culture
-							value >= com_movement_cultural_minority_secession_state_weight_culture_percent_state_1
+							value >= com_movement_cultural_minority_secession_state_weight_culture_percent_state_4
 						}
 					}
 					add = 50

@@ -604,7 +604,15 @@ movement_religious_minority = {
 				value = 0.05
 			}
 		}
-
+		
+		if = {
+			limit = { Grey_PLP_is_active = yes }
+			add = { 
+				value = mog_plp_movement_religious_minority_pop_support_weight_mult
+				desc = "STANDARD_OF_LIVING_FOR_RELIGION"
+			}
+		}
+		
 		if = {
 			limit = {
 				state = {
@@ -646,19 +654,19 @@ movement_religious_minority = {
 			}
 			if = {
 				limit = {
-					owner = { cultural_acceptance_base = { target = culture value <= acceptance_status_1 } }
+					owner = { cultural_acceptance_base = { target = root.culture value <= acceptance_status_1 } }	# BugFix from PLP (root.culture, not culture)
 				}
 				multiply = 0.1
 			}
 			else_if = {
 				limit = {
-					owner = { cultural_acceptance_base = { target = culture value <= acceptance_status_2 } }
+					owner = { cultural_acceptance_base = { target = root.culture value <= acceptance_status_2 } }	# BugFix from PLP (root.culture, not culture)
 				}
 				multiply = 0.25
 			}
 			else_if = {
 				limit = {
-					owner = { cultural_acceptance_base = { target = culture value <= acceptance_status_3 } }
+					owner = { cultural_acceptance_base = { target = root.culture value <= acceptance_status_3 } }	# BugFix from PLP (root.culture, not culture)
 				}
 				multiply = 0.5
 			}
@@ -671,7 +679,7 @@ movement_religious_minority = {
 				any_scope_state = {
 					religion_percent_state = {
 						target = root.religion
-						value >= 0.10
+						value >= com_movement_religious_minority_secession_possible_religion_percent_state
 					}
 				}
 				trigger_if = {
@@ -699,7 +707,7 @@ movement_religious_minority = {
 					limit = {
 						religion_percent_state = {
 							target = scope:political_movement.religion
-							value >= 0.75
+							value >= com_movement_religious_minority_secession_state_weight_religion_percent_state_1
 						}
 					}
 					add = 250
@@ -708,7 +716,7 @@ movement_religious_minority = {
 					limit = {
 						religion_percent_state = {
 							target = scope:political_movement.religion
-							value >= 0.5
+							value >= com_movement_religious_minority_secession_state_weight_religion_percent_state_2
 						}
 					}
 					add = 150
@@ -717,7 +725,7 @@ movement_religious_minority = {
 					limit = {
 						religion_percent_state = {
 							target = scope:political_movement.religion
-							value >= 0.25
+							value >= com_movement_religious_minority_secession_state_weight_religion_percent_state_3
 						}
 					}
 					add = 50
@@ -726,7 +734,7 @@ movement_religious_minority = {
 					limit = {
 						religion_percent_state = {
 							target = scope:political_movement.religion
-							value >= 0.1
+							value >= com_movement_religious_minority_secession_state_weight_religion_percent_state_4
 						}
 					}
 					add = 10
@@ -767,7 +775,13 @@ movement_religious_minority = {
 
 	additional_radicalism_factors = {
 		add = {
-			value = "owner.average_sol"
+			if = {
+				limit = { Grey_PLP_is_active = yes } 
+				value = "owner.average_sol_for_religion(owner.religion)"
+			}
+			else = { # Vanilla
+				value = "owner.average_sol"
+			}
 			subtract = "owner.average_sol_for_religion(scope:religion)"
 			multiply = 0.05
 			max = 0.5

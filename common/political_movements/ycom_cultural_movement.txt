@@ -785,7 +785,10 @@ movement_cultural_minority = {
 
 		if = {
 			limit = { Grey_PLP_is_active = yes }
-			multiply = mog_plp_movement_cultural_minority_pop_support_weight_mult
+			multiply = { 
+				value = mog_plp_movement_cultural_minority_pop_support_weight_mult
+				desc = "STANDARD_OF_LIVING_FOR_CULTURE"
+			}
 		}
 
 		if = {
@@ -1093,6 +1096,14 @@ movement_cultural_minority = {
 			min = 0
 			desc = "LOW_MOVEMENT_IDENTITY_SUPPORT"
 		}
+		
+		if = {
+			limit = { Grey_PLP_is_active = yes }
+			add = { 
+				value = mog_plp_movement_cultural_minority_additional_radicalism_factor_add
+				desc = "INSTITUTION_FUNDING_LEVEL_colonial_affairs"
+			}
+		}
 	}
 }
 
@@ -1127,7 +1138,7 @@ movement_minority_rights = {
 				exists = owner
 			}
 			culture = {
-				NOT = { is_primary_culture_of = owner }
+				NOT = { is_primary_culture_of = root.owner } # BugFix from PLP (root.owner, not owner)
 			}
 		}
 		OR = {
@@ -1166,7 +1177,7 @@ movement_minority_rights = {
 
 	pop_support_trigger = {
 		culture = {
-			NOT = { is_primary_culture_of = owner }
+			NOT = { is_primary_culture_of = root.owner } # BugFix from PLP (root.owner, not owner)
 		}
 		owner = {
 			cultural_acceptance_base = { target = root.culture value < acceptance_status_5 }
@@ -1305,7 +1316,15 @@ movement_minority_rights = {
 				desc = "POP_POVERTY"
 			}
 		}
-
+		
+		if = {
+			limit = { Grey_PLP_is_active = yes }
+			add = { 
+				value = mog_plp_movement_minority_rights_pop_support_weight_mult
+				desc = "STANDARD_OF_LIVING_FOR_CULTURE"
+			}
+		}
+		
 		if = {
 			limit = {
 				state = {

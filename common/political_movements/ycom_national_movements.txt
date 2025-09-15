@@ -5,7 +5,7 @@
 	character_ideologies = {
 		ideology_fascist
 		ideology_theocrat
-	}		
+	}
 	
 	creation_trigger = {
 		OR = {
@@ -34,7 +34,7 @@
 	}
 	creation_weight = {
 		value = 100
-	}		
+	}
 	on_created = {}
 	
 	religion_selection_trigger = {
@@ -42,7 +42,7 @@
 	}
 	religion_selection_weight = {
 		value = 100
-	}	
+	}
 	
 	character_support_trigger = {
 		culture = {
@@ -64,7 +64,7 @@
 				value = 5
 			}
 		}
-	}	
+	}
 	
 	pop_support_trigger = {
 		culture = {
@@ -89,10 +89,10 @@
 			limit = {
 				exists = scope:political_movement
 				scope:political_movement ?= {
-						OR = {
-							is_being_suppressed = yes
-							is_being_bolstered = yes
-						}
+					OR = {
+						is_being_suppressed = yes
+						is_being_bolstered = yes
+					}
 				}
 			}
 			if = {
@@ -156,7 +156,7 @@
 					value = 9
 					desc = "POP_BUREAUCRATS"
 				}
-			}		
+			}
 			if = {
 				limit = {
 					is_pop_type = clerks
@@ -211,7 +211,7 @@
 	revolution = {
 		possible = {
 			political_movement_support >= 0.05
-		}	
+		}
 	
 		weight = {
 			value = 100
@@ -220,7 +220,7 @@
 		state_weight = {
 			value = 1
 			if = {
-			   limit = { 
+			   limit = {
 					NOT = {
 						state_is_homeland_of_indian_cultures = yes
 					}
@@ -244,13 +244,13 @@
 		}
 	
 		weight = {
-			value = 1000		
-		}	
+			value = 1000
+		}
 		
 		state_weight = {
 			value = 1
 			if = {
-			   limit = { 
+			   limit = {
 					NOT = {
 						state_is_homeland_of_indian_cultures = yes
 					}
@@ -265,7 +265,7 @@
 				}
 				weight = 1000
 			}
-		}		
+		}
 	}
 	
 	additional_radicalism_factors = {
@@ -297,7 +297,7 @@
 					value = 0.05
 				}
 			}
-		}	
+		}
 		if = {
 			limit = {
 				owner = {
@@ -309,7 +309,7 @@
 				value = owner.liberty_desire
 				divide = 500
 			}
-		}	
+		}
 	}
 }
 
@@ -320,7 +320,7 @@ movement_muslim_nationalist = {
 	character_ideologies = {
 		ideology_theocrat
 		ideology_social_democrat
-	}		
+	}
 	
 	creation_trigger = {
 		OR = {
@@ -356,7 +356,7 @@ movement_muslim_nationalist = {
 	}
 	creation_weight = {
 		value = 100
-	}		
+	}
 	on_created = {}
 	
 	religion_selection_trigger = {
@@ -367,7 +367,7 @@ movement_muslim_nationalist = {
 	}
 	religion_selection_weight = {
 		value = 100
-	}	
+	}
 	
 	character_support_trigger = {
 		culture = {
@@ -400,7 +400,7 @@ movement_muslim_nationalist = {
 				value = 10
 			}
 		}
-	}	
+	}
 	
 	pop_support_trigger = {
 		culture = {
@@ -428,10 +428,10 @@ movement_muslim_nationalist = {
 			limit = {
 				exists = scope:political_movement
 				scope:political_movement ?= {
-						OR = {
-							is_being_suppressed = yes
-							is_being_bolstered = yes
-						}
+					OR = {
+						is_being_suppressed = yes
+						is_being_bolstered = yes
+					}
 				}
 			}
 			if = {
@@ -558,7 +558,7 @@ movement_muslim_nationalist = {
 		state_weight = {
 			value = 1
 			if = {
-			   limit = { 
+			   limit = {
 					NOT = {
 						state_is_homeland_of_indian_cultures = yes
 					}
@@ -605,7 +605,7 @@ movement_muslim_nationalist = {
 					value = 0.05
 				}
 			}
-		}	
+		}
 		if = {
 			limit = {
 				owner = {
@@ -617,6 +617,6 @@ movement_muslim_nationalist = {
 				value = owner.liberty_desire
 				divide = 500
 			}
-		}	
+		}
 	}
 }

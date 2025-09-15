@@ -16,7 +16,7 @@
 	}
 	creation_weight = {
 		value = 100
-	}	
+	}
 	on_created = {
 		add_movement_enthusiasm_modifier = yes
 	}
@@ -84,9 +84,9 @@
 			limit = {
 				exists = scope:political_movement
 				scope:political_movement ?= {
-						OR = {
-							is_being_suppressed = yes
-							is_being_bolstered = yes
+					OR = {
+						is_being_suppressed = yes
+						is_being_bolstered = yes
 					}
 				}
 			}
@@ -205,7 +205,7 @@
 	revolution = {
 		possible = {
 			political_movement_support >= 0.05
-		}	
+		}
 	
 		weight = {
 			value = 100
@@ -214,23 +214,23 @@
 		state_weight = {
 			value = 1
 			if = {
-				limit = { 
+				limit = {
 					OR = {
 					    any_scope_building = {
 							is_building_group = bg_bureaucracy
 							level >= 10
-					    }		
+					    }
 					}
 				}
 				multiply = 10
 			}
 			else_if = {
-				limit = { 
+				limit = {
 					OR = {
 					    any_scope_building = {
 							is_building_group = bg_bureaucracy
 							level >= 5
-					    }		
+					    }
 					}
 				}
 				multiply = 5
@@ -249,28 +249,28 @@
 		
 		weight = {
 			value = 1000
-		}		
+		}
 		
 		state_weight = {
 			value = 1
 			if = {
-				limit = { 
+				limit = {
 					OR = {
 					    any_scope_building = {
 							is_building_group = bg_bureaucracy
 							level >= 10
-					    }		
+					    }
 					}
 				}
 				multiply = 10
 			}
 			else_if = {
-				limit = { 
+				limit = {
 					OR = {
 					    any_scope_building = {
 							is_building_group = bg_bureaucracy
 							level >= 5
-					    }		
+					    }
 					}
 				}
 				multiply = 5
@@ -278,8 +278,8 @@
 			else = {
 				multiply = 0
 			}
-		}		
-	}	
+		}
+	}
 	
 	additional_radicalism_factors = {
 		owner = {
@@ -297,8 +297,8 @@
 				add = {
 					value = 0.1
 					desc = "NO_INSTITUTION_schools"
-				}		
-			}				
+				}
+			}
 		}
 	}
 }
@@ -330,7 +330,7 @@ movement_orleanist = {
 	}
 	creation_weight = {
 		value = 100
-	}	
+	}
 	on_created = {
 		add_movement_enthusiasm_modifier = yes
 	}
@@ -399,9 +399,9 @@ movement_orleanist = {
 			limit = {
 				exists = scope:political_movement
 				scope:political_movement ?= {
-						OR = {
-							is_being_suppressed = yes
-							is_being_bolstered = yes
+					OR = {
+						is_being_suppressed = yes
+						is_being_bolstered = yes
 					}
 				}
 			}
@@ -450,7 +450,7 @@ movement_orleanist = {
 			if = {
 				limit = {
 					is_pop_type = capitalists
-				} 
+				}
 				add = {
 					value = 12
 					desc = "POP_CAPITALISTS"
@@ -535,7 +535,7 @@ movement_orleanist = {
 	revolution = {
 		possible = {
 			political_movement_support >= 0.05
-		}	
+		}
 	
 		weight = {
 			value = 100
@@ -550,8 +550,8 @@ movement_orleanist = {
 		
 		weight = {
 			value = 1000
-		}		
-	}	
+		}
+	}
 
 	additional_radicalism_factors = {
 		if = {
@@ -569,7 +569,7 @@ movement_orleanist = {
 				value = 0.25
 				desc = "NON_ORLEANIST_MONARCH"
 			}
-		}		
+		}
 	}
 }
 
@@ -600,7 +600,7 @@ movement_bonapartist = {
 	}
 	creation_weight = {
 		value = 100
-	}	
+	}
 	on_created = {
 		add_movement_enthusiasm_modifier = yes
 	}
@@ -671,9 +671,9 @@ movement_bonapartist = {
 			limit = {
 				exists = scope:political_movement
 				scope:political_movement ?= {
-						OR = {
-							is_being_suppressed = yes
-							is_being_bolstered = yes
+					OR = {
+						is_being_suppressed = yes
+						is_being_bolstered = yes
 					}
 				}
 			}
@@ -819,7 +819,7 @@ movement_bonapartist = {
 	revolution = {
 		possible = {
 			political_movement_support >= 0.05
-		}	
+		}
 	
 		weight = {
 			value = 100
@@ -834,8 +834,8 @@ movement_bonapartist = {
 		
 		weight = {
 			value = 1000
-		}		
-	}	
+		}
+	}
 
 	additional_radicalism_factors = {
 		if = {
@@ -853,8 +853,8 @@ movement_bonapartist = {
 				value = 0.25
 				desc = "NON_BONAPARTIST_MONARCH"
 			}
-		}		
-	}	
+		}
+	}
 }
 
 movement_legitimist = {
@@ -884,7 +884,7 @@ movement_legitimist = {
 	}
 	creation_weight = {
 		value = 100
-	}	
+	}
 	on_created = {
 		add_movement_enthusiasm_modifier = yes
 	}
@@ -955,9 +955,9 @@ movement_legitimist = {
 			limit = {
 				exists = scope:political_movement
 				scope:political_movement ?= {
-						OR = {
-							is_being_suppressed = yes
-							is_being_bolstered = yes
+					OR = {
+						is_being_suppressed = yes
+						is_being_bolstered = yes
 					}
 				}
 			}
@@ -1008,7 +1008,7 @@ movement_legitimist = {
 				value = 25
 				desc = "POP_ARISTOCRATS"
 			}
-		}	
+		}
 		else_if = {
 			limit = {
 				is_pop_type = farmers
@@ -1026,7 +1026,7 @@ movement_legitimist = {
 				value = 15
 				desc = "POP_PEASANTS"
 			}
-		}			
+		}
 		else_if = {
 			limit = {
 				is_pop_type = clergymen
@@ -1057,7 +1057,7 @@ movement_legitimist = {
 	revolution = {
 		possible = {
 			political_movement_support >= 0.05
-		}	
+		}
 	
 		weight = {
 			value = 100
@@ -1072,8 +1072,8 @@ movement_legitimist = {
 		
 		weight = {
 			value = 1000
-		}		
-	}	
+		}
+	}
 
 	additional_radicalism_factors = {
 		if = {
@@ -1091,6 +1091,6 @@ movement_legitimist = {
 				value = 0.25
 				desc = "NON_LEGITIMIST_MONARCH"
 			}
-		}		
+		}
 	}
 }

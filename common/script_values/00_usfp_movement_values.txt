@@ -67,7 +67,8 @@ usfp_movement_pro_slavery_secession_state_weight_mult = {
 				state_region = s:STATE_MISSOURI
 			}
 			value = 0.5
-		}	
+		}
+	}
 	else = {
 		value = 1	# Mult no change
 	}

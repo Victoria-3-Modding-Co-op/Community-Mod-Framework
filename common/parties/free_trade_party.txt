@@ -452,8 +452,8 @@ free_trade_party = {
 					has_ideology = ideology:ideology_stratocratic
 					has_ideology = ideology:ideology_laissez_faire
 				}
-				OR = {
-					owner = {
+				owner = {
+					OR = {
 						has_law = law_type:law_regulatory_bodies
 						has_law = law_type:law_worker_protections
 					}
@@ -470,8 +470,8 @@ free_trade_party = {
 					has_ideology = ideology:ideology_stratocratic
 					has_ideology = ideology:ideology_individualist
 				}
-				OR = {
-					owner = {
+				owner = {
+					OR = {
 						has_law = law_type:law_wage_subsidies
 						has_law = law_type:law_old_age_pension
 					}
@@ -939,7 +939,7 @@ free_trade_party = {
 				owner = {
 					ig:ig_industrialists = {
 						has_party = yes
-						party = py:free_trade_party
+						party = owner.py:free_trade_party
 					}
 				}
 			}

@@ -1,6 +1,6 @@
 ﻿
 company_vic3_mod_coop = {
-	icon = "gfx/interface/icons/company_icons/historical_company_icons/vic3_mod_coop.dds"
+	icon = "gfx/interface/icons/company_icons/vic3_mod_coop.dds"
 	background = "gfx/interface/icons/company_icons/company_backgrounds/comp_illu_manufactering_light.dds"
 	flavored_company = yes
 	building_types = {

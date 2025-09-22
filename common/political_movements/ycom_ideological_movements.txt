@@ -501,9 +501,9 @@ movement_pro_slavery = {
 		value = 200
 		if = {
 			limit = {
-				OR = {
+				# OR = {
 					has_ideology = ideology:ideology_slaver
-				}
+				# }
 			}
 			multiply = {
 				value = 5

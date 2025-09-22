@@ -215,23 +215,23 @@
 			value = 1
 			if = {
 				limit = {
-					OR = {
-					    any_scope_building = {
+					# OR = {
+						any_scope_building = {
 							is_building_group = bg_bureaucracy
 							level >= 10
-					    }
-					}
+						}
+					# }
 				}
 				multiply = 10
 			}
 			else_if = {
 				limit = {
-					OR = {
-					    any_scope_building = {
+					# OR = {
+						any_scope_building = {
 							is_building_group = bg_bureaucracy
 							level >= 5
-					    }
-					}
+						}
+					# }
 				}
 				multiply = 5
 			}
@@ -255,23 +255,23 @@
 			value = 1
 			if = {
 				limit = {
-					OR = {
-					    any_scope_building = {
+					# OR = {
+						any_scope_building = {
 							is_building_group = bg_bureaucracy
 							level >= 10
-					    }
-					}
+						}
+					# }
 				}
 				multiply = 10
 			}
 			else_if = {
 				limit = {
-					OR = {
-					    any_scope_building = {
+					# OR = {
+						any_scope_building = {
 							is_building_group = bg_bureaucracy
 							level >= 5
-					    }
-					}
+						}
+					# }
 				}
 				multiply = 5
 			}

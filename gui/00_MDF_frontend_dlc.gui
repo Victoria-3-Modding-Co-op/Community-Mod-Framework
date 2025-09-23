@@ -17,7 +17,7 @@ types dlc_types {
         # Vanilla
 		hbox = {
 			# datamodel = "[GetDlcCollection]" # MDF
-            datamodel = "[DataModelFirst( GetDlcCollection, '(int32)7' )]" # MDF - Set arg 2 to current number of real DLCs in menu
+            datamodel = "[DataModelFirst( GetDlcCollection, '(int32)8' )]" # MDF - Set arg 2 to current number of real DLCs in menu
 			spacing = 10
 
 			item = {
@@ -38,13 +38,13 @@ types dlc_types {
 		}
         
         vertical_divider = {
-            visible = "[GreaterThan_int32( GetDataModelSize(GetDlcCollection), '(int32)7' )]" # MDF - Set arg 2 to # of real DLCs
+            visible = "[GreaterThan_int32( GetDataModelSize(GetDlcCollection), '(int32)8' )]" # MDF - Set arg 2 to # of real DLCs
         }
         
         # Mods
         hbox = {
 			# datamodel = "[GetDlcCollection]" # MDF
-            datamodel = "[DataModelSkipFirst( GetDlcCollection, '(int32)7' )]" # MDF - Set arg 2 to # of real DLCs
+            datamodel = "[DataModelSkipFirst( GetDlcCollection, '(int32)8' )]" # MDF - Set arg 2 to # of real DLCs
 			spacing = 10
 
 			item = {

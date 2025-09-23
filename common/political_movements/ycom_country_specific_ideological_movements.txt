@@ -16,6 +16,23 @@
 	}
 	creation_weight = {
 		value = 100
+		if = {
+			limit = {
+				owner ?= { # If a movement of this type exists in a neighbouring country, make it more likely to spawn here as well
+					any_neighbouring_state = {
+						owner = {
+							prestige > ROOT.owner.prestige
+							any_political_movement = {
+								is_political_movement_type = movement_utilitarian
+							}
+						}
+					}
+				}
+			}
+			multiply = {
+				value = 2
+			}
+		}
 	}
 	on_created = {
 		add_movement_enthusiasm_modifier = yes
@@ -25,7 +42,7 @@
 		OR = {
 			AND = {
 				culture = {
-					has_discrimination_trait = european_heritage
+					has_discrimination_trait_group = heritage_group_european
 				}
 				has_reactionary_ideology = no
 				has_conservative_ideology = no
@@ -53,7 +70,7 @@
 					is_country_type = colonial
 				}
 				culture = {
-					has_discrimination_trait = european_heritage
+					has_discrimination_trait_group = heritage_group_european
 				}
 			}
 			is_pop_type = bureaucrats
@@ -128,7 +145,7 @@
 					is_country_type = colonial
 				}
 				culture = {
-					has_discrimination_trait = european_heritage
+					has_discrimination_trait_group = heritage_group_european
 				}
 			}
 			add = {
@@ -300,6 +317,25 @@
 				}
 			}
 		}
+		if = {
+			limit = {
+				owner = {
+					any_neighbouring_state = {
+						owner = {
+							NOT = { THIS = ROOT.owner }
+							any_political_movement = {
+								is_political_movement_type = movement_utilitarian
+								is_insurrectionary = yes
+							}
+						}
+					}
+				}
+			}
+			add = {
+				desc = "NEIGHBOURING_COUNTRY_WITH_REVOLUTION"
+				value = 0.15
+			}
+		}
 	}
 }
 
@@ -330,6 +366,23 @@ movement_orleanist = {
 	}
 	creation_weight = {
 		value = 100
+		if = {
+			limit = {
+				owner ?= { # If a movement of this type exists in a neighbouring country, make it more likely to spawn here as well
+					any_neighbouring_state = {
+						owner = {
+							prestige > ROOT.owner.prestige
+							any_political_movement = {
+								is_political_movement_type = movement_orleanist
+							}
+						}
+					}
+				}
+			}
+			multiply = {
+				value = 2
+			}
+		}
 	}
 	on_created = {
 		add_movement_enthusiasm_modifier = yes
@@ -557,7 +610,7 @@ movement_orleanist = {
 		if = {
 			limit = {
 				owner ?= {
-					has_law = law_type:law_monarchy
+					has_law_or_variant = law_type:law_monarchy
 					ruler ?= {
 						NOT = {
 							has_ideology = ideology:ideology_orleanist
@@ -568,6 +621,25 @@ movement_orleanist = {
 			add = {
 				value = 0.25
 				desc = "NON_ORLEANIST_MONARCH"
+			}
+		}
+		if = {
+			limit = {
+				owner = {
+					any_neighbouring_state = {
+						owner = {
+							NOT = { THIS = ROOT.owner }
+							any_political_movement = {
+								is_political_movement_type = movement_orleanist
+								is_insurrectionary = yes
+							}
+						}
+					}
+				}
+			}
+			add = {
+				desc = "NEIGHBOURING_COUNTRY_WITH_REVOLUTION"
+				value = 0.15
 			}
 		}
 	}
@@ -600,6 +672,23 @@ movement_bonapartist = {
 	}
 	creation_weight = {
 		value = 100
+		if = {
+			limit = {
+				owner ?= { # If a movement of this type exists in a neighbouring country, make it more likely to spawn here as well
+					any_neighbouring_state = {
+						owner = {
+							prestige > ROOT.owner.prestige
+							any_political_movement = {
+								is_political_movement_type = movement_bonapartist
+							}
+						}
+					}
+				}
+			}
+			multiply = {
+				value = 2
+			}
+		}
 	}
 	on_created = {
 		add_movement_enthusiasm_modifier = yes
@@ -841,7 +930,7 @@ movement_bonapartist = {
 		if = {
 			limit = {
 				owner ?= {
-					has_law = law_type:law_monarchy
+					has_law_or_variant = law_type:law_monarchy
 					ruler ?= {
 						NOT = {
 							has_ideology = ideology:ideology_bonapartist
@@ -852,6 +941,25 @@ movement_bonapartist = {
 			add = {
 				value = 0.25
 				desc = "NON_BONAPARTIST_MONARCH"
+			}
+		}
+		if = {
+			limit = {
+				owner = {
+					any_neighbouring_state = {
+						owner = {
+							NOT = { THIS = ROOT.owner }
+							any_political_movement = {
+								is_political_movement_type = movement_bonapartist
+								is_insurrectionary = yes
+							}
+						}
+					}
+				}
+			}
+			add = {
+				desc = "NEIGHBOURING_COUNTRY_WITH_REVOLUTION"
+				value = 0.15
 			}
 		}
 	}
@@ -884,6 +992,23 @@ movement_legitimist = {
 	}
 	creation_weight = {
 		value = 100
+		if = {
+			limit = {
+				owner ?= { # If a movement of this type exists in a neighbouring country, make it more likely to spawn here as well
+					any_neighbouring_state = {
+						owner = {
+							prestige > ROOT.owner.prestige
+							any_political_movement = {
+								is_political_movement_type = movement_legitimist
+							}
+						}
+					}
+				}
+			}
+			multiply = {
+				value = 2
+			}
+		}
 	}
 	on_created = {
 		add_movement_enthusiasm_modifier = yes
@@ -1079,7 +1204,7 @@ movement_legitimist = {
 		if = {
 			limit = {
 				owner ?= {
-					has_law = law_type:law_monarchy
+					has_law_or_variant = law_type:law_monarchy
 					ruler ?= {
 						NOT = {
 							has_ideology = ideology:ideology_legitimist
@@ -1090,6 +1215,25 @@ movement_legitimist = {
 			add = {
 				value = 0.25
 				desc = "NON_LEGITIMIST_MONARCH"
+			}
+		}
+		if = {
+			limit = {
+				owner = {
+					any_neighbouring_state = {
+						owner = {
+							NOT = { THIS = ROOT.owner }
+							any_political_movement = {
+								is_political_movement_type = movement_legitimist
+								is_insurrectionary = yes
+							}
+						}
+					}
+				}
+			}
+			add = {
+				desc = "NEIGHBOURING_COUNTRY_WITH_REVOLUTION"
+				value = 0.15
 			}
 		}
 	}

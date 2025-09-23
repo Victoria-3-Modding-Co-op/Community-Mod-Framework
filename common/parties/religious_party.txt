@@ -27,10 +27,35 @@ religious_party = {
 			}
 
 			triggered_desc = {
+				desc = party_fatherland_front
+				trigger = {
+					exists = c:AUS
+					THIS = c:AUS
+					any_interest_group = {
+						is_in_government = yes
+						party ?= {
+							is_party_type = religious_party
+						}
+					}
+					has_law_or_variant = law_type:law_single_party_state
+					has_variable = fatherland_front_var
+				}
+			}
+			triggered_desc = {
 				desc = party_catholic_peoples_party
 				trigger = {
 					exists = c:AUS
 					THIS = c:AUS
+					NAND = {
+						any_interest_group = {
+							is_in_government = yes
+							party ?= {
+								is_party_type = fascist_party
+							}
+						}
+						has_law_or_variant = law_type:law_single_party_state
+						has_variable = fatherland_front_var
+					}
 				}
 			}
 			triggered_desc = {
@@ -117,6 +142,11 @@ religious_party = {
 						country_has_primary_culture = cu:north_italian
 						country_has_primary_culture = cu:south_italian
 					}
+					NOR = {
+						c:AUS ?= this
+						c:KUK ?= this
+						c:HRE ?= this
+					}
 				}
 			}
 			triggered_desc = {
@@ -135,7 +165,7 @@ religious_party = {
 				desc = party_buddhist
 				trigger = {
 					root.religion = {
-						has_discrimination_trait = buddhist
+						has_discrimination_trait = heritage_dharmic
 					}
 				}
 			}
@@ -161,7 +191,7 @@ religious_party = {
 				desc = party_muslim
 				trigger = {
 					root.religion = {
-						has_discrimination_trait = muslim
+						has_discrimination_trait = heritage_islamic
 					}
 				}
 			}
@@ -175,14 +205,14 @@ religious_party = {
 				desc = party_christian
 				trigger = {
 					root.religion = {
-						has_discrimination_trait = christian
+						has_discrimination_trait = heritage_christian
 					}
 				}
 			}
 			triggered_desc = {
 				desc = party_hindu_mahasabha
 				trigger = {
-					ig:ig_devout = {
+					ig:ig_devout ?= {
 						has_ideology = ideology:ideology_hindu_moralist
 					}
 					OR = {
@@ -245,7 +275,7 @@ religious_party = {
 				owner = {
 					country_is_in_south_america = yes
 					any_primary_culture = {
-						has_discrimination_trait = hispanophone
+						has_discrimination_trait = language_hispanophone
 					}
 				}
 			}
@@ -262,7 +292,7 @@ religious_party = {
 						country_has_primary_culture = cu:yankee
 						country_has_primary_culture = cu:dixie
 					}
-					has_law = law_type:law_presidential_republic
+					has_law_or_variant = law_type:law_presidential_republic
 				}
 			}
 			add = {
@@ -291,7 +321,7 @@ religious_party = {
 			limit = {
 				is_interest_group_type = ig_devout
 				owner = {
-					has_law = law_type:law_theocracy
+					has_law_or_variant = law_type:law_theocracy
 				}
 			}
 			add = {
@@ -307,7 +337,7 @@ religious_party = {
 					AND = {
 						exists = owner.py:religious_party
 						owner = {
-							ig:ig_devout = {
+							ig:ig_devout ?= {
 								NOT = { is_member_of_party = owner.py:religious_party }
 							}
 						}
@@ -333,7 +363,7 @@ religious_party = {
 			limit = {
 				is_powerful = no
 				owner = {
-					ig:ig_devout = {
+					ig:ig_devout ?= {
 						is_powerful = yes
 					}
 				}
@@ -372,6 +402,9 @@ religious_party = {
 						has_ideology = ideology:ideology_corporatist_leader
 					}
 				}
+				NOT = {
+					c:AUS ?= owner
+				}
 			}
 			add = {
 				value = 10
@@ -392,7 +425,7 @@ religious_party = {
 					}
 				}
 				owner = {
-					has_law = law_type:law_womens_suffrage
+					has_law_or_variant = law_type:law_womens_suffrage
 				}
 			}
 			add = {
@@ -404,6 +437,9 @@ religious_party = {
 			limit = {
 				is_interest_group_type = ig_devout
 				is_powerful = yes
+				NOT = {
+					c:AUS ?= owner
+				}
 			}
 			multiply = {
 				value = 2

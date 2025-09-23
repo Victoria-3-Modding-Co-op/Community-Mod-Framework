@@ -67,6 +67,13 @@ on_country_formed = {
 					c:YUG ?= ROOT
 				}
 				trigger_event = { id = formation.9 popup = yes }
+
+				if = {
+					limit = {
+						NOT = { was_formed_from = BUL }
+					}
+					remove_primary_culture = cu:bulgarian
+				}
 			}
 			else_if = {
 				limit = {
@@ -139,6 +146,32 @@ on_country_formed = {
 					c:GER ?= ROOT
 				}
 				trigger_event = { id = german_unification.4 popup = yes }
+				if = {
+					limit = {
+						any_scope_state = {
+							state_region = {
+								OR = {
+									is_homeland = cu:hungarian
+									is_homeland = cu:romanian
+									AND = {
+										is_homeland = cu:croat
+										NOT = {
+											s:STATE_ISTRIA ?= this
+										}
+									}
+									AND = {
+										is_homeland = cu:north_italian
+										NOR = {
+											s:STATE_ISTRIA ?= this
+											s:STATE_SOUTH_TYROL ?= this
+										}
+									}
+								}
+							}
+						}
+					}
+					trigger_event = { id = austria_germany.1 days = 7 popup = yes }
+				}
 			}
 			else_if = {
 				limit = {
@@ -177,6 +210,12 @@ on_country_formed = {
 					c:FSA ?= ROOT
 				}
 				trigger_event = { id = fsa_events.1 popup = yes }
+			}
+			else_if = {
+				limit = {
+					c:GAL ?= ROOT
+				}
+				trigger_event = { id = galicia_formation.1 popup = yes }
 			}
 			else = {
 				trigger_event = { id = formation.17 popup = yes }

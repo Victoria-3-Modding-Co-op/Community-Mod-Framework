@@ -1387,7 +1387,7 @@ liberal_party = {
 					is_interest_group_type = ig_petty_bourgeoisie
 				}
 				add  = {
-					value = 20
+					value = 40
 					desc = "from_archetype_party"
 				}
 			}

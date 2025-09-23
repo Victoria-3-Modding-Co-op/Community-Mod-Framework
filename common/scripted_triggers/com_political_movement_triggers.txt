@@ -4,6 +4,9 @@
 		has_ideology = ideology:ideology_humanitarian
 		has_ideology = ideology:ideology_utopian
 		has_ideology = ideology:ideology_turkfm_ottomanist #GOTB
+		has_ideology = ideology:ideology_usfp_abolitionist_radical #USFP
+		has_ideology = ideology:ideology_usfp_progressive
+		has_ideology = ideology:ideology_usfp_social_gospel_leader
 		law_stance = {
 			law = law_type:law_slavery_banned
 			value >= approve

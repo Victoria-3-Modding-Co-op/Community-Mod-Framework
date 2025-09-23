@@ -66,6 +66,11 @@ anarchist_party = {
 						country_has_primary_culture = cu:north_italian
 						country_has_primary_culture = cu:south_italian
 					}
+					NOR = {
+						c:AUS ?= this
+						c:KUK ?= this
+						c:HRE ?= this
+					}
 				}
 			}
 			# MoH
@@ -170,7 +175,7 @@ anarchist_party = {
 					has_ideology = ideology:ideology_anarchist
 				}
 				owner = {
-					has_law = law_type:law_council_republic
+					has_law_or_variant = law_type:law_council_republic
 					ruler = {
 						has_ideology = ideology:ideology_vanguardist
 					}
@@ -215,8 +220,8 @@ anarchist_party = {
 				}
 				owner = {
 					OR = {
-						has_law = law_type:law_outlawed_dissent
-						has_law = law_type:law_censorship
+						has_law_or_variant = law_type:law_outlawed_dissent
+						has_law_or_variant = law_type:law_censorship
 					}
 				}
 			}
@@ -237,7 +242,7 @@ anarchist_party = {
 					}
 				}
 				owner = {
-					has_law = law_type:law_outlawed_dissent
+					has_law_or_variant = law_type:law_outlawed_dissent
 				}
 			}
 			add = {
@@ -268,7 +273,7 @@ anarchist_party = {
 					}
 				}
 				owner = {
-					has_law = law_type:law_land_based_taxation
+					has_law_or_variant = law_type:law_land_based_taxation
 				}
 			}
 			add = {
@@ -285,7 +290,7 @@ anarchist_party = {
 					}
 				}
 				owner = {
-					has_law = law_type:law_state_religion
+					has_law_or_variant = law_type:law_state_religion
 				}
 			}
 			add = {
@@ -315,7 +320,7 @@ anarchist_party = {
 					}
 				}
 				owner = {
-					has_law = law_type:law_peasant_levies
+					has_law_or_variant = law_type:law_peasant_levies
 				}
 			}
 			add = {
@@ -327,8 +332,9 @@ anarchist_party = {
 			limit = {
 				owner = {
 					OR = {
-						has_law = law_type:law_legacy_slavery
-						has_law = law_type:law_slave_trade
+						has_law_or_variant = law_type:law_legacy_slavery
+						has_law_or_variant = law_type:law_slave_trade
+						has_law_or_variant = law_type:law_colonial_slavery
 					}
 				}
 				OR = {
@@ -354,7 +360,7 @@ anarchist_party = {
 		if = { # anti-serfdom
 			limit = {
 				owner = {
-					has_law = law_type:law_serfdom
+					has_law_or_variant = law_type:law_serfdom
 				}
 				OR = {
 					has_ideology = ideology:ideology_egalitarian

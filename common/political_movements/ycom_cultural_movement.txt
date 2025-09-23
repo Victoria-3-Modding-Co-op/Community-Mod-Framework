@@ -657,16 +657,24 @@ movement_cultural_minority = {
 				#USFP: White Radical Abolitionists can join the Afro-American movement, but only once Abolition is done
 				AND = {
 					scope:culture = cu:afro_american
-					owner = {
+					owner ?= {
 						NOT = {
 							any_political_movement = {
 								is_political_movement_type = movement_anti_slavery
 							}
 						}
 					}
+					has_ideology = ideology:ideology_usfp_abolitionist_radical
+				}
+				#USFP: Any African-heritage character can join the Afro-American movement even if they're not strictly afro_american culture
+				AND = {
+					scope:culture = cu:afro_american
+					culture = {
+						has_discrimination_trait_group = heritage_group_african
+					}
 				}
 			}
-		}	
+		}
 		trigger_else = {
 			culture = scope:culture
 		}
@@ -676,9 +684,19 @@ movement_cultural_minority = {
 			has_ideology = ideology:ideology_sovereignist_leader
 			has_ideology = ideology:ideology_reformer
 			has_ideology = ideology:ideology_usfp_abolitionist_radical
+			has_ideology = ideology:ideology_turkfm_reformer #GOTB
 			has_ideology = ideology:ideology_turkfm_ottomanist #GOTB
+			#USFP: African-heritage characters of any ideology can join the Afro-American movement
+			AND = {
+				is_usfp_active = yes
+				scope:culture = cu:afro_american
+				culture = {
+					has_discrimination_trait_group = heritage_group_african
+				}
+			}
 		}
 	}
+
 	character_support_weight = {
 		value = 50
 		if = {

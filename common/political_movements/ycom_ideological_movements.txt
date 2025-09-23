@@ -557,6 +557,10 @@
 			value = usfp_movement_anti_slavery_additional_radicalism_add
 			desc = "human_rights"						# Desc only shows when value =/= 0
 		}
+		add = {
+			value = usfp_movement_missouri_compromise_radicalism_add
+			desc = "missouri_compromise" # Desc only shows when value =/= 0
+		}
 	}
 }
 
@@ -1043,6 +1047,10 @@ movement_pro_slavery = {
 		add = {
 			value = usfp_movement_pro_slavery_additional_radicalism_add
 			desc = "powerful_abolitionist"
+		}
+		add = {
+			value = usfp_movement_missouri_compromise_radicalism_add
+			desc = "missouri_compromise" # Desc only shows when value =/= 0
 		}
 	}
 }
@@ -2543,6 +2551,12 @@ movement_socialist = {
 			}
 			multiply = 0.05
 		}
+
+		#USFP
+		multiply = {
+			value = usfp_harlem_renaissance_socialism_attraction_mult
+			desc = "harlem_renaissance_movement_attraction"
+		}
 	}
 
 	revolution = {
@@ -2933,6 +2947,12 @@ movement_anarchist = {
 			value = pop_radical_fraction
 			add = 1
 		}
+
+		#USFP
+		multiply = {
+			value = usfp_harlem_renaissance_socialism_attraction_mult
+			desc = "harlem_renaissance_movement_attraction"
+		}
 	}
 
 	revolution = {
@@ -3271,6 +3291,12 @@ movement_communist = {
 			desc = "POP_RADICALS"
 			value = pop_radical_fraction
 			add = 1
+		}
+
+		#USFP
+		multiply = {
+			value = usfp_harlem_renaissance_socialism_attraction_mult
+			desc = "harlem_renaissance_movement_attraction"
 		}
 	}
 
@@ -3753,6 +3779,7 @@ movement_corporatist = {
 	ideology = ideology_corporatist_movement
 	character_ideologies = {
 		ideology_corporatist_leader
+		ideology_usfp_social_gospel_leader
 	}
 
 	creation_trigger = {
@@ -3790,6 +3817,7 @@ movement_corporatist = {
 			has_ideology = ideology:ideology_integralist
 			has_ideology = ideology:ideology_social_democrat
 			has_ideology = ideology:ideology_utopian
+			has_ideology = ideology:ideology_usfp_social_gospel_leader
 		}
 	}
 	character_support_weight = {
@@ -6253,6 +6281,11 @@ movement_reactionary = {
 			any_political_movement = {
 				is_political_movement_type = movement_legitimist
 			}
+		}
+		#USFP
+		NOT = {
+			is_usfp_active = yes
+			usfp_country_is_american = yes #Reactionary is too monarchist for america
 		}
 	}
 	creation_weight = {

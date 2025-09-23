@@ -1,110 +1,19 @@
-﻿## ANTI-SLAVERY
+﻿		## ANTI-SLAVERY
 #Human Rights tech doubles abolition support
-usfp_movement_anti_slavery_pop_support_mult = {
-	if = {
-		limit = {
-			is_usfp_active = yes
-			owner ?= {
-				has_technology_researched = human_rights
-			}
-		}
-		value = 2.0
-	}
-	else = {
-		value = 1	# Mult no change
-	}
-}
+usfp_movement_anti_slavery_pop_support_mult = { value = 1 }
 #By the time you have Human Rights tech slavery should really be getting abolished
-usfp_movement_anti_slavery_additional_radicalism_add = {
-	if = {
-		limit = {
-			is_usfp_active = yes
-			owner ?= {
-				has_technology_researched = human_rights
-			}
-		}
-		value = 0.2
-	}
-	else = {
-		value = 0	# Add no change
-	}
-}
+usfp_movement_anti_slavery_additional_radicalism_add = { value = 0 }
+
+usfp_movement_missouri_compromise_radicalism_add = { value =  0 }
 
 ## PRO-SLAVERY
-usfp_movement_pro_slavery_secession_state_weight_mult = {
-	#USFP: Deep South and Upper South more inclined to join
-	if = {
-		limit = {
-			is_usfp_active = yes
-		}
-		#USFP: Deep South and Upper South more inclined to join
-		if = {
-			limit = {
-				is_usfp_active = yes
-				has_modifier = usfp_deep_south_modifier
-			}
-			value = 5.0
-		}
-		else_if = {
-			limit = {
-				is_usfp_active = yes
-				has_modifier = usfp_upper_south_modifier
-			}
-			value = 2.0
-		}
-		#USFP: West Virginia goes with real Virginia
-		if = {
-			limit = {
-				is_usfp_active = yes
-				state_region = s:STATE_WEST_VIRGINIA
-			}
-			value = 10.0
-		}
-		#USFP: Missouri is less likely
-		if = {
-			limit = {
-				is_usfp_active = yes 
-				state_region = s:STATE_MISSOURI
-			}
-			value = 0.5
-		}
-	}
-	else = {
-		value = 1	# Mult no change
-	}
-}
+usfp_movement_pro_slavery_secession_state_weight_mult = {value = 1}
+
 #Powerful IG with anti-slavery leader spooks the slavers
-usfp_movement_pro_slavery_additional_radicalism_add = {
-	if = {
-		limit = {
-			is_usfp_active = yes
-			owner ?= {
-				usfp_country_is_american = yes
-				any_interest_group = {
-					is_powerful = yes
-					leader = {
-						character_is_anti_slavery = yes
-					}
-				}
-			}
-		}
-		value = 0.3
-	}
-	else = {
-		value = 0	# Add no change
-	}
-}
+usfp_movement_pro_slavery_additional_radicalism_add = { value = 0 }
 
 ## LIBERAL
-usfp_movement_liberal_character_support_weight_mult = {
-	if = {
-		limit = {
-			is_usfp_active = yes
-			has_ideology = ideology:ideology_usfp_social_darwinist_leader #USFP
-		}
-		value = 0.2
-	}
-	else = {
-		value = 1	# Mult no change
-	}
-}
+usfp_movement_liberal_character_support_weight_mult = { value = 1 }
+
+usfp_harlem_renaissance_socialism_attraction_mult = { value = 1 }
+usfp_harlem_renaissance_religious_attraction_mult = { value = 1 }

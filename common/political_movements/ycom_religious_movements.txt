@@ -6,6 +6,7 @@
 		ideology_theocrat
 		ideology_traditionalist
 		ideology_turkfm_islamist #GOTB
+		ideology_usfp_social_gospel_leader #USFP
 	}
 
 	can_cause_obstinance = yes
@@ -211,6 +212,12 @@
                 value = 0.25
             }
         }
+
+		#USFP
+		multiply = {
+			value = usfp_harlem_renaissance_religious_attraction_mult
+			desc = "harlem_renaissance_movement_attraction"
+		}
     }
 
     revolution = {
@@ -695,6 +702,12 @@ movement_religious_minority = {
 				}
 				multiply = 0.5
 			}
+		}
+
+		#USFP
+		multiply = {
+			value = usfp_harlem_renaissance_religious_attraction_mult
+			desc = "harlem_renaissance_movement_attraction"
 		}
 	}
 

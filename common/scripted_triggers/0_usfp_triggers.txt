@@ -9,3 +9,7 @@
 usfp_has_american_primary_culture = {
 	always = no
 }
+
+usfp_has_constitutional_government = {
+	has_law_or_variant = law_type:law_presidential_republic
+}

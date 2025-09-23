@@ -6,7 +6,6 @@
 		ideology_theocrat
 		ideology_traditionalist
 		ideology_turkfm_islamist #GOTB
-		ideology_turkfm_theocrat #GOTB
 	}
 	
 	creation_trigger = {
@@ -59,7 +58,6 @@
 					has_ideology = ideology:ideology_traditionalist
 					has_ideology = ideology:ideology_theocrat
 					has_ideology = ideology:ideology_turkfm_islamist #GOTB
-					has_ideology = ideology:ideology_turkfm_theocrat #GOTB
 				}
 			}
 			multiply = {

@@ -10,8 +10,9 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=3385002128
 ## Contents
 * [Setting Dependency](#setting-dependency)
 * [Debug Mode](#debug-mode)
-* [Variable Prefixing](#variable-prefixing)
 * [Political Movements](#political-movements)
+    * [Adding New Ideologies](#adding-new-ideologies)
+    * [Modifying Movement Weights](#modifying-movement-weights)
 * [GUI Framework](#gui-framework)
     * [Alternative Event Windows](#alternative-event-windows)
     * [Hiding Objective Header](#hiding-objective-header)
@@ -58,20 +59,40 @@ The keybinding `CTRL + ALT + D` toggles the global variable `com_debug`.
 
 This can be used to enable or disable debug content like debug Decisions or Events.
 
-
-# Variable Prefixing
-
-If you add a variable, list, effect, trigger, etc. for use in CMF, please prefix it using `com_`. This is to prevent conflicts with both basegame and other mods.
-
 # Political Movements
 
-Overwrites vanilla Political Movement definitions with scripted triggers to aid in mod compatibility
+CMF overwrites vanilla Political Movement definitions with versions that have scripted triggers to aid in mod compatibility
 
-Add dummy ideologies from mods into political movements, allowing them to spawn with the appropiate mod enabled:
-* Add a dummy ideology with the same name as your mod ideology
-* Assign the ideology to the appropiate political movements (and scripted triggers if needed)
-* Load this mod below any other mod
-* Your mod will overwrite the ideology definition and allow it to spawn in the specified political movements
+## Adding New Ideologies
+To add dummy ideologies from your mods into political movements, allowing them to spawn with the appropiate mod enabled:
+* Add a dummy ideology to CMF with the same name as your mod ideology in a file named `00_dummy_ideologies_<your_mod>`.
+* Assign the ideology to the appropiate political movements (and scripted triggers if needed).
+* Ensure the ideologies in your mod are in a file that will overwrite the dummy one (see [File Naming](.github/CONTRIBUTING.md#file-naming)).
+* Your mod will overwrite the ideology definition and allow it to spawn in the specified political movements.
+
+## Modifying Movement Weights
+Depending on whether your mod must depend on CMF, or is able to be used in a standalone capacity, what you do may be slightly different.
+* Work out where you need to either add or multiply values for a particular movement.
+* Add a bloc to the CMF movement that looks like:
+```
+# Your_Mod
+add/multiply = {
+	value = <your_mod>_<movement_type>_<movement_section>_<function>
+	desc = "YOUR_LOCALIZATION"
+}
+```
+> **For example:**  
+> `mog_plp_movement_minority_rights_pop_support_weight_mult`  
+> **Is made up of:**  
+> mod: mog_plp_  
+> type: movement_minority_rights_  
+> section: pop_support_weight_  
+> function: mult
+* Then; create a file in common\script_values called `00_<your_mod>_movement_values`.
+* Define all values you want added in this file, = 0 for `add` and = 1 for `mult` (as seen in `00_mog_plp_movement_values`)
+* Define the values again in your own mod, with all the maths for what you need, in a file that will overwrite the dummy one. (see [File Naming](.github/CONTRIBUTING.md#file-naming))
+* *Optional:* If your mod will depend on CMF (cannot work without CMF) you can define the maths in your `00_<your_mod>_movement_values` file (as seen in `00_anzfp_movement_values`) as long as you have a scripted trigger for when your mod is active. (see [Community Mod Triggers](#community-mod-triggers))
+
 
 # GUI Framework
 

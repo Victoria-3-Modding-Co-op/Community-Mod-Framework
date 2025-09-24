@@ -754,8 +754,12 @@ types com_ongoing_outliner_items {
 				visible = "[EqualTo_int32(Law.GetEnactmentPhase, '(int32)0')]"
 			}
 
+			background = {
+				using = fade_center_colored_grey
+			}
+
 			icon = {
-				using = highlighted_square_selection
+				using = highlighted_active_square_selection
 			}
 
 			textbox = {
@@ -1538,8 +1542,7 @@ types com_ongoing_outliner_items {
 	type outliner_revolutionary_political_movement_item = flowcontainer {
 		direction = vertical
 
-		datacontext = "[AccessPlayer.GetGrowingCivilWar.AccessPoliticalMovement]"
-		visible = "[AccessPlayer.GetGrowingCivilWar.IsValid]"
+		datacontext = "[CivilWar.AccessPoliticalMovement]"
 
 		onmousehierarchyenter = "[AccessHighlightManager.HighlightPoliticalMovement(PoliticalMovement.Self)]"
 		onmousehierarchyleave = "[AccessHighlightManager.RemoveHighlight]"
@@ -1689,7 +1692,7 @@ types com_ongoing_outliner_items {
 								round_progress_bad = {
 									size = { 80% 80% }
 									position = { 0 7 }
-									value = "[FixedPointToFloat(AccessPlayer.GetGrowingCivilWar.GetClockTime)]"
+									value = "[FixedPointToFloat(CivilWar.GetClockTime)]"
 									parentanchor = center
 								}
 								
@@ -1716,11 +1719,7 @@ types com_ongoing_outliner_items {
 							widget = {
 								size = { 230 25 }
 
-								revolution_progress_bar = {
-									blockoverride "datacontext" {
-										datacontext = "[AccessPlayer.GetGrowingCivilWar]"
-									}
-								}
+								revolution_progress_bar = {}
 							}
 
 							### Movement Header ###
@@ -1822,7 +1821,6 @@ types com_ongoing_outliner_items {
 			
 			### Interest Groups
 			flowcontainer = {
-				datacontext = "[AccessPlayer.GetGrowingCivilWar]"
 				visible = "[Not(IsDataModelEmpty(CivilWar.AccessInsurrectionaryIGs(GetPlayer)))]"
 				datamodel = "[CivilWar.AccessInsurrectionaryIGs(GetPlayer)]"
 				parentanchor = hcenter
@@ -1847,8 +1845,6 @@ types com_ongoing_outliner_items {
 				}
 			}
 		}
-
-		outliner_revolutionary_movement_events = {}
 	}
 
 	### REVOLUTIONARY MOVEMENT EVENT LIST

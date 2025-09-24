@@ -1,0 +1,19 @@
+﻿		## ANTI-SLAVERY
+#Human Rights tech doubles abolition support
+usfp_movement_anti_slavery_pop_support_mult = { value = 1 }
+#By the time you have Human Rights tech slavery should really be getting abolished
+usfp_movement_anti_slavery_additional_radicalism_add = { value = 0 }
+
+usfp_movement_missouri_compromise_radicalism_add = { value =  0 }
+
+## PRO-SLAVERY
+usfp_movement_pro_slavery_secession_state_weight_mult = {value = 1}
+
+#Powerful IG with anti-slavery leader spooks the slavers
+usfp_movement_pro_slavery_additional_radicalism_add = { value = 0 }
+
+## LIBERAL
+usfp_movement_liberal_character_support_weight_mult = { value = 1 }
+
+usfp_harlem_renaissance_socialism_attraction_mult = { value = 1 }
+usfp_harlem_renaissance_religious_attraction_mult = { value = 1 }

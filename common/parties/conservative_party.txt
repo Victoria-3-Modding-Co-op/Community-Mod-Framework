@@ -37,10 +37,35 @@ conservative_party = {
 			}
 
 			triggered_desc = {
+				desc = party_fatherland_front
+				trigger = {
+					exists = c:AUS
+					THIS = c:AUS
+					any_interest_group = {
+						is_in_government = yes
+						party ?= {
+							is_party_type = conservative_party
+						}
+					}
+					has_law_or_variant = law_type:law_single_party_state
+					has_variable = fatherland_front_var
+				}
+			}
+			triggered_desc = {
 				desc = party_christian_social_party
 				trigger = {
 					exists = c:AUS
 					THIS = c:AUS
+					NAND = {
+						any_interest_group = {
+							is_in_government = yes
+							party ?= {
+								is_party_type = fascist_party
+							}
+						}
+						has_law_or_variant = law_type:law_single_party_state
+						has_variable = fatherland_front_var
+					}
 				}
 			}
 			triggered_desc = {
@@ -140,7 +165,7 @@ conservative_party = {
 				desc = party_moderate_party
 				trigger = {
 					country_has_primary_culture = cu:brazilian
-					has_law = law_type:law_monarchy
+					has_law_or_variant = law_type:law_monarchy
 					OR = {
 						game_date <= 1837.1.1
 						has_modifier = brz_regency
@@ -151,7 +176,7 @@ conservative_party = {
 				desc = party_conservative
 				trigger = {
 					country_has_primary_culture = cu:brazilian
-					has_law = law_type:law_monarchy
+					has_law_or_variant = law_type:law_monarchy
 					NOT = {
 						has_modifier = brz_regency
 					}
@@ -162,8 +187,8 @@ conservative_party = {
 				trigger = {
 					country_has_primary_culture = cu:brazilian
 					OR = {
-						has_law = law_type:law_presidential_republic
-						has_law = law_type:law_parliamentary_republic
+						has_law_or_variant = law_type:law_presidential_republic
+						has_law_or_variant = law_type:law_parliamentary_republic
 					}
 					any_scope_state = {
 						state_region = s:STATE_BAHIA
@@ -191,8 +216,8 @@ conservative_party = {
 				trigger = {
 					country_has_primary_culture = cu:brazilian
 					OR = {
-						has_law = law_type:law_presidential_republic
-						has_law = law_type:law_parliamentary_republic
+						has_law_or_variant = law_type:law_presidential_republic
+						has_law_or_variant = law_type:law_parliamentary_republic
 					}
 					any_scope_state = {
 						state_region = s:STATE_SAO_PAULO
@@ -220,8 +245,8 @@ conservative_party = {
 				trigger = {
 					country_has_primary_culture = cu:brazilian
 					OR = {
-						has_law = law_type:law_presidential_republic
-						has_law = law_type:law_parliamentary_republic
+						has_law_or_variant = law_type:law_presidential_republic
+						has_law_or_variant = law_type:law_parliamentary_republic
 					}
 					any_scope_state = {
 						state_region = s:STATE_MINAS_GERAIS
@@ -249,8 +274,8 @@ conservative_party = {
 				trigger = {
 					country_has_primary_culture = cu:brazilian
 					OR = {
-						has_law = law_type:law_presidential_republic
-						has_law = law_type:law_parliamentary_republic
+						has_law_or_variant = law_type:law_presidential_republic
+						has_law_or_variant = law_type:law_parliamentary_republic
 					}
 					NOR = {
 						any_scope_state = {
@@ -270,7 +295,7 @@ conservative_party = {
 				trigger = {
 					exists = c:RUS
 					THIS = c:RUS
-					has_law = law_type:law_monarchy
+					has_law_or_variant = law_type:law_monarchy
 				}
 			}
 			triggered_desc = {
@@ -278,7 +303,7 @@ conservative_party = {
 				trigger = {
 					exists = c:CHI
 					THIS = c:CHI
-					has_law = law_type:law_monarchy
+					has_law_or_variant = law_type:law_monarchy
 				}
 			}
 			triggered_desc = {
@@ -288,10 +313,10 @@ conservative_party = {
 					exists = c:CHI
 					THIS = c:CHI
 					NOT = {
-						has_law = law_type:law_monarchy
-						has_law = law_type:law_council_republic
+						has_law_or_variant = law_type:law_monarchy
+						has_law_or_variant = law_type:law_council_republic
 					}
-					has_law = law_type:law_single_party_state
+					has_law_or_variant = law_type:law_single_party_state
 				}
 			}
 			triggered_desc = {
@@ -301,8 +326,8 @@ conservative_party = {
 					exists = c:CHI
 					THIS = c:CHI
 					NOT = {
-						has_law = law_type:law_monarchy
-						has_law = law_type:law_council_republic
+						has_law_or_variant = law_type:law_monarchy
+						has_law_or_variant = law_type:law_council_republic
 					}
 				}
 			}
@@ -311,7 +336,7 @@ conservative_party = {
 				trigger = {
 					exists = c:JAP
 					THIS = c:JAP
-					has_law = law_type:law_monarchy
+					has_law_or_variant = law_type:law_monarchy
 				}
 			}
 			triggered_desc = {
@@ -326,10 +351,10 @@ conservative_party = {
 				trigger = {
 					exists = c:GRE
 					THIS = c:GRE
-					has_law = law_type:law_monarchy
+					has_law_or_variant = law_type:law_monarchy
 					ruler = {
 						culture = {
-							has_discrimination_trait = german_speaking
+							has_discrimination_trait = heritage_germanic
 						}
 					}
 				}
@@ -361,6 +386,11 @@ conservative_party = {
 					OR = {
 						country_has_primary_culture = cu:north_italian
 						country_has_primary_culture = cu:south_italian
+					}
+					NOR = {
+						c:AUS ?= this
+						c:KUK ?= this
+						c:HRE ?= this
 					}
 				}
 			}
@@ -503,7 +533,7 @@ conservative_party = {
 				OR = {
 					has_ideology = ideology:ideology_paternalistic
 					has_ideology = ideology:ideology_magnatial
-					has_ideology = ideology:ideology_stratocratic
+					has_ideology = ideology:ideology_hierarchic
 					has_ideology = ideology:ideology_patriarchal
 					has_ideology = ideology:ideology_moralist
 					has_ideology = ideology:ideology_corporatist
@@ -590,9 +620,10 @@ conservative_party = {
 				}
 				owner = {
 					OR = {
-						this ?= c:USA
-						NOT = { 
-							has_law = law_type:law_slavery_banned 
+						NOT = { has_law_or_variant = law_type:law_slavery_banned }
+						AND = {
+							is_usfp_active = yes #USFP: abolitionists remember the conservative party being pro-slavery
+							c:USA ?= this
 						}
 					}
 				}
@@ -604,7 +635,10 @@ conservative_party = {
 		}
 		if = { # patriots are inclined towards conservativism
 			limit = {
-				has_ideology = ideology:ideology_patriotic
+				OR = {
+					has_ideology = ideology:ideology_patriotic
+					has_ideology = ideology:ideology_military_absolutist
+				}
 			}
 			add = {
 				value = 5
@@ -630,7 +664,7 @@ conservative_party = {
 					}
 				}
 				owner = {
-					has_law = law_type:law_universal_suffrage
+					has_law_or_variant = law_type:law_universal_suffrage
 				}
 			}
 			add = {
@@ -642,7 +676,7 @@ conservative_party = {
 			limit = {
 				OR = {
 					has_ideology = ideology:ideology_plutocratic
-					has_ideology = ideology:ideology_stratocratic
+					has_ideology = ideology:ideology_hierarchic
 
 					# ANZFP
 					trigger_if = {
@@ -656,7 +690,7 @@ conservative_party = {
 					}
 				}
 				owner = {
-					has_law = law_type:law_graduated_taxation
+					has_law_or_variant = law_type:law_graduated_taxation
 				}
 			}
 			add = {
@@ -668,7 +702,7 @@ conservative_party = {
 			limit = {
 				has_ideology = ideology:ideology_individualist
 				owner = {
-					has_law = law_type:law_public_health_insurance
+					has_law_or_variant = law_type:law_public_health_insurance
 				}
 			}
 			add = {
@@ -683,7 +717,7 @@ conservative_party = {
 					has_ideology = ideology:ideology_pious
 				}
 				owner = {
-					has_law = law_type:law_public_schools
+					has_law_or_variant = law_type:law_public_schools
 				}
 			}
 			add = {
@@ -703,7 +737,7 @@ conservative_party = {
 					}
 				}
 				owner = {
-					has_law = law_type:law_total_separation
+					has_law_or_variant = law_type:law_total_separation
 				}
 			}
 			add = {
@@ -735,7 +769,7 @@ conservative_party = {
 			limit = {
 				has_ideology = ideology:ideology_patriarchal
 				owner = {
-					has_law = law_type:law_womens_suffrage
+					has_law_or_variant = law_type:law_womens_suffrage
 				}
 
 				# ANZFP
@@ -755,7 +789,7 @@ conservative_party = {
 			limit = {
 				has_ideology = ideology:ideology_patriarchal
 				owner = {
-					has_law = law_type:law_women_in_the_workplace
+					has_law_or_variant = law_type:law_women_in_the_workplace
 				}
 
 				# ANZFP
@@ -785,7 +819,7 @@ conservative_party = {
 					}
 				}
 				owner = {
-					has_law = law_type:law_multicultural
+					has_law_or_variant = law_type:law_multicultural
 				}
 			}
 			add = {
@@ -798,12 +832,13 @@ conservative_party = {
 			limit = {
 				OR = {
 					has_ideology = ideology:ideology_patriotic
+					has_ideology = ideology:ideology_military_absolutist
 					leader = { has_ideology = ideology:ideology_authoritarian }
 				}
 				owner = {
 					OR = { #vanilla bugfix
-						has_law = law_type:law_no_home_affairs
-						has_law = law_type:law_guaranteed_liberties
+						has_law_or_variant = law_type:law_no_home_affairs
+						has_law_or_variant = law_type:law_guaranteed_liberties
 					}
 				}
 			}
@@ -817,13 +852,14 @@ conservative_party = {
 				owner = {
 					has_technology_researched = law_enforcement
 					OR = { 
-						has_law = law_type:law_right_of_assembly
-						has_law = law_type:law_protected_speech
+						has_law_or_variant = law_type:law_right_of_assembly
+						has_law_or_variant = law_type:law_protected_speech
 					}
 				}
 				OR = {
 					has_ideology = ideology:ideology_patriarchal
 					has_ideology = ideology:ideology_patriotic
+					has_ideology = ideology:ideology_military_absolutist
 					leader = { has_ideology = ideology:ideology_authoritarian }
 
 					# ANZFP
@@ -860,8 +896,8 @@ conservative_party = {
 				}
 				owner = {
 					NOR = {
-						has_law = law_type:law_monarchy
-						has_law = law_type:law_theocracy
+						has_law_or_variant = law_type:law_monarchy
+						has_law_or_variant = law_type:law_theocracy
 					}
 				}
 			}
@@ -873,7 +909,7 @@ conservative_party = {
 		if = { # landowners and industrialists hate labor rights
 			limit = {
 				OR = {
-					has_ideology = ideology:ideology_stratocratic
+					has_ideology = ideology:ideology_hierarchic
 					has_ideology = ideology:ideology_laissez_faire
 
 					# ANZFP
@@ -887,10 +923,10 @@ conservative_party = {
 						}
 					}
 				}
-				OR = {
-					owner = {
-						has_law = law_type:law_regulatory_bodies
-						has_law = law_type:law_worker_protections
+				owner = {
+					OR = { #Vanilla bugfix
+						has_law_or_variant = law_type:law_regulatory_bodies
+						has_law_or_variant = law_type:law_worker_protections
 					}
 				}
 			}
@@ -902,7 +938,7 @@ conservative_party = {
 		if = { # conservatives hate welfare
 			limit = {
 				OR = {
-					has_ideology = ideology:ideology_stratocratic
+					has_ideology = ideology:ideology_hierarchic
 					has_ideology = ideology:ideology_individualist
 
 					# ANZFP
@@ -913,10 +949,10 @@ conservative_party = {
 						anz_stratocratic_ideologies = yes
 					}
 				}
-				OR = {
-					owner = {
-						has_law = law_type:law_wage_subsidies
-						has_law = law_type:law_old_age_pension
+				owner = {
+					OR = { #Vanilla bugfix
+						has_law_or_variant = law_type:law_wage_subsidies
+						has_law_or_variant = law_type:law_old_age_pension
 					}
 				}
 			}
@@ -930,6 +966,7 @@ conservative_party = {
 				OR = {
 					has_paternalist_ideology = yes
 					has_ideology = ideology:ideology_patriotic
+					has_ideology = ideology:ideology_military_absolutist
 
 					# ANZFP
 					trigger_if = {
@@ -941,12 +978,43 @@ conservative_party = {
 				}
 				owner = {
 					has_technology_researched = law_enforcement
-					has_law = law_type:law_no_police
+					has_law_or_variant = law_type:law_no_police
 				}
 			}
 			add = {
 				value = 3
 				desc = "from_no_police"
+			}
+		}
+		# Austria
+		if = { # Austrian Devout want to be part of the CSU
+			limit = {
+				c:AUS ?= owner
+				is_interest_group_type = ig_devout
+				NOR = {
+					interest_group_has_liberal_ideology = yes
+					interest_group_has_progressive_ideology = yes
+					interest_group_has_socialist_ideology = yes
+				}
+			}
+			add = {
+				value = 5
+				desc = "from_austrian_devout"
+			}
+		}
+		if = { # Corporatism
+			limit = {
+				OR = {
+					has_ideology = ideology:ideology_corporatist
+					leader = {
+						has_ideology = ideology:ideology_corporatist_leader
+					}
+				}
+				c:AUS ?= owner
+			}
+			add = {
+				value = 10
+				desc = "from_corporatism"
 			}
 		}
 	
@@ -1102,10 +1170,10 @@ conservative_party = {
 				owner = {
 					any_interest_group = {
 						has_party = yes
+						is_powerful = yes
 						party = {
 							is_party_type = conservative_party
 						}
-						is_powerful = yes
 						leader = {
 							has_ideology = ideology:ideology_orleanist
 						}
@@ -1128,10 +1196,10 @@ conservative_party = {
 				owner = {
 					any_interest_group = {
 						has_party = yes
+						is_powerful = yes
 						party = {
 							is_party_type = conservative_party
 						}
-						is_powerful = yes
 						leader = {
 							has_ideology = ideology:ideology_legitimist
 						}
@@ -1154,10 +1222,10 @@ conservative_party = {
 				owner = {
 					any_interest_group = {
 						has_party = yes
+						is_powerful = yes
 						party = {
 							is_party_type = conservative_party
 						}
-						is_powerful = yes
 						leader = {
 							has_ideology = ideology:ideology_bonapartist
 						}
@@ -1167,6 +1235,28 @@ conservative_party = {
 			add = {
 				value = -5
 				desc = "from_french_monarchist_rival"
+			}
+		}
+		if = {
+			limit = {
+				is_interest_group_type = ig_armed_forces
+				leader = {
+					NOR = {
+						has_ideology = ideology:ideology_liberal_leader
+						has_ideology = ideology:ideology_republican_leader
+						has_ideology = ideology:ideology_radical
+						has_ideology = ideology:ideology_communist
+						has_ideology = ideology:ideology_vanguardist
+					}
+				}
+				owner = {
+					c:FRA ?= this
+					has_law_or_variant = law_type:law_monarchy
+				}
+			}
+			add = {
+				value = 10
+				desc = "from_monarchist_leanings"
 			}
 		}
 		if = {
@@ -1200,7 +1290,7 @@ conservative_party = {
 				owner = {
 					country_is_in_south_america = yes
 					any_primary_culture = {
-						has_discrimination_trait = hispanophone
+						has_discrimination_trait = language_hispanophone
 					}
 				}
 				OR = {
@@ -1235,7 +1325,7 @@ conservative_party = {
 					}
 					OR = {
 						NOT = {
-							has_law = law_type:law_slavery_banned
+							has_law_or_variant = law_type:law_slavery_banned
 						}
 						has_modifier = missouri_compromise
 					}
@@ -1259,7 +1349,7 @@ conservative_party = {
 					}
 					OR = {
 						NOT = {
-							has_law = law_type:law_slavery_banned
+							has_law_or_variant = law_type:law_slavery_banned
 						}
 						has_modifier = missouri_compromise
 					}

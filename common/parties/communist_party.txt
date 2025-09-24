@@ -462,7 +462,7 @@ communist_party = {
 					has_ideology = ideology:ideology_anarchist
 				}
 				owner = {
-					has_law = law_type:law_council_republic
+					has_law_or_variant = law_type:law_council_republic
 					ruler = {
 						has_ideology = ideology:ideology_vanguardist
 					}
@@ -533,7 +533,7 @@ communist_party = {
 					}
 				}
 				owner = {
-					has_law = law_type:law_land_based_taxation
+					has_law_or_variant = law_type:law_land_based_taxation
 				}
 			}
 			add = {
@@ -550,7 +550,7 @@ communist_party = {
 					}
 				}
 				owner = {
-					has_law = law_type:law_state_religion
+					has_law_or_variant = law_type:law_state_religion
 				}
 			}
 			add = {
@@ -565,7 +565,7 @@ communist_party = {
 					has_ideology = ideology:ideology_agrarian
 				}
 				owner = {
-					has_law = law_type:law_free_trade
+					has_law_or_variant = law_type:law_free_trade
 				}
 				NOR = {
 					leader = {
@@ -614,7 +614,7 @@ communist_party = {
 					}
 				}
 				owner = {
-					has_law = law_type:law_laissez_faire
+					has_law_or_variant = law_type:law_laissez_faire
 				}
 				NOT = {
 					leader = {
@@ -648,15 +648,15 @@ communist_party = {
 						has_ideology = ideology:ideology_loyalist
 						owner = {
 							NOR = {
-								has_law = law_type:law_proportional_taxation
-								has_law = law_type:law_per_capita_based_taxation
+								has_law_or_variant = law_type:law_proportional_taxation
+								has_law_or_variant = law_type:law_per_capita_based_taxation
 							}
 						}
 					}
 				}
 				owner = {
 					NOT = {
-						has_law = law_type:law_graduated_taxation
+						has_law_or_variant = law_type:law_graduated_taxation
 					}
 				}
 			}
@@ -668,7 +668,7 @@ communist_party = {
 		if = { # anti-serfdom
 			limit = {
 				owner = {
-					has_law = law_type:law_serfdom
+					has_law_or_variant = law_type:law_serfdom
 				}
 				OR = {
 					has_ideology = ideology:ideology_egalitarian
@@ -699,8 +699,9 @@ communist_party = {
 			limit = {
 				owner = {
 					OR = {
-						has_law = law_type:law_legacy_slavery
-						has_law = law_type:law_slave_trade
+						has_law_or_variant = law_type:law_legacy_slavery
+						has_law_or_variant = law_type:law_slave_trade
+						has_law_or_variant = law_type:law_colonial_slavery
 					}
 				}
 				OR = {

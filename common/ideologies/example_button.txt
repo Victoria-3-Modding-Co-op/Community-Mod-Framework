@@ -11,17 +11,17 @@
     character_ideology = no
 
     # Never allow button ideologies to be triggered
-    non_interest_group_leader_trigger = {
-        always = no
-    }
+    #non_interest_group_leader_trigger = {		# Only for character_ideology = yes
+    #    always = no
+    #}
 
     # Never allow button ideologies to be triggered
-    interest_group_leader_trigger = {
-        always = no
-    }
+    #interest_group_leader_trigger = {			# Only for character_ideology = yes
+    #    always = no
+    #}
 
     # Never allow button ideologies to be triggered
-    country_trigger = {
-        always = no
-    }
+    #country_trigger = {						# Only for character_ideology = yes
+    #    always = no
+    #}
 }

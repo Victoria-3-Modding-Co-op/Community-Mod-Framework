@@ -73,9 +73,24 @@ agrarian_party = {
 				trigger = {
 					country_has_primary_culture = cu:brazilian
 					OR = {
-						has_law = law_type:law_presidential_republic
-						has_law = law_type:law_parliamentary_republic
+						has_law_or_variant = law_type:law_presidential_republic
+						has_law_or_variant = law_type:law_parliamentary_republic
 					}
+				}
+			}
+			triggered_desc = {
+				desc = party_fatherland_front
+				trigger = {
+					exists = c:AUS
+					THIS = c:AUS
+					any_interest_group = {
+						is_in_government = yes
+						party ?= {
+							is_party_type = agrarian_party
+						}
+					}
+					has_law_or_variant = law_type:law_single_party_state
+					has_variable = fatherland_front_var
 				}
 			}
 			triggered_desc = {
@@ -83,6 +98,16 @@ agrarian_party = {
 				trigger = {
 					exists = c:AUS
 					THIS = c:AUS
+					NAND = {
+						any_interest_group = {
+							is_in_government = yes
+							party ?= {
+								is_party_type = fascist_party
+							}
+						}
+						has_law_or_variant = law_type:law_single_party_state
+						has_variable = fatherland_front_var
+					}
 				}
 			}
 			triggered_desc = {
@@ -199,7 +224,7 @@ agrarian_party = {
 		}
 		owner = {
 			country_has_voting_franchise = yes
-			ig:ig_rural_folk = {
+			ig:ig_rural_folk ?= {
 				is_marginal = no
 			}
 		}
@@ -238,7 +263,7 @@ agrarian_party = {
 				owner = {
 					country_is_in_south_america = yes
 					any_primary_culture = {
-						has_discrimination_trait = hispanophone
+						has_discrimination_trait = language_hispanophone
 					}
 				}
 			}
@@ -257,7 +282,7 @@ agrarian_party = {
 						country_has_primary_culture = cu:yankee
 						country_has_primary_culture = cu:dixie
 					}
-					has_law = law_type:law_presidential_republic
+					has_law_or_variant = law_type:law_presidential_republic
 				}
 			}
 			add = {
@@ -445,7 +470,7 @@ agrarian_party = {
 			limit = {
 				is_powerful = no
 				owner = {
-					has_law = law_type:law_serfdom
+					has_law_or_variant = law_type:law_serfdom
 				}
 				law_stance = {
 					law = law_type:law_serfdom
@@ -461,7 +486,7 @@ agrarian_party = {
 			limit = {
 				owner = {
 					any_primary_culture = {
-						has_discrimination_trait = scandinavian_culture_group
+						has_discrimination_trait = heritage_nordic
 					}
 				}
 				OR = {
@@ -480,7 +505,7 @@ agrarian_party = {
 					has_ideology = ideology:ideology_pacifist
 				}
 				owner = {
-					NOT = { has_law = law_type:law_no_colonial_affairs }
+					NOT = { has_law_or_variant = law_type:law_no_colonial_affairs }
 				}
 			}
 			add = {
@@ -508,7 +533,7 @@ agrarian_party = {
 					}		
 				}
 				owner = {
-					has_law = law_type:law_no_migration_controls
+					has_law_or_variant = law_type:law_no_migration_controls
 				}
 			}
 			add = {
@@ -520,7 +545,7 @@ agrarian_party = {
 			limit = {
 				is_interest_group_type = ig_rural_folk
 				owner = {
-					NOT = { has_law = law_type:law_universal_suffrage }
+					NOT = { has_law_or_variant = law_type:law_universal_suffrage }
 				}
 			}
 			add = {
@@ -529,8 +554,8 @@ agrarian_party = {
 					limit = {
 						owner = {
 							OR = {
-								has_law = law_type:law_landed_voting
-								has_law = law_type:law_wealth_voting
+								has_law_or_variant = law_type:law_landed_voting
+								has_law_or_variant = law_type:law_wealth_voting
 							}
 						}
 					}
@@ -539,7 +564,7 @@ agrarian_party = {
 				if = {
 					limit = {
 						owner = {
-							has_law = law_type:law_census_voting
+							has_law_or_variant = law_type:law_census_voting
 						}
 					}
 					add = -5
@@ -563,8 +588,8 @@ agrarian_party = {
 				}
 				owner = {
 					OR = {	
-						has_law = law_type:law_local_police
-						has_law = law_type:law_militarized_police
+						has_law_or_variant = law_type:law_local_police
+						has_law_or_variant = law_type:law_militarized_police
 					}
 				}
 			}
@@ -597,7 +622,7 @@ agrarian_party = {
                 }
 
 				owner = {
-					has_law = law_type:law_land_based_taxation
+					has_law_or_variant = law_type:law_land_based_taxation
 				}
 			}
 			add = {
@@ -624,7 +649,7 @@ agrarian_party = {
 					}
 				}
 				owner = {
-					has_law = law_type:law_free_trade
+					has_law_or_variant = law_type:law_free_trade
 				}
 				NOR = {
 					leader = {
@@ -664,7 +689,7 @@ agrarian_party = {
 					}
 				}
 				owner = {
-					has_law = law_type:law_laissez_faire
+					has_law_or_variant = law_type:law_laissez_faire
 				}
 				NOT = {
 					leader = {
@@ -701,7 +726,7 @@ agrarian_party = {
 					}
 				}
 				owner = {
-					has_law = law_type:law_peasant_levies
+					has_law_or_variant = law_type:law_peasant_levies
 				}
 			}
 			add = {
@@ -712,7 +737,7 @@ agrarian_party = {
 		if = { # anti-serfdom
 			limit = {
 				owner = {
-					has_law = law_type:law_serfdom
+					has_law_or_variant = law_type:law_serfdom
 				}
 				OR = {
 					has_ideology = ideology:ideology_egalitarian
@@ -735,7 +760,7 @@ agrarian_party = {
 		if = { # opposition to debt slavery
 			limit = {
 				owner = {
-					has_law = law_type:law_debt_slavery
+					has_law_or_variant = law_type:law_debt_slavery
 				}
 				OR = {
 					has_ideology = ideology:ideology_anti_slavery
@@ -764,7 +789,7 @@ agrarian_party = {
 					AND = {
 						exists = owner.py:agrarian_party
 						owner = {
-							ig:ig_rural_folk = {
+							ig:ig_rural_folk ?= {
 								NOT = { is_member_of_party = owner.py:agrarian_party }
 							}
 						}

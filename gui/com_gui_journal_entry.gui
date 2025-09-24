@@ -572,6 +572,13 @@ types journal_entry_overwrites {
 	}
 	
 	type com_journal_entry_progress_bars = flowcontainer {
+		# This is a COM addition to give modders the ability to select additional colors for scripted progress bars
+		# These work by setting a variable in the journal entry scope which will change which progress bar is used
+		# Currently, the following variables are used:
+		## com_double_bad_gold_marker -- replaces the journal entry marker in double_sided_bad with the marker from double_sided_gold
+		## com_double_bad_white_bar -- replaced double_sided_bad with white_progressbar_horizontal
+		## com_double_bad_gold_bar -- replaced double_sided_bad with gold_progressbar_horizontal
+		## com_bear_spray_applied -- removes the bear and lion icons from double_sided_gold and resizes the progress bar
 		parentanchor = hcenter
 		direction = vertical
 		

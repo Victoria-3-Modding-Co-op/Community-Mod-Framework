@@ -108,6 +108,7 @@ Current Scope:
 9) Integration of the "Multi-line PM Framework" (Credit to 1230James)
 10) Alerts can now open custom windows (Credit to Bahmut)
 11) More than three local goods can now be shown in state building panel correctly (Credit to Bahmut)
+12) Variables can be set on journal entries to change the colors of certain progress bars (Credit to Alexedishi)
 
 ## Alternative Event Windows
 
@@ -180,6 +181,14 @@ set_variable = {
 }
 ```
 **I recommend doing this in the history file of a country `common/history/countries`**
+
+## Custom Progress Bar Colors
+
+This works by setting specific variables in the journal entry scope. These will change which progress bar is displayed. Currently, the following variables are used:
+- `com_double_bad_gold_marker` -- replaces the journal entry marker in double_sided_bad with the marker from double_sided_gold
+- `com_double_bad_white_bar` -- replaced double_sided_bad with white_progressbar_horizontal
+- `com_double_bad_gold_bar` -- replaced double_sided_bad with gold_progressbar_horizontal
+- `com_bear_spray_applied` -- removes the bear and lion icons from double_sided_gold and resizes the progress bar
 
 ## Sidebar Button
 

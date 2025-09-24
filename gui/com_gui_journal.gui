@@ -331,7 +331,7 @@ types journal_overwrites {
 	}
 
 	type journal_entry = button {
-		# Overriden to add support for changing the colors of certain progress bars - Alexedishi
+		# Overridden to add support for changing the colors of certain progress bars - Alexedishi
 		highlight_tutorial_ui = {
 			visible = "[JournalEntry.IsBeingTutorialHighlighted]"
 		}
@@ -530,6 +530,7 @@ types journal_overwrites {
 
 							# Double-sided Bad (with Journal Icon)
 							default_progressbar_horizontal = {
+								# COM addition; displays normal double_sided_bad
 								visible = "[And4(
 									ScriptedProgressBar.IsDoubleSidedBad,
 									Not(JournalEntry.MakeScope.Var('com_double_bad_gold_marker').IsSet),
@@ -592,6 +593,7 @@ types journal_overwrites {
 
 							# Double-sided Bad (with Gold Marker)
 							default_progressbar_horizontal = {
+								# COM addition; displays replaces the journal icon with the marker from double_sided gold
 								visible = "[And4(
 									ScriptedProgressBar.IsDoubleSidedBad,
 									JournalEntry.MakeScope.Var('com_double_bad_gold_marker').IsSet,
@@ -648,6 +650,7 @@ types journal_overwrites {
 							}
 
 							# Double-sided Bad (turned into single-sided white bar)
+							# COM addition; uses the vanilla white_progressbar_horizontal
 							white_progressbar_horizontal = {
 								visible = "[And4(
 									ScriptedProgressBar.IsDoubleSidedBad,
@@ -667,6 +670,7 @@ types journal_overwrites {
 							}
 
 							# Double-sided Bad (turned into single-sided gold bar)
+							# COM addition; uses the vanilla gold_progressbar_horizontal
 							gold_progressbar_horizontal = {
 								visible = "[And4(
 									ScriptedProgressBar.IsDoubleSidedBad,

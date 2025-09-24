@@ -329,4 +329,482 @@ types journal_overwrites {
 			}
 		}
 	}
+
+	type journal_entry = button {
+		# Overridden to add support for changing the colors of certain progress bars - Alexedishi
+		highlight_tutorial_ui = {
+			visible = "[JournalEntry.IsBeingTutorialHighlighted]"
+		}
+
+		block "button_style" {
+			using = default_button
+		}
+		onclick = "[InformationPanelBar.OpenJournalEntryPanel(JournalEntry.AccessSelf)]"
+		enabled = "[JournalEntry.IsActive]"
+
+		tooltipwidget = {
+			FancyTooltip_JournalEntry = {}
+		}
+
+		onmousehierarchyenter = "[PdxGuiWidget.FindChild('journal_pin_button').InterruptThenTriggerAnimation('hide_journal_pin_button','show_journal_pin_button')]"
+		onmousehierarchyleave = "[PdxGuiWidget.FindChild('journal_pin_button').InterruptThenTriggerAnimation('show_journal_pin_button','hide_journal_pin_button')]"
+
+		block "background" {}
+
+		flowcontainer = {
+			resizeparent = yes
+			block "minimumsize" {
+				minimumsize = { @panel_width -1 }
+			}
+			block "flowcontainer_properties" {
+				margin = { 10 8 }
+				spacing = 10
+			}
+
+			flowcontainer = {
+				direction = vertical
+
+				# journal entry icon
+				icon = {
+					texture = "[JournalEntry.GetIcon]"
+					block "iconsize" {
+						size = { 40 40 }
+					}
+				}
+
+				# completion in progress
+				icon = {
+					visible = "[JournalEntry.IsProgressing]"
+					parentanchor = hcenter
+					block "completing_iconsize" {
+						size = { 20 20 }
+					}
+					texture = "gfx/interface/icons/generic_icons/green_checkmark.dds"
+					tooltip = "JOURNAL_ENTRY_IN_PROGRESS"
+					using = shimmer
+
+					icon = {
+						parentanchor = center
+						using = rotate_glow_animation_02
+						size = { 300% 300% }
+						alpha = 0.5
+					}
+				}
+			}
+
+			flowcontainer = {
+				direction = vertical
+				parentanchor = vcenter
+
+				# title
+				textbox = {
+					text = "[JournalEntry.GetName]"
+					autoresize = yes
+					align = left|nobaseline
+					multiline = yes
+					default_format = "#header"
+
+					block "fontsize" {
+						using = fontsize_large
+					}
+
+					block "textsize" {
+						maximumsize = { 420 -1 }
+						minimumsize = { 420 -1 }
+					}
+				}
+
+				# status description
+				textbox = {
+					text = "[JournalEntry.GetStatusDesc]"
+					visible = "[Not(StringIsEmpty(JournalEntry.GetStatusDesc))]"
+					autoresize = yes
+					align = left|nobaseline
+					multiline = yes
+					block "textsize" {
+						maximumsize = { 420 -1 }
+						minimumsize = { 420 -1 }
+					}
+				}
+
+				# number of possible actions
+				textbox = {
+					text = "JOURNAL_ENTRY_POSSIBLE_ACTIONS"
+					visible = "[GreaterThan_int32(JournalEntry.GetNumPossibleScriptedButtons, '(int32)0')]"
+					autoresize = yes
+					align = left|nobaseline
+					multiline = yes
+					block "textsize" {
+						maximumsize = { 420 -1 }
+						minimumsize = { 420 -1 }
+					}
+				}
+
+				textbox = {
+
+					autoresize = yes
+				}
+
+				# progress description
+				textbox = {
+					text = "[JournalEntry.GetProgressDesc]"
+					tooltip = "[JournalEntry.GetGoalDesc]"
+					autoresize = yes
+					align = left|nobaseline
+					multiline = yes
+					block "textsize" {
+						maximumsize = { 420 -1 }
+						minimumsize = { 420 -1 }
+					}
+				}
+
+				# progress bar
+				flowcontainer = {
+					visible = "[And(JournalEntry.HasProgressBar, JournalEntry.IsActive)]"
+					margin = { 0 10 }
+					default_progressbar_horizontal = {
+						block "progressbar_size" {
+							size = { 420 6 }
+						}
+						blockoverride "values" {
+							value = "[FixedPointToFloat(JournalEntry.GetGoalProgressPercent)]"
+							min = 0
+							max = 1
+						}
+					}
+				}
+
+				# scripted progress bars
+				flowcontainer = {
+					visible = "[Not( IsDataModelEmpty( JournalEntry.GetScriptedProgressBars ) )]"
+					datamodel = "[JournalEntry.GetScriptedProgressBars]"
+					margin = { 0 10 }
+					direction = vertical
+					spacing = 10
+
+					item = {
+						container = {
+
+							# Default
+							default_progressbar_horizontal = {
+								visible = "[ScriptedProgressBar.IsDefault]"
+								block "progressbar_size" {
+									size = { 420 10 }
+								}
+								tooltip = "[ScriptedProgressBar.GetPeriodicProgressBreakdown]"
+								blockoverride "values" {
+									value = "[JournalEntry.GetCurrentBarProgress(ScriptedProgressBar.Self)]"
+									min = 0
+									max = 1
+								}
+							}
+
+							# Default Bad
+							bad_progressbar_horizontal = {
+								visible = "[ScriptedProgressBar.IsDefaultBad]"
+								block "progressbar_size" {
+									size = { 420 10 }
+								}
+								tooltip = "[ScriptedProgressBar.GetPeriodicProgressBreakdown]"
+								blockoverride "values" {
+									value = "[JournalEntry.GetCurrentBarProgress(ScriptedProgressBar.Self)]"
+									min = 0
+									max = 1
+								}
+							}
+
+							#Default Green
+							green_progressbar_horizontal = {
+								visible = "[ScriptedProgressBar.IsDefaultGreen]"
+								block "progressbar_size" {
+									size = { 420 10 }
+								}
+
+								tooltip = "[ScriptedProgressBar.GetPeriodicProgressBreakdown]"
+								blockoverride "values" {
+									value = "[JournalEntry.GetCurrentBarProgress(ScriptedProgressBar.Self)]"
+									min = 0
+									max = 1
+								}
+							}
+
+							# Double-sided Bad (with Journal Icon)
+							default_progressbar_horizontal = {
+								# COM addition; displays normal double_sided_bad
+								visible = "[And4(
+									ScriptedProgressBar.IsDoubleSidedBad,
+									Not(JournalEntry.MakeScope.Var('com_double_bad_gold_marker').IsSet),
+									Not(JournalEntry.MakeScope.Var('com_double_bad_white_bar').IsSet),
+									Not(JournalEntry.MakeScope.Var('com_double_bad_gold_bar').IsSet)
+								)]"
+								block "progressbar_size" {
+									size = { 420 10 }
+								}
+								tooltip = "[ScriptedProgressBar.GetPeriodicProgressBreakdown]"
+
+								blockoverride "noprogresstexture" {
+									noprogresstexture = "gfx/interface/progressbar/progressbar_bad.dds"
+								}
+
+								blockoverride "values" {
+									value = "[JournalEntry.GetCurrentBarProgress(ScriptedProgressBar.Self)]"
+									min = 0
+									max = 1
+								}
+
+								#this is hack to get an extra marker on top of the frame (progressbar properties are copied)
+								blockoverride "on_top_of_the_progressbar" {
+									progressbar = {
+										noprogresstexture = "gfx/interface/icons/generic_icons/transparent.dds"
+										progresstexture = "gfx/interface/icons/generic_icons/transparent.dds"
+										size = { 100% 100% }
+										spriteType = Corneredtiled
+										spriteborder = { 4 4 }
+										texture_density = 2
+										skip_initial_animation = yes
+
+										block "values" {}
+										block "direction" {
+											direction = horizontal
+										}
+										block "progress_changed_animation" {
+											using = progressbar_changed_animation
+										}
+										block "animate_negative_change" {
+											animate_negative_changes = yes
+										}
+										marker = {
+											widget = {
+												size = { 50 50 }
+												icon = {
+													size = { 35 35 }
+													widgetanchor = center
+													position = { 0 5 }
+
+													block "progress_icon" {
+														texture = "[JournalEntry.GetIcon]"
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+
+							# Double-sided Bad (with Gold Marker)
+							default_progressbar_horizontal = {
+								# COM addition; displays replaces the journal icon with the marker from double_sided gold
+								visible = "[And4(
+									ScriptedProgressBar.IsDoubleSidedBad,
+									JournalEntry.MakeScope.Var('com_double_bad_gold_marker').IsSet,
+									Not(JournalEntry.MakeScope.Var('com_double_bad_white_bar').IsSet),
+									Not(JournalEntry.MakeScope.Var('com_double_bad_gold_bar').IsSet)
+								)]"
+								block "progressbar_size" {
+									size = { 420 10 }
+								}
+								tooltip = "[ScriptedProgressBar.GetPeriodicProgressBreakdown]"
+
+								blockoverride "noprogresstexture" {
+									noprogresstexture = "gfx/interface/progressbar/progressbar_bad.dds"
+								}
+
+								blockoverride "values" {
+									value = "[JournalEntry.GetCurrentBarProgress(ScriptedProgressBar.Self)]"
+									min = 0
+									max = 1
+								}
+
+								#this is hack to get an extra marker on top of the frame (progressbar properties are copied)
+								blockoverride "on_top_of_the_progressbar" {
+									progressbar = {
+										noprogresstexture = "gfx/interface/icons/generic_icons/transparent.dds"
+										progresstexture = "gfx/interface/icons/generic_icons/transparent.dds"
+										size = { 100% 100% }
+										spriteType = Corneredtiled
+										spriteborder = { 4 4 }
+										texture_density = 2
+										skip_initial_animation = yes
+
+										block "values" {}
+										block "direction" {
+											direction = horizontal
+										}
+										block "progress_changed_animation" {
+											using = progressbar_changed_animation
+										}
+										block "animate_negative_change" {
+											animate_negative_changes = yes
+										}
+										marker = {
+											icon = {
+												size = { 65 33 }
+												parentanchor = vcenter
+												widgetanchor = center
+												texture = "gfx/interface/progressbar/progressbar_marker.dds"
+												using = shimmer
+											}
+										}
+									}
+								}
+							}
+
+							# Double-sided Bad (turned into single-sided white bar)
+							# COM addition; uses the vanilla white_progressbar_horizontal
+							white_progressbar_horizontal = {
+								visible = "[And4(
+									ScriptedProgressBar.IsDoubleSidedBad,
+									Not(JournalEntry.MakeScope.Var('com_double_bad_gold_marker').IsSet),
+									JournalEntry.MakeScope.Var('com_double_bad_white_bar').IsSet,
+									Not(JournalEntry.MakeScope.Var('com_double_bad_gold_bar').IsSet)
+								)]"
+								block "progressbar_size" {
+									size = { 420 10 }
+								}
+								tooltip = "[ScriptedProgressBar.GetPeriodicProgressBreakdown]"
+								blockoverride "values" {
+									value = "[JournalEntry.GetCurrentBarProgress(ScriptedProgressBar.Self)]"
+									min = 0
+									max = 1
+								}
+							}
+
+							# Double-sided Bad (turned into single-sided gold bar)
+							# COM addition; uses the vanilla gold_progressbar_horizontal
+							gold_progressbar_horizontal = {
+								visible = "[And4(
+									ScriptedProgressBar.IsDoubleSidedBad,
+									Not(JournalEntry.MakeScope.Var('com_double_bad_gold_marker').IsSet),
+									Not(JournalEntry.MakeScope.Var('com_double_bad_white_bar').IsSet),
+									JournalEntry.MakeScope.Var('com_double_bad_gold_bar').IsSet
+								)]"
+								block "progressbar_size" {
+									size = { 420 10 }
+								}
+								tooltip = "[ScriptedProgressBar.GetPeriodicProgressBreakdown]"
+								blockoverride "values" {
+									value = "[JournalEntry.GetCurrentBarProgress(ScriptedProgressBar.Self)]"
+									min = 0
+									max = 1
+								}
+							}
+
+							# Double sided gold
+							default_progressbar_horizontal  = {
+								visible = "[ScriptedProgressBar.IsDoubleSidedGold]"
+								block "progressbar_size" {
+									size = { 420 6 }
+								}
+
+								blockoverride "noprogresstexture" {
+									noprogresstexture = "gfx/interface/progressbar/progressbar_gold.dds"
+								}
+
+								tooltip = "[ScriptedProgressBar.GetPeriodicProgressBreakdown]"
+								blockoverride "values" {
+									value = "[JournalEntry.GetCurrentBarProgress(ScriptedProgressBar.Self)]"
+									min = 0
+									max = 1
+								}
+
+								#this is hack to get an extra marker on top of the frame (progressbar properties are copied)
+								blockoverride "on_top_of_the_progressbar" {
+									progressbar = {
+										noprogresstexture = "gfx/interface/icons/generic_icons/transparent.dds"
+										progresstexture = "gfx/interface/icons/generic_icons/transparent.dds"
+										size = { 100% 100% }
+										spriteType = Corneredtiled
+										spriteborder = { 4 4 }
+										texture_density = 2
+										skip_initial_animation = yes
+
+										block "values" {}
+										block "direction" {
+											direction = horizontal
+										}
+										block "progress_changed_animation" {
+											using = progressbar_changed_animation
+										}
+										block "animate_negative_change" {
+											animate_negative_changes = yes
+										}
+										marker = {
+											icon = {
+												size = { 40 20 }
+												parentanchor = vcenter
+												widgetanchor = center
+												texture = "gfx/interface/progressbar/progressbar_marker.dds"
+												using = shimmer
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+
+				# time out info
+				flowcontainer = {
+					visible = "[And(JournalEntry.CanTimeOut, JournalEntry.IsActive)]"
+					spacing = 5
+
+					icon = {
+						size = { 18 18 }
+						texture = "gfx/interface/icons/generic_icons/clock.dds"
+						parentanchor = vcenter
+					}
+					textbox = {
+						text = "[JournalEntry.GetTimeoutTooltip]"
+						autoresize = yes
+						align = left|nobaseline
+						parentanchor = vcenter
+					}
+				}
+			}
+		}
+
+		# pin button
+		widget = {
+			size = { 23 23 }
+			parentanchor = vcenter|right
+			position = { -5 0 }
+			visible = "[JournalEntry.IsActive]"
+
+			button = {
+				name = "journal_pin_button"
+				texture = "gfx/interface/outliner/unpinned_icon.dds"
+				using = check_button_sound
+				size = { 100% 100% }
+				visible = "[Not(JournalEntry.IsPinnedInOutliner)]"
+				onclick = "[JournalEntry.TogglePinInOutliner]"
+				tooltip = "PIN"
+				parentanchor = center
+
+				state = {
+					name = hide_journal_pin_button
+					trigger_on_create = yes
+					alpha = 0
+					duration = 0.2
+					scale = 0.5
+				}
+
+				state = {
+					name = show_journal_pin_button
+					alpha = 1
+					duration = 0.15
+					scale = 1
+				}
+			}
+			button = {
+				using = check_button_sound
+				texture = "gfx/interface/outliner/pinned_icon.dds"
+				size = { 100% 100% }
+				visible = "[JournalEntry.IsPinnedInOutliner]"
+				onclick = "[JournalEntry.TogglePinInOutliner]"
+				tooltip = "UNPIN"
+				parentanchor = center
+			}
+		}
+	}
 }

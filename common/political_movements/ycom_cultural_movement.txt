@@ -1185,6 +1185,15 @@ movement_cultural_minority = {
 					add = 50
 				}
 			}
+
+			if = { # Agnus Dei, qui tollis peccata mundi, miserere nobis
+				limit = {
+					p:xF0E080.state ?= this
+					is_split_state = yes
+					scope:political_movement.culture ?= cu:polish
+				}
+				multiply = -100
+			}
 		}
 
 		target_fraction_of_states = {

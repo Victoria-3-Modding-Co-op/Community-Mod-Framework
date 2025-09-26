@@ -1,13 +1,13 @@
 # COPY-PASTED FOR NOW
-@panel_width_minus_10 = 530			# used to be 450
-@panel_width = 540  				# used to be 460
-@panel_width_half = 270				# used to be 230
-@panel_width_plus_10 = 550  		# used to be 470
-@panel_width_plus_14 = 554			# used to be 474
-@panel_width_plus_14_half = 277		# used to be 237
-@panel_width_plus_20 = 560			# used to be 480
-@panel_width_plus_30 = 570			# used to be 490
-@panel_width_plus_70 = 610			# used to be 530
+@panel_width_minus_10 = 530            # used to be 450
+@panel_width = 540                # used to be 460
+@panel_width_half = 270                # used to be 230
+@panel_width_plus_10 = 550        # used to be 470
+@panel_width_plus_14 = 554            # used to be 474
+@panel_width_plus_14_half = 277        # used to be 237
+@panel_width_plus_20 = 560            # used to be 480
+@panel_width_plus_30 = 570            # used to be 490
+@panel_width_plus_70 = 610            # used to be 530
 @panel_width_w_margin = 520
 
 @social_class_strata_width = 180
@@ -38,6 +38,13 @@ types society_panel_overwrites {
         blockoverride "window_header_name"
         {
             text = "SOCIETY_OVERVIEW"
+        }
+
+        blockoverride "map_modes_button" {
+            map_modes_single_button_minimized = {
+                datacontext = "[SocietyPanel.GetMapModeList]"
+                using = map_modes_button_position
+            }
         }
 
         blockoverride "fixed_top"
@@ -240,6 +247,11 @@ types society_panel_overwrites {
                     onclick = "[AccessPlayer.SortCultures('name')]"
                 }
 
+                blockoverride "sort_fervor"
+                {
+                    onclick = "[AccessPlayer.SortCultures('fervor')]"
+                }
+
                 blockoverride "sort_acceptance"
                 {
                     onclick = "[AccessPlayer.SortCultures('acceptance')]"
@@ -360,8 +372,8 @@ types society_panel_overwrites {
             flowcontainer = {
                 using = default_list_position
                 direction = vertical
-                minimumsize = { @panel_width_plus_20 -1 }
-                maximumsize = { @panel_width_plus_20 -1 }
+                minimumsize = { @panel_width -1 }
+                maximumsize = { @panel_width -1 }
 
                 flowcontainer = {
                     visible = "[InformationPanel.IsTabSelected('default')]"
@@ -371,10 +383,15 @@ types society_panel_overwrites {
 
                     datacontext = "[GetPlayer]"
 
-                    textbox = {
-                        autoresize = yes
-                        text = "ACCEPTANCE_STATUS_DISTRIBUTION_LABEL_COUNTRY"
+                    widget = {
                         parentanchor = hcenter
+                        size = { @panel_width 45 }
+
+                        textbox = {
+                            autoresize = yes
+                            text = "ACCEPTANCE_STATUS_DISTRIBUTION_LABEL_COUNTRY"
+                            parentanchor = center
+                        }
                     }
 
                     clickable_population_acceptance_status_chart = {}
@@ -552,7 +569,7 @@ types society_panel_overwrites {
                     using = society_panel_tab_contents_properties
 
                     culture_or_religion_list_dynamicgridbox = {
-                        name  = "cultures"
+                        name = "cultures"
 
                         blockoverride "cr_list_datamodel"
                         {
@@ -581,6 +598,12 @@ types society_panel_overwrites {
                             text = "CULTURE_NAME_AND_PRIMARY"
                         }
 
+                        blockoverride "cr_item_fervor"
+                        {
+                            text = "CULTURE_FERVOR_AND_ARROW_ICON"
+                            tooltip = "CULTURE_FERVOR_TOOLTIP"
+                        }
+
                         blockoverride "cr_item_acceptance"
                         {
                             text = "[Culture.GetAcceptanceIn(GetPlayer.Self)|=]"
@@ -606,7 +629,7 @@ types society_panel_overwrites {
                     using = society_panel_tab_contents_properties
 
                     culture_or_religion_list_dynamicgridbox = {
-                        name  = "religions"
+                        name = "religions"
 
                         blockoverride "cr_list_datamodel"
                         {
@@ -616,6 +639,13 @@ types society_panel_overwrites {
                         blockoverride "cr_item_name"
                         {
                             text = "RELIGION_NAME_AND_STATE_RELIGION"
+                        }
+
+                        blockoverride "cr_item_in_front_of_name" {
+                            icon = {
+                                size = { 24 24 }
+                                texture = "[Religion.GetTexture]"
+                            }
                         }
 
                         blockoverride "cr_item_onclick"

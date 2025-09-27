@@ -28,15 +28,15 @@ anzfp_is_active = { # Australia & New Zealand Flavor Pack
 }
 
 basileia_is_active = { # Basileia Romaion
-    always = no
+	always = no
 }
 
 betterdecrees_is_active = { # Better Decrees
-    always = no
+	always = no
 }
 
 BPM_is_active_trigger = { # Better Politics Mod
-    always = no
+	always = no
 }
 
 com_is_active = { # Community Outfit Mod
@@ -44,23 +44,19 @@ com_is_active = { # Community Outfit Mod
 }
 
 EACP_is_active_trigger = { # East Asian Clothes Patch
-    always = no
+	always = no
 }
 
 ecchi_r_is_active = { # ECCHI Redux
-    always = no
-}
-
-eocfm_is_active_trigger = { # Eastern Orthodox Flavor
 	always = no
 }
 
 GGGG_is_active_trigger = { # Gas, Guns, Garb, & Grub
-    always = no
+	always = no
 }
 
 gilded_age_is_active_trigger = { # Gilded Age
-    always = no
+	always = no
 }
 
 grefm_is_active = { # Gates of the Bosphorus
@@ -71,15 +67,19 @@ IEX_is_active_trigger = { # Industry Expanded
 	always = no
 }
 
-is_usfp_active = { # Hail, Columbia!
-    always = no
+is_usfp_active = { # Hail, Columbia! (USA Flavor)
+	always = no
 }
 
-jotn_is_active_trigger = { # Jewel of the Nile
+jotn_is_active_trigger = { # Jewel of the Nile (Egypt Flavor)
 	always = no
 }
 
 JKFP_is_active_trigger = { # James's Korea Flavor Pack
+	always = no
+}
+
+kog_is_active_trigger = { # Kingdom of God
 	always = no
 }
 
@@ -88,11 +88,11 @@ magic_gate_is_active = { # Manaflow: Ankaris Arrival
 }
 
 war_goal_framework_is_active = { # War Goal Framework
-    always = no
+	always = no
 }
 
 mandate_o_h_is_active = { # Mandate of Heaven
-    always = no
+	always = no
 }
 
 morgenrote_is_active = { # Morgenrote: Dawn of Flavor
@@ -100,11 +100,15 @@ morgenrote_is_active = { # Morgenrote: Dawn of Flavor
 }
 
 newspapers_is_active_triger = { # Newspapers Mod
-    always = no
+	always = no
 }
 
 PCT_is_active_trigger = { # James's Pop Clothing Tweaks
-    always = no
+	always = no
+}
+
+phfp_is_active = { # Maharlika (Philippines Flavor)
+	always = no
 }
 
 RRK_is_active_trigger = { # Rally Round the King
@@ -112,15 +116,15 @@ RRK_is_active_trigger = { # Rally Round the King
 }
 
 STMS_is_active_trigger = { # States That Make Sense
-    always = no
+	always = no
 }
 
-tlim_is_active_trigger = { # This Land is Mine
-    always = no
+tlim_is_active_trigger = { # This Land is Mine (Arabia & Islam Flavor)
+	always = no
 }
 
 vtm_is_active_trigger = { # Victoria Tweaks Mod
-    always = no
+	always = no
 }
 
 WCR_is_active_trigger = { # Western Clothes: Redux
@@ -128,43 +132,42 @@ WCR_is_active_trigger = { # Western Clothes: Redux
 }
 
 #### Grey's Little Reworks ####
-
 Grey_CIR_is_active = { # Clothing Industry Rework
-    always = no
+	always = no
 }
 
 Grey_FIR_is_active = { # Food Industry Rework
-    always = no
+	always = no
 }
 
 Grey_MIR_is_active = { # Military Industry Rework
-    always = no
+	always = no
 }
 
 Grey_PLP_is_active = { # Populist Legal Power
-    always = no
+	always = no
 }
 
 Grey_RPR_is_active = { # Ranch Production Rework
-    always = no
+	always = no
 }
 
 Grey_SEA_is_active = { # Soft Econ Adjustments
-    always = no
+	always = no
 }
 
 Grey_SPA_is_active = { # Soft Pop Adjustments
-    always = no
+	always = no
 }
 
 Grey_SIS_is_active = { # Subject Interaction Suite
-    always = no
+	always = no
 }
 
 Grey_TSC_is_active = { # Tweaked Start Conditions
-    always = no
+	always = no
 }
 
 Grey_USU_is_active = { # Urban Synergy Unleashed
-    always = no
+	always = no
 }

@@ -1,0 +1,19 @@
+﻿sb_com_rise_of_communism_test = {
+	name = sb_com_rise_of_communism_test
+	desc = sb_com_rise_of_communism_test_desc
+
+	possible = {
+        always = yes
+	}
+
+	ai_chance = {
+		value = 100
+	}
+
+	effect = {
+		rename_com_situation_side = {
+            side = left
+            name = je_com_rise_of_communism_communists
+        }
+	}
+}

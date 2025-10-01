@@ -1,0 +1,196 @@
+# COPY-PASTED FOR NOW
+@panel_width_minus_30 = 510
+@panel_width_minus_20 = 520			
+@panel_width_minus_10 = 530			# used to be 450
+@panel_width = 540  				# used to be 460
+@panel_width_half = 270				# used to be 230
+@panel_width_plus_10 = 550  		# used to be 470
+@panel_width_plus_14 = 554			# used to be 474
+@panel_width_plus_14_half = 277		# used to be 237
+@panel_width_plus_20 = 560			# used to be 480
+@panel_width_plus_30 = 570			# used to be 490
+@panel_width_plus_70 = 610			# used to be 530
+
+@COM_panel_width_plus_20_half = @[panel_width_plus_20 / 2]
+
+types com_situation_types {
+    type com_journal_entry_situation = flowcontainer {
+        minimumsize = { @panel_width_plus_14 -1 }
+        direction = vertical
+        using = default_list_position
+        spacing = 10
+        margin_top = -4
+
+        default_header_2texts_clean = {
+            using = default_list_position
+            blockoverride "text1" {
+                datacontext = "[ComSituationLeft]"
+                using = com_side_header_properties
+            }
+            blockoverride "text2" {
+                datacontext = "[ComSituationRight]"
+                using = com_side_header_properties
+            }
+            blockoverride "size" {
+                size = { @panel_width_plus_14 44 }
+            }
+        }
+
+        flowcontainer = {
+            direction = horizontal
+            minimumsize = { @panel_width_plus_14 44 }
+            using = default_list_position
+
+            com_journal_entry_character_situation_left = {
+                datacontext = "[ComSituationLeft.Var('com_leader').GetCountry.GetRuler]"
+            }
+            widget = {
+                size = {
+                    @[panel_width - 400]
+                    20
+                }
+            }
+            com_journal_entry_character_situation_right = {
+                datacontext = "[ComSituationRight.Var('com_leader').GetCountry.GetRuler]"
+            }
+        }
+
+        flowcontainer = {
+            direction = horizontal
+            using = default_list_position
+
+            com_leader_header_left = {
+                blockoverride "text" {
+                    raw_text = "[ComSituationLeft.Var('com_leader').GetCountry.GetName]"
+                }
+                blockoverride "size" {
+                    size = { @[panel_width_plus_14 / 2 - 20] 40 }
+                }
+            }
+
+            widget = {
+                size = { 40 40 }
+                textbox = {
+                    parentanchor = hcenter|vcenter
+                    align = center
+                    size = { 40 40 }
+                    default_format = "#header"
+                    using = fontsize_large
+                    text = com_situation_vs
+                }
+            }
+
+            com_leader_header_right = {
+                blockoverride "text" {
+                    align = right
+                    raw_text = "[ComSituationRight.Var('com_leader').GetCountry.GetName]"
+                }
+                blockoverride "size" {
+                    size = { @[panel_width_plus_14 / 2 - 20] 40 }
+                }
+            }
+        }
+
+        dynamicgridbox = {
+            parentanchor = hcenter
+            visible = "[Not( IsDataModelEmpty( JournalEntry.GetScriptedButtons ) )]"
+            datamodel = "[JournalEntry.GetScriptedButtons]"
+            datamodel_wrap = 2
+            flipdirection = yes
+
+            item = {
+                widget = {
+                    size = { 260 60 }
+
+                    scripted_journal_entry_button = {
+                        parentanchor = center
+                    }
+
+                    # Buttons for which the selected trigger is true have a different appearance and tooltip, but share all behaviors.
+                    # This means that even selected buttons are clickable as usual, assuming the possible trigger does not prevent it.
+                    # This enables more use cases, such as using buttons as on-off toggles, but requires the scripter to disable buttons manually in the possible trigger as needed.
+                }
+            }
+        }
+    }
+
+    type com_leader_header_left = default_header {
+        blockoverride "deco" {}
+        blockoverride "header_background" {
+            background = {
+                using = default_header_bg
+                blockoverride "header_fade_mask" {
+                    modify_texture = {
+                        texture = "gfx/interface/masks/fade_horizontal_right.dds"
+                        spriteType = Corneredstretched
+                        spriteborder = { 0 0 }
+                        blend_mode = alphamultiply
+                        alpha = 0.9
+                    }
+                }
+            }
+        }
+    }
+
+    type com_leader_header_right = default_header {
+        blockoverride "deco" {}
+        blockoverride "header_background" {
+            background = {
+                using = default_header_bg
+                blockoverride "header_fade_mask" {
+                    modify_texture = {
+                        texture = "gfx/interface/masks/fade_horizontal_left.dds"
+                        spriteType = Corneredstretched
+                        spriteborder = { 0 0 }
+                        blend_mode = alphamultiply
+                        alpha = 0.9
+                    }
+                }
+            }
+        }
+    }
+
+    type com_journal_entry_character_situation_left = character_portrait_base {
+        size = { 200 160 }
+        blockoverride "portrait_size" {
+            size = { 200 200 }
+        }
+        blockoverride "portrait_texture" {
+            portrait_texture = "[Character.GetAnimatedPortrait('environment_event_01', 'camera_duel_01', 'idle', GetPortraitRenderSize(PdxGuiWidget.Self))]"
+        }
+        blockoverride "show_hat" {}
+        blockoverride "portrait_icons" {}
+    }
+
+    type com_journal_entry_character_situation_right = character_portrait_base {
+        size = { 200 160 }
+        blockoverride "portrait_size" {
+            size = { 200 200 }
+        }
+        blockoverride "portrait_texture" {
+            portrait_texture = "[Character.GetAnimatedPortrait('environment_event_01', 'camera_duel_02', 'idle', GetPortraitRenderSize(PdxGuiWidget.Self))]"
+        }
+        blockoverride "show_hat" {}
+        blockoverride "portrait_icons" {}
+    }
+}
+
+template com_side_header_properties {
+    raw_text = "#header [ComSituationLeft.Var('com_name').GetFlagName]#! [Localize('com_situation_leader')]"
+    tooltipwidget = {
+        RegularTooltip = {
+            blockoverride "tooltip_content" {
+                custom_tooltip_textbox = {
+                    raw_text = "[Scope.Var('com_name').GetFlagName]"
+                    default_format = "#header"
+                }
+                custom_tooltip_textbox_with_empty_line = {
+                    text = com_concept_situation_leader_for
+                }
+                custom_tooltip_textbox = {
+                    raw_text = "[Scope.Var('com_desc').GetFlagName]"
+                }
+            }
+        }
+    }
+}

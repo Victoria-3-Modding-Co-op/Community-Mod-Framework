@@ -1,0 +1,17 @@
+﻿macro = {
+    description = "Get situation struct scope"
+    definition = "ComSituation"
+    replace_with = "JournalEntry.MakeScope.Var('com_situation')"
+}
+
+macro = {
+    description = "Get left side struct scope"
+    definition = "ComSituationLeft"
+    replace_with = "ComSituation.Var('com_side_left')"
+}
+
+macro = {
+    description = "Get right side struct scope"
+    definition = "ComSituationRight"
+    replace_with = "ComSituation.Var('com_side_right')"
+}

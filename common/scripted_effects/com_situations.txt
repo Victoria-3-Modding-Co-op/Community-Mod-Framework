@@ -1,0 +1,80 @@
+﻿create_com_situation = {
+    create_struct = {
+        struct_type = com_struct_situation
+        struct_scope = com_situation
+    }
+    create_struct = {
+        struct_type = com_struct_situation_side
+        struct_scope = com_side_left
+    }
+    create_struct = {
+        struct_type = com_struct_situation_side
+        struct_scope = com_side_right
+    }
+
+    # Create Situation
+    scope:journal_entry = {
+        set_variable = {
+            name = com_situation
+            value = scope:com_situation
+        }
+    }
+
+    # Create Sides
+    scope:com_situation = {
+        set_variable = {
+            name = com_side_left
+            value = scope:com_side_left
+        }
+        set_variable = {
+            name = com_side_right
+            value = scope:com_side_right
+        }
+    }
+    scope:com_side_left = {
+        set_variable = {
+            name = com_name
+            value = flag:$side_name_left$
+        }
+        set_variable = {
+            name = com_desc
+            value = flag:$side_desc_left$
+        }
+        set_variable = {
+            name = com_leader
+            value = $side_leader_country_left$
+        }
+    }
+    scope:com_side_right = {
+        set_variable = {
+            name = com_name
+            value = flag:$side_name_right$
+        }
+        set_variable = {
+            name = com_desc
+            value = flag:$side_desc_right$
+        }
+        set_variable = {
+            name = com_leader
+            value = $side_leader_country_right$
+        }
+    }
+}
+
+switch_com_situation_leader = {
+    scope:com_side_$side$ = {
+        set_variable = {
+            name = com_leader
+            value = $leader$
+        }
+    }
+}
+
+rename_com_situation_side = {
+    scope:com_side_$side$ = {
+        set_variable = {
+            name = com_name
+            value = flag:$name$
+        }
+    }
+}

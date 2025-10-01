@@ -1,0 +1,6 @@
+﻿l_english:
+ com_situation_vs: "vs"
+ com_situation_leader: "Leader"
+ com_concept_situation_leader: "Situation Leader"
+ com_concept_situation_leader_desc: "com_concept_situation_leader_desc"
+ com_concept_situation_leader_for: "[Scope.Var('com_leader').GetCountry.GetName] is the [com_concept_situation_leader] for the #header [Scope.Var('com_name').GetFlagName]#! side."

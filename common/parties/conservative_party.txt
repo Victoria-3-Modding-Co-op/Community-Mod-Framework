@@ -492,7 +492,7 @@ conservative_party = {
 		}
 		if = { # socialists and radicals won't join conservative parties
 			limit = {
-				leader = { 
+				leader ?= {
 					OR = {
 						has_ideology = ideology:ideology_communist
 						has_ideology = ideology:ideology_vanguardist
@@ -510,7 +510,7 @@ conservative_party = {
 		}
 		if = { # conservatives love conservativism
 			limit = {
-				leader = {
+				leader ?= {
 					OR = {
 						has_ideology = ideology:ideology_traditionalist
 						has_ideology = ideology:ideology_royalist
@@ -565,7 +565,7 @@ conservative_party = {
 					any_interest_group = {
 						is_member_of_party = owner.py:conservative_party
 						is_powerful = yes
-						leader = {
+						leader ?= {
 							has_ideology = ideology:ideology_jingoist_leader
 						}
 					}
@@ -588,13 +588,14 @@ conservative_party = {
 		}
 		if = { # various progressives dislike conservativism
 			limit = {
-				leader = {
+				leader ?= {
 					OR = {
 						has_ideology = ideology:ideology_feminist
 						has_ideology = ideology:ideology_pacifist
 						has_ideology = ideology:ideology_reformer
 						has_ideology = ideology:ideology_humanitarian
 						has_ideology = ideology:ideology_humanitarian_royalist
+						has_ideology = ideology:ideology_usfp_progressive
 					}
 				}
 			}
@@ -615,7 +616,7 @@ conservative_party = {
 		# Abolitionists won't join conservative party
 		if = {
 			limit = {
-				leader = {
+				leader ?= {
 					character_is_anti_slavery = yes
 				}
 				owner = {
@@ -833,7 +834,7 @@ conservative_party = {
 				OR = {
 					has_ideology = ideology:ideology_patriotic
 					has_ideology = ideology:ideology_military_absolutist
-					leader = { has_ideology = ideology:ideology_authoritarian }
+					leader ?= { has_ideology = ideology:ideology_authoritarian }
 				}
 				owner = {
 					OR = { #vanilla bugfix
@@ -860,7 +861,7 @@ conservative_party = {
 					has_ideology = ideology:ideology_patriarchal
 					has_ideology = ideology:ideology_patriotic
 					has_ideology = ideology:ideology_military_absolutist
-					leader = { has_ideology = ideology:ideology_authoritarian }
+					leader ?= { has_ideology = ideology:ideology_authoritarian }
 
 					# ANZFP
 					trigger_if = {
@@ -1006,7 +1007,7 @@ conservative_party = {
 			limit = {
 				OR = {
 					has_ideology = ideology:ideology_corporatist
-					leader = {
+					leader ?= {
 						has_ideology = ideology:ideology_corporatist_leader
 					}
 				}
@@ -1033,14 +1034,14 @@ conservative_party = {
 				}
 			}
 			if = {
-				limit = { leader = { has_ideology = ideology:ideology_slaver } }
+				limit = { leader ?= { has_ideology = ideology:ideology_slaver } }
 				add = {
 					value = 100
 					desc = "from_slaver_leader"
 				}					
 			}	
 			else_if = {
-				limit = { leader = { character_is_anti_slavery = yes } }
+				limit = { leader ?= { character_is_anti_slavery = yes } }
 				add = {
 					value = -100
 					desc = "from_abolitionist_leader"
@@ -1112,7 +1113,7 @@ conservative_party = {
 		}
 		if = { # anti-orleanist
 			limit = {
-				leader = {
+				leader ?= {
 					OR = {
 						has_ideology = ideology:ideology_bonapartist
 						has_ideology = ideology:ideology_legitimist
@@ -1125,7 +1126,7 @@ conservative_party = {
 						party = {
 							is_party_type = conservative_party
 						}
-						leader = {
+						leader ?= {
 							has_ideology = ideology:ideology_orleanist
 						}
 					}
@@ -1138,7 +1139,7 @@ conservative_party = {
 		}
 		if = { # anti-legitimist
 			limit = {
-				leader = {
+				leader ?= {
 					OR = {
 						has_ideology = ideology:ideology_bonapartist
 						has_ideology = ideology:ideology_orleanist
@@ -1151,7 +1152,7 @@ conservative_party = {
 						party = {
 							is_party_type = conservative_party
 						}
-						leader = {
+						leader ?= {
 							has_ideology = ideology:ideology_legitimist
 						}
 					}
@@ -1164,7 +1165,7 @@ conservative_party = {
 		}
 		if = { # anti-bonapartist
 			limit = {
-				leader = {
+				leader ?= {
 					OR = {
 						has_ideology = ideology:ideology_legitimist
 						has_ideology = ideology:ideology_orleanist
@@ -1177,7 +1178,7 @@ conservative_party = {
 						party = {
 							is_party_type = conservative_party
 						}
-						leader = {
+						leader ?= {
 							has_ideology = ideology:ideology_bonapartist
 						}
 					}
@@ -1191,7 +1192,7 @@ conservative_party = {
 		if = {
 			limit = {
 				is_interest_group_type = ig_armed_forces
-				leader = {
+				leader ?= {
 					NOR = {
 						has_ideology = ideology:ideology_liberal_leader
 						has_ideology = ideology:ideology_republican_leader
@@ -1212,7 +1213,7 @@ conservative_party = {
 		}
 		if = {
 			limit = {
-				leader = {
+				leader ?= {
 					has_ideology = ideology:ideology_jacksonian_democrat
 				}
 			}
@@ -1256,7 +1257,7 @@ conservative_party = {
 		}
 		if = {
 			limit = {
-				leader = {
+				leader ?= {
 					has_variable = caudillo_conservative
 				}
 			}
@@ -1281,7 +1282,7 @@ conservative_party = {
 						has_modifier = missouri_compromise
 					}
 				}
-				leader = {
+				leader ?= {
 					culture = cu:yankee
 				}
 			}
@@ -1305,13 +1306,24 @@ conservative_party = {
 						has_modifier = missouri_compromise
 					}
 				}
-				leader = {
+				leader ?= {
 					culture = cu:dixie
 				}
 			}
 			add = {
 				value = 3
 				desc = "from_southern_interests"
+			}
+		}
+		if = { #Vanilla has duplicate jacksonian blocks
+			limit = {
+				leader ?= {
+					has_ideology = ideology:ideology_jacksonian_democrat
+				}
+			}
+			add = {
+				value = 1000
+				desc = "from_jacksonian_democrat"
 			}
 		}
 		#USFP weights

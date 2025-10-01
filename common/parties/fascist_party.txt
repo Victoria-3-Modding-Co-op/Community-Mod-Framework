@@ -31,7 +31,7 @@ fascist_party = {
 						party ?= {
 							is_party_type = fascist_party
 						}
-						leader = {
+						leader ?= {
 							OR = {
 								has_ideology = ideology:ideology_ethno_nationalist
 								has_ideology = ideology:ideology_fascist
@@ -60,7 +60,7 @@ fascist_party = {
 							party ?= {
 								is_party_type = fascist_party
 							}
-							leader = {
+							leader ?= {
 								OR = {
 									has_ideology = ideology:ideology_ethno_nationalist
 									has_ideology = ideology:ideology_fascist
@@ -246,7 +246,7 @@ fascist_party = {
 						country_has_primary_culture = cu:south_german
 					}
 					any_interest_group = {
-						leader = {
+						leader ?= {
 							OR = {
 								has_ideology = ideology:ideology_ethno_nationalist
 								has_ideology = ideology:ideology_fascist
@@ -264,7 +264,7 @@ fascist_party = {
 					}
 					NOT = {
 						any_interest_group = {
-							leader = {
+							leader ?= {
 								OR = {
 									has_ideology = ideology:ideology_ethno_nationalist
 									has_ideology = ideology:ideology_fascist
@@ -375,7 +375,7 @@ fascist_party = {
 		owner = {
 			country_has_voting_franchise = yes
 			any_interest_group = {
-				leader = {
+				leader ?= {
 					OR = { # PB shouldn't instantly become fascist without fascism being relevant
 						has_ideology = ideology:ideology_fascist
 						has_ideology = ideology:ideology_integralist
@@ -417,7 +417,7 @@ fascist_party = {
 		}
 		if = { # fascists and general racists love fascism
 			limit = {
-				leader = {
+				leader ?= {
 					OR = {
 						has_ideology = ideology:ideology_fascist
 						has_ideology = ideology:ideology_ethno_nationalist
@@ -434,7 +434,7 @@ fascist_party = {
 		if = { # strong fascists love fascism even more
 			limit = {
 				is_powerful = yes
-				leader = {
+				leader ?= {
 					OR = {
 						has_ideology = ideology:ideology_fascist
 						has_ideology = ideology:ideology_integralist
@@ -479,7 +479,7 @@ fascist_party = {
 				owner = {
 					any_interest_group = {
 						is_powerful = yes
-						leader = {
+						leader ?= {
 							OR = {
 								has_ideology = ideology:ideology_fascist
 								has_ideology = ideology:ideology_integralist
@@ -496,7 +496,7 @@ fascist_party = {
 		}
 		if = { # socialists and radicals won't join conservative parties
 			limit = {
-				leader = { 
+				leader ?= {
 					OR = {
 						has_ideology = ideology:ideology_communist
 						has_ideology = ideology:ideology_vanguardist
@@ -514,7 +514,7 @@ fascist_party = {
 		}
 		if = { # various progressives dislike fascism
 			limit = {
-				leader = {
+				leader ?= {
 					OR = {
 						has_ideology = ideology:ideology_nihilist
 						has_ideology = ideology:ideology_feminist
@@ -543,7 +543,7 @@ fascist_party = {
 		}
 		if = { # free trade advocates don't love protectionism
 			limit = {
-				leader = {
+				leader ?= {
 					has_ideology = ideology:ideology_market_liberal
 				}
 			}
@@ -554,7 +554,7 @@ fascist_party = {
 		}
 		if = { # moderates are scared of radical politics
 			limit = {
-				leader = {
+				leader ?= {
 					has_ideology = ideology:ideology_moderate
 				}
 			}
@@ -568,7 +568,7 @@ fascist_party = {
 				owner = {
 					any_interest_group = {
 						is_powerful = yes
-						leader = {
+						leader ?= {
 							OR = {
 								has_ideology = ideology:ideology_fascist
 								has_ideology = ideology:ideology_integralist
@@ -578,7 +578,7 @@ fascist_party = {
 				}
 				OR = {
 					has_ideology = ideology:ideology_corporatist
-					leader = {
+					leader ?= {
 						has_ideology = ideology:ideology_corporatist_leader
 					}
 				}
@@ -653,7 +653,7 @@ fascist_party = {
 					has_ideology = ideology:ideology_jingoist
 					has_ideology = ideology:ideology_particularist
 					has_ideology = ideology:ideology_sikh_moralist
-					leader = {
+					leader ?= {
 						OR = {
 							has_ideology = ideology:ideology_fascist
 							has_ideology = ideology:ideology_jingoist_leader
@@ -702,7 +702,7 @@ fascist_party = {
 		}
 		if = { # authoritarians inclined towards fascism
 			limit = {
-				leader = {
+				leader ?= {
 					has_ideology = ideology:ideology_authoritarian
 				}
 			}
@@ -751,7 +751,7 @@ fascist_party = {
 		}
 		if = { # anti-orleanist
 			limit = {
-				leader = {
+				leader ?= {
 					OR = {
 						has_ideology = ideology:ideology_bonapartist
 						has_ideology = ideology:ideology_legitimist
@@ -764,7 +764,7 @@ fascist_party = {
 							is_party_type = fascist_party
 						}
 						is_powerful = yes
-						leader = {
+						leader ?= {
 							has_ideology = ideology:ideology_orleanist
 						}
 					}
@@ -777,7 +777,7 @@ fascist_party = {
 		}
 		if = { # anti-legitimist
 			limit = {
-				leader = {
+				leader ?= {
 					OR = {
 						has_ideology = ideology:ideology_bonapartist
 						has_ideology = ideology:ideology_orleanist
@@ -790,7 +790,7 @@ fascist_party = {
 							is_party_type = fascist_party
 						}
 						is_powerful = yes
-						leader = {
+						leader ?= {
 							has_ideology = ideology:ideology_legitimist
 						}
 					}
@@ -803,7 +803,7 @@ fascist_party = {
 		}
 		if = { # anti-bonapartist
 			limit = {
-				leader = {
+				leader ?= {
 					OR = {
 						has_ideology = ideology:ideology_legitimist
 						has_ideology = ideology:ideology_orleanist
@@ -816,7 +816,7 @@ fascist_party = {
 							is_party_type = fascist_party
 						}
 						is_powerful = yes
-						leader = {
+						leader ?= {
 							has_ideology = ideology:ideology_bonapartist
 						}
 					}
@@ -829,7 +829,7 @@ fascist_party = {
 		}
 		if = {
 			limit = {
-				leader = {
+				leader ?= {
 					has_variable = caudillo_fascist
 				}
 			}

@@ -30,7 +30,7 @@ communist_party = {
 					country_has_primary_culture = cu:russian
 					any_interest_group = {
 						is_powerful = yes
-						leader = {
+						leader ?= {
 							has_ideology = ideology:ideology_vanguardist
 						}
 					}
@@ -43,7 +43,7 @@ communist_party = {
 					THIS = c:GBR
 					any_interest_group = {
 						is_powerful = yes
-						leader = {
+						leader ?= {
 							has_ideology = ideology:ideology_vanguardist
 						}
 					}
@@ -56,7 +56,7 @@ communist_party = {
 					THIS = c:FRA
 					any_interest_group = {
 						is_powerful = yes
-						leader = {
+						leader ?= {
 							has_ideology = ideology:ideology_vanguardist
 						}
 					}
@@ -69,7 +69,7 @@ communist_party = {
 					THIS = c:SWI
 					any_interest_group = {
 						is_powerful = yes
-						leader = {
+						leader ?= {
 							has_ideology = ideology:ideology_vanguardist
 						}
 					}
@@ -82,7 +82,7 @@ communist_party = {
 					THIS = c:NOR
 					any_interest_group = {
 						is_powerful = yes
-						leader = {
+						leader ?= {
 							has_ideology = ideology:ideology_vanguardist
 						}
 					}
@@ -95,7 +95,7 @@ communist_party = {
 					THIS = c:DEN
 					any_interest_group = {
 						is_powerful = yes
-						leader = {
+						leader ?= {
 							has_ideology = ideology:ideology_vanguardist
 						}
 					}
@@ -108,7 +108,7 @@ communist_party = {
 					THIS = c:SWE
 					any_interest_group = {
 						is_powerful = yes
-						leader = {
+						leader ?= {
 							has_ideology = ideology:ideology_vanguardist
 						}
 					}
@@ -121,7 +121,7 @@ communist_party = {
 					THIS = c:FIN
 					any_interest_group = {
 						is_powerful = yes
-						leader = {
+						leader ?= {
 							has_ideology = ideology:ideology_vanguardist
 						}
 					}
@@ -134,7 +134,7 @@ communist_party = {
 					THIS = c:LUX
 					any_interest_group = {
 						is_powerful = yes
-						leader = {
+						leader ?= {
 							has_ideology = ideology:ideology_vanguardist
 						}
 					}
@@ -147,7 +147,7 @@ communist_party = {
 					THIS = c:BUL
 					any_interest_group = {
 						is_powerful = yes
-						leader = {
+						leader ?= {
 							has_ideology = ideology:ideology_vanguardist
 						}
 					}
@@ -160,7 +160,7 @@ communist_party = {
 					THIS = c:HUN
 					any_interest_group = {
 						is_powerful = yes
-						leader = {
+						leader ?= {
 							has_ideology = ideology:ideology_vanguardist
 						}
 					}
@@ -173,7 +173,7 @@ communist_party = {
 					THIS = c:AUS
 					any_interest_group = {
 						is_powerful = yes
-						leader = {
+						leader ?= {
 							has_ideology = ideology:ideology_vanguardist
 						}
 					}
@@ -186,7 +186,7 @@ communist_party = {
 					THIS = c:JAP
 					any_interest_group = {
 						is_powerful = yes
-						leader = {
+						leader ?= {
 							has_ideology = ideology:ideology_vanguardist
 						}
 					}
@@ -199,7 +199,7 @@ communist_party = {
 					THIS = c:PER
 					any_interest_group = {
 						is_powerful = yes
-						leader = {
+						leader ?= {
 							has_ideology = ideology:ideology_vanguardist
 						}
 					}
@@ -212,7 +212,7 @@ communist_party = {
 					THIS = c:MEX
 					any_interest_group = {
 						is_powerful = yes
-						leader = {
+						leader ?= {
 							has_ideology = ideology:ideology_vanguardist
 						}
 					}
@@ -225,7 +225,7 @@ communist_party = {
 					THIS = c:GRE
 					any_interest_group = {
 						is_powerful = yes
-						leader = {
+						leader ?= {
 							has_ideology = ideology:ideology_vanguardist
 						}
 					}
@@ -241,7 +241,7 @@ communist_party = {
 						}
 						any_interest_group = {
 							is_powerful = yes
-							leader = {
+							leader ?= {
 								has_ideology = ideology:ideology_vanguardist
 							}
 						}
@@ -254,7 +254,7 @@ communist_party = {
 					country_has_primary_culture = cu:brazilian
 					any_interest_group = {
 						is_powerful = yes
-						leader = {
+						leader ?= {
 							has_ideology = ideology:ideology_vanguardist
 						}
 					}
@@ -271,7 +271,7 @@ communist_party = {
 						}
 						any_interest_group = {
 							is_powerful = yes
-							leader = {
+							leader ?= {
 								has_ideology = ideology:ideology_vanguardist
 							}
 						}
@@ -288,7 +288,7 @@ communist_party = {
 						NOT = {
 							any_interest_group = {
 								is_powerful = yes
-								leader = {
+								leader ?= {
 									has_ideology = ideology:ideology_vanguardist
 								}
 							}
@@ -311,7 +311,7 @@ communist_party = {
 						}
 						any_interest_group = {
 							is_powerful = yes
-							leader = {
+							leader ?= {
 								has_ideology = ideology:ideology_vanguardist
 							}
 						}
@@ -340,7 +340,7 @@ communist_party = {
 		owner = {
 			country_has_voting_franchise = yes
 			any_interest_group = {
-				leader = {
+				leader ?= {
 					OR = {
 						has_ideology = ideology:ideology_communist
 						has_ideology = ideology:ideology_vanguardist
@@ -353,7 +353,7 @@ communist_party = {
 			is_interest_group_type = ig_industrialists
 			is_interest_group_type = ig_landowners
 		}
-		leader = { # fascists, conservatives, and capitalists hate communism
+		leader ?= { # fascists, conservatives, and capitalists hate communism
 			NOR = {
 				has_ideology = ideology:ideology_fascist
 				has_ideology = ideology:ideology_integralist
@@ -400,7 +400,7 @@ communist_party = {
 		}
 		if = { # communists love communism
 			limit = {
-				leader = {
+				leader ?= {
 					OR = {
 						has_ideology = ideology:ideology_communist
 						has_ideology = ideology:ideology_vanguardist
@@ -416,7 +416,7 @@ communist_party = {
 		if = { # communists love communism
 			limit = {
 				is_powerful = yes
-				leader = {
+				leader ?= {
 					OR = {
 						has_ideology = ideology:ideology_communist
 						has_ideology = ideology:ideology_vanguardist
@@ -432,7 +432,7 @@ communist_party = {
 		if = { # weak social democrats and radicals may side with strong communists
 			limit = {
 				is_powerful = no
-				leader = {
+				leader ?= {
 					OR = {
 						has_ideology = ideology:ideology_social_democrat
 						has_ideology = ideology:ideology_radical
@@ -441,7 +441,7 @@ communist_party = {
 				owner = {
 					any_interest_group = {
 						is_powerful = yes
-						leader = {
+						leader ?= {
 							OR = {
 								has_ideology = ideology:ideology_communist
 								has_ideology = ideology:ideology_vanguardist
@@ -458,7 +458,7 @@ communist_party = {
 		}
 		if = { # post-revolution anarchists not excited about vanguard party
 			limit = {
-				leader = {
+				leader ?= {
 					has_ideology = ideology:ideology_anarchist
 				}
 				owner = {
@@ -501,7 +501,7 @@ communist_party = {
 		}
 		if = { # moderates are scared of radical politics
 			limit = {
-				leader = {
+				leader ?= {
 					has_ideology = ideology:ideology_moderate
 				}
 			}
@@ -515,7 +515,7 @@ communist_party = {
 				OR = {
 					has_ideology = ideology:ideology_meritocratic
 					has_ideology = ideology:ideology_agrarian
-					leader = {
+					leader ?= {
 						has_ideology = ideology:ideology_social_democrat
 					}
 
@@ -545,7 +545,7 @@ communist_party = {
 			limit = {
 				OR = {
 					has_ideology = ideology:ideology_anti_clerical
-					leader = {
+					leader ?= {
 						has_ideology = ideology:ideology_nihilist
 					}
 				}
@@ -568,7 +568,7 @@ communist_party = {
 					has_law_or_variant = law_type:law_free_trade
 				}
 				NOR = {
-					leader = {
+					leader ?= {
 						has_ideology = ideology:ideology_market_liberal
 					}
 
@@ -596,7 +596,7 @@ communist_party = {
 				OR = {
 					has_ideology = ideology:ideology_socialist
 					has_ideology = ideology:ideology_agrarian
-					leader = {
+					leader ?= {
 						has_ideology = ideology:ideology_protectionist
 					}
 
@@ -617,7 +617,7 @@ communist_party = {
 					has_law_or_variant = law_type:law_laissez_faire
 				}
 				NOT = {
-					leader = {
+					leader ?= {
 						has_ideology = ideology:ideology_market_liberal
 					}
 				}
@@ -631,7 +631,7 @@ communist_party = {
 			limit = {
 				OR = {
 					has_ideology = ideology:ideology_proletarian
-					leader = {
+					leader ?= {
 						has_ideology = ideology:ideology_social_democrat
 					}
 
@@ -676,17 +676,20 @@ communist_party = {
 					has_ideology = ideology:ideology_anti_slavery
 					has_ideology = ideology:ideology_laissez_faire
 					has_ideology = ideology:ideology_particularist
-					leader = {
-						has_ideology = ideology:ideology_abolitionist
-						has_ideology = ideology:ideology_social_democrat
-						has_ideology = ideology:ideology_communist
-					}
-					# ANZFP
-					trigger_if = {
-						limit = {
-							anzfp_is_active = yes
+					leader ?= {
+						OR = {
+							character_is_anti_slavery = yes
+							has_ideology = ideology:ideology_social_democrat
+							has_ideology = ideology:ideology_communist
+							has_ideology = ideology:ideology_vanguardist
 						}
-						anz_particularist_ideologies = yes
+						# ANZFP
+						trigger_if = {
+							limit = {
+								anzfp_is_active = yes
+							}
+							anz_particularist_ideologies = yes
+						}
 					}
 				}
 			}
@@ -706,7 +709,7 @@ communist_party = {
 				}
 				OR = {
 					has_ideology = ideology:ideology_anti_slavery
-					leader = {
+					leader ?= {
 						has_ideology = ideology:ideology_abolitionist
 					}
 
@@ -764,7 +767,7 @@ communist_party = {
 		}
 		if = {
 			limit = {
-				leader = {
+				leader ?= {
 					has_variable = caudillo_communist
 				}
 			}

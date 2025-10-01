@@ -236,17 +236,6 @@ usfp_party_weight_conservative_add = {
 				desc = "from_northern_interests"
 			}
 		}
-		if = {
-			limit = {
-				leader = {
-					has_ideology = ideology:ideology_jacksonian_democrat
-				}
-			}
-			add = {
-				value = 1000
-				desc = "from_jacksonian_democrat"
-			}
-		}
 }
 
 usfp_party_weight_free_trade_add = {

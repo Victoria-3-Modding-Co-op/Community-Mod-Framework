@@ -1,0 +1,25 @@
+﻿je_com_rise_of_communism = {
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	group = je_group_foreign_affairs
+
+	scripted_button = sb_com_rise_of_communism_test
+
+	immediate = {
+        create_com_situation = {
+            side_leader_country_left = c:GBR
+            side_name_left = je_com_rise_of_communism_communists
+            side_desc_left = je_com_rise_of_communism_communists_desc
+
+            side_leader_country_right = c:FRA
+            side_name_right = je_com_rise_of_communism_capitalists
+            side_desc_right = je_com_rise_of_communism_capitalists_desc
+        }
+	}
+
+	transferable = no
+	can_revolution_inherit = yes
+
+	weight = 200
+	should_be_pinned_by_default = yes
+}

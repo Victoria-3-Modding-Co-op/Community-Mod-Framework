@@ -1,0 +1,4 @@
+﻿com_concept_situation_leader = {
+	texture = "gfx/interface/icons/event_icons/waving_flag.dds"
+	is_loading_tip = yes
+}

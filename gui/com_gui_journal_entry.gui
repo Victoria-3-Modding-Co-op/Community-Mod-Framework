@@ -37,394 +37,400 @@ types journal_entry_overwrites {
 		}
 
 		blockoverride "scrollarea_content" {
-			flowcontainer = {
-				datacontext = "[JournalEntryPanel.AccessJournalEntry]"
-				direction = vertical
-				using = default_list_position
-				spacing = 10
+            # Base Game Journal Entry
+            flowcontainer = {
+                visible = "[Not(ComSituation.IsSet)]" # CMF: Added visible condition
+                datacontext = "[JournalEntryPanel.AccessJournalEntry]"
+                direction = vertical
+                using = default_list_position
+                spacing = 10
 
-				widget  = {
-					size = { @panel_width_plus_20 120 }
-					
-					parentanchor = hcenter
+                widget  = {
+                    size = { @panel_width_plus_20 120 }
 
-					background = {
-						texture =  "gfx/interface/illustrations/journal/top_illu_journal_entries.dds"
-						using = top_illu_properties
-					}
-					
-					widget = {
-						size = { 250 120 }
-						parentanchor = hcenter
+                    parentanchor = hcenter
 
-						icon = {
-							parentanchor = hcenter
-							size = { 120 120 }
-							texture = "gfx/interface/backgrounds/round_frame_dec.dds"
+                    background = {
+                        texture =  "gfx/interface/illustrations/journal/top_illu_journal_entries.dds"
+                        using = top_illu_properties
+                    }
 
-							icon = {
-								parentanchor = center
-								texture = "[JournalEntry.GetIcon]"
-								size = { 100 100 }
-							}
-						}
-						
-						
-						
-						# completion in progress
-						icon = {
-							visible = "[JournalEntry.IsProgressing]"
-							parentanchor = right|vcenter
-							size = { 50 50 }
-							texture = "gfx/interface/icons/generic_icons/green_checkmark.dds"
-							tooltip = "JOURNAL_ENTRY_IN_PROGRESS"
-							using = shimmer
-							
-							icon = {
-								parentanchor = center
-								using = rotate_glow_animation_02
-								size = { 300% 300% }
-								alpha = 0.5
-							}
-						}
-					}
+                    widget = {
+                        size = { 250 120 }
+                        parentanchor = hcenter
 
-					### TIMED MODIFIERS
-					flowcontainer = {
-						background = {
-							using = fade_left_simple
-							margin_right = 10
-						}
+                        icon = {
+                            parentanchor = hcenter
+                            size = { 120 120 }
+                            texture = "gfx/interface/backgrounds/round_frame_dec.dds"
 
-						datamodel = "[JournalEntry.GetTimedModifiers]"
-						spacing = 5
-						visible = "[Not(IsDataModelEmpty(JournalEntry.GetTimedModifiers))]"
-						parentanchor = vcenter|right
-						datamodel_wrap = 2
-						margin = { 10 10 }
-						margin_right = 30
+                            icon = {
+                                parentanchor = center
+                                texture = "[JournalEntry.GetIcon]"
+                                size = { 100 100 }
+                            }
+                        }
 
-						item = {
-							icon = {
-								tooltip = "[TimedModifier.GetTooltip]"
-								texture = "[TimedModifier.GetIcon]"
-								size = { 35 35 }
-							}
-						}
 
-					}
-				}
 
-				###############################
-				### Journal Entry Character ###
-				###############################
-				com_journal_entry_characters = {}
+                        # completion in progress
+                        icon = {
+                            visible = "[JournalEntry.IsProgressing]"
+                            parentanchor = right|vcenter
+                            size = { 50 50 }
+                            texture = "gfx/interface/icons/generic_icons/green_checkmark.dds"
+                            tooltip = "JOURNAL_ENTRY_IN_PROGRESS"
+                            using = shimmer
 
-				# time out info
-				flowcontainer = {
-					visible = "[JournalEntry.CanTimeOut]"
-					spacing = 5
-					parentanchor = hcenter
-					tooltip = "JOURNAL_ENTRY_ON_TIMEOUT_LONG"
-					
-					icon = {
-						size = { 30 30 }
-						texture = "gfx/interface/icons/generic_icons/clock.dds"
-					}
-					textbox = {
-						text = "[JournalEntry.GetTimeoutTooltip]"
-						autoresize = yes
-						align = nobaseline
-						using = fontsize_large
-						parentanchor = vcenter
-					}
-				}
+                            icon = {
+                                parentanchor = center
+                                using = rotate_glow_animation_02
+                                size = { 300% 300% }
+                                alpha = 0.5
+                            }
+                        }
+                    }
 
-				textbox = {
-					visible = "[Not(StringIsEmpty(JournalEntry.GetStatusDesc))]"
-					text = "[JournalEntry.GetStatusDesc]"
-					autoresize = yes
-					multiline = yes
-					minimumsize = { @panel_width_minus_20 -1 }
-					maximumsize = { @panel_width_minus_20 -1 }
-					using = default_list_position
-					align = hcenter|nobaseline
-					using = fontsize_large
+                    ### TIMED MODIFIERS
+                    flowcontainer = {
+                        background = {
+                            using = fade_left_simple
+                            margin_right = 10
+                        }
 
-					margin = { 20 20 }
-					
-					background = {
-						alpha = 0.5
-						using = entry_bg_fancy_dark
-					}
-				}
-				
-				dynamicgridbox = {
-					parentanchor = hcenter
-					visible = "[Not( IsDataModelEmpty( JournalEntry.GetScriptedButtons ) )]"
-					datamodel = "[JournalEntry.GetScriptedButtons]"
-					datamodel_wrap = 2
-					flipdirection = yes
+                        datamodel = "[JournalEntry.GetTimedModifiers]"
+                        spacing = 5
+                        visible = "[Not(IsDataModelEmpty(JournalEntry.GetTimedModifiers))]"
+                        parentanchor = vcenter|right
+                        datamodel_wrap = 2
+                        margin = { 10 10 }
+                        margin_right = 30
 
-					item = {
-						widget = {
-							size = { 260 60 }
+                        item = {
+                            icon = {
+                                tooltip = "[TimedModifier.GetTooltip]"
+                                texture = "[TimedModifier.GetIcon]"
+                                size = { 35 35 }
+                            }
+                        }
 
-							scripted_journal_entry_button = {
-								parentanchor = center
-							}
+                    }
+                }
 
-							# Buttons for which the selected trigger is true have a different appearance and tooltip, but share all behaviors.
-							# This means that even selected buttons are clickable as usual, assuming the possible trigger does not prevent it.
-							# This enables more use cases, such as using buttons as on-off toggles, but requires the scripter to disable buttons manually in the possible trigger as needed.
-						}
-					}
-				}
-				
-				com_journal_entry_progress_bars = {}
+                ###############################
+                ### Journal Entry Character ###
+                ###############################
+                com_journal_entry_characters = {}
 
-				flowcontainer = {
-					parentanchor = hcenter
-					visible = "[And(JournalEntry.HasProgressBar, JournalEntry.IsActive)]"
-					margin = { 0 5 }
-					
-					default_progressbar_horizontal = {
-						block "progressbar_size" {
-							size = { 504 30 }
-						}
-						blockoverride "values" {
-							value = "[FixedPointToFloat(JournalEntry.GetGoalProgressPercent)]"
-							min = 0
-							max = 1
-						}
-						
-						container = {
-							visible = "[Not(JournalEntry.ShowProgressbarAsTime)]"
+                # time out info
+                flowcontainer = {
+                    visible = "[JournalEntry.CanTimeOut]"
+                    spacing = 5
+                    parentanchor = hcenter
+                    tooltip = "JOURNAL_ENTRY_ON_TIMEOUT_LONG"
 
-							textbox = {
-								visible = "[EqualTo_CFixedPoint(JournalEntry.GetBaselineValue, '(CFixedPoint)0')]"
-								text = "JOURNAL_ENTRY_PROGRESSBAR_FROM_ZERO"
-								autoresize = yes
-								align = nobaseline
-								margin_left = 10
-								parentanchor = vcenter
-							}
-							textbox = {
-								visible = "[Not(EqualTo_CFixedPoint(JournalEntry.GetBaselineValue, '(CFixedPoint)0'))]"
-								text = "JOURNAL_ENTRY_PROGRESSBAR_FROM_BASE"
-								autoresize = yes
-								align = nobaseline
-								margin_left = 10
-								parentanchor = vcenter
-							}
-						}
+                    icon = {
+                        size = { 30 30 }
+                        texture = "gfx/interface/icons/generic_icons/clock.dds"
+                    }
+                    textbox = {
+                        text = "[JournalEntry.GetTimeoutTooltip]"
+                        autoresize = yes
+                        align = nobaseline
+                        using = fontsize_large
+                        parentanchor = vcenter
+                    }
+                }
 
-						container = {
-							visible = "[JournalEntry.ShowProgressbarAsTime]"
-							
-							textbox = {
-								visible = "[JournalEntry.ShowProgressbarAsMonths]"
-								text = "JOURNAL_ENTRY_PROGRESSBAR_MONTHS"
-								autoresize = yes
-								align = nobaseline
-								margin_left = 10
-								parentanchor = vcenter
-							}
-							textbox = {
-								visible = "[JournalEntry.ShowProgressbarAsWeeks]"
-								text = "JOURNAL_ENTRY_PROGRESSBAR_WEEKS"
-								autoresize = yes
-								align = nobaseline
-								margin_left = 10
-								parentanchor = vcenter
-							}
-						}
-					}
-				}
+                textbox = {
+                    visible = "[Not(StringIsEmpty(JournalEntry.GetStatusDesc))]"
+                    text = "[JournalEntry.GetStatusDesc]"
+                    autoresize = yes
+                    multiline = yes
+                    minimumsize = { @panel_width_minus_20 -1 }
+                    maximumsize = { @panel_width_minus_20 -1 }
+                    using = default_list_position
+                    align = hcenter|nobaseline
+                    using = fontsize_large
 
-				flowcontainer = {
-					direction = vertical
-					using = default_list_position
+                    margin = { 20 20 }
 
-					spacing = 20
+                    background = {
+                        alpha = 0.5
+                        using = entry_bg_fancy_dark
+                    }
+                }
 
-					textbox = {
-						autoresize = yes
-						text = "[JournalEntry.GetReason]"
-						min_width = @panel_width_minus_30 
-						max_width = @panel_width_minus_30
+                dynamicgridbox = {
+                    parentanchor = hcenter
+                    visible = "[Not( IsDataModelEmpty( JournalEntry.GetScriptedButtons ) )]"
+                    datamodel = "[JournalEntry.GetScriptedButtons]"
+                    datamodel_wrap = 2
+                    flipdirection = yes
 
-						multiline = yes
-						using = default_list_position
+                    item = {
+                        widget = {
+                            size = { 260 60 }
 
-						align = nobaseline
-						default_format = "#lore"
+                            scripted_journal_entry_button = {
+                                parentanchor = center
+                            }
 
-						margin = { 15 15 }
+                            # Buttons for which the selected trigger is true have a different appearance and tooltip, but share all behaviors.
+                            # This means that even selected buttons are clickable as usual, assuming the possible trigger does not prevent it.
+                            # This enables more use cases, such as using buttons as on-off toggles, but requires the scripter to disable buttons manually in the possible trigger as needed.
+                        }
+                    }
+                }
 
-						background = {
-							using = entry_bg
-						}
-					}
+                com_journal_entry_progress_bars = {}
 
-					flowcontainer = {
-						direction = vertical
-						using = default_list_position
-						name = "complete_text"
+                flowcontainer = {
+                    parentanchor = hcenter
+                    visible = "[And(JournalEntry.HasProgressBar, JournalEntry.IsActive)]"
+                    margin = { 0 5 }
 
-						spacing = 5
+                    default_progressbar_horizontal = {
+                        block "progressbar_size" {
+                            size = { 504 30 }
+                        }
+                        blockoverride "values" {
+                            value = "[FixedPointToFloat(JournalEntry.GetGoalProgressPercent)]"
+                            min = 0
+                            max = 1
+                        }
 
-						textbox = {
-							visible = "[Not(StringIsEmpty(JournalEntry.GetProgressDesc))]"
-							text = "[JournalEntry.GetProgressDesc]"
-							autoresize = yes
-							multiline = yes
-							minimumsize = { @panel_width_minus_30 -1 }
-							maximumsize = { @panel_width_minus_30 -1 }
-							using = default_list_position
-							align = nobaseline
+                        container = {
+                            visible = "[Not(JournalEntry.ShowProgressbarAsTime)]"
 
-							margin = { 15 0 }
+                            textbox = {
+                                visible = "[EqualTo_CFixedPoint(JournalEntry.GetBaselineValue, '(CFixedPoint)0')]"
+                                text = "JOURNAL_ENTRY_PROGRESSBAR_FROM_ZERO"
+                                autoresize = yes
+                                align = nobaseline
+                                margin_left = 10
+                                parentanchor = vcenter
+                            }
+                            textbox = {
+                                visible = "[Not(EqualTo_CFixedPoint(JournalEntry.GetBaselineValue, '(CFixedPoint)0'))]"
+                                text = "JOURNAL_ENTRY_PROGRESSBAR_FROM_BASE"
+                                autoresize = yes
+                                align = nobaseline
+                                margin_left = 10
+                                parentanchor = vcenter
+                            }
+                        }
 
-							background = {
-								using = entry_bg
-							}
-						}
-						
-						textbox = {
-							visible = "[JournalEntry.CanComplete]"
-							text = "[JournalEntry.GetCompletionTooltip]"
-							autoresize = yes
-							multiline = yes
-							minimumsize = { @panel_width_minus_30 -1 }
-							maximumsize = { @panel_width_minus_30 -1 }
-							using = default_list_position
-							align = nobaseline
+                        container = {
+                            visible = "[JournalEntry.ShowProgressbarAsTime]"
 
-							margin = { 15 5 }
+                            textbox = {
+                                visible = "[JournalEntry.ShowProgressbarAsMonths]"
+                                text = "JOURNAL_ENTRY_PROGRESSBAR_MONTHS"
+                                autoresize = yes
+                                align = nobaseline
+                                margin_left = 10
+                                parentanchor = vcenter
+                            }
+                            textbox = {
+                                visible = "[JournalEntry.ShowProgressbarAsWeeks]"
+                                text = "JOURNAL_ENTRY_PROGRESSBAR_WEEKS"
+                                autoresize = yes
+                                align = nobaseline
+                                margin_left = 10
+                                parentanchor = vcenter
+                            }
+                        }
+                    }
+                }
 
-							background = {
-								texture = "gfx/interface/tooltip/tooltip_title_bg.dds"
-								using = color_gold_positive
-								alpha = 0.4
-								
-								modify_texture = {
-									using = texture_velvet
-								}
-							}
-						}
+                flowcontainer = {
+                    direction = vertical
+                    using = default_list_position
 
-						textbox = {
-							text = "[JournalEntry.GetOnCompleteTooltip]"
-							autoresize = yes
-							multiline = yes
-							minimumsize = { @panel_width_minus_30 -1 }
-							maximumsize = { @panel_width_minus_30 -1 }
-							using = default_list_position
-							align = nobaseline
+                    spacing = 20
 
-							margin_left = 35
-							margin_right = 15
-						}
-					}
+                    textbox = {
+                        autoresize = yes
+                        text = "[JournalEntry.GetReason]"
+                        min_width = @panel_width_minus_30
+                        max_width = @panel_width_minus_30
 
-					flowcontainer = {
-						name = "fail_text"
-						direction = vertical
-						using = default_list_position
+                        multiline = yes
+                        using = default_list_position
 
-						spacing = 5
+                        align = nobaseline
+                        default_format = "#lore"
 
-						textbox = {
-							visible = "[Not(StringIsEmpty(JournalEntry.GetFailureTooltip))]"
-							text = "[JournalEntry.GetFailureTooltip]"
-							autoresize = yes
-							multiline = yes
-							minimumsize = { @panel_width_minus_30 -1 }
-							maximumsize = { @panel_width_minus_30 -1 }
-							using = default_list_position
-							align = nobaseline
+                        margin = { 15 15 }
 
-							margin = { 15 5 }
+                        background = {
+                            using = entry_bg
+                        }
+                    }
 
-							background = {
-								texture = "gfx/interface/tooltip/tooltip_title_bg.dds"
-								using = color_blue_negative
-								alpha = 0.5
-								
-								modify_texture = {
-									using = texture_velvet
-								}
-							}
-						}
+                    flowcontainer = {
+                        direction = vertical
+                        using = default_list_position
+                        name = "complete_text"
 
-						textbox = {
-							text = "[JournalEntry.GetOnFailTooltip]"
-							visible = "[Not(StringIsEmpty(JournalEntry.GetOnFailTooltip))]"
-							autoresize = yes
-							multiline = yes
-							minimumsize = { @panel_width_minus_30 -1 }
-							maximumsize = { @panel_width_minus_30 -1 }
-							using = default_list_position
-							align = nobaseline
+                        spacing = 5
 
-							margin_left = 35
-							margin_right = 15
-						}
+                        textbox = {
+                            visible = "[Not(StringIsEmpty(JournalEntry.GetProgressDesc))]"
+                            text = "[JournalEntry.GetProgressDesc]"
+                            autoresize = yes
+                            multiline = yes
+                            minimumsize = { @panel_width_minus_30 -1 }
+                            maximumsize = { @panel_width_minus_30 -1 }
+                            using = default_list_position
+                            align = nobaseline
 
-						textbox = {
-							text = "[JournalEntry.GetOnTimeoutTooltip]"
-							visible = "[Not(StringIsEmpty(JournalEntry.GetOnTimeoutTooltip))]"
-							autoresize = yes
-							multiline = yes
-							minimumsize = { @panel_width_minus_30 -1 }
-							maximumsize = { @panel_width_minus_30 -1 }
-							using = default_list_position
-							align = nobaseline
+                            margin = { 15 0 }
 
-							margin_left = 35
-							margin_right = 15
-						}
-					}
-				}
+                            background = {
+                                using = entry_bg
+                            }
+                        }
 
-				### TUTORIAL				
+                        textbox = {
+                            visible = "[JournalEntry.CanComplete]"
+                            text = "[JournalEntry.GetCompletionTooltip]"
+                            autoresize = yes
+                            multiline = yes
+                            minimumsize = { @panel_width_minus_30 -1 }
+                            maximumsize = { @panel_width_minus_30 -1 }
+                            using = default_list_position
+                            align = nobaseline
 
-				divider_clean = {
-					visible = "[Or(JournalEntry.HasHowTutorialLesson, JournalEntry.HasWhyTutorialLesson)]"
-				}
+                            margin = { 15 5 }
 
-				flowcontainer = {
-					direction = vertical
-					parentanchor = hcenter
-					spacing = 10
-					
-					button = {
-						using = default_button
-						parentanchor = hcenter
-						size = { @panel_width_minus_30 60 }
-						text = "TELL_ME_HOW"
-						using = fontsize_large
-						tooltip = "[JournalEntry.CanStartTutorialLessonDesc]"
-						visible = "[JournalEntry.HasHowTutorialLesson]"
-						enabled = "[JournalEntry.CanStartTutorialLesson]"
-						onclick = "[JournalEntry.StartHowTutorialLesson]"
-						onclick = "[InformationPanelBar.OpenJournalEntryPanel(JournalEntry.AccessSelf)]"
-					}		
-					button = {
-						using = default_button
-						parentanchor = hcenter
-						size = { @panel_width_minus_30 60 }
-						text = "TELL_ME_WHY"
-						using = fontsize_large
-						tooltip = "[JournalEntry.CanStartTutorialLessonDesc]"
-						visible = "[JournalEntry.HasWhyTutorialLesson]"
-						enabled = "[JournalEntry.CanStartTutorialLesson]"
-						onclick = "[JournalEntry.StartWhyTutorialLesson]"
-						onclick = "[InformationPanelBar.OpenJournalEntryPanel(JournalEntry.AccessSelf)]"
-					}			
-				}
-			}
+                            background = {
+                                texture = "gfx/interface/tooltip/tooltip_title_bg.dds"
+                                using = color_gold_positive
+                                alpha = 0.4
+
+                                modify_texture = {
+                                    using = texture_velvet
+                                }
+                            }
+                        }
+
+                        textbox = {
+                            text = "[JournalEntry.GetOnCompleteTooltip]"
+                            autoresize = yes
+                            multiline = yes
+                            minimumsize = { @panel_width_minus_30 -1 }
+                            maximumsize = { @panel_width_minus_30 -1 }
+                            using = default_list_position
+                            align = nobaseline
+
+                            margin_left = 35
+                            margin_right = 15
+                        }
+                    }
+
+                    flowcontainer = {
+                        name = "fail_text"
+                        direction = vertical
+                        using = default_list_position
+
+                        spacing = 5
+
+                        textbox = {
+                            visible = "[Not(StringIsEmpty(JournalEntry.GetFailureTooltip))]"
+                            text = "[JournalEntry.GetFailureTooltip]"
+                            autoresize = yes
+                            multiline = yes
+                            minimumsize = { @panel_width_minus_30 -1 }
+                            maximumsize = { @panel_width_minus_30 -1 }
+                            using = default_list_position
+                            align = nobaseline
+
+                            margin = { 15 5 }
+
+                            background = {
+                                texture = "gfx/interface/tooltip/tooltip_title_bg.dds"
+                                using = color_blue_negative
+                                alpha = 0.5
+
+                                modify_texture = {
+                                    using = texture_velvet
+                                }
+                            }
+                        }
+
+                        textbox = {
+                            text = "[JournalEntry.GetOnFailTooltip]"
+                            visible = "[Not(StringIsEmpty(JournalEntry.GetOnFailTooltip))]"
+                            autoresize = yes
+                            multiline = yes
+                            minimumsize = { @panel_width_minus_30 -1 }
+                            maximumsize = { @panel_width_minus_30 -1 }
+                            using = default_list_position
+                            align = nobaseline
+
+                            margin_left = 35
+                            margin_right = 15
+                        }
+
+                        textbox = {
+                            text = "[JournalEntry.GetOnTimeoutTooltip]"
+                            visible = "[Not(StringIsEmpty(JournalEntry.GetOnTimeoutTooltip))]"
+                            autoresize = yes
+                            multiline = yes
+                            minimumsize = { @panel_width_minus_30 -1 }
+                            maximumsize = { @panel_width_minus_30 -1 }
+                            using = default_list_position
+                            align = nobaseline
+
+                            margin_left = 35
+                            margin_right = 15
+                        }
+                    }
+                }
+
+                ### TUTORIAL
+
+                divider_clean = {
+                    visible = "[Or(JournalEntry.HasHowTutorialLesson, JournalEntry.HasWhyTutorialLesson)]"
+                }
+
+                flowcontainer = {
+                    direction = vertical
+                    parentanchor = hcenter
+                    spacing = 10
+
+                    button = {
+                        using = default_button
+                        parentanchor = hcenter
+                        size = { @panel_width_minus_30 60 }
+                        text = "TELL_ME_HOW"
+                        using = fontsize_large
+                        tooltip = "[JournalEntry.CanStartTutorialLessonDesc]"
+                        visible = "[JournalEntry.HasHowTutorialLesson]"
+                        enabled = "[JournalEntry.CanStartTutorialLesson]"
+                        onclick = "[JournalEntry.StartHowTutorialLesson]"
+                        onclick = "[InformationPanelBar.OpenJournalEntryPanel(JournalEntry.AccessSelf)]"
+                    }
+                    button = {
+                        using = default_button
+                        parentanchor = hcenter
+                        size = { @panel_width_minus_30 60 }
+                        text = "TELL_ME_WHY"
+                        using = fontsize_large
+                        tooltip = "[JournalEntry.CanStartTutorialLessonDesc]"
+                        visible = "[JournalEntry.HasWhyTutorialLesson]"
+                        enabled = "[JournalEntry.CanStartTutorialLesson]"
+                        onclick = "[JournalEntry.StartWhyTutorialLesson]"
+                        onclick = "[InformationPanelBar.OpenJournalEntryPanel(JournalEntry.AccessSelf)]"
+                    }
+                }
+            }
+            # CMF Situation Framework
+            com_journal_entry_situation = {
+                visible = "[ComSituation.IsSet]"
+            }
 		}
 
 		blockoverride "pin_visibility" {}
@@ -1042,5 +1048,4 @@ types journal_entry_overwrites {
 			}
 		}
 	}
-	
 }

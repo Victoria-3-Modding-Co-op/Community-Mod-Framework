@@ -683,7 +683,7 @@ movement_muslim_nationalist = {
 				}
 			}
 			add = {
-				desc = "INSURRECTIONARY_MOVEMENTS"
+				desc = "SIMULTANEOUS_INSURRECTIONARY_MOVEMENTS"
 				owner = {
 					every_political_movement = {
 						limit = {

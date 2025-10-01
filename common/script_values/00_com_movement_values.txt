@@ -10,7 +10,7 @@ com_movement_cultural_minority_secession_target_fraction_of_states_max = 0.75
 
 ## Religious Movement Values
 com_movement_religious_minority_secession_possible_religion_percent_state = 0.10
-com_movement_religious_minority_secession_state_weight_religion_percent_state_1 = 0.75
+com_movement_religious_minority_secession_state_weight_religion_percent_state_1 = 0.05 #changed in 1.10.3
 com_movement_religious_minority_secession_state_weight_religion_percent_state_2 = 0.5
 com_movement_religious_minority_secession_state_weight_religion_percent_state_3 = 0.25
 com_movement_religious_minority_secession_state_weight_religion_percent_state_4 = 0.1

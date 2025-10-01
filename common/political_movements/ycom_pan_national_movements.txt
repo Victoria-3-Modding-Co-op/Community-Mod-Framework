@@ -244,11 +244,11 @@
 				}
 			}
 
-			multiply = { # Range from x0.625 to x3.125
+			multiply = { # Range from x0.775 to 2.275
 				desc = "POP_CULTURE_FERVOR"
 				value = culture.culture_current_fervor
 				subtract = 15
-				multiply = 0.025
+				multiply = 0.015
 				add = 1
 			}
 
@@ -658,11 +658,11 @@ movement_german_national = {
 			}
 		}
 
-		multiply = { # Range from x0.625 to x3.125
+		multiply = { # Range from x0.775 to 2.275
 			desc = "POP_CULTURE_FERVOR"
 			value = culture.culture_current_fervor
 			subtract = 15
-			multiply = 0.025
+			multiply = 0.015
 			add = 1
 		}
 
@@ -695,7 +695,14 @@ movement_german_national = {
 				subtract = pop_radical_fraction
 			}
 		}
+
+		multiply = { # Illiterate pops participate at 1/10 the rate of fully literate pops
+			desc = "POP_LITERACY"
+			value = literacy_rate
+			add = 0.10
+		}
 	}
+
 	revolution = {
 		possible = {
 			political_movement_support >= 0.05
@@ -787,31 +794,11 @@ movement_german_national = {
 				value = 0.10
 			}
 		}
+
 		if = {
 			limit = {
 				owner ?= {
-					has_technology_researched = pan-nationalism
-				}
-			}
-			if = {
-				limit = {
-					NOT = {
-						any_state_region = {
-							OR = {
-								is_homeland = cu:south_german
-								is_homeland = cu:north_german
-							}
-							any_scope_state = {
-								NOT = {
-									owner = ROOT.owner
-								}
-							}
-						}
-					}
-				}
-				add = {
-					desc = "GERMAN_UNIFICATION"
-					value = 0.10
+					has_technology_researched = nationalism
 				}
 			}
 			if = {
@@ -825,6 +812,53 @@ movement_german_national = {
 				}
 				add = {
 					desc = "RIVAL_GERMAN_UNIFIERS"
+					value = 0.10
+				}
+			}
+			else_if = {
+				limit = {
+					owner ?= {
+								NOT = {
+							is_unification_candidate = GER
+								}
+						any_diplomatically_relevant_country = {
+							is_unification_candidate = GER
+						}
+					}
+				}
+				add = {
+					desc = "SUPPORT_FOR_UNIFIER"
+					value = 0.10
+				}
+			}
+		}
+		if = {
+			limit = {
+				owner ?= {
+					has_technology_researched = pan-nationalism
+				}
+			}
+			if = {
+				limit = {
+					owner ?= {
+						is_unification_candidate = GER
+						NOT = {
+							any_state_region = {
+								OR = {
+									is_homeland = cu:south_german
+									is_homeland = cu:north_german
+								}
+								any_scope_state = {
+									NOT = {
+										owner = ROOT.owner
+									}
+								}
+							}
+						}
+					}
+				}
+				add = {
+					desc = "GERMAN_UNIFICATION"
 					value = 0.10
 				}
 			}
@@ -1142,11 +1176,11 @@ movement_italian_national = {
 			}
 		}
 
-		multiply = { # Range from x0.625 to x3.125
+		multiply = { # Range from x0.775 to 2.275
 			desc = "POP_CULTURE_FERVOR"
 			value = culture.culture_current_fervor
 			subtract = 15
-			multiply = 0.025
+			multiply = 0.015
 			add = 1
 		}
 
@@ -1178,6 +1212,12 @@ movement_italian_national = {
 				value = 1
 				subtract = pop_radical_fraction
 			}
+		}
+
+		multiply = { # Illiterate pops participate at 1/10 the rate of fully literate pops
+			desc = "POP_LITERACY"
+			value = literacy_rate
+			add = 0.10
 		}
 	}
 	revolution = {
@@ -1253,28 +1293,7 @@ movement_italian_national = {
 		if = {
 			limit = {
 				owner ?= {
-					has_technology_researched = pan-nationalism
-				}
-			}
-			if = {
-				limit = {
-					NOT = {
-						any_state_region = {
-							OR = {
-								is_homeland = cu:south_italian
-								is_homeland = cu:north_italian
-							}
-							any_scope_state = {
-								NOT = {
-									owner = ROOT.owner
-								}
-							}
-						}
-					}
-				}
-				add = {
-					desc = "ITALIAN_UNIFICATION"
-					value = 0.10
+					has_technology_researched = nationalism
 				}
 			}
 			if = {
@@ -1288,6 +1307,53 @@ movement_italian_national = {
 				}
 				add = {
 					desc = "RIVAL_ITALIAN_UNIFIERS"
+					value = 0.10
+				}
+			}
+			else_if = {
+				limit = {
+					owner ?= {
+								NOT = {
+							is_unification_candidate = ITA
+								}
+						any_diplomatically_relevant_country = {
+							is_unification_candidate = ITA
+						}
+					}
+				}
+				add = {
+					desc = "SUPPORT_FOR_UNIFIER"
+					value = 0.10
+				}
+			}
+		}
+		if = {
+			limit = {
+				owner ?= {
+					has_technology_researched = pan-nationalism
+				}
+			}
+			if = {
+				limit = {
+					owner ?= {
+						is_unification_candidate = ITA
+						NOT = {
+							any_state_region = {
+								OR = {
+									is_homeland = cu:south_italian
+									is_homeland = cu:north_italian
+								}
+								any_scope_state = {
+									NOT = {
+										owner = ROOT.owner
+									}
+								}
+							}
+						}
+					}
+				}
+				add = {
+					desc = "ITALIAN_UNIFICATION"
 					value = 0.10
 				}
 			}
@@ -1610,11 +1676,11 @@ movement_yugoslav_national = {
 			}
 		}
 
-		multiply = { # Range from x0.625 to x3.125
+		multiply = { # Range from x0.775 to 2.275
 			desc = "POP_CULTURE_FERVOR"
 			value = culture.culture_current_fervor
 			subtract = 15
-			multiply = 0.025
+			multiply = 0.015
 			add = 1
 		}
 
@@ -1646,6 +1712,12 @@ movement_yugoslav_national = {
 				value = 1
 				subtract = pop_radical_fraction
 			}
+		}
+
+		multiply = { # Illiterate pops participate at 1/10 the rate of fully literate pops
+			desc = "POP_LITERACY"
+			value = literacy_rate
+			add = 0.10
 		}
 	}
 	revolution = {
@@ -1727,33 +1799,11 @@ movement_yugoslav_national = {
 				desc = "RULER_NOT_PRIMARY_CULTURE"
 			}
 		}
+
 		if = {
 			limit = {
 				owner ?= {
-					has_technology_researched = pan-nationalism
-				}
-			}
-			if = {
-				limit = {
-					NOT = {
-						any_state_region = {
-							OR = {
-								is_homeland = cu:croat
-								is_homeland = cu:serb
-								is_homeland = cu:bosniak
-								is_homeland = cu:slovene
-							}
-							any_scope_state = {
-								NOT = {
-									owner = ROOT.owner
-								}
-							}
-						}
-					}
-				}
-				add = {
-					desc = "YUGOSLAV_UNIFICATION"
-					value = 0.10
+					has_technology_researched = nationalism
 				}
 			}
 			if = {
@@ -1767,6 +1817,55 @@ movement_yugoslav_national = {
 				}
 				add = {
 					desc = "RIVAL_YUGOSLAV_UNIFIERS"
+					value = 0.10
+				}
+			}
+			else_if = {
+				limit = {
+					owner ?= {
+						NOT = {
+							is_unification_candidate = YUG
+						}
+						any_diplomatically_relevant_country = {
+							is_unification_candidate = YUG
+						}
+					}
+				}
+				add = {
+					desc = "SUPPORT_FOR_UNIFIER"
+					value = 0.10
+				}
+			}
+		}
+		if = {
+			limit = {
+				owner ?= {
+					has_technology_researched = pan-nationalism
+				}
+			}
+			if = {
+				limit = {
+					owner ?= {
+						is_unification_candidate = YUG
+						NOT = {
+							any_state_region = {
+								OR = {
+									is_homeland = cu:croat
+									is_homeland = cu:serb
+									is_homeland = cu:bosniak
+									is_homeland = cu:slovene
+								}
+								any_scope_state = {
+									NOT = {
+										owner = ROOT.owner
+									}
+								}
+							}
+						}
+					}
+				}
+				add = {
+					desc = "YUGOSLAV_UNIFICATION"
 					value = 0.10
 				}
 			}

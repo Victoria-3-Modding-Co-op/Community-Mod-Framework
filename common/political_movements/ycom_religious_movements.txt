@@ -168,11 +168,18 @@
             }
         }
 
+		if = {
+			limit = {
+				NOT = {
+					is_pop_type = clergymen
+				}
+			}
 		add = { # Weakened by increasing literacy rates
             desc = "POP_LITERACY"
             this = {
                 value = literacy_rate
                 multiply = -2
+				}
             }
         }
 
@@ -485,7 +492,7 @@ movement_religious_minority = {
 				OR = {
 					AND = {
 						owner ?= {
-							has_law = law_type:law_state_atheism
+							has_law_or_variant = law_type:law_state_atheism
 						}
 						character_hates_state_atheism = yes #Compatibility Trigger
 					}
@@ -608,11 +615,18 @@ movement_religious_minority = {
 			}
 		}
 
-		add = { # Weakened by increasing literacy rates
-			desc = "POP_LITERACY"
-			this = {
-				value = literacy_rate
-				multiply = -2
+		if = {
+			limit = {
+				NOT = {
+					is_pop_type = clergymen
+				}
+			}
+			add = { # Weakened by increasing literacy rates
+				desc = "POP_LITERACY"
+				this = {
+					value = literacy_rate
+					multiply = -2
+				}
 			}
 		}
 
@@ -739,43 +753,23 @@ movement_religious_minority = {
 			if = {
 				limit = {
 					is_capital = no
-				}
-
-				if = {
-					limit = {
 						religion_percent_state = {
 							target = scope:political_movement.religion
-							value >= com_movement_religious_minority_secession_state_weight_religion_percent_state_1 #vanilla value: 0.75
+							value >= com_movement_religious_minority_secession_state_weight_religion_percent_state_1 #vanilla value: 0.05
 						}
 					}
-					add = 250
-				}
-				else_if = {
-					limit = {
-						religion_percent_state = {
-							target = scope:political_movement.religion
-							value >= com_movement_religious_minority_secession_state_weight_religion_percent_state_2 #vanilla value: 0.5
-						}
+				add = { # These three values must add up to more than 1 - 5 x Obstinance, 1/2 Turmoil, percent of pops of this religion
+					value = -1
+					add = "this.religion_percent_state(scope:political_movement.religion)"
+					add = {
+						value = this.turmoil
+						multiply = 0.5
 					}
-					add = 150
-				}
-				else_if = {
-					limit = {
-						religion_percent_state = {
-							target = scope:political_movement.religion
-							value >= com_movement_religious_minority_secession_state_weight_religion_percent_state_3 #vanilla value: 0.25
-						}
+					add = {
+						value = this.obstinance
+						multiply = 5
 					}
-					add = 50
-				}
-				else_if = {
-					limit = {
-						religion_percent_state = {
-							target = scope:political_movement.religion
-							value >= com_movement_religious_minority_secession_state_weight_religion_percent_state_4 #vanilla value: 0.1
-						}
-					}
-					add = 10
+					multiply = 100
 				}
 			}
 		}
@@ -864,7 +858,7 @@ movement_religious_minority = {
 				}
 			}
 			add = {
-				desc = "INSURRECTIONARY_MOVEMENTS"
+				desc = "SIMULTANEOUS_INSURRECTIONARY_MOVEMENTS"
 				owner = {
 					every_political_movement = {
 						limit = {

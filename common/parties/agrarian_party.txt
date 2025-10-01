@@ -290,161 +290,7 @@ agrarian_party = {
 				desc = "usa_two_party_system"
 			}
 		}
-		#USFP: Two Party System Handling
-		if = {
-			limit = {
-				is_usfp_active = yes
-				owner = {
-					country_is_in_north_america = yes
-					usfp_country_is_american = yes
-					has_law = law_type:law_presidential_republic
-				}
-			}
-			if = { # If LO+Democratic Party is around, business as usual
-				limit = {
-					OR = {
-						AND = {
-							exists = owner.py:conservative_party
-							owner = {
-								ig:ig_landowners = {
-									is_member_of_party = owner.py:conservative_party
-								}
-							}
-						}
-						year < 1837
-					}
-				}
-				add = {
-					value = -20
-					desc = "usa_two_party_system"
-				}
-			}
-			else = { # otherwise...
-				if = { # non-whig leaders will like green party more
-					limit = {
-						leader = {
-							OR = {
-								has_reactionary_ideology = yes
-								has_conservative_ideology = yes
-							}
-							has_socialist_ideology = no #USFP
-						}
-					}
-					add = {
-						value = 20
-						desc = "usa_two_party_system"
-					}
-				}
-				if = { # RF-TU alliance with dethroned LO in toe
-					limit = {
-						OR = {
-							is_interest_group_type = ig_rural_folk
-							is_interest_group_type = ig_trade_unions
-							is_interest_group_type = ig_landowners
-						}
-						leader = {
-							has_socialist_ideology = no #USFP
-						}
-					}
-					add = {
-						value = 20
-						desc = "usa_two_party_system"
-					}
-				}
-				if = { #pro-slaver
-					limit = { 
-						leader = { has_ideology = ideology:ideology_slaver }
-						NOT = {
-							owner = { has_law = law_type:law_slavery_banned }
-						} 
-					}
-					add = {
-						value = 100
-						desc = "from_slaver_leader"
-					}					
-				}	
-				else_if = {
-					limit = { 
-						leader = { character_is_anti_slavery = yes }
-						NOT = {
-							owner = { has_law = law_type:law_slavery_banned }
-						}  
-					}
-					add = {
-						value = -100
-						desc = "from_abolitionist_leader"
-					}					
-				}
-				if = { # If DP is around but LO isn't in it, then it is time to JUMP SHIP!
-					limit = {
-						exists = owner.py:conservative_party
-						owner = {
-							ig:ig_landowners = {
-								NOT = { is_member_of_party = owner.py:conservative_party }
-							}
-						}
-					}
-					multiply = {
-						value = 100
-						desc = "usa_two_party_system"
-					}
-				}
-				if = {
-					limit = {
-						leader = {
-							has_ideology = ideology:ideology_jacksonian_democrat
-						}
-					}
-					add = {
-						value = 1000
-						desc = "from_jacksonian_democrat"
-					}
-				}
-			}
-		}
-		#USFP: Bourbon Democrats
-		#LF Industrialists might switch to the Democratic party post civil war
-		if = {
-			limit = {
-				is_usfp_active = yes
-				owner = {
-					NOT = {
-						exists = py:conservative_party
-					}
-					OR = {
-						country_has_primary_culture = cu:yankee
-						usfp_has_american_primary_culture = yes
-					}
-					ig:ig_landowners = {
-						NOT = {
-							has_ideology = ideology:ideology_pro_slavery
-						}
-					}
-				}
-				is_interest_group_type = ig_industrialists
-				law_stance = {
-					law = law_type:law_free_trade
-					value >= approve
-				}
-			}
-			add = {
-				value = 75
-				desc = "usfp_bourbon_democrats"
-			}
-		}
-		#USFP: American IGs should prefer to join an existing party even if its not their preferred
-		if = {
-			limit = {
-				is_usfp_active = yes
-				owner = {usfp_country_is_american = yes}
-				has_party = no
-				exists = owner.py:agrarian_party
-			}
-			add = {
-				value = 20
-				desc = "join_existing_party"
-			}
-		}
+
 		if = { # a party for powerful farmers
 			limit = {
 				OR = {
@@ -866,6 +712,10 @@ agrarian_party = {
 				value = -10
 				desc = "from_two_party_system"
 			}
+		}
+
+		add = {
+			value = usfp_party_weight_agrarian_add
 		}
 	}
 }

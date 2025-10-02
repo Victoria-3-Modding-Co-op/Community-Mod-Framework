@@ -20,10 +20,19 @@ types com_situation_types {
         direction = vertical
         using = default_list_position
         spacing = 10
-        margin_top = -4
+
+        textbox = {
+            minimumsize = { @panel_width_minus_20 40 }
+            visible = "[ComSituation.Var('com_header').IsSet]"
+            raw_text = "[ComSituation.Var('com_header').GetFlagName]"
+            align = center
+            using = fontsize_xl
+            default_format = "#header"
+        }
 
         # Header
         flowcontainer = {
+            margin_top = -4
             direction = vertical
             using = default_list_position
             spacing = 10
@@ -116,6 +125,7 @@ types com_situation_types {
                 }
             }
 
+            # Victory conditions
             flowcontainer = {
                 direction = horizontal
                 using = default_list_position
@@ -132,16 +142,36 @@ types com_situation_types {
                     datacontext = "[ComSituationRight]"
                 }
             }
+        }
 
-            # Factions header
-            default_header_clean = {
-                using = default_list_position
-                blockoverride "text" {
-                    raw_text = "[com_concept_situation_faction]"
-                }
-                blockoverride "size" {
-                    size = { @panel_width_plus_14 44 }
-                }
+        # Status
+        textbox = {
+            visible = "[Not(StringIsEmpty(JournalEntry.GetStatusDesc))]"
+            text = "[JournalEntry.GetStatusDesc]"
+            autoresize = yes
+            multiline = yes
+            minimumsize = { @panel_width_minus_20 -1 }
+            maximumsize = { @panel_width_minus_20 -1 }
+            using = default_list_position
+            align = hcenter|nobaseline
+            using = fontsize_large
+
+            margin = { 20 20 }
+
+            background = {
+                alpha = 0.5
+                using = entry_bg_fancy_dark
+            }
+        }
+
+        # Factions header
+        default_header_clean = {
+            using = default_list_position
+            blockoverride "text" {
+                raw_text = "[com_concept_situation_faction]"
+            }
+            blockoverride "size" {
+                size = { @panel_width_plus_14 44 }
             }
         }
 
@@ -170,6 +200,34 @@ types com_situation_types {
         }
 
         com_situation_buttons = {}
+
+        flowcontainer = {
+            direction = vertical
+            margin = { 0 10 }
+            spacing = 30
+            using = default_list_position
+
+            divider_decorative = {}
+
+            textbox = {
+                autoresize = yes
+                text = "[JournalEntry.GetReason]"
+                min_width = @panel_width_minus_30
+                max_width = @panel_width_minus_30
+
+                multiline = yes
+                using = default_list_position
+
+                align = nobaseline
+                default_format = "#lore"
+
+                margin = { 15 15 }
+
+                background = {
+                    using = entry_bg
+                }
+            }
+        }
     }
 
     type com_situation_factions = flowcontainer {

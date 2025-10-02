@@ -4,8 +4,11 @@
 	group = je_group_foreign_affairs
 
 	scripted_button = sb_com_rise_of_communism_test
+    scripted_button = sb_com_rise_of_communism_test2
+    scripted_button = sb_com_rise_of_communism_test3
 
 	immediate = {
+        # Setup base situation
         create_com_situation = {
             side_leader_country_left = c:GBR
             side_name_left = je_com_rise_of_communism_communists
@@ -16,6 +19,7 @@
             side_desc_right = je_com_rise_of_communism_capitalists_desc
         }
 
+        # Create Hardliners faction
         create_com_situation_faction = {
             side = left
             name = je_com_rise_of_communism_faction_hardliners
@@ -29,7 +33,36 @@
             name = je_com_rise_of_communism_faction_hardliners
             country = c:RUS
         }
+        add_com_situation_faction_country = {
+            name = je_com_rise_of_communism_faction_hardliners
+            country = c:BCE
+        }
+        add_com_situation_faction_country = {
+            name = je_com_rise_of_communism_faction_hardliners
+            country = c:AYI
+        }
+        add_com_situation_faction_country = {
+            name = je_com_rise_of_communism_faction_hardliners
+            country = c:BAD
+        }
+        add_com_situation_faction_country = {
+            name = je_com_rise_of_communism_faction_hardliners
+            country = c:AUS
+        }
+        add_com_situation_faction_country = {
+            name = je_com_rise_of_communism_faction_hardliners
+            country = c:BAL
+        }
+        add_com_situation_faction_country = {
+            name = je_com_rise_of_communism_faction_hardliners
+            country = c:BEN
+        }
+        add_com_situation_faction_country = {
+            name = je_com_rise_of_communism_faction_hardliners
+            country = c:BGM
+        }
 
+        # Create Reformers faction
         create_com_situation_faction = {
             side = left
             name = je_com_rise_of_communism_faction_reformers
@@ -40,6 +73,7 @@
             country = c:PRU
         }
 
+        # Create Fascist faction
         create_com_situation_faction = {
             side = right
             name = je_com_rise_of_communism_faction_fascists
@@ -49,7 +83,55 @@
             name = je_com_rise_of_communism_faction_fascists
             country = c:SWI
         }
+
+        # Create Main Actions button group
+        create_com_situation_button_group = {
+            name = je_com_rise_of_communism_button_group_main_actions
+            desc = je_com_rise_of_communism_button_group_main_actions_desc
+        }
+        add_com_situation_button_group_element = {
+            group = je_com_rise_of_communism_button_group_main_actions
+            name = sb_com_rise_of_communism_test
+        }
+
+        # Create Diplomatic Actions button group
+        create_com_situation_button_group = {
+            name = je_com_rise_of_communism_button_group_diplomatic_actions
+            desc = je_com_rise_of_communism_button_group_diplomatic_actions_desc
+        }
+        add_com_situation_button_group_element = {
+            group = je_com_rise_of_communism_button_group_diplomatic_actions
+            name = sb_com_rise_of_communism_test2
+        }
+        add_com_situation_button_group_element = {
+            group = je_com_rise_of_communism_button_group_diplomatic_actions
+            name = sb_com_rise_of_communism_test3
+        }
 	}
+
+    on_complete = {
+        c:GBR = {
+            add_modifier = {
+                name = border_cowardice
+            }
+        }
+    }
+
+    on_fail = {
+        c:FRA = {
+            add_modifier = {
+                name = border_cowardice
+            }
+        }
+    }
+
+    complete = {
+        has_modifier = border_cowardice
+    }
+
+    fail = {
+        has_modifier = border_cowardice
+    }
 
 	transferable = no
 	can_revolution_inherit = yes

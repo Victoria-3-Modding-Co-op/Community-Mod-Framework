@@ -116,6 +116,23 @@ types com_situation_types {
                 }
             }
 
+            flowcontainer = {
+                direction = horizontal
+                using = default_list_position
+                spacing = 20
+
+                com_situation_victory_conditions = {
+                    visible = "[JournalEntry.CanComplete]"
+                    tooltip = "[JournalEntry.GetCompletionTooltip]"
+                    datacontext = "[ComSituationLeft]"
+                }
+                com_situation_victory_conditions = {
+                    visible = "[Not(StringIsEmpty(JournalEntry.GetFailureTooltip))]"
+                    tooltip = "[JournalEntry.GetFailureTooltip]"
+                    datacontext = "[ComSituationRight]"
+                }
+            }
+
             # Factions header
             default_header_clean = {
                 using = default_list_position
@@ -152,38 +169,7 @@ types com_situation_types {
             }
         }
 
-        # Main Actions
-        default_header_clean = {
-            using = default_list_position
-            blockoverride "text" {
-                text = com_situation_header_main_actions
-            }
-            blockoverride "size" {
-                size = { @panel_width_plus_14 44 }
-            }
-        }
-
-        dynamicgridbox = {
-            parentanchor = hcenter
-            visible = "[Not( IsDataModelEmpty( JournalEntry.GetScriptedButtons ) )]"
-            datamodel = "[JournalEntry.GetScriptedButtons]"
-            datamodel_wrap = 2
-            flipdirection = yes
-
-            item = {
-                widget = {
-                    size = { 260 60 }
-
-                    scripted_journal_entry_button = {
-                        parentanchor = center
-                    }
-
-                    # Buttons for which the selected trigger is true have a different appearance and tooltip, but share all behaviors.
-                    # This means that even selected buttons are clickable as usual, assuming the possible trigger does not prevent it.
-                    # This enables more use cases, such as using buttons as on-off toggles, but requires the scripter to disable buttons manually in the possible trigger as needed.
-                }
-            }
-        }
+        com_situation_buttons = {}
     }
 
     type com_situation_factions = flowcontainer {
@@ -225,7 +211,7 @@ types com_situation_types {
                 dynamicgridbox = {
                     parentanchor = hcenter
                     datamodel = "[Scope.GetList('com_countries')]"
-                    datamodel_wrap = 4
+                    datamodel_wrap = 6
                     flipdirection = yes
 
                     item = {
@@ -234,6 +220,78 @@ types com_situation_types {
                             minimumsize = { 27 18 }
                             tiny_flag = {
                                 datacontext = "[Scope.GetCountry]"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    type com_situation_victory_conditions = flowcontainer {
+        background = {
+            using = simple_frame
+        }
+        margin = { 5 5 }
+        textbox = {
+            default_format = "#yellow"
+            raw_text = "[Scope.Var('com_name').GetFlagName] [Localize('com_situation_victory_conditions')]"
+            multiline = yes
+            autoresize = yes
+            maximumsize = { 240 -1 }
+            minimumsize = { 240 40 }
+            align = center
+        }
+    }
+
+    type com_situation_buttons = flowcontainer {
+        using = default_list_position
+        direction = vertical
+        spacing = 10
+        visible = "[And(
+            Not(IsDataModelEmpty(JournalEntry.GetScriptedButtons)),
+            Not(IsDataModelEmpty(ComSituation.GetList('com_button_groups')))
+        )]"
+        datamodel = "[ComSituation.GetList('com_button_groups')]"
+
+        item = {
+            flowcontainer = {
+                using = default_list_position
+                direction = vertical
+                visible = "[Not(IsDataModelEmpty(Scope.GetList('com_buttons')))]"
+                spacing = 10
+
+                default_header_clean = {
+                    using = default_list_position
+                    blockoverride "text" {
+                        raw_text = "[Scope.Var('com_name').GetFlagName]"
+                        tooltip = "[Scope.Var('com_desc').GetFlagName]"
+                    }
+                    blockoverride "size" {
+                        size = { @panel_width_plus_14 44 }
+                    }
+                }
+
+                dynamicgridbox = {
+                    datamodel = "[Scope.GetList('com_buttons')]"
+                    parentanchor = hcenter
+                    datamodel_wrap = 2
+                    flipdirection = yes
+
+                    item = {
+                        flowcontainer = {
+                            datamodel = "[JournalEntry.GetScriptedButtons]"
+                            direction = vertical
+
+                            item = {
+                                widget = {
+                                    visible = "[EqualTo_string(ScriptedButton.GetName, Scope.GetFlagName)]"
+                                    size = { 260 60 }
+
+                                    scripted_journal_entry_button = {
+                                        parentanchor = center
+                                    }
+                                }
                             }
                         }
                     }
@@ -304,6 +362,7 @@ types com_situation_types {
 }
 
 template com_side_header_properties {
+    maximumsize = { 240 44 }
     raw_text = "#header [Scope.Var('com_name').GetFlagName]#! [Localize('com_situation_leader')]"
     tooltipwidget = {
         RegularTooltip = {

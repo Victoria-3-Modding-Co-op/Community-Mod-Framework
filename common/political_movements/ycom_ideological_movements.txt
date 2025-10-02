@@ -195,7 +195,7 @@
 					is_pop_type = slaves
 				}
 				add = {
-					value = 50
+					value = com_movement_anti_slavery_pop_support_weight_type_slaves #vanilla value: 50
 					desc = "POP_SLAVES"
 				}
 			}
@@ -277,9 +277,22 @@
 			}
 		}
 
+		# Grey_PLP
+		add = { 
+			value = mog_plp_movement_anti_slavery_pop_support_weight_cultural_solidarity_add
+			desc = "CULTURE_ENSLAVED_PERCENT"								# Desc only shows when value =/= 0
+		}
+
+		# Grey_PLP
+		add = { 
+			value = mog_plp_movement_anti_slavery_pop_support_weight_personal_add
+			desc = "POP_POVERTY"											# Desc only shows when value =/= 0
+		}
+
 		if = { # Colonial slavery is out of sight and out of mind
 			limit = {
 				owner ?= { has_law_or_variant = law_type:law_colonial_slavery }
+				mog_plp_movement_anti_slavery_colonial_slavery_trigger = yes	# Grey_PLP
 			}
 			if = {
 				limit = {
@@ -336,7 +349,7 @@
 
 	revolution = {
 		possible = {
-			political_movement_support >= 0.05
+			political_movement_support >= com_movement_anti_slavery_revolution_possible_political_movement_support #vanilla value: 0.05
 		}
 
 		weight = {
@@ -391,7 +404,7 @@
 
 	secession = {
 		possible = {
-			political_movement_support >= 0.05
+			political_movement_support >= com_movement_anti_slavery_secession_possible_political_movement_support #vanilla value: 0.05
 			OR = {
 				scope:clout <= 0
 				owner = {
@@ -636,7 +649,7 @@ movement_pro_slavery = {
 		value = 200
 		if = {
 			limit = {
-					has_ideology = ideology:ideology_slaver
+				has_ideology = ideology:ideology_slaver
 			}
 			multiply = {
 				value = 5
@@ -743,6 +756,18 @@ movement_pro_slavery = {
 			}
 		}
 
+		# Grey_PLP
+		add = { 
+			value = mog_plp_movement_pro_slavery_pop_support_weight_owner_add
+			desc = "SLAVE_OWNER"						# Desc only shows when value =/= 0
+		}
+
+		# Grey_PLP
+		multiply = { 
+			value = mog_plp_movement_pro_slavery_pop_support_weight_enslaved_percent_mult
+			desc = "CULTURE_ENSLAVED_PERCENT"			# Desc only shows when value =/= 0
+		}
+
 		if = {
 			limit = {
 				owner ?= { has_journal_entry = je_acw_countdown }
@@ -763,7 +788,7 @@ movement_pro_slavery = {
 
 	revolution = {
 		possible = {
-			political_movement_support >= 0.05
+			political_movement_support >= com_movement_pro_slavery_revolution_possible_political_movement_support #vanilla value: 0.05
 		}
 
 		weight = {
@@ -818,7 +843,7 @@ movement_pro_slavery = {
 
 	secession = {
 		possible = {
-			political_movement_support >= 0.05
+			political_movement_support >= com_movement_pro_slavery_secession_possible_political_movement_support #vanilla value: 0.05
 			OR = {
 				scope:clout <= 0
 				owner = {

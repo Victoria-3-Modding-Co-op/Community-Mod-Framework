@@ -11,7 +11,8 @@
 @panel_width_plus_30 = 570			# used to be 490
 @panel_width_plus_70 = 610			# used to be 530
 
-@COM_panel_width_plus_20_half = @[panel_width_plus_20 / 2]
+# CMF Situation specific
+@com_character_width = 200
 
 types com_situation_types {
     type com_journal_entry_situation = flowcontainer {
@@ -21,73 +22,144 @@ types com_situation_types {
         spacing = 10
         margin_top = -4
 
-        default_header_2texts_clean = {
+        # Header
+        flowcontainer = {
+            direction = vertical
             using = default_list_position
-            blockoverride "text1" {
-                datacontext = "[ComSituationLeft]"
-                using = com_side_header_properties
+            spacing = 10
+
+            background = {
+                margin_top = -44
+                margin_bottom = -20
+                texture = "gfx/interface/situation/com_rise_of_communism.dds"
+                alpha = 0.5
+                modify_texture = {
+                    texture = "gfx/interface/masks/fade_vertical_bottom.dds"
+                    spriteType = Corneredstretched
+                    spriteborder = { 0 0 }
+                    blend_mode = alphamultiply
+                    alpha = 0.9
+                }
             }
-            blockoverride "text2" {
-                datacontext = "[ComSituationRight]"
-                using = com_side_header_properties
+
+            # Side names header
+            default_header_2texts_clean = {
+                using = default_list_position
+                blockoverride "text1" {
+                    datacontext = "[ComSituationLeft]"
+                    using = com_side_header_properties
+                }
+                blockoverride "text2" {
+                    datacontext = "[ComSituationRight]"
+                    using = com_side_header_properties
+                }
+                blockoverride "size" {
+                    size = { @panel_width_plus_14 44 }
+                }
+            }
+
+            # Leader country ruler characters
+            flowcontainer = {
+                direction = horizontal
+                minimumsize = { @panel_width_plus_14 44 }
+                using = default_list_position
+
+                com_journal_entry_character_situation_left = {
+                    datacontext = "[ComSituationLeft.Var('com_leader').GetCountry.GetRuler]"
+                }
+                widget = {
+                    # Spacer
+                    size = {
+                        @[ panel_width - ( com_character_width * 2 ) ]
+                        20
+                    }
+                }
+                com_journal_entry_character_situation_right = {
+                    datacontext = "[ComSituationRight.Var('com_leader').GetCountry.GetRuler]"
+                }
+            }
+
+            # Leader country names
+            flowcontainer = {
+                direction = horizontal
+                using = default_list_position
+
+                com_leader_header_left = {
+                    blockoverride "text" {
+                        raw_text = "[ComSituationLeft.Var('com_leader').GetCountry.GetName]"
+                    }
+                    blockoverride "size" {
+                        size = { @[ panel_width_plus_14 / 2 - 20 ] 40 }
+                    }
+                }
+
+                widget = {
+                    size = { 40 40 }
+                    textbox = {
+                        parentanchor = hcenter|vcenter
+                        align = center
+                        size = { 40 40 }
+                        default_format = "#header"
+                        using = fontsize_large
+                        text = com_situation_vs
+                    }
+                }
+
+                com_leader_header_right = {
+                    blockoverride "text" {
+                        align = right
+                        raw_text = "[ComSituationRight.Var('com_leader').GetCountry.GetName]"
+                    }
+                    blockoverride "size" {
+                        size = { @[ panel_width_plus_14 / 2 - 20 ] 40 }
+                    }
+                }
+            }
+
+            # Factions header
+            default_header_clean = {
+                using = default_list_position
+                blockoverride "text" {
+                    raw_text = "[com_concept_situation_faction]"
+                }
+                blockoverride "size" {
+                    size = { @panel_width_plus_14 44 }
+                }
+            }
+        }
+
+        # Factions
+        flowcontainer = {
+            direction = horizontal
+            spacing = 20
+            margin = { 20 10 }
+
+            # At least one side needs to have factions for them to show up
+            visible = "[Or(
+                Not(IsDataModelEmpty(ComSituationLeft.GetList('com_factions'))),
+                Not(IsDataModelEmpty(ComSituationRight.GetList('com_factions')))
+            )]"
+
+            com_situation_factions = {
+                blockoverride "context" {
+                    datacontext = "[ComSituationLeft]"
+                }
+            }
+            com_situation_factions = {
+                blockoverride "context" {
+                    datacontext = "[ComSituationRight]"
+                }
+            }
+        }
+
+        # Main Actions
+        default_header_clean = {
+            using = default_list_position
+            blockoverride "text" {
+                text = com_situation_header_main_actions
             }
             blockoverride "size" {
                 size = { @panel_width_plus_14 44 }
-            }
-        }
-
-        flowcontainer = {
-            direction = horizontal
-            minimumsize = { @panel_width_plus_14 44 }
-            using = default_list_position
-
-            com_journal_entry_character_situation_left = {
-                datacontext = "[ComSituationLeft.Var('com_leader').GetCountry.GetRuler]"
-            }
-            widget = {
-                size = {
-                    @[panel_width - 400]
-                    20
-                }
-            }
-            com_journal_entry_character_situation_right = {
-                datacontext = "[ComSituationRight.Var('com_leader').GetCountry.GetRuler]"
-            }
-        }
-
-        flowcontainer = {
-            direction = horizontal
-            using = default_list_position
-
-            com_leader_header_left = {
-                blockoverride "text" {
-                    raw_text = "[ComSituationLeft.Var('com_leader').GetCountry.GetName]"
-                }
-                blockoverride "size" {
-                    size = { @[panel_width_plus_14 / 2 - 20] 40 }
-                }
-            }
-
-            widget = {
-                size = { 40 40 }
-                textbox = {
-                    parentanchor = hcenter|vcenter
-                    align = center
-                    size = { 40 40 }
-                    default_format = "#header"
-                    using = fontsize_large
-                    text = com_situation_vs
-                }
-            }
-
-            com_leader_header_right = {
-                blockoverride "text" {
-                    align = right
-                    raw_text = "[ComSituationRight.Var('com_leader').GetCountry.GetName]"
-                }
-                blockoverride "size" {
-                    size = { @[panel_width_plus_14 / 2 - 20] 40 }
-                }
             }
         }
 
@@ -109,6 +181,62 @@ types com_situation_types {
                     # Buttons for which the selected trigger is true have a different appearance and tooltip, but share all behaviors.
                     # This means that even selected buttons are clickable as usual, assuming the possible trigger does not prevent it.
                     # This enables more use cases, such as using buttons as on-off toggles, but requires the scripter to disable buttons manually in the possible trigger as needed.
+                }
+            }
+        }
+    }
+
+    type com_situation_factions = flowcontainer {
+        block "context" {}
+        direction = vertical
+        spacing = 20
+        datamodel = "[Scope.GetList('com_factions')]"
+
+        item = {
+            flowcontainer = {
+                margin_top = -2
+                background = {
+                    using = simple_frame
+                }
+
+                default_header_clean_faded = {
+                    blockoverride "text" {
+                        raw_text = "[Scope.Var('com_name').GetFlagName]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "tooltip_content" {
+                                    custom_tooltip_textbox = {
+                                        raw_text = "[Scope.Var('com_name').GetFlagName]"
+                                        default_format = "#header"
+                                    }
+                                    custom_tooltip_textbox = {
+                                        raw_text = "[Scope.Var('com_desc').GetFlagName]"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    blockoverride "size" {
+                        size = { @[panel_width_half - 20] 45 }
+                    }
+                }
+                direction = vertical
+
+                dynamicgridbox = {
+                    parentanchor = hcenter
+                    datamodel = "[Scope.GetList('com_countries')]"
+                    datamodel_wrap = 4
+                    flipdirection = yes
+
+                    item = {
+                        flowcontainer = {
+                            margin = { 5 10 }
+                            minimumsize = { 27 18 }
+                            tiny_flag = {
+                                datacontext = "[Scope.GetCountry]"
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -151,9 +279,9 @@ types com_situation_types {
     }
 
     type com_journal_entry_character_situation_left = character_portrait_base {
-        size = { 200 160 }
+        size = { @com_character_width 160 }
         blockoverride "portrait_size" {
-            size = { 200 200 }
+            size = { @com_character_width 200 }
         }
         blockoverride "portrait_texture" {
             portrait_texture = "[Character.GetAnimatedPortrait('environment_event_01', 'camera_duel_01', 'idle', GetPortraitRenderSize(PdxGuiWidget.Self))]"
@@ -163,9 +291,9 @@ types com_situation_types {
     }
 
     type com_journal_entry_character_situation_right = character_portrait_base {
-        size = { 200 160 }
+        size = { @com_character_width 160 }
         blockoverride "portrait_size" {
-            size = { 200 200 }
+            size = { @com_character_width 200 }
         }
         blockoverride "portrait_texture" {
             portrait_texture = "[Character.GetAnimatedPortrait('environment_event_01', 'camera_duel_02', 'idle', GetPortraitRenderSize(PdxGuiWidget.Self))]"
@@ -176,7 +304,7 @@ types com_situation_types {
 }
 
 template com_side_header_properties {
-    raw_text = "#header [ComSituationLeft.Var('com_name').GetFlagName]#! [Localize('com_situation_leader')]"
+    raw_text = "#header [Scope.Var('com_name').GetFlagName]#! [Localize('com_situation_leader')]"
     tooltipwidget = {
         RegularTooltip = {
             blockoverride "tooltip_content" {
@@ -185,7 +313,7 @@ template com_side_header_properties {
                     default_format = "#header"
                 }
                 custom_tooltip_textbox_with_empty_line = {
-                    text = com_concept_situation_leader_for
+                    text = com_situation_header_leader_for
                 }
                 custom_tooltip_textbox = {
                     raw_text = "[Scope.Var('com_desc').GetFlagName]"

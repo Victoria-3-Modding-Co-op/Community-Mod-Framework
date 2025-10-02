@@ -1,2 +1,3 @@
 ﻿com_struct_situation = 10001
 com_struct_situation_side = 10002
+com_struct_situation_faction = 10003

@@ -97,12 +97,12 @@ change_com_situation_side_name = {
 }
 
 change_com_situation_side_description = {
-    fix_variable_error = { variable = $name$ }
+    fix_variable_error = { variable = $desc$ }
 
     scope:com_side_$side$ = {
         set_variable = {
             name = com_desc
-            value = flag:$name$
+            value = flag:$desc$
         }
     }
 }
@@ -117,6 +117,9 @@ create_com_situation_faction = {
         error_log = "CMF: No com_side_$side$ scope defined! This effect needs to be run in the immediate block of a journal entry!"
     }
     else = {
+        fix_variable_error = { variable = $name$ }
+        fix_variable_error = { variable = $desc$ }
+
         create_struct = {
             struct_type = com_struct_situation_faction
             struct_scope = com_faction_$name$
@@ -144,6 +147,30 @@ create_com_situation_faction = {
     }
 }
 
+remove_com_situation_faction = {
+    if = {
+        limit = {
+            NOT = {
+                exists = scope:com_side_$side$
+            }
+        }
+        error_log = "CMF: No com_side_$side$ scope defined! This effect needs to be run in the immediate block of a journal entry!"
+    }
+    else = {
+        # Remove faction from list
+        scope:com_side_$side$ = {
+            remove_list_variable = {
+                name = com_factions
+                target = scope:com_faction_$name$
+            }
+        }
+        # Cleanup struct
+        destroy_struct = {
+            struct = com_faction_$name$
+        }
+    }
+}
+
 add_com_situation_faction_country = {
     if = {
         limit = {
@@ -158,6 +185,128 @@ add_com_situation_faction_country = {
             add_to_variable_list = {
                 name = com_countries
                 target = $country$
+            }
+        }
+    }
+}
+
+remove_com_situation_faction_country = {
+    if = {
+        limit = {
+            NOT = {
+                exists = scope:com_faction_$name$
+            }
+        }
+        error_log = "CMF: No scope:com_faction_$name$ scope defined! This effect needs to be run in the immediate block of a journal entry!"
+    }
+    else = {
+        scope:com_faction_$name$ = {
+            remove_list_variable = {
+                name = com_countries
+                target = $country$
+            }
+        }
+    }
+}
+
+create_com_situation_button_group = {
+    if = {
+        limit = {
+            NOT = {
+                exists = scope:com_situation
+            }
+        }
+        error_log = "CMF: No com_situation scope defined! This effect needs to be run in the immediate block of a journal entry!"
+    }
+    else = {
+        fix_variable_error = { variable = $name$ }
+        fix_variable_error = { variable = $desc$ }
+
+        create_struct = {
+            struct_type = com_struct_situation_button_group
+            struct_scope = com_button_group_$name$
+        }
+
+        # Add name
+        scope:com_button_group_$name$ = {
+            set_variable = {
+                name = com_name
+                value = flag:$name$
+            }
+            set_variable = {
+                name = com_desc
+                value = flag:$desc$
+            }
+        }
+
+        # Add to defined side
+        scope:com_situation = {
+            add_to_variable_list = {
+                name = com_button_groups
+                target = scope:com_button_group_$name$
+            }
+        }
+    }
+}
+
+remove_com_situation_button_group = {
+    if = {
+        limit = {
+            NOT = {
+                exists = scope:com_situation
+            }
+        }
+        error_log = "CMF: No com_situation scope defined! This effect needs to be run in the immediate block of a journal entry!"
+    }
+    else = {
+        scope:com_situation = {
+            remove_list_variable = {
+                name = com_button_groups
+                target = scope:com_button_group_$name$
+            }
+        }
+
+        destroy_struct = {
+            struct = scope:com_button_group_$name$
+        }
+    }
+}
+
+add_com_situation_button_group_element = {
+    if = {
+        limit = {
+            NOT = {
+                exists = scope:com_button_group_$group$
+            }
+        }
+        error_log = "CMF: No com_button_group_$group$ scope defined! This effect needs to be run in the immediate block of a journal entry!"
+    }
+    else = {
+        fix_variable_error = { variable = $name$ }
+
+        scope:com_button_group_$group$ = {
+            add_to_variable_list = {
+                name = com_buttons
+                target = flag:$name$
+            }
+        }
+    }
+}
+
+remove_com_situation_button_group_element = {
+    if = {
+        limit = {
+            NOT = {
+                exists = scope:com_button_group_$group$
+            }
+        }
+        error_log = "CMF: No com_button_group_$group$ scope defined! This effect needs to be run in the immediate block of a journal entry!"
+    }
+    else = {
+        scope:com_button_group_$group$ = {
+            remove_list_variable = {
+                name = com_buttons
+                target = flag:$name$
             }
         }
     }

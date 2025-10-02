@@ -11,9 +11,49 @@
 	}
 
 	effect = {
-		rename_com_situation_side = {
+		change_com_situation_side_name = {
             side = left
             name = je_com_rise_of_communism_communists
         }
 	}
+}
+
+sb_com_rise_of_communism_test2 = {
+    name = sb_com_rise_of_communism_test2
+    desc = sb_com_rise_of_communism_test_desc
+
+    possible = {
+        always = yes
+    }
+
+    ai_chance = {
+        value = 100
+    }
+
+    effect = {
+        change_com_situation_side_name = {
+            side = left
+            name = je_com_rise_of_communism_communists
+        }
+    }
+}
+
+sb_com_rise_of_communism_test3 = {
+    name = sb_com_rise_of_communism_test3
+    desc = sb_com_rise_of_communism_test_desc
+
+    possible = {
+        always = yes
+    }
+
+    ai_chance = {
+        value = 100
+    }
+
+    effect = {
+        change_com_situation_side_name = {
+            side = left
+            name = je_com_rise_of_communism_communists
+        }
+    }
 }

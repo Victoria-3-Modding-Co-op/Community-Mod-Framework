@@ -11,9 +11,8 @@
 	}
 
 	effect = {
-		change_com_situation_side_name = {
-            side = left
-            name = je_com_rise_of_communism_communists
+        set_com_situation_header = {
+            text = je_com_rise_of_communism_header
         }
 	}
 }
@@ -31,10 +30,7 @@ sb_com_rise_of_communism_test2 = {
     }
 
     effect = {
-        change_com_situation_side_name = {
-            side = left
-            name = je_com_rise_of_communism_communists
-        }
+        remove_com_situation_header = yes
     }
 }
 

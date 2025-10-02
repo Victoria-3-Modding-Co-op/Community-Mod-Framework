@@ -76,6 +76,22 @@
     }
 }
 
+set_com_situation_header = {
+    fix_variable_error = { variable = $text$ }
+    scope:com_situation = {
+        set_variable = {
+            name = com_header
+            value = flag:$text$
+        }
+    }
+}
+
+remove_com_situation_header = {
+    scope:com_situation = {
+        remove_variable = com_header
+    }
+}
+
 change_com_situation_leader = {
     scope:com_side_$side$ = {
         set_variable = {

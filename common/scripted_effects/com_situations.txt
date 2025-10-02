@@ -13,64 +13,99 @@
         fix_variable_error = { variable = $side_name_right$ }
         fix_variable_error = { variable = $side_desc_right$ }
 
-        create_struct = {
-            struct_type = com_struct_situation
-            struct_scope = com_situation
+        if = {
+            limit = {
+                any_in_global_list = {
+                    variable = com_situation_cache
+                    var:com_id ?= $id$
+                    has_variable = is_struct
+                }
+            }
+            random_in_global_list = {
+                variable = com_situation_cache
+                limit = {
+                    var:com_id ?= $id$
+                    has_variable = is_struct
+                }
+                save_scope_as = com_situation
+            }
+            # Setup cached situation
+            scope:journal_entry = {
+                set_variable = {
+                    name = com_situation
+                    value = scope:com_situation
+                }
+            }
         }
-        create_struct = {
-            struct_type = com_struct_situation_side
-            struct_scope = com_side_left
-        }
-        create_struct = {
-            struct_type = com_struct_situation_side
-            struct_scope = com_side_right
-        }
+        else = {
+            create_struct = {
+                struct_type = com_struct_situation
+                struct_scope = com_situation
+            }
+            create_struct = {
+                struct_type = com_struct_situation_side
+                struct_scope = com_side_left
+            }
+            create_struct = {
+                struct_type = com_struct_situation_side
+                struct_scope = com_side_right
+            }
 
-        # Create Situation
-        scope:journal_entry = {
-            set_variable = {
-                name = com_situation
-                value = scope:com_situation
+            # Create Situation
+            scope:journal_entry = {
+                set_variable = {
+                    name = com_situation
+                    value = scope:com_situation
+                }
             }
-        }
 
-        # Create Sides
-        scope:com_situation = {
-            set_variable = {
-                name = com_side_left
-                value = scope:com_side_left
+            add_to_global_variable_list = {
+                name = com_situation_cache
+                target = scope:com_situation
             }
-            set_variable = {
-                name = com_side_right
-                value = scope:com_side_right
+
+            # Create Sides
+            scope:com_situation = {
+                set_variable = {
+                    name = com_id
+                    value = $id$
+                }
+                set_variable = {
+                    name = com_side_left
+                    value = scope:com_side_left
+                }
+                set_variable = {
+                    name = com_side_right
+                    value = scope:com_side_right
+                }
             }
-        }
-        scope:com_side_left = {
-            set_variable = {
-                name = com_name
-                value = flag:$side_name_left$
+            scope:com_side_left = {
+                set_variable = {
+                    name = com_name
+                    value = flag:$side_name_left$
+                }
+                set_variable = {
+                    name = com_desc
+                    value = flag:$side_desc_left$
+                }
+                set_variable = {
+                    name = com_leader
+                    value = $side_leader_country_left$
+                }
             }
-            set_variable = {
-                name = com_desc
-                value = flag:$side_desc_left$
-            }
-            set_variable = {
-                name = com_leader
-                value = $side_leader_country_left$
-            }
-        }
-        scope:com_side_right = {
-            set_variable = {
-                name = com_name
-                value = flag:$side_name_right$
-            }
-            set_variable = {
-                name = com_desc
-                value = flag:$side_desc_right$
-            }
-            set_variable = {
-                name = com_leader
-                value = $side_leader_country_right$
+            scope:com_side_right = {
+                set_variable = {
+                    name = com_name
+                    value = flag:$side_name_right$
+                }
+                set_variable = {
+                    name = com_desc
+                    value = flag:$side_desc_right$
+                }
+                set_variable = {
+                    name = com_leader
+                    value = $side_leader_country_right$
+                }
             }
         }
     }

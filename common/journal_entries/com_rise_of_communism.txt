@@ -13,7 +13,10 @@
 
 	immediate = {
         # Setup base situation
+        # The id can be anything that can be stored in a variable like a flag, value or scope
         create_com_situation = {
+            id = 1
+
             side_leader_country_left = c:GBR
             side_name_left = je_com_rise_of_communism_communists
             side_desc_left = je_com_rise_of_communism_communists_desc
@@ -140,6 +143,10 @@
     fail = {
         has_modifier = border_cowardice
     }
+
+    progressbar = yes
+    goal_add_value = 100
+    current_value = 10
 
 	transferable = no
 	can_revolution_inherit = yes

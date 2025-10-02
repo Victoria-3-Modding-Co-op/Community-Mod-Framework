@@ -11,5 +11,10 @@ on_com_add_communism = {
                 type = je_com_rise_of_communism
             }
         }
+        c:FRA = {
+            add_journal_entry = {
+                type = je_com_rise_of_communism
+            }
+        }
 	}
 }

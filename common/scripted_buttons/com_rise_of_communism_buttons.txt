@@ -47,9 +47,11 @@ sb_com_rise_of_communism_test3 = {
     }
 
     effect = {
-        change_com_situation_side_name = {
-            side = left
-            name = je_com_rise_of_communism_communists
+        remove_com_situation_button_group = {
+            name = je_com_rise_of_communism_button_group_main_actions
+        }
+        remove_com_situation_button_group = {
+            name = je_com_rise_of_communism_button_group_diplomatic_actions
         }
     }
 }

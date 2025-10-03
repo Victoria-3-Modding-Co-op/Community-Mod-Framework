@@ -16,6 +16,7 @@
         # The id can be anything that can be stored in a variable like a flag, value or scope
         create_com_situation = {
             id = 1
+            icon = com_icon_rise_of_communism
 
             side_leader_country_left = c:GBR
             side_name_left = je_com_rise_of_communism_communists
@@ -37,38 +38,47 @@
             desc = je_com_rise_of_communism_faction_hardliners_desc
         }
         add_com_situation_faction_country = {
+            side = left
             name = je_com_rise_of_communism_faction_hardliners
             country = c:CHI
         }
         add_com_situation_faction_country = {
+            side = left
             name = je_com_rise_of_communism_faction_hardliners
             country = c:RUS
         }
         add_com_situation_faction_country = {
+            side = left
             name = je_com_rise_of_communism_faction_hardliners
             country = c:BCE
         }
         add_com_situation_faction_country = {
+            side = left
             name = je_com_rise_of_communism_faction_hardliners
             country = c:AYI
         }
         add_com_situation_faction_country = {
+            side = left
             name = je_com_rise_of_communism_faction_hardliners
             country = c:BAD
         }
         add_com_situation_faction_country = {
+            side = left
             name = je_com_rise_of_communism_faction_hardliners
             country = c:AUS
         }
         add_com_situation_faction_country = {
+            side = left
             name = je_com_rise_of_communism_faction_hardliners
             country = c:BAL
         }
         add_com_situation_faction_country = {
+            side = left
             name = je_com_rise_of_communism_faction_hardliners
             country = c:BEN
         }
         add_com_situation_faction_country = {
+            side = left
             name = je_com_rise_of_communism_faction_hardliners
             country = c:BGM
         }
@@ -80,6 +90,7 @@
             desc = je_com_rise_of_communism_faction_reformers_desc
         }
         add_com_situation_faction_country = {
+            side = left
             name = je_com_rise_of_communism_faction_reformers
             country = c:PRU
         }
@@ -91,6 +102,7 @@
             desc = je_com_rise_of_communism_faction_fascists_desc
         }
         add_com_situation_faction_country = {
+            side = right
             name = je_com_rise_of_communism_faction_fascists
             country = c:SWI
         }

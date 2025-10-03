@@ -47,11 +47,26 @@ sb_com_rise_of_communism_test3 = {
     }
 
     effect = {
-        remove_com_situation_button_group = {
-            name = je_com_rise_of_communism_button_group_main_actions
+        change_com_situation_leader = {
+            side = left
+            leader = c:RUS
         }
-        remove_com_situation_button_group = {
-            name = je_com_rise_of_communism_button_group_diplomatic_actions
+        change_com_situation_leader = {
+            side = right
+            leader = c:USA
+        }
+        create_com_situation_journal_entry = {
+            journal = je_com_rise_of_communism
+            situation_id = 1
+            icon = com_icon_rise_of_communism
+
+            side_leader_country_left = c:GBR
+            side_name_left = je_com_rise_of_communism_communists
+            side_desc_left = je_com_rise_of_communism_communists_desc
+
+            side_leader_country_right = c:FRA
+            side_name_right = je_com_rise_of_communism_capitalists
+            side_desc_right = je_com_rise_of_communism_capitalists_desc
         }
     }
 }

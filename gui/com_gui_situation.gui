@@ -20,19 +20,30 @@ types com_situation_types {
         direction = vertical
         using = default_list_position
         spacing = 10
+        margin_top = -4
 
-        textbox = {
-            minimumsize = { @panel_width_minus_20 40 }
+        flowcontainer = {
             visible = "[ComSituation.Var('com_header').IsSet]"
-            raw_text = "[ComSituation.Var('com_header').GetFlagName]"
-            align = center
-            using = fontsize_xl
-            default_format = "#header"
+            margin_top = 10
+            using = default_list_position
+            minimumsize = { @panel_width_minus_30 40 }
+            maximumsize = { @panel_width_minus_30 -1 }
+
+            textbox = {
+                using = default_list_position
+                minimumsize = { @panel_width_minus_30 40 }
+                maximumsize = { @panel_width_minus_30 -1 }
+                raw_text = "[ComSituation.Var('com_header').GetFlagName]"
+                align = center
+                using = fontsize_xl
+                multiline = yes
+                autoresize = yes
+                default_format = "#title"
+            }
         }
 
         # Header
         flowcontainer = {
-            margin_top = -4
             direction = vertical
             using = default_list_position
             spacing = 10
@@ -40,7 +51,7 @@ types com_situation_types {
             background = {
                 margin_top = -44
                 margin_bottom = -20
-                texture = "gfx/interface/situation/com_rise_of_communism.dds"
+                texture = "[ComSituation.GetCharacter.GetIdeology.GetTexture]"
                 alpha = 0.5
                 modify_texture = {
                     texture = "gfx/interface/masks/fade_vertical_bottom.dds"
@@ -476,7 +487,7 @@ types com_situation_types {
         default_header_clean = {
             using = default_list_position
             blockoverride "text" {
-                raw_text = "[com_concept_situation_faction]"
+                raw_text = "[Concept('concept_com_situation_faction', Localize('concept_com_situation_factions'))]"
             }
             blockoverride "size" {
                 size = { @panel_width_plus_14 44 }
@@ -507,6 +518,7 @@ types com_situation_types {
             }
         }
 
+        # Button Groups
         com_situation_buttons = {}
 
         flowcontainer = {
@@ -613,49 +625,95 @@ types com_situation_types {
     type com_situation_buttons = flowcontainer {
         using = default_list_position
         direction = vertical
-        spacing = 10
-        visible = "[And(
-            Not(IsDataModelEmpty(JournalEntry.GetScriptedButtons)),
-            Not(IsDataModelEmpty(ComSituation.GetList('com_button_groups')))
-        )]"
-        datamodel = "[ComSituation.GetList('com_button_groups')]"
 
-        item = {
-            flowcontainer = {
+        # Fallback - No groups defined
+        flowcontainer = {
+            direction = vertical
+            visible = "[And(
+                Not(IsDataModelEmpty(JournalEntry.GetScriptedButtons)),
+                IsDataModelEmpty(ComSituation.GetList('com_button_groups'))
+            )]"
+            spacing = 10
+
+            default_header_clean = {
                 using = default_list_position
-                direction = vertical
-                visible = "[Not(IsDataModelEmpty(Scope.GetList('com_buttons')))]"
-                spacing = 10
+                blockoverride "text" {
+                    text = com_situation_interactions
+                }
+                blockoverride "size" {
+                    size = { @panel_width_plus_14 44 }
+                }
+            }
 
-                default_header_clean = {
-                    using = default_list_position
-                    blockoverride "text" {
-                        raw_text = "[Scope.Var('com_name').GetFlagName]"
-                        tooltip = "[Scope.Var('com_desc').GetFlagName]"
-                    }
-                    blockoverride "size" {
-                        size = { @panel_width_plus_14 44 }
+            dynamicgridbox = {
+                parentanchor = hcenter
+                datamodel = "[JournalEntry.GetScriptedButtons]"
+                datamodel_wrap = 2
+                flipdirection = yes
+
+                item = {
+                    widget = {
+                        size = { 260 60 }
+
+                        scripted_journal_entry_button = {
+                            parentanchor = center
+                        }
+
+                        # Buttons for which the selected trigger is true have a different appearance and tooltip, but share all behaviors.
+                        # This means that even selected buttons are clickable as usual, assuming the possible trigger does not prevent it.
+                        # This enables more use cases, such as using buttons as on-off toggles, but requires the scripter to disable buttons manually in the possible trigger as needed.
                     }
                 }
+            }
+        }
 
-                dynamicgridbox = {
-                    datamodel = "[Scope.GetList('com_buttons')]"
-                    parentanchor = hcenter
-                    datamodel_wrap = 2
-                    flipdirection = yes
+        # Button groups
+        flowcontainer = {
+            direction = vertical
+            visible = "[And(
+                Not(IsDataModelEmpty(JournalEntry.GetScriptedButtons)),
+                Not(IsDataModelEmpty(ComSituation.GetList('com_button_groups')))
+            )]"
+            spacing = 10
+            datamodel = "[ComSituation.GetList('com_button_groups')]"
 
-                    item = {
-                        flowcontainer = {
-                            datamodel = "[JournalEntry.GetScriptedButtons]"
-                            direction = vertical
+            item = {
+                flowcontainer = {
+                    using = default_list_position
+                    direction = vertical
+                    visible = "[Not(IsDataModelEmpty(Scope.GetList('com_buttons')))]"
+                    spacing = 10
 
-                            item = {
-                                widget = {
-                                    visible = "[EqualTo_string(ScriptedButton.GetName, Scope.GetFlagName)]"
-                                    size = { 260 60 }
+                    default_header_clean = {
+                        using = default_list_position
+                        blockoverride "text" {
+                            raw_text = "[Scope.Var('com_name').GetFlagName]"
+                            tooltip = "[Scope.Var('com_desc').GetFlagName]"
+                        }
+                        blockoverride "size" {
+                            size = { @panel_width_plus_14 44 }
+                        }
+                    }
 
-                                    scripted_journal_entry_button = {
-                                        parentanchor = center
+                    dynamicgridbox = {
+                        datamodel = "[Scope.GetList('com_buttons')]"
+                        parentanchor = hcenter
+                        datamodel_wrap = 2
+                        flipdirection = yes
+
+                        item = {
+                            flowcontainer = {
+                                datamodel = "[JournalEntry.GetScriptedButtons]"
+                                direction = vertical
+
+                                item = {
+                                    widget = {
+                                        visible = "[EqualTo_string(ScriptedButton.GetName, Scope.GetFlagName)]"
+                                        size = { 260 60 }
+
+                                        scripted_journal_entry_button = {
+                                            parentanchor = center
+                                        }
                                     }
                                 }
                             }

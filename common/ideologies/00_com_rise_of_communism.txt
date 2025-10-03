@@ -1,0 +1,27 @@
+﻿com_icon_rise_of_communism = {
+    # This is the icon used for the example button
+    icon = "gfx/interface/situation/com_rise_of_communism.dds"
+
+    # Never allow button ideologies to be shown
+    show_in_list = no
+
+    priority = 0
+
+    # Never allow button ideologies to be triggered
+    character_ideology = no
+
+    # Never allow button ideologies to be triggered
+    #non_interest_group_leader_trigger = {		# Only for character_ideology = yes
+    #    always = no
+    #}
+
+    # Never allow button ideologies to be triggered
+    #interest_group_leader_trigger = {			# Only for character_ideology = yes
+    #    always = no
+    #}
+
+    # Never allow button ideologies to be triggered
+    #country_trigger = {						# Only for character_ideology = yes
+    #    always = no
+    #}
+}

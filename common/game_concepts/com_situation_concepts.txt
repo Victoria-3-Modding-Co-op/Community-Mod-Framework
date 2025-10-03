@@ -1,4 +1,9 @@
-﻿concept_com_situation_leader = {
+﻿concept_com_situation = {
+	texture = "gfx/interface/icons/event_icons/waving_flag.dds"
+	is_loading_tip = yes
+}
+
+concept_com_situation_leader = {
 	texture = "gfx/interface/icons/event_icons/waving_flag.dds"
 	is_loading_tip = yes
 }

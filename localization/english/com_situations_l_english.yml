@@ -30,3 +30,15 @@
  effect_clear_com_situation_factions_both: "All [Concept('concept_com_situation_faction', '$concept_com_situation_factions$')] on both sides will dissolve"
  effect_add_com_situation_faction_country: "[TopScope.GetLocalVariable('com_country').GetCountry.GetName|v] will join the [TopScope.GetLocalVariable('com_faction_name').GetFlagName|v] [concept_com_situation_faction]"
  effect_remove_com_situation_faction_country: "[TopScope.GetLocalVariable('com_country').GetCountry.GetName|v] will leave the [TopScope.GetLocalVariable('com_faction_name').GetFlagName|v] [concept_com_situation_faction]"
+# Triggers
+ trigger_is_com_situation_faction_member: "[COUNTRY.GetName|v] is a [concept_com_situation_faction] member"
+ trigger_is_com_situation_faction_member_not: "[COUNTRY.GetName|v] is not a [concept_com_situation_faction] member"
+ trigger_is_party_in_com_situation: "[COUNTRY.GetName|v] is a party in the [concept_com_situation]"
+ trigger_is_party_in_com_situation_not: "[COUNTRY.GetName|v] is not a party in the [concept_com_situation]"
+# Lists
+ trigger_any_com_situation_countries: "Any [concept_country] in the [concept_com_situation]:"
+ trigger_any_com_situation_countries_all: "All [concept_country] in the [concept_com_situation]:"
+ trigger_any_com_situation_countries_PERCENT: "$PARAMETERS$ of $FILTER$[concept_country] in the [concept_com_situation]"
+ trigger_any_com_situation_countries_COUNT: "$PARAMETERS$ $FILTER$[concept_country] in the [concept_com_situation]"
+ trigger_any_com_situation_countries_COUNT_FIRST: "$PARAMETERS$ $FILTER$[concept_country] in the [concept_com_situation]"
+ trigger_any_com_situation_countries_COUNT_THIRD: "$PARAMETERS$ $FILTER$[concept_country] in the [concept_com_situation]"

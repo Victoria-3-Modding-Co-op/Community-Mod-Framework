@@ -1,0 +1,6 @@
+﻿com_situation_countries = {
+    base = country
+    conditions = {
+        is_party_in_com_situation = yes
+    }
+}

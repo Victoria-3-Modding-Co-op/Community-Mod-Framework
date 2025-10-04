@@ -22,7 +22,21 @@ sb_com_rise_of_communism_test2 = {
     desc = sb_com_rise_of_communism_test_desc
 
     possible = {
-        always = yes
+        c:USA ?= {
+            is_com_situation_faction_member = {
+                side = left
+                faction = je_com_rise_of_communism_faction_hardliners
+            }
+        }
+        c:CHI ?= {
+            is_com_situation_faction_member = {
+                side = left
+                faction = je_com_rise_of_communism_faction_hardliners
+            }
+        }
+        any_com_situation_countries = {
+            has_modifier = border_cowardice
+        }
     }
 
     ai_chance = {
@@ -40,6 +54,12 @@ sb_com_rise_of_communism_test2 = {
             name = je_com_rise_of_communism_faction_reformers
             desc = je_com_rise_of_communism_faction_reformers_desc
         }
+
+        every_com_situation_countries = {
+            add_modifier = {
+                name = border_cowardice
+            }
+        }
     }
 }
 
@@ -48,7 +68,10 @@ sb_com_rise_of_communism_test3 = {
     desc = sb_com_rise_of_communism_test_desc
 
     possible = {
-        always = yes
+        c:USA ?= {
+            is_party_in_com_situation = yes
+        }
+        is_party_in_com_situation = yes
     }
 
     ai_chance = {

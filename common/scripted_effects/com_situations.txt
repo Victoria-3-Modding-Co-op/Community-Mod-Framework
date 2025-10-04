@@ -408,21 +408,35 @@ change_com_situation_leader = {
 # - side = either 'left' or 'right'
 # - name = localization key for the new name
 change_com_situation_side_name = {
-    if = {
-        limit = {
-            NOT = {
-                exists = scope:com_situation
+    custom_tooltip = {
+        text = effect_change_com_situation_side_name
+        if = {
+            limit = {
+                NOT = {
+                    exists = scope:com_situation
+                }
             }
+            error_log = "CMF: No com_situation scope defined! Are you in a Journal Entry?"
         }
-        error_log = "CMF: No com_situation scope defined! Are you in a Journal Entry?"
-    }
-    else = {
-        fix_variable_error = { variable = $name$ }
-        scope:com_situation = {
-            var:com_side_$side$ = {
-                set_variable = {
-                    name = com_name
-                    value = flag:$name$
+        else = {
+            fix_variable_error = { variable = $name$ }
+            fix_variable_error = { variable = com_name_old }
+            fix_variable_error = { variable = com_name_new }
+            set_local_variable = {
+                name = com_name_new
+                value = flag:$name$
+            }
+
+            scope:com_situation = {
+                var:com_side_$side$ = {
+                    set_local_variable = {
+                        name = com_name_old
+                        value = var:com_name
+                    }
+                    set_variable = {
+                        name = com_name
+                        value = flag:$name$
+                    }
                 }
             }
         }
@@ -435,21 +449,23 @@ change_com_situation_side_name = {
 # - side = either 'left' or 'right'
 # - desc = localization key for the new description/tooltip
 change_com_situation_side_description = {
-    if = {
-        limit = {
-            NOT = {
-                exists = scope:com_situation
+    hidden_effect = {
+        if = {
+            limit = {
+                NOT = {
+                    exists = scope:com_situation
+                }
             }
+            error_log = "CMF: No com_situation scope defined! Are you in a Journal Entry?"
         }
-        error_log = "CMF: No com_situation scope defined! Are you in a Journal Entry?"
-    }
-    else = {
-        fix_variable_error = { variable = $desc$ }
-        scope:com_situation = {
-            var:com_side_$side$ = {
-                set_variable = {
-                    name = com_desc
-                    value = flag:$desc$
+        else = {
+            fix_variable_error = { variable = $desc$ }
+            scope:com_situation = {
+                var:com_side_$side$ = {
+                    set_variable = {
+                        name = com_desc
+                        value = flag:$desc$
+                    }
                 }
             }
         }
@@ -463,53 +479,75 @@ change_com_situation_side_description = {
 # - name = localization key for the name of the faction
 # - desc = localization key for the description/tooltip of the faction
 create_com_situation_faction = {
-    if = {
-        limit = {
-            NOT = {
-                exists = scope:com_situation
-            }
+    custom_tooltip = {
+        text = effect_create_com_situation_faction
+        fix_variable_error = { variable = com_faction_name }
+        set_local_variable = {
+            name = com_faction_name
+            value = flag:$name$
         }
-        error_log = "CMF: No com_situation scope defined! Are you in a Journal Entry?"
-    }
-    else_if = {
-        limit = {
-            scope:com_situation = {
-                var:com_side_$side$ = {
-                    any_in_list = {
-                        variable = com_factions
-                        var:com_name ?= flag:$name$
+
+        if = {
+            limit = {
+                NOT = {
+                    exists = scope:com_situation
+                }
+            }
+            error_log = "CMF: No com_situation scope defined! Are you in a Journal Entry?"
+        }
+        else_if = {
+            limit = {
+                scope:com_situation = {
+                    var:com_side_$side$ = {
+                        any_in_list = {
+                            variable = com_factions
+                            var:com_name ?= flag:$name$
+                        }
                     }
                 }
             }
-        }
-        debug_log = "CMF: $name$ faction already exists"
-    }
-    else = {
-        fix_variable_error = { variable = $name$ }
-        fix_variable_error = { variable = $desc$ }
-
-        create_struct = {
-            struct_type = com_struct_situation_faction
-            struct_scope = com_faction_$name$
-        }
-
-        # Add name
-        scope:com_faction_$name$ = {
-            set_variable = {
-                name = com_name
-                value = flag:$name$
+            scope:com_situation = {
+                var:com_side_$side$ = {
+                    set_local_variable = {
+                        name = com_side_name
+                        value = var:com_name
+                    }
+                }
             }
-            set_variable = {
-                name = com_desc
-                value = flag:$desc$
-            }
+            debug_log = "CMF: $name$ faction already exists"
         }
+        else = {
+            fix_variable_error = { variable = $name$ }
+            fix_variable_error = { variable = $desc$ }
+            fix_variable_error = { variable = com_side_name }
 
-        scope:com_situation = {
-            var:com_side_$side$ = {
-                add_to_variable_list = {
-                    name = com_factions
-                    target = scope:com_faction_$name$
+            create_struct = {
+                struct_type = com_struct_situation_faction
+                struct_scope = com_faction
+            }
+
+            # Add name
+            scope:com_faction = {
+                set_variable = {
+                    name = com_name
+                    value = flag:$name$
+                }
+                set_variable = {
+                    name = com_desc
+                    value = flag:$desc$
+                }
+            }
+
+            scope:com_situation = {
+                var:com_side_$side$ = {
+                    set_local_variable = {
+                        name = com_side_name
+                        value = var:com_name
+                    }
+                    add_to_variable_list = {
+                        name = com_factions
+                        target = scope:com_faction
+                    }
                 }
             }
         }
@@ -522,35 +560,53 @@ create_com_situation_faction = {
 # - side = either 'left' or 'right'
 # - name = localization key for the name of the faction
 remove_com_situation_faction = {
-    if = {
-        limit = {
-            NOT = {
-                exists = scope:com_situation
+    custom_tooltip = {
+        text = effect_remove_com_situation_faction
+        if = {
+            limit = {
+                NOT = {
+                    exists = scope:com_situation
+                }
             }
+            error_log = "CMF: No com_situation scope defined! Are you in a Journal Entry?"
         }
-        error_log = "CMF: No com_situation scope defined! Are you in a Journal Entry?"
-    }
-    else = {
-        scope:com_situation = {
-            random_in_list = {
-                variable = com_factions
-                limit = {
-                    var:com_name ?= flag:$name$
-                }
-                save_temporary_scope_as = com_internal_scope
+        else = {
+            fix_variable_error = { variable = com_faction_name }
+            fix_variable_error = { variable = com_side_name }
+
+            set_local_variable = {
+                name = com_faction_name
+                value = flag:$name$
             }
-            if = {
-                limit = {
-                    exists = scope:com_internal_scope
-                }
+
+            scope:com_situation = {
                 var:com_side_$side$ = {
-                    remove_list_variable = {
-                        name = com_factions
-                        target = scope:com_internal_scope
+                    set_local_variable = {
+                        name = com_side_name
+                        value = var:com_name
+                    }
+
+                    random_in_list = {
+                        variable = com_factions
+                        limit = {
+                            var:com_name ?= flag:$name$
+                        }
+                        save_temporary_scope_as = com_internal_scope
                     }
                 }
-                destroy_struct = {
-                    struct = scope:com_internal_scope
+                if = {
+                    limit = {
+                        exists = scope:com_internal_scope
+                    }
+                    var:com_side_$side$ = {
+                        remove_list_variable = {
+                            name = com_factions
+                            target = scope:com_internal_scope
+                        }
+                    }
+                    destroy_struct = {
+                        struct = scope:com_internal_scope
+                    }
                 }
             }
         }
@@ -562,24 +618,34 @@ remove_com_situation_faction = {
 # Parameters:
 # - side = either 'left' or 'right'
 clear_com_situation_factions = {
-    if = {
-        limit = {
-            NOT = {
-                exists = scope:com_situation
-            }
-        }
-        error_log = "CMF: No com_situation scope defined! Are you in a Journal Entry?"
-    }
-    else = {
-        scope:com_situation = {
-            var:com_side_$side$ = {
-                every_in_list = {
-                    variable = com_factions
-                    destroy_struct = {
-                        struct = this
-                    }
+    custom_tooltip = {
+        text = effect_clear_com_situation_factions
+        if = {
+            limit = {
+                NOT = {
+                    exists = scope:com_situation
                 }
-                clear_variable_list = com_factions
+            }
+            error_log = "CMF: No com_situation scope defined! Are you in a Journal Entry?"
+        }
+        else = {
+            fix_variable_error = { variable = com_side_name }
+
+            scope:com_situation = {
+                var:com_side_$side$ = {
+                    set_local_variable = {
+                        name = com_side_name
+                        value = var:com_name
+                    }
+
+                    every_in_list = {
+                        variable = com_factions
+                        destroy_struct = {
+                            struct = this
+                        }
+                    }
+                    clear_variable_list = com_factions
+                }
             }
         }
     }
@@ -588,20 +654,23 @@ clear_com_situation_factions = {
 # Clear all factions for both sides
 # This effect has to be run inside a scope where 'scope:com_situation' is available!
 clear_com_situation_factions_both = {
-    if = {
-        limit = {
-            NOT = {
-                exists = scope:com_situation
+    custom_tooltip = {
+        text = effect_clear_com_situation_factions_both
+        if = {
+            limit = {
+                NOT = {
+                    exists = scope:com_situation
+                }
             }
+            error_log = "CMF: No com_situation scope defined! Are you in a Journal Entry?"
         }
-        error_log = "CMF: No com_situation scope defined! Are you in a Journal Entry?"
-    }
-    else = {
-        clear_com_situation_factions = {
-            side = left
-        }
-        clear_com_situation_factions = {
-            side = right
+        else = {
+            clear_com_situation_factions = {
+                side = left
+            }
+            clear_com_situation_factions = {
+                side = right
+            }
         }
     }
 }
@@ -612,25 +681,39 @@ clear_com_situation_factions_both = {
 # - name = localization key for the name of the faction
 # - country = country scope for the new member
 add_com_situation_faction_country = {
-    if = {
-        limit = {
-            NOT = {
-                exists = scope:com_situation
+    custom_tooltip = {
+        text = effect_add_com_situation_faction_country
+        if = {
+            limit = {
+                NOT = {
+                    exists = scope:com_situation
+                }
             }
+            error_log = "CMF: No com_situation scope defined! Are you in a Journal Entry?"
         }
-        error_log = "CMF: No com_situation scope defined! Are you in a Journal Entry?"
-    }
-    else = {
-        scope:com_situation = {
-            var:com_side_$side$ = {
-                random_in_list = {
-                    variable = com_factions
-                    limit = {
-                        var:com_name ?= flag:$name$
-                    }
-                    add_to_variable_list = {
-                        name = com_countries
-                        target = $country$
+        else = {
+            fix_variable_error = { variable = com_country }
+            fix_variable_error = { variable = com_faction_name }
+            set_local_variable = {
+                name = com_country
+                value = $country$
+            }
+            set_local_variable = {
+                name = com_faction_name
+                value = flag:$name$
+            }
+
+            scope:com_situation = {
+                var:com_side_$side$ = {
+                    random_in_list = {
+                        variable = com_factions
+                        limit = {
+                            var:com_name ?= flag:$name$
+                        }
+                        add_to_variable_list = {
+                            name = com_countries
+                            target = $country$
+                        }
                     }
                 }
             }
@@ -644,25 +727,28 @@ add_com_situation_faction_country = {
 # - name = localization key for the name of the faction
 # - country = country scope for the removed member
 remove_com_situation_faction_country = {
-    if = {
-        limit = {
-            NOT = {
-                exists = scope:com_situation
+    custom_tooltip = {
+        text = effect_remove_com_situation_faction_country
+        if = {
+            limit = {
+                NOT = {
+                    exists = scope:com_situation
+                }
             }
+            error_log = "CMF: No com_situation scope defined! Are you in a Journal Entry?"
         }
-        error_log = "CMF: No com_situation scope defined! Are you in a Journal Entry?"
-    }
-    else = {
-        scope:com_situation = {
-            var:com_side_$side$ = {
-                random_in_list = {
-                    variable = com_factions
-                    limit = {
-                        var:com_name ?= flag:$name$
-                    }
-                    remove_list_variable = {
-                        name = com_countries
-                        target = $country$
+        else = {
+            scope:com_situation = {
+                var:com_side_$side$ = {
+                    random_in_list = {
+                        variable = com_factions
+                        limit = {
+                            var:com_name ?= flag:$name$
+                        }
+                        remove_list_variable = {
+                            name = com_countries
+                            target = $country$
+                        }
                     }
                 }
             }
@@ -675,61 +761,63 @@ remove_com_situation_faction_country = {
 # - name = localization key for the name of the button group
 # - desc = localization key for the description/tooltip of the button group
 create_com_situation_button_group = {
-    if = {
-        limit = {
-            NOT = {
-                exists = scope:com_situation
-            }
-        }
-        error_log = "CMF: No com_situation scope defined! Are you in a Journal Entry?"
-    }
-    else = {
-        fix_variable_error = { variable = $name$ }
-        fix_variable_error = { variable = $desc$ }
-
+    hidden_effect = {
         if = {
             limit = {
                 NOT = {
-                    scope:com_situation = {
-                        any_in_list = {
-                            variable = com_button_groups
-                            var:com_name ?= flag:$name$
+                    exists = scope:com_situation
+                }
+            }
+            error_log = "CMF: No com_situation scope defined! Are you in a Journal Entry?"
+        }
+        else = {
+            fix_variable_error = { variable = $name$ }
+            fix_variable_error = { variable = $desc$ }
+
+            if = {
+                limit = {
+                    NOT = {
+                        scope:com_situation = {
+                            any_in_list = {
+                                variable = com_button_groups
+                                var:com_name ?= flag:$name$
+                            }
                         }
                     }
                 }
-            }
-            create_struct = {
-                struct_type = com_struct_situation_button_group
-                struct_scope = com_button_group_$name$
-            }
+                create_struct = {
+                    struct_type = com_struct_situation_button_group
+                    struct_scope = com_button_group_$name$
+                }
 
-            # Add name
-            scope:com_button_group_$name$ = {
-                set_variable = {
-                    name = com_name
-                    value = flag:$name$
-                }
-                set_variable = {
-                    name = com_desc
-                    value = flag:$desc$
-                }
-            }
-
-            scope:com_situation = {
-                add_to_variable_list = {
-                    name = com_button_groups
-                    target = scope:com_button_group_$name$
-                }
-            }
-        }
-        else = {
-            scope:com_situation = {
-                random_in_list = {
-                    variable = com_button_groups
-                    limit = {
-                        var:com_name ?= flag:$name$
+                # Add name
+                scope:com_button_group_$name$ = {
+                    set_variable = {
+                        name = com_name
+                        value = flag:$name$
                     }
-                    save_scope_as = com_button_group_$name$
+                    set_variable = {
+                        name = com_desc
+                        value = flag:$desc$
+                    }
+                }
+
+                scope:com_situation = {
+                    add_to_variable_list = {
+                        name = com_button_groups
+                        target = scope:com_button_group_$name$
+                    }
+                }
+            }
+            else = {
+                scope:com_situation = {
+                    random_in_list = {
+                        variable = com_button_groups
+                        limit = {
+                            var:com_name ?= flag:$name$
+                        }
+                        save_scope_as = com_button_group_$name$
+                    }
                 }
             }
         }
@@ -740,24 +828,26 @@ create_com_situation_button_group = {
 # This effect has to be run inside a scope where 'scope:com_situation' is available!
 # - name = localization key for the name of the button group
 remove_com_situation_button_group = {
-    if = {
-        limit = {
-            NOT = {
-                exists = scope:com_situation
+    hidden_effect = {
+        if = {
+            limit = {
+                NOT = {
+                    exists = scope:com_situation
+                }
             }
+            error_log = "CMF: No com_situation scope defined! Are you in a Journal Entry?"
         }
-        error_log = "CMF: No com_situation scope defined! Are you in a Journal Entry?"
-    }
-    else = {
-        scope:com_situation = {
-            remove_list_variable = {
-                name = com_button_groups
-                target = scope:com_button_group_$name$
+        else = {
+            scope:com_situation = {
+                remove_list_variable = {
+                    name = com_button_groups
+                    target = scope:com_button_group_$name$
+                }
             }
-        }
 
-        destroy_struct = {
-            struct = scope:com_button_group_$name$
+            destroy_struct = {
+                struct = scope:com_button_group_$name$
+            }
         }
     }
 }
@@ -768,25 +858,27 @@ remove_com_situation_button_group = {
 # - name = localization key for the name of the scripted button
 # - group = localization key for the name of the button group
 add_com_situation_button_group_element = {
-    if = {
-        limit = {
-            NOT = {
-                exists = scope:com_situation
-            }
-        }
-        error_log = "CMF: No com_situation scope defined! Are you in a Journal Entry?"
-    }
-    else = {
-        fix_variable_error = { variable = $name$ }
-        scope:com_situation = {
-            random_in_list = {
-                variable = com_button_groups
-                limit = {
-                    var:com_name ?= flag:$group$
+    hidden_effect = {
+        if = {
+            limit = {
+                NOT = {
+                    exists = scope:com_situation
                 }
-                add_to_variable_list = {
-                    name = com_buttons
-                    target = flag:$name$
+            }
+            error_log = "CMF: No com_situation scope defined! Are you in a Journal Entry?"
+        }
+        else = {
+            fix_variable_error = { variable = $name$ }
+            scope:com_situation = {
+                random_in_list = {
+                    variable = com_button_groups
+                    limit = {
+                        var:com_name ?= flag:$group$
+                    }
+                    add_to_variable_list = {
+                        name = com_buttons
+                        target = flag:$name$
+                    }
                 }
             }
         }
@@ -798,24 +890,26 @@ add_com_situation_button_group_element = {
 # - name = localization key for the name of the scripted button
 # - group = localization key for the name of the button group
 remove_com_situation_button_group_element = {
-    if = {
-        limit = {
-            NOT = {
-                exists = scope:com_situation
-            }
-        }
-        error_log = "CMF: No com_situation scope defined! Are you in a Journal Entry?"
-    }
-    else = {
-        scope:com_situation = {
-            random_in_list = {
-                variable = com_button_groups
-                limit = {
-                    var:com_name ?= flag:$group$
+    hidden_effect = {
+        if = {
+            limit = {
+                NOT = {
+                    exists = scope:com_situation
                 }
-                remove_list_variable = {
-                    name = com_buttons
-                    target = flag:$name$
+            }
+            error_log = "CMF: No com_situation scope defined! Are you in a Journal Entry?"
+        }
+        else = {
+            scope:com_situation = {
+                random_in_list = {
+                    variable = com_button_groups
+                    limit = {
+                        var:com_name ?= flag:$group$
+                    }
+                    remove_list_variable = {
+                        name = com_buttons
+                        target = flag:$name$
+                    }
                 }
             }
         }

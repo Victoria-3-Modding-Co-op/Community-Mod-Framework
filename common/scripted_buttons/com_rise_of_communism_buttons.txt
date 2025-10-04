@@ -30,7 +30,16 @@ sb_com_rise_of_communism_test2 = {
     }
 
     effect = {
-        remove_com_situation_header = yes
+        clear_com_situation_factions = {
+            side = left
+        }
+
+        # Create Reformers faction
+        create_com_situation_faction = {
+            side = left
+            name = je_com_rise_of_communism_faction_reformers
+            desc = je_com_rise_of_communism_faction_reformers_desc
+        }
     }
 }
 
@@ -67,6 +76,17 @@ sb_com_rise_of_communism_test3 = {
             side_leader_country_right = c:FRA
             side_name_right = je_com_rise_of_communism_capitalists
             side_desc_right = je_com_rise_of_communism_capitalists_desc
+        }
+        add_com_situation_faction_country = {
+            side = left
+            name = je_com_rise_of_communism_faction_reformers
+            country = c:PRU
+        }
+
+        # Remove Fascist faction
+        remove_com_situation_faction = {
+            side = right
+            name = je_com_rise_of_communism_faction_fascists
         }
     }
 }

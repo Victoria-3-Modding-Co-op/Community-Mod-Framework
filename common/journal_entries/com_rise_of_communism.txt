@@ -83,18 +83,6 @@
             country = c:BGM
         }
 
-        # Create Reformers faction
-        create_com_situation_faction = {
-            side = left
-            name = je_com_rise_of_communism_faction_reformers
-            desc = je_com_rise_of_communism_faction_reformers_desc
-        }
-        add_com_situation_faction_country = {
-            side = left
-            name = je_com_rise_of_communism_faction_reformers
-            country = c:PRU
-        }
-
         # Create Fascist faction
         create_com_situation_faction = {
             side = right

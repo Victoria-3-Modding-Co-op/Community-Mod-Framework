@@ -516,7 +516,7 @@ create_com_situation_faction = {
     }
 }
 
-# Create a faction from the given side
+# Remove a faction from the given side
 # This effect has to be run inside a scope where 'scope:com_situation' is available!
 # Parameters:
 # - side = either 'left' or 'right'
@@ -638,7 +638,7 @@ add_com_situation_faction_country = {
     }
 }
 
-# Add a country from a faction for the given side
+# Remove a country from a faction for the given side
 # This effect has to be run inside a scope where 'scope:com_situation' is available!
 # - side = either 'left' or 'right'
 # - name = localization key for the name of the faction

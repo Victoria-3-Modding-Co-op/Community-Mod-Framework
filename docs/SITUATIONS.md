@@ -21,6 +21,14 @@
 * [add_com_situation_button_group_element](#effect-add_com_situation_button_group_element)
 * [remove_com_situation_button_group_element](#effect-remove_com_situation_button_group_element)
 
+## Triggers
+* [is_com_situation_faction_member](#trigger-is_com_situation_faction_member)
+* [is_party_in_com_situation](#trigger-is_party_in_com_situation)
+
+## Lists
+* [{any|every|random|ordered}_com_situation_countries](#list-anyeveryrandomordered_com_situation_countries)
+
+## Details
 ### Effect: `create_com_situation_journal_entry`
 Add journal entry to the scoped country
 and add a newly created situation to that journal.
@@ -186,3 +194,20 @@ Remove a scripted button from a button group.
 - `name` localization key for the name of the scripted button
 - `group` localization key for the name of the button group
 
+
+
+### Trigger: `is_com_situation_faction_member`
+Check whether the currently scoped country is part of the given faction.
+> NOTE: This effect has to be run inside a scope where '**scope:com_situation**' is available!
+
+**Parameters:**
+- `side` either 'left' or 'right'
+- `name` localization key for the name of the faction
+
+### Trigger: `is_party_in_com_situation`
+Check whether the currently scoped country is part of the situation in any way (leader or a faction member).
+> NOTE: This effect has to be run inside a scope where '**scope:com_situation**' is available!
+
+### List: `{any|every|random|ordered}_com_situation_countries`
+Iterate over all countries involved in the situation (leader or a faction member).
+> NOTE: This effect has to be run inside a scope where '**scope:com_situation**' is available!

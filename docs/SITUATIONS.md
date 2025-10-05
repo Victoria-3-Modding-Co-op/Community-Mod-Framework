@@ -95,6 +95,7 @@ and then [add_com_situation_button_group_element](#effect-add_com_situation_butt
 * [remove_com_situation_button_group](#effect-remove_com_situation_button_group)
 * [add_com_situation_button_group_element](#effect-add_com_situation_button_group_element)
 * [remove_com_situation_button_group_element](#effect-remove_com_situation_button_group_element)
+* [save_com_situation_scope](#effect-save_com_situation_scope)
 
 ## Triggers
 * [is_com_situation_faction_member](#trigger-is_com_situation_faction_member)
@@ -269,7 +270,12 @@ Remove a scripted button from a button group.
 - `name` localization key for the name of the scripted button
 - `group` localization key for the name of the button group
 
+### Effect: `save_com_situation_scope`
+Set up an existing situation as an accessible scope.
+This allows using effects and triggers that rely on the '**scope:com_situation**' outside the event chain.
 
+**Parameters:**
+- `id` id of the ongoing situation
 
 ### Trigger: `is_com_situation_faction_member`
 Check whether the currently scoped country is part of the given faction.

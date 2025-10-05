@@ -915,3 +915,28 @@ remove_com_situation_button_group_element = {
         }
     }
 }
+
+# Sets up an existing situation as an accessible scope
+# This allows using effects and triggers that rely on the 'scope:com_situation' outside the event chain
+# - id = id of the ongoing situation
+save_com_situation_scope = {
+    hidden_effect = {
+        if = {
+            limit = {
+                any_in_global_list = {
+                    variable = com_situation_cache
+                    var:com_id ?= $id$
+                    has_variable = is_struct
+                }
+            }
+            random_in_global_list = {
+                variable = com_situation_cache
+                limit = {
+                    var:com_id ?= $id$
+                    has_variable = is_struct
+                }
+                save_scope_as = com_situation
+            }
+        }
+    }
+}

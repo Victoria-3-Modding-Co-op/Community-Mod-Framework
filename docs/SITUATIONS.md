@@ -1,4 +1,79 @@
-# Documentation
+# Overview
+Situations are meant to model clashes between factions on an international scale.
+
+They can have multiple journal entries associated with it and provide a tool to model complex power struggles.
+
+In the background, situations are Journal Entries with a few extra variables and a whole new layout.
+This means using them should come natural to modders who have already used those.
+
+Most of the complexity is masked behind tailored and documented scripted effects.
+A full list of them can be found below.
+
+# Content
+* [Overview](#overview)
+* [Usage](#usage)
+  * [Setting up a new situation](#setting-up-a-new-situation)
+  * [Victory conditions](#victory-conditions)
+  * [Optional features](#optional-features)
+    * [Factions](#factions)
+    * [Button Groups](#button-groups)
+* [Script Documentation](#script-documentation)
+  * [Effects](#effects)
+  * [Triggers](#triggers)
+  * [Lists](#lists)
+
+# Usage
+## Setting up a new situation
+All situations have two main sides that are set up at the start (Though there are effects to change them).
+Each side has a name, description and a leader country.
+
+- The whole situation itself is identified by its id
+- The id can be anything that can be assigned to a variable
+- The framework guarantees that situations with the same id are always the same anywhere they are used
+- This means as long as the same ids are used, the situation is the same everywhere and manipulation in one context is reflected in another
+
+To set up a new situation, there are two possible effects:
+* [create_com_situation_journal_entry](#effect-create_com_situation_journal_entry) adds a journal entry to the country and also creates a new situation for that journal entry.
+* [create_com_situation](#effect-create_com_situation) just creates and sets up the situation. It is meant to be used in the `immediate` block of a journal entry.
+
+> **NOTE** If a situation already exists,
+> both effects work the same as [create_ongoing_com_situation_journal_entry](#effect-create_ongoing_com_situation_journal_entry) and [add_ongoing_com_situation](#effect-add_ongoing_com_situation)!
+> So there can always be only one situation with a specific **id** no matter how many journal entries try to create it.
+
+## Victory conditions
+Each side has its own victory condition.
+This is modeled through the `complete` and `fail` blocks of the journal.
+
+The `complete` blocks (`complete`, `on_complete`, etc.)
+are the victory conditions for the left side of the situation,
+while `fail` blocks (`fail`, `on_fail`, etc.) are the victory conditions for the right side of the situation.
+
+## Optional features
+Situations can have scripted progress bars, scripted buttons and so on as any other journal entry.
+
+Though there are some situation specific features that can be used if needed.
+
+### Factions
+Factions are subgroups of countries inside a side of the situation.
+These can be used to model how a side in the situation may have a unified goal but is still made up of different internal factions.
+Each side has a name, a description and is composed of member countries.
+
+For example, a 'Communists' side could have factions like 'Hardliners' and 'Reformers'.
+
+A new faction can be created and assigned using the [create_com_situation_faction](#effect-create_com_situation_faction) effect.
+After the creation of a faction,
+countries can be assigned to it using the [add_com_situation_faction_country](#effect-add_com_situation_faction_country) effect.
+
+### Button Groups
+Button groups allow scripted buttons of the journal entry to be categorized into groups.
+Each side has a name and a description.
+
+To use button groups first one needs to be created using [create_com_situation_button_group](#effect-create_com_situation_button_group)
+and then [add_com_situation_button_group_element](#effect-add_com_situation_button_group_element) can be used to assign scripted buttons to the group
+
+> **NOTE** As soon as there is at least one button group, all buttons need to be put into a group for them to be visible to the user!
+
+# Script Documentation
 ## Effects
 * [create_com_situation_journal_entry](#effect-create_com_situation_journal_entry)
 * [create_ongoing_com_situation_journal_entry](#effect-create_ongoing_com_situation_journal_entry)

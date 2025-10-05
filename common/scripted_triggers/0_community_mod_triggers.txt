@@ -39,6 +39,10 @@ BPM_is_active_trigger = { # Better Politics Mod
 	always = no
 }
 
+chilam_balam_is_active_trigger = { # Chilam Balam
+	always = no
+}
+
 com_is_active = { # Community Outfit Mod
 	always = no
 }

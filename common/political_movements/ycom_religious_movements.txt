@@ -394,25 +394,25 @@ movement_religious_minority = {
 	}
 	on_created = {}
 
-    disband_trigger = {
-        OR = {
-            scope:political_movement ?= {
-                religion = {
-                    is_state_religion = root
-                }
-                root = {
-                    religion_percent_country = {
-                        target = scope:political_movement.religion
-                        value <= 0.08
-                    }
-                }
-            }
-            AND = {
-                c:BIC ?= this
-                has_technology_researched = pan-nationalism
-            }
-        }
-    }
+	disband_trigger = {
+		OR = {
+			scope:political_movement ?= {
+				religion = {
+					is_state_religion = root
+				}
+				root = {
+					religion_percent_country = {
+						target = scope:political_movement.religion
+						value <= 0.08
+					}
+				}
+			}
+			AND = {
+				c:BIC ?= this
+				has_technology_researched = pan-nationalism
+			}
+		}
+	}
 
 	on_disbanded = {
 		if = {
@@ -523,15 +523,15 @@ movement_religious_minority = {
 		religion = scope:religion
 	}
 
-    pop_support_factors = {
-        movement_support_poverty
-        movement_support_low_literacy
-        movement_support_religious_discrimination
-        movement_support_clergymen
-        movement_support_aristocrats
-        movement_support_peasants
-        movement_support_corporatism_tech
-    }
+	pop_support_factors = {
+		movement_support_poverty
+		movement_support_low_literacy
+		movement_support_religious_discrimination
+		movement_support_clergymen
+		movement_support_aristocrats
+		movement_support_peasants
+		movement_support_corporatism_tech
+	}
 
 	pop_support_weight = {
 		if = {
@@ -753,11 +753,11 @@ movement_religious_minority = {
 			if = {
 				limit = {
 					is_capital = no
-						religion_percent_state = {
-							target = scope:political_movement.religion
-							value >= com_movement_religious_minority_secession_state_weight_religion_percent_state_1 #vanilla value: 0.05
-						}
+					religion_percent_state = {
+						target = scope:political_movement.religion
+						value >= com_movement_religious_minority_secession_state_weight_religion_percent_state_0 #vanilla value: 0.05
 					}
+				}
 				add = { # These three values must add up to more than 1 - 5 x Obstinance, 1/2 Turmoil, percent of pops of this religion
 					value = -1
 					add = "this.religion_percent_state(scope:political_movement.religion)"
@@ -766,7 +766,7 @@ movement_religious_minority = {
 						multiply = 0.5
 					}
 					add = {
-						value = this.obstinance
+						value = this.obstinance	# Note: OBSTINANCE_MAX = 0.2
 						multiply = 5
 					}
 					multiply = 100
@@ -821,12 +821,12 @@ movement_religious_minority = {
 			desc = "STANDARD_OF_LIVING_FOR_RELIGION"
 		}
 
-        subtract = {
-            value = 0.5
-            subtract = political_movement_identity_support
-            min = 0
-            desc = "LOW_MOVEMENT_IDENTITY_SUPPORT"
-        }
+		subtract = {
+			value = 0.5
+			subtract = political_movement_identity_support
+			min = 0
+			desc = "LOW_MOVEMENT_IDENTITY_SUPPORT"
+		}
 
 		if = {
 			limit = {
@@ -883,5 +883,5 @@ movement_religious_minority = {
 				max = 0.25
 			}
 		}
-    }
+	}
 }

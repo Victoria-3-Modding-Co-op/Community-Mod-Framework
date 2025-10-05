@@ -22,7 +22,21 @@ sb_com_rise_of_communism_test2 = {
     desc = sb_com_rise_of_communism_test_desc
 
     possible = {
-        always = yes
+        c:USA ?= {
+            is_com_situation_faction_member = {
+                side = left
+                faction = je_com_rise_of_communism_faction_hardliners
+            }
+        }
+        c:CHI ?= {
+            is_com_situation_faction_member = {
+                side = left
+                faction = je_com_rise_of_communism_faction_hardliners
+            }
+        }
+        any_com_situation_countries = {
+            has_modifier = border_cowardice
+        }
     }
 
     ai_chance = {
@@ -30,7 +44,22 @@ sb_com_rise_of_communism_test2 = {
     }
 
     effect = {
-        remove_com_situation_header = yes
+        clear_com_situation_factions = {
+            side = left
+        }
+
+        # Create Reformers faction
+        create_com_situation_faction = {
+            side = left
+            name = je_com_rise_of_communism_faction_reformers
+            desc = je_com_rise_of_communism_faction_reformers_desc
+        }
+
+        every_com_situation_countries = {
+            add_modifier = {
+                name = border_cowardice
+            }
+        }
     }
 }
 
@@ -39,7 +68,10 @@ sb_com_rise_of_communism_test3 = {
     desc = sb_com_rise_of_communism_test_desc
 
     possible = {
-        always = yes
+        c:USA ?= {
+            is_party_in_com_situation = yes
+        }
+        is_party_in_com_situation = yes
     }
 
     ai_chance = {
@@ -47,9 +79,37 @@ sb_com_rise_of_communism_test3 = {
     }
 
     effect = {
-        change_com_situation_side_name = {
+        change_com_situation_leader = {
             side = left
-            name = je_com_rise_of_communism_communists
+            leader = c:RUS
+        }
+        change_com_situation_leader = {
+            side = right
+            leader = c:USA
+        }
+        create_com_situation_journal_entry = {
+            journal = je_com_rise_of_communism
+            situation_id = 1
+            icon = com_icon_rise_of_communism
+
+            side_leader_country_left = c:GBR
+            side_name_left = je_com_rise_of_communism_communists
+            side_desc_left = je_com_rise_of_communism_communists_desc
+
+            side_leader_country_right = c:FRA
+            side_name_right = je_com_rise_of_communism_capitalists
+            side_desc_right = je_com_rise_of_communism_capitalists_desc
+        }
+        add_com_situation_faction_country = {
+            side = left
+            name = je_com_rise_of_communism_faction_reformers
+            country = c:PRU
+        }
+
+        # Remove Fascist faction
+        remove_com_situation_faction = {
+            side = right
+            name = je_com_rise_of_communism_faction_fascists
         }
     }
 }

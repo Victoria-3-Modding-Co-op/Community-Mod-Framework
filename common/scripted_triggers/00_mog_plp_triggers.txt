@@ -1,0 +1,6 @@
+﻿mog_plp_movement_anti_slavery_colonial_slavery_trigger = {
+	always = yes
+}
+mog_plp_movement_mainland_general_pop_support_trigger = {
+	always = yes
+}

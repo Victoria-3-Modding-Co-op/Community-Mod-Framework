@@ -5,3 +5,9 @@ mog_plp_movement_cultural_minority_additional_radicalism_factor_add = 0
 mog_plp_movement_minority_rights_pop_support_weight_mult = 1
 ## Religious Movement Values
 mog_plp_movement_religious_minority_pop_support_weight_mult = 1
+## Ideological Movement Values
+mog_plp_movement_anti_slavery_pop_support_weight_cultural_solidarity_add = 0
+mog_plp_movement_anti_slavery_pop_support_weight_personal_add = 0
+mog_plp_movement_pro_slavery_pop_support_weight_owner_add = 0
+mog_plp_movement_pro_slavery_pop_support_weight_enslaved_percent_mult = 1
+mog_plp_movement_mainland_general_pop_support_weight_incorporation_percent_mult = 1

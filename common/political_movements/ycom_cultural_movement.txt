@@ -802,35 +802,35 @@ movement_cultural_minority = {
 			if = {
 				limit = {
 					is_pop_type = aristocrats
-			}
-			if = {
-				limit = {
-					culture = cu:polish
-					state ?= {
-						OR = {
-							has_variable = lingering_plc_resistance
-							has_variable = christ_of_nations_target
+				}
+				if = {
+					limit = {
+						culture = cu:polish
+						state ?= {
+							OR = {
+								has_variable = lingering_plc_resistance
+								has_variable = christ_of_nations_target
+							}
 						}
 					}
-				}
-				add = {
+					add = {
 						value = 50
-					desc = "POP_POLISH_ARISTOCRATS"
-				}
-			}
-			else_if = {
-				limit = {
-					culture = cu:hungarian
-					owner ?= {
-							has_journal_entry = je_matter_of_hungary
+						desc = "POP_POLISH_ARISTOCRATS"
 					}
 				}
-				add = {
-					value = 50
-					desc = "je_matter_of_hungary"
+				else_if = {
+					limit = {
+						culture = cu:hungarian
+						owner ?= {
+							has_journal_entry = je_matter_of_hungary
+						}
+					}
+					add = {
+						value = 50
+						desc = "je_matter_of_hungary"
+					}
 				}
-			}
-			else = {
+				else = {
 					add = {
 						value = 12
 						desc = "POP_ARISTOCRATS"
@@ -840,7 +840,7 @@ movement_cultural_minority = {
 			else = {
 				add = {
 					value = 18
-				desc = "UPPER_NO_ICON"
+					desc = "UPPER_NO_ICON"
 				}
 			}
 		}
@@ -873,9 +873,9 @@ movement_cultural_minority = {
 					}
 				}
 				else = {
-				add = {
+					add = {
 						value = 15
-					desc = "POP_CLERGYMEN"
+						desc = "POP_CLERGYMEN"
 					}
 				}
 			}
@@ -1269,7 +1269,7 @@ movement_cultural_minority = {
 			desc = "LOW_MOVEMENT_IDENTITY_SUPPORT"
 		}
 
-				if = {
+		if = {
 			limit = {
 				owner = { cultural_acceptance_base = { target = scope:culture value <= acceptance_status_4 } }
 			}

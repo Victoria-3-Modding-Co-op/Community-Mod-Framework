@@ -195,7 +195,7 @@
 					is_pop_type = slaves
 				}
 				add = {
-					value = 50
+					value = com_movement_anti_slavery_pop_support_weight_type_slaves #vanilla value: 50
 					desc = "POP_SLAVES"
 				}
 			}
@@ -277,9 +277,22 @@
 			}
 		}
 
+		# Grey_PLP
+		add = { 
+			value = mog_plp_movement_anti_slavery_pop_support_weight_cultural_solidarity_add
+			desc = "CULTURE_ENSLAVED_PERCENT"								# Desc only shows when value =/= 0
+		}
+
+		# Grey_PLP
+		add = { 
+			value = mog_plp_movement_anti_slavery_pop_support_weight_personal_add
+			desc = "POP_POVERTY"											# Desc only shows when value =/= 0
+		}
+
 		if = { # Colonial slavery is out of sight and out of mind
 			limit = {
 				owner ?= { has_law_or_variant = law_type:law_colonial_slavery }
+				mog_plp_movement_anti_slavery_colonial_slavery_trigger = yes	# Grey_PLP
 			}
 			if = {
 				limit = {
@@ -336,7 +349,7 @@
 
 	revolution = {
 		possible = {
-			political_movement_support >= 0.05
+			political_movement_support >= com_movement_anti_slavery_revolution_possible_political_movement_support #vanilla value: 0.05
 		}
 
 		weight = {
@@ -391,7 +404,7 @@
 
 	secession = {
 		possible = {
-			political_movement_support >= 0.05
+			political_movement_support >= com_movement_anti_slavery_secession_possible_political_movement_support #vanilla value: 0.05
 			OR = {
 				scope:clout <= 0
 				owner = {
@@ -636,7 +649,7 @@ movement_pro_slavery = {
 		value = 200
 		if = {
 			limit = {
-					has_ideology = ideology:ideology_slaver
+				has_ideology = ideology:ideology_slaver
 			}
 			multiply = {
 				value = 5
@@ -743,6 +756,18 @@ movement_pro_slavery = {
 			}
 		}
 
+		# Grey_PLP
+		add = { 
+			value = mog_plp_movement_pro_slavery_pop_support_weight_owner_add
+			desc = "SLAVE_OWNER"						# Desc only shows when value =/= 0
+		}
+
+		# Grey_PLP
+		multiply = { 
+			value = mog_plp_movement_pro_slavery_pop_support_weight_enslaved_percent_mult
+			desc = "CULTURE_ENSLAVED_PERCENT"			# Desc only shows when value =/= 0
+		}
+
 		if = {
 			limit = {
 				owner ?= { has_journal_entry = je_acw_countdown }
@@ -763,7 +788,7 @@ movement_pro_slavery = {
 
 	revolution = {
 		possible = {
-			political_movement_support >= 0.05
+			political_movement_support >= com_movement_pro_slavery_revolution_possible_political_movement_support #vanilla value: 0.05
 		}
 
 		weight = {
@@ -818,7 +843,7 @@ movement_pro_slavery = {
 
 	secession = {
 		possible = {
-			political_movement_support >= 0.05
+			political_movement_support >= com_movement_pro_slavery_secession_possible_political_movement_support #vanilla value: 0.05
 			OR = {
 				scope:clout <= 0
 				owner = {
@@ -1076,7 +1101,7 @@ movement_royalist_absolutist = {
 				NOT = {
 					has_variable = king_in_parliament_possible
 				}
-			country_has_voting_franchise = yes
+				country_has_voting_franchise = yes
 			}
 			has_variable = monarchy_stamped_out_var
 		}
@@ -1184,6 +1209,7 @@ movement_royalist_absolutist = {
 		NOT = {
 			is_pop_type = slaves
 		}
+		mog_plp_movement_mainland_general_pop_support_trigger = yes	# Grey_PLP
 	}
 
 	pop_support_factors = {
@@ -1364,6 +1390,11 @@ movement_royalist_absolutist = {
 			value = literacy_rate
 			add = 0.2
 			max = 0.7 # Starts more powerful but caps out early
+		}
+
+		# Grey_PLP
+		multiply = {
+			value = mog_plp_movement_mainland_general_pop_support_weight_incorporation_percent_mult
 		}
 	}
 
@@ -1571,6 +1602,7 @@ movement_royalist_constitutional = {
 		NOT = {
 			is_pop_type = slaves
 		}
+		mog_plp_movement_mainland_general_pop_support_trigger = yes	# Grey_PLP
 	}
 
 	pop_support_factors = {
@@ -1745,6 +1777,11 @@ movement_royalist_constitutional = {
 			desc = "POP_LITERACY"
 			value = literacy_rate
 			add = 0.10
+		}
+
+		# Grey_PLP
+		multiply = {
+			value = mog_plp_movement_mainland_general_pop_support_weight_incorporation_percent_mult
 		}
 	}
 
@@ -1977,6 +2014,7 @@ movement_labor = { # Explicitly non-socialist labour movement
 		NOT = {
 			is_pop_type = slaves
 		}
+		mog_plp_movement_mainland_general_pop_support_trigger = yes	# Grey_PLP
 	}
 
 	pop_support_factors = {
@@ -2175,6 +2213,11 @@ movement_labor = { # Explicitly non-socialist labour movement
 				subtract = pop_radical_fraction
 			}
 		}
+
+		# Grey_PLP
+		multiply = {
+			value = mog_plp_movement_mainland_general_pop_support_weight_incorporation_percent_mult
+		}
 	}
 
 	revolution = {
@@ -2360,7 +2403,7 @@ movement_socialist = {
 		}
 		else_if = {
 			limit = {
-					has_ideology = ideology:ideology_social_democrat
+				has_ideology = ideology:ideology_social_democrat
 				NOT = {
 					owner ?= {
 						any_political_movement = {
@@ -2381,6 +2424,7 @@ movement_socialist = {
 			is_pop_type = aristocrats
 			is_pop_type = slaves
 		}
+		mog_plp_movement_mainland_general_pop_support_trigger = yes	# Grey_PLP
 	}
 
 	pop_support_factors = {
@@ -2569,6 +2613,11 @@ movement_socialist = {
 		multiply = {
 			value = usfp_harlem_renaissance_socialism_attraction_mult
 			desc = "harlem_renaissance_movement_attraction"
+		}
+
+		# Grey_PLP
+		multiply = {
+			value = mog_plp_movement_mainland_general_pop_support_weight_incorporation_percent_mult
 		}
 	}
 
@@ -3109,6 +3158,7 @@ movement_communist = {
 			is_pop_type = aristocrats
 			is_pop_type = slaves
 		}
+		mog_plp_movement_mainland_general_pop_support_trigger = yes	# Grey_PLP
 	}
 
 	pop_support_factors = {
@@ -3310,6 +3360,11 @@ movement_communist = {
 			value = usfp_harlem_renaissance_socialism_attraction_mult
 			desc = "harlem_renaissance_movement_attraction"
 		}
+
+		# Grey_PLP
+		multiply = {
+			value = mog_plp_movement_mainland_general_pop_support_weight_incorporation_percent_mult
+		}
 	}
 
 	revolution = {
@@ -3460,6 +3515,7 @@ movement_fascist = {
 		NOT = {
 			is_pop_type = slaves
 		}
+		mog_plp_movement_mainland_general_pop_support_trigger = yes	# Grey_PLP
 	}
 
 	pop_support_factors = {
@@ -3719,6 +3775,11 @@ movement_fascist = {
 			multiply = pop_acceptance
 			desc = "ACCEPTANCE"
 		}
+
+		# Grey_PLP
+		multiply = {
+			value = mog_plp_movement_mainland_general_pop_support_weight_incorporation_percent_mult
+		}
 	}
 
 	revolution = {
@@ -3874,6 +3935,7 @@ movement_corporatist = {
 		NOT = {
 			is_pop_type = slaves
 		}
+		mog_plp_movement_mainland_general_pop_support_trigger = yes	# Grey_PLP
 	}
 
 	pop_support_factors = {
@@ -4108,6 +4170,11 @@ movement_corporatist = {
 			add = 0.20
 			desc = "ACCEPTANCE"
 		}
+
+		# Grey_PLP
+		multiply = {
+			value = mog_plp_movement_mainland_general_pop_support_weight_incorporation_percent_mult
+		}
 	}
 
 	revolution = {
@@ -4322,6 +4389,7 @@ movement_liberal = {
 		NOT = {
 			is_pop_type = slaves
 		}
+		mog_plp_movement_mainland_general_pop_support_trigger = yes	# Grey_PLP
 	}
 
 	pop_support_factors = {
@@ -4415,9 +4483,9 @@ movement_liberal = {
 					}
 				}
 				else = {
-				add = {
-					value = 6
-					desc = "POP_ARISTOCRATS"
+					add = {
+						value = 6
+						desc = "POP_ARISTOCRATS"
 					}
 				}
 			}
@@ -4500,6 +4568,11 @@ movement_liberal = {
 			desc = "POP_LITERACY"
 			value = literacy_rate
 			add = 0.10
+		}
+
+		# Grey_PLP
+		multiply = {
+			value = mog_plp_movement_mainland_general_pop_support_weight_incorporation_percent_mult
 		}
 	}
 
@@ -4723,6 +4796,7 @@ movement_radical = {
 				religion = owner.religion
 			}
 		}
+		mog_plp_movement_mainland_general_pop_support_trigger = yes	# Grey_PLP
 	}
 
 	pop_support_factors = {
@@ -4925,6 +4999,11 @@ movement_radical = {
 			desc = "POP_RADICALS"
 			value = pop_radical_fraction
 			add = 1
+		}
+
+		# Grey_PLP
+		multiply = {
+			value = mog_plp_movement_mainland_general_pop_support_weight_incorporation_percent_mult
 		}
 	}
 
@@ -5411,6 +5490,7 @@ movement_positivist = {
 			is_pop_type = peasants
 			is_pop_type = slaves
 		}
+		mog_plp_movement_mainland_general_pop_support_trigger = yes	# Grey_PLP
 	}
 
 	pop_support_factors = {
@@ -5642,6 +5722,11 @@ movement_positivist = {
 			desc = "POP_LITERACY"
 			value = literacy_rate
 			add = 0.10
+		}
+
+		# Grey_PLP
+		multiply = {
+			value = mog_plp_movement_mainland_general_pop_support_weight_incorporation_percent_mult
 		}
 	}
 
@@ -6422,6 +6507,7 @@ movement_reactionary = {
 		NOT = {
 			is_pop_type = slaves
 		}
+		mog_plp_movement_mainland_general_pop_support_trigger = yes	# Grey_PLP
 	}
 
 	pop_support_factors = {
@@ -6610,6 +6696,11 @@ movement_reactionary = {
 				value = 1
 				subtract = pop_radical_fraction
 			}
+		}
+
+		# Grey_PLP
+		multiply = {
+			value = mog_plp_movement_mainland_general_pop_support_weight_incorporation_percent_mult
 		}
 	}
 
@@ -6813,6 +6904,7 @@ movement_modernizer = {
 			is_pop_type = peasants
 			is_pop_type = slaves
 		}
+		mog_plp_movement_mainland_general_pop_support_trigger = yes	# Grey_PLP
 	}
 
 	pop_support_factors = {
@@ -7002,6 +7094,11 @@ movement_modernizer = {
 			desc = "POP_LITERACY"
 			value = literacy_rate
 			add = 0.10
+		}
+
+		# Grey_PLP
+		multiply = {
+			value = mog_plp_movement_mainland_general_pop_support_weight_incorporation_percent_mult
 		}
 	}
 

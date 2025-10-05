@@ -1,0 +1,22 @@
+﻿is_com_situation_faction_member = {
+    global = trigger_is_com_situation_faction_member
+    global_not = trigger_is_com_situation_faction_member_not
+    first = trigger_is_com_situation_faction_member
+    first_not = trigger_is_com_situation_faction_member_not
+    third = trigger_is_com_situation_faction_member
+    third_not = trigger_is_com_situation_faction_member_not
+}
+
+is_party_in_com_situation = {
+    global = trigger_is_party_in_com_situation
+    global_not = trigger_is_party_in_com_situation_not
+    first = trigger_is_party_in_com_situation
+    first_not = trigger_is_party_in_com_situation_not
+    third = trigger_is_party_in_com_situation
+    third_not = trigger_is_party_in_com_situation_not
+}
+
+any_com_situation_countries = {
+    global = trigger_any_com_situation_countries
+    first = trigger_any_com_situation_countries
+}

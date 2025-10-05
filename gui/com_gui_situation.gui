@@ -1,0 +1,807 @@
+# COPY-PASTED FOR NOW
+@panel_width_minus_30 = 510
+@panel_width_minus_20 = 520			
+@panel_width_minus_10 = 530			# used to be 450
+@panel_width = 540  				# used to be 460
+@panel_width_half = 270				# used to be 230
+@panel_width_plus_10 = 550  		# used to be 470
+@panel_width_plus_14 = 554			# used to be 474
+@panel_width_plus_14_half = 277		# used to be 237
+@panel_width_plus_20 = 560			# used to be 480
+@panel_width_plus_30 = 570			# used to be 490
+@panel_width_plus_70 = 610			# used to be 530
+
+# CMF Situation specific
+@com_character_width = 200
+
+types com_situation_types {
+    type com_journal_entry_situation = flowcontainer {
+        minimumsize = { @panel_width_plus_14 -1 }
+        direction = vertical
+        using = default_list_position
+        spacing = 10
+        margin_top = -4
+
+        flowcontainer = {
+            visible = "[ComSituation.Var('com_header').IsSet]"
+            margin_top = 10
+            using = default_list_position
+            minimumsize = { @panel_width_minus_30 40 }
+            maximumsize = { @panel_width_minus_30 -1 }
+
+            textbox = {
+                using = default_list_position
+                minimumsize = { @panel_width_minus_30 40 }
+                maximumsize = { @panel_width_minus_30 -1 }
+                raw_text = "[ComSituation.Var('com_header').GetFlagName]"
+                align = center
+                using = fontsize_xl
+                multiline = yes
+                autoresize = yes
+                default_format = "#title"
+            }
+        }
+
+        # Header
+        flowcontainer = {
+            direction = vertical
+            using = default_list_position
+            spacing = 10
+
+            background = {
+                margin_top = -44
+                margin_bottom = -20
+                texture = "[ComSituation.GetCharacter.GetIdeology.GetTexture]"
+                alpha = 0.5
+                modify_texture = {
+                    texture = "gfx/interface/masks/fade_vertical_bottom.dds"
+                    spriteType = Corneredstretched
+                    spriteborder = { 0 0 }
+                    blend_mode = alphamultiply
+                    alpha = 0.9
+                }
+            }
+
+            # Side names header
+            default_header_2texts_clean = {
+                using = default_list_position
+                blockoverride "text1" {
+                    datacontext = "[ComSituationLeft]"
+                    using = com_side_header_properties
+                }
+                blockoverride "text2" {
+                    datacontext = "[ComSituationRight]"
+                    using = com_side_header_properties
+                }
+                blockoverride "size" {
+                    size = { @panel_width_plus_14 44 }
+                }
+            }
+
+            # Leader country ruler characters
+            flowcontainer = {
+                direction = horizontal
+                minimumsize = { @panel_width_plus_14 44 }
+                using = default_list_position
+
+                com_journal_entry_character_situation_left = {
+                    datacontext = "[ComSituationLeft.Var('com_leader').GetCountry.GetRuler]"
+                }
+                widget = {
+                    # Spacer
+                    size = {
+                        @[ panel_width - ( com_character_width * 2 ) ]
+                        20
+                    }
+                }
+                com_journal_entry_character_situation_right = {
+                    datacontext = "[ComSituationRight.Var('com_leader').GetCountry.GetRuler]"
+                }
+            }
+
+            # Leader country names
+            flowcontainer = {
+                direction = horizontal
+                using = default_list_position
+
+                com_leader_header_left = {
+                    blockoverride "text" {
+                        raw_text = "[ComSituationLeft.Var('com_leader').GetCountry.GetName]"
+                    }
+                    blockoverride "size" {
+                        size = { @[ panel_width_plus_14 / 2 - 20 ] 40 }
+                    }
+                }
+
+                widget = {
+                    size = { 40 40 }
+                    textbox = {
+                        parentanchor = hcenter|vcenter
+                        align = center
+                        size = { 40 40 }
+                        default_format = "#header"
+                        using = fontsize_large
+                        text = com_situation_vs
+                    }
+                }
+
+                com_leader_header_right = {
+                    blockoverride "text" {
+                        align = right
+                        raw_text = "[ComSituationRight.Var('com_leader').GetCountry.GetName]"
+                    }
+                    blockoverride "size" {
+                        size = { @[ panel_width_plus_14 / 2 - 20 ] 40 }
+                    }
+                }
+            }
+
+            # Victory conditions
+            flowcontainer = {
+                direction = horizontal
+                using = default_list_position
+                spacing = 20
+
+                com_situation_victory_conditions = {
+                    visible = "[JournalEntry.CanComplete]"
+                    tooltip = "[JournalEntry.GetCompletionTooltip]"
+                    datacontext = "[ComSituationLeft]"
+                }
+                com_situation_victory_conditions = {
+                    visible = "[Not(StringIsEmpty(JournalEntry.GetFailureTooltip))]"
+                    tooltip = "[JournalEntry.GetFailureTooltip]"
+                    datacontext = "[ComSituationRight]"
+                }
+            }
+        }
+
+        # Status
+        textbox = {
+            visible = "[Not(StringIsEmpty(JournalEntry.GetStatusDesc))]"
+            text = "[JournalEntry.GetStatusDesc]"
+            autoresize = yes
+            multiline = yes
+            minimumsize = { @panel_width_minus_20 -1 }
+            maximumsize = { @panel_width_minus_20 -1 }
+            using = default_list_position
+            align = hcenter|nobaseline
+            using = fontsize_large
+
+            margin = { 20 20 }
+
+            background = {
+                alpha = 0.5
+                using = entry_bg_fancy_dark
+            }
+        }
+
+        # Scripted progress bars
+        flowcontainer = {
+            parentanchor = hcenter
+            direction = vertical
+
+            visible = "[Not( IsDataModelEmpty( JournalEntry.GetScriptedProgressBars ) )]"
+            datamodel = "[JournalEntry.GetScriptedProgressBars]"
+
+            spacing = 15
+
+            item = {
+                container = {
+
+                    # Default
+                    default_progressbar_horizontal = {
+                        visible = "[ScriptedProgressBar.IsDefault]"
+                        block "progressbar_size" {
+                            size = { 504 30 }
+                        }
+                        tooltip = "[ScriptedProgressBar.GetPeriodicProgressBreakdown]"
+                        blockoverride "values" {
+                            value = "[JournalEntry.GetCurrentBarProgress(ScriptedProgressBar.Self)]"
+                            min = 0
+                            max = 1
+                        }
+                        textbox = {
+                            text = "[ScriptedProgressBar.GetDesc]"
+                            autoresize = yes
+                            align = nobaseline
+                            margin_left = 10
+                            parentanchor = vcenter
+                        }
+                    }
+
+                    # Default Bad
+                    bad_progressbar_horizontal = {
+                        visible = "[ScriptedProgressBar.IsDefaultBad]"
+                        block "progressbar_size" {
+                            size = { 504 30 }
+                        }
+                        tooltip = "[ScriptedProgressBar.GetPeriodicProgressBreakdown]"
+                        blockoverride "values" {
+                            value = "[JournalEntry.GetCurrentBarProgress(ScriptedProgressBar.Self)]"
+                            min = 0
+                            max = 1
+                        }
+                        textbox = {
+                            text = "[ScriptedProgressBar.GetDesc]"
+                            autoresize = yes
+                            align = nobaseline
+                            margin_left = 10
+                            parentanchor = vcenter
+                        }
+                    }
+
+                    #Default Green
+                    green_progressbar_horizontal = {
+                        visible = "[ScriptedProgressBar.IsDefaultGreen]"
+                        block "progressbar_size" {
+                            size = { 504 30 }
+                        }
+
+                        tooltip = "[ScriptedProgressBar.GetPeriodicProgressBreakdown]"
+                        blockoverride "values" {
+                            value = "[JournalEntry.GetCurrentBarProgress(ScriptedProgressBar.Self)]"
+                            min = 0
+                            max = 1
+                        }
+                        textbox = {
+                            text = "[ScriptedProgressBar.GetDesc]"
+                            autoresize = yes
+                            align = nobaseline
+                            margin_left = 10
+                            parentanchor = vcenter
+                        }
+                        textbox = {
+                            text = "[ScriptedProgressBar.GetSecondDesc]"
+                            autoresize = yes
+                            align = right|nobaseline
+                            margin_right = 10
+                            parentanchor = right|vcenter
+                        }
+                    }
+
+                    # double sided bad
+                    default_progressbar_horizontal = {
+                        visible = "[ScriptedProgressBar.IsDoubleSidedBad]"
+                        block "progressbar_size" {
+                            size = { 504 30 }
+                        }
+                        tooltip = "[ScriptedProgressBar.GetPeriodicProgressBreakdown]"
+
+                        blockoverride "noprogresstexture" {
+                            noprogresstexture = "gfx/interface/progressbar/progressbar_bad.dds"
+                        }
+
+                        blockoverride "values" {
+                            value = "[JournalEntry.GetCurrentBarProgress(ScriptedProgressBar.Self)]"
+                            min = 0
+                            max = 1
+                        }
+                        textbox = {
+                            text = "[ScriptedProgressBar.GetDesc]"
+                            autoresize = yes
+                            align = nobaseline
+                            margin_left = 10
+                            parentanchor = vcenter
+                        }
+                        textbox = {
+                            text = "[ScriptedProgressBar.GetSecondDesc]"
+                            autoresize = yes
+                            align = right|nobaseline
+                            margin_right = 10
+                            parentanchor = right|vcenter
+                        }
+
+                        #this is hack to get an extra marker on top of the frame (progressbar properties are copied)
+                        blockoverride "on_top_of_the_progressbar" {
+                            progressbar = {
+                                noprogresstexture = "gfx/interface/icons/generic_icons/transparent.dds"
+                                progresstexture = "gfx/interface/icons/generic_icons/transparent.dds"
+                                size = { 100% 100% }
+                                spriteType = Corneredtiled
+                                spriteborder = { 4 4 }
+                                texture_density = 2
+                                skip_initial_animation = yes
+
+                                block "values" {}
+                                block "direction" {
+                                    direction = horizontal
+                                }
+                                block "progress_changed_animation" {
+                                    using = progressbar_changed_animation
+                                }
+                                block "animate_negative_change" {
+                                    animate_negative_changes = yes
+                                }
+                                marker = {
+
+                                    widget = {
+                                        size = { 50 50 }
+                                        icon = {
+                                            size = { 65 65 }
+                                            widgetanchor = center
+                                            position = { 0 12 }
+
+                                            block "progress_icon" {
+                                                texture = "[JournalEntry.GetIcon]"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    # Double sided gold
+                    widget = {
+                        size = { 520 45 }
+                        parentanchor = center
+                        visible = "[ScriptedProgressBar.IsDoubleSidedGold]"
+
+                        default_progressbar_horizontal  = {
+                            parentanchor = center
+                            block "progressbar_size" {
+                                size = { 430 30 }
+                            }
+
+                            blockoverride "noprogresstexture" {
+                                noprogresstexture = "gfx/interface/progressbar/progressbar_gold.dds"
+                            }
+
+                            tooltip = "[ScriptedProgressBar.GetPeriodicProgressBreakdown]"
+                            blockoverride "values" {
+                                value = "[JournalEntry.GetCurrentBarProgress(ScriptedProgressBar.Self)]"
+                                min = 0
+                                max = 1
+                            }
+                            textbox = {
+                                text = "[ScriptedProgressBar.GetDesc]"
+                                autoresize = yes
+                                align = nobaseline
+                                margin_left = 10
+                                parentanchor = vcenter
+                            }
+                            textbox = {
+                                text = "[ScriptedProgressBar.GetSecondDesc]"
+                                autoresize = yes
+                                align = right|nobaseline
+                                margin_right = 10
+                                parentanchor = right|vcenter
+                            }
+
+                            #this is hack to get an extra marker on top of the frame (progressbar properties are copied)
+                            blockoverride "on_top_of_the_progressbar" {
+                                progressbar = {
+                                    noprogresstexture = "gfx/interface/icons/generic_icons/transparent.dds"
+                                    progresstexture = "gfx/interface/icons/generic_icons/transparent.dds"
+                                    size = { 100% 100% }
+                                    spriteType = Corneredtiled
+                                    spriteborder = { 4 4 }
+                                    texture_density = 2
+                                    skip_initial_animation = yes
+
+                                    block "values" {}
+                                    block "direction" {
+                                        direction = horizontal
+                                    }
+                                    block "progress_changed_animation" {
+                                        using = progressbar_changed_animation
+                                    }
+                                    block "animate_negative_change" {
+                                        animate_negative_changes = yes
+                                    }
+                                    marker = {
+
+                                        icon = {
+                                            size = { 65 33 }
+                                            parentanchor = vcenter
+                                            widgetanchor = center
+                                            texture = "gfx/interface/progressbar/progressbar_marker.dds"
+                                            using = shimmer
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        icon = {
+                            size = { 45 45 }
+                            parentanchor = left|vcenter
+                            block "progressbar_left_icon" {
+                                texture = "gfx/interface/progressbar/greatgame_bear_marker.dds"
+                            }
+                        }
+
+                        icon = {
+                            size = { 45 45 }
+                            parentanchor = right|vcenter
+                            block "progressbar_right_icon" {
+                                texture = "gfx/interface/progressbar/greatgame_lion_marker.dds"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        # Simple progress bar
+        flowcontainer = {
+            parentanchor = hcenter
+            visible = "[And(JournalEntry.HasProgressBar, JournalEntry.IsActive)]"
+            margin = { 0 5 }
+
+            default_progressbar_horizontal = {
+                block "progressbar_size" {
+                    size = { 504 30 }
+                }
+                blockoverride "values" {
+                    value = "[FixedPointToFloat(JournalEntry.GetGoalProgressPercent)]"
+                    min = 0
+                    max = 1
+                }
+
+                container = {
+                    visible = "[Not(JournalEntry.ShowProgressbarAsTime)]"
+
+                    textbox = {
+                        visible = "[EqualTo_CFixedPoint(JournalEntry.GetBaselineValue, '(CFixedPoint)0')]"
+                        text = "JOURNAL_ENTRY_PROGRESSBAR_FROM_ZERO"
+                        autoresize = yes
+                        align = nobaseline
+                        margin_left = 10
+                        parentanchor = vcenter
+                    }
+                    textbox = {
+                        visible = "[Not(EqualTo_CFixedPoint(JournalEntry.GetBaselineValue, '(CFixedPoint)0'))]"
+                        text = "JOURNAL_ENTRY_PROGRESSBAR_FROM_BASE"
+                        autoresize = yes
+                        align = nobaseline
+                        margin_left = 10
+                        parentanchor = vcenter
+                    }
+                }
+
+                container = {
+                    visible = "[JournalEntry.ShowProgressbarAsTime]"
+
+                    textbox = {
+                        visible = "[JournalEntry.ShowProgressbarAsMonths]"
+                        text = "JOURNAL_ENTRY_PROGRESSBAR_MONTHS"
+                        autoresize = yes
+                        align = nobaseline
+                        margin_left = 10
+                        parentanchor = vcenter
+                    }
+                    textbox = {
+                        visible = "[JournalEntry.ShowProgressbarAsWeeks]"
+                        text = "JOURNAL_ENTRY_PROGRESSBAR_WEEKS"
+                        autoresize = yes
+                        align = nobaseline
+                        margin_left = 10
+                        parentanchor = vcenter
+                    }
+                }
+            }
+        }
+
+        # Factions header
+        default_header_clean = {
+            using = default_list_position
+            blockoverride "text" {
+                raw_text = "[Concept('concept_com_situation_faction', Localize('concept_com_situation_factions'))]"
+            }
+            blockoverride "size" {
+                size = { @panel_width_plus_14 44 }
+            }
+        }
+
+        # Factions
+        flowcontainer = {
+            direction = horizontal
+            spacing = 20
+            margin = { 20 10 }
+
+            # At least one side needs to have factions for them to show up
+            visible = "[Or(
+                Not(IsDataModelEmpty(ComSituationLeft.GetList('com_factions'))),
+                Not(IsDataModelEmpty(ComSituationRight.GetList('com_factions')))
+            )]"
+
+            com_situation_factions = {
+                blockoverride "context" {
+                    datacontext = "[ComSituationLeft]"
+                }
+            }
+            com_situation_factions = {
+                blockoverride "context" {
+                    datacontext = "[ComSituationRight]"
+                }
+            }
+        }
+
+        # Button Groups
+        com_situation_buttons = {}
+
+        flowcontainer = {
+            direction = vertical
+            margin = { 0 10 }
+            spacing = 30
+            using = default_list_position
+
+            divider_decorative = {}
+
+            textbox = {
+                autoresize = yes
+                text = "[JournalEntry.GetReason]"
+                min_width = @panel_width_minus_30
+                max_width = @panel_width_minus_30
+
+                multiline = yes
+                using = default_list_position
+
+                align = nobaseline
+                default_format = "#lore"
+
+                margin = { 15 15 }
+
+                background = {
+                    using = entry_bg
+                }
+            }
+        }
+    }
+
+    type com_situation_factions = flowcontainer {
+        block "context" {}
+        direction = vertical
+        spacing = 20
+        datamodel = "[Scope.GetList('com_factions')]"
+
+        item = {
+            flowcontainer = {
+                margin_top = -2
+                background = {
+                    using = simple_frame
+                }
+
+                default_header_clean_faded = {
+                    blockoverride "text" {
+                        raw_text = "[Scope.Var('com_name').GetFlagName]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "tooltip_content" {
+                                    custom_tooltip_textbox = {
+                                        raw_text = "[Scope.Var('com_name').GetFlagName]"
+                                        default_format = "#header"
+                                    }
+                                    custom_tooltip_textbox = {
+                                        raw_text = "[Scope.Var('com_desc').GetFlagName]"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    blockoverride "size" {
+                        size = { @[panel_width_half - 20] 45 }
+                    }
+                }
+                direction = vertical
+
+                dynamicgridbox = {
+                    parentanchor = hcenter
+                    datamodel = "[Scope.GetList('com_countries')]"
+                    datamodel_wrap = 6
+                    flipdirection = yes
+
+                    item = {
+                        flowcontainer = {
+                            margin = { 5 10 }
+                            minimumsize = { 27 18 }
+                            tiny_flag = {
+                                datacontext = "[Scope.GetCountry]"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    type com_situation_victory_conditions = flowcontainer {
+        background = {
+            using = simple_frame
+        }
+        margin = { 5 5 }
+        textbox = {
+            default_format = "#yellow"
+            raw_text = "[Scope.Var('com_name').GetFlagName] [Localize('com_situation_victory_conditions')]"
+            multiline = yes
+            autoresize = yes
+            maximumsize = { 240 -1 }
+            minimumsize = { 240 40 }
+            align = center
+        }
+    }
+
+    type com_situation_buttons = flowcontainer {
+        using = default_list_position
+        direction = vertical
+
+        # Fallback - No groups defined
+        flowcontainer = {
+            direction = vertical
+            visible = "[And(
+                Not(IsDataModelEmpty(JournalEntry.GetScriptedButtons)),
+                IsDataModelEmpty(ComSituation.GetList('com_button_groups'))
+            )]"
+            spacing = 10
+
+            default_header_clean = {
+                using = default_list_position
+                blockoverride "text" {
+                    text = com_situation_interactions
+                }
+                blockoverride "size" {
+                    size = { @panel_width_plus_14 44 }
+                }
+            }
+
+            dynamicgridbox = {
+                parentanchor = hcenter
+                datamodel = "[JournalEntry.GetScriptedButtons]"
+                datamodel_wrap = 2
+                flipdirection = yes
+
+                item = {
+                    widget = {
+                        size = { 260 60 }
+
+                        scripted_journal_entry_button = {
+                            parentanchor = center
+                        }
+
+                        # Buttons for which the selected trigger is true have a different appearance and tooltip, but share all behaviors.
+                        # This means that even selected buttons are clickable as usual, assuming the possible trigger does not prevent it.
+                        # This enables more use cases, such as using buttons as on-off toggles, but requires the scripter to disable buttons manually in the possible trigger as needed.
+                    }
+                }
+            }
+        }
+
+        # Button groups
+        flowcontainer = {
+            direction = vertical
+            visible = "[And(
+                Not(IsDataModelEmpty(JournalEntry.GetScriptedButtons)),
+                Not(IsDataModelEmpty(ComSituation.GetList('com_button_groups')))
+            )]"
+            spacing = 10
+            datamodel = "[ComSituation.GetList('com_button_groups')]"
+
+            item = {
+                flowcontainer = {
+                    using = default_list_position
+                    direction = vertical
+                    visible = "[Not(IsDataModelEmpty(Scope.GetList('com_buttons')))]"
+                    spacing = 10
+
+                    default_header_clean = {
+                        using = default_list_position
+                        blockoverride "text" {
+                            raw_text = "[Scope.Var('com_name').GetFlagName]"
+                            tooltip = "[Scope.Var('com_desc').GetFlagName]"
+                        }
+                        blockoverride "size" {
+                            size = { @panel_width_plus_14 44 }
+                        }
+                    }
+
+                    dynamicgridbox = {
+                        datamodel = "[Scope.GetList('com_buttons')]"
+                        parentanchor = hcenter
+                        datamodel_wrap = 2
+                        flipdirection = yes
+
+                        item = {
+                            flowcontainer = {
+                                datamodel = "[JournalEntry.GetScriptedButtons]"
+                                direction = vertical
+
+                                item = {
+                                    widget = {
+                                        visible = "[EqualTo_string(ScriptedButton.GetName, Scope.GetFlagName)]"
+                                        size = { 260 60 }
+
+                                        scripted_journal_entry_button = {
+                                            parentanchor = center
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    type com_leader_header_left = default_header {
+        blockoverride "deco" {}
+        blockoverride "header_background" {
+            background = {
+                using = default_header_bg
+                blockoverride "header_fade_mask" {
+                    modify_texture = {
+                        texture = "gfx/interface/masks/fade_horizontal_right.dds"
+                        spriteType = Corneredstretched
+                        spriteborder = { 0 0 }
+                        blend_mode = alphamultiply
+                        alpha = 0.9
+                    }
+                }
+            }
+        }
+    }
+
+    type com_leader_header_right = default_header {
+        blockoverride "deco" {}
+        blockoverride "header_background" {
+            background = {
+                using = default_header_bg
+                blockoverride "header_fade_mask" {
+                    modify_texture = {
+                        texture = "gfx/interface/masks/fade_horizontal_left.dds"
+                        spriteType = Corneredstretched
+                        spriteborder = { 0 0 }
+                        blend_mode = alphamultiply
+                        alpha = 0.9
+                    }
+                }
+            }
+        }
+    }
+
+    type com_journal_entry_character_situation_left = character_portrait_base {
+        size = { @com_character_width 160 }
+        blockoverride "portrait_size" {
+            size = { @com_character_width 200 }
+        }
+        blockoverride "portrait_texture" {
+            portrait_texture = "[Character.GetAnimatedPortrait('environment_event_01', 'camera_duel_01', 'idle', GetPortraitRenderSize(PdxGuiWidget.Self))]"
+        }
+        blockoverride "show_hat" {}
+        blockoverride "portrait_icons" {}
+    }
+
+    type com_journal_entry_character_situation_right = character_portrait_base {
+        size = { @com_character_width 160 }
+        blockoverride "portrait_size" {
+            size = { @com_character_width 200 }
+        }
+        blockoverride "portrait_texture" {
+            portrait_texture = "[Character.GetAnimatedPortrait('environment_event_01', 'camera_duel_02', 'idle', GetPortraitRenderSize(PdxGuiWidget.Self))]"
+        }
+        blockoverride "show_hat" {}
+        blockoverride "portrait_icons" {}
+    }
+}
+
+template com_side_header_properties {
+    maximumsize = { 240 44 }
+    raw_text = "#header [Scope.Var('com_name').GetFlagName]#! [Localize('com_situation_leader')]"
+    tooltipwidget = {
+        RegularTooltip = {
+            blockoverride "tooltip_content" {
+                custom_tooltip_textbox = {
+                    raw_text = "[Scope.Var('com_name').GetFlagName]"
+                    default_format = "#header"
+                }
+                custom_tooltip_textbox_with_empty_line = {
+                    text = com_situation_header_leader_for
+                }
+                custom_tooltip_textbox = {
+                    raw_text = "[Scope.Var('com_desc').GetFlagName]"
+                }
+            }
+        }
+    }
+}

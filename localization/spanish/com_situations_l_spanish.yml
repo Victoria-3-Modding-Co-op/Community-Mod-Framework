@@ -1,0 +1,23 @@
+﻿l_spanish:
+ com_situation_vs: "vs."
+ com_situation_leader: "Leader"
+ com_situation_interactions: "Interactions"
+ com_situation_victory_conditions: "Victory Condition"
+
+ concept_com_situation: "Situation"
+ concept_com_situations: "Situations"
+ concept_com_situation_desc: "$concept_com_situations$ are complex and long-term events that call the sustained attention of both large and small [Concept('concept_country','$concept_countries$')] alike. These can present strategic opportunities or spiral into geopolitical crises.\n\n$concept_com_situations$ usually involve two or more [Concept('concept_com_situation_faction','$concept_com_situation_factions$')], each with their own [concept_com_situation_leader]. Once resolved, these are removed from your $concept_journal$."
+
+ concept_com_situation_leader: "Situation Leader"
+ concept_com_situation_leaders: "Situation Leaders"
+ concept_com_leader: "Leader"
+ concept_com_leaders: "Leaders"
+ concept_com_situation_leader_desc: "One [concept_country] on each side of a [Concept('concept_com_situation_faction','$concept_com_faction$')] is considered the $concept_com_situation_leader$ for that $concept_com_faction$. These are usually (but not always) the instigators of the [concept_com_situation], and tend to be the drivers of progress through the $concept_com_situation$ towards its eventual resolution."
+
+ concept_com_situation_faction: "Situation Faction"
+ concept_com_situation_factions: "Situation Factions"
+ concept_com_faction: "Faction"
+ concept_com_factions: "Factions"
+ concept_com_situation_faction_desc: "$concept_com_situation_factions$ are [Concept('concept_country','$concept_countries$')] that share a common interest in the outome of a [concept_com_situation]. They are guided (directly or indirectly) by their [Concept('concept_com_situation_leader','$concept_com_situation_leaders$')] and can either benefit or suffer from its eventual resolution."
+
+ com_situation_header_leader_for: "[Scope.Var('com_leader').GetCountry.GetName] is the [concept_com_situation_leader] for the #header [Scope.Var('com_name').GetFlagName]#! side."

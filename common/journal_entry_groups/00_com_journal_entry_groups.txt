@@ -1,0 +1,1 @@
+﻿je_group_com_situations = {}

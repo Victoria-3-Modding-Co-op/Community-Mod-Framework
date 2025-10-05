@@ -1,7 +1,7 @@
 ﻿je_com_rise_of_communism = {
 	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
 
-	group = je_group_foreign_affairs
+	group = je_group_com_situations
 
 	scripted_button = sb_com_rise_of_communism_test
     scripted_button = sb_com_rise_of_communism_test2

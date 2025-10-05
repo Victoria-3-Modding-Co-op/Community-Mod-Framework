@@ -1,0 +1,13 @@
+﻿com_situation_remove_broken_country = {
+    scope = country
+
+    saved_scopes = {
+        com_situation
+    }
+
+    effect = {
+        remove_com_situation_faction_country_all = {
+            country = this
+        }
+    }
+}

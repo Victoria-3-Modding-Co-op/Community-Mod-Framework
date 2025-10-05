@@ -323,7 +323,7 @@ set_com_situation_header = {
                     exists = scope:com_situation
                 }
             }
-            error_log = "CMF: No com_situation scope defined! Are you in a Journal Entry?"
+            error_log = error_no_situation_scope
         }
         else = {
             fix_variable_error = { variable = $text$ }
@@ -347,7 +347,7 @@ remove_com_situation_header = {
                     exists = scope:com_situation
                 }
             }
-            error_log = "CMF: No com_situation scope defined! Are you in a Journal Entry?"
+            error_log = error_no_situation_scope
         }
         else = {
             scope:com_situation = {
@@ -371,7 +371,7 @@ change_com_situation_leader = {
                     exists = scope:com_situation
                 }
             }
-            error_log = "CMF: No com_situation scope defined! Are you in a Journal Entry?"
+            error_log = error_no_situation_scope
         }
         else = {
             fix_variable_error = { variable = com_faction_name }
@@ -416,7 +416,7 @@ change_com_situation_side_name = {
                     exists = scope:com_situation
                 }
             }
-            error_log = "CMF: No com_situation scope defined! Are you in a Journal Entry?"
+            error_log = error_no_situation_scope
         }
         else = {
             fix_variable_error = { variable = $name$ }
@@ -456,7 +456,7 @@ change_com_situation_side_description = {
                     exists = scope:com_situation
                 }
             }
-            error_log = "CMF: No com_situation scope defined! Are you in a Journal Entry?"
+            error_log = error_no_situation_scope
         }
         else = {
             fix_variable_error = { variable = $desc$ }
@@ -493,7 +493,7 @@ create_com_situation_faction = {
                     exists = scope:com_situation
                 }
             }
-            error_log = "CMF: No com_situation scope defined! Are you in a Journal Entry?"
+            error_log = error_no_situation_scope
         }
         else_if = {
             limit = {
@@ -568,7 +568,7 @@ remove_com_situation_faction = {
                     exists = scope:com_situation
                 }
             }
-            error_log = "CMF: No com_situation scope defined! Are you in a Journal Entry?"
+            error_log = error_no_situation_scope
         }
         else = {
             fix_variable_error = { variable = com_faction_name }
@@ -626,7 +626,7 @@ clear_com_situation_factions = {
                     exists = scope:com_situation
                 }
             }
-            error_log = "CMF: No com_situation scope defined! Are you in a Journal Entry?"
+            error_log = error_no_situation_scope
         }
         else = {
             fix_variable_error = { variable = com_side_name }
@@ -662,7 +662,7 @@ clear_com_situation_factions_both = {
                     exists = scope:com_situation
                 }
             }
-            error_log = "CMF: No com_situation scope defined! Are you in a Journal Entry?"
+            error_log = error_no_situation_scope
         }
         else = {
             clear_com_situation_factions = {
@@ -689,7 +689,7 @@ add_com_situation_faction_country = {
                     exists = scope:com_situation
                 }
             }
-            error_log = "CMF: No com_situation scope defined! Are you in a Journal Entry?"
+            error_log = error_no_situation_scope
         }
         else = {
             fix_variable_error = { variable = com_country }
@@ -721,6 +721,97 @@ add_com_situation_faction_country = {
     }
 }
 
+# Reassign a country to a new faction for the given side
+# This removes the country from all other factions and adds it to the new one
+# This effect has to be run inside a scope where 'scope:com_situation' is available!
+# - side = either 'left' or 'right'
+# - name = localization key for the name of the faction
+# - country = country scope for the new member
+reassign_com_situation_faction_country = {
+    custom_tooltip = {
+        text = effect_add_com_situation_faction_country
+        if = {
+            limit = {
+                NOT = {
+                    exists = scope:com_situation
+                }
+            }
+            error_log = error_no_situation_scope
+        }
+        else = {
+            remove_com_situation_faction_country_all = {
+                country = $country$
+            }
+
+            fix_variable_error = { variable = com_country }
+            fix_variable_error = { variable = com_faction_name }
+
+            set_local_variable = {
+                name = com_country
+                value = $country$
+            }
+            set_local_variable = {
+                name = com_faction_name
+                value = flag:$name$
+            }
+
+            scope:com_situation = {
+                var:com_side_$side$ = {
+                    random_in_list = {
+                        variable = com_factions
+                        limit = {
+                            var:com_name ?= flag:$name$
+                        }
+                        add_to_variable_list = {
+                            name = com_countries
+                            target = $country$
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+# Removes a country from all factions regardless of side or faction
+# This effect has to be run inside a scope where 'scope:com_situation' is available!
+# - country = country scope for the new member
+remove_com_situation_faction_country_all = {
+    custom_tooltip = {
+        text = effect_remove_com_situation_faction_country_all
+        if = {
+            limit = {
+                NOT = {
+                    exists = scope:com_situation
+                }
+            }
+            error_log = error_no_situation_scope
+        }
+        else = {
+            scope:com_situation = {
+                var:com_side_left = {
+                    every_in_list = {
+                        variable = com_factions
+                        remove_list_variable = {
+                            name = com_countries
+                            target = $country$
+                        }
+                    }
+                }
+                var:com_side_right = {
+                    every_in_list = {
+                        variable = com_factions
+                        remove_list_variable = {
+                            name = com_countries
+                            target = $country$
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
 # Remove a country from a faction for the given side
 # This effect has to be run inside a scope where 'scope:com_situation' is available!
 # - side = either 'left' or 'right'
@@ -735,7 +826,7 @@ remove_com_situation_faction_country = {
                     exists = scope:com_situation
                 }
             }
-            error_log = "CMF: No com_situation scope defined! Are you in a Journal Entry?"
+            error_log = error_no_situation_scope
         }
         else = {
             scope:com_situation = {
@@ -768,7 +859,7 @@ create_com_situation_button_group = {
                     exists = scope:com_situation
                 }
             }
-            error_log = "CMF: No com_situation scope defined! Are you in a Journal Entry?"
+            error_log = error_no_situation_scope
         }
         else = {
             fix_variable_error = { variable = $name$ }
@@ -835,7 +926,7 @@ remove_com_situation_button_group = {
                     exists = scope:com_situation
                 }
             }
-            error_log = "CMF: No com_situation scope defined! Are you in a Journal Entry?"
+            error_log = error_no_situation_scope
         }
         else = {
             scope:com_situation = {
@@ -865,7 +956,7 @@ add_com_situation_button_group_element = {
                     exists = scope:com_situation
                 }
             }
-            error_log = "CMF: No com_situation scope defined! Are you in a Journal Entry?"
+            error_log = error_no_situation_scope
         }
         else = {
             fix_variable_error = { variable = $name$ }
@@ -897,7 +988,7 @@ remove_com_situation_button_group_element = {
                     exists = scope:com_situation
                 }
             }
-            error_log = "CMF: No com_situation scope defined! Are you in a Journal Entry?"
+            error_log = error_no_situation_scope
         }
         else = {
             scope:com_situation = {

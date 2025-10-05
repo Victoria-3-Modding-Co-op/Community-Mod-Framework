@@ -90,7 +90,9 @@ and then [add_com_situation_button_group_element](#effect-add_com_situation_butt
 * [clear_com_situation_factions](#effect-clear_com_situation_factions)
 * [clear_com_situation_factions_both](#effect-clear_com_situation_factions_both)
 * [add_com_situation_faction_country](#effect-add_com_situation_faction_country)
+* [reassign_com_situation_faction_country](#effect-reassign_com_situation_faction_country)
 * [remove_com_situation_faction_country](#effect-remove_com_situation_faction_country)
+* [remove_com_situation_faction_country_all](#effect-remove_com_situation_faction_country_all)
 * [create_com_situation_button_group](#effect-create_com_situation_button_group)
 * [remove_com_situation_button_group](#effect-remove_com_situation_button_group)
 * [add_com_situation_button_group_element](#effect-add_com_situation_button_group_element)
@@ -229,6 +231,16 @@ Add a new country to a faction for the given side.
 - `name` localization key for the name of the faction
 - `country` country scope for the new member
 
+### Effect: `reassign_com_situation_faction_country`
+Reassign a country to a new faction for the given side.
+This removes the country from all other factions and adds it to the new one.
+> NOTE: This effect has to be run inside a scope where '**scope:com_situation**' is available!
+
+**Parameters:**
+- `side` either 'left' or 'right'
+- `name` localization key for the name of the faction
+- `country` country scope for the new member
+
 ### Effect: `remove_com_situation_faction_country`
 Remove a country from a faction for the given side.
 > NOTE: This effect has to be run inside a scope where '**scope:com_situation**' is available!
@@ -236,6 +248,13 @@ Remove a country from a faction for the given side.
 **Parameters:**
 - `side` either 'left' or 'right'
 - `name` localization key for the name of the faction
+- `country` country scope for the removed member
+
+### Effect: `remove_com_situation_faction_country_all`
+Removes a country from all factions regardless of side or faction.
+> NOTE: This effect has to be run inside a scope where '**scope:com_situation**' is available!
+
+**Parameters:**
 - `country` country scope for the removed member
 
 ### Effect: `create_com_situation_button_group`

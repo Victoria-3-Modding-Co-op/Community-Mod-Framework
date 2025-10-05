@@ -255,6 +255,10 @@
 			else = {
 				multiply = 0
 			}
+			# Grey_PLP - always put last
+			multiply = {
+				value = mog_plp_movement_all_general_state_weight_mult
+			}
 		}
 	}
 	
@@ -294,6 +298,10 @@
 			}
 			else = {
 				multiply = 0
+			}
+			# Grey_PLP - always put last
+			multiply = {
+				value = mog_plp_movement_all_general_state_weight_mult
 			}
 		}
 	}

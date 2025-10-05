@@ -399,6 +399,10 @@
 					multiply = 0.1
 				}
 			}
+			# Grey_PLP - always put last
+			multiply = {
+				value = mog_plp_movement_all_general_state_weight_mult
+			}
 		}
 	}
 
@@ -492,6 +496,10 @@
 				}
 
 				multiply = 10.0
+			}
+			# Grey_PLP - always put last
+			multiply = {
+				value = mog_plp_movement_all_general_state_weight_mult
 			}
 		}
 	}
@@ -838,6 +846,10 @@ movement_pro_slavery = {
 					multiply = 0.1
 				}
 			}
+			# Grey_PLP - always put last
+			multiply = {
+				value = mog_plp_movement_all_general_state_weight_mult
+			}
 		}
 	}
 
@@ -947,6 +959,10 @@ movement_pro_slavery = {
 				else = {
 					multiply = usfp_movement_pro_slavery_secession_state_weight_mult
 				}
+			}
+			# Grey_PLP - always put last
+			multiply = {
+				value = mog_plp_movement_all_general_state_weight_mult
 			}
 		}
 	}
@@ -1418,6 +1434,10 @@ movement_royalist_absolutist = {
 					multiply = 0.1
 				}
 			}
+			# Grey_PLP - always put last
+			multiply = {
+				value = mog_plp_movement_all_general_state_weight_mult
+			}
 		}
 	}
 
@@ -1445,6 +1465,10 @@ movement_royalist_absolutist = {
 				else = {
 					multiply = 0.1
 				}
+			}
+			# Grey_PLP - always put last
+			multiply = {
+				value = mog_plp_movement_all_general_state_weight_mult
 			}
 		}
 
@@ -1812,6 +1836,10 @@ movement_royalist_constitutional = {
 					multiply = 0.1
 				}
 			}
+			# Grey_PLP - always put last
+			multiply = {
+				value = mog_plp_movement_all_general_state_weight_mult
+			}
 		}
 	}
 
@@ -1842,6 +1870,10 @@ movement_royalist_constitutional = {
 				else = {
 					multiply = 0.1
 				}
+			}
+			# Grey_PLP - always put last
+			multiply = {
+				value = mog_plp_movement_all_general_state_weight_mult
 			}
 		}
 
@@ -2231,6 +2263,11 @@ movement_labor = { # Explicitly non-socialist labour movement
 
 		state_weight = {
 			value = state_urbanization_rate
+			
+			# Grey_PLP - always put last
+			multiply = {
+				value = mog_plp_movement_all_general_state_weight_mult
+			}
 		}
 	}
 
@@ -2246,6 +2283,11 @@ movement_labor = { # Explicitly non-socialist labour movement
 
 		state_weight = {
 			value = state_urbanization_rate
+			
+			# Grey_PLP - always put last
+			multiply = {
+				value = mog_plp_movement_all_general_state_weight_mult
+			}
 		}
 	}
 
@@ -2643,6 +2685,10 @@ movement_socialist = {
 					multiply = 0.1
 				}
 			}
+			# Grey_PLP - always put last
+			multiply = {
+				value = mog_plp_movement_all_general_state_weight_mult
+			}
 		}
 	}
 
@@ -2668,6 +2714,10 @@ movement_socialist = {
 				else = {
 					multiply = 0.1
 				}
+			}
+			# Grey_PLP - always put last
+			multiply = {
+				value = mog_plp_movement_all_general_state_weight_mult
 			}
 		}
 	}
@@ -3793,6 +3843,11 @@ movement_fascist = {
 
 		state_weight = {
 			value = 1
+			
+			# Grey_PLP - always put last
+			multiply = {
+				value = mog_plp_movement_all_general_state_weight_mult
+			}
 		}
 	}
 
@@ -4188,6 +4243,11 @@ movement_corporatist = {
 
 		state_weight = {
 			value = 1
+			
+			# Grey_PLP - always put last
+			multiply = {
+				value = mog_plp_movement_all_general_state_weight_mult
+			}
 		}
 	}
 
@@ -4587,6 +4647,11 @@ movement_liberal = {
 
 		state_weight = {
 			value = state_urbanization_rate
+			
+			# Grey_PLP - always put last
+			multiply = {
+				value = mog_plp_movement_all_general_state_weight_mult
+			}
 		}
 	}
 
@@ -4602,6 +4667,11 @@ movement_liberal = {
 
 		state_weight = {
 			value = state_urbanization_rate
+			
+			# Grey_PLP - always put last
+			multiply = {
+				value = mog_plp_movement_all_general_state_weight_mult
+			}
 		}
 	}
 
@@ -5018,6 +5088,11 @@ movement_radical = {
 
 		state_weight = {
 			value = state_urbanization_rate
+			
+			# Grey_PLP - always put last
+			multiply = {
+				value = mog_plp_movement_all_general_state_weight_mult
+			}
 		}
 	}
 
@@ -5033,6 +5108,11 @@ movement_radical = {
 
 		state_weight = {
 			value = state_urbanization_rate
+			
+			# Grey_PLP - always put last
+			multiply = {
+				value = mog_plp_movement_all_general_state_weight_mult
+			}
 		}
 	}
 
@@ -5342,6 +5422,11 @@ movement_nihilist = {
 
 		state_weight = {
 			value = state_urbanization_rate
+			
+			# Grey_PLP - always put last
+			multiply = {
+				value = mog_plp_movement_all_general_state_weight_mult
+			}
 		}
 	}
 
@@ -5357,6 +5442,11 @@ movement_nihilist = {
 
 		state_weight = {
 			value = state_urbanization_rate
+			
+			# Grey_PLP - always put last
+			multiply = {
+				value = mog_plp_movement_all_general_state_weight_mult
+			}
 		}
 	}
 }
@@ -5741,6 +5831,11 @@ movement_positivist = {
 
 		state_weight = {
 			value = 1
+			
+			# Grey_PLP - always put last
+			multiply = {
+				value = mog_plp_movement_all_general_state_weight_mult
+			}
 		}
 	}
 
@@ -6040,6 +6135,11 @@ movement_land_reform = {
 			value = 1.5
 
 			subtract = state_urbanization_rate
+			
+			# Grey_PLP - always put last
+			multiply = {
+				value = mog_plp_movement_all_general_state_weight_mult
+			}
 		}
 	}
 
@@ -6075,6 +6175,11 @@ movement_land_reform = {
 			value = 1.5
 
 			subtract = state_urbanization_rate
+			
+			# Grey_PLP - always put last
+			multiply = {
+				value = mog_plp_movement_all_general_state_weight_mult
+			}
 		}
 	}
 
@@ -6329,6 +6434,11 @@ movement_feminist = {
 
 		state_weight = {
 			value = 1
+			
+			# Grey_PLP - always put last
+			multiply = {
+				value = mog_plp_movement_all_general_state_weight_mult
+			}
 		}
 	}
 
@@ -6715,6 +6825,11 @@ movement_reactionary = {
 
 		state_weight = {
 			value = 1
+			
+			# Grey_PLP - always put last
+			multiply = {
+				value = mog_plp_movement_all_general_state_weight_mult
+			}
 		}
 	}
 
@@ -7113,6 +7228,11 @@ movement_modernizer = {
 
 		state_weight = {
 			value = 1
+			
+			# Grey_PLP - always put last
+			multiply = {
+				value = mog_plp_movement_all_general_state_weight_mult
+			}
 		}
 	}
 

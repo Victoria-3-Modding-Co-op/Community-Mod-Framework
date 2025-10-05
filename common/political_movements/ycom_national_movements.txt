@@ -230,6 +230,10 @@
 				}
 				multiply = 0
 			}
+			# Grey_PLP - always put last
+			multiply = {
+				value = mog_plp_movement_all_general_state_weight_mult
+			}
 		}
 		forced_tags = {
 			BHT = {
@@ -259,6 +263,10 @@
 					}
 				}
 				multiply = 0
+			}
+			# Grey_PLP - always put last
+			multiply = {
+				value = mog_plp_movement_all_general_state_weight_mult
 			}
 		}
 		forced_tags = {
@@ -599,6 +607,10 @@ movement_muslim_nationalist = {
 					}
 				}
 				multiply = 0
+			}
+			# Grey_PLP - always put last
+			multiply = {
+				value = mog_plp_movement_all_general_state_weight_mult
 			}
 		}
 

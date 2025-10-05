@@ -369,6 +369,10 @@
 					add = 50
 				}
 			}
+			# Grey_PLP - always put last
+			multiply = {
+				value = mog_plp_movement_all_general_state_weight_mult
+			}
 		}
 	}
 	
@@ -404,6 +408,10 @@
 					}
 					multiply = 100
 				}
+			}
+			# Grey_PLP - always put last
+			multiply = {
+				value = mog_plp_movement_all_general_state_weight_mult
 			}
 		}
 	}
@@ -1148,6 +1156,10 @@ movement_cultural_minority = {
 				multiply = 100
 				}
 			}
+			# Grey_PLP - always put last
+			multiply = {
+				value = mog_plp_movement_all_general_state_weight_mult
+			}
 		}
 
 		target_fraction_of_states = {
@@ -1753,6 +1765,11 @@ movement_minority_rights = {
 
 		state_weight = {
 			value = 1
+			
+			# Grey_PLP - always put last
+			multiply = {
+				value = mog_plp_movement_all_general_state_weight_mult
+			}
 		}
 	}
 }

@@ -13,6 +13,8 @@ A full list of them can be found below.
 * [Overview](#overview)
 * [Usage](#usage)
   * [Setting up a new situation](#setting-up-a-new-situation)
+  * [Modifying a situation](#modifying-a-situation)
+  * [Scoping to side leaders](#scoping-to-side-leaders)
   * [Victory conditions](#victory-conditions)
   * [Optional features](#optional-features)
     * [Factions](#factions)

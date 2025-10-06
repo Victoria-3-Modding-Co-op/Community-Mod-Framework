@@ -302,7 +302,7 @@ Check whether the currently scoped country is part of the given faction.
 
 **Parameters:**
 - `side` either 'left' or 'right'
-- `name` localization key for the name of the faction
+- `faction` localization key for the name of the faction
 
 ### Trigger: `is_party_in_com_situation`
 Check whether the currently scoped country is part of the situation in any way (leader or a faction member).

@@ -1,4 +1,8 @@
-﻿is_com_situation_faction_member = {
+﻿# Check whether the currently scoped country is part of the given faction
+# This effect has to be run inside a scope where 'scope:com_situation' is available!
+# - side = either 'left' or 'right'
+# - faction = localization key for the name of the faction
+is_com_situation_faction_member = {
     custom_description = {
         text = is_com_situation_faction_member
         subject = this
@@ -22,6 +26,8 @@
     }
 }
 
+# Check whether the currently scoped country is part of the situation in any way (leader or a faction member)
+# This effect has to be run inside a scope where 'scope:com_situation' is available!
 is_party_in_com_situation = {
     custom_description = {
         text = is_party_in_com_situation

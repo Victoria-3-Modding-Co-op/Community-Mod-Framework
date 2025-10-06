@@ -3,7 +3,7 @@
 		has_ideology = ideology:ideology_abolitionist
 		has_ideology = ideology:ideology_humanitarian
 		has_ideology = ideology:ideology_utopian
-		has_ideology = ideology:ideology_turkfm_ottomanist #GOTB
+		has_ideology = ideology:ideology_gbbf_ottomanist #GOTB
 		has_ideology = ideology:ideology_usfp_abolitionist_radical #USFP
 		has_ideology = ideology:ideology_usfp_progressive
 		has_ideology = ideology:ideology_usfp_social_gospel_leader
@@ -34,7 +34,7 @@ character_is_pro_religious_majority = {
 		has_ideology = ideology:ideology_traditionalist
 		has_ideology = ideology:ideology_theocrat
 		has_ideology = ideology:ideology_integralist
-		has_ideology = ideology:ideology_turkfm_islamist #GOTB
+		has_ideology = ideology:ideology_gbbf_islamist #GOTB
 		law_stance = {
 			law = law_type:law_state_religion
 			value = strongly_approve
@@ -46,7 +46,7 @@ character_is_pro_religious_minority = {
 	OR = {
 		has_ideology = ideology:ideology_traditionalist_minoritarian
 		has_ideology = ideology:ideology_usfp_universalist
-		has_ideology = ideology:ideology_turkfm_ottomanist #GOTB
+		has_ideology = ideology:ideology_gbbf_ottomanist #GOTB
 	}
 }
 
@@ -97,7 +97,7 @@ character_is_pro_labor_movement = {
 		has_ideology = ideology:ideology_communist
 		has_ideology = ideology:ideology_vanguardist
 		has_ideology = ideology:ideology_utopian
-		has_ideology = ideology:ideology_venizelist #GOTB
+		has_ideology = ideology:ideology_gbbf_venizelist #GOTB
 		law_stance = {
 			law = law_type:law_regulatory_bodies
 			value >= approve
@@ -131,7 +131,7 @@ character_is_pro_liberal_movement = {
 		has_ideology = ideology:ideology_utopian
 		has_ideology = ideology:ideology_modernizer_leader
 		has_ideology = ideology:ideology_positivist
-		has_ideology = ideology:ideology_turkfm_ottomanist #GOTB
+		has_ideology = ideology:ideology_gbbf_ottomanist #GOTB
 		law_stance = {
 			law = law_type:law_censorship
 			value <= disapprove

@@ -5,7 +5,7 @@
 	character_ideologies = {
 		ideology_theocrat
 		ideology_traditionalist
-		ideology_turkfm_islamist #GOTB
+		ideology_gbbf_islamist #GOTB
 		ideology_usfp_social_gospel_leader #USFP
 	}
 
@@ -60,7 +60,7 @@
 				OR = {
 					has_ideology = ideology:ideology_traditionalist
 					has_ideology = ideology:ideology_theocrat
-					has_ideology = ideology:ideology_turkfm_islamist #GOTB
+					has_ideology = ideology:ideology_gbbf_islamist #GOTB
 				}
 			}
 			multiply = {
@@ -386,7 +386,7 @@ movement_religious_minority = {
 	character_ideologies = {
 		ideology_traditionalist_minoritarian
 		ideology_usfp_universalist #USFP
-		ideology_turkfm_ottomanist #GOTB
+		ideology_gbbf_ottomanist #GOTB
 	}
 
 	can_cause_obstinance = yes

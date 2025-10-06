@@ -7,7 +7,7 @@
 		ideology_abolitionist
 		ideology_humanitarian
 		ideology_usfp_abolitionist_radical #USFP
-		ideology_turkfm_ottomanist #GOTB
+		ideology_gbbf_ottomanist #GOTB
 	}
 
 	disband_trigger = {
@@ -1108,7 +1108,7 @@ movement_royalist_absolutist = {
 	character_ideologies = {
 		ideology_royalist
 		ideology_authoritarian
-		ideology_bavarocrat #GOTB
+		ideology_gbbf_bavarocrat #GOTB
 	}
 
 	disband_trigger = {
@@ -1545,8 +1545,8 @@ movement_royalist_constitutional = {
 	character_ideologies = {
 		ideology_royalist
 		ideology_humanitarian_royalist
-		ideology_grefm_constitutionalist #GOTB
-		ideology_turkfm_ottomanist #GOTB
+		ideology_gbbf_constitutionalist #GOTB
+		ideology_gbbf_ottomanist #GOTB
 	}
 
 	disband_trigger = {
@@ -1591,8 +1591,8 @@ movement_royalist_constitutional = {
 		OR = {
 			has_ideology = ideology:ideology_royalist
 			has_ideology = ideology:ideology_humanitarian_royalist
-			has_ideology = ideology:ideology_grefm_constitutionalist #GOTB
-			has_ideology = ideology:ideology_turkfm_ottomanist #GOTB
+			has_ideology = ideology:ideology_gbbf_constitutionalist #GOTB
+			has_ideology = ideology:ideology_gbbf_ottomanist #GOTB
 			AND = {
 				OR = {
 					is_interest_group_type = ig_landowners
@@ -1952,8 +1952,8 @@ movement_labor = { # Explicitly non-socialist labour movement
 		ideology_radical
 		ideology_social_democrat
 		ideology_utopian
-		ideology_grefm_constitutionalist #GOTB
-		ideology_venizelist #GOTB
+		ideology_gbbf_constitutionalist #GOTB
+		ideology_gbbf_venizelist #GOTB
 	}
 
 	creation_trigger = {
@@ -4314,10 +4314,10 @@ movement_liberal = {
 		ideology_republican_leader
 		ideology_radical
 		ideology_humanitarian
-		ideology_grefm_constitutionalist #GOTB
-		ideology_venizelist #GOTB
-		ideology_turkfm_ottomanist #GOTB
-		ideology_dacianist #GOTB
+		ideology_gbbf_constitutionalist #GOTB
+		ideology_gbbf_venizelist #GOTB
+		ideology_gbbf_ottomanist #GOTB
+		ideology_gbbf_dacianist #GOTB
 		ideology_moh_revolutionary # MoH Revolutionary
 		ideology_moh_kmt # MoH Kuomintang Nationalist
 		ideology_anz_atsi_pluralist_character #anzfp
@@ -5457,7 +5457,7 @@ movement_positivist = {
 	ideology = ideology_positivist_movement
 	character_ideologies = {
 		ideology_positivist
-		ideology_kogalnitchanism #GOTB
+		ideology_gbbf_kogalnitchanism #GOTB
 	}
 
 	creation_trigger = {
@@ -6485,7 +6485,7 @@ movement_reactionary = {
 		ideology_protectionist
 		ideology_authoritarian
 		ideology_luddite
-		ideology_turkfm_islamist #GOTB
+		ideology_gbbf_islamist #GOTB
 	}
 
 	creation_trigger = {
@@ -6885,7 +6885,7 @@ movement_modernizer = {
 		ideology_protectionist
 		ideology_market_liberal
 		ideology_abolitionist
-		ideology_turkfm_ottomanist #GOTB
+		ideology_gbbf_ottomanist #GOTB
 	}
 
 	creation_trigger = {

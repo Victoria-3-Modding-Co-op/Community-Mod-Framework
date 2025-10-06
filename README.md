@@ -176,7 +176,9 @@ This means using them should come natural to modders who have already used those
 
 Situations were inspired by [EU5](https://forum.paradoxplaza.com/forum/developer-diary/tinto-talks-70-2nd-of-july-2025.1823383/).
 
-[The full documentation can be found here.](docs/SITUATIONS.md) 
+[The usage documentation can be found here.](docs/SITUATIONS.md)
+
+[While the script documentation can be found here.](docs/SITUATIONS_SCRIPT_DOCS.md)
 
 ## Hiding Objective Header
 

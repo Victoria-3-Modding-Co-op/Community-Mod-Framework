@@ -1,23 +1,48 @@
 ﻿l_japanese:
+# GUI
  com_situation_vs: "vs."
  com_situation_leader: "Leader"
  com_situation_interactions: "Interactions"
  com_situation_victory_conditions: "Victory Condition"
-
+ com_situation_header_leader_for: "[Scope.Var('com_leader').GetCountry.GetName] is the [concept_com_situation_leader] for the #header [Scope.Var('com_name').GetFlagName]#! side."
+# Concepts
  concept_com_situation: "Situation"
  concept_com_situations: "Situations"
  concept_com_situation_desc: "$concept_com_situations$ are complex and long-term events that call the sustained attention of both large and small [Concept('concept_country','$concept_countries$')] alike. These can present strategic opportunities or spiral into geopolitical crises.\n\n$concept_com_situations$ usually involve two or more [Concept('concept_com_situation_faction','$concept_com_situation_factions$')], each with their own [concept_com_situation_leader]. Once resolved, these are removed from your $concept_journal$."
-
  concept_com_situation_leader: "Situation Leader"
  concept_com_situation_leaders: "Situation Leaders"
  concept_com_leader: "Leader"
  concept_com_leaders: "Leaders"
  concept_com_situation_leader_desc: "One [concept_country] on each side of a [Concept('concept_com_situation_faction','$concept_com_faction$')] is considered the $concept_com_situation_leader$ for that $concept_com_faction$. These are usually (but not always) the instigators of the [concept_com_situation], and tend to be the drivers of progress through the $concept_com_situation$ towards its eventual resolution."
-
  concept_com_situation_faction: "Situation Faction"
  concept_com_situation_factions: "Situation Factions"
  concept_com_faction: "Faction"
  concept_com_factions: "Factions"
  concept_com_situation_faction_desc: "$concept_com_situation_factions$ are [Concept('concept_country','$concept_countries$')] that share a common interest in the outome of a [concept_com_situation]. They are guided (directly or indirectly) by their [Concept('concept_com_situation_leader','$concept_com_situation_leaders$')] and can either benefit or suffer from its eventual resolution."
-
- com_situation_header_leader_for: "[Scope.Var('com_leader').GetCountry.GetName] is the [concept_com_situation_leader] for the #header [Scope.Var('com_name').GetFlagName]#! side."
+ error_no_situation_scope: "CMF: No com_situation scope defined"
+# Effects
+ effect_add_com_situation_journal_entry: "Adds #v [TopScope.GetLocalVariable('com_name').GetFlagName]#! [concept_com_situation] to the Journal of [THIS.GetCountry.GetName|v]"
+ effect_end_com_situation: "Concludes the situation"
+ effect_change_com_situation_leader: "Changes the [concept_com_situation_leader] of the #v [TopScope.GetLocalVariable('com_faction_name').GetFlagName]#! side from [TopScope.GetLocalVariable('com_leader_old').GetCountry.GetName|v] to [TopScope.GetLocalVariable('com_leader_new').GetCountry.GetName|v]"
+ effect_change_com_situation_side_name: "The [TopScope.GetLocalVariable('com_name_old').GetFlagName|v] side will change its name to [TopScope.GetLocalVariable('com_name_new').GetFlagName|v]"
+ effect_create_com_situation_faction: "The [TopScope.GetLocalVariable('com_faction_name').GetFlagName|v] [concept_com_situation_faction] will join on the [TopScope.GetLocalVariable('com_side_name').GetFlagName|v] side"
+ effect_remove_com_situation_faction: "The [TopScope.GetLocalVariable('com_faction_name').GetFlagName|v] [concept_com_situation_faction] on the [TopScope.GetLocalVariable('com_side_name').GetFlagName|v] side will dissolve"
+ effect_clear_com_situation_factions: "All [Concept('concept_com_situation_faction', '$concept_com_situation_factions$')] on the [TopScope.GetLocalVariable('com_side_name').GetFlagName|v] will dissolve"
+ effect_clear_com_situation_factions_both: "All [Concept('concept_com_situation_faction', '$concept_com_situation_factions$')] on both sides will dissolve"
+ effect_add_com_situation_faction_country: "[TopScope.GetLocalVariable('com_country').GetCountry.GetName|v] will join the [TopScope.GetLocalVariable('com_faction_name').GetFlagName|v] [concept_com_situation_faction]"
+ effect_remove_com_situation_faction_country: "[TopScope.GetLocalVariable('com_country').GetCountry.GetName|v] will leave the [TopScope.GetLocalVariable('com_faction_name').GetFlagName|v] [concept_com_situation_faction]"
+ effect_remove_com_situation_faction_country_all: "[TopScope.GetLocalVariable('com_country').GetCountry.GetName|v] will no longer be associated with any [concept_com_situation_faction]"
+# Triggers
+ trigger_is_com_situation_faction_member: "[COUNTRY.GetName|v] is a [concept_com_situation_faction] member"
+ trigger_is_com_situation_faction_member_not: "[COUNTRY.GetName|v] is not a [concept_com_situation_faction] member"
+ trigger_is_party_in_com_situation: "[COUNTRY.GetName|v] is a party in the [concept_com_situation]"
+ trigger_is_party_in_com_situation_not: "[COUNTRY.GetName|v] is not a party in the [concept_com_situation]"
+# Lists
+ trigger_any_com_situation_countries: "Any [concept_country] in the [concept_com_situation]:"
+ trigger_any_com_situation_countries_all: "All [concept_country] in the [concept_com_situation]:"
+ trigger_any_com_situation_countries_PERCENT: "$PARAMETERS$ of $FILTER$[concept_country] in the [concept_com_situation]"
+ trigger_any_com_situation_countries_COUNT: "$PARAMETERS$ $FILTER$[concept_country] in the [concept_com_situation]"
+ trigger_any_com_situation_countries_COUNT_FIRST: "$PARAMETERS$ $FILTER$[concept_country] in the [concept_com_situation]"
+ trigger_any_com_situation_countries_COUNT_THIRD: "$PARAMETERS$ $FILTER$[concept_country] in the [concept_com_situation]"
+# Journal Group
+ je_group_com_situations: "International [Concept('concept_com_situation','$concept_com_situations$')]"

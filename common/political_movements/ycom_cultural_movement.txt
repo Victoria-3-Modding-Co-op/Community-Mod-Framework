@@ -520,40 +520,91 @@ movement_cultural_minority = {
 	on_created = {
 		if = {
 			limit = {
-				culture = {
+				OR = {
 					AND = {
-						shares_heritage_trait_with_any_primary_culture = root.owner
 						OR = {
-							shares_language_trait_group_with_any_primary_culture = root.owner
-							shares_tradition_trait_with_any_primary_culture = root.owner
+							Grey_PLP_is_active = yes
+							Grey_SPA_is_active = yes
+						}
+						culture = {
+							mog_plp_nat_sup_culture_minority_trigger = yes
+						}
+					}
+					AND = {	# Vanilla
+						AND = {
+							Grey_PLP_is_active = no
+							Grey_SPA_is_active = no
+						}
+						culture = {
+							AND = {
+								shares_heritage_trait_with_any_primary_culture = root.owner
+								OR = {
+									shares_language_trait_group_with_any_primary_culture = root.owner
+									shares_tradition_trait_with_any_primary_culture = root.owner
+								}
+							}
 						}
 					}
 				}
 			}
-			set_core_ideology = ideology_pluralist_movement_1
+			set_core_ideology = ideology_pluralist_movement_1	 # National Supremacy
 		}
 		else_if = {
 			limit = {
-				culture = {
-					shares_heritage_trait_group_with_any_primary_culture = root.owner
-					OR = {
-						shares_language_trait_group_with_any_primary_culture = root.owner
-						shares_tradition_trait_with_any_primary_culture = root.owner
+				OR = {
+					AND = {
+						OR = {
+							Grey_PLP_is_active = yes
+							Grey_SPA_is_active = yes
+						}
+						culture = {
+							mog_plp_rac_seg_culture_minority_trigger = yes
+						}
+					}
+					AND = {	# Vanilla
+						AND = {
+							Grey_PLP_is_active = no
+							Grey_SPA_is_active = no
+						}
+						culture = {
+							shares_heritage_trait_group_with_any_primary_culture = root.owner
+							OR = {
+								shares_language_trait_group_with_any_primary_culture = root.owner
+								shares_tradition_trait_with_any_primary_culture = root.owner
+							}
+						}
 					}
 				}
 			}
-			set_core_ideology = ideology_pluralist_movement_2
+			set_core_ideology = ideology_pluralist_movement_2	# Racial Segregation
 		}
 		else_if = {
 			limit = {
-				culture = {
-					OR = {
-						shares_heritage_trait_group_with_any_primary_culture = root.owner
-						shares_language_trait_with_any_primary_culture = root.owner
+				OR = {
+					AND = {
+						OR = {
+							Grey_PLP_is_active = yes
+							Grey_SPA_is_active = yes
+						}
+						culture = {
+							mog_plp_cul_exc_culture_minority_trigger = yes
+						}
+					}
+					AND = {
+						AND = {	# Vanilla
+							Grey_PLP_is_active = no
+							Grey_SPA_is_active = no
+						}
+						culture = {	# Vanilla
+							OR = {
+								shares_heritage_trait_group_with_any_primary_culture = root.owner
+								shares_language_trait_with_any_primary_culture = root.owner
+							}
+						}
 					}
 				}
 			}
-			set_core_ideology = ideology_pluralist_movement_3
+			set_core_ideology = ideology_pluralist_movement_3 # Cultural Exclusion
 		}
 		else = {
 			set_core_ideology = ideology_pluralist_movement_4

@@ -1,0 +1,84 @@
+﻿# Check whether the currently scoped country is part of the given faction
+# This effect has to be run inside a scope where 'scope:com_situation' is available!
+# - side = either 'left' or 'right'
+# - faction = localization key for the name of the faction
+is_com_situation_faction_member = {
+    custom_description = {
+        text = is_com_situation_faction_member
+        subject = this
+        object = scope:com_faction_temp
+
+        save_temporary_scope_as = com_country_temp
+        scope:com_situation ?= {
+            var:com_side_$side$ ?= {
+                save_temporary_scope_as = com_side_temp
+                any_in_list = {
+                    variable = com_factions
+                    var:com_name ?= flag:$faction$
+                    save_temporary_scope_as = com_faction_temp
+                    any_in_list = {
+                        variable = com_countries
+                        this = scope:com_country_temp
+                    }
+                }
+            }
+        }
+    }
+}
+
+# Check whether the currently scoped country is part of the situation in any way (leader or a faction member)
+# This effect has to be run inside a scope where 'scope:com_situation' is available!
+is_party_in_com_situation = {
+    custom_description = {
+        text = is_party_in_com_situation
+        subject = this
+
+        save_temporary_scope_as = com_country_temp
+        scope:com_situation ?= {
+            OR = {
+                var:com_side_left ?= {
+                    OR = {
+                        var:com_leader ?= scope:com_country_temp
+                        any_in_list = {
+                            variable = com_factions
+                            any_in_list = {
+                                variable = com_countries
+                                this = scope:com_country_temp
+                            }
+                        }
+                    }
+                }
+                var:com_side_right ?= {
+                    OR = {
+                        var:com_leader ?= scope:com_country_temp
+                        any_in_list = {
+                            variable = com_factions
+                            any_in_list = {
+                                variable = com_countries
+                                this = scope:com_country_temp
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+# Check whether the currently scoped country is the leader of the specified side
+# This effect has to be run inside a scope where 'scope:com_situation' is available!
+# - side = either 'left' or 'right'
+is_com_situation_side_leader = {
+    custom_description = {
+        text = is_com_situation_side_leader
+        subject = this
+
+        save_temporary_scope_as = com_country_temp
+        scope:com_situation ?= {
+            var:com_side_$side$ ?= {
+                var:com_leader ?= scope:com_country_temp
+            }
+        }
+    }
+}

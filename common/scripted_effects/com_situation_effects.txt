@@ -1,0 +1,1021 @@
+﻿# Add journal entry to the scoped country
+# and add a newly created situation to that journal
+# Parameters:
+# - journal = journal entry key
+# - situation_id = localization key identifier of the new situation
+# - icon = icon ideology key for the situation
+# - side_leader_country_left = country scope for the left side leader of the situation
+# - side_name_left = name localization key for the left side leader of the situation
+# - side_desc_left = description/tooltip localization key for the left side leader of the situation
+# - side_leader_country_right = country scope for the right side leader of the situation
+# - side_name_right = name localization key for the right side leader of the situation
+# - side_desc_right = description/tooltip localization key for the right side leader of the situation
+create_com_situation_journal_entry = {
+    custom_tooltip = {
+        text = effect_add_com_situation_journal_entry
+        fix_variable_error = { variable = $journal$ }
+        fix_variable_error = { variable = com_name }
+
+        set_local_variable = {
+            name = com_name
+            value = flag:$journal$
+        }
+
+        add_journal_entry = {
+            type = $journal$
+        }
+
+        je:$journal$ = {
+            create_com_situation = {
+                situation_id = $situation_id$
+                icon = $icon$
+                side_leader_country_left = $side_leader_country_left$
+                side_name_left = $side_name_left$
+                side_desc_left = $side_desc_left$
+                side_leader_country_right = $side_leader_country_right$
+                side_name_right = $side_name_right$
+                side_desc_right = $side_desc_right$
+            }
+        }
+    }
+}
+
+# Add journal entry to the scoped country
+# and add an already ongoing situation to that journal entry
+# Parameters:
+# - journal = journal entry key
+# - situation_id = localization key identifier of the ongoing situation
+create_ongoing_com_situation_journal_entry = {
+    custom_tooltip = {
+        text = effect_add_com_situation_journal_entry
+        fix_variable_error = { variable = $journal$ }
+        fix_variable_error = { variable = com_name }
+
+        set_local_variable = {
+            name = com_name
+            value = flag:$journal$
+        }
+
+        add_journal_entry = {
+            type = $journal$
+        }
+
+        je:$journal$ = {
+            add_existing_com_situation = {
+                id = $situation_id$
+            }
+        }
+    }
+}
+
+# Add an ongoing situation to the current journal
+# This effect has to be run inside a scope where 'scope:journal_entry' is available!
+# Parameters:
+# - situation_id = localization key identifier of the ongoing situation
+add_ongoing_com_situation = {
+    hidden_effect = {
+        if = {
+            limit = {
+                any_in_global_list = {
+                    variable = com_situation_cache
+                    var:com_id ?= flag:$situation_id$
+                    has_variable = is_struct
+                }
+            }
+            random_in_global_list = {
+                variable = com_situation_cache
+                limit = {
+                    var:com_id ?= flag:$situation_id$
+                    var:com_type ?= com_struct_situation
+                }
+                save_scope_as = com_situation
+            }
+
+            # Setup cached situation
+            scope:journal_entry = {
+                set_variable = {
+                    name = com_situation
+                    value = scope:com_situation
+                }
+            }
+        }
+    }
+}
+
+# Create and add a new situation to the current journal
+# This effect has to be run inside a scope where 'scope:journal_entry' is available!
+# Parameters:
+# - situation_id = localization key identifier of the new situation
+# - icon = icon ideology key for the situation
+# - side_leader_country_left = country scope for the left side leader of the situation
+# - side_name_left = name localization key for the left side leader of the situation
+# - side_desc_left = description/tooltip localization key for the left side leader of the situation
+# - side_leader_country_right = country scope for the right side leader of the situation
+# - side_name_right = name localization key for the right side leader of the situation
+# - side_desc_right = description/tooltip localization key for the right side leader of the situation
+create_com_situation = {
+    hidden_effect = {
+        if = {
+            limit = {
+                NOT = {
+                    exists = scope:journal_entry
+                }
+            }
+            error_log = "CMF: No journal_entry scope defined! This effect should be run in the immediate block of a journal entry!"
+        }
+        else = {
+            fix_variable_error = { variable = $side_name_left$ }
+            fix_variable_error = { variable = $side_desc_left$ }
+            fix_variable_error = { variable = $side_name_right$ }
+            fix_variable_error = { variable = $side_desc_right$ }
+
+            if = {
+                limit = {
+                    any_in_global_list = {
+                        variable = com_situation_cache
+                        var:com_id ?= flag:$situation_id$
+                        var:com_type ?= com_struct_situation
+                    }
+                }
+                add_ongoing_com_situation = {
+                    situation_id = $situation_id$
+                }
+            }
+            else = {
+                create_struct = {
+                    struct_type = com_struct_situation
+                    struct_scope = com_situation
+                }
+                create_struct = {
+                    struct_type = com_struct_situation_side
+                    struct_scope = com_side_left
+                }
+                create_struct = {
+                    struct_type = com_struct_situation_side
+                    struct_scope = com_side_right
+                }
+
+                # Create Situation
+                scope:journal_entry = {
+                    set_variable = {
+                        name = com_situation
+                        value = scope:com_situation
+                    }
+                }
+
+                add_to_global_variable_list = {
+                    name = com_situation_cache
+                    target = scope:com_situation
+                }
+
+                # Create Sides
+                scope:com_situation = {
+                    set_variable = {
+                        name = com_id
+                        value = flag:$situation_id$
+                    }
+                    set_ideology = ideology:$icon$
+                    set_variable = {
+                        name = com_side_left
+                        value = scope:com_side_left
+                    }
+                    set_variable = {
+                        name = com_side_right
+                        value = scope:com_side_right
+                    }
+                }
+                scope:com_side_left = {
+                    set_variable = {
+                        name = com_name
+                        value = flag:$side_name_left$
+                    }
+                    set_variable = {
+                        name = com_desc
+                        value = flag:$side_desc_left$
+                    }
+                    set_variable = {
+                        name = com_leader
+                        value = $side_leader_country_left$
+                    }
+                }
+                scope:com_side_right = {
+                    set_variable = {
+                        name = com_name
+                        value = flag:$side_name_right$
+                    }
+                    set_variable = {
+                        name = com_desc
+                        value = flag:$side_desc_right$
+                    }
+                    set_variable = {
+                        name = com_leader
+                        value = $side_leader_country_right$
+                    }
+                }
+            }
+        }
+    }
+}
+
+# This effect should be run after ALL corresponding journal entries have been concluded
+# A good place to run it should be the on_complete/on_fail/on_invalid/on_timeout blocks
+# of the master journal entry
+# Parameters:
+# - situation_id = localization key identifier of the ongoing situation
+end_com_situation = {
+    custom_tooltip = {
+        text = effect_end_com_situation
+        if = {
+            limit = {
+                NOT = {
+                    any_in_global_list = {
+                        variable = com_situation_cache
+                        var:com_id ?= flag:$situation_id$
+                    }
+                }
+            }
+            error_log = "CMF: Situation could not be found"
+        }
+        else = {
+            # Retrieve situation
+            random_in_global_list = {
+                variable = com_situation_cache
+                limit = {
+                    var:com_id ?= flag:$situation_id$
+                    var:com_type ?= com_struct_situation
+                }
+                save_scope_as = com_internal_scope
+            }
+
+            # Remove situation from cache
+            remove_list_global_variable = {
+                name = com_situation_cache
+                target = scope:com_internal_scope
+            }
+
+            scope:com_internal_scope = {
+                # Destroy factions
+                var:com_side_left ?= {
+                    every_in_list = {
+                        variable = com_factions
+                        destroy_struct = {
+                            struct = this
+                        }
+                    }
+                    clear_variable_list = com_factions
+                }
+                var:com_side_right ?= {
+                    every_in_list = {
+                        variable = com_factions
+                        destroy_struct = {
+                            struct = this
+                        }
+                    }
+                    clear_variable_list = com_factions
+                }
+
+                # Destroy sides
+                destroy_struct = {
+                    struct = var:com_side_left
+                }
+                destroy_struct = {
+                    struct = var:com_side_right
+                }
+
+                # Destroy button groups
+                every_in_list = {
+                    variable = com_button_groups
+                    destroy_struct = {
+                        struct = this
+                    }
+                }
+            }
+
+            # Destroy situation
+            destroy_struct = {
+                struct = scope:com_internal_scope
+            }
+        }
+    }
+}
+
+# Set optional header to the situation journal entry
+# This effect has to be run inside a scope where 'scope:com_situation' is available!
+# Parameters:
+# - text = localization key for the situation header
+set_com_situation_header = {
+    hidden_effect = {
+        if = {
+            limit = {
+                NOT = {
+                    exists = scope:com_situation
+                }
+            }
+            error_log = error_no_situation_scope
+        }
+        else = {
+            fix_variable_error = { variable = $text$ }
+            scope:com_situation = {
+                set_variable = {
+                    name = com_header
+                    value = flag:$text$
+                }
+            }
+        }
+    }
+}
+
+# Remove optional header to the situation journal entry
+# This effect has to be run inside a scope where 'scope:com_situation' is available!
+remove_com_situation_header = {
+    hidden_effect = {
+        if = {
+            limit = {
+                NOT = {
+                    exists = scope:com_situation
+                }
+            }
+            error_log = error_no_situation_scope
+        }
+        else = {
+            scope:com_situation = {
+                remove_variable = com_header
+            }
+        }
+    }
+}
+
+# Change a sides situation leader country
+# This effect has to be run inside a scope where 'scope:com_situation' is available!
+# Parameters:
+# - side = either 'left' or 'right'
+# - leader = country scope of the new side leader
+change_com_situation_leader = {
+    custom_tooltip = {
+        text = effect_change_com_situation_leader
+        if = {
+            limit = {
+                NOT = {
+                    exists = scope:com_situation
+                }
+            }
+            error_log = error_no_situation_scope
+        }
+        else = {
+            fix_variable_error = { variable = com_faction_name }
+            fix_variable_error = { variable = com_leader_old }
+            fix_variable_error = { variable = com_leader_new }
+            set_local_variable = {
+                name = com_leader_new
+                value = $leader$
+            }
+
+            scope:com_situation = {
+                var:com_side_$side$ = {
+                    set_local_variable = {
+                        name = com_faction_name
+                        value = var:com_name
+                    }
+                    set_local_variable = {
+                        name = com_leader_old
+                        value = var:com_leader
+                    }
+                    set_variable = {
+                        name = com_leader
+                        value = $leader$
+                    }
+                }
+            }
+        }
+    }
+}
+
+# Change a sides name
+# This effect has to be run inside a scope where 'scope:com_situation' is available!
+# Parameters:
+# - side = either 'left' or 'right'
+# - name = localization key for the new name
+change_com_situation_side_name = {
+    custom_tooltip = {
+        text = effect_change_com_situation_side_name
+        if = {
+            limit = {
+                NOT = {
+                    exists = scope:com_situation
+                }
+            }
+            error_log = error_no_situation_scope
+        }
+        else = {
+            fix_variable_error = { variable = $name$ }
+            fix_variable_error = { variable = com_name_old }
+            fix_variable_error = { variable = com_name_new }
+            set_local_variable = {
+                name = com_name_new
+                value = flag:$name$
+            }
+
+            scope:com_situation = {
+                var:com_side_$side$ = {
+                    set_local_variable = {
+                        name = com_name_old
+                        value = var:com_name
+                    }
+                    set_variable = {
+                        name = com_name
+                        value = flag:$name$
+                    }
+                }
+            }
+        }
+    }
+}
+
+# Change a sides description/tooltip
+# This effect has to be run inside a scope where 'scope:com_situation' is available!
+# Parameters:
+# - side = either 'left' or 'right'
+# - desc = localization key for the new description/tooltip
+change_com_situation_side_description = {
+    hidden_effect = {
+        if = {
+            limit = {
+                NOT = {
+                    exists = scope:com_situation
+                }
+            }
+            error_log = error_no_situation_scope
+        }
+        else = {
+            fix_variable_error = { variable = $desc$ }
+            scope:com_situation = {
+                var:com_side_$side$ = {
+                    set_variable = {
+                        name = com_desc
+                        value = flag:$desc$
+                    }
+                }
+            }
+        }
+    }
+}
+
+# Create a new faction for the given side
+# This effect has to be run inside a scope where 'scope:com_situation' is available!
+# Parameters:
+# - side = either 'left' or 'right'
+# - name = localization key for the name of the faction
+# - desc = localization key for the description/tooltip of the faction
+create_com_situation_faction = {
+    custom_tooltip = {
+        text = effect_create_com_situation_faction
+        fix_variable_error = { variable = com_faction_name }
+        set_local_variable = {
+            name = com_faction_name
+            value = flag:$name$
+        }
+
+        if = {
+            limit = {
+                NOT = {
+                    exists = scope:com_situation
+                }
+            }
+            error_log = error_no_situation_scope
+        }
+        else_if = {
+            limit = {
+                scope:com_situation = {
+                    var:com_side_$side$ = {
+                        any_in_list = {
+                            variable = com_factions
+                            var:com_name ?= flag:$name$
+                        }
+                    }
+                }
+            }
+            scope:com_situation = {
+                var:com_side_$side$ = {
+                    set_local_variable = {
+                        name = com_side_name
+                        value = var:com_name
+                    }
+                }
+            }
+            debug_log = "CMF: $name$ faction already exists"
+        }
+        else = {
+            fix_variable_error = { variable = $name$ }
+            fix_variable_error = { variable = $desc$ }
+            fix_variable_error = { variable = com_side_name }
+
+            create_struct = {
+                struct_type = com_struct_situation_faction
+                struct_scope = com_faction
+            }
+
+            # Add name
+            scope:com_faction = {
+                set_variable = {
+                    name = com_name
+                    value = flag:$name$
+                }
+                set_variable = {
+                    name = com_desc
+                    value = flag:$desc$
+                }
+            }
+
+            scope:com_situation = {
+                var:com_side_$side$ = {
+                    set_local_variable = {
+                        name = com_side_name
+                        value = var:com_name
+                    }
+                    add_to_variable_list = {
+                        name = com_factions
+                        target = scope:com_faction
+                    }
+                }
+            }
+        }
+    }
+}
+
+# Remove a faction from the given side
+# This effect has to be run inside a scope where 'scope:com_situation' is available!
+# Parameters:
+# - side = either 'left' or 'right'
+# - name = localization key for the name of the faction
+remove_com_situation_faction = {
+    custom_tooltip = {
+        text = effect_remove_com_situation_faction
+        if = {
+            limit = {
+                NOT = {
+                    exists = scope:com_situation
+                }
+            }
+            error_log = error_no_situation_scope
+        }
+        else = {
+            fix_variable_error = { variable = com_faction_name }
+            fix_variable_error = { variable = com_side_name }
+
+            set_local_variable = {
+                name = com_faction_name
+                value = flag:$name$
+            }
+
+            scope:com_situation = {
+                var:com_side_$side$ = {
+                    set_local_variable = {
+                        name = com_side_name
+                        value = var:com_name
+                    }
+
+                    random_in_list = {
+                        variable = com_factions
+                        limit = {
+                            var:com_name ?= flag:$name$
+                        }
+                        save_temporary_scope_as = com_internal_scope
+                    }
+                }
+                if = {
+                    limit = {
+                        exists = scope:com_internal_scope
+                    }
+                    var:com_side_$side$ = {
+                        remove_list_variable = {
+                            name = com_factions
+                            target = scope:com_internal_scope
+                        }
+                    }
+                    destroy_struct = {
+                        struct = scope:com_internal_scope
+                    }
+                }
+            }
+        }
+    }
+}
+
+# Clear all factions from the given side
+# This effect has to be run inside a scope where 'scope:com_situation' is available!
+# Parameters:
+# - side = either 'left' or 'right'
+clear_com_situation_factions = {
+    custom_tooltip = {
+        text = effect_clear_com_situation_factions
+        if = {
+            limit = {
+                NOT = {
+                    exists = scope:com_situation
+                }
+            }
+            error_log = error_no_situation_scope
+        }
+        else = {
+            fix_variable_error = { variable = com_side_name }
+
+            scope:com_situation = {
+                var:com_side_$side$ = {
+                    set_local_variable = {
+                        name = com_side_name
+                        value = var:com_name
+                    }
+
+                    every_in_list = {
+                        variable = com_factions
+                        destroy_struct = {
+                            struct = this
+                        }
+                    }
+                    clear_variable_list = com_factions
+                }
+            }
+        }
+    }
+}
+
+# Clear all factions for both sides
+# This effect has to be run inside a scope where 'scope:com_situation' is available!
+clear_com_situation_factions_both = {
+    custom_tooltip = {
+        text = effect_clear_com_situation_factions_both
+        if = {
+            limit = {
+                NOT = {
+                    exists = scope:com_situation
+                }
+            }
+            error_log = error_no_situation_scope
+        }
+        else = {
+            clear_com_situation_factions = {
+                side = left
+            }
+            clear_com_situation_factions = {
+                side = right
+            }
+        }
+    }
+}
+
+# Add a new country to a faction for the given side
+# This effect has to be run inside a scope where 'scope:com_situation' is available!
+# - side = either 'left' or 'right'
+# - name = localization key for the name of the faction
+# - country = country scope for the new member
+add_com_situation_faction_country = {
+    custom_tooltip = {
+        text = effect_add_com_situation_faction_country
+        if = {
+            limit = {
+                NOT = {
+                    exists = scope:com_situation
+                }
+            }
+            error_log = error_no_situation_scope
+        }
+        else = {
+            fix_variable_error = { variable = com_country }
+            fix_variable_error = { variable = com_faction_name }
+            set_local_variable = {
+                name = com_country
+                value = $country$
+            }
+            set_local_variable = {
+                name = com_faction_name
+                value = flag:$name$
+            }
+
+            scope:com_situation = {
+                var:com_side_$side$ = {
+                    random_in_list = {
+                        variable = com_factions
+                        limit = {
+                            var:com_name ?= flag:$name$
+                        }
+                        add_to_variable_list = {
+                            name = com_countries
+                            target = $country$
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+# Reassign a country to a new faction for the given side
+# This removes the country from all other factions and adds it to the new one
+# This effect has to be run inside a scope where 'scope:com_situation' is available!
+# - side = either 'left' or 'right'
+# - name = localization key for the name of the faction
+# - country = country scope for the new member
+reassign_com_situation_faction_country = {
+    custom_tooltip = {
+        text = effect_add_com_situation_faction_country
+        if = {
+            limit = {
+                NOT = {
+                    exists = scope:com_situation
+                }
+            }
+            error_log = error_no_situation_scope
+        }
+        else = {
+            remove_com_situation_faction_country_all = {
+                country = $country$
+            }
+
+            fix_variable_error = { variable = com_country }
+            fix_variable_error = { variable = com_faction_name }
+
+            set_local_variable = {
+                name = com_country
+                value = $country$
+            }
+            set_local_variable = {
+                name = com_faction_name
+                value = flag:$name$
+            }
+
+            scope:com_situation = {
+                var:com_side_$side$ = {
+                    random_in_list = {
+                        variable = com_factions
+                        limit = {
+                            var:com_name ?= flag:$name$
+                        }
+                        add_to_variable_list = {
+                            name = com_countries
+                            target = $country$
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+# Removes a country from all factions regardless of side or faction
+# This effect has to be run inside a scope where 'scope:com_situation' is available!
+# - country = country scope for the new member
+remove_com_situation_faction_country_all = {
+    custom_tooltip = {
+        text = effect_remove_com_situation_faction_country_all
+        if = {
+            limit = {
+                NOT = {
+                    exists = scope:com_situation
+                }
+            }
+            error_log = error_no_situation_scope
+        }
+        else = {
+            scope:com_situation = {
+                var:com_side_left = {
+                    every_in_list = {
+                        variable = com_factions
+                        remove_list_variable = {
+                            name = com_countries
+                            target = $country$
+                        }
+                    }
+                }
+                var:com_side_right = {
+                    every_in_list = {
+                        variable = com_factions
+                        remove_list_variable = {
+                            name = com_countries
+                            target = $country$
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+# Remove a country from a faction for the given side
+# This effect has to be run inside a scope where 'scope:com_situation' is available!
+# - side = either 'left' or 'right'
+# - name = localization key for the name of the faction
+# - country = country scope for the removed member
+remove_com_situation_faction_country = {
+    custom_tooltip = {
+        text = effect_remove_com_situation_faction_country
+        if = {
+            limit = {
+                NOT = {
+                    exists = scope:com_situation
+                }
+            }
+            error_log = error_no_situation_scope
+        }
+        else = {
+            scope:com_situation = {
+                var:com_side_$side$ = {
+                    random_in_list = {
+                        variable = com_factions
+                        limit = {
+                            var:com_name ?= flag:$name$
+                        }
+                        remove_list_variable = {
+                            name = com_countries
+                            target = $country$
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+# Create a button group for the situation
+# This effect has to be run inside a scope where 'scope:com_situation' is available!
+# - name = localization key for the name of the button group
+# - desc = localization key for the description/tooltip of the button group
+create_com_situation_button_group = {
+    hidden_effect = {
+        if = {
+            limit = {
+                NOT = {
+                    exists = scope:com_situation
+                }
+            }
+            error_log = error_no_situation_scope
+        }
+        else = {
+            fix_variable_error = { variable = $name$ }
+            fix_variable_error = { variable = $desc$ }
+
+            if = {
+                limit = {
+                    NOT = {
+                        scope:com_situation = {
+                            any_in_list = {
+                                variable = com_button_groups
+                                var:com_name ?= flag:$name$
+                            }
+                        }
+                    }
+                }
+                create_struct = {
+                    struct_type = com_struct_situation_button_group
+                    struct_scope = com_button_group_$name$
+                }
+
+                # Add name
+                scope:com_button_group_$name$ = {
+                    set_variable = {
+                        name = com_name
+                        value = flag:$name$
+                    }
+                    set_variable = {
+                        name = com_desc
+                        value = flag:$desc$
+                    }
+                }
+
+                scope:com_situation = {
+                    add_to_variable_list = {
+                        name = com_button_groups
+                        target = scope:com_button_group_$name$
+                    }
+                }
+            }
+            else = {
+                scope:com_situation = {
+                    random_in_list = {
+                        variable = com_button_groups
+                        limit = {
+                            var:com_name ?= flag:$name$
+                        }
+                        save_scope_as = com_button_group_$name$
+                    }
+                }
+            }
+        }
+    }
+}
+
+# Remove a button group from the situation
+# This effect has to be run inside a scope where 'scope:com_situation' is available!
+# - name = localization key for the name of the button group
+remove_com_situation_button_group = {
+    hidden_effect = {
+        if = {
+            limit = {
+                NOT = {
+                    exists = scope:com_situation
+                }
+            }
+            error_log = error_no_situation_scope
+        }
+        else = {
+            scope:com_situation = {
+                remove_list_variable = {
+                    name = com_button_groups
+                    target = scope:com_button_group_$name$
+                }
+            }
+
+            destroy_struct = {
+                struct = scope:com_button_group_$name$
+            }
+        }
+    }
+}
+
+# Add a scripted button to a button group
+# The scripted button has to be added to the journal entry as normal first
+# This effect has to be run inside a scope where 'scope:com_situation' is available!
+# - name = localization key for the name of the scripted button
+# - group = localization key for the name of the button group
+add_com_situation_button_group_element = {
+    hidden_effect = {
+        if = {
+            limit = {
+                NOT = {
+                    exists = scope:com_situation
+                }
+            }
+            error_log = error_no_situation_scope
+        }
+        else = {
+            fix_variable_error = { variable = $name$ }
+            scope:com_situation = {
+                random_in_list = {
+                    variable = com_button_groups
+                    limit = {
+                        var:com_name ?= flag:$group$
+                    }
+                    add_to_variable_list = {
+                        name = com_buttons
+                        target = flag:$name$
+                    }
+                }
+            }
+        }
+    }
+}
+
+# Remove a scripted button from a button group
+# This effect has to be run inside a scope where 'scope:com_situation' is available!
+# - name = localization key for the name of the scripted button
+# - group = localization key for the name of the button group
+remove_com_situation_button_group_element = {
+    hidden_effect = {
+        if = {
+            limit = {
+                NOT = {
+                    exists = scope:com_situation
+                }
+            }
+            error_log = error_no_situation_scope
+        }
+        else = {
+            scope:com_situation = {
+                random_in_list = {
+                    variable = com_button_groups
+                    limit = {
+                        var:com_name ?= flag:$group$
+                    }
+                    remove_list_variable = {
+                        name = com_buttons
+                        target = flag:$name$
+                    }
+                }
+            }
+        }
+    }
+}
+
+# Sets up an existing situation as an accessible scope
+# This allows using effects and triggers that rely on the 'scope:com_situation' outside the event chain
+# - situation_id = id of the ongoing situation
+save_com_situation_scope = {
+    hidden_effect = {
+        if = {
+            limit = {
+                any_in_global_list = {
+                    variable = com_situation_cache
+                    var:com_id ?= flag:$situation_id$
+                    var:com_type ?= com_struct_situation
+                }
+            }
+            random_in_global_list = {
+                variable = com_situation_cache
+                limit = {
+                    var:com_id ?= flag:$situation_id$
+                    var:com_type ?= com_struct_situation
+                }
+                save_scope_as = com_situation
+            }
+        }
+    }
+}

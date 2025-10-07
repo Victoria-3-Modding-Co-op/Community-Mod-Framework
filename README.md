@@ -15,6 +15,7 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=3385002128
     * [Modifying Movement Weights](#modifying-movement-weights)
 * [GUI Framework](#gui-framework)
     * [Alternative Event Windows](#alternative-event-windows)
+    * [EU5 Style Situation Journal Entries](#eu5-style-situation-journal-entries)
     * [Hiding Objective Header](#hiding-objective-header)
     * [Custom Social Hierarchies](#custom-social-hierarchies)
     * [Sidebar Button](#sidebar-button)
@@ -109,6 +110,7 @@ Current Scope:
 10) Alerts can now open custom windows (Credit to Bahmut)
 11) More than three local goods can now be shown in state building panel correctly (Credit to Bahmut)
 12) Variables can be set on journal entries to change the colors of certain progress bars (Credit to Alexedishi)
+13) Framework to create EU5 style situation journal entries (Credit to Bahmut)
 
 ## Alternative Event Windows
 
@@ -163,6 +165,20 @@ Letter Style Window:
   - Bottom Right & Top Left
   - Bottom Left & Top Right
 - The Buttons do not support classical text but are optimized for texticons (i.e. `@innovation!`)
+
+## EU5 Style Situation Journal Entries
+Situations are meant to model clashes between factions on an international scale.
+
+They can have multiple journal entries associated with it and provide a tool to model complex power struggles.
+
+In the background, situations are Journal Entries with a few extra variables and a whole new UI.
+This means using them should come natural to modders who have already used those.
+
+Situations were inspired by [EU5](https://forum.paradoxplaza.com/forum/developer-diary/tinto-talks-70-2nd-of-july-2025.1823383/).
+
+[The usage documentation can be found here.](docs/SITUATIONS.md)
+
+[While the script documentation can be found here.](docs/SITUATIONS_SCRIPT_DOCS.md)
 
 ## Hiding Objective Header
 

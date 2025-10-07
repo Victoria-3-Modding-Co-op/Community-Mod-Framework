@@ -100,6 +100,7 @@ jobs:
           rm -rf script/
           rm -f .gitattributes
           rm -f .gitignore
+          rm -f vic3-tiger.conf
           rm -f README.md
 
         # Package clean mod folder into a zip file

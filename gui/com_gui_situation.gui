@@ -521,6 +521,7 @@ types com_situation_types {
         # Button Groups
         com_situation_buttons = {}
 
+        # Reason Text
         flowcontainer = {
             direction = vertical
             margin = { 0 10 }
@@ -546,6 +547,53 @@ types com_situation_types {
                 background = {
                     using = entry_bg
                 }
+            }
+        }
+
+        # Victory results
+        flowcontainer = {
+            direction = vertical
+            using = default_list_position
+            margin_bottom = 20
+
+            spacing = 5
+
+            textbox = {
+                text = "[JournalEntry.GetOnCompleteTooltip]"
+                autoresize = yes
+                multiline = yes
+                minimumsize = { @panel_width_minus_30 -1 }
+                maximumsize = { @panel_width_minus_30 -1 }
+                using = default_list_position
+                align = nobaseline
+
+                margin = { 15 0 }
+            }
+
+            textbox = {
+                text = "[JournalEntry.GetOnFailTooltip]"
+                visible = "[Not(StringIsEmpty(JournalEntry.GetOnFailTooltip))]"
+                autoresize = yes
+                multiline = yes
+                minimumsize = { @panel_width_minus_30 -1 }
+                maximumsize = { @panel_width_minus_30 -1 }
+                using = default_list_position
+                align = nobaseline
+
+                margin = { 15 0 }
+            }
+
+            textbox = {
+                text = "[JournalEntry.GetOnTimeoutTooltip]"
+                visible = "[Not(StringIsEmpty(JournalEntry.GetOnTimeoutTooltip))]"
+                autoresize = yes
+                multiline = yes
+                minimumsize = { @panel_width_minus_30 -1 }
+                maximumsize = { @panel_width_minus_30 -1 }
+                using = default_list_position
+                align = nobaseline
+
+                margin = { 15 0 }
             }
         }
     }

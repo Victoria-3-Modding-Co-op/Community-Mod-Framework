@@ -230,7 +230,7 @@ end_com_situation = {
                 NOT = {
                     any_in_global_list = {
                         variable = com_situation_cache
-                        var:com_id ?= $situation_id$
+                        var:com_id ?= flag:$situation_id$
                     }
                 }
             }
@@ -241,7 +241,7 @@ end_com_situation = {
             random_in_global_list = {
                 variable = com_situation_cache
                 limit = {
-                    var:com_id ?= $situation_id$
+                    var:com_id ?= flag:$situation_id$
                     var:com_type ?= com_struct_situation
                 }
                 save_scope_as = com_internal_scope

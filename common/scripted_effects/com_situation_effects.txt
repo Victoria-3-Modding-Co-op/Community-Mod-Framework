@@ -2,7 +2,7 @@
 # and add a newly created situation to that journal
 # Parameters:
 # - journal = journal entry key
-# - situation_id = id of the new situation
+# - situation_id = localization key identifier of the new situation
 # - icon = icon ideology key for the situation
 # - side_leader_country_left = country scope for the left side leader of the situation
 # - side_name_left = name localization key for the left side leader of the situation
@@ -27,7 +27,7 @@ create_com_situation_journal_entry = {
 
         je:$journal$ = {
             create_com_situation = {
-                id = $situation_id$
+                situation_id = $situation_id$
                 icon = $icon$
                 side_leader_country_left = $side_leader_country_left$
                 side_name_left = $side_name_left$
@@ -44,7 +44,7 @@ create_com_situation_journal_entry = {
 # and add an already ongoing situation to that journal entry
 # Parameters:
 # - journal = journal entry key
-# - situation_id = id of the ongoing situation
+# - situation_id = localization key identifier of the ongoing situation
 create_ongoing_com_situation_journal_entry = {
     custom_tooltip = {
         text = effect_add_com_situation_journal_entry
@@ -71,22 +71,22 @@ create_ongoing_com_situation_journal_entry = {
 # Add an ongoing situation to the current journal
 # This effect has to be run inside a scope where 'scope:journal_entry' is available!
 # Parameters:
-# - id = id of the ongoing situation
+# - situation_id = localization key identifier of the ongoing situation
 add_ongoing_com_situation = {
     hidden_effect = {
         if = {
             limit = {
                 any_in_global_list = {
                     variable = com_situation_cache
-                    var:com_id ?= $id$
+                    var:com_id ?= flag:$situation_id$
                     has_variable = is_struct
                 }
             }
             random_in_global_list = {
                 variable = com_situation_cache
                 limit = {
-                    var:com_id ?= $id$
-                    has_variable = is_struct
+                    var:com_id ?= flag:$situation_id$
+                    var:com_type ?= com_struct_situation
                 }
                 save_scope_as = com_situation
             }
@@ -105,7 +105,7 @@ add_ongoing_com_situation = {
 # Create and add a new situation to the current journal
 # This effect has to be run inside a scope where 'scope:journal_entry' is available!
 # Parameters:
-# - id = id of the new situation (any scope, flag or value)
+# - situation_id = localization key identifier of the new situation
 # - icon = icon ideology key for the situation
 # - side_leader_country_left = country scope for the left side leader of the situation
 # - side_name_left = name localization key for the left side leader of the situation
@@ -133,25 +133,12 @@ create_com_situation = {
                 limit = {
                     any_in_global_list = {
                         variable = com_situation_cache
-                        var:com_id ?= $id$
-                        has_variable = is_struct
+                        var:com_id ?= flag:$situation_id$
+                        var:com_type ?= com_struct_situation
                     }
                 }
-                random_in_global_list = {
-                    variable = com_situation_cache
-                    limit = {
-                        var:com_id ?= $id$
-                        has_variable = is_struct
-                    }
-                    save_scope_as = com_situation
-                }
-
-                # Setup cached situation
-                scope:journal_entry = {
-                    set_variable = {
-                        name = com_situation
-                        value = scope:com_situation
-                    }
+                add_ongoing_com_situation = {
+                    situation_id = $situation_id$
                 }
             }
             else = {
@@ -185,7 +172,7 @@ create_com_situation = {
                 scope:com_situation = {
                     set_variable = {
                         name = com_id
-                        value = $id$
+                        value = flag:$situation_id$
                     }
                     set_ideology = ideology:$icon$
                     set_variable = {
@@ -234,7 +221,7 @@ create_com_situation = {
 # A good place to run it should be the on_complete/on_fail/on_invalid/on_timeout blocks
 # of the master journal entry
 # Parameters:
-# - id = id of the situation
+# - situation_id = localization key identifier of the ongoing situation
 end_com_situation = {
     custom_tooltip = {
         text = effect_add_com_situation_journal_entry
@@ -243,7 +230,7 @@ end_com_situation = {
                 NOT = {
                     any_in_global_list = {
                         variable = com_situation_cache
-                        var:com_id ?= $id$
+                        var:com_id ?= $situation_id$
                     }
                 }
             }
@@ -254,7 +241,8 @@ end_com_situation = {
             random_in_global_list = {
                 variable = com_situation_cache
                 limit = {
-                    var:com_id ?= $id$
+                    var:com_id ?= $situation_id$
+                    var:com_type ?= com_struct_situation
                 }
                 save_scope_as = com_internal_scope
             }
@@ -1009,21 +997,21 @@ remove_com_situation_button_group_element = {
 
 # Sets up an existing situation as an accessible scope
 # This allows using effects and triggers that rely on the 'scope:com_situation' outside the event chain
-# - id = id of the ongoing situation
+# - situation_id = id of the ongoing situation
 save_com_situation_scope = {
     hidden_effect = {
         if = {
             limit = {
                 any_in_global_list = {
                     variable = com_situation_cache
-                    var:com_id ?= $id$
+                    var:com_id ?= $situation_id$
                     has_variable = is_struct
                 }
             }
             random_in_global_list = {
                 variable = com_situation_cache
                 limit = {
-                    var:com_id ?= $id$
+                    var:com_id ?= $situation_id$
                     has_variable = is_struct
                 }
                 save_scope_as = com_situation

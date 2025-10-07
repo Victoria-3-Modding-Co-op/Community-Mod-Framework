@@ -594,25 +594,11 @@ types com_situation_types {
 
                     item = {
                         flowcontainer = {
-                            flowcontainer = {
-                                visible = "[Scope.GetCountry.IsValid]"
-                                margin = { 5 10 }
-                                minimumsize = { 27 18 }
-                                tiny_flag = {
-                                    datacontext = "[Scope.GetCountry]"
-                                }
-                            }
-                            flowcontainer = {
-                                visible = "[Not(Scope.GetCountry.IsValid)]"
-                                state = {
-                                    name = _show
-                                    on_finish = "[GetScriptedGui('com_situation_remove_broken_country').Execute(GuiScope
-                                        .SetRoot(Scope.GetCountry.MakeScope)
-                                        .AddScope('com_situation', ComSituation)
-                                        .End
-                                    )]"
-
-                                }
+                            visible = "[Scope.GetCountry.IsValid]"
+                            margin = { 5 10 }
+                            minimumsize = { 27 18 }
+                            tiny_flag = {
+                                datacontext = "[Scope.GetCountry]"
                             }
                         }
                     }

@@ -89,7 +89,7 @@ sb_com_rise_of_communism_test3 = {
         }
         create_com_situation_journal_entry = {
             journal = je_com_rise_of_communism
-            situation_id = 1
+            situation_id = je_com_rise_of_communism
             icon = com_icon_rise_of_communism
 
             side_leader_country_left = c:GBR

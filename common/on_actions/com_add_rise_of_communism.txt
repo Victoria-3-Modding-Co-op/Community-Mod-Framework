@@ -1,20 +1,20 @@
-﻿on_game_started = {
-	on_actions = {
-		on_com_add_communism
-	}
-}
-
-on_com_add_communism = {
-	effect = {
-		c:GBR = {
-            add_journal_entry = {
-                type = je_com_rise_of_communism
-            }
-        }
-        c:FRA = {
-            add_journal_entry = {
-                type = je_com_rise_of_communism
-            }
-        }
-	}
-}
+﻿# on_game_started = {
+# 	on_actions = {
+# 		on_com_add_communism
+# 	}
+# }
+#
+# on_com_add_communism = {
+# 	effect = {
+# 		c:GBR = {
+#             add_journal_entry = {
+#                 type = je_com_rise_of_communism
+#             }
+#         }
+#         c:FRA = {
+#             add_journal_entry = {
+#                 type = je_com_rise_of_communism
+#             }
+#         }
+# 	}
+# }

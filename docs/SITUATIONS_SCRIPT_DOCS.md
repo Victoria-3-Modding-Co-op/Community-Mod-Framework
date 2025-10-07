@@ -38,7 +38,7 @@ Set up an existing situation as an accessible scope.
 This allows using effects and triggers that rely on the '**scope:com_situation**' outside the event chain.
 
 **Parameters:**
-- `id` id of the ongoing situation
+- `situation_id` localization key identifier of the ongoing situation
 
 ### Effect: `create_com_situation_journal_entry`
 Add journal entry to the scoped country
@@ -46,7 +46,7 @@ and add a newly created situation to that journal.
 
 **Parameters:**
 - `journal` journal entry key
-- `situation_id` id of the new situation
+- `situation_id` localization key identifier of the new situation
 - `icon` icon ideology key for the situation
 - `side_leader_country_left` country scope for the left side leader of the situation
 - `side_name_left` name localization key for the left side leader of the situation
@@ -61,21 +61,21 @@ and add an already ongoing situation to that journal entry.
 
 **Parameters:**
 - `journal` journal entry key
-- `situation_id` id of the ongoing situation
+- `situation_id` localization key identifier of the ongoing situation
 
 ### Effect: `add_ongoing_com_situation`
 Add an ongoing situation to the current journal.
 > NOTE: This effect has to be run inside a scope where '**scope:journal_entry**' is available!
 
 **Parameters:**
-- `id` id of the ongoing situation
+- `situation_id` localization key identifier of the ongoing situation
 
 ### Effect: `create_com_situation`
 Create and add a new situation to the current journal.
 > NOTE: This effect has to be run inside a scope where '**scope:journal_entry**' is available!
 
 **Parameters:**
-- `id` id of the new situation
+- `situation_id` localization key identifier of the new situation
 - `icon` icon ideology key for the situation
 - `side_leader_country_left` country scope for the left side leader of the situation
 - `side_name_left` name localization key for the left side leader of the situation
@@ -87,10 +87,10 @@ Create and add a new situation to the current journal.
 ### Effect: `end_com_situation`
 This effect should be run after ALL corresponding journal entries have been concluded.
 
-A good place to run it should be the on_complete/on_fail/on_invalid/on_timeout blocks of the master journal entry.
+A good place to run it should be the `on_complete`/`on_fail`/`on_invalid`/`on_timeout` blocks of the master journal entry.
 
 **Parameters:**
-- `id` id of the situation
+- `situation_id` localization key identifier of the ongoing situation
 
 ### Effect: `set_com_situation_header`
 Set optional header to the situation journal entry

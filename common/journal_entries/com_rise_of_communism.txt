@@ -15,7 +15,7 @@
         # Setup base situation
         # The id can be anything that can be stored in a variable like a flag, value or scope
         create_com_situation = {
-            id = 1
+            situation_id = je_com_rise_of_communism
             icon = com_icon_rise_of_communism
 
             side_leader_country_left = c:GBR

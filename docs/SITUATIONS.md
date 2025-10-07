@@ -9,6 +9,8 @@ This means using them should come natural to modders who have already used those
 Most of the complexity is masked behind tailored and documented scripted effects.
 A full list of them can be found below.
 
+
+
 # Content
 * [Overview](#overview)
 * [Usage](#usage)
@@ -16,6 +18,7 @@ A full list of them can be found below.
   * [Modifying a situation](#modifying-a-situation)
   * [Scoping to side leaders](#scoping-to-side-leaders)
   * [Victory conditions](#victory-conditions)
+  * [Example Journal](#victory-conditions)
   * [Optional features](#optional-features)
     * [Factions](#factions)
     * [Button Groups](#button-groups)
@@ -69,6 +72,11 @@ This is modeled through the `complete` and `fail` blocks of the journal.
 The `complete` blocks (`complete`, `on_complete`, etc.)
 are the victory conditions for the left side of the situation,
 while `fail` blocks (`fail`, `on_fail`, etc.) are the victory conditions for the right side of the situation.
+
+## Example Journal
+There is an example journal entry which was used for testing in the Community Mod Framework.
+
+[This journal entry can be found here.](/common/journal_entries/com_rise_of_communism.txt)
 
 ## Optional features
 Situations can have scripted progress bars, scripted buttons and so on as any other journal entry.

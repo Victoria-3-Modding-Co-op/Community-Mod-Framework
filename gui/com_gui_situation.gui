@@ -86,6 +86,7 @@ types com_situation_types {
 
                 com_journal_entry_character_situation_left = {
                     datacontext = "[ComSituationLeft.Var('com_leader').GetCountry.GetRuler]"
+                    datacontext = "[ComSituationLeft.Var('com_leader').GetCountry]"
                 }
                 widget = {
                     # Spacer
@@ -96,6 +97,7 @@ types com_situation_types {
                 }
                 com_journal_entry_character_situation_right = {
                     datacontext = "[ComSituationRight.Var('com_leader').GetCountry.GetRuler]"
+                    datacontext = "[ComSituationRight.Var('com_leader').GetCountry]"
                 }
             }
 
@@ -817,6 +819,12 @@ types com_situation_types {
         blockoverride "portrait_texture" {
             portrait_texture = "[Character.GetAnimatedPortrait('environment_event_01', 'camera_duel_01', 'idle', GetPortraitRenderSize(PdxGuiWidget.Self))]"
         }
+        blockoverride "portrait_button_onclick" {
+            onclick = "[InformationPanelBar.OpenCountryPanel(Country.Self)]"
+        }
+        blockoverride "portrait_button_onrightclick" {
+            onrightclick = "[RightClickMenuManager.ShowForCountry(Country.AccessSelf)]"
+        }
         blockoverride "show_hat" {}
         blockoverride "portrait_icons" {}
     }
@@ -828,6 +836,12 @@ types com_situation_types {
         }
         blockoverride "portrait_texture" {
             portrait_texture = "[Character.GetAnimatedPortrait('environment_event_01', 'camera_duel_02', 'idle', GetPortraitRenderSize(PdxGuiWidget.Self))]"
+        }
+        blockoverride "portrait_button_onclick" {
+            onclick = "[InformationPanelBar.OpenCountryPanel(Country.Self)]"
+        }
+        blockoverride "portrait_button_onrightclick" {
+            onrightclick = "[RightClickMenuManager.ShowForCountry(Country.AccessSelf)]"
         }
         blockoverride "show_hat" {}
         blockoverride "portrait_icons" {}

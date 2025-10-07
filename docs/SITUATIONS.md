@@ -73,6 +73,21 @@ The `complete` blocks (`complete`, `on_complete`, etc.)
 are the victory conditions for the left side of the situation,
 while `fail` blocks (`fail`, `on_fail`, etc.) are the victory conditions for the right side of the situation.
 
+To change the localization for "If completed:" or "Will complete if:" the game offers these properties in journal entries:
+- `custom_on_completion_header = <loc key>`
+- `custom_on_failure_header = <loc key>`
+- `custom_completion_header = <loc key>`
+- `custom_failure_header = <loc key>`
+
+Here is a set of example locs for those:
+```yaml
+ je_springtime_of_the_peoples_complete_header: "#title Will result in a #b Revolutionary#! victory if:#!\n"
+ je_springtime_of_the_peoples_on_complete_header: "#title On a #b Revolutionary#! victory:#!\n$EFFECT$"
+ je_springtime_of_the_peoples_fail_header: "#title Will result in a #b Conservative#! victory if:#!\n"
+ je_springtime_of_the_peoples_on_fail_header: "#title On a #b Conservative#! victory:#!\n$EFFECT$"
+```
+> **NOTE** The `$EFFECT$` has to be part of the `on_` blocks to hide the base effect blocks
+
 ## Example Journal
 There is an example journal entry which was used for testing in the Community Mod Framework.
 

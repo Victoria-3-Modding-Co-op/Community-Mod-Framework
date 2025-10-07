@@ -76,7 +76,7 @@ is_com_situation_side_leader = {
 
         save_temporary_scope_as = com_country_temp
         scope:com_situation ?= {
-            var:com_side_right ?= {
+            var:com_side_$side$ ?= {
                 var:com_leader ?= scope:com_country_temp
             }
         }

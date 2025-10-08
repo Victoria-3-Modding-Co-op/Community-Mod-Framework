@@ -117,9 +117,9 @@ types journal_entry_overwrites {
                     }
                 }
 
-                ###############################
-                ### Journal Entry Character ###
-                ###############################
+                ####################################
+                ### CMF: Journal Entry Character ###
+                ####################################
                 com_journal_entry_characters = {}
 
                 # time out info
@@ -424,6 +424,62 @@ types journal_entry_overwrites {
                         enabled = "[JournalEntry.CanStartTutorialLesson]"
                         onclick = "[JournalEntry.StartWhyTutorialLesson]"
                         onclick = "[InformationPanelBar.OpenJournalEntryPanel(JournalEntry.AccessSelf)]"
+                    }
+                }
+
+                divider_clean = {
+                    visible = "[JournalEntry.MakeScope.Var('com_dlc').IsSet]"
+                }
+
+                ### CMF: DLC icon
+                flowcontainer = {
+                    using = default_list_position
+                    margin_top = 10
+                    margin_bottom = 10
+                    visible = "[JournalEntry.MakeScope.Var('com_dlc').IsSet]"
+
+                    flowcontainer = {
+                        background = {
+                            using = fade_right_simple
+                            margin_left = 10
+                        }
+                        max_width = @panel_width_plus_14
+                        min_width = @panel_width_plus_14
+                        datamodel = "[GetDlcCollection]"
+                        margin = { 10 5 }
+                        margin_left = 30
+
+                        item = {
+                            flowcontainer = {
+                                spacing = 10
+                                visible = "[EqualTo_string(Dlc.GetName, JournalEntry.MakeScope.Var('com_dlc').GetFlagName)]"
+                                tooltip = "[Dlc.GetName]"
+
+                                flowcontainer = {
+                                    margin_top = 5
+                                    margin_bottom = 0
+
+                                    icon = {
+                                        size = { 40 40 }
+                                        texture = "gfx/interface/backgrounds/round_frame_dec.dds"
+
+                                        icon = {
+                                            size = { 40 40 }
+                                            position = { 3 -3 }
+                                            texture = "[Dlc.GetIcon]"
+                                            parentanchor = center
+                                        }
+                                    }
+                                }
+
+                                textbox = {
+                                    margin_top = 10
+                                    minimumsize = { -1 35 }
+                                    text = "[Dlc.GetName]"
+                                    #align = vcenter
+                                }
+                            }
+                        }
                     }
                 }
             }

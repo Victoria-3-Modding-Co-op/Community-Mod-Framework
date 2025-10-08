@@ -374,6 +374,27 @@ gui/building_browser_panel.gui
 ```
 **NOTE: Note that military buildings, such as barracks and naval bases, are NOT INTENDED TO BE USED WITH MPM due to the new unit graphics being displayed alongside the PMGs which now take up most of the space that the extra PMGs would overflow into.**
 
+## DLC Icons in Journal Entries
+
+To add DLC/Mod information to a journal entry, CMF offers the scripted effect `add_com_dlc_icon`.
+
+It needs to be run in the journal entry scope.
+The best place for that is the `immediate` block of a journal entry:
+```
+je_some_journal = {
+    # journal definition
+    immediate = {
+        scope:journal_entry = {
+            add_com_dlc_icon = {
+                dlc = dlc_magic_gate
+            }
+        }
+    }
+    # some more journal definition
+}
+```
+
+
 # Structs
 
 CMF now allows for structs that can be used to categorize variables. They are especially meant to be used with GUI but can be used anywhere.
@@ -542,20 +563,22 @@ For naming, you need to include loc keys to avoid load-up error. These can be bl
 # Community Mod Triggers
 
 ## Usage
-1) Request to have CMF add a trigger for your mod into into the CMF compatibility file `01_community_mod_compatibility_triggers.txt`. This file contains the scripted triggers all set to return false by default. This is intentional. Your trigger should look like this:
+Request to have CMF add a trigger for your mod into the CMF compatibility file `01_community_mod_compatibility_triggers.txt`.
+This file contains the scripted triggers all set to return false by default. This is intentional. Your trigger should look like this:
 ```
 YOURMODNAME_is_active_trigger = {
    always = no
 }
 ```
-2) Create another file with the name `zz_YOURMODNAME_compatibility_triggers.txt` in the `/common/scripted_triggers` folder of your mod, that contains the following:
+Create another file with the name `zz_YOURMODNAME_compatibility_triggers.txt` in the `/common/scripted_triggers` folder of your mod,
+that contains the following:
 ```
 YOURMODNAME_is_active_trigger = {
    always = yes
 }
 ```
 
-## Currently Included:
+## Currently Included
 * Anno 1836
 * Australia & New Zealand Flavor Pack
 * Basileia Romaion

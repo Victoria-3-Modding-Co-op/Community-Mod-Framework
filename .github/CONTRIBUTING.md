@@ -4,7 +4,12 @@
 As the Community Mod Framework aims to support compatibility between different mods - sometimes you have to add something to it so your mods can integrate successfully.
 In particular, this applies to things like Political Movements & Lobbies, where the script is very rigid.
 
-So here's what you need to know to do this effectively.
+# Philosophy
+
+This framework aims to preserve base game behavior by default.
+So if no other mod is used, the framework aims to be invisible to players.
+
+The goal is to provide mods that make use of it, new ways to show content or hook into base game functionality.
 
 ## Contents
 * [Ground Rules](#ground-rules)
@@ -24,7 +29,7 @@ Whether it's appropriate for CMF to overwrite some content, or whether your mod 
 
 This means that CMF content always falls into one of two categories:
 - Universal Providers
-- Universal Receviers
+- Universal Receivers
 
 Universal Providers are content elements that you either use or overwrite in your own files, as needed. e.g. Mod Triggers (overwritten), Weekly Event Framework (utilised as a function)
 
@@ -37,9 +42,11 @@ File names control overwrite order (See the [Wiki](https://vic3.paradoxwikis.com
 
 To ensure maximum robustness in compatibility design, it is important that universal receiver and universal provider content elements are not located in the same file as each other.
 
-CMF universal providers should be named with either the `com_` prefix (for community files), or with the vanilla-style file name prefixes like `00_`.
+CMF universal providers should be named with either the `com_` prefix (for community files),
+or with the vanilla-style file name prefixes like `00_`.
 
-CMF universal receivers should be named with either a `ycom_` prefix for general compatibility, or some `zz_` stytle prefix if there is no justified reason for another mod to ever overwrite it.
+CMF universal receivers should be named with either a `ycom_` prefix for general compatibility,
+or some `zz_` style prefix if there is no justified reason for another mod to ever overwrite it.
 
 Ensure that you know whether your files need to overwrite, or be overwritten, by CMF, and name them appropriately.
 

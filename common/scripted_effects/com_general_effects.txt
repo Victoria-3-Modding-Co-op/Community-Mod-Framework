@@ -4,3 +4,11 @@
         set_variable = {name = $variable$ value = flag:$variable$} flag:$variable$ = {save_scope_as = $variable$}
     }
 }
+
+add_com_dlc_icon = {
+    set_variable = {
+        name = com_dlc
+        value = flag:$dlc$
+    }
+    fix_variable_error = { variable = $dlc$ }
+}

@@ -111,6 +111,8 @@ Current Scope:
 11) More than three local goods can now be shown in state building panel correctly (Credit to Bahmut)
 12) Variables can be set on journal entries to change the colors of certain progress bars (Credit to Alexedishi)
 13) Framework to create EU5 style situation journal entries (Credit to Bahmut)
+14) Support for more than 3 unit types in GUI (Credit to lil jimmy)
+15) Support for more mobilization options per category in GUI (Credit to lil jimmy)
 
 ## Alternative Event Windows
 

@@ -61,8 +61,8 @@ create_ongoing_com_situation_journal_entry = {
         }
 
         je:$journal$ = {
-            add_existing_com_situation = {
-                id = $situation_id$
+            add_ongoing_com_situation = {
+                situation_id = $situation_id$
             }
         }
     }

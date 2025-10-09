@@ -29,7 +29,7 @@ All situations have two main sides that are set up at the start (Though there ar
 Each side has a name, description and a leader country.
 
 - The whole situation itself is identified by its id
-- The id can be anything that can be assigned to a variable
+- The id can be any localization key
 - The framework guarantees that situations with the same id are always the same anywhere they are used
 - This means as long as the same ids are used, the situation is the same everywhere and manipulation in one context is reflected in another
 

@@ -660,11 +660,11 @@ clear_com_situation_factions = {
     }
 }
 
-# Clear all factions for both sides
+# Clear all factions for all sides
 # This effect has to be run inside a scope where 'scope:com_situation' is available!
-clear_com_situation_factions_both = {
+clear_com_situation_factions_all = {
     custom_tooltip = {
-        text = effect_clear_com_situation_factions_both
+        text = effect_clear_com_situation_factions_all
         if = {
             limit = {
                 NOT = {
@@ -679,6 +679,9 @@ clear_com_situation_factions_both = {
             }
             clear_com_situation_factions = {
                 side = right
+            }
+			clear_com_situation_factions = {
+                side = neutral
             }
         }
     }

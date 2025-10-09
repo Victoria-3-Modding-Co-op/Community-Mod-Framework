@@ -28,7 +28,7 @@
  effect_create_com_situation_faction: "The [TopScope.GetLocalVariable('com_faction_name').GetFlagName|v] [concept_com_situation_faction] will join on the [TopScope.GetLocalVariable('com_side_name').GetFlagName|v] side"
  effect_remove_com_situation_faction: "The [TopScope.GetLocalVariable('com_faction_name').GetFlagName|v] [concept_com_situation_faction] on the [TopScope.GetLocalVariable('com_side_name').GetFlagName|v] side will dissolve"
  effect_clear_com_situation_factions: "All [Concept('concept_com_situation_faction', '$concept_com_situation_factions$')] on the [TopScope.GetLocalVariable('com_side_name').GetFlagName|v] will dissolve"
- effect_clear_com_situation_factions_both: "All [Concept('concept_com_situation_faction', '$concept_com_situation_factions$')] on both sides will dissolve"
+ effect_clear_com_situation_factions_all: "All [Concept('concept_com_situation_faction', '$concept_com_situation_factions$')] on both sides will dissolve"
  effect_add_com_situation_faction_country: "[TopScope.GetLocalVariable('com_country').GetCountry.GetName|v] will join the [TopScope.GetLocalVariable('com_faction_name').GetFlagName|v] [concept_com_situation_faction]"
  effect_remove_com_situation_faction_country: "[TopScope.GetLocalVariable('com_country').GetCountry.GetName|v] will leave the [TopScope.GetLocalVariable('com_faction_name').GetFlagName|v] [concept_com_situation_faction]"
  effect_remove_com_situation_faction_country_all: "[TopScope.GetLocalVariable('com_country').GetCountry.GetName|v] will no longer be associated with any [concept_com_situation_faction]"

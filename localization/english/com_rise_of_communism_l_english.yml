@@ -14,6 +14,8 @@
  je_com_rise_of_communism_faction_hardliners_desc: "TODO: Fill loc key je_com_rise_of_communism_faction_hardliners_desc"
  je_com_rise_of_communism_faction_reformers: "Reformers"
  je_com_rise_of_communism_faction_reformers_desc: "TODO: Fill loc key je_com_rise_of_communism_faction_reformers_desc"
+ je_com_rise_of_communism_faction_bystanders: "Bystanders"
+ je_com_rise_of_communism_faction_bystanders_desc: "TODO: Fill loc key je_com_rise_of_communism_faction_bystanders_desc"
  je_com_rise_of_communism_button_group_main_actions: "Main Actions"
  je_com_rise_of_communism_button_group_main_actions_desc: "TODO: Fill loc key je_com_rise_of_communism_button_group_main_actions_desc"
  je_com_rise_of_communism_button_group_diplomatic_actions: "Diplomatic Actions"

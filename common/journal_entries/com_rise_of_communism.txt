@@ -94,7 +94,24 @@
             name = je_com_rise_of_communism_faction_fascists
             country = c:SWI
         }
-
+		
+        # Create Bystanders faction
+        create_com_situation_faction = {
+            side = neutral
+            name = je_com_rise_of_communism_faction_bystanders
+            desc = je_com_rise_of_communism_faction_bystanders_desc
+        }
+        add_com_situation_faction_country = {
+            side = neutral
+            name = je_com_rise_of_communism_faction_bystanders
+            country = c:PRU
+        }
+		add_com_situation_faction_country = {
+            side = neutral
+            name = je_com_rise_of_communism_faction_bystanders
+            country = c:TUR
+        }
+		
         # Create Main Actions button group
         create_com_situation_button_group = {
             name = je_com_rise_of_communism_button_group_main_actions

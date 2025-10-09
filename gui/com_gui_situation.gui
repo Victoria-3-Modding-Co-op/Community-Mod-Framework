@@ -519,7 +519,36 @@ types com_situation_types {
                 }
             }
         }
+		
+        # Neutral factions header
+        default_header_clean = {
+            using = default_list_position
+            # At least one side needs to have factions for them to show up
+            visible = "[Not(IsDataModelEmpty(ComSituation.Var('com_side_neutral').GetList('com_factions')))]"
+            blockoverride "text" {
+                raw_text = "Neutral [Concept('concept_com_situation_faction', Localize('concept_com_situation_factions'))]"
+            }
+            blockoverride "size" {
+                size = { @panel_width_plus_14 44 }
+            }
+        }
 
+        # Factions
+        flowcontainer = {
+            direction = horizontal
+            spacing = 20
+            margin = { 20 10 }
+
+            # At least one side needs to have factions for them to show up
+            visible = "[Not(IsDataModelEmpty(ComSituation.Var('com_side_neutral').GetList('com_factions')))]"
+
+            com_situation_neutral_factions = {
+                blockoverride "context" {
+                    datacontext = "[ComSituation.Var('com_side_neutral')]"
+                }
+            }
+        }
+		
         # Button Groups
         com_situation_buttons = {}
 
@@ -704,6 +733,63 @@ types com_situation_types {
                             margin = { 5 10 }
                             minimumsize = { 27 18 }
                             tiny_flag = {
+                                datacontext = "[Scope.GetCountry]"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    type com_situation_neutral_factions = flowcontainer {
+        block "context" {}
+        direction = vertical
+        spacing = 20
+        datamodel = "[Scope.GetList('com_factions')]"
+
+        item = {
+            flowcontainer = {
+                margin_top = -2
+                background = {
+                    using = simple_frame
+                }
+
+                default_header_clean_faded = {
+                    blockoverride "text" {
+                        raw_text = "[Scope.Var('com_name').GetFlagName]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "tooltip_content" {
+                                    custom_tooltip_textbox = {
+                                        raw_text = "[Scope.Var('com_name').GetFlagName]"
+                                        default_format = "#header"
+                                    }
+                                    custom_tooltip_textbox = {
+                                        raw_text = "[Scope.Var('com_desc').GetFlagName]"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    blockoverride "size" {
+                        size = { @panel_width_minus_20 45 }
+                    }
+                }
+                direction = vertical
+
+                dynamicgridbox = {
+                    parentanchor = hcenter
+                    datamodel = "[Scope.GetList('com_countries')]"
+                    datamodel_wrap = 6
+                    flipdirection = yes
+
+                    item = {
+                        flowcontainer = {
+                            visible = "[Scope.GetCountry.IsValid]"
+                            margin = { 5 10 }
+                            minimumsize = { 27 18 }
+                            small_flag = {
                                 datacontext = "[Scope.GetCountry]"
                             }
                         }

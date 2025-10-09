@@ -154,6 +154,11 @@ create_com_situation = {
                     struct_type = com_struct_situation_side
                     struct_scope = com_side_right
                 }
+				
+				create_struct = {
+                    struct_type = com_struct_situation_side
+                    struct_scope = com_side_neutral
+                }
 
                 # Create Situation
                 scope:journal_entry = {
@@ -182,6 +187,10 @@ create_com_situation = {
                     set_variable = {
                         name = com_side_right
                         value = scope:com_side_right
+                    }
+					set_variable = {
+                        name = com_side_neutral
+                        value = scope:com_side_neutral
                     }
                 }
                 scope:com_side_left = {
@@ -273,6 +282,15 @@ end_com_situation = {
                     }
                     clear_variable_list = com_factions
                 }
+				var:com_side_neutral ?= {
+                    every_in_list = {
+                        variable = com_factions
+                        destroy_struct = {
+                            struct = this
+                        }
+                    }
+                    clear_variable_list = com_factions
+                }
 
                 # Destroy sides
                 destroy_struct = {
@@ -280,6 +298,9 @@ end_com_situation = {
                 }
                 destroy_struct = {
                     struct = var:com_side_right
+                }
+				destroy_struct = {
+                    struct = var:com_side_neutral
                 }
 
                 # Destroy button groups
@@ -639,11 +660,11 @@ clear_com_situation_factions = {
     }
 }
 
-# Clear all factions for both sides
+# Clear all factions for all sides
 # This effect has to be run inside a scope where 'scope:com_situation' is available!
-clear_com_situation_factions_both = {
+clear_com_situation_factions_all = {
     custom_tooltip = {
-        text = effect_clear_com_situation_factions_both
+        text = effect_clear_com_situation_factions_all
         if = {
             limit = {
                 NOT = {
@@ -658,6 +679,9 @@ clear_com_situation_factions_both = {
             }
             clear_com_situation_factions = {
                 side = right
+            }
+			clear_com_situation_factions = {
+                side = neutral
             }
         }
     }
@@ -787,6 +811,15 @@ remove_com_situation_faction_country_all = {
                     }
                 }
                 var:com_side_right = {
+                    every_in_list = {
+                        variable = com_factions
+                        remove_list_variable = {
+                            name = com_countries
+                            target = $country$
+                        }
+                    }
+                }
+                var:com_side_neutral = {
                     every_in_list = {
                         variable = com_factions
                         remove_list_variable = {

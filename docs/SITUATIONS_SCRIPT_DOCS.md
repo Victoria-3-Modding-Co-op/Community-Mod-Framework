@@ -14,7 +14,7 @@
 * [create_com_situation_faction](#effect-create_com_situation_faction)
 * [remove_com_situation_faction](#effect-remove_com_situation_faction)
 * [clear_com_situation_factions](#effect-clear_com_situation_factions)
-* [clear_com_situation_factions_both](#effect-clear_com_situation_factions_both)
+* [clear_com_situation_factions_all](#effect-clear_com_situation_factions_all)
 * [add_com_situation_faction_country](#effect-add_com_situation_faction_country)
 * [reassign_com_situation_faction_country](#effect-reassign_com_situation_faction_country)
 * [remove_com_situation_faction_country](#effect-remove_com_situation_faction_country)
@@ -132,7 +132,7 @@ Create a new faction for the given side.
 > NOTE: This effect has to be run inside a scope where '**scope:com_situation**' is available!
 
 **Parameters:**
-- `side` either 'left' or 'right'
+- `side` one of 'left', 'right' or 'neutral'
 - `name` localization key for the name of the faction
 - `desc` localization key for the description/tooltip of the faction
 
@@ -141,7 +141,7 @@ Remove a faction from the given side.
 > NOTE: This effect has to be run inside a scope where '**scope:com_situation**' is available!
 
 **Parameters:**
-- `side` either 'left' or 'right'
+- `side` one of 'left', 'right' or 'neutral'
 - `name` localization key for the name of the faction
 
 ### Effect: `clear_com_situation_factions`
@@ -149,10 +149,10 @@ Clear all factions from the given side.
 > NOTE: This effect has to be run inside a scope where '**scope:com_situation**' is available!
 
 **Parameters:**
-- `side` either 'left' or 'right'
+- `side` one of 'left', 'right' or 'neutral'
 
-### Effect: `clear_com_situation_factions_both`
-Clear all factions for both sides.
+### Effect: `clear_com_situation_factions_all`
+Clear all factions for all sides.
 > NOTE: This effect has to be run inside a scope where '**scope:com_situation**' is available!
 
 ### Effect: `add_com_situation_faction_country`
@@ -160,7 +160,7 @@ Add a new country to a faction for the given side.
 > NOTE: This effect has to be run inside a scope where '**scope:com_situation**' is available!
 
 **Parameters:**
-- `side` either 'left' or 'right'
+- `side` one of 'left', 'right' or 'neutral'
 - `name` localization key for the name of the faction
 - `country` country scope for the new member
 
@@ -170,7 +170,7 @@ This removes the country from all other factions and adds it to the new one.
 > NOTE: This effect has to be run inside a scope where '**scope:com_situation**' is available!
 
 **Parameters:**
-- `side` either 'left' or 'right'
+- `side` one of 'left', 'right' or 'neutral'
 - `name` localization key for the name of the faction
 - `country` country scope for the new member
 
@@ -179,7 +179,7 @@ Remove a country from a faction for the given side.
 > NOTE: This effect has to be run inside a scope where '**scope:com_situation**' is available!
 
 **Parameters:**
-- `side` either 'left' or 'right'
+- `side` one of 'left', 'right' or 'neutral'
 - `name` localization key for the name of the faction
 - `country` country scope for the removed member
 
@@ -227,7 +227,7 @@ Check whether the currently scoped country is part of the given faction.
 > NOTE: This effect has to be run inside a scope where '**scope:com_situation**' is available!
 
 **Parameters:**
-- `side` either 'left' or 'right'
+- `side` one of 'left', 'right' or 'neutral'
 - `faction` localization key for the name of the faction
 
 ### Trigger: `is_com_situation_side_leader`

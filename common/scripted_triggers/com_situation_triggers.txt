@@ -60,6 +60,15 @@ is_party_in_com_situation = {
                         }
                     }
                 }
+				var:com_side_neutral ?= {
+					any_in_list = {
+						variable = com_factions
+						any_in_list = {
+							variable = com_countries
+							this = scope:com_country_temp
+						}
+					}
+                }
             }
         }
     }

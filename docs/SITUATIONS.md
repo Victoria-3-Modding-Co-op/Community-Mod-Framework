@@ -25,7 +25,7 @@ A full list of them can be found below.
 
 # Usage
 ## Setting up a new situation
-All situations have two main sides that are set up at the start (Though there are effects to change them).
+All situations have two main sides, plus a third "neutral" side, that are set up at the start (Though there are effects to change them).
 Each side has a name, description and a leader country.
 
 - The whole situation itself is identified by its id
@@ -109,6 +109,8 @@ For example, a 'Communists' side could have factions like 'Hardliners' and 'Refo
 A new faction can be created and assigned using the [create_com_situation_faction](SITUATIONS_SCRIPT_DOCS.md#effect-create_com_situation_faction) effect.
 After the creation of a faction,
 countries can be assigned to it using the [add_com_situation_faction_country](SITUATIONS_SCRIPT_DOCS.md#effect-add_com_situation_faction_country) effect.
+
+There is a third "side" for factions, neutral, which cannot have a leader. The neutral factions are not shown if none are set up.
 
 ### Button Groups
 Button groups allow scripted buttons of the journal entry to be categorized into groups.

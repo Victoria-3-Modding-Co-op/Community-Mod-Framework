@@ -1213,6 +1213,28 @@ movement_cultural_minority = {
 			}
 		}
 
+		interest_group_can_join = {
+			trigger_if = {
+				limit = {
+					c:BIC ?= owner
+				}
+				is_indian_interest_group = yes
+			}
+			trigger_else_if = {
+				limit = {
+					owner = {
+						is_country_type = colonial
+					}
+				}
+				NOT = {
+					has_ideology = ideology:ideology_colonialist
+				}
+			}
+			trigger_else = { # For example - the Austrian Aristocracy can only secede with a Polish uprising if the leader of the IG is Polish
+				leader = { culture = scope:political_movement.culture }
+			}
+		}
+
 		target_fraction_of_states = {
 			value = political_movement_identity_support
 			add = scope:clout

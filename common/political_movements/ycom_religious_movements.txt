@@ -5,7 +5,7 @@
 	character_ideologies = {
 		ideology_theocrat
 		ideology_traditionalist
-		ideology_gbbf_islamist #GOTB
+		ideology_gbbf_islamist_leader #GOTB
 		ideology_usfp_social_gospel_leader #USFP
 	}
 
@@ -60,7 +60,7 @@
 				OR = {
 					has_ideology = ideology:ideology_traditionalist
 					has_ideology = ideology:ideology_theocrat
-					has_ideology = ideology:ideology_gbbf_islamist #GOTB
+					has_ideology = ideology:ideology_gbbf_islamist_leader #GOTB
 				}
 			}
 			multiply = {

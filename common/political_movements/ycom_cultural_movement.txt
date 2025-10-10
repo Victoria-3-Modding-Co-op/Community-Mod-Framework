@@ -5,7 +5,7 @@
 	character_ideologies = {
 		ideology_ethno_nationalist
 		ideology_usfp_social_darwinist_leader
-		ideology_gbbf_islamist # GOTB
+		ideology_gbbf_islamist_leader # GOTB
 	}
 	
 	can_cause_obstinance = yes
@@ -51,7 +51,7 @@
 			limit = {
 				has_ideology = ideology:ideology_ethno_nationalist
 				has_ideology = ideology:ideology_usfp_social_darwinist_leader #USFP
-				has_ideology = ideology:ideology_gbbf_islamist # GOTB
+				has_ideology = ideology:ideology_gbbf_islamist_leader # GOTB
 			}
 			multiply = {
 				value = 5

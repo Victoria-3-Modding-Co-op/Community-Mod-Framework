@@ -6485,7 +6485,7 @@ movement_reactionary = {
 		ideology_protectionist
 		ideology_authoritarian
 		ideology_luddite
-		ideology_gbbf_islamist #GOTB
+		ideology_gbbf_islamist_leader #GOTB
 	}
 
 	creation_trigger = {

@@ -150,6 +150,7 @@ Letter Style Window:
 - [com_event_window_letter_image](docs/event_windows/com_event_window_letter_image.png)
 - [com_event_window_letter_paper](docs/event_windows/com_event_window_letter_paper.png) (Default View)
 - [com_event_window_letter_paper](docs/event_windows/com_event_window_letter_paper_transcribed.png) (Transcribed View)
+- [com_event_window_telegram](docs/event_windows/com_event_window_telegram.png)
 
 ### Usage Notes
 - For ease of use, any modded windows with characters will expect a character scope for the arguments `left_icon = scope:some_character`, `right_icon = scope:some_character` and `center_icon = scope:some_character` if the event has three characters. Just like the vanilla events do.

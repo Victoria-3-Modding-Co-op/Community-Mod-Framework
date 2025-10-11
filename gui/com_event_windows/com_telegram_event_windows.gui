@@ -1,0 +1,198 @@
+######################################
+# COMMUNITY GUI MODDED EVENT WINDOWS #
+######################################
+
+
+types com_window_types {
+
+    type com_event_window_telegram = com_event_window_letter_simple {
+        blockoverride "event_name" {
+            name = "com_event_window_telegram"
+        }
+        blockoverride "text_background" {
+            background = {
+                using = paper_bg_light
+                margin = { -30 -30 }
+            }
+        }
+        blockoverride "text_header" {
+            flowcontainer = {
+                margin_bottom = -20
+                icon = {
+                    size = { 1000 256 }
+                    texture = "gfx/interface/event_window/com_telegram_header.dds"
+                }
+            }
+        }
+        blockoverride "text_footer" {
+            icon = {
+                size = { 1000 32 }
+                texture = "gfx/interface/event_window/com_telegram_footer.dds"
+            }
+        }
+        blockoverride "text_description" {
+            textbox = {
+                visible = "[Not(GetVariableSystem.Exists('com_event_window_telegram'))]"
+                name = "description_fancy"
+                multiline = yes
+                autoresize = yes
+                minimumsize = { 980 -1 }
+                maximumsize = { 980 -1 }
+                parentanchor = top|hcenter
+                align = hcenter|nobaseline
+                text = "[EventWindow.GetDescription]"
+                margin = { 10 0 }
+                using = fontsize_large
+                default_format = "#com_typewriter"
+            }
+            textbox = {
+                visible = "[GetVariableSystem.Exists('com_event_window_telegram')]"
+                name = "description_clean"
+                multiline = yes
+                autoresize = yes
+                minimumsize = { 980 -1 }
+                maximumsize = { 980 -1 }
+                parentanchor = top|hcenter
+                align = hcenter|nobaseline
+                text = "[EventWindow.GetDescription]"
+                margin = { 10 0 }
+                using = fontsize_large
+                default_format = "#com_letter"
+            }
+
+        }
+        blockoverride "text_flavor" {
+            textbox = {
+                visible = "[Not(GetVariableSystem.Exists('com_event_window_telegram'))]"
+                name = "flavortext_fancy"
+                multiline = yes
+                autoresize = yes
+                minimumsize = { 980 -1 }
+                maximumsize = { 980 -1 }
+                parentanchor = top|hcenter
+                default_format = "#com_typewriter"
+                align = top|left
+                text = "[EventWindow.GetFlavor]"
+                margin = { 30 0 }
+            }
+            textbox = {
+                visible = "[GetVariableSystem.Exists('com_event_window_telegram')]"
+                name = "flavortext_clean"
+                multiline = yes
+                autoresize = yes
+                minimumsize = { 980 -1 }
+                maximumsize = { 980 -1 }
+                parentanchor = top|hcenter
+                default_format = "#com_letter"
+                align = top|left
+                text = "[EventWindow.GetFlavor]"
+                margin = { 30 0 }
+            }
+        }
+        blockoverride "additional_button" {
+            button_icon_round = {
+                parentanchor = top|right
+                position = { -40 45 }
+                size = { 30 30 }
+                onclick = "[GetVariableSystem.Toggle('com_event_window_telegram')]"
+
+                blockoverride "icon" {
+                    texture = "gfx/interface/buttons/button_icons/reset.dds"
+                }
+            }
+        }
+
+        blockoverride "event_buttons" {
+            dynamicgridbox = {
+                direction = vertical
+                using = default_list_position
+                datamodel = "[EventWindow.GetOptions]"
+                datamodel_wrap = 2
+                flipdirection = yes
+
+                item = {
+                    container = {
+
+                        widget = {
+                            visible = "[EventOption.IsHighlightedOption]"
+
+                            button = {
+                                size = { 96% 100% }
+                                parentanchor = hcenter
+                                using = default_button_primary_action
+                                onclick = "[EventOption.Select]"
+                                tooltip = "[EventOption.GetDesc]"
+                                using = tooltip_ws
+                                enabled = "[EventOption.IsEnabled]"
+                                using = confirm_button_sound
+                            }
+
+                            textbox = {
+                                resizeparent = yes
+                                minimumsize = { 400 42 }
+                                maximumsize = { 400 -1 }
+                                text = "[EventOption.GetText]"
+                                multiline = yes
+                                align = hcenter|nobaseline
+                                autoresize = yes
+                                margin = { 30 10 }
+                            }
+                        }
+
+                        widget = {
+                            visible = "[Not(EventOption.IsHighlightedOption)]"
+
+                            button = {
+                                size = { 96% 100% }
+                                parentanchor = hcenter
+                                using = default_button_action
+                                onclick = "[EventOption.Select]"
+                                tooltip = "EVENT_OPTION_TOOLTIP"
+                                using = tooltip_ws
+                                enabled = "[EventOption.IsEnabled]"
+                                using = confirm_button_sound
+                            }
+
+                            textbox = {
+                                resizeparent = yes
+                                minimumsize = { 400 42 }
+                                maximumsize = { 400 -1 }
+                                text = "[EventOption.GetText]"
+                                multiline = yes
+                                align = hcenter|nobaseline
+                                autoresize = yes
+                                margin = { 30 10 }
+                            }
+
+                            ### Time until the default option will be picked
+                            round_progress_default = {
+                                visible = "[EventOption.IsDefaultOption]"
+                                parentanchor = right|vcenter
+                                position = { 0 0.5 }
+                                size = { 27 27 }
+                                tooltip = "DEFAULT_EVENT_OPTION"
+                                value = "[Event.GetPercentageRemainingDays]"
+
+                                icon = {
+                                    size = { 26 26 }
+                                    position = { -0.2 -0.2 }
+                                    parentanchor = center
+                                    texture = "gfx/interface/icons/generic_icons/event_default_option.dds"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        blockoverride "text_format_dlc" {
+            default_format = "#white;bold;shadow"
+        }
+        blockoverride "text_divider" {}
+        blockoverride "text_button_spacing" {}
+        blockoverride "text_format_description" {
+            default_format = "#com_letter_black;bold"
+        }
+    }
+
+}

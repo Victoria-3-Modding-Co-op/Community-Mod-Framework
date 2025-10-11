@@ -538,3 +538,4 @@ event_window_ethics = {}
 com_event_window_letter_simple = {}
 com_event_window_letter_paper = {}
 com_event_window_letter_image = {}
+com_event_window_telegram = {}

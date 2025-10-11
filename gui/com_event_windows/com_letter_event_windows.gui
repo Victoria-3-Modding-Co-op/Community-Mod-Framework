@@ -89,6 +89,8 @@ types com_window_types {
                         parentanchor = right|vcenter
                         margin = { 40 50 }
 
+                        block "text_header" {}
+
                         block "text_background" {
                             background = {
                                 using = entry_bg_simple_solid
@@ -96,20 +98,22 @@ types com_window_types {
                             }
                         }
 
-                        textbox = {
-                            name = "description"
-                            multiline = yes
-                            autoresize = yes
-                            minimumsize = { 500 -1 }
-                            maximumsize = { 520 -1 }
-                            parentanchor = top|hcenter
-                            align = hcenter|nobaseline
-                            text = "[EventWindow.GetDescription]"
-                            block "text_format_description" {
-                                #default_format = "#bold"
+                        block "text_description" {
+                            textbox = {
+                                name = "description"
+                                multiline = yes
+                                autoresize = yes
+                                minimumsize = { 500 -1 }
+                                maximumsize = { 520 -1 }
+                                parentanchor = top|hcenter
+                                align = hcenter|nobaseline
+                                text = "[EventWindow.GetDescription]"
+                                block "text_format_description" {
+                                    #default_format = "#bold"
+                                }
+                                margin = { 10 0 }
+                                using = fontsize_large
                             }
-                            margin = { 10 0 }
-                            using = fontsize_large
                         }
 
 
@@ -141,87 +145,91 @@ types com_window_types {
                             widget = { size = { 20 10 }}
                         }
 
-                        flowcontainer = {
-                            direction = vertical
-                            using = default_list_position
-                            datamodel = "[EventWindow.GetOptions]"
-                            spacing = 5
-                            margin_bottom = 10
+                        block "event_buttons" {
+                            flowcontainer = {
+                                direction = vertical
+                                using = default_list_position
+                                datamodel = "[EventWindow.GetOptions]"
+                                spacing = 5
+                                margin_bottom = 10
 
-                            item = {
-                                container = {
+                                item = {
+                                    container = {
 
-                                    widget = {
-                                        visible = "[EventOption.IsHighlightedOption]"
+                                        widget = {
+                                            visible = "[EventOption.IsHighlightedOption]"
 
-                                        button = {
-                                            size = { 96% 100% }
-                                            parentanchor = hcenter
-                                            using = default_button_primary_action
-                                            onclick = "[EventOption.Select]"
-                                            tooltip = "[EventOption.GetDesc]"
-                                            using = tooltip_ws
-                                            enabled = "[EventOption.IsEnabled]"
-                                            using = confirm_button_sound
+                                            button = {
+                                                size = { 96% 100% }
+                                                parentanchor = hcenter
+                                                using = default_button_primary_action
+                                                onclick = "[EventOption.Select]"
+                                                tooltip = "[EventOption.GetDesc]"
+                                                using = tooltip_ws
+                                                enabled = "[EventOption.IsEnabled]"
+                                                using = confirm_button_sound
+                                            }
+
+                                            textbox = {
+                                                resizeparent = yes
+                                                minimumsize = { 500 42 }
+                                                maximumsize = { 500 -1 }
+                                                text = "[EventOption.GetText]"
+                                                multiline = yes
+                                                align = hcenter|nobaseline
+                                                autoresize = yes
+                                                margin = { 30 10 }
+                                            }
                                         }
 
-                                        textbox = {
-                                            resizeparent = yes
-                                            minimumsize = { 500 42 }
-                                            maximumsize = { 500 -1 }
-                                            text = "[EventOption.GetText]"
-                                            multiline = yes
-                                            align = hcenter|nobaseline
-                                            autoresize = yes
-                                            margin = { 30 10 }
-                                        }
-                                    }
+                                        widget = {
+                                            visible = "[Not(EventOption.IsHighlightedOption)]"
 
-                                    widget = {
-                                        visible = "[Not(EventOption.IsHighlightedOption)]"
+                                            button = {
+                                                size = { 96% 100% }
+                                                parentanchor = hcenter
+                                                using = default_button_action
+                                                onclick = "[EventOption.Select]"
+                                                tooltip = "EVENT_OPTION_TOOLTIP"
+                                                using = tooltip_ws
+                                                enabled = "[EventOption.IsEnabled]"
+                                                using = confirm_button_sound
+                                            }
 
-                                        button = {
-                                            size = { 96% 100% }
-                                            parentanchor = hcenter
-                                            using = default_button_action
-                                            onclick = "[EventOption.Select]"
-                                            tooltip = "EVENT_OPTION_TOOLTIP"
-                                            using = tooltip_ws
-                                            enabled = "[EventOption.IsEnabled]"
-                                            using = confirm_button_sound
-                                        }
+                                            textbox = {
+                                                resizeparent = yes
+                                                minimumsize = { 500 42 }
+                                                maximumsize = { 500 -1 }
+                                                text = "[EventOption.GetText]"
+                                                multiline = yes
+                                                align = hcenter|nobaseline
+                                                autoresize = yes
+                                                margin = { 30 10 }
+                                            }
 
-                                        textbox = {
-                                            resizeparent = yes
-                                            minimumsize = { 500 42 }
-                                            maximumsize = { 500 -1 }
-                                            text = "[EventOption.GetText]"
-                                            multiline = yes
-                                            align = hcenter|nobaseline
-                                            autoresize = yes
-                                            margin = { 30 10 }
-                                        }
+                                            ### Time until the default option will be picked
+                                            round_progress_default = {
+                                                visible = "[EventOption.IsDefaultOption]"
+                                                parentanchor = right|vcenter
+                                                position = { 0 0.5 }
+                                                size = { 27 27 }
+                                                tooltip = "DEFAULT_EVENT_OPTION"
+                                                value = "[Event.GetPercentageRemainingDays]"
 
-                                        ### Time until the default option will be picked
-                                        round_progress_default = {
-                                            visible = "[EventOption.IsDefaultOption]"
-                                            parentanchor = right|vcenter
-                                            position = { 0 0.5 }
-                                            size = { 27 27 }
-                                            tooltip = "DEFAULT_EVENT_OPTION"
-                                            value = "[Event.GetPercentageRemainingDays]"
-
-                                            icon = {
-                                                size = { 26 26 }
-                                                position = { -0.2 -0.2 }
-                                                parentanchor = center
-                                                texture = "gfx/interface/icons/generic_icons/event_default_option.dds"
+                                                icon = {
+                                                    size = { 26 26 }
+                                                    position = { -0.2 -0.2 }
+                                                    parentanchor = center
+                                                    texture = "gfx/interface/icons/generic_icons/event_default_option.dds"
+                                                }
                                             }
                                         }
                                     }
                                 }
                             }
                         }
+
+                        block "text_footer" {}
 
                         # button = {
                         #     parentanchor = hcenter

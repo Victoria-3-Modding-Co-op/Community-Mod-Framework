@@ -6,6 +6,12 @@
         format = "size:14;FONT:ComHandwrittenLetter;com_letter_black"
     }
 
+    # Typewriter
+    format = {
+        name = com_typewriter
+        format = "size:18;FONT:ComTypewriter;com_letter_black"
+    }
+
     # Transcribed Letter
     format = {
         name = com_letter

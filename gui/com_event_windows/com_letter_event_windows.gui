@@ -98,46 +98,47 @@ types com_window_types {
                             }
                         }
 
-                        block "text_description" {
-                            textbox = {
-                                name = "description"
-                                multiline = yes
-                                autoresize = yes
-                                minimumsize = { 500 -1 }
-                                maximumsize = { 520 -1 }
-                                parentanchor = top|hcenter
-                                align = hcenter|nobaseline
-                                text = "[EventWindow.GetDescription]"
-                                block "text_format_description" {
-                                    #default_format = "#bold"
+                        block "text_content" {
+                            block "text_description" {
+                                textbox = {
+                                    name = "description"
+                                    multiline = yes
+                                    autoresize = yes
+                                    minimumsize = { 500 -1 }
+                                    maximumsize = { 520 -1 }
+                                    parentanchor = top|hcenter
+                                    align = hcenter|nobaseline
+                                    text = "[EventWindow.GetDescription]"
+                                    block "text_format_description" {
+                                        #default_format = "#bold"
+                                    }
+                                    margin = { 10 0 }
+                                    using = fontsize_large
                                 }
-                                margin = { 10 0 }
-                                using = fontsize_large
                             }
-                        }
 
-
-                        block "text_divider" {
-                            divider_decorative = {
-                                minimumsize = { 480 -1 }
-                                maximumsize = { 480 -1 }
-                            }
-                        }
-
-                        block "text_flavor" {
-                            textbox = {
-                                name = "flavortext"
-                                multiline = yes
-                                autoresize = yes
-                                minimumsize = { 500 -1 }
-                                maximumsize = { 500 -1 }
-                                parentanchor = top|hcenter
-                                block "text_format_flavor" {
-                                    default_format = "#lore"
+                            block "text_divider" {
+                                divider_decorative = {
+                                    minimumsize = { 480 -1 }
+                                    maximumsize = { 480 -1 }
                                 }
-                                align = top|left
-                                text = "[EventWindow.GetFlavor]"
-                                margin = { 30 10 }
+                            }
+
+                            block "text_flavor" {
+                                textbox = {
+                                    name = "flavortext"
+                                    multiline = yes
+                                    autoresize = yes
+                                    minimumsize = { 500 -1 }
+                                    maximumsize = { 500 -1 }
+                                    parentanchor = top|hcenter
+                                    block "text_format_flavor" {
+                                        default_format = "#lore"
+                                    }
+                                    align = top|left
+                                    text = "[EventWindow.GetFlavor]"
+                                    margin = { 30 10 }
+                                }
                             }
                         }
 

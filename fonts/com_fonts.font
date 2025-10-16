@@ -7,19 +7,14 @@ fontfiles = {
         files = {
             "fonts/com_fonts/HomemadeApple-Regular.ttf"
             "fonts/com_fonts/KimjungchulScript-Regular.ttf"
-			"fonts/com_fonts/KimjungchulScript-Regular.ttf"
-            "fonts/com_fonts/KimjungchulScript-Regular.ttf"
-            "fonts/com_fonts/KimjungchulScript-Regular.ttf"
+            "fonts/com_fonts/japanese.ttf"
+            "fonts/com_fonts/gangjian-handwriting.ttf"
         }
     }
 
     group = {
         languages = { "l_simp_chinese" }
         files = {
-            "fonts/com_fonts/gangjian-handwriting.ttf"
-            "fonts/com_fonts/gangjian-handwriting.ttf"
-			"fonts/com_fonts/gangjian-handwriting.ttf"
-            "fonts/com_fonts/gangjian-handwriting.ttf"
             "fonts/com_fonts/gangjian-handwriting.ttf"
         }
     }
@@ -29,9 +24,6 @@ fontfiles = {
         files = {
             "fonts/com_fonts/japanese.ttf"
             "fonts/com_fonts/KimjungchulScript-Regular.ttf"
-			"fonts/com_fonts/KimjungchulScript-Regular.ttf"
-            "fonts/com_fonts/KimjungchulScript-Regular.ttf"
-            "fonts/com_fonts/KimjungchulScript-Regular.ttf"
         }
     }
 
@@ -39,10 +31,6 @@ fontfiles = {
         languages = { "l_korean" }
         files = {
             "fonts/com_fonts/KimjungchulScript-Regular.ttf" # GunglipbakmulgwanClassicM is used for ParadoxVictorian in Korean.
-            "fonts/com_fonts/KimjungchulScript-Regular.ttf"
-			"fonts/com_fonts/KimjungchulScript-Regular.ttf"
-            "fonts/com_fonts/KimjungchulScript-Regular.ttf"
-            "fonts/com_fonts/KimjungchulScript-Regular.ttf"
         }
     }
 }
@@ -56,19 +44,14 @@ fontfiles = {
         files = {
             "fonts/com_fonts/SpecialElite.ttf"
             "fonts/com_fonts/KimjungchulScript-Regular.ttf"
-			"fonts/com_fonts/KimjungchulScript-Regular.ttf"
-            "fonts/com_fonts/KimjungchulScript-Regular.ttf"
-            "fonts/com_fonts/KimjungchulScript-Regular.ttf"
+            "fonts/com_fonts/japanese.ttf"
+            "fonts/com_fonts/gangjian-handwriting.ttf"
         }
     }
 
     group = {
         languages = { "l_simp_chinese" }
         files = {
-            "fonts/com_fonts/gangjian-handwriting.ttf"
-            "fonts/com_fonts/gangjian-handwriting.ttf"
-			"fonts/com_fonts/gangjian-handwriting.ttf"
-            "fonts/com_fonts/gangjian-handwriting.ttf"
             "fonts/com_fonts/gangjian-handwriting.ttf"
         }
     }
@@ -78,20 +61,25 @@ fontfiles = {
         files = {
             "fonts/com_fonts/japanese.ttf"
             "fonts/com_fonts/KimjungchulScript-Regular.ttf"
-			"fonts/com_fonts/KimjungchulScript-Regular.ttf"
-            "fonts/com_fonts/KimjungchulScript-Regular.ttf"
-            "fonts/com_fonts/KimjungchulScript-Regular.ttf"
         }
     }
 
     group = {
         languages = { "l_korean" }
         files = {
-            "fonts/com_fonts/KimjungchulScript-Regular.ttf" # GunglipbakmulgwanClassicM is used for ParadoxVictorian in Korean.
             "fonts/com_fonts/KimjungchulScript-Regular.ttf"
-			"fonts/com_fonts/KimjungchulScript-Regular.ttf"
-            "fonts/com_fonts/KimjungchulScript-Regular.ttf"
-            "fonts/com_fonts/KimjungchulScript-Regular.ttf"
+        }
+    }
+}
+
+fontfiles = {
+    name = "com_newspaper_header"
+    always_load = yes
+
+    group = {
+        languages = { "l_english" "l_braz_por" "l_french" "l_german" "l_polish" "l_russian" "l_spanish" "l_turkish" "l_simp_chinese" "l_japanese" "l_korean" }
+        files = {
+            "fonts/com_fonts/UnifrakturMaguntia-Regular.ttf"
         }
     }
 }
@@ -131,5 +119,24 @@ font = {
     fontstyle = {
         style = bold
         fontfiles = "com_typewriter_regular"
+    }
+}
+
+font = {
+    name = "ComNewspaperHeader"
+
+    fontstyle = {
+        style = regular
+        fontfiles = "com_newspaper_header"
+    }
+
+    fontstyle = {
+        style = italic
+        fontfiles = "com_newspaper_header"
+    }
+
+    fontstyle = {
+        style = bold
+        fontfiles = "com_newspaper_header"
     }
 }

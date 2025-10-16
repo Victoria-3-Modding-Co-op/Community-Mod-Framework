@@ -195,4 +195,359 @@ types com_window_types {
         }
     }
 
+    type com_event_window_newspaper = com_event_window_letter_simple {
+        blockoverride "event_name" {
+            name = "com_event_window_newspaper"
+        }
+        blockoverride "text_background" {
+            background = {
+                using = paper_bg_light
+                margin = { -30 -30 }
+            }
+        }
+        blockoverride "text_header" {
+            flowcontainer = {
+                name = "newspaper_header"
+                direction = vertical
+                spacing = 0
+                parentanchor = hcenter
+                margin_top = 10
+
+                textbox = {
+                    visible = "[EqualTo_string(Localize(Concatenate(Event.GetKey, '.sub_title')), Concatenate(Event.GetKey, '.sub_title'))]"
+                    name = "newspaper_header_name"
+                    multiline = yes
+                    autoresize = yes
+                    minimumsize = { 950 -1 }
+                    maximumsize = { 950 -1 }
+                    parentanchor = top|hcenter
+                    align = hcenter|nobaseline
+                    raw_text = "Western Mail"
+                    margin = { 10 0 }
+                    default_format = "#com_newspaper_header"
+                }
+                textbox = {
+                    visible = "[Not(EqualTo_string(Localize(Concatenate(Event.GetKey, '.sub_title')), Concatenate(Event.GetKey, '.sub_title')))]"
+                    name = "newspaper_header_name_dynamic"
+                    multiline = yes
+                    autoresize = yes
+                    minimumsize = { 950 -1 }
+                    maximumsize = { 950 -1 }
+                    parentanchor = top|hcenter
+                    align = hcenter|nobaseline
+                    text = "[Localize(Concatenate(Event.GetKey, '.sub_title'))]"
+                    margin = { 10 0 }
+                    default_format = "#com_newspaper_header"
+                }
+
+                icon = {
+                    parentanchor = top|hcenter
+                    spriteType = Corneredstretched
+                    size = { 950 4 }
+                    texture = "gfx/interface/event_window/com_newspaper_header_separator.dds"
+                }
+
+                widget = {
+                    parentanchor = hcenter
+                    size = { 920 40 }
+
+                    textbox = {
+                        visible = "[EqualTo_string(Localize(Concatenate(Event.GetKey, '.sub_left')), Concatenate(Event.GetKey, '.sub_left'))]"
+                        parentanchor = left|vcenter
+                        multiline = yes
+                        autoresize = yes
+                        align = hcenter|nobaseline
+                        raw_text = "#bold No. 512#!"
+                        using = fontsize_large
+                        default_format = "#com_newspaper_black"
+                    }
+                    textbox = {
+                        visible = "[Not(EqualTo_string(Localize(Concatenate(Event.GetKey, '.sub_left')), Concatenate(Event.GetKey, '.sub_left')))]"
+                        parentanchor = left|vcenter
+                        multiline = yes
+                        autoresize = yes
+                        align = hcenter|nobaseline
+                        text = "[Localize(Concatenate(Event.GetKey, '.sub_left'))]"
+                        using = fontsize_large
+                        default_format = "#com_newspaper_black"
+                    }
+
+                    textbox = {
+                        visible = "[EqualTo_string(Localize(Concatenate(Event.GetKey, '.sub_middle')), Concatenate(Event.GetKey, '.sub_middle'))]"
+                        parentanchor = hcenter|vcenter
+                        multiline = yes
+                        autoresize = yes
+                        align = hcenter|nobaseline
+                        raw_text = "[TimeKeeper.GetDayOfWeek], [TimeKeeper.GetCurrentDate.Format('wmw wd, wy')]"
+                        using = fontsize_large
+                        default_format = "#com_newspaper_black"
+                    }
+                    textbox = {
+                        visible = "[Not(EqualTo_string(Localize(Concatenate(Event.GetKey, '.sub_middle')), Concatenate(Event.GetKey, '.sub_middle')))]"
+                        parentanchor = hcenter|vcenter
+                        multiline = yes
+                        autoresize = yes
+                        align = hcenter|nobaseline
+                        raw_text = "[Localize(Concatenate(Event.GetKey, '.sub_middle'))]"
+                        using = fontsize_large
+                        default_format = "#com_newspaper_black"
+                    }
+
+                    textbox = {
+                        visible = "[EqualTo_string(Localize(Concatenate(Event.GetKey, '.sub_right')), Concatenate(Event.GetKey, '.sub_right'))]"
+                        parentanchor = right|vcenter
+                        multiline = yes
+                        autoresize = yes
+                        align = hcenter|nobaseline
+                        raw_text = "#bold ONE PENNY#!"
+                        using = fontsize_large
+                        default_format = "#com_newspaper_black"
+                    }
+                    textbox = {
+                        visible = "[Not(EqualTo_string(Localize(Concatenate(Event.GetKey, '.sub_right')), Concatenate(Event.GetKey, '.sub_right')))]"
+                        parentanchor = right|vcenter
+                        multiline = yes
+                        autoresize = yes
+                        align = hcenter|nobaseline
+                        text = "[Localize(Concatenate(Event.GetKey, '.sub_right'))]"
+                        using = fontsize_large
+                        default_format = "#com_newspaper_black"
+                    }
+                }
+
+
+                icon = {
+                    parentanchor = top|hcenter
+                    spriteType = Corneredstretched
+                    size = { 950 10 }
+                    texture = "gfx/interface/event_window/com_newspaper_header_underline.dds"
+                }
+            }
+        }
+
+        blockoverride "text_content" {
+            flowcontainer = {
+                parentanchor = top|hcenter
+                minimumsize = { 920 -1 }
+                maximumsize = { 920 -1 }
+                spacing = 20
+                icon = {
+                    spriteType = Corneredstretched
+                    size = { 448 300 }
+                    texture = "gfx/interface/event_window/com_newspaper_header_separator.dds"
+
+                    # image
+                    icon = {
+                        parentanchor = center
+                        visible = "[Event.HasTexture]"
+                        texture = "[Event.GetTexture]"
+                        alwaystransparent = yes
+                        size = { 440 292 }
+                    }
+
+                    # animated video
+                    video_icon = {
+                        parentanchor = center
+                        visible = "[Event.HasVideo]"
+                        video = "[Event.GetVideo]"
+                        size = { 440 292 }
+                        alwaystransparent = yes
+                        loop = no
+                    }
+                }
+                flowcontainer = {
+                    direction = vertical
+                    spacing = 10
+
+                    textbox = {
+                        name = "newspaper_headline"
+                        multiline = yes
+                        autoresize = yes
+                        minimumsize = { 450 -1 }
+                        maximumsize = { 450 -1 }
+                        align = left|nobaseline
+                        text = "[EventWindow.GetTitle]"
+                        margin = { 10 0 }
+                        using = fontsize_xxl
+                        default_format = "#com_newspaper_black;bold"
+                    }
+                    textbox = {
+                        name = "newspaper_text_description"
+                        multiline = yes
+                        autoresize = yes
+                        minimumsize = { 450 -1 }
+                        maximumsize = { 450 -1 }
+                        align = left
+                        text = "[EventWindow.GetDescription]"
+                        margin = { 10 0 }
+                        default_format = "#com_newspaper_black"
+                    }
+                    textbox = {
+                        name = "newspaper_text_flavor"
+                        multiline = yes
+                        autoresize = yes
+                        minimumsize = { 450 -1 }
+                        maximumsize = { 450 -1 }
+                        align = left
+                        text = "[EventWindow.GetFlavor]"
+                        margin = { 10 0 }
+                        default_format = "#com_newspaper_black"
+                    }
+                }
+            }
+
+        }
+        blockoverride "text_description" {
+            textbox = {
+                visible = "[Not(GetVariableSystem.Exists('com_event_window_telegram'))]"
+                name = "description_fancy"
+                multiline = yes
+                autoresize = yes
+                minimumsize = { 980 -1 }
+                maximumsize = { 980 -1 }
+                parentanchor = top|hcenter
+                align = hcenter|nobaseline
+                text = "[EventWindow.GetDescription]"
+                margin = { 10 0 }
+                using = fontsize_large
+                default_format = "#com_typewriter"
+            }
+            textbox = {
+                visible = "[GetVariableSystem.Exists('com_event_window_telegram')]"
+                name = "description_clean"
+                multiline = yes
+                autoresize = yes
+                minimumsize = { 980 -1 }
+                maximumsize = { 980 -1 }
+                parentanchor = top|hcenter
+                align = hcenter|nobaseline
+                text = "[EventWindow.GetDescription]"
+                margin = { 10 0 }
+                using = fontsize_large
+                default_format = "#com_letter"
+            }
+
+        }
+        blockoverride "text_flavor" {
+            textbox = {
+                visible = "[Not(GetVariableSystem.Exists('com_event_window_telegram'))]"
+                name = "flavortext_fancy"
+                multiline = yes
+                autoresize = yes
+                minimumsize = { 980 -1 }
+                maximumsize = { 980 -1 }
+                parentanchor = top|hcenter
+                default_format = "#com_typewriter"
+                align = top|left
+                text = "[EventWindow.GetFlavor]"
+                margin = { 30 0 }
+            }
+            textbox = {
+                visible = "[GetVariableSystem.Exists('com_event_window_telegram')]"
+                name = "flavortext_clean"
+                multiline = yes
+                autoresize = yes
+                minimumsize = { 980 -1 }
+                maximumsize = { 980 -1 }
+                parentanchor = top|hcenter
+                default_format = "#com_letter"
+                align = top|left
+                text = "[EventWindow.GetFlavor]"
+                margin = { 30 0 }
+            }
+        }
+
+        blockoverride "event_buttons" {
+            dynamicgridbox = {
+                using = default_list_position
+                datamodel = "[EventWindow.GetOptions]"
+                datamodel_wrap = 2
+                flipdirection = yes
+
+                item = {
+                    flowcontainer = {
+                        margin = { 4 4 }
+
+                        widget = {
+                            visible = "[EventOption.IsHighlightedOption]"
+
+                            button = {
+                                size = { 96% 100% }
+                                parentanchor = hcenter
+                                using = default_button_primary_action
+                                onclick = "[EventOption.Select]"
+                                tooltip = "[EventOption.GetDesc]"
+                                using = tooltip_ws
+                                enabled = "[EventOption.IsEnabled]"
+                                using = confirm_button_sound
+                            }
+
+                            textbox = {
+                                resizeparent = yes
+                                minimumsize = { 400 42 }
+                                maximumsize = { 400 -1 }
+                                text = "[EventOption.GetText]"
+                                multiline = yes
+                                align = hcenter|nobaseline
+                                autoresize = yes
+                                margin = { 30 10 }
+                            }
+                        }
+
+                        widget = {
+                            visible = "[Not(EventOption.IsHighlightedOption)]"
+
+                            button = {
+                                size = { 96% 100% }
+                                parentanchor = hcenter
+                                using = default_button_action
+                                onclick = "[EventOption.Select]"
+                                tooltip = "EVENT_OPTION_TOOLTIP"
+                                using = tooltip_ws
+                                enabled = "[EventOption.IsEnabled]"
+                                using = confirm_button_sound
+                            }
+
+                            textbox = {
+                                resizeparent = yes
+                                minimumsize = { 400 42 }
+                                maximumsize = { 400 -1 }
+                                text = "[EventOption.GetText]"
+                                multiline = yes
+                                align = hcenter|nobaseline
+                                autoresize = yes
+                                margin = { 30 10 }
+                            }
+
+                            ### Time until the default option will be picked
+                            round_progress_default = {
+                                visible = "[EventOption.IsDefaultOption]"
+                                parentanchor = right|vcenter
+                                position = { 0 0.5 }
+                                size = { 27 27 }
+                                tooltip = "DEFAULT_EVENT_OPTION"
+                                value = "[Event.GetPercentageRemainingDays]"
+
+                                icon = {
+                                    size = { 26 26 }
+                                    position = { -0.2 -0.2 }
+                                    parentanchor = center
+                                    texture = "gfx/interface/icons/generic_icons/event_default_option.dds"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        blockoverride "text_format_dlc" {
+            default_format = "#white;bold;shadow"
+        }
+        blockoverride "text_divider" {}
+        blockoverride "text_button_spacing" {}
+        blockoverride "text_format_description" {
+            default_format = "#com_letter_black;bold"
+        }
+    }
+
 }

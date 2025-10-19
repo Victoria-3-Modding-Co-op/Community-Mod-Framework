@@ -1,0 +1,247 @@
+﻿types military_formation_panel_types
+{
+	type military_formation_panel_overview_content = flowcontainer {
+		direction = vertical
+		using = default_list_position
+		spacing = 10
+
+		### COMMANDERS
+		default_header = {
+			using = default_fade_in_out
+
+			blockoverride "text" {
+				text = "MILITARY_FORMATION_COMMANDERS"
+			}
+		}
+
+		### If not Player and no commanders - Show empty state
+		empty_state = {
+			blockoverride "visible" {
+				visible = "[And(IsDataModelEmpty(MilitaryFormation.GetCommanders), Not(MilitaryFormation.GetCountry.IsLocalPlayer))]"
+			}
+			blockoverride "text" {
+				text = "NO_COMMANDERS_IN_MILITARY_FORMATION"
+			}
+		}
+
+		### If not Player - Only show commanders
+		dynamicgridbox = {
+			visible = "[And( Not(MilitaryFormation.GetCountry.IsLocalPlayer), Not(IsDataModelEmpty(MilitaryFormation.GetCommanders)))]"
+			datamodel = "[MilitaryFormation.GetCommanders]"
+			parentanchor = hcenter
+			datamodel_wrap = "[GetDefine('NMilitary','MAX_NUM_COMMANDERS_PER_FORMATION')]"
+			flipdirection = yes
+
+			item = {
+				widget = {
+					size = { 120 110 }
+
+					### COMMANDER
+					military_formation_commander = {
+						visible = "[Character.IsValid]"
+					}
+				}
+			}
+		}
+
+		### If Player - Show commanders + extra slot
+		dynamicgridbox = {
+			visible = "[MilitaryFormation.GetCountry.IsLocalPlayer]"
+			datamodel = "[MilitaryFormation.GetCommandersWithRecruitableSlot]"
+			parentanchor = hcenter
+			datamodel_wrap = "[GetDefine('NMilitary','MAX_NUM_COMMANDERS_PER_FORMATION')]"
+			flipdirection = yes
+
+			item = {
+				widget = {
+					size = { 120 110 }
+
+					### COMMANDER
+					military_formation_commander = {
+						visible = "[Character.IsValid]"
+
+						highlight_tutorial = {
+							visible = "[Character.IsBeingTutorialHighlighted]"
+						}
+					}
+
+					### RECRUIT GENERAL
+					add_character_button = {
+						name = "tutorial_highlight_recruit_general"
+						visible = "[And(And(Not(Character.IsValid), MilitaryFormation.IsArmy), MilitaryFormation.GetCountry.IsLocalPlayer)]"
+						size = { 110 110 }
+						parentanchor = center
+						
+						blockoverride "tooltip" {
+							tooltip = "RECRUIT_CHARACTER_GENERAL"
+						}
+
+						blockoverride "onclick" {
+							onclick = "[PopupManager.ToggleRecruitFormationGeneral( MilitaryFormation.Self )]"
+						}
+					}
+
+					### RECRUIT ADMIRAL
+					add_character_button = {
+						name = "tutorial_highlight_recruit_admiral"
+						visible = "[And(And(Not(Character.IsValid), MilitaryFormation.IsFleet), MilitaryFormation.GetCountry.IsLocalPlayer)]"
+						size = { 110 110 }
+						parentanchor = center
+
+						blockoverride "tooltip" {
+							tooltip = "RECRUIT_CHARACTER_ADMIRAL"
+						}
+
+						blockoverride "onclick" {
+							onclick = "[PopupManager.ToggleRecruitFormationAdmiral( MilitaryFormation.Self )]"
+						}
+					}
+
+				}
+			}
+		}
+
+		flowcontainer = {
+			datamodel = "[MilitaryFormation.GetActiveBattles]"
+			visible = "[Not(IsDataModelEmpty( MilitaryFormation.GetActiveBattles ))]"
+			spacing = 10
+			parentanchor = hcenter
+			direction = vertical
+
+			item = {
+				battle_item = {
+					blockoverride "highlight_visibility" {
+						visible = no
+					}
+				}
+			}
+		}
+
+		flowcontainer = {
+			visible = "[IsDataModelEmpty(MilitaryFormation.GetCommandersWithRecruitableSlot)]"
+			parentanchor = hcenter
+			direction = vertical
+			spacing = 5
+
+			textbox = {
+				visible = "[MilitaryFormation.IsArmy]"
+				parentanchor = hcenter
+				align = hcenter|nobaseline
+				autoresize = yes
+				using = fontsize_large
+				using = look_at_me_text_animation
+				text = "MILITARY_FORMATION_RECRUIT_GENERAL"
+			}
+
+			textbox = {
+				visible = "[MilitaryFormation.IsFleet]"
+				parentanchor = hcenter
+				align = hcenter|nobaseline
+				autoresize = yes
+				using = fontsize_large
+				using = look_at_me_text_animation
+				text = "MILITARY_FORMATION_RECRUIT_ADMIRAL"
+			}
+
+			### RECRUIT GENERAL
+			add_character_button = {
+				visible = "[MilitaryFormation.IsArmy]"
+				size = { 110 110 }
+				parentanchor = hcenter
+
+				blockoverride "tooltip" {
+					tooltip = "RECRUIT_CHARACTER_GENERAL"
+				}
+
+				blockoverride "onclick" {
+					onclick = "[PopupManager.ToggleRecruitFormationGeneral( MilitaryFormation.Self )]"
+				}
+			}
+
+			### RECRUIT ADMIRAL
+			add_character_button = {
+				visible = "[MilitaryFormation.IsFleet]"
+				size = { 110 110 }
+				parentanchor = hcenter
+
+				blockoverride "tooltip" {
+					tooltip = "RECRUIT_CHARACTER_ADMIRAL"
+				}
+
+				blockoverride "onclick" {
+					onclick = "[PopupManager.ToggleRecruitFormationAdmiral( MilitaryFormation.Self )]"
+				}
+			}
+		}
+
+		### UNIT RECRUITMENT
+		default_header = {
+			using = default_fade_in_out
+			visible = "[MilitaryFormation.GetCountry.IsLocalPlayer]"
+
+			blockoverride "text" {
+				text = "MILITARY_FORMATION_UNITS_RECRUITMENT"
+			}
+		}
+
+		dynamicgridbox = {
+			visible = "[MilitaryFormation.GetCountry.IsLocalPlayer]"
+			parentanchor = hcenter
+			flipdirection = yes
+			datamodel = "[MilitaryFormation.GetEligibleGroups]"
+            datamodel_wrap = 3 # CMF
+
+			item = {
+				flowcontainer = {
+					direction = vertical
+					minimumsize = { 182 280 }
+					datacontext = "[MilitaryFormation.GetSelectedUnitTypeForGroup(CombatUnitGroup.Self)]"
+
+					military_formation_unit_type_default = {
+						visible = "[CombatUnitType.IsValid]"
+					}
+
+					military_formation_unit_type_default_not_valid = {
+						visible = "[Not(CombatUnitType.IsValid)]"
+					}
+				}
+			}
+		}
+
+		### UNIT DETAILS
+
+		default_header = {
+			using = default_fade_in_out
+
+			blockoverride "text" {
+				text = "MILITARY_FORMATION_UNITS"
+			}
+		}
+
+		dynamicgridbox = {
+			parentanchor = hcenter
+
+			datamodel = "[MilitaryFormation.GetEligibleGroups]"
+
+			item = {
+				flowcontainer = {
+					margin = { 0 5 }
+
+					military_formation_unit_type_group = {}
+				}
+			}
+		}
+
+		### DEBUG INFO
+		textbox = {
+			parentanchor = hcenter
+			text = "FORMATION_PANEL_DEBUG_INFO"
+			maximumsize = { @panel_width -1 }
+			max_width = @panel_width_minus_10
+			autoresize = yes
+			multiline = yes
+			align = left|nobaseline
+			visible = "[InDebugMode]"
+		}
+	}
+}

@@ -77,12 +77,13 @@ types mobilization_options {
 			datamodel = "[GetMobilizationOptionGroups]"
 			datamodel_wrap = 3
 			flipdirection = yes
-			parentanchor = left # CMF
+			parentanchor = hcenter
 
 			item = {
 				flowcontainer = {
 					direction = vertical
-                    margin_left = 22 # CMF - 22.5 is perfectly centered but it looks cleaner this way
+					margin_right = 5 # CMF
+					margin_bottom = 5 # CMF
 
 					textbox = {
 						text = "[MobilizationOptionGroup.GetNameNoFormatting]"
@@ -90,19 +91,120 @@ types mobilization_options {
 						align = nobaseline
 						default_format = "#title"
 						margin_left = 2
-                        multiline = yes # CMF
-                        max_width = 150 # CMF
+						multiline = yes # CMF
+						max_width = 150 # CMF
 					}
 
-					dynamicgridbox = { # CMF # flowcontainer -> dynamicgridbox
-						datamodel = "[MobilizationOptionGroup.GetMobilizationOptions]"
-						# margin_right = 5 # CMF (silence error)
-                        # margin_bottom = 5 # CMF (silence error)
-                        datamodel_wrap = 3 # CMF
-                        flipdirection = yes # CMF
+					# CMF - Preserve 4-wrap behavior for second column by 1230james
+					#   Theory of operation: we have two containers that each contain a `dynamicgridbox` which houses
+					#     the options for each mobilization option group. The first container has a wrap of 3 and the
+					#     second container has a wrap of 4. The first container is only visible for columns 1 and 3
+					#     whilst the second container is only visible for column 2. This preserves the behavior where
+					#     the center column (column 2) has 4 buttons in each row whilst the outer columns (1 and 3) only
+					#     have 3. Each `dynamicgridbox` is stored in a container so we can use the `visible` parameter
+					#     in there as opposed to within each `dynamicgridbox` because we need to use
+					#     `GetIndexInDataModel` based on the datamodel from `GetMobilizationOptionGroups` (but the
+					#     `dynamicgridbox`es change their datamodel to the options in a specific mob. option group)
+					#
+					#   Formula for Column for Given Index
+					#     This formula will return the zero-based column number of a given mobilization option group
+					#     for the current total number of mobilization option groups defined in the game. The columns
+					#     change size depending on the number of rows in the needed to fit all the mobilization groups.
+					#
+					#     The index number in the `GetMobilizationOptionGroups` datamodel is also ***NOT*** arranged the
+					#     same way the mobilization option groups are laid out visually. Whilst the items visually are
+					#     laid out left to right, adding a new row after every third item, the *indices* go **downwards,
+					#     *then* across**, adding a new column after every Nth row. Notably, this also means there can
+					#     be cases where an index number seemingly is unassigned when the grid isn't full because the
+					#     grid items and the datamodel indices increment in different directions.
+					#
+					#     If you're confused, here is a visualization for various grids for a given T, where T is the
+					#     total number of mobilization option groups, and each "cell" is the index number:
+					#
+					#     T = 3      T = 6      T = 9      T = 12
+					#     0 1 2      0 2 4      0 3 6      0 4 8
+					#                1 3 5      1 4 7      1 5 9
+					#                           2 5 8      2 6 10
+					#                                      3 7 11
+					#
+					#     Again, the grid **visually** fills left to right in columns of 3. If T = 4, then the second
+					#     grid will be used (the 2 x 3 one). The indices are assigned going downwards then across, but
+					#     the GUI elements are arranged going across then downwards. This means that **index 3 will not
+					#     correspond to anything**. The third element in the grid will actually have an index of 4.
+					#     And yes, this was empirically tested (on 1.11.0).
+					#
+					#     The following formula will give the zero-based column number of a given mob. option group:
+					#       n  = Index number (PdxGuiWidget.GetIndexInDataModel)
+					#       Mt = Total number of mobilization option groups
+					#       Rt = Total rows
+					#       Cn = Column number for element at index n
+					#
+					#       Rt = floor( (count(Mt) - 1) / 3) + 1
+					#       Cn = floor(n/Rt)
+					#
+					#     All values are int32s, so a single division operation (with Divide_int32) doubles as both a 
+					#     division operation *and* a floor operation.
+					container = {
+						visible = "[Not(
+							EqualTo_int32(
+								Divide_int32(
+									PdxGuiWidget.GetIndexInDataModel,
+									Add_int32(
+										Divide_int32(
+											Subtract_int32(
+												GetDataModelSize(GetMobilizationOptionGroups),
+												'(int32)1',
+											),
+											'(int32)3'
+										),
+										'(int32)1'
+									)
+								),
+								'(int32)1'
+							)
+						)]"
 
-						item = {
-							mobilization_option_small = {}
+						dynamicgridbox = { # CMF # flowcontainer -> dynamicgridbox
+							datamodel = "[MobilizationOptionGroup.GetMobilizationOptions]"
+							# margin_right = 5 # CMF (silence error)
+							# margin_bottom = 5 # CMF (silence error)
+							datamodel_wrap = 3 # CMF
+							flipdirection = yes # CMF
+
+							item = {
+								mobilization_option_small = {}
+							}
+						}
+					}
+
+					container = {
+						visible = "[EqualTo_int32(
+							Divide_int32(
+								PdxGuiWidget.GetIndexInDataModel,
+								Add_int32(
+									Divide_int32(
+										Subtract_int32(
+											GetDataModelSize(GetMobilizationOptionGroups),
+											'(int32)1',
+										),
+										'(int32)3'
+									),
+									'(int32)1'
+								)
+							),
+							'(int32)1'
+						)]"
+
+						dynamicgridbox = { # CMF # flowcontainer -> dynamicgridbox
+							datamodel = "[MobilizationOptionGroup.GetMobilizationOptions]"
+							# margin_right = 5 # CMF (silence error)
+							# margin_bottom = 5 # CMF (silence error)
+							datamodel_wrap = 4 # CMF
+							flipdirection = yes # CMF
+
+							item = {
+								mobilization_option_small = {}
+							}
 						}
 					}
 				}

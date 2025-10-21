@@ -1,7 +1,7 @@
 types dlc_types {
-	type dlc_collection = flowcontainer {
-		margin_left = 20
-		spacing = 16
+    type dlc_collection = flowcontainer {
+        margin_left = 20
+        spacing = 16
 
         text_single = {
             parentanchor = vcenter
@@ -38,17 +38,17 @@ types dlc_types {
                 }
             }
         }
-        
+
         vertical_divider = {
-            visible = "[GreaterThan_int32(GetDataModelSize(GetDlcCollection), '(int32)9')]" # MDF - Set arg 2 to # of real DLCs
+            visible = "[GreaterThan_int32( GetDataModelSize(GetDlcCollection), '(int32)9' )]" # MDF - Set arg 2 to # of real DLCs
         }
 
         # Mods
         flowcontainer = {
             # datamodel = "[GetDlcCollection]" # MDF
-            datamodel = "[DataModelSkipFirst(GetDlcCollection, '(int32)9')]" # MDF - Set arg 2 to # of real DLCs
-            parentanchor = vcenter
+            datamodel = "[DataModelSkipFirst( GetDlcCollection, '(int32)9' )]" # MDF - Set arg 2 to # of real DLCs
             spacing = 10
+            min_height = 80 # MPM - needed to keep mod DLCs at same height as vanilla minor DLCs
 
             item = {
                 container = {
@@ -65,7 +65,7 @@ types dlc_types {
                     }
 
                     widget = {
-                        visible = "[Not(Dlc.IsMajor)]"
+                        visible = "[Not( Dlc.IsMajor )]"
                         size = { 65 65 }
                         dlc_button = {
                             blockoverride "button_params" {
@@ -76,15 +76,17 @@ types dlc_types {
                 }
             }
         }
-	}
 
-	type dlc_button = button {
-		size = { 100% 100% }
-		# alpha = "[TransparentIfFalse( Dlc.IsEnabled )]" # MDF
-		# onclick = "[Dlc.ShowInStore]" # MDF
-		# tooltip = "DLC_BUTTON_TOOLTIP" # MDF
-		using = tooltip_ne
-        
+        expand = {}
+    }
+
+    type dlc_button = button {
+        size = { 100% 100% }
+        # alpha = "[TransparentIfFalse( Dlc.IsEnabled )]" # MDF
+        # onclick = "[Dlc.ShowInStore]" # MDF
+        # tooltip = "DLC_BUTTON_TOOLTIP" # MDF
+        using = tooltip_ne
+
         # MDF
         block "button_params" { # MDF
             alpha   = "[TransparentIfFalse( Dlc.IsEnabled )]"
@@ -92,18 +94,18 @@ types dlc_types {
             tooltip = "DLC_BUTTON_TOOLTIP"
         }
 
-		icon = {
-			size = { 100% 100% }
-			texture = "gfx/interface/backgrounds/round_frame_dec.dds"
+        button = {
+            size = { 100% 100% }
+            alwaystransparent = yes
+            texture = "gfx/interface/backgrounds/round_frame_dec.dds"
 
-			icon = {
-				size = { 100% 100% }
-				position = { 3 -3 }
-
-				texture = "[Dlc.GetIcon]"
-				parentanchor = center
-
-			}
-		}
-	}
+            button = {
+                size = { 100% 100% }
+                position = { 3 -3 }
+                alwaystransparent = yes
+                parentanchor = center
+                texture = "[Dlc.GetIcon]"
+            }
+        }
+    }
 }

@@ -374,6 +374,7 @@ gui/building_details_panel.gui
 gui/goods_state_panel.gui
 gui/production_methods.gui
 gui/building_browser_panel.gui
+gui/map_list_panel.gui
 ```
 **NOTE: Note that military buildings, such as barracks and naval bases, are NOT INTENDED TO BE USED WITH MPM due to the new unit graphics being displayed alongside the PMGs which now take up most of the space that the extra PMGs would overflow into.**
 

@@ -1,0 +1,962 @@
+﻿# COPY-PASTED FOR NOW
+@panel_width_minus_30 = 510
+@panel_width_minus_20 = 520	
+@panel_width_minus_10 = 530			# used to be 450
+@panel_width = 540  				# used to be 460
+@panel_width_half = 270				# used to be 230
+@panel_width_plus_10 = 550  		# used to be 470
+@panel_width_plus_14 = 554			# used to be 474
+@panel_width_plus_14_half = 277		# used to be 237
+@panel_width_plus_20 = 560			# used to be 480
+@panel_width_plus_30 = 570			# used to be 490
+@panel_width_plus_70 = 610			# used to be 530
+
+@military_formation_grid_spacing = 15
+
+types military_formation_panel_types
+{
+	type military_formation_panel = default_block_window_two_lines
+	{
+		name = "military_formation_panel"
+		datacontext = "[FormationPanel.GetFormation]"
+
+		blockoverride "window_header_name"
+		{
+			text = "MILITARY_FORMATION_PANEL_TITLE"
+		}
+		blockoverride "window_header_name_line_two"
+		{
+			text = "MILITARY_FORMATION_SUBTITLE"
+		}
+
+		blockoverride "pin_visibility" {
+			visible = "[MilitaryFormation.GetCountry.IsLocalPlayer]"
+		}
+
+		blockoverride "pin_properties" {
+			visible = "[MilitaryFormation.IsPinnedInOutliner]"
+			onclick = "[MilitaryFormation.TogglePinInOutliner]"
+			tooltip = "UNPIN_MILITARY_FORMATION"
+		}
+
+		blockoverride "unpin_properties" {
+			visible = "[Not(MilitaryFormation.IsPinnedInOutliner)]"
+			onclick = "[MilitaryFormation.TogglePinInOutliner]"
+			tooltip = "PIN_MILITARY_FORMATION"
+		}
+
+		blockoverride "goto_visibility" {}
+
+		blockoverride "goto_properties" {
+			### TODO add a function to zoom to the current location of the Military Formation + tooltip
+			onclick = "[MilitaryFormation.ZoomToMapMarkerPosition]"
+			tooltip = "ZOOM_TO_MILITARY_FORMATION"
+			enabled = "[Not( MilitaryFormation.IsZoomingToMapMarkerPosition )]"
+		}
+
+		blockoverride "goto_button" {
+			button_icon_goto = {
+				size = { 30 30 }
+				datacontext = "[MilitaryFormation.GetCountry]"
+				tooltip = "GO_TO_BUTTON_COUNTRY"
+				onclick = "[InformationPanelBar.OpenCountryPanel(Country.Self)]"
+				input_action = "go_to_details"
+			}
+		}
+		
+		
+		blockoverride "edit_visibility" {
+			visible = "[MilitaryFormation.GetCountry.IsLocalPlayer]"
+		}
+		
+		blockoverride "edit_tooltip" {
+			tooltip = "CUSTOMIZE_NAME_AND_EMBLEM"
+		}
+		
+		blockoverride "edit_properties" {
+			onclick = "[PopupManager.ShowMilitaryFormationChangeName(MilitaryFormation.Self)]"
+			#enabled = yes
+		}
+
+		blockoverride "top_left_button_visibility" {
+			visible = "[MilitaryFormation.GetCountry.IsLocalPlayer]"
+		}
+		
+		blockoverride "top_left_button_tooltip" {
+			tooltip = "REHOME_MILITARY_FORMATION_TOOLTIP"
+		}
+		
+		blockoverride "top_left_button_properties" {
+			onclick = "[MilitaryFormation.OnRehomeClicked]"
+		}	
+
+		blockoverride "fixed_top"
+		{
+			vbox = {
+				visible = "[Not(FormationPanel.HasSelectionView)]"
+
+				top_illu = {
+					visible = "[MilitaryFormation.IsFleet]"
+					size = { @panel_width_plus_10 120 }
+					datacontext = "[GetPlayer]"
+
+					blockoverride "illu" {
+						texture = "gfx/interface/illustrations/top_illus/top_illu_navy.dds"
+					}
+
+					### FORMATION STATS
+					flowcontainer = {
+						parentanchor = center
+						direction = vertical
+						spacing = 10
+
+						military_formation_top_illu_info = {}
+					}
+				}
+
+				top_illu = {
+					visible = "[MilitaryFormation.IsArmy]"
+					size = { @panel_width_plus_10 120 }
+					datacontext = "[GetPlayer]"
+
+					blockoverride "illu" {
+						texture = "gfx/interface/illustrations/top_illus/top_illu_army.dds"
+					}
+
+					### FORMATION STATS
+					flowcontainer = {
+						parentanchor = center
+						direction = vertical
+						spacing = 10
+
+						military_formation_top_illu_info = {}
+					}
+				}
+
+				tab_buttons = {
+					# Information
+					blockoverride "first_button" {
+						text = "MILITARY_FORMATION_PANEL_INFORMATION_TAB"
+					}
+					blockoverride "first_button_tooltip" {
+						tooltip = "MILITARY_FORMATION_PANEL_INFORMATION_TAB"
+					}
+					blockoverride "first_button_click" {
+						onclick = "[InformationPanel.SelectTab('default')]"
+					}
+					blockoverride "first_button_visibility" {
+						visible = "[InformationPanel.IsTabSelected('default')]"
+					}
+					blockoverride "first_button_visibility_checked" {
+						visible = "[Not( InformationPanel.IsTabSelected('default') )]"
+					}
+					blockoverride "first_button_selected" {
+						text = "MILITARY_FORMATION_PANEL_INFORMATION_TAB_SELECTED"
+					}
+						
+					# Mobilization
+					blockoverride "second_button" {
+						text = "MILITARY_FORMATION_PANEL_MOBILIZATION_TAB"
+					}
+					blockoverride "second_button_tooltip" {
+						tooltip = "MILITARY_FORMATION_PANEL_MOBILIZATION_TAB"
+					}
+					blockoverride "second_button_click" {
+						onclick = "[InformationPanel.SelectTab('mobilization')]"
+					}
+					blockoverride "second_button_visibility" {
+						visible = "[And(Not(IsDataModelEmpty(MilitaryFormation.GetMobilizationOptions)),InformationPanel.IsTabSelected('mobilization'))]"
+					}
+					blockoverride "second_button_visibility_checked" {
+						visible = "[And(Not(IsDataModelEmpty(MilitaryFormation.GetMobilizationOptions)),Not(InformationPanel.IsTabSelected('mobilization')))]"
+					}
+					blockoverride "second_button_selected" {
+						text = "MILITARY_FORMATION_PANEL_MOBILIZATION_TAB_SELECTED"
+					}		
+					
+					# Buildings
+					blockoverride "third_button" {
+						text = "MILITARY_FORMATION_PANEL_BUILDINGS_TAB"
+					}
+					blockoverride "third_button_tooltip" {
+						tooltip = "MILITARY_FORMATION_PANEL_BUILDINGS_TAB"
+					}
+					blockoverride "third_button_click" {
+						onclick = "[InformationPanel.SelectTab('buildings')]"
+					}
+					blockoverride "third_button_visibility" {
+						visible = "[InformationPanel.IsTabSelected('buildings')]"
+					}
+					blockoverride "third_button_visibility_checked" {
+						visible = "[Not( InformationPanel.IsTabSelected('buildings') )]"
+					}
+					blockoverride "third_button_selected" {
+						text = "MILITARY_FORMATION_PANEL_BUILDINGS_TAB_SELECTED"
+					}	
+
+					# Modifiers
+					blockoverride "fourth_button" {
+						text = "MILITARY_FORMATION_PANEL_MODIFIERS_TAB"
+					}
+					blockoverride "fourth_button_tooltip" {
+						tooltip = "MILITARY_FORMATION_PANEL_MODIFIERS_TAB"
+					}
+					blockoverride "fourth_button_click" {
+						onclick = "[InformationPanel.SelectTab('modifiers')]"
+					}
+					blockoverride "fourth_button_visibility" {
+						visible = "[InformationPanel.IsTabSelected('modifiers')]"
+					}
+					blockoverride "fourth_button_visibility_checked" {
+						visible = "[Not( InformationPanel.IsTabSelected('modifiers') )]"
+					}
+					blockoverride "fourth_button_selected" {
+						text = "MILITARY_FORMATION_PANEL_MODIFIERS_TAB_SELECTED"
+					}		
+				}
+			}
+		}
+		
+		blockoverride "scrollarea_content"
+		{
+			
+			flowcontainer = {
+				visible = "[Not(FormationPanel.HasSelectionView)]"
+				direction = vertical
+
+				military_formation_panel_overview_content = {
+					visible = "[InformationPanel.IsTabSelected('default')]"
+					using = default_content_fade
+				}
+
+				military_formation_panel_buildings_content = {
+					visible = "[InformationPanel.IsTabSelected('buildings')]"
+					using = default_content_fade
+				}
+
+				military_formation_panel_mobilization_content = {
+					visible = "[InformationPanel.IsTabSelected('mobilization')]"
+					using = default_content_fade
+				}
+
+				modifier_list = {
+					visible = "[InformationPanel.IsTabSelected('modifiers')]"
+					using = default_content_fade
+				}
+			}
+
+			flowcontainer = {
+				visible = "[FormationPanel.HasSelectionView]"
+				parentanchor = hcenter
+				direction = vertical
+
+				flowcontainer = {
+					direction = vertical
+					parentanchor = hcenter
+					spacing = 10
+					margin_top = 10
+					margin_bottom = 5
+
+					flowcontainer = {
+						wrap_count = 2
+						parentanchor = hcenter
+						spacing = 4
+
+						# MERGE
+						formation_bulk_action_button = {
+							blockoverride "properties" {
+								enabled = "[IsValid(MergeSelectedFormations)]"
+								onclick = "[Execute(MergeSelectedFormations)]"
+								tooltip = "MERGE_SELECTED_FORMATIONS_TOOLTIP"
+								input_action = "merge"
+							}
+
+							blockoverride "icon" {
+								texture = "gfx/interface/icons/generic_icons/icon_merge_all.dds"
+							}
+
+							blockoverride "text" {
+								text = "SETTING_INPUT_ACTION_MERGE"
+							}
+						}
+
+						# RAISE CONSCRIPTS
+						formation_bulk_action_button = {
+							blockoverride "properties" {
+								visible = "[GreaterThan_int32(GetNumSelectedArmies, '(int32)0')]" # Hide if we have only selected fleets
+								enabled = "[IsValid(RaiseConscriptsInSelectedArmies)]"
+								onclick = "[Execute(RaiseConscriptsInSelectedArmies)]"
+								tooltip = "RAISE_CONSCRIPTS_IN_SELECTED_ARMIES_TOOLTIP"
+							}
+
+							blockoverride "icon" {
+								texture = "gfx/interface/icons/lens_toolbar_icons/activate_conscription_centers_lens_option.dds"
+							}
+
+							blockoverride "text" {
+								text = "BULK_RAISE_CONSCRIPTS"
+							}
+						}
+
+						# MOBILIZE
+						formation_bulk_action_button = {
+							blockoverride "properties" {
+								visible = "[GreaterThan_int32(GetNumSelectedArmies, '(int32)0')]" # Hide if we have only selected fleets
+								enabled = "[IsValid(MobilizeSelectedArmies)]"
+								onclick = "[Execute(MobilizeSelectedArmies)]"
+								tooltip = "MOBILIZE_SELECTED_ARMIES_TOOLTIP"
+							}
+
+							blockoverride "icon" {
+								texture = "gfx/interface/icons/generic_icons/mobilize_icon.dds"
+								frame = 0
+								framesize = { 120 120 }
+							}
+
+							blockoverride "text" {
+								text = "MOBILIZE_ARMY"
+							}
+						}
+
+						# DE-MOBILIZE
+						formation_bulk_action_button = {
+							blockoverride "properties" {
+								visible = "[GreaterThan_int32(GetNumSelectedArmies, '(int32)0')]" # Hide if we have only selected fleets
+								enabled = "[IsValid(DemobilizeSelectedArmies)]"
+								onclick = "[PopupManager.AskConfirmation(DemobilizeSelectedArmies)]"
+								tooltip = "DEMOBILIZE_SELECTED_ARMIES_TOOLTIP"
+							}
+
+							blockoverride "icon" {
+								texture = "gfx/interface/buttons/button_icons/close.dds"
+							}
+
+							blockoverride "text" {
+								text = "concept_mobilize_army_demobilize"
+							}
+						}
+					}
+
+					flowcontainer = {
+						direction = vertical
+						minimumsize = { @panel_width -1 }
+						margin_bottom = 10
+						margin_top = 5
+
+						background = {
+							using = dark_area
+							margin_left = 7
+							margin_right = 7
+						}
+
+						textbox = {
+							text = "concept_orders"
+							autoresize = yes
+							align = nobaseline
+							default_format = "#title"
+						}
+
+						flowcontainer = {
+							datamodel = "[FormationPanel.AccessCommanderOrdersPossibleForSelectedFormations]"
+							spacing = 5
+
+							item = {
+								widget = {
+									size = { 50 50 }
+
+									button_icon_round_action = {
+										enabled = "[IsValid(SetCharacterOrderForSelectedFormations(CommanderOrderType.Self))]"
+										onclick = "[Execute(SetCharacterOrderForSelectedFormations(CommanderOrderType.Self))]"
+										tooltip = "SET_COMMANDER_ORDER_IN_SELECTED_FORMATIONS_TOOLTIP"
+										using = tooltip_above
+
+										blockoverride "icon_size" {
+											size = { 75% 75% }
+										}
+
+										blockoverride "icon" {
+											texture = "[CommanderOrderType.GetTexture]"
+										}
+
+										action_selection_number = {
+											visible = "[Or(
+												NotZero(GetNumCommandersInSelectedFormationsWithOrderActive(CommanderOrderType.Self)),
+												NotZero(GetNumCommandersInSelectedFormationsWithOrderNext(CommanderOrderType.Self))
+											)]"
+
+											blockoverride "text" {
+												text = "NUM_ACTIVE_AND_NEXT_ORDERS_FOR_SELECTED"
+											}
+
+											blockoverride "default_format" {}
+										}
+
+										icon = {
+											visible = "[Not(CommanderOrderType.IsBasicOrderType)]"
+											parentanchor = bottom
+											size = { 18 18 }
+											texture = "gfx/interface/icons/generic_icons/most_senior_front_commander.dds"
+										}
+									}
+								}
+							}
+						}
+					}
+
+					dynamicgridbox = {
+						datamodel = "[GetMobilizationOptionGroups]"
+						datamodel_wrap = 3
+						flipdirection = yes
+						parentanchor = hcenter # CMF
+
+						item = {
+							flowcontainer = {
+								direction = vertical
+								margin_right = 10 # CMF - `panel_military` uses 5 but 10 looks better here b/c of the extra lateral space
+								margin_bottom = 5 # CMF
+
+								textbox = {
+									text = "[MobilizationOptionGroup.GetNameNoFormatting]"
+									autoresize = yes
+									align = nobaseline
+									default_format = "#title"
+									margin_left = 2
+									multiline = yes # CMF
+									max_width = 150 # CMF
+								}
+
+								# CMF - Preserve 4-wrap behavior for second column by 1230james
+								# See comment in `com_gui_panel_military.gui` for in-depth explanation of WTF is going
+								# on in these `visible`s for these `container`s.
+								container = {
+									visible = "[Not(
+										EqualTo_int32(
+											Divide_int32(
+												PdxGuiWidget.GetIndexInDataModel,
+												Add_int32(
+													Divide_int32(
+														Subtract_int32(
+															GetDataModelSize(GetMobilizationOptionGroups),
+															'(int32)1',
+														),
+														'(int32)3'
+													),
+													'(int32)1'
+												)
+											),
+											'(int32)1'
+										)
+									)]"
+									
+									dynamicgridbox = { # CMF # flowcontainer -> dynamicgridbox
+										datamodel = "[MobilizationOptionGroup.GetMobilizationOptions]"
+										# margin_right = 5 # CMF (silence error)
+										# margin_bottom = 5 # CMF (silence error)
+										datamodel_wrap = 3 # CMF
+										flipdirection = yes # CMF
+
+										item = {
+											widget = {
+												alpha = "[TransparentIfFalse(Or(MobilizationOption.IsActivatedForSelected,IsValid(MobilizationOption.ToggleForSelected)))]" 
+												size = { 50 50 }
+
+												widget = {
+													size = { 50 50 }
+
+													# Activate
+													widget = {
+														visible = "[Not(MobilizationOption.IsActivatedForSelected)]"
+														size = { 100% 100% }
+
+														# Activate button - show confirmation popup
+														button = {
+															using = default_button
+															size = { 100% 100% }
+															visible = "[ShouldAskConfirmation(MobilizationOption.ToggleForSelected)]"
+															
+															enabled = "[And(Not(MobilizationOption.IsActivatedForSelected), IsValid(MobilizationOption.ToggleForSelected))]"
+															onclick = "[PopupManager.AskConfirmation(MobilizationOption.ToggleForSelected)]"
+															tooltip = "ACTIVATE_MOBILIZATION_OPTION_FOR_SELECTED_BUTTON_TOOLTIP"
+														}
+														
+														# Activate button - no confirmation popup
+														button = {
+															using = default_button
+															size = { 100% 100% }
+															visible = "[Not(ShouldAskConfirmation(MobilizationOption.ToggleForSelected))]"
+															
+															enabled = "[And(Not(MobilizationOption.IsActivatedForSelected), IsValid(MobilizationOption.ToggleForSelected))]"
+															onclick = "[Execute(MobilizationOption.ToggleForSelected)]"
+															tooltip = "ACTIVATE_MOBILIZATION_OPTION_FOR_SELECTED_BUTTON_TOOLTIP"
+														}
+													}
+
+													# Deactivate
+													widget = {
+														visible = "[MobilizationOption.IsActivatedForSelected]"
+														size = { 100% 100% }
+														
+														# Deactivate button - show confirmation popup
+														button = {
+															using = default_button
+															size = { 100% 100% }
+															visible = "[ShouldAskConfirmation(MobilizationOption.ToggleForSelected)]"
+															
+															enabled = "[And(MobilizationOption.IsActivatedForSelected, IsValid(MobilizationOption.ToggleForSelected))]"
+															onclick = "[PopupManager.AskConfirmation(MobilizationOption.ToggleForSelected)]"
+															tooltip = "DEACTIVATE_MOBILIZATION_OPTION_FOR_SELECTED_BUTTON_TOOLTIP"
+														}
+
+														# Deactivate button - no confirmation popup
+														button = {
+															using = default_button
+															size = { 100% 100% }
+															visible = "[Not(ShouldAskConfirmation(MobilizationOption.ToggleForSelected))]"
+															
+															enabled = "[And(MobilizationOption.IsActivatedForSelected, IsValid(MobilizationOption.ToggleForSelected))]"
+															onclick = "[Execute(MobilizationOption.ToggleForSelected)]"
+															tooltip = "DEACTIVATE_MOBILIZATION_OPTION_FOR_SELECTED_BUTTON_TOOLTIP"
+														}
+													}
+												}
+
+												icon = {
+													size = { 38 38 }
+													texture = "[MobilizationOption.GetTexture]"
+													parentanchor = center
+												}
+
+												textbox = {
+													visible = "[NotZero(MobilizationOption.GetNumActiveForSelected)]"
+													align = right|nobaseline
+													autoresize = yes
+													margin_left = 7
+													margin_right = 7
+													parentanchor = right|top
+													text = "[MobilizationOption.GetNumActiveForSelected|vu]"
+												}
+
+												icon = {
+													visible = "[MobilizationOption.IsActivatedForSelected]"
+													using = highlighted_square_selection
+												}
+
+												icon = {
+													visible = "[MobilizationOption.IsMixedActivationForSelected]"
+													using = highlighted_active_square_selection
+												}
+											}
+										}
+									}
+								}
+								
+								# This should be identical to the contain above aside from the `visible` and the
+								# `datamodel_wrap` on line 577. If changes are made to the one above, just copy-paste
+								# them in & adjust the `visible` and `datamodel_wrap`.
+								container = {
+									visible = "[EqualTo_int32(
+										Divide_int32(
+											PdxGuiWidget.GetIndexInDataModel,
+											Add_int32(
+												Divide_int32(
+													Subtract_int32(
+														GetDataModelSize(GetMobilizationOptionGroups),
+														'(int32)1',
+													),
+													'(int32)3'
+												),
+												'(int32)1'
+											)
+										),
+										'(int32)1'
+									)]"
+									
+									dynamicgridbox = { # CMF # flowcontainer -> dynamicgridbox
+										datamodel = "[MobilizationOptionGroup.GetMobilizationOptions]"
+										# margin_right = 5 # CMF (silence error)
+										# margin_bottom = 5 # CMF (silence error)
+										datamodel_wrap = 4 # CMF
+										flipdirection = yes # CMF
+
+										item = {
+											widget = {
+												alpha = "[TransparentIfFalse(Or(MobilizationOption.IsActivatedForSelected,IsValid(MobilizationOption.ToggleForSelected)))]" 
+												size = { 50 50 }
+
+												widget = {
+													size = { 50 50 }
+
+													# Activate
+													widget = {
+														visible = "[Not(MobilizationOption.IsActivatedForSelected)]"
+														size = { 100% 100% }
+
+														# Activate button - show confirmation popup
+														button = {
+															using = default_button
+															size = { 100% 100% }
+															visible = "[ShouldAskConfirmation(MobilizationOption.ToggleForSelected)]"
+															
+															enabled = "[And(Not(MobilizationOption.IsActivatedForSelected), IsValid(MobilizationOption.ToggleForSelected))]"
+															onclick = "[PopupManager.AskConfirmation(MobilizationOption.ToggleForSelected)]"
+															tooltip = "ACTIVATE_MOBILIZATION_OPTION_FOR_SELECTED_BUTTON_TOOLTIP"
+														}
+														
+														# Activate button - no confirmation popup
+														button = {
+															using = default_button
+															size = { 100% 100% }
+															visible = "[Not(ShouldAskConfirmation(MobilizationOption.ToggleForSelected))]"
+															
+															enabled = "[And(Not(MobilizationOption.IsActivatedForSelected), IsValid(MobilizationOption.ToggleForSelected))]"
+															onclick = "[Execute(MobilizationOption.ToggleForSelected)]"
+															tooltip = "ACTIVATE_MOBILIZATION_OPTION_FOR_SELECTED_BUTTON_TOOLTIP"
+														}
+													}
+
+													# Deactivate
+													widget = {
+														visible = "[MobilizationOption.IsActivatedForSelected]"
+														size = { 100% 100% }
+														
+														# Deactivate button - show confirmation popup
+														button = {
+															using = default_button
+															size = { 100% 100% }
+															visible = "[ShouldAskConfirmation(MobilizationOption.ToggleForSelected)]"
+															
+															enabled = "[And(MobilizationOption.IsActivatedForSelected, IsValid(MobilizationOption.ToggleForSelected))]"
+															onclick = "[PopupManager.AskConfirmation(MobilizationOption.ToggleForSelected)]"
+															tooltip = "DEACTIVATE_MOBILIZATION_OPTION_FOR_SELECTED_BUTTON_TOOLTIP"
+														}
+
+														# Deactivate button - no confirmation popup
+														button = {
+															using = default_button
+															size = { 100% 100% }
+															visible = "[Not(ShouldAskConfirmation(MobilizationOption.ToggleForSelected))]"
+															
+															enabled = "[And(MobilizationOption.IsActivatedForSelected, IsValid(MobilizationOption.ToggleForSelected))]"
+															onclick = "[Execute(MobilizationOption.ToggleForSelected)]"
+															tooltip = "DEACTIVATE_MOBILIZATION_OPTION_FOR_SELECTED_BUTTON_TOOLTIP"
+														}
+													}
+												}
+
+												icon = {
+													size = { 38 38 }
+													texture = "[MobilizationOption.GetTexture]"
+													parentanchor = center
+												}
+
+												textbox = {
+													visible = "[NotZero(MobilizationOption.GetNumActiveForSelected)]"
+													align = right|nobaseline
+													autoresize = yes
+													margin_left = 7
+													margin_right = 7
+													parentanchor = right|top
+													text = "[MobilizationOption.GetNumActiveForSelected|vu]"
+												}
+
+												icon = {
+													visible = "[MobilizationOption.IsActivatedForSelected]"
+													using = highlighted_square_selection
+												}
+
+												icon = {
+													visible = "[MobilizationOption.IsMixedActivationForSelected]"
+													using = highlighted_active_square_selection
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+
+				default_header = {
+					using = default_list_position
+					blockoverride "text" {
+						text = "MILITARY_FORMATION_PANEL_TITLE_MULTIPLE_FORMATIONS"
+					}
+				}
+
+				flowcontainer = {
+					parentanchor = hcenter
+					direction = vertical
+					spacing = 10
+					margin_top = 10
+					datamodel = "[FormationPanel.GetSelectedFormations]"
+
+					item = {
+						container = {
+							military_panel_formation_entry = {
+								blockoverride "formation_onclick" {
+									onclick = "[FormationPanel.SelectFormation(MilitaryFormation.Self)]"
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+
+		### BOTTOM PART
+		blockoverride "fixed_bottom"
+		{
+			military_formation_panel_default_footer = {
+				visible = "[And(InformationPanel.IsTabSelected('default'), Not(FormationPanel.HasSelectionView))]"
+			}
+		}
+
+		blockoverride "bottom_spacing" {}
+	}
+	
+	type military_formation_panel_overview_content = flowcontainer {
+		direction = vertical
+		using = default_list_position
+		spacing = 10
+
+		### COMMANDERS
+		default_header = {
+			using = default_fade_in_out
+
+			blockoverride "text" {
+				text = "MILITARY_FORMATION_COMMANDERS"
+			}
+		}
+
+		### If not Player and no commanders - Show empty state
+		empty_state = {
+			blockoverride "visible" {
+				visible = "[And(IsDataModelEmpty(MilitaryFormation.GetCommanders), Not(MilitaryFormation.GetCountry.IsLocalPlayer))]"
+			}
+			blockoverride "text" {
+				text = "NO_COMMANDERS_IN_MILITARY_FORMATION"
+			}
+		}
+
+		### If not Player - Only show commanders
+		dynamicgridbox = {
+			visible = "[And( Not(MilitaryFormation.GetCountry.IsLocalPlayer), Not(IsDataModelEmpty(MilitaryFormation.GetCommanders)))]"
+			datamodel = "[MilitaryFormation.GetCommanders]"
+			parentanchor = hcenter
+			datamodel_wrap = "[GetDefine('NMilitary','MAX_NUM_COMMANDERS_PER_FORMATION')]"
+			flipdirection = yes
+
+			item = {
+				widget = {
+					size = { 120 110 }
+
+					### COMMANDER
+					military_formation_commander = {
+						visible = "[Character.IsValid]"
+					}
+				}
+			}
+		}
+
+		### If Player - Show commanders + extra slot
+		dynamicgridbox = {
+			visible = "[MilitaryFormation.GetCountry.IsLocalPlayer]"
+			datamodel = "[MilitaryFormation.GetCommandersWithRecruitableSlot]"
+			parentanchor = hcenter
+			datamodel_wrap = "[GetDefine('NMilitary','MAX_NUM_COMMANDERS_PER_FORMATION')]"
+			flipdirection = yes
+
+			item = {
+				widget = {
+					size = { 120 110 }
+
+					### COMMANDER
+					military_formation_commander = {
+						visible = "[Character.IsValid]"
+
+						highlight_tutorial = {
+							visible = "[Character.IsBeingTutorialHighlighted]"
+						}
+					}
+
+					### RECRUIT GENERAL
+					add_character_button = {
+						name = "tutorial_highlight_recruit_general"
+						visible = "[And(And(Not(Character.IsValid), MilitaryFormation.IsArmy), MilitaryFormation.GetCountry.IsLocalPlayer)]"
+						size = { 110 110 }
+						parentanchor = center
+						
+						blockoverride "tooltip" {
+							tooltip = "RECRUIT_CHARACTER_GENERAL"
+						}
+
+						blockoverride "onclick" {
+							onclick = "[PopupManager.ToggleRecruitFormationGeneral( MilitaryFormation.Self )]"
+						}
+					}
+
+					### RECRUIT ADMIRAL
+					add_character_button = {
+						name = "tutorial_highlight_recruit_admiral"
+						visible = "[And(And(Not(Character.IsValid), MilitaryFormation.IsFleet), MilitaryFormation.GetCountry.IsLocalPlayer)]"
+						size = { 110 110 }
+						parentanchor = center
+
+						blockoverride "tooltip" {
+							tooltip = "RECRUIT_CHARACTER_ADMIRAL"
+						}
+
+						blockoverride "onclick" {
+							onclick = "[PopupManager.ToggleRecruitFormationAdmiral( MilitaryFormation.Self )]"
+						}
+					}
+
+				}
+			}
+		}
+
+		flowcontainer = {
+			datamodel = "[MilitaryFormation.GetActiveBattles]"
+			visible = "[Not(IsDataModelEmpty( MilitaryFormation.GetActiveBattles ))]"
+			spacing = 10
+			parentanchor = hcenter
+			direction = vertical
+
+			item = {
+				battle_item = {
+					blockoverride "highlight_visibility" {
+						visible = no
+					}
+				}
+			}
+		}
+
+		flowcontainer = {
+			visible = "[IsDataModelEmpty(MilitaryFormation.GetCommandersWithRecruitableSlot)]"
+			parentanchor = hcenter
+			direction = vertical
+			spacing = 5
+
+			textbox = {
+				visible = "[MilitaryFormation.IsArmy]"
+				parentanchor = hcenter
+				align = hcenter|nobaseline
+				autoresize = yes
+				using = fontsize_large
+				using = look_at_me_text_animation
+				text = "MILITARY_FORMATION_RECRUIT_GENERAL"
+			}
+
+			textbox = {
+				visible = "[MilitaryFormation.IsFleet]"
+				parentanchor = hcenter
+				align = hcenter|nobaseline
+				autoresize = yes
+				using = fontsize_large
+				using = look_at_me_text_animation
+				text = "MILITARY_FORMATION_RECRUIT_ADMIRAL"
+			}
+
+			### RECRUIT GENERAL
+			add_character_button = {
+				visible = "[MilitaryFormation.IsArmy]"
+				size = { 110 110 }
+				parentanchor = hcenter
+
+				blockoverride "tooltip" {
+					tooltip = "RECRUIT_CHARACTER_GENERAL"
+				}
+
+				blockoverride "onclick" {
+					onclick = "[PopupManager.ToggleRecruitFormationGeneral( MilitaryFormation.Self )]"
+				}
+			}
+
+			### RECRUIT ADMIRAL
+			add_character_button = {
+				visible = "[MilitaryFormation.IsFleet]"
+				size = { 110 110 }
+				parentanchor = hcenter
+
+				blockoverride "tooltip" {
+					tooltip = "RECRUIT_CHARACTER_ADMIRAL"
+				}
+
+				blockoverride "onclick" {
+					onclick = "[PopupManager.ToggleRecruitFormationAdmiral( MilitaryFormation.Self )]"
+				}
+			}
+		}
+
+		### UNIT RECRUITMENT
+		default_header = {
+			using = default_fade_in_out
+			visible = "[MilitaryFormation.GetCountry.IsLocalPlayer]"
+
+			blockoverride "text" {
+				text = "MILITARY_FORMATION_UNITS_RECRUITMENT"
+			}
+		}
+
+		dynamicgridbox = {
+			visible = "[MilitaryFormation.GetCountry.IsLocalPlayer]"
+			parentanchor = hcenter
+			flipdirection = yes
+			datamodel = "[MilitaryFormation.GetEligibleGroups]"
+			datamodel_wrap = 3 # CMF
+
+			item = {
+				flowcontainer = {
+					direction = vertical
+					minimumsize = { 182 280 }
+					datacontext = "[MilitaryFormation.GetSelectedUnitTypeForGroup(CombatUnitGroup.Self)]"
+
+					military_formation_unit_type_default = {
+						visible = "[CombatUnitType.IsValid]"
+					}
+
+					military_formation_unit_type_default_not_valid = {
+						visible = "[Not(CombatUnitType.IsValid)]"
+					}
+				}
+			}
+		}
+
+		### UNIT DETAILS
+
+		default_header = {
+			using = default_fade_in_out
+
+			blockoverride "text" {
+				text = "MILITARY_FORMATION_UNITS"
+			}
+		}
+
+		dynamicgridbox = {
+			parentanchor = hcenter
+
+			datamodel = "[MilitaryFormation.GetEligibleGroups]"
+
+			item = {
+				flowcontainer = {
+					margin = { 0 5 }
+
+					military_formation_unit_type_group = {}
+				}
+			}
+		}
+
+		### DEBUG INFO
+		textbox = {
+			parentanchor = hcenter
+			text = "FORMATION_PANEL_DEBUG_INFO"
+			maximumsize = { @panel_width -1 }
+			max_width = @panel_width_minus_10
+			autoresize = yes
+			multiline = yes
+			align = left|nobaseline
+			visible = "[InDebugMode]"
+		}
+	}
+}

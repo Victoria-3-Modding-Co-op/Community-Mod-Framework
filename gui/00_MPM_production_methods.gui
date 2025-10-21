@@ -70,14 +70,14 @@ types production_methods
 			### production methods grouped
 			container = {
 				position     = { 110 45 } # MPM Framework
-                parentanchor = top        # MPM Framework
+				parentanchor = top        # MPM Framework
 
 				fixedgridbox = {
-                    datamodel = "[DataModelFirst(BuildingBrowserBuildingTypeItem.GetBuildingType.AccessProductionMethodGroups, '(int32)4')]" # MPM - Only first 4
+					datamodel = "[DataModelFirst(BuildingBrowserBuildingTypeItem.GetBuildingType.AccessProductionMethodGroups, '(int32)4')]" # MPM - Only first 4
 					flipdirection = yes
 					addcolumn = 52
 					addrow = 50
-                    datamodel_wrap = @MPM_max_PMs_first_line # MPM Framework - PM wraparound
+					datamodel_wrap = @MPM_max_PMs_first_line # MPM Framework - PM wraparound
 
 					item = {
 						widget = {
@@ -141,14 +141,14 @@ types production_methods
 						}
 					}
 				}
-                fixedgridbox  = { # MPM - use up extra available space
+				fixedgridbox  = { # MPM - use up extra available space
 					visible   = "[GreaterThan_int32(GetDataModelSize(BuildingBrowserBuildingTypeItem.GetBuildingType.AccessProductionMethodGroups), '(int32)4')]"
-                    datamodel = "[DataModelSkipFirst(BuildingBrowserBuildingTypeItem.GetBuildingType.AccessProductionMethodGroups, '(int32)4')]" # MPM - Skip first 4
-                    position  = { 0 50 }
+					datamodel = "[DataModelSkipFirst(BuildingBrowserBuildingTypeItem.GetBuildingType.AccessProductionMethodGroups, '(int32)4')]" # MPM - Skip first 4
+					position  = { 0 50 }
 					flipdirection = yes
 					addcolumn = 52
 					addrow = 50
-                    datamodel_wrap = @MPM_max_PMs_per_line # MPM Framework - PM wraparound
+					datamodel_wrap = @MPM_max_PMs_per_line # MPM Framework - PM wraparound
 
 					item = {
 						widget = {
@@ -234,7 +234,7 @@ types production_methods
 			### ACTION BUTTONS
 			flowcontainer = {
 				parentanchor = top|right # MPM Framework
-                position = { -10 50 }    # MPM Framework (original vert was -5; 95 - 5 - 45 = 50
+				position = { -10 50 }    # MPM Framework (original vert was -5; 95 - 5 - 45 = 50
 				spacing = 5
 
 				### expand
@@ -250,7 +250,7 @@ types production_methods
 					tooltip = "EXPAND"
 					using = tooltip_se
 				}
-				
+
 				### nationalize
 				building_type_nationalize_button = {
 					size = { 40 40 }
@@ -266,12 +266,12 @@ types production_methods
 
 				### subsidize
 				building_type_subsidize_toggle = {
-					size = { 40 40 } 
+					size = { 40 40 }
 				}
 
 				### auto expand
 				building_type_auto_expand_toggle = {
-					size = { 40 40 } 
+					size = { 40 40 }
 				}
 			}
 
@@ -280,7 +280,7 @@ types production_methods
 				raw_text = "#v [BuildingBrowserBuildingTypeItem.GetTotalFilteredSizeDesc]#!"
 				autoresize = yes
 				position = { 11 71 } # MPM Framework; original is -3; 100 - 26 - 3 = 71
-                parentanchor = top   # MPM Framework
+				parentanchor = top   # MPM Framework
 				align = hcenter|nobaseline
 				using = fontsize_large
 				minimumsize = { 26 26 }
@@ -313,7 +313,7 @@ types production_methods
 					blockoverride "extra_items_in_production_methods_list" {
 						military_building_combat_unit_summary = {
 							parentanchor = right|vcenter
-                            position = { -230 0 } # MPM
+							position = { -230 0 } # MPM
 
 							blockoverride "icon_size" {
 								size = { 50 50 }
@@ -337,13 +337,325 @@ types production_methods
 							onclick = "[InformationPanelBar.OpenCompanyPanel(Company.Self)]"
 							tooltip = "GO_TO_BUTTON_COMPANY"
 							using = tooltip_ne
-							
+
 							blockoverride "icon" {
 								texture = "[Company.GetCompanyType.GetIcon]"
 							}
 
 							blockoverride "icon_size" {
 								size = { 75% 75% }
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	### OLD PM ITEM (ONLY USED IN CONSTRUCTION PANEL)
+	type old_buildings_production_method_item = flowcontainer {
+		block "visible" {
+			visible = "[Not(IsDataModelEmpty(BuildingProductionMethodsEntry.GetBuildings))]"
+		}
+
+		block "datacontext" {
+			datacontext = "[BuildingProductionMethodsEntry.GetBuildingType]"
+		}
+
+		direction = vertical
+		spacing = 10
+
+		### TOP ITEM
+		widget = {
+			size = { @panel_width_plus_14 95 }
+
+			highlight_tutorial = {
+	   			visible = "[BuildingType.IsBeingTutorialHighlighted]"
+	    	}
+
+	    	### building icon
+	    	button = {
+	    		texture = "[BuildingType.GetIcon]"
+	    		onrightclick = "[RightClickMenuManager.ShowForBuildingType(BuildingType.AccessSelf)]"
+	    		effectname = "NoHighlight"
+	    		distribute_visual_state = no
+	    		inherit_visual_state = no
+
+	    		size = { 100 100 }
+	    		position = { 7 0 }
+	    		parentanchor = vcenter
+
+	    		tooltipwidget = {
+	    			FancyTooltip_BuildingType = {}
+	    		}
+	    	}
+
+			### DROPDOWN / EXPAND
+			section_header_button = {
+				position = { 50 0 }
+				size = { 440 38 }
+
+				blockoverride "left_text" {
+					raw_text = "#v [BuildingType.GetNameNoFormatting]#!"
+				}
+				blockoverride "right_text" {
+					section_header_right_text = {
+						visible = "[And( And(Not(BuildingType.IsGovernmentFunded), Not(BuildingType.IsSubsistenceBuilding)), GreaterThan_int32( BuildingType.GetNumLevelsInCountryRaw(GetPlayer.Self), '(int32)0' ))]"
+						text = "[BuildingType.GetProductivitySpanDesc(GetPlayer.Self)]"
+						tooltip = "PRODUCTIVITY_SPAN_TOOLTIP"
+					}
+				}
+
+				blockoverride "onclick" {
+					onclick = "[BuildingProductionMethodsEntry.ToggleExpand]"
+				}
+
+				blockoverride "onclick_showmore" {
+					visible = "[Not(BuildingProductionMethodsEntry.IsExpanded)]"
+				}
+
+				blockoverride "onclick_showless" {
+					visible = "[BuildingProductionMethodsEntry.IsExpanded]"
+				}
+			}
+
+			# INFO AREA BELOW THE DROPDOWN
+			widget = {
+				position = { 110 38 }
+				size = { 440 57 }
+
+				hbox = {
+					layoutpolicy_horizontal = expanding
+					layoutpolicy_vertical = expanding
+					margin = { 0 0 }
+
+					spacing = 10
+
+					container = {
+						# MPM
+						# If only 1 or 2 PMGs, use vanilla container and not the scrollarea
+						visible = "[LessThanOrEqualTo_int32(
+							GetDataModelSize(BuildingProductionMethodsEntry.GetBuildingType.AccessProductionMethodGroups),
+							'(int32)2'
+						)]"
+
+						hbox = {
+							datamodel = "[BuildingProductionMethodsEntry.GetBuildingType.AccessProductionMethodGroups]"
+							flipdirection = yes
+							addcolumn = 52
+							addrow = 50
+
+							item = {
+								widget = {
+									size = { 50 50 }
+									tooltip = "[BuildingProductionMethodsEntry.GetBulkChangeTooltip( ProductionMethodGroup.Self )]"
+									using = tooltip_above
+
+									button = {
+										visible = "[NotEqualTo_int32( GetDataModelSize( ProductionMethodGroup.AccessCountryProductionMethods( GetPlayer.Self ) ), '(int32)1' )]"
+										distribute_visual_state = no
+										inherit_visual_state = no
+										using = expand_button_bg_dropdown
+										size = { 100% 100% }
+										onclick = "[RightClickMenuManager.ToggleSwitchProductionMethodMenuForType(BuildingProductionMethodsEntry.GetBuildingType, ProductionMethodGroup.AccessSelf, PdxGuiWidget.AccessSelf)]"
+									}
+
+									### pm icon
+									icon = {
+										visible = "[BuildingProductionMethodsEntry.HasAllSameProductionMethod( ProductionMethodGroup.Self )]"
+										size = { 40 40 }
+										parentanchor = center
+										texture = "[BuildingProductionMethodsEntry.GetAllSameProductionMethodTexture( ProductionMethodGroup.Self )]"
+									}
+
+									### mixed pm icon
+									icon = {
+										visible = "[Not( BuildingProductionMethodsEntry.HasAllSameProductionMethod( ProductionMethodGroup.Self ) )]"
+										size = { 35 35 }
+										parentanchor = center
+										texture = "[ProductionMethodGroup.GetMixedIcon]"
+									}
+
+									### new pm
+									has_new_pm_icon = {
+										position = { -2 2 }
+										parentanchor = bottom|left
+										blockoverride "visible" {
+											visible = "[GetPlayer.HasNewProductionMethodInGroup( ProductionMethodGroup.Self )]"
+										}
+									}
+
+
+									### nr available
+									textbox = {
+										raw_text = "#bold [ProductionMethodGroup.GetNumAvailableOptionsForBuildingType(BuildingProductionMethodsEntry.GetBuildingType)]#!"
+										parentanchor = right
+										position = { -5 0 }
+										autoresize = yes
+										align = right|nobaseline
+										visible = "[GreaterThan_int32( ProductionMethodGroup.GetNumAvailableOptionsForBuildingType(BuildingProductionMethodsEntry.GetBuildingType), '(int32)1')]"
+										tooltip = "PRODUCTION_METHOD_OPTIONS_BULK"
+										using = tooltip_above
+										using = fontsize_small
+
+										background = {
+											using = default_background
+											margin = { 8 4 }
+										}
+									}
+								}
+							}
+						}
+					}
+
+					scrollarea = { # MPM - Scrollarea when >=3 PMGs
+						visible = "[GreaterThan_int32(
+							GetDataModelSize(BuildingProductionMethodsEntry.GetBuildingType.AccessProductionMethodGroups),
+							'(int32)2'
+						)]" # MPM
+
+						min_width = 150
+						layoutpolicy_horizontal = preferred
+						layoutpolicy_vertical   = expanding
+
+						scrollbarpolicy_vertical = always_off
+
+						scrollbar_horizontal = {
+							using = horizontal_scrollbar
+						}
+
+						scrollwidget = {
+							### production methods grouped
+							# container = { # MPM # this is a duplicate of the vanilla container above, but we dont need the container for this spot specifically
+								hbox = {
+									datamodel = "[BuildingProductionMethodsEntry.GetBuildingType.AccessProductionMethodGroups]"
+									flipdirection = yes
+									addcolumn = 52
+									addrow = 50
+
+									item = {
+										widget = {
+											size = { 50 50 }
+											tooltip = "[BuildingProductionMethodsEntry.GetBulkChangeTooltip( ProductionMethodGroup.Self )]"
+											using = tooltip_above
+
+											button = {
+												visible = "[NotEqualTo_int32( GetDataModelSize( ProductionMethodGroup.AccessCountryProductionMethods( GetPlayer.Self ) ), '(int32)1' )]"
+												distribute_visual_state = no
+												inherit_visual_state = no
+												using = expand_button_bg_dropdown
+												size = { 100% 100% }
+												onclick = "[RightClickMenuManager.ToggleSwitchProductionMethodMenuForType(BuildingProductionMethodsEntry.GetBuildingType, ProductionMethodGroup.AccessSelf, PdxGuiWidget.AccessSelf)]"
+											}
+
+											### pm icon
+											icon = {
+												visible = "[BuildingProductionMethodsEntry.HasAllSameProductionMethod( ProductionMethodGroup.Self )]"
+												size = { 40 40 }
+												parentanchor = center
+												texture = "[BuildingProductionMethodsEntry.GetAllSameProductionMethodTexture( ProductionMethodGroup.Self )]"
+											}
+
+											### mixed pm icon
+											icon = {
+												visible = "[Not( BuildingProductionMethodsEntry.HasAllSameProductionMethod( ProductionMethodGroup.Self ) )]"
+												size = { 35 35 }
+												parentanchor = center
+												texture = "[ProductionMethodGroup.GetMixedIcon]"
+											}
+
+											### new pm
+											has_new_pm_icon = {
+												position = { -2 2 }
+												parentanchor = bottom|left
+												blockoverride "visible" {
+													visible = "[GetPlayer.HasNewProductionMethodInGroup( ProductionMethodGroup.Self )]"
+												}
+											}
+
+
+											### nr available
+											textbox = {
+												raw_text = "#bold [ProductionMethodGroup.GetNumAvailableOptionsForBuildingType(BuildingProductionMethodsEntry.GetBuildingType)]#!"
+												parentanchor = right
+												position = { -5 0 }
+												autoresize = yes
+												align = right|nobaseline
+												visible = "[GreaterThan_int32( ProductionMethodGroup.GetNumAvailableOptionsForBuildingType(BuildingProductionMethodsEntry.GetBuildingType), '(int32)1')]"
+												tooltip = "PRODUCTION_METHOD_OPTIONS_BULK"
+												using = tooltip_above
+												using = fontsize_small
+
+												background = {
+													using = default_background
+													margin = { 8 4 }
+												}
+											}
+										}
+									}
+								}
+							# }
+						}
+					}
+
+					construction_queue_sector_actions = {
+						min_width = 280 # MPM
+						max_width = 378 # MPM
+						layoutpolicy_horizontal = expanding
+						layoutpolicy_vertical = expanding
+					}
+
+				}
+			}
+
+
+
+			### PRODUCTIVITY SPAN ###
+			textbox = {
+				text = "[BuildingType.GetNumLevelsInCountryFormatted(GetPlayer.Self)]"
+				autoresize = yes
+				position = { 11 -3 }
+				parentanchor = bottom
+				align = hcenter|nobaseline
+				using = fontsize_large
+				minimumsize = { 26 26 }
+			}
+		}
+
+		### EXPANDED LIST OF BUILDINGS
+		expanded_list = {
+			visible = "[BuildingProductionMethodsEntry.IsExpanded]"
+			using = expanded_list_bg
+
+			blockoverride "dark_area_alpha" {
+				alpha = 0.5
+			}
+
+			datamodel = "[BuildingProductionMethodsEntry.GetBuildings]"
+
+			item = {
+				condensed_building_information = {
+					background = {
+						using = entry_bg_simple
+					}
+					background = {
+						using = entry_bg_simple
+					}
+
+					blockoverride "extra_items_in_production_methods_list" {
+						military_building_combat_unit_summary = {
+							parentanchor = right|vcenter
+
+							blockoverride "icon_size" {
+								size = { 50 50 }
+							}
+
+							blockoverride "overlappingitembox_size" {
+								size = { 190 50 }
+							}
+
+							blockoverride "unit_number_margins" {
+								margin = { 6 3 }
 							}
 						}
 					}

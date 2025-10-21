@@ -1,0 +1,345 @@
+﻿# COPY-PASTED FOR NOW
+@panel_width_minus_10 = 530			# used to be 450
+@panel_width = 540  				# used to be 460
+@panel_width_half = 270				# used to be 230
+@panel_width_plus_10 = 550  		# used to be 470
+@panel_width_plus_14 = 554			# used to be 474
+@panel_width_plus_14_half = 277		# used to be 237
+@panel_width_plus_20 = 560			# used to be 480
+@panel_width_plus_30 = 570			# used to be 490
+@panel_width_plus_70 = 610			# used to be 530
+
+types mobilization_options {
+	type mobilization_widget = flowcontainer {
+		direction = vertical
+		minimumsize = { 540 -1 }
+		margin_bottom = 10
+
+		using = entry_bg_fancy
+
+		# Name and info header
+		container = {
+			minimumsize = { @panel_width 35 }
+
+			background = {
+				using = fade_right_entry_fancy_header_colored
+				color = "[MilitaryFormation.GetCountry.GetMapColor]"
+			}
+			
+			flowcontainer = {
+				position = { 12 0 }
+				parentanchor = vcenter
+				spacing = 2
+
+				icon = {
+					size = { 30 30 }
+					texture = "[MilitaryFormation.GetFlag]"
+					color = "[MilitaryFormation.GetFlagColor]"
+					parentanchor = vcenter
+				}
+
+				textbox = {
+					maximumsize = { 200 -1 }
+					parentanchor = vcenter
+					multiline = yes
+					autoresize = yes
+					text = "[MilitaryFormation.GetName]"
+					align = nobaseline
+					elide = right
+					margin_right = 3
+				}
+
+				button_icon_goto = {
+					parentanchor = vcenter
+					size = { 25 25 }
+					tooltip = "GO_TO_BUTTON_MILITARY_FORMATION"
+					onclick = "[InformationPanelBar.OpenMilitaryFormationPanelTab( MilitaryFormation.Self, 'default' )]"
+				}
+			}
+
+			# Formation status
+			flowcontainer = {
+				position = { -15 0 }
+				parentanchor = right|vcenter
+
+				block "estimated_costs_visibility" {}
+
+				textbox = {
+					autoresize = yes
+					text = "[MilitaryFormation.GetEstimatedMobilizationCostFormatted]"
+					parentanchor = vcenter
+					align = right|nobaseline
+				}
+			}
+		}
+
+		dynamicgridbox = {
+			datamodel = "[GetMobilizationOptionGroups]"
+			datamodel_wrap = 3
+			flipdirection = yes
+			parentanchor = hcenter
+
+			item = {
+				flowcontainer = {
+					direction = vertical
+					margin_right = 5 # CMF
+					margin_bottom = 5 # CMF
+
+					textbox = {
+						text = "[MobilizationOptionGroup.GetNameNoFormatting]"
+						autoresize = yes
+						align = nobaseline
+						default_format = "#title"
+						margin_left = 2
+						multiline = yes # CMF
+						max_width = 150 # CMF
+					}
+
+					# CMF - Preserve 4-wrap behavior for second column by 1230james
+					#   Theory of operation: we have two containers that each contain a `dynamicgridbox` which houses
+					#     the options for each mobilization option group. The first container has a wrap of 3 and the
+					#     second container has a wrap of 4. The first container is only visible for columns 1 and 3
+					#     whilst the second container is only visible for column 2. This preserves the behavior where
+					#     the center column (column 2) has 4 buttons in each row whilst the outer columns (1 and 3) only
+					#     have 3. Each `dynamicgridbox` is stored in a container so we can use the `visible` parameter
+					#     in there as opposed to within each `dynamicgridbox` because we need to use
+					#     `GetIndexInDataModel` based on the datamodel from `GetMobilizationOptionGroups` (but the
+					#     `dynamicgridbox`es change their datamodel to the options in a specific mob. option group)
+					#
+					#   Formula for Column for Given Index
+					#     This formula will return the zero-based column number of a given mobilization option group
+					#     for the current total number of mobilization option groups defined in the game. The columns
+					#     change size depending on the number of rows in the needed to fit all the mobilization groups.
+					#
+					#     The index number in the `GetMobilizationOptionGroups` datamodel is also ***NOT*** arranged the
+					#     same way the mobilization option groups are laid out visually. Whilst the items visually are
+					#     laid out left to right, adding a new row after every third item, the *indices* go **downwards,
+					#     *then* across**, adding a new column after every Nth row. Notably, this also means there can
+					#     be cases where an index number seemingly is unassigned when the grid isn't full because the
+					#     grid items and the datamodel indices increment in different directions.
+					#
+					#     If you're confused, here is a visualization for various grids for a given T, where T is the
+					#     total number of mobilization option groups, and each "cell" is the index number:
+					#
+					#     T = 3      T = 6      T = 9      T = 12
+					#     0 1 2      0 2 4      0 3 6      0 4 8
+					#                1 3 5      1 4 7      1 5 9
+					#                           2 5 8      2 6 10
+					#                                      3 7 11
+					#
+					#     Again, the grid **visually** fills left to right in columns of 3. If T = 4, then the second
+					#     grid will be used (the 2 x 3 one). The indices are assigned going downwards then across, but
+					#     the GUI elements are arranged going across then downwards. This means that **index 3 will not
+					#     correspond to anything**. The third element in the grid will actually have an index of 4.
+					#     And yes, this was empirically tested (on 1.11.0).
+					#
+					#     The following formula will give the zero-based column number of a given mob. option group:
+					#       n  = Index number (PdxGuiWidget.GetIndexInDataModel)
+					#       Mt = Total number of mobilization option groups
+					#       Rt = Total rows
+					#       Cn = Column number for element at index n
+					#
+					#       Rt = floor( (count(Mt) - 1) / 3) + 1
+					#       Cn = floor(n/Rt)
+					#
+					#     All values are int32s, so a single division operation (with Divide_int32) doubles as both a 
+					#     division operation *and* a floor operation.
+					container = {
+						visible = "[Not(
+							EqualTo_int32(
+								Divide_int32(
+									PdxGuiWidget.GetIndexInDataModel,
+									Add_int32(
+										Divide_int32(
+											Subtract_int32(
+												GetDataModelSize(GetMobilizationOptionGroups),
+												'(int32)1',
+											),
+											'(int32)3'
+										),
+										'(int32)1'
+									)
+								),
+								'(int32)1'
+							)
+						)]"
+
+						dynamicgridbox = { # CMF # flowcontainer -> dynamicgridbox
+							datamodel = "[MobilizationOptionGroup.GetMobilizationOptions]"
+							# margin_right = 5 # CMF (silence error)
+							# margin_bottom = 5 # CMF (silence error)
+							datamodel_wrap = 3 # CMF
+							flipdirection = yes # CMF
+
+							item = {
+								mobilization_option_small = {}
+							}
+						}
+					}
+
+					container = {
+						visible = "[EqualTo_int32(
+							Divide_int32(
+								PdxGuiWidget.GetIndexInDataModel,
+								Add_int32(
+									Divide_int32(
+										Subtract_int32(
+											GetDataModelSize(GetMobilizationOptionGroups),
+											'(int32)1',
+										),
+										'(int32)3'
+									),
+									'(int32)1'
+								)
+							),
+							'(int32)1'
+						)]"
+
+						dynamicgridbox = { # CMF # flowcontainer -> dynamicgridbox
+							datamodel = "[MobilizationOptionGroup.GetMobilizationOptions]"
+							# margin_right = 5 # CMF (silence error)
+							# margin_bottom = 5 # CMF (silence error)
+							datamodel_wrap = 4 # CMF
+							flipdirection = yes # CMF
+
+							item = {
+								mobilization_option_small = {}
+							}
+						}
+					}
+				}
+			}
+		}
+
+		widget = { size = { 5 5 }}
+		divider_clean = {
+			parentanchor = hcenter
+			size = { 520 2 }
+		}
+		widget = { size = { 5 5 }}
+
+		flowcontainer = {
+			parentanchor = hcenter
+			spacing = 10
+
+			### UNIT NUMBERS AND MANPOWER
+			flowcontainer = {
+				parentanchor = vcenter
+				spacing = 5
+				tooltip = "MILITARY_FORMATION_TOTAL_NUMBER_OF_UNITS_TOOLTIP"
+				minimumsize = { 120 -1 }
+				margin_left = 5
+
+				### ARMY ICON
+				icon = {
+					visible = "[MilitaryFormation.IsArmy]"
+					size = { 23 23 }
+					parentanchor = vcenter
+					texture = "gfx/interface/icons/generic_icons/battalions.dds"
+				}
+
+				### FLEET ICON
+				icon = {
+					visible = "[MilitaryFormation.IsFleet]"
+					size = { 23 23 }
+					parentanchor = vcenter
+					texture = "gfx/interface/icons/generic_icons/flotillas.dds"
+				}
+
+				### ARMY - NUMBER OF UNITS
+				textbox = {
+					parentanchor = vcenter
+					autoresize = yes
+					align = nobaseline
+					text = "MILITARY_FORMATION_TOTAL_NUMBER_OF_UNITS"
+					using = fontsize_large
+					maximumsize = { 90 -1 }
+					fontsize_min = 12
+				}
+
+				widget = { size = { 1 1 }}
+
+				manpower_bar = {}
+			}
+
+			flowcontainer = {
+				minimumsize = { 80 -1 }
+				spacing = 10 
+				tooltip = "MILITARY_FORMATION_MORALE_TOOLTIP"
+				parentanchor = vcenter
+
+				### MORALE VALUE
+				textbox = {
+					parentanchor = vcenter
+					autoresize = yes
+					align = right|nobaseline
+
+					text = "MILITARY_FORMATION_MORALE"
+					minimumsize = { 70 -1 }
+				}
+
+				### MORALE BAR
+				morale_bar = {
+					size = { 6 24 }
+					parentanchor = vcenter
+
+					blockoverride "morale_value" {
+						value = "[FixedPointToFloat( MilitaryFormation.GetMorale )]"
+					}
+					blockoverride "morale_color" {
+						color = "[GetMoraleColorVec( MilitaryFormation.GetMorale )]"
+					}
+				}
+			}
+
+			flowcontainer = {
+				tooltip = "MILITARY_FORMATION_ORGANIZATION_TOOLTIP"
+				spacing = 10
+				parentanchor = vcenter
+
+				### ORGANIZATION
+				textbox = {
+					raw_text = "@organization! [MilitaryFormation.GetOrganizationPercentage|%v0]"
+					parentanchor = vcenter
+					align = right|nobaseline
+					minimumsize = { 70 -1 }
+				}
+
+				### ORGANIZATION BAR
+				organization_bar = {
+					size = { 6 24 }
+					parentanchor = vcenter
+					
+					blockoverride "organization_value" {
+						value = "[FixedPointToFloat( MilitaryFormation.GetOrganizationPercentage )]"
+					}
+					blockoverride "organization_color" {
+						color = "[GetOrganizationColorVec( MilitaryFormation.GetOrganizationPercentage )]"
+					}
+				}
+			}
+
+			widget = { size = { 1 1 }}
+			vertical_divider = {}
+
+			military_formation_mobilize_button = {
+				parentanchor = vcenter
+				visible = "[MilitaryFormation.IsArmy]"
+
+				blockoverride "size" {
+					size = { 180 50 }
+				}
+
+				blockoverride "button_size" {
+					size = { 160 75% }
+				}
+
+				blockoverride "fontsize" {}
+
+				blockoverride "mobilization_icon_size" {
+					size = { 50 50 }
+				}
+			}
+		}
+	}
+}

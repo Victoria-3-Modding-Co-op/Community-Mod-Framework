@@ -372,7 +372,7 @@ The `set_com_character_portrait` has three required parameters:
 - `environment` - A localization key containing the environment name
 
 CMF has predefined the base game animations, cameras, and environments.
-They can be found [here](localization/english/com_character_l_english.yml).
+They can be found [here](localization/english/com_character_portrait_l_english.yml).
 
 If you want to use custom values for modded animations, cameras, and environments,
 you can simply define them as localization keys, like CMF already does.

@@ -12,3 +12,27 @@ add_com_dlc_icon = {
     }
     fix_variable_error = { variable = $dlc$ }
 }
+
+set_com_character_portrait = {
+    set_variable = {
+        name = com_character_animation
+        value = flag:$animation$
+    }
+    set_variable = {
+        name = com_character_camera
+        value = flag:$camera$
+    }
+    set_variable = {
+        name = com_character_environment
+        value = flag:$environment$
+    }
+    fix_variable_error = { variable = $animation$ }
+    fix_variable_error = { variable = $camera$ }
+    fix_variable_error = { variable = $environment$ }
+}
+
+remove_com_character_portrait = {
+    remove_variable = com_character_animation
+    remove_variable = com_character_camera
+    remove_variable = com_character_environment
+}

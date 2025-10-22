@@ -1,0 +1,167 @@
+types character_types {
+
+	### CHARACTER PORTRAIT BASE
+	type character_portrait_base = widget {
+		block "show_hat" {
+			scissor = yes
+		}
+
+		block "portrait_frame" {}
+
+        # CMF
+        com_portrait_button_base = {
+            visible = "[Not(And3(
+                Character.MakeScope.Var('com_character_animation').IsSet,
+                Character.MakeScope.Var('com_character_camera').IsSet,
+                Character.MakeScope.Var('com_character_environment').IsSet
+            ))]"
+        }
+
+        # CMF
+        com_portrait_button_base = {
+            visible = "[And3(
+                Character.MakeScope.Var('com_character_animation').IsSet,
+                Character.MakeScope.Var('com_character_camera').IsSet,
+                Character.MakeScope.Var('com_character_environment').IsSet
+            )]"
+
+
+            blockoverride "portrait_texture" {
+                portrait_texture = "[Character.GetAnimatedPortrait(
+                    Character.MakeScope.Var('com_character_environment').GetFlagName,
+                    Character.MakeScope.Var('com_character_camera').GetFlagName,
+                    Character.MakeScope.Var('com_character_animation').GetFlagName,
+                    GetPortraitRenderSize(PdxGuiWidget.Self)
+                )]"
+            }
+        }
+
+		block "portrait_frame_on_top_of_portrait" {}
+
+		block "portrait_icons" {
+			character_icon = {}
+		}
+
+		block "tooltip" {
+			tooltipwidget = {
+				FancyTooltip_Character = {}
+			}
+		}
+	}
+
+	### CHARACTER PORTRAIT BASE WITHOUT MASK
+	type character_portrait_base_no_mask = widget {
+		block "show_hat" {
+			scissor = yes
+		}
+		block "portrait_frame" {}
+
+        # CMF
+        com_portrait_button_base_no_mask = {
+            visible = "[Not(And3(
+                Character.MakeScope.Var('com_character_animation').IsSet,
+                Character.MakeScope.Var('com_character_camera').IsSet,
+                Character.MakeScope.Var('com_character_environment').IsSet
+            ))]"
+        }
+
+        # CMF
+        com_portrait_button_base_no_mask = {
+            visible = "[And3(
+                Character.MakeScope.Var('com_character_animation').IsSet,
+                Character.MakeScope.Var('com_character_camera').IsSet,
+                Character.MakeScope.Var('com_character_environment').IsSet
+            )]"
+
+
+            blockoverride "portrait_texture" {
+                portrait_texture = "[Character.GetAnimatedPortrait(
+                    Character.MakeScope.Var('com_character_environment').GetFlagName,
+                    Character.MakeScope.Var('com_character_camera').GetFlagName,
+                    Character.MakeScope.Var('com_character_animation').GetFlagName,
+                    GetPortraitRenderSize(PdxGuiWidget.Self)
+                )]"
+            }
+        }
+
+		block "portrait_icons" {
+			character_icon = {}
+		}
+
+		block "tooltip" {
+			tooltipwidget = {
+				FancyTooltip_Character = {}
+			}
+		}
+	}
+
+    type com_portrait_button_base_no_mask = portrait_button {
+        parentanchor = bottom|hcenter
+
+        block "portrait_position" {}
+
+        block "portrait_size" {
+            size = { 80 100 }
+        }
+
+        using = portrait_base
+
+        block "portrait_texture" {
+            portrait_texture = "[Character.GetPortrait('environment_front_generals_right', 'camera_head', 'idle', GetPortraitRenderSize(PdxGuiWidget.Self))]"
+        }
+
+        block "portrait_mask" {
+            mask = "gfx/interface/portraits/portrait_mask_no_fade_bottom.dds"
+        }
+
+        block "portrait_onhover_highlight" {
+            effectname = "NoHighlight"
+        }
+
+        block "portrait_button" {}
+    }
+
+    type com_portrait_button_base = portrait_button {
+        parentanchor = bottom|hcenter
+
+        block "portrait_position" {}
+
+        block "portrait_size" {
+            size = { 80 100 }
+        }
+
+        using = portrait_base
+
+        block "portrait_texture" {
+            portrait_texture = "[Character.GetPortrait('environment_standard', 'camera_head', 'idle', GetPortraitRenderSize(PdxGuiWidget.Self))]"
+        }
+
+        block "portrait_mask" {
+            mask = "gfx/interface/portraits/portrait_mask_default.dds"
+        }
+
+        block "highlight" {
+            effectname = "NoHighlight"
+        }
+
+        block "portrait_button" {
+            button = {
+                size = { 100% 100% }
+
+                block "portrait_button_onclick" {
+                    onclick = "[InformationPanelBar.OpenCommanderPanel(Character.AccessSelf)]"
+                }
+
+                block "portrait_button_onrightclick" {
+                    onrightclick = "[RightClickMenuManager.ShowForCharacter(Character.AccessSelf)]"
+                }
+
+                block "character_highlight" {
+                    onmousehierarchyenter = "[AccessHighlightManager.HighlightCharacter( Character.Self )]"
+                    onmousehierarchyleave = "[AccessHighlightManager.RemoveHighlight]"
+                }
+            }
+        }
+    }
+
+}

@@ -20,6 +20,7 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=3385002128
     * [Custom Social Hierarchies](#custom-social-hierarchies)
     * [Sidebar Button](#sidebar-button)
     * [Characters in Journal Entry](#characters-in-journal-entry)
+    * [Character Animation, Camera and Environment](#character-animation-camera-and-environment)
     * [Custom Owner Buildings](#custom-owner-buildings)
     * [Multi-line Production Methods](#multi-line-production-methods)
 * [Structs](#structs)
@@ -113,6 +114,7 @@ Current Scope:
 13) Framework to create EU5 style situation journal entries (Credit to Bahmut)
 14) Support for more than 3 unit types in GUI (Credit to lil jimmy)
 15) Support for more mobilization options per category in GUI (Credit to lil jimmy)
+16) Configurable Character portraits (Credit to Bahmut)
 
 ## Alternative Event Windows
 
@@ -322,6 +324,7 @@ If you have multiple alerts which should all open the same panel you can use ful
  mod_alert_send_to_example_panel: "Example Panel"
 ```
 > **NOTE:** If using this in a widget; you will need a scripted widget definition in `gui\scripted_widgets\` to load your widget.
+
 ## Characters in Journal Entry
 
 Screenshots: [Single Character with Opinion](docs/example_journal_entry_character_01.png), [Multiple Characters without Opinions](docs/example_journal_entry_character_02.png)
@@ -367,6 +370,56 @@ set_variable = {
 The text behind `flag:` is a localization key (See [com_gui_l_english.yml](localization/english/com_gui_l_english.yml)).
 
 **NOTE: Only one opinion can be set on a character at a time. So if you are using a character in multiple journal entries be aware of this.**
+
+## Character Animation, Camera and Environment
+
+To change a characters animation,
+camera and environment CMF provides a scripted effect called `set_com_character_portrait` to set them
+and another scripted effect to remove them called `remove_com_character_portrait`.
+
+> **NOTE** This will change the character portrait EVERYWHERE the character is shown and will be PERMANENT unless removed! So use this effect with caution.
+
+The `set_com_character_portrait` has three required parameters:
+- `animation` - A localization key containing the animation name
+- `camera` - A localization key containing the camera name
+- `environment` - A localization key containing the environment name
+
+CMF has predefined the base game animations, cameras, and environments.
+They can be found [here](localization/english/com_character_portrait_l_english.yml).
+
+If you want to use custom values for modded animations, cameras, and environments,
+you can simply define them as localization keys, like CMF already does.
+
+### Usage Example
+
+One of the main use cases for this feature is probably showing characters in specific events.
+Here is a very simple example event:
+```
+some_event.1 = {
+	# ... event stuff
+
+    gui_window = event_window_1char_tabloid
+    left_icon = root.ruler
+
+	immediate = {
+		ruler = {
+            set_com_character_portrait = {
+                animation = com_animation_idle
+                camera = com_camera_lifestyles
+                environment = com_environment_agitator_main
+            }
+		}
+	}
+
+    after = {
+        ruler = {
+            remove_com_character_portrait = yes
+        }
+    }
+    
+	# ... event stuff
+}
+```
 
 ## Custom Owner Buildings
 

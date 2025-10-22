@@ -43,7 +43,18 @@ set_com_character_portrait = {
     set_com_character_environment = { environment = $environment$ }
 }
 
+set_com_character_portrait_everywhere = {
+    set_variable = {
+        name = com_character_override
+    }
+	fix_variable_error = { variable = com_character_override }
+    set_com_character_animation = { animation = $animation$ }
+    set_com_character_camera = { camera = $camera$ }
+    set_com_character_environment = { environment = $environment$ }
+}
+
 remove_com_character_portrait = {
+    remove_variable = com_character_override
     remove_variable = com_character_animation
     remove_variable = com_character_camera
     remove_variable = com_character_environment

@@ -374,25 +374,37 @@ The text behind `flag:` is a localization key (See [com_gui_l_english.yml](local
 ## Character Animation, Camera and Environment
 
 To change a characters animation,
-camera and environment CMF provides a scripted effect called `set_com_character_portrait` to set them
-and another scripted effect to remove them called `remove_com_character_portrait`.
+camera and environment CMF provides a series of scripted effects to set them:
+* `set_com_character_animation` - sets only the animation
+* `set_com_character_camera` - sets only the camera
+* `set_com_character_environment` - sets only the environment
+* `set_com_character_portrait` - sets all three elements
+* `set_com_character_portrait_everywhere` - sets all three elements for every portrait of the character
 
-> **NOTE** This will change the character portrait EVERYWHERE the character is shown and will be PERMANENT unless removed! So use this effect with caution.
+Another scripted effect `remove_com_character_portrait` removes all three elements. Individual elements can be removed with `remove_variable = com_character_"element"`
 
-The `set_com_character_portrait` has three required parameters:
+All of these effects must be run in the scope of the character.
+
+> **NOTE** These effects will change the character portrait in all COM event windows and `set_com_character_portrait_everywhere` does so EVERYWHERE the character is shown and will be PERMANENT unless removed! So use this effect with caution.
+
+The `set_com_character_portrait` and `set_com_character_portrait_everywhere` effects have three required parameters:
 - `animation` - A localization key containing the animation name
 - `camera` - A localization key containing the camera name
 - `environment` - A localization key containing the environment name
 
+The other three setting effects have only one of those parameters, matching the effect's name. `remove_com_character_portrait` has no parameters.
+
 CMF has predefined the base game animations, cameras, and environments.
 They can be found [here](localization/english/com_character_portrait_l_english.yml).
+
+> **NOTE** Either localization or the "base" value can be used; i.e. both `com_animation_idle` and `idle` produce the same pose - as long as `idle` is not also a localization key.
 
 If you want to use custom values for modded animations, cameras, and environments,
 you can simply define them as localization keys, like CMF already does.
 
 ### Usage Example
 
-One of the main use cases for this feature is probably showing characters in specific events.
+One of the main use cases for this feature is posing characters in specific events.
 Here is a very simple example event:
 ```
 some_event.1 = {

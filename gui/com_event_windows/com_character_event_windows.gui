@@ -1029,6 +1029,15 @@ types com_character_window_types {
 						mask = "gfx/event_pictures/2characters_mask.dds"
 					}
 					blockoverride "portrait_icons" {}
+
+					blockoverride "portrait_texture" {
+						portrait_texture = "[Character.GetAnimatedPortrait(
+							ComSelectPortraitVar('com_character_environment','environment_event_01'),
+							ComSelectPortraitVar('com_character_camera','camera_duel_01'),
+							ComSelectPortraitVar('com_character_animation','idle'),
+							GetPortraitRenderSize(PdxGuiWidget.Self)
+						)]"
+					}
 				}
 			}
 			
@@ -1045,6 +1054,15 @@ types com_character_window_types {
 						mask = "gfx/event_pictures/2characters_mask.dds"
 					}
 					blockoverride "portrait_icons" {}
+
+					blockoverride "portrait_texture" {
+						portrait_texture = "[Character.GetAnimatedPortrait(
+							ComSelectPortraitVar('com_character_environment','environment_event_01'),
+							ComSelectPortraitVar('com_character_camera','camera_duel_02'),
+							ComSelectPortraitVar('com_character_animation','idle'),
+							GetPortraitRenderSize(PdxGuiWidget.Self)
+						)]"
+					}
 				}
 			}
 
@@ -1061,6 +1079,15 @@ types com_character_window_types {
 						mask = "gfx/event_pictures/2characters_mask.dds"
 					}
 					blockoverride "portrait_icons" {}
+
+					blockoverride "portrait_texture" {
+						portrait_texture = "[Character.GetAnimatedPortrait(
+							ComSelectPortraitVar('com_character_environment','environment_event_01'),
+							ComSelectPortraitVar('com_character_camera','camera_duel_01'),
+							ComSelectPortraitVar('com_character_animation','idle'),
+							GetPortraitRenderSize(PdxGuiWidget.Self)
+						)]"
+					}
 				}
 			}
 		}

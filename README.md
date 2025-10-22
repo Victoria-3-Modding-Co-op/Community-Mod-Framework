@@ -145,12 +145,13 @@ Widescreen Windows:
 Ethics Style Window:
 - [event_window_ethics](docs/event_windows/event_window_ethics.png)
 
-Letter Style Window:
+Paper Style Window:
 - [com_event_window_letter_simple](docs/event_windows/com_event_window_letter_simple.png)
 - [com_event_window_letter_image](docs/event_windows/com_event_window_letter_image.png)
 - [com_event_window_letter_paper](docs/event_windows/com_event_window_letter_paper.png) (Default View)
 - [com_event_window_letter_paper](docs/event_windows/com_event_window_letter_paper_transcribed.png) (Transcribed View)
 - [com_event_window_telegram](docs/event_windows/com_event_window_telegram.png)
+- [com_event_window_newspaper](docs/event_windows/com_event_window_newspaper.png)
 
 ### Usage Notes
 - For ease of use, any modded windows with characters will expect a character scope for the arguments `left_icon = scope:some_character`, `right_icon = scope:some_character` and `center_icon = scope:some_character` if the event has three characters. Just like the vanilla events do.
@@ -158,6 +159,18 @@ Letter Style Window:
   - This is activated by setting the variable com_event_window_2char_duel_var
   - The progress bar will pull the value from this variable; it has a maximum of 100 and a minimum of 0
 - `event_window_crisis` uses six character scopes saved as variables; documentation is provided in the `eventwindow.gui` file
+
+### Newspaper Events
+The Newspaper event allows overwriting of the header texts.
+There are three optional localization keys that can be defined to overwrite the following values:
+- `event_name.1.sub_title` - Newspaper name (default: Western Mail)
+- `event_name.1.sub_left` - Topbar left text (default: No. 512)
+- `event_name.1.sub_right` - Topbar right text (default: ONE PENNY)
+- `event_name.1.sub_middle` - Topbar middle text (default: The current game date)
+
+For the newspaper image,
+the recommended minimum size is 440x292px,
+or a multiple of that to keep the aspect ratio correct.
 
 ### Ethic Events
 - Ethic events can have up to 9 buttons

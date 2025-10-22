@@ -67,9 +67,9 @@ types com_character_window_types {
 					}
 					blockoverride "portrait_texture" {
 						portrait_texture = "[Character.GetAnimatedPortrait(
-							SelectPortraitVar('com_character_environment','environment_standard'),
-							SelectPortraitVar('com_character_camera','camera_event_left'),
-							SelectPortraitVar('com_character_animation','idle'),
+							ComSelectPortraitVar('com_character_environment','environment_standard'),
+							ComSelectPortraitVar('com_character_camera','camera_event_left'),
+							ComSelectPortraitVar('com_character_animation','idle'),
 							GetPortraitRenderSize(PdxGuiWidget.Self)
 						)]"
 					}
@@ -148,9 +148,9 @@ types com_character_window_types {
 					}
 					blockoverride "portrait_texture" {
 						portrait_texture = "[Character.GetAnimatedPortrait(
-							SelectPortraitVar('com_character_environment','environment_standard'),
-							SelectPortraitVar('com_character_camera','camera_event_left'),
-							SelectPortraitVar('com_character_animation','idle'),
+							ComSelectPortraitVar('com_character_environment','environment_standard'),
+							ComSelectPortraitVar('com_character_camera','camera_event_left'),
+							ComSelectPortraitVar('com_character_animation','idle'),
 							GetPortraitRenderSize(PdxGuiWidget.Self)
 						)]"
 					}
@@ -177,9 +177,9 @@ types com_character_window_types {
 					}
 					blockoverride "portrait_texture" {
 						portrait_texture = "[Character.GetAnimatedPortrait(
-							SelectPortraitVar('com_character_environment','environment_standard'),
-							SelectPortraitVar('com_character_camera','camera_event_right'),
-							SelectPortraitVar('com_character_animation','idle'),
+							ComSelectPortraitVar('com_character_environment','environment_standard'),
+							ComSelectPortraitVar('com_character_camera','camera_event_right'),
+							ComSelectPortraitVar('com_character_animation','idle'),
 							GetPortraitRenderSize(PdxGuiWidget.Self)
 						)]"
 					}
@@ -255,9 +255,9 @@ types com_character_window_types {
 					}
 					blockoverride "portrait_texture" {
 						portrait_texture = "[Character.GetAnimatedPortrait(
-							SelectPortraitVar('com_character_environment','environment_standard'),
-							SelectPortraitVar('com_character_camera','camera_event_left'),
-							SelectPortraitVar('com_character_animation','idle'),
+							ComSelectPortraitVar('com_character_environment','environment_standard'),
+							ComSelectPortraitVar('com_character_camera','camera_event_left'),
+							ComSelectPortraitVar('com_character_animation','idle'),
 							GetPortraitRenderSize(PdxGuiWidget.Self)
 						)]"
 					}
@@ -280,9 +280,9 @@ types com_character_window_types {
 					}
 					blockoverride "portrait_texture" {
 						portrait_texture = "[Character.GetAnimatedPortrait(
-							SelectPortraitVar('com_character_environment','environment_standard'),
-							SelectPortraitVar('com_character_camera','camera_event_right'),
-							SelectPortraitVar('com_character_animation','idle'),
+							ComSelectPortraitVar('com_character_environment','environment_standard'),
+							ComSelectPortraitVar('com_character_camera','camera_event_right'),
+							ComSelectPortraitVar('com_character_animation','idle'),
 							GetPortraitRenderSize(PdxGuiWidget.Self)
 						)]"
 					}
@@ -516,9 +516,9 @@ types com_character_window_types {
 					}
 					blockoverride "portrait_texture" {
 						portrait_texture = "[Character.GetAnimatedPortrait(
-							SelectPortraitVar('com_character_environment','environment_front_generals_left'),
-							SelectPortraitVar('com_character_camera','camera_event_left'),
-							SelectPortraitVar('com_character_animation','commander_vs_left'),
+							ComSelectPortraitVar('com_character_environment','environment_front_generals_left'),
+							ComSelectPortraitVar('com_character_camera','camera_event_left'),
+							ComSelectPortraitVar('com_character_animation','commander_vs_left'),
 							GetPortraitRenderSize(PdxGuiWidget.Self)
 						)]"
 					}
@@ -541,9 +541,9 @@ types com_character_window_types {
 					}
 					blockoverride "portrait_texture" {
 						portrait_texture = "[Character.GetAnimatedPortrait(
-							SelectPortraitVar('com_character_environment','environment_front_generals_right'),
-							SelectPortraitVar('com_character_camera','camera_event_right'),
-							SelectPortraitVar('com_character_animation','commander_vs_right'),
+							ComSelectPortraitVar('com_character_environment','environment_front_generals_right'),
+							ComSelectPortraitVar('com_character_camera','camera_event_right'),
+							ComSelectPortraitVar('com_character_animation','commander_vs_right'),
 							GetPortraitRenderSize(PdxGuiWidget.Self)
 						)]"
 					}
@@ -799,9 +799,9 @@ types com_character_window_types {
 					}
 					blockoverride "portrait_texture" {
 						portrait_texture = "[Character.GetAnimatedPortrait(
-							SelectPortraitVar('com_character_environment','environment_front_generals_left'),
-							SelectPortraitVar('com_character_camera','camera_event_left'),
-							SelectPortraitVar('com_character_animation','commander_vs_left'),
+							ComSelectPortraitVar('com_character_environment','environment_front_generals_left'),
+							ComSelectPortraitVar('com_character_camera','camera_event_left'),
+							ComSelectPortraitVar('com_character_animation','commander_vs_left'),
 							GetPortraitRenderSize(PdxGuiWidget.Self)
 						)]"
 					}
@@ -827,9 +827,9 @@ types com_character_window_types {
 					}
 					blockoverride "portrait_texture" {
 						portrait_texture = "[Character.GetAnimatedPortrait(
-							SelectPortraitVar('com_character_environment','environment_front_generals_right'),
-							SelectPortraitVar('com_character_camera','camera_event_right'),
-							SelectPortraitVar('com_character_animation','commander_vs_right'),
+							ComSelectPortraitVar('com_character_environment','environment_front_generals_right'),
+							ComSelectPortraitVar('com_character_camera','camera_event_right'),
+							ComSelectPortraitVar('com_character_animation','commander_vs_right'),
 							GetPortraitRenderSize(PdxGuiWidget.Self)
 						)]"
 					}
@@ -1343,9 +1343,9 @@ types com_character_window_types {
 			}
 			blockoverride "portrait_texture" {
 				portrait_texture = "[Character.GetAnimatedPortrait(
-							SelectPortraitVar('com_character_environment','politician_environment'),
-							SelectPortraitVar('com_character_camera','camera_leader'),
-							SelectPortraitVar('com_character_animation','idle'),
+							ComSelectPortraitVar('com_character_environment','politician_environment'),
+							ComSelectPortraitVar('com_character_camera','camera_leader'),
+							ComSelectPortraitVar('com_character_animation','idle'),
 							GetPortraitRenderSize(PdxGuiWidget.Self)
 						)]"
 			}

@@ -15,3 +15,9 @@ macro = {
     definition = "ComSituationRight"
     replace_with = "ComSituation.Var('com_side_right')"
 }
+
+macro = {
+    description = "Overwrites portrait value if set, or uses specified default"
+    definition = "ComSelectPortraitVar(Variable,Default)"
+    replace_with = "SelectLocalization( Character.MakeScope.Var(Variable).IsSet, Character.MakeScope.Var(Variable).GetFlagName, Default )"
+}

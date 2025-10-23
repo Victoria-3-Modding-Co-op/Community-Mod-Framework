@@ -959,7 +959,12 @@ types com_situation_types {
             size = { @com_character_width 200 }
         }
         blockoverride "portrait_texture" {
-            portrait_texture = "[Character.GetAnimatedPortrait('environment_event_01', 'camera_duel_01', 'idle', GetPortraitRenderSize(PdxGuiWidget.Self))]"
+            portrait_texture = "[Character.GetAnimatedPortrait(
+                ComSelectPortraitVar('com_character_environment','environment_event_01'),
+                ComSelectPortraitVar('com_character_camera','camera_duel_01'),
+                ComSelectPortraitVar('com_character_animation','idle'),
+                GetPortraitRenderSize(PdxGuiWidget.Self)
+            )]"
         }
         blockoverride "portrait_button_onclick" {
             onclick = "[InformationPanelBar.OpenCountryPanel(Country.Self)]"
@@ -977,7 +982,12 @@ types com_situation_types {
             size = { @com_character_width 200 }
         }
         blockoverride "portrait_texture" {
-            portrait_texture = "[Character.GetAnimatedPortrait('environment_event_01', 'camera_duel_02', 'idle', GetPortraitRenderSize(PdxGuiWidget.Self))]"
+            portrait_texture = "[Character.GetAnimatedPortrait(
+                ComSelectPortraitVar('com_character_environment','environment_event_01'),
+                ComSelectPortraitVar('com_character_camera','camera_duel_02'),
+                ComSelectPortraitVar('com_character_animation','idle'),
+                GetPortraitRenderSize(PdxGuiWidget.Self)
+            )]"
         }
         blockoverride "portrait_button_onclick" {
             onclick = "[InformationPanelBar.OpenCountryPanel(Country.Self)]"

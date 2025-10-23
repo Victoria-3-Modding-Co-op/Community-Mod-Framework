@@ -10,7 +10,8 @@ types character_types {
 
         # CMF
         com_portrait_button_base = {
-            visible = "[Not(And3(
+            visible = "[Not(And4(
+                Character.MakeScope.Var('com_character_override').IsSet,
                 Character.MakeScope.Var('com_character_animation').IsSet,
                 Character.MakeScope.Var('com_character_camera').IsSet,
                 Character.MakeScope.Var('com_character_environment').IsSet
@@ -19,7 +20,8 @@ types character_types {
 
         # CMF
         com_portrait_button_base = {
-            visible = "[And3(
+            visible = "[And4(
+                Character.MakeScope.Var('com_character_override').IsSet,
                 Character.MakeScope.Var('com_character_animation').IsSet,
                 Character.MakeScope.Var('com_character_camera').IsSet,
                 Character.MakeScope.Var('com_character_environment').IsSet
@@ -58,7 +60,8 @@ types character_types {
 
         # CMF
         com_portrait_button_base_no_mask = {
-            visible = "[Not(And3(
+            visible = "[Not(And4(
+                Character.MakeScope.Var('com_character_override').IsSet,
                 Character.MakeScope.Var('com_character_animation').IsSet,
                 Character.MakeScope.Var('com_character_camera').IsSet,
                 Character.MakeScope.Var('com_character_environment').IsSet
@@ -67,7 +70,8 @@ types character_types {
 
         # CMF
         com_portrait_button_base_no_mask = {
-            visible = "[And3(
+            visible = "[And4(
+                Character.MakeScope.Var('com_character_override').IsSet,
                 Character.MakeScope.Var('com_character_animation').IsSet,
                 Character.MakeScope.Var('com_character_camera').IsSet,
                 Character.MakeScope.Var('com_character_environment').IsSet

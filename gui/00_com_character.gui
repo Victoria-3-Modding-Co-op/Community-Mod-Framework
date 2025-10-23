@@ -8,19 +8,20 @@ types character_types {
 
 		block "portrait_frame" {}
 
-        # CMF
-        com_portrait_button_base = {
-            visible = "[Not(And4(
+        block "com_portrait_button" {
+            # CMF
+            com_portrait_button_base = {
+                visible = "[Not(And4(
                 Character.MakeScope.Var('com_character_override').IsSet,
                 Character.MakeScope.Var('com_character_animation').IsSet,
                 Character.MakeScope.Var('com_character_camera').IsSet,
                 Character.MakeScope.Var('com_character_environment').IsSet
             ))]"
-        }
+            }
 
-        # CMF
-        com_portrait_button_base = {
-            visible = "[And4(
+            # CMF
+            com_portrait_button_base = {
+                visible = "[And4(
                 Character.MakeScope.Var('com_character_override').IsSet,
                 Character.MakeScope.Var('com_character_animation').IsSet,
                 Character.MakeScope.Var('com_character_camera').IsSet,
@@ -28,13 +29,14 @@ types character_types {
             )]"
 
 
-            blockoverride "portrait_texture" {
-                portrait_texture = "[Character.GetAnimatedPortrait(
+                blockoverride "portrait_texture" {
+                    portrait_texture = "[Character.GetAnimatedPortrait(
                     Character.MakeScope.Var('com_character_environment').GetFlagName,
                     Character.MakeScope.Var('com_character_camera').GetFlagName,
                     Character.MakeScope.Var('com_character_animation').GetFlagName,
                     GetPortraitRenderSize(PdxGuiWidget.Self)
                 )]"
+                }
             }
         }
 
@@ -98,6 +100,41 @@ types character_types {
 			}
 		}
 	}
+
+    ### POP PORTRAITS
+    type pop_portrait_base = character_portrait_base {
+        size = { 80 100 }
+
+        # CMF
+        blockoverride "com_portrait_button" {
+            com_portrait_button_base = { # CMF - Fix error spam when viewing pops
+                blockoverride "portrait_texture" {
+                    block "pop_portrait_texture" {
+                        # Always use Cached portraits by default (better for performance and they can't be animated)
+                        portrait_texture = "[Pop.GetTypedPortrait('environment_standard', 'camera_head', 'idle', GetPortraitRenderSize(PdxGuiWidget.Self), 'random_adult', '(int32)-1')]"
+
+                        # GetTypedPortrait will return the specified type, and age.
+                        #  Valid types are 'male', 'female', 'boy', 'girl', 'random_adult', 'random_child', 'scripted'. Scripted uses the same scripted weights as GetPortrait (i.e. based on laws etc)
+                        #  Valid values for age are 0-100 (years), or -1 to use the scripted age.
+                        #  Valid values for pose are defined in common/genes/99_genes_special.txt. Empty will use the default pose.
+                        # portrait_texture = "[Pop.GetTypedPortrait('environment_standard', 'camera_head', 'idle', GetPortraitRenderSize(PdxGuiWidget.Self), 'random_adult', '(int32)30')]"
+                    }
+                }
+            }
+        }
+        blockoverride "portrait_icons" {}
+        blockoverride "tooltip" {}
+        blockoverride "show_hat" {}
+
+        # Override click/hover effects since we don't set a character context for these
+        blockoverride "portrait_button" {
+            block "portrait_button" {
+                button = {
+                    size = { 100% 100% }
+                }
+            }
+        }
+    }
 
     type com_portrait_button_base_no_mask = portrait_button {
         parentanchor = bottom|hcenter

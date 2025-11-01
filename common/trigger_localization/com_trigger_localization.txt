@@ -37,7 +37,7 @@ any_com_situation_countries_count = {
 	first = trigger_any_com_situation_countries_COUNT_FIRST
 	third = trigger_any_com_situation_countries_COUNT_THIRD
 }
-any_country_percent = {
+any_com_situation_countries_percent = {
 	global = trigger_any_com_situation_countries_PERCENT
 	first = TRIGGER_ANY_COUNTRY_PERCENT_FIRST
 }

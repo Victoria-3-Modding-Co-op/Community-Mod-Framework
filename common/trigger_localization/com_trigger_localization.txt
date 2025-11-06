@@ -16,7 +16,28 @@ is_party_in_com_situation = {
     third_not = trigger_is_party_in_com_situation_not
 }
 
+is_com_situation_side_leader = {
+    global = trigger_is_com_situation_side_leader
+    global_not = trigger_is_com_situation_side_leader_not
+    first = trigger_is_com_situation_side_leader
+    first_not = trigger_is_com_situation_side_leader_not
+    third = trigger_is_com_situation_side_leader
+    third_not = trigger_is_com_situation_side_leader_not
+}
+
 any_com_situation_countries = {
     global = trigger_any_com_situation_countries
     first = trigger_any_com_situation_countries
+}
+any_com_situation_countries_all = {
+	global = trigger_any_com_situation_countries_all
+}
+any_com_situation_countries_count = {
+	global = trigger_any_com_situation_countries_COUNT
+	first = trigger_any_com_situation_countries_COUNT_FIRST
+	third = trigger_any_com_situation_countries_COUNT_THIRD
+}
+any_com_situation_countries_percent = {
+	global = trigger_any_com_situation_countries_PERCENT
+	first = trigger_any_com_situation_countries_PERCENT_FIRST
 }

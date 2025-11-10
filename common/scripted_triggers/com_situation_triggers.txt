@@ -1,6 +1,6 @@
 ﻿# Check whether the currently scoped country is part of the given faction
 # This effect has to be run inside a scope where 'scope:com_situation' is available!
-# - side = either 'left' or 'right'
+# - side = 'left', 'right', or 'neutral'
 # - faction = localization key for the name of the faction
 is_com_situation_faction_member = {
     custom_description = {
@@ -19,6 +19,48 @@ is_com_situation_faction_member = {
                     any_in_list = {
                         variable = com_countries
                         this = scope:com_country_temp
+                    }
+                }
+            }
+        }
+    }
+}
+
+# Check whether the currently scoped country is part of any faction
+# This effect has to be run inside a scope where 'scope:com_situation' is available!
+is_in_any_com_situation_faction = {
+    custom_description = {
+        text = is_com_situation_faction_member
+        subject = this
+
+        save_temporary_scope_as = com_country_temp
+        scope:com_situation ?= {
+            OR = {
+                var:com_side_left ?= {
+                    any_in_list = {
+                        variable = com_factions
+                        any_in_list = {
+                            variable = com_countries
+                            this = scope:com_country_temp
+                        }
+                    }
+                }
+                var:com_side_right ?= {
+                    any_in_list = {
+                        variable = com_factions
+                        any_in_list = {
+                            variable = com_countries
+                            this = scope:com_country_temp
+                        }
+                    }
+                }
+                var:com_side_neutral ?= {
+                    any_in_list = {
+                        variable = com_factions
+                        any_in_list = {
+                            variable = com_countries
+                            this = scope:com_country_temp
+                        }
                     }
                 }
             }
@@ -74,7 +116,6 @@ is_party_in_com_situation = {
     }
 }
 
-
 # Check whether the currently scoped country is the leader of the specified side
 # This effect has to be run inside a scope where 'scope:com_situation' is available!
 # - side = either 'left' or 'right'
@@ -82,12 +123,124 @@ is_com_situation_side_leader = {
     custom_description = {
         text = is_com_situation_side_leader
         subject = this
+        object = scope:com_side_temp
 
         save_temporary_scope_as = com_country_temp
         scope:com_situation ?= {
             var:com_side_$side$ ?= {
+                save_temporary_scope_as = com_side_temp
                 var:com_leader ?= scope:com_country_temp
             }
+        }
+    }
+}
+
+# Check whether the situation has the given faction
+# This effect has to be run inside a scope where 'scope:com_situation' is available!
+# - side = 'left', 'right', or 'neutral'
+# - name = localization key for the name of the faction
+has_com_situation_faction = {
+    custom_description = {
+        text = has_com_situation_faction
+        subject = scope:com_faction_temp
+        object = scope:com_side_temp
+
+        scope:com_situation ?= {
+            var:com_side_$side$ ?= {
+                save_temporary_scope_as = com_side_temp
+                any_in_list = {
+                    variable = com_factions
+                    var:com_name ?= flag:$name$
+                    save_temporary_scope_as = com_faction_temp
+                }
+            }
+        }
+    }
+}
+
+# Check whether the given faction has a certain amount of members
+# This effect has to be run inside a scope where 'scope:com_situation' is available!
+# - side = 'left', 'right', or 'neutral'
+# - name = localization key for the name of the faction
+# - op = comparison operator, from the usual set
+# - size = value to test against
+num_com_situation_faction_members = {
+    custom_description = {
+        text = num_com_situation_faction_members
+        subject = scope:com_faction_temp
+        object = scope:com_side_temp
+
+        scope:com_situation ?= {
+            var:com_side_$side$ ?= {
+                save_temporary_scope_as = com_side_temp
+                any_in_list = {
+                    variable = com_factions
+                    var:com_name ?= flag:$name$
+                    save_temporary_scope_as = com_faction_temp
+                    variable_list_size = {
+                        name = com_countries
+                        value $op$ $size$
+                    }
+                }
+            }
+        }
+    }
+}
+
+# Check whether the situation has any factions
+# This effect has to be run inside a scope where 'scope:com_situation' is available!
+has_any_com_situation_factions = {
+    custom_description = {
+        text = has_any_com_situation_factions
+
+        scope:com_situation ?= {
+            OR = {
+                var:com_side_left ?= {
+                    variable_list_size = {
+                        name = com_factions
+                        target > 0
+                    }
+                }
+                var:com_side_right ?= {
+                    variable_list_size = {
+                        name = com_factions
+                        target > 0
+                    }
+                }
+                var:com_side_neutral ?= {
+                    variable_list_size = {
+                        name = com_factions
+                        target > 0
+                    }
+                }
+            }
+        }
+    }
+}
+
+# Check whether the given situation id exists
+# Parameters:
+# - situation_id = localization key that identifies the situation
+exists_com_situtation = {
+    custom_description = {
+        text = exists_com_situation
+        any_in_global_list = {
+            variable = com_situation_cache
+            var:com_id ?= flag:$situation_id$
+            var:com_type ?= com_struct_situation
+        }
+    }
+}
+
+# Check whether the given situation side exists
+# This effect has to be run inside a scope where 'scope:com_situation' is available!
+# Parameters:
+# - side = either "left" or "right"
+exists_com_situtation_side = {
+    custom_description = {
+        text = exists_com_situation_side
+        scope:com_situation ?= {
+            exists = var:com_side_$side$
         }
     }
 }

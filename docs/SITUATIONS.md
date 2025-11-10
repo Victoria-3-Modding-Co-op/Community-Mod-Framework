@@ -25,17 +25,21 @@ A full list of them can be found below.
 
 # Usage
 ## Setting up a new situation
-All situations have two main sides, plus a third "neutral" side, that are set up at the start (Though there are effects to change them).
-Each side has a name, description and a leader country.
+There are three types of situations: two-sided, one-sided, and no-sided. They are broadly the same, and it is possible to change between the formats dynamically.
+
+All situations can have two main sides, plus a third "neutral" side. These can be set up at the start or later through effects, and there are futher effects to modify sides.
+The main sides each have a name, description and a leader country.
 
 - The whole situation itself is identified by its id
 - The id can be any localization key
 - The framework guarantees that situations with the same id are always the same anywhere they are used
 - This means as long as the same ids are used, the situation is the same everywhere and manipulation in one context is reflected in another
 
-To set up a new situation, there are two possible effects:
+To set up a new situation, there are two possible effects, either with the main sides specified or not:
 * [create_com_situation_journal_entry](SITUATIONS_SCRIPT_DOCS.md#effect-create_com_situation_journal_entry) adds a journal entry to the country and also creates a new situation for that journal entry.
+* [create_com_situation_journal_entry_no_sides](SITUATIONS_SCRIPT_DOCS.md#effect-create_com_situation_journal_entry_no_sides) adds a journal entry to the country and also creates a new situation for that journal entry, without the main sides.
 * [create_com_situation](SITUATIONS_SCRIPT_DOCS.md#effect-create_com_situation) just creates and sets up the situation. It is meant to be used in the `immediate` block of a journal entry.
+* [create_com_situation_no_sides](SITUATIONS_SCRIPT_DOCS.md#effect-create_com_situation_no_sides) just creates and sets up the situation, without the main sides. It is meant to be used in the `immediate` block of a journal entry.
 
 > **NOTE** If a situation already exists,
 > both effects work the same as [create_ongoing_com_situation_journal_entry](SITUATIONS_SCRIPT_DOCS.md#effect-create_ongoing_com_situation_journal_entry) and [add_ongoing_com_situation](SITUATIONS_SCRIPT_DOCS.md#effect-add_ongoing_com_situation)!
@@ -51,17 +55,19 @@ After that effect was run, all documented effects, triggers and lists can be use
 ## Scoping to side leaders
 To scope to the leader of a specific side in the situation, a provided trigger and list need to be combined.
 The [{any|every|random|ordered}_com_situation_countries](SITUATIONS_SCRIPT_DOCS.md#list-anyeveryrandomordered_com_situation_countries) list
-and the  [is_com_situation_side_leader](SITUATIONS_SCRIPT_DOCS.md#trigger-is_com_situation_side_leader) trigger.
+and the [is_com_situation_side_leader](SITUATIONS_SCRIPT_DOCS.md#trigger-is_com_situation_side_leader) trigger.
 
 Here is an example:
 ```
-every_com_situation_countries = {
-    limit = {
-        is_com_situation_side_leader = {
-            side = left
+scope:com_situation = {
+    every_com_situation_countries = {
+        limit = {
+            is_com_situation_side_leader = {
+                side = left
+            }
         }
+        # Do something to the leader country of the left side
     }
-    # Do something to the leader country of the left side
 }
 ```
 
@@ -88,6 +94,8 @@ Here is a set of example locs for those:
  je_springtime_of_the_peoples_on_fail_header: "#title On a #b Conservative#! victory:#!\n$EFFECT$"
 ```
 > **NOTE** The `$EFFECT$` has to be part of the effect localization blocks to hide the base effect blocks
+
+Custom victory condition and effect text can be set for either side with [set_com_situation_side_victory_condition_text](SITUATIONS_SCRIPT_DOCS.md#effect-set_com_situation_side_victory_condition_text) and [set_com_situation_side_victory_effect_text](SITUATIONS_SCRIPT_DOCS.md#effect-set_com_situation_side_victory_effect_text). This can also be used on the neutral side to display alternative ending conditions.
 
 ## Example Journal
 There is an example journal entry which was used for testing in the Community Mod Framework.

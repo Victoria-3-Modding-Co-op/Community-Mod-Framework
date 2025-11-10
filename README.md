@@ -111,7 +111,7 @@ Current Scope:
 10) Alerts can now open custom windows (Credit to Bahmut)
 11) More than three local goods can now be shown in state building panel correctly (Credit to Bahmut)
 12) Variables can be set on journal entries to change the colors of certain progress bars (Credit to Alexedishi)
-13) Framework to create EU5 style situation journal entries (Credit to Bahmut)
+13) Framework to create EU5 style situation journal entries (Credit to Bahmut & CaesarVincens)
 14) Support for more than 3 unit types in GUI (Credit to lil jimmy & 1230James)
 15) Support for more mobilization options per category in GUI (Credit to lil jimmy & 1230James)
 16) Configurable Character portraits (Credit to Bahmut & CaesarVincens)
@@ -185,9 +185,9 @@ or a multiple of that to keep the aspect ratio correct.
 - The Buttons do not support classical text but are optimized for texticons (i.e. `@innovation!`)
 
 ## EU5 Style Situation Journal Entries
-Situations are meant to model clashes between factions on an international scale.
+Situations are meant to model international events, such as clashes between factions, pandemics, and more.
 
-They can have multiple journal entries associated with it and provide a tool to model complex power struggles.
+Each situation can have multiple, different journal entries associated with it and provides a tool to model complex power struggles.
 
 In the background, situations are Journal Entries with a few extra variables and a whole new UI.
 This means using them should come natural to modders who have already used those.

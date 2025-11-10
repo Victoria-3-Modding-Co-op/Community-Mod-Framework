@@ -118,12 +118,27 @@ add_ongoing_com_situation = {
             }
 
             # Setup cached situation
+            # We want to cach this in the scope of a journal entry, but the 'scope:journal_entry' doesn't work when your already in the journal entry scope by scoping to it directly via the 'je:your_je_key'
+            # So first try to set the variable on the current scope
+            set_variable = {
+                name = com_situation
+                value = scope:com_situation
+            }
+            #if the current scope is a country than the prev var was set on the country, that is not what we want
+            #We want it to be set on the 'scope:journal_entry', so we do the same thing but in this scope
+            #If the current scope is already the journal entry scope than it simply won't be able to set the variable, but that is not a problem because we already set it just before in this scope
             scope:journal_entry = {
+                #If the scope before this was a country we remove the variable set on the first try
+                root = {
+                    remove_variable = com_situation
+                }
+                #And we set it again in this scope
                 set_variable = {
                     name = com_situation
                     value = scope:com_situation
                 }
             }
+            #If you don't do it in this way the 'create_ongoing_com_situation_journal_entry' won't work because it calls this scripted effect in the 'je:your_je_key' scope
         }
     }
 }

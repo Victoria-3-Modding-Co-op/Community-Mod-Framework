@@ -12,3 +12,8 @@ concept_com_situation_faction = {
     texture = "gfx/interface/icons/lens_toolbar_icons/unused/diplomatic_plays.dds"
     is_loading_tip = yes
 }
+
+concept_com_situation_faction_neutral = {
+    texture = "gfx/interface/icons/lens_toolbar_icons/unused/diplomatic_plays.dds"
+    is_loading_tip = yes
+}

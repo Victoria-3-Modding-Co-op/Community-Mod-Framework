@@ -41,3 +41,28 @@ any_com_situation_countries_percent = {
 	global = trigger_any_com_situation_countries_PERCENT
 	first = trigger_any_com_situation_countries_PERCENT_FIRST
 }
+
+has_com_situation_faction = {
+    global = trigger_has_com_situation_faction
+    global_not = trigger_has_com_situation_faction_not
+}
+
+has_any_com_situation_factions = {
+    global = trigger_has_any_com_situation_factions
+    global_not = trigger_has_any_com_situation_factions_not
+}
+
+num_com_situation_faction_members = {
+    global = trigger_num_com_situation_faction_members
+    global_not = trigger_num_com_situation_faction_members_not
+}
+
+exists_com_situation = {
+    global = trigger_exists_com_situation
+    global_not = trigger_exists_com_situation_not
+}
+
+exists_com_situation_side = {
+    global = trigger_exists_com_situation_side
+    global_not = trigger_exists_com_situation_side_not
+}

@@ -24,7 +24,7 @@ types com_situation_types {
         ### Versus/Default style ###
         # Header
         com_situation_header = {
-            visible = "[And(ComSituationLeft.IsSet,ComSituationRight.IsSet)]"
+            visible = "[And(ComSituationLeft.IsSet, ComSituationRight.IsSet)]"
             blockoverride "com_situation_header_top_text" {
                 default_header_2texts_clean = {
                     using = default_list_position
@@ -47,7 +47,7 @@ types com_situation_types {
         ### Single side style ###
         # Header
         com_situation_header = {
-            visible = "[Xor(ComSituationLeft.IsSet,ComSituationRight.IsSet)]"
+            visible = "[Xor(ComSituationLeft.IsSet, ComSituationRight.IsSet)]"
             blockoverride "com_situation_header_top_text" {
                 default_header_clean = {
                     using = default_list_position
@@ -111,8 +111,8 @@ types com_situation_types {
         ### No sides style ###
         # Header
         com_situation_header = {
-            visible = "[Nor(ComSituationLeft.IsSet,ComSituationRight.IsSet)]"
-            blockoverride "com_situation_header_background_alt" {
+            visible = "[Nor(ComSituationLeft.IsSet, ComSituationRight.IsSet)]"
+            blockoverride "com_situation_header_background_alt" { #TODO; come up with more generic solution to framing/size
                 spriteType = CorneredTiled
                 spriteborder_bottom = 840
             }
@@ -174,9 +174,9 @@ types com_situation_types {
         }
         #Victory conditions after header/status
         com_situation_victory = {
-            blockoverride "neutral" {}
+            blockoverride "neutral" {} #show only complete/fail or left/right
         }
-        com_situation_victory = {
+        com_situation_victory = { #show only alternate ending
             blockoverride "left" {}
             blockoverride "right" {}
         }
@@ -582,7 +582,7 @@ types com_situation_types {
 
         # Reason Text, default location
         flowcontainer = {
-            visible = "[Or3(Not(ComSituation.Var('com_reason_location').IsSet),ComSituationLeft.IsSet,ComSituationRight.IsSet)]"
+            visible = "[Or3(Not(ComSituation.Var('com_reason_location').IsSet), ComSituationLeft.IsSet, ComSituationRight.IsSet)]" #auto return if a character is shown
             direction = vertical
             margin = { 0 10 }
             spacing = 30
@@ -799,7 +799,7 @@ types com_situation_types {
                 }
 
                 widget = {
-                    visible = "[And(ComSituationLeft.IsSet,ComSituationRight.IsSet)]"
+                    visible = "[And(ComSituationLeft.IsSet, ComSituationRight.IsSet)]"
                     size = { 40 40 }
                     textbox = {
                         parentanchor = hcenter|vcenter
@@ -831,34 +831,34 @@ types com_situation_types {
         spacing = 20
 
         block "left" {
-            visible = "[Or(JournalEntry.CanComplete,ComSituationLeft.Var('com_victory_condition').IsSet)]"
-            com_victory_conditions = { #Left side victory
+            visible = "[Or(JournalEntry.CanComplete, ComSituationLeft.Var('com_victory_condition').IsSet)]" #only show left victory/complete if one exists
+            com_victory_conditions = { #Left side victory, either set as regular complete or custom condition and effect
                 visible = "[ComSituationLeft.IsSet]"
-                tooltip = "[ComVictoryCondition(JournalEntry.GetCompletionTooltip)][ConcatIfNeitherEmpty(Localize('NEWLINE'),Localize(ComVictoryEffect(JournalEntry.GetOnCompleteTooltip)))]"
+                tooltip = "[ComVictoryCondition(JournalEntry.GetCompletionTooltip)][ConcatIfNeitherEmpty(Localize('NEWLINE'), ComVictoryEffect(JournalEntry.GetOnCompleteTooltip) )]"
                 datacontext = "[ComSituationLeft]"
             }
-            com_victory_conditions = { #Completion
+            com_victory_conditions = { #Regular completion, only visible if left side is not set
                 visible = "[Not(ComSituationLeft.IsSet)]"
                 blockoverride "text" { raw_text = "[Localize('com_situation_completion_conditions')]" }
-                tooltip = "[JournalEntry.GetCompletionTooltip][ConcatIfNeitherEmpty(Localize('NEWLINE'),Localize(JournalEntry.GetOnCompleteTooltip))]"
+                tooltip = "[JournalEntry.GetCompletionTooltip][ConcatIfNeitherEmpty(Localize('NEWLINE'), JournalEntry.GetOnCompleteTooltip )]"
             }
         }
 
         block "right" {
-            visible = "[Or(Not(StringIsEmpty(JournalEntry.GetFailureTooltip)),ComSituationRight.Var('com_victory_condition').IsSet)]"
-            com_victory_conditions = { #Right side victory
+            visible = "[Or(Not(StringIsEmpty(JournalEntry.GetFailureTooltip)), ComSituationRight.Var('com_victory_condition').IsSet)]" #only show right victory/failure if one exists
+            com_victory_conditions = { #Right side victory, either set as regular failure or custom condition and effect
                 visible = "[ComSituationRight.IsSet]"
-                tooltip = "[ComVictoryCondition(JournalEntry.GetFailureTooltip)][ConcatIfNeitherEmpty(Localize('NEWLINE'),Localize(ComVictoryEffect(JournalEntry.GetOnFailTooltip)))]"
+                tooltip = "[ComVictoryCondition(JournalEntry.GetFailureTooltip)][ConcatIfNeitherEmpty(Localize('NEWLINE'), ComVictoryEffect(JournalEntry.GetOnFailTooltip) )]"
                 datacontext = "[ComSituationRight]"
             }
-            com_victory_conditions = { #Failure
+            com_victory_conditions = { #Regular failure, only visible if right side is not set
                 visible = "[Not(ComSituationRight.IsSet)]"
                 blockoverride "text" { raw_text = "[Localize('com_situation_failure_conditions')]" }
-                tooltip = "[JournalEntry.GetFailureTooltip][ConcatIfNeitherEmpty(Localize('NEWLINE'),Localize(JournalEntry.GetOnFailTooltip))]"
+                tooltip = "[JournalEntry.GetFailureTooltip][ConcatIfNeitherEmpty(Localize('NEWLINE'), JournalEntry.GetOnFailTooltip )]"
             }
         }
         block "neutral" {
-            com_victory_conditions = {
+            com_victory_conditions = { #only visible if custom ending condition is set
                 visible = "[Scope.Var('com_victory_condition').IsSet]"
                 tooltip = "[Scope.Var('com_victory_condition').GetFlagName]"
                 blockoverride "text" { raw_text = "[Localize('com_situation_alternate_ending_conditions')]" }

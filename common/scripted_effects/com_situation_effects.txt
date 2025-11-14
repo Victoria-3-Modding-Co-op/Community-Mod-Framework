@@ -468,7 +468,7 @@ remove_com_situation_header = {
 
 # Move reason text to header space in the situation journal entry; has no effect if left or right sides are set
 # This effect has to be run inside a scope where 'scope:com_situation' is available!
-set_je_reason_location = {
+set_com_je_reason_location = {
 	hidden_effect = {
 		if = {
 			limit = {
@@ -476,7 +476,7 @@ set_je_reason_location = {
 					exists = scope:journal_entry
 				}
 			}
-			error_log = "CMF: No journal_entry scope defined! This effect should be run in the immediate block of a journal entry!"
+			error_log = error_no_situation_scope
 		}
 		else = {
 			fix_variable_error = { variable = com_reason_location }
@@ -499,7 +499,7 @@ set_je_reason_location = {
 
 # Move reason text to below faction space in the situation journal entry
 # This effect has to be run inside a scope where 'scope:com_situation' is available!
-remove_je_reason_location = {
+remove_com_je_reason_location = {
 	hidden_effect = {
 		if = {
 			limit = {
@@ -507,7 +507,7 @@ remove_je_reason_location = {
 					exists = scope:journal_entry
 				}
 			}
-			error_log = "CMF: No journal_entry scope defined! This effect should be run in the immediate block of a journal entry!"
+			error_log = error_no_situation_scope
 		}
 		else = {
 			fix_variable_error = { variable = com_reason_location }

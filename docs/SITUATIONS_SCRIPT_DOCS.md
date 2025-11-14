@@ -10,8 +10,8 @@
 * [end_com_situation](#effect-end_com_situation)
 * [set_com_situation_header](#effect-set_com_situation_header)
 * [remove_com_situation_header](#effect-remove_com_situation_header)
-* [set_je_reason_location](#effect-set_je_reason_location)
-* [remove_je_reason_location](#effect-remove_je_reason_location)
+* [set_com_je_reason_location](#effect-set_com_je_reason_location)
+* [remove_com_je_reason_location](#effect-remove_com_je_reason_location)
 * [create_com_situation_side](#effect-create_com_situation_side)
 * [remove_com_situation_side](#effect-remove_com_situation_side)
 * [change_com_situation_leader](#effect-change_com_situation_leader)
@@ -135,11 +135,11 @@ Set optional header to the situation journal entry
 Remove optional header to the situation journal entry
 > NOTE: This effect has to be run inside a scope where '**scope:com_situation**' is available!
 
-### Effect: `set_je_reason_location`
+### Effect: `set_com_je_reason_location`
 Move journal reason text to header space in the situation journal entry; has no effect if left or right sides are set
 > NOTE: This effect has to be run inside a scope where '**scope:com_situation**' is available!
 
-### Effect: `remove_je_reason_location`
+### Effect: `remove_com_je_reason_location`
 Move journal reason text to below faction space in the situation journal entry
 > NOTE: This effect has to be run inside a scope where '**scope:com_situation**' is available!
 

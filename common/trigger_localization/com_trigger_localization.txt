@@ -66,3 +66,8 @@ exists_com_situation_side = {
     global = trigger_exists_com_situation_side
     global_not = trigger_exists_com_situation_side_not
 }
+
+exists_com_progress_bar = {
+    global = trigger_exists_com_progress_bar
+    global_not = trigger_exists_com_progress_bar_not
+}

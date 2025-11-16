@@ -1,0 +1,250 @@
+﻿# Setup progress bar for styling on the current journal
+# This effect has to be run inside a scope where 'scope:journal_entry' is available!
+# Parameters:
+# - progress_bar = name localization key of progress bar
+# - index = 0-indexed position the given progress bar in the journal
+# THIS DOES NOT REPLACE THE VANILLA SETUP
+create_com_progress_bar = {
+    hidden_effect = {
+        if = {
+            limit = {
+                NOT = {
+                    exists = scope:journal_entry
+                }
+            }
+            error_log = "CMF: No journal_entry scope defined! This effect should be run in the immediate block of a journal entry!"
+        }
+        else = {
+            if = {
+                limit = {
+                    NOT = { exists_com_progress_bar = { progress_bar = $progress_bar$ } }
+                }
+                create_struct = {
+                    struct_type = com_struct_progress_bar
+                    struct_scope = com_$progress_bar$
+                }
+                add_to_global_variable_list = {
+                    name = com_progress_bar_cache
+                    target = scope:com_$progress_bar$
+                }
+            }
+            fix_variable_error = { variable = com_progress_bar_$index$ }
+            fix_variable_error = { variable = com_$progress_bar$ }
+            # Set progress bar
+            scope:journal_entry = {
+                set_variable = {
+                    name = com_progress_bar_$index$
+                    value = scope:com_$progress_bar$
+                }
+            }
+            # save id
+            scope:com_$progress_bar$ = {
+                set_variable = {
+                    name = com_id
+                    value = flag:$progress_bar$
+                }
+            }
+            
+        }
+    }
+}
+
+# This effect should be run when the journal entry concludes
+# Parameters:
+# - progress_bar = name localization key of progress bar
+# This effect has to be run inside a scope where 'scope:journal_entry' is available!
+remove_com_progress_bar = {
+    custom_tooltip = {
+        text = effect_remove_com_progress_bar
+        if = {
+            limit = {
+                NOT = {
+                    exists_com_progress_bar = { progress_bar = $progress_bar$ }
+                }
+            }
+            error_log = "CMF: Progress bar could not be found"
+        }
+        else = {
+            # Retrieve progress bar
+            random_in_global_list = {
+                variable = com_progress_bar_cache
+                limit = {
+                    var:com_id ?= flag:$progress_bar$
+                    var:com_type ?= com_struct_progress_bar
+                }
+                save_scope_as = com_internal_scope
+            }
+
+            # Remove progress bar from cache
+            remove_list_global_variable = {
+                name = com_progress_bar_cache
+                target = scope:com_internal_scope
+            }
+
+            # Destroy progress bar
+            destroy_struct = {
+                struct = scope:com_internal_scope
+            }
+        }
+    }
+}
+
+# Sets the color of progress bar
+# Requires access to 'scope:com_$progress_bar$'
+# - progress_bar = name localization key of progress bar
+# - color = color of base bar
+set_com_progress_bar_color = {
+    hidden_effect = {
+        if = {
+            limit = {
+                NOT = {
+                    exists = scope:com_$progress_bar$
+                }
+            }
+            error_log = error_no_progress_bar_scope
+        }
+        else = {
+            fix_variable_error = { variable = com_base_color }
+            fix_variable_error = { variable = $color$ }
+            scope:com_$progress_bar$ = {
+                set_variable = {
+                    name = com_base_color
+                    value = flag:$color$
+                }
+            }
+        }
+    }
+}
+
+# Sets the type of drift and the value to be used
+# Requires access to 'scope:com_$progress_bar$'
+# - progress_bar = name localization key of progress bar
+# - drift_color = color of drift bar
+# - drift_value = a 0-1 value which sets the size and direction of the drift 
+set_com_progress_bar_drift = {
+    hidden_effect = {
+        if = {
+            limit = {
+                NOT = {
+                    exists = scope:com_$progress_bar$
+                }
+            }
+            error_log = error_no_progress_bar_scope
+        }
+        else = {
+            fix_variable_error = { variable = com_drift_color }
+            fix_variable_error = { variable = com_drift_value }
+            fix_variable_error = { variable = $drift_color$ }
+            fix_variable_error = { variable = $drift_value$ }
+            scope:com_$progress_bar$ = {
+                set_variable = {
+                    name = com_drift_color
+                    value = flag:$drift_color$
+                }
+                set_variable = {
+                    name = com_drift_value
+                    value = flag:$drift_value$
+                }
+            }
+        }
+    }
+}
+
+# Sets the type of drift and the value to be used
+# Requires access to 'scope:com_$progress_bar$'
+# - progress_bar = name localization key of progress bar
+remove_com_progress_bar_drift = {
+    hidden_effect = {
+        if = {
+            limit = {
+                NOT = {
+                    exists = scope:com_$progress_bar$
+                }
+            }
+            error_log = error_no_progress_bar_scope
+        }
+        else = {
+            scope:com_$progress_bar$ = {
+                remove_variable = com_drift_color
+                remove_variable = com_drift_value
+            }
+        }
+    }
+}
+
+# Sets the type of target and the value to be used
+# Requires access to 'scope:com_$progress_bar$'
+# - progress_bar = name localization key of progress bar
+# - target_icon = icon for target value
+# - target_value = a 0-1 value which sets the position of the target
+set_com_progress_bar_target = {
+    hidden_effect = {
+        if = {
+            limit = {
+                NOT = {
+                    exists = scope:com_$progress_bar$
+                }
+            }
+            error_log = error_no_progress_bar_scope
+        }
+        else = {
+            fix_variable_error = { variable = com_target_icon }
+            fix_variable_error = { variable = com_target_value }
+            fix_variable_error = { variable = $target_icon$ }
+            fix_variable_error = { variable = $target_value$ }
+            scope:com_$progress_bar$ = {
+                set_variable = {
+                    name = com_target_icon
+                    value = flag:$target_icon$
+                }
+                set_variable = {
+                    name = com_target_value
+                    value = flag:$target_value$
+                }
+            }
+        }
+    }
+}
+
+# Removes the progress bar target
+# Requires access to 'scope:com_$progress_bar$'
+# - progress_bar = name localization key of progress bar
+remove_com_progress_bar_target = {
+    hidden_effect = {
+        if = {
+            limit = {
+                NOT = {
+                    exists = scope:com_$progress_bar$
+                }
+            }
+            error_log = error_no_progress_bar_scope
+        }
+        else = {
+            scope:com_$progress_bar$ = {
+                remove_variable = com_target_icon
+                remove_variable = com_target_value
+            }
+        }
+    }
+}
+
+# Sets up an existing progress bar as an accessible scope
+# This allows using effects and triggers that rely on the 'scope:com_$progress_bar$' outside the event chain
+# - progress_bar = name localization key of progress bar
+save_com_progress_bar_scope = {
+    hidden_effect = {
+        if = {
+            limit = {
+                exists_com_progress_bar = { progress_bar = $progress_bar$ }
+            }
+            random_in_global_list = {
+                variable = com_progress_bar_cache
+                limit = {
+                    var:com_id ?= flag:$progress_bar$
+                    var:com_type ?= com_struct_progress_bar
+                }
+                save_scope_as = com_$progress_bar$
+            }
+        }
+    }
+}

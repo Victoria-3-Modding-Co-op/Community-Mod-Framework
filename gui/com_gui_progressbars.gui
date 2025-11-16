@@ -1,0 +1,894 @@
+# COPY-PASTED FOR NOW
+@panel_width_minus_30 = 510
+@panel_width_minus_20 = 520			
+@panel_width_minus_10 = 530			# used to be 450
+@panel_width = 540  				# used to be 460
+@panel_width_half = 270				# used to be 230
+@panel_width_plus_10 = 550  		# used to be 470
+@panel_width_plus_14 = 554			# used to be 474
+@panel_width_plus_14_half = 277		# used to be 237
+@panel_width_plus_20 = 560			# used to be 480
+@panel_width_plus_30 = 570			# used to be 490
+@panel_width_plus_70 = 610			# used to be 530
+
+@COM_panel_width_plus_20_half = @[panel_width_plus_20 / 2]
+
+types progressbar_overwrites {
+	type com_journal_entry_progress_bars = flowcontainer {
+		# This is a COM addition to give modders the ability to select additional colors for scripted progress bars
+		# These work by setting a variable in the journal entry scope which will change which progress bar is used
+		# Currently, the following variables are used:
+		## com_double_bad_gold_marker -- replaces the journal entry marker in double_sided_bad with the marker from double_sided_gold
+		## com_double_bad_white_bar -- replaced double_sided_bad with white_progressbar_horizontal
+		## com_double_bad_gold_bar -- replaced double_sided_bad with gold_progressbar_horizontal
+		## com_bear_spray_applied -- removes the bear and lion icons from double_sided_gold and resizes the progress bar
+		parentanchor = hcenter
+		direction = vertical
+		
+		datamodel = "[JournalEntry.GetScriptedProgressBars]"
+		visible = "[Not( IsDataModelEmpty( JournalEntry.GetScriptedProgressBars ) )]"
+		
+		spacing = 15
+		
+		item = {
+			container = {
+
+				#Green increasing value
+				com_progressbar_default = {
+					visible = "[ScriptedProgressBar.IsDefault]"
+					block "progressbar_size" {
+						size = { 504 30 }
+					}
+					tooltip = "[ScriptedProgressBar.GetPeriodicProgressBreakdown]"
+					
+					blockoverride "com_drift_value" {
+						value = "[ComProgressBarDriftSValue]"
+					}
+					blockoverride "com_base_value" {
+						value = "[JournalEntry.GetCurrentBarProgress(ScriptedProgressBar.Self)]"
+					}
+					textbox = {
+						text = "[ScriptedProgressBar.GetDesc]"
+						autoresize = yes
+						align = nobaseline
+						margin_left = 10
+						parentanchor = vcenter
+					}
+				}
+				
+				#Red increasing value
+				com_progressbar_bad = {
+					visible = "[ScriptedProgressBar.IsDefaultBad]"
+					block "progressbar_size" {
+						size = { 504 30 }
+					}
+
+					blockoverride "com_decrease" {}
+					blockoverride "com_mirror_drift_arrow" {
+						mirror = horizontal
+					}
+					tooltip = "[ScriptedProgressBar.GetPeriodicProgressBreakdown]"
+					blockoverride "com_base_values" {
+						value = "[ComProgressBarDriftSValue]"
+						min = 0
+						max = 1
+					}
+					blockoverride "com_drift_values" {
+						value = "[JournalEntry.GetCurrentBarProgress(ScriptedProgressBar.Self)]"
+						min = 0
+						max = 1
+					}
+					textbox = {
+						text = "[ScriptedProgressBar.GetDesc]"
+						autoresize = yes
+						align = nobaseline
+						margin_left = 10
+						parentanchor = vcenter
+					}
+					blockoverride "com_target_visible" {
+						visible = no
+					}
+				}
+				
+				# Default
+				default_progressbar_horizontal = {
+					visible = "[And(Not(ComProgressBar.IsSet),ScriptedProgressBar.IsDefault)]"
+					block "progressbar_size" {
+						size = { 504 30 }
+					}
+					tooltip = "[ScriptedProgressBar.GetPeriodicProgressBreakdown]"
+					blockoverride "values" {
+						value = "[JournalEntry.GetCurrentBarProgress(ScriptedProgressBar.Self)]"
+						min = 0
+						max = 1
+					}
+					textbox = {
+						text = "[ScriptedProgressBar.GetDesc]"
+						autoresize = yes
+						align = nobaseline
+						margin_left = 10
+						parentanchor = vcenter
+					}
+				}
+
+				# Default Bad
+				bad_progressbar_horizontal = {
+					visible = "[And(Not(ComProgressBar.IsSet),ScriptedProgressBar.IsDefaultBad)]"
+					block "progressbar_size" {
+						size = { 504 30 }
+					}
+					tooltip = "[ScriptedProgressBar.GetPeriodicProgressBreakdown]"
+					blockoverride "values" {
+						value = "[JournalEntry.GetCurrentBarProgress(ScriptedProgressBar.Self)]"
+						min = 0
+						max = 1
+					}
+					textbox = {
+						text = "[ScriptedProgressBar.GetDesc]"
+						autoresize = yes
+						align = nobaseline
+						margin_left = 10
+						parentanchor = vcenter
+					}
+				}
+				
+				#Default Green
+				com_progressbar_green = {
+					visible = "[ScriptedProgressBar.IsDefaultGreen]"
+					block "progressbar_size" {
+						size = { 504 30 }
+					}
+					
+					tooltip = "[ScriptedProgressBar.GetPeriodicProgressBreakdown]"
+					blockoverride "values" {
+						value = "[JournalEntry.GetCurrentBarProgress(ScriptedProgressBar.Self)]"
+						min = 0
+						max = 1
+					}
+					textbox = {
+						text = "[ScriptedProgressBar.GetDesc]"
+						autoresize = yes
+						align = nobaseline
+						margin_left = 10
+						parentanchor = vcenter
+					}
+					textbox = {
+						text = "[ScriptedProgressBar.GetSecondDesc]"
+						autoresize = yes
+						align = right|nobaseline
+						margin_right = 10
+						parentanchor = right|vcenter
+					}
+				}
+				
+				# Double-sided Bad (with Journal Icon)
+				com_progressbar_default = {
+					visible = "[And4(
+						ScriptedProgressBar.IsDoubleSidedBad,
+						Not(JournalEntry.MakeScope.Var('com_double_bad_gold_marker').IsSet),
+						Not(JournalEntry.MakeScope.Var('com_double_bad_white_bar').IsSet),
+						Not(JournalEntry.MakeScope.Var('com_double_bad_gold_bar').IsSet)
+					)]"
+					block "progressbar_size" {
+						size = { 504 30 }
+					}
+					tooltip = "[ScriptedProgressBar.GetPeriodicProgressBreakdown]"
+					
+					blockoverride "noprogresstexture" {
+						noprogresstexture = "gfx/interface/progressbar/progressbar_bad.dds"
+					}
+					
+					blockoverride "values" {
+						value = "[JournalEntry.GetCurrentBarProgress(ScriptedProgressBar.Self)]"
+						min = 0
+						max = 1
+					}
+					textbox = {
+						text = "[ScriptedProgressBar.GetDesc]"
+						autoresize = yes
+						align = nobaseline
+						margin_left = 10
+						parentanchor = vcenter
+					}
+					textbox = {
+						text = "[ScriptedProgressBar.GetSecondDesc]"
+						autoresize = yes
+						align = right|nobaseline
+						margin_right = 10
+						parentanchor = right|vcenter
+					}
+					
+					#this is hack to get an extra marker on top of the frame (progressbar properties are copied)
+					blockoverride "com_target" {
+						progressbar = {
+							noprogresstexture = "gfx/interface/icons/generic_icons/transparent.dds"
+							progresstexture = "gfx/interface/icons/generic_icons/transparent.dds"
+							size = { 100% 100% }
+							spriteType = Corneredtiled
+							spriteborder = { 4 4 }
+							texture_density = 2
+							skip_initial_animation = yes
+							
+							block "values" {
+								value = "[JournalEntry.GetCountry.MakeScope.ScriptValue('bar_value')]"
+								min = 0
+								max = 1
+							}
+							block "direction" {
+								direction = horizontal
+							}
+							block "progress_changed_animation" {
+								using = progressbar_changed_animation
+							}
+							block "animate_negative_change" {
+								animate_negative_changes = yes
+							}
+							marker = {
+								
+								widget = {
+									size = { 50 50 }
+									icon = {
+										size = { 65 65 }
+										widgetanchor = center
+										position = { 0 12 }
+										
+										block "progress_icon" {
+											texture = "[JournalEntry.GetIcon]"
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+				
+				# Double-sided Bad (with Gold Marker)
+				default_progressbar_horizontal = {
+					visible = "[And4(
+						ScriptedProgressBar.IsDoubleSidedBad,
+						JournalEntry.MakeScope.Var('com_double_bad_gold_marker').IsSet,
+						Not(JournalEntry.MakeScope.Var('com_double_bad_white_bar').IsSet),
+						Not(JournalEntry.MakeScope.Var('com_double_bad_gold_bar').IsSet)
+					)]"
+					block "progressbar_size" {
+						size = { 504 30 }
+					}
+					tooltip = "[ScriptedProgressBar.GetPeriodicProgressBreakdown]"
+					
+					blockoverride "noprogresstexture" {
+						noprogresstexture = "gfx/interface/progressbar/progressbar_bad.dds"
+					}
+					
+					blockoverride "values" {
+						value = "[JournalEntry.GetCurrentBarProgress(ScriptedProgressBar.Self)]"
+						min = 0
+						max = 1
+					}
+					textbox = {
+						text = "[ScriptedProgressBar.GetDesc]"
+						autoresize = yes
+						align = nobaseline
+						margin_left = 10
+						parentanchor = vcenter
+					}
+					textbox = {
+						text = "[ScriptedProgressBar.GetSecondDesc]"
+						autoresize = yes
+						align = right|nobaseline
+						margin_right = 10
+						parentanchor = right|vcenter
+					}
+					
+					#this is hack to get an extra marker on top of the frame (progressbar properties are copied)
+					blockoverride "on_top_of_the_progressbar" {
+						progressbar = {
+							noprogresstexture = "gfx/interface/icons/generic_icons/transparent.dds"
+							progresstexture = "gfx/interface/icons/generic_icons/transparent.dds"
+							size = { 100% 100% }
+							spriteType = Corneredtiled
+							spriteborder = { 4 4 }
+							texture_density = 2
+							skip_initial_animation = yes
+							
+							block "values" {}
+							block "direction" {
+								direction = horizontal
+							}
+							block "progress_changed_animation" {
+								using = progressbar_changed_animation
+							}
+							block "animate_negative_change" {
+								animate_negative_changes = yes
+							}
+							marker = {
+								icon = {
+									size = { 65 33 }
+									parentanchor = vcenter
+									widgetanchor = center
+									texture = "gfx/interface/progressbar/progressbar_marker.dds"
+									using = shimmer
+								}
+							}
+						}
+					}
+				}
+				
+				# Double-sided Bad (turned into single-sided white bar)
+				com_progressbar_white = {
+					visible = "[And4(
+						ScriptedProgressBar.IsDoubleSidedBad,
+						Not(JournalEntry.MakeScope.Var('com_double_bad_gold_marker').IsSet),
+						JournalEntry.MakeScope.Var('com_double_bad_white_bar').IsSet,
+						Not(JournalEntry.MakeScope.Var('com_double_bad_gold_bar').IsSet)
+					)]"
+					block "progressbar_size" {
+						size = { 504 30 }
+					}
+					
+					tooltip = "[ScriptedProgressBar.GetPeriodicProgressBreakdown]"
+					blockoverride "values" {
+						value = "[JournalEntry.GetCurrentBarProgress(ScriptedProgressBar.Self)]"
+						min = 0
+						max = 1
+					}
+					textbox = {
+						text = "[ScriptedProgressBar.GetDesc]"
+						autoresize = yes
+						align = nobaseline
+						margin_left = 10
+						parentanchor = vcenter
+					}
+					textbox = {
+						text = "[ScriptedProgressBar.GetSecondDesc]"
+						autoresize = yes
+						align = right|nobaseline
+						margin_right = 10
+						parentanchor = right|vcenter
+					}
+				}
+				
+				# Double-sided Bad (turned into single-sided gold bar)
+				com_progressbar_gold = {
+					visible = "[And4(
+						ScriptedProgressBar.IsDoubleSidedBad,
+						Not(JournalEntry.MakeScope.Var('com_double_bad_gold_marker').IsSet),
+						Not(JournalEntry.MakeScope.Var('com_double_bad_white_bar').IsSet),
+						JournalEntry.MakeScope.Var('com_double_bad_gold_bar').IsSet
+					)]"
+					block "progressbar_size" {
+						size = { 504 30 }
+					}
+					
+					tooltip = "[ScriptedProgressBar.GetPeriodicProgressBreakdown]"
+					blockoverride "values" {
+						value = "[JournalEntry.GetCurrentBarProgress(ScriptedProgressBar.Self)]"
+						min = 0
+						max = 1
+					}
+					textbox = {
+						text = "[ScriptedProgressBar.GetDesc]"
+						autoresize = yes
+						align = nobaseline
+						margin_left = 10
+						parentanchor = vcenter
+					}
+					textbox = {
+						text = "[ScriptedProgressBar.GetSecondDesc]"
+						autoresize = yes
+						align = right|nobaseline
+						margin_right = 10
+						parentanchor = right|vcenter
+					}
+				}
+				
+				# Double-Sided Gold (with Bear and Lion)
+				widget = {
+					size = { 520 45 }
+					parentanchor = center
+					visible = "[And(
+						ScriptedProgressBar.IsDoubleSidedGold,
+						Not(JournalEntry.MakeScope.Var('com_bear_spray_applied').IsSet)
+					)]"
+					
+					default_progressbar_horizontal  = {
+						parentanchor = center
+						block "progressbar_size" {
+							size = { 430 30 }
+						}
+						
+						blockoverride "noprogresstexture" {
+							noprogresstexture = "gfx/interface/progressbar/progressbar_gold.dds"
+						}
+						
+						tooltip = "[ScriptedProgressBar.GetPeriodicProgressBreakdown]"
+						blockoverride "values" {
+							value = "[JournalEntry.GetCurrentBarProgress(ScriptedProgressBar.Self)]"
+							min = 0
+							max = 1
+						}
+						textbox = {
+							text = "[ScriptedProgressBar.GetDesc]"
+							autoresize = yes
+							align = nobaseline
+							margin_left = 10
+							parentanchor = vcenter
+						}
+						textbox = {
+							text = "[ScriptedProgressBar.GetSecondDesc]"
+							autoresize = yes
+							align = right|nobaseline
+							margin_right = 10
+							parentanchor = right|vcenter
+						}
+						
+						#this is hack to get an extra marker on top of the frame (progressbar properties are copied)
+						blockoverride "on_top_of_the_progressbar" {
+							progressbar = {
+								noprogresstexture = "gfx/interface/icons/generic_icons/transparent.dds"
+								progresstexture = "gfx/interface/icons/generic_icons/transparent.dds"
+								size = { 100% 100% }
+								spriteType = Corneredtiled
+								spriteborder = { 4 4 }
+								texture_density = 2
+								skip_initial_animation = yes
+								
+								block "values" {}
+								block "direction" {
+									direction = horizontal
+								}
+								block "progress_changed_animation" {
+									using = progressbar_changed_animation
+								}
+								block "animate_negative_change" {
+									animate_negative_changes = yes
+								}
+								marker = {
+									
+									icon = {
+										size = { 65 33 }
+										parentanchor = vcenter
+										widgetanchor = center
+										texture = "gfx/interface/progressbar/progressbar_marker.dds"
+										using = shimmer
+									}
+								}
+							}
+						}
+					}
+					
+					icon = {
+						size = { 45 45 }
+						parentanchor = left|vcenter
+						block "progressbar_left_icon" {
+							texture = "gfx/interface/progressbar/greatgame_bear_marker.dds"
+						}
+					}
+					
+					icon = {
+						size = { 45 45 }
+						parentanchor = right|vcenter
+						block "progressbar_right_icon" {
+							texture = "gfx/interface/progressbar/greatgame_lion_marker.dds"
+						}
+					}
+				}
+				
+				# Double-Sided Gold (WITHOUT Bear and Lion)
+				default_progressbar_horizontal  = {
+					visible = "[And(
+						ScriptedProgressBar.IsDoubleSidedGold,
+						JournalEntry.MakeScope.Var('com_bear_spray_applied').IsSet
+					)]"
+					
+					block "progressbar_size" {
+						size = { 504 30 }
+					}
+					
+					blockoverride "noprogresstexture" {
+						noprogresstexture = "gfx/interface/progressbar/progressbar_gold.dds"
+					}
+					
+					tooltip = "[ScriptedProgressBar.GetPeriodicProgressBreakdown]"
+					blockoverride "values" {
+						value = "[JournalEntry.GetCurrentBarProgress(ScriptedProgressBar.Self)]"
+						min = 0
+						max = 1
+					}
+					textbox = {
+						text = "[ScriptedProgressBar.GetDesc]"
+						autoresize = yes
+						align = nobaseline
+						margin_left = 10
+						parentanchor = vcenter
+					}
+					textbox = {
+						text = "[ScriptedProgressBar.GetSecondDesc]"
+						autoresize = yes
+						align = right|nobaseline
+						margin_right = 10
+						parentanchor = right|vcenter
+					}
+					
+					#this is hack to get an extra marker on top of the frame (progressbar properties are copied)
+					blockoverride "on_top_of_the_progressbar" {
+						progressbar = {
+							noprogresstexture = "gfx/interface/icons/generic_icons/transparent.dds"
+							progresstexture = "gfx/interface/icons/generic_icons/transparent.dds"
+							size = { 100% 100% }
+							spriteType = Corneredtiled
+							spriteborder = { 4 4 }
+							texture_density = 2
+							skip_initial_animation = yes
+							
+							block "values" {}
+							block "direction" {
+								direction = horizontal
+							}
+							block "progress_changed_animation" {
+								using = progressbar_changed_animation
+							}
+							block "animate_negative_change" {
+								animate_negative_changes = yes
+							}
+							marker = {
+								
+								icon = {
+									size = { 65 33 }
+									parentanchor = vcenter
+									widgetanchor = center
+									texture = "gfx/interface/progressbar/progressbar_marker.dds"
+									using = shimmer
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+types com_progressbars {
+	type com_progressbar = progressbar_properties {
+		blockoverride "progressbar" {
+			block "com_drift" {
+				progressbar = {
+					using = com_drift_progressbar
+				}
+			}
+			block "com_base" {
+				progressbar = {
+					using = com_base_progressbar
+				}
+			}
+		}
+		blockoverride "on_top_of_the_progressbar" {
+			block "com_target" {
+				progressbar = {
+					using = com_target_progressbar
+				}
+			}
+		}
+	}
+	type com_progressbar_default = com_progressbar {
+		blockoverride "com_drift_visible" {
+			visible = "[And(ComProgressBar.IsSet, ComProgressBarDrift.IsSet)]"
+		}
+		blockoverride "com_target_visible" {
+			visible = "[And(ComProgressBar.IsSet, ComProgressBarTarget.IsSet)]"
+		}
+	}
+	type com_progressbar_bad = com_progressbar_default {
+		blockoverride "progresstexture" {
+			progresstexture = "gfx/interface/progressbar/progressbar_bad.dds"
+		}
+		blockoverride "glow" {
+			texture = "gfx/interface/progressbar/progressbar_bad_glow.dds"
+		}
+		blockoverride "glow_line" {
+			texture = "gfx/interface/progressbar/progressbar_bad_glow_line.dds"
+		}
+	}
+	type com_progressbar_green = com_progressbar_default {
+		blockoverride "progresstexture" {
+			progresstexture = "gfx/interface/progressbar/progressbar_green.dds"
+		}
+		blockoverride "glow" {
+			texture = "gfx/interface/progressbar/progressbar_green_glow.dds"
+		}
+		blockoverride "glow_line" {
+			texture = "gfx/interface/progressbar/progressbar_green_glow_line.dds"
+		}
+	}
+	type com_progressbar_gold = com_progressbar_default {
+		blockoverride "progresstexture" {
+			progresstexture = "gfx/interface/progressbar/progressbar_gold.dds"
+		}
+		blockoverride "glow" {
+			texture = "gfx/interface/progressbar/progressbar_gold_glow.dds"
+		}
+		blockoverride "glow_line" {
+			texture = "gfx/interface/progressbar/progressbar_gold_glow_line.dds"
+		}
+	}
+	type com_progressbar_white = com_progressbar_default {
+		blockoverride "progresstexture" {
+			progresstexture = "gfx/interface/progressbar/progressbar_white.dds"
+		}
+		blockoverride "glow" {
+			texture = "gfx/interface/progressbar/progressbar_white_glow.dds"
+		}
+		blockoverride "glow_line" {
+			texture = "gfx/interface/progressbar/progressbar_white_glow_line.dds"
+		}
+	}
+	type com_drift_increase = com_progressbar {
+
+	}
+	type com_drift_decrease = com_progressbar {
+		blockoverride "com_mirror_drift_arrow" {
+			mirror = horizontal
+		}
+		blockoverride "com_drift_values" {
+			block "com_base_values" {
+				block "values" {
+					min = 0
+					max = 1
+					block "com_base_value" {}
+				}
+			}
+		}
+		blockoverride "com_base_values" {
+			block "com_drift_values" {
+				min = 0
+				max = 1
+				block "com_drift_value" {}
+			}
+		}
+	}
+	type com_drift_increase_green = com_drift_increase {
+		blockoverride "com_base" {}
+		blockoverride "com_target" {}
+	}
+	type com_drift_decrease_green = com_drift_decrease {
+		blockoverride "com_base" {}
+		blockoverride "com_target" {}
+	}
+	type com_drift_increase_blue = com_drift_increase {
+		blockoverride "com_base" {}
+		blockoverride "com_target" {}
+	}
+	type com_drift_decrease_blue = com_drift_decrease {
+		blockoverride "com_base" {}
+		blockoverride "com_target" {}
+	}
+}
+
+template com_drift_progressbar {
+	block "com_drift_visible" {}
+	block "com_drift_noprogresstexture" {
+		noprogresstexture = "gfx/interface/icons/generic_icons/transparent.dds"
+	}
+	block "com_drift_progresstexture" {
+		progresstexture = "[ComProgressBarColor(
+							Select_CString(
+								ComProgressBarDriftColor.IsSet,
+								ComProgressBarDriftColor.GetFlagName,
+								'green'
+							)
+							,'.dds'
+							)]"
+	}
+	size = { 100% 100% }
+	spriteType = Corneredtiled
+	spriteborder = { 4 4 }
+	texture_density = 2
+	skip_initial_animation = yes
+	
+	block "com_drift_values" {
+		min = 0
+		max = 1
+		block "com_drift_value" {}
+	}
+	
+	direction = horizontal
+	using = progressbar_changed_animation
+	animate_negative_changes = yes
+	block "com_decrease" {
+		using = progressbar_marker_indicator
+	}
+	using = progressbar_texture_properties
+	
+	marker = {
+		widget = {
+			size = { 100% 100% }
+			
+			icon = {
+				block "com_drift_glow" {
+					texture = "[ComProgressBarColor(
+								Select_CString(
+									ComProgressBarDriftColor.IsSet,
+									ComProgressBarDriftColor.GetFlagName,
+									'green'
+								)
+								,'_glow.dds'
+								)]"
+				}
+				size = { 30 100% }
+				widgetanchor = right
+				alpha = 0.3
+				using = progressbar_texture_properties
+				
+				### line
+				icon = {
+					block "com_drift_glow_line" {
+						block "glow_line" {
+							texture = "[ComProgressBarColor(
+										Select_CString(
+											ComProgressBarDriftColor.IsSet,
+											ComProgressBarDriftColor.GetFlagName,
+											'green'
+										)
+										,'_glow_line.dds'
+										)]"
+						}
+					}
+					size = { 3 100% }
+					parentanchor = right
+					spriteType = Corneredtiled
+					spriteborder = { 0 0 }
+				}
+			}
+			
+			icon = {
+				block "com_drift_texture" {
+					texture = "[ComProgressBarColor(
+								Select_CString(
+									ComProgressBarDriftColor.IsSet,
+									ComProgressBarDriftColor.GetFlagName,
+									'green'
+								)
+								,'.dds'
+								)]"
+				}
+				size = { 100% 100% }
+				spriteType = Corneredtiled
+				spriteborder = { 4 4 }
+				texture_density = 2
+				shaderfile = "gfx/FX/pdxgui_repeat_texture.shader"
+				widgetanchor = right
+				
+				modify_texture = {
+					texture = "gfx/interface/backgrounds/light_bg.dds"  
+					spriteType = CorneredTiled
+					spriteborder = { 6 6 }
+					texture_density = 2
+					blend_mode = overlay
+				}
+				
+				modify_texture = {
+					name = arrow_animation
+					texture = "gfx/interface/progressbar/progressbar_arrow.dds"
+					spriteType = Corneredtiled
+					spriteborder = { 0 0 }
+					block "arrow_texture_density" {
+						texture_density = 10 #use to match height of progressbar
+					}
+					translate_uv = { 0 0 }
+					blend_mode = alphamultiply
+					block "com_mirror_drift_arrow" {}
+				}
+				
+				state = {
+					trigger_on_create = yes
+					name = arrow_animation_1
+					next = arrow_animation_2
+					duration = 1
+					
+					modify_texture = {
+						name = arrow_animation
+						translate_uv = { -1 0 }
+					}
+				}
+				state = {
+					name = arrow_animation_2
+					next = arrow_animation_1
+					duration = 0
+					
+					modify_texture = {
+						name = arrow_animation
+						translate_uv = { 0 0 }
+					}
+				}
+			}
+		}
+	}
+}
+
+template com_base_progressbar {
+	block "com_base_visible" {}
+	block "com_drift_noprogresstexture" {
+		block "noprogresstexture" {
+			noprogresstexture = "gfx/interface/icons/generic_icons/transparent.dds"
+		}
+	}
+	block "com_base_progresstexture" {
+		block "progresstexture" {
+			progresstexture = "[ComProgressBarColor(
+								Select_CString(
+									ComProgressBarColor.IsSet,
+									ComProgressBarColor.GetFlagName,
+									'default'
+								)
+								,'.dds'
+								)]"
+		}
+	}
+	size = { 100% 100% }
+	spriteType = Corneredtiled
+	spriteborder = { 4 4 }
+	texture_density = 2
+	skip_initial_animation = yes
+	
+	block "com_base_values" {
+		block "values" {
+			min = 0
+			max = 1
+			block "com_base_value" {}
+		}
+	}
+	
+	direction = horizontal
+	using = progressbar_changed_animation
+	animate_negative_changes = yes
+	using = progressbar_marker_indicator
+	using = progressbar_texture_properties
+}
+
+template com_target_progressbar {
+	block "com_target_visible" {}
+	block "com_drift_noprogresstexture" {
+		block "noprogresstexture" {
+			noprogresstexture = "gfx/interface/icons/generic_icons/transparent.dds"
+		}
+	}
+	block "com_target_progresstexture" {
+		block "progresstexture" {
+			progresstexture = "gfx/interface/icons/generic_icons/transparent.dds"
+		}
+	}
+	size = { 100% 100% }
+	spriteType = Corneredtiled
+	spriteborder = { 4 4 }
+	texture_density = 2
+	skip_initial_animation = yes
+
+	block "com_target_values" {
+		min = 0
+		max = 1
+		block "com_target_value" {}
+	}
+	direction = horizontal
+	block "progress_changed_animation" {
+		using = progressbar_changed_animation
+	}
+	block "animate_negative_change" {
+		animate_negative_changes = yes
+	}
+	marker = {
+		widget = {
+			block "com_target_progress_icon" {
+				icon = {
+					size = { 65 33 }
+					parentanchor = vcenter
+					widgetanchor = center
+					#position = { 0 16 }
+					block "com_target_progress_texture" {
+						texture = "gfx/interface/progressbar/progressbar_marker.dds"
+					}
+					using = shimmer
+				}
+			}
+		}
+	}
+}

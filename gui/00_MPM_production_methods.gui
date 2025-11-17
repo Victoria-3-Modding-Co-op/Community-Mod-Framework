@@ -439,7 +439,7 @@ types production_methods
 							'(int32)2'
 						)]"
 
-						hbox = {
+						fixedgridbox = {
 							datamodel = "[BuildingProductionMethodsEntry.GetBuildingType.AccessProductionMethodGroups]"
 							flipdirection = yes
 							addcolumn = 52
@@ -527,7 +527,7 @@ types production_methods
 						scrollwidget = {
 							### production methods grouped
 							# container = { # MPM # this is a duplicate of the vanilla container above, but we dont need the container for this spot specifically
-								hbox = {
+								fixedgridbox = {
 									datamodel = "[BuildingProductionMethodsEntry.GetBuildingType.AccessProductionMethodGroups]"
 									flipdirection = yes
 									addcolumn = 52

@@ -1,0 +1,90 @@
+﻿macro = {
+    description = "Scripted progress bar index in journal entry"
+    definition = "ComProgressBarIndex"
+    replace_with = "Localize(Concatenate( 'com_progress_bar_', ToString_int32(PdxGuiWidget.GetIndexInDataModel) ))"
+}
+
+macro = {
+    description = "Get progress bar struct"
+    definition = "ComProgressBar"
+    replace_with = "JournalEntry.MakeScope.Var(ComProgressBarIndex)"
+}
+
+macro = {
+    description = "Get progress bar base color"
+    definition = "ComProgressBarBaseColor"
+    replace_with = "ComProgressBar.Var('com_base_color')"
+}
+
+macro = {
+    description = "Set progress bar increase color"
+    definition = "ComProgressBarSetBaseColor(Color)"
+    replace_with = "And(ComProgressBarBaseColor.IsSet, ObjectsEqual(ComProgressBarBaseColor.GetFlagName,Color))"
+}
+
+macro = {
+    description = "Get progress bar drift"
+    definition = "ComProgressBarDrift"
+    replace_with = "ComProgressBar.Var('com_drift_value')"
+}
+
+macro = {
+    description = "Get progress bar drift script value"
+    definition = "ComProgressBarDriftSValue"
+    replace_with = "JournalEntry.GetCountry.MakeScope.ScriptValue(ComProgressBarDrift.GetFlagName)"
+}
+
+macro = {
+    description = "Is progress bar value increasing"
+    definition = "ComIsProgressBarIncreasing"
+    replace_with = "GreaterThan_float(FixedPointToFloat(ComProgressBarDriftSValue), JournalEntry.GetCurrentBarProgress(ScriptedProgressBar.Self) )"
+}
+
+macro = {
+    description = "Is progress bar value decreasing"
+    definition = "ComIsProgressBarDecreasing"
+    replace_with = "GreaterThan_float(JournalEntry.GetCurrentBarProgress(ScriptedProgressBar.Self), FixedPointToFloat(ComProgressBarDriftSValue))"
+}
+
+macro = {
+    description = "Get progress bar increase color"
+    definition = "ComProgressBarIncreaseColor"
+    replace_with = "ComProgressBar.Var('com_bar_increase_color')"
+}
+
+macro = {
+    description = "Set progress bar increase color"
+    definition = "ComProgressBarSetIncreaseColor(Color)"
+    replace_with = "And3(ComProgressBarDecreaseColor.IsSet, ObjectsEqual(ComProgressBarIncreaseColor.GetFlagName,Color), ComIsProgressBarIncreasing )"
+}
+
+macro = {
+    description = "Get progress bar drift down color"
+    definition = "ComProgressBarDecreaseColor"
+    replace_with = "ComProgressBar.Var('com_bar_decrease_color')"
+}
+
+macro = {
+    description = "Set progress bar drift down color"
+    definition = "ComProgressBarSetDecreaseColor(Color)"
+    replace_with = "And3(ComProgressBarDecreaseColor.IsSet, ObjectsEqual(ComProgressBarDecreaseColor.GetFlagName,Color), ComIsProgressBarDecreasing )"
+}
+
+macro = {
+    description = "Get progress bar target"
+    definition = "ComProgressBarTarget"
+    replace_with = "ComProgressBar.Var('com_target_value')"
+}
+
+macro = {
+    description = "Get progress bar target"
+    definition = "ComProgressBarTargetSValue"
+    replace_with = "JournalEntry.GetCountry.MakeScope.ScriptValue(ComProgressBarTarget.GetFlagName)"
+}
+
+macro = {
+    description = "Get progress bar target type"
+    definition = "ComProgressBarTargetTypeCompare(Value)"
+    replace_with = "ObjectsEqual(ComProgressBar.Var('com_target_type').GetFlagName,Value)"
+}
+

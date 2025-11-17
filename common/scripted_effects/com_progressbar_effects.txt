@@ -1,10 +1,10 @@
-﻿# Setup progress bar for styling on the current journal
+﻿# Basic setup for progress bar styling on the current journal
 # This effect has to be run inside a scope where 'scope:journal_entry' is available!
 # Parameters:
 # - progress_bar = name localization key of progress bar
-# - index = 0-indexed position the given progress bar in the journal
+# - index = 0-indexed position of the given progress bar in the journal
 # THIS DOES NOT REPLACE THE VANILLA SETUP
-create_com_progress_bar = {
+initialize_com_progress_bar = {
     hidden_effect = {
         if = {
             limit = {
@@ -30,6 +30,7 @@ create_com_progress_bar = {
             }
             fix_variable_error = { variable = com_progress_bar_$index$ }
             fix_variable_error = { variable = com_$progress_bar$ }
+            fix_variable_error = { variable = $progress_bar$ }
             # Set progress bar
             scope:journal_entry = {
                 set_variable = {
@@ -44,8 +45,63 @@ create_com_progress_bar = {
                     value = flag:$progress_bar$
                 }
             }
-            
         }
+    }
+}
+
+# General setup for progress bar styling on the current journal
+# This effect has to be run inside a scope where 'scope:journal_entry' is available!
+# Parameters:
+# - progress_bar = name localization key of progress bar
+# - index = 0-indexed position of the given progress bar in the journal
+# - color = color of base bar
+# - bar_increase_color = color of drift bar when increasing
+# - bar_decrease_color = color of drift bar when decreasing
+# - drift_value = a 0-1 script value which sets the size and direction of the drift 
+# THIS DOES NOT REPLACE THE VANILLA SETUP
+create_com_progress_bar = {
+    initialize_com_progress_bar = {
+        progress_bar = $progress_bar$
+        index = $index$
+    }
+    set_com_progress_bar_color = {
+        progress_bar = $progress_bar$
+        color = $color$
+    }
+    set_com_progress_bar_drift = {
+        progress_bar = $progress_bar$
+        bar_increase_color = $bar_increase_color$
+        bar_decrease_color = $bar_decrease_color$
+        drift_value = $drift_value$
+    }
+}
+
+# Full setup for progress bar styling on the current journal
+# This effect has to be run inside a scope where 'scope:journal_entry' is available!
+# Parameters:
+# - progress_bar = name localization key of progress bar
+# - index = 0-indexed position of the given progress bar in the journal
+# - color = color of base bar
+# - bar_increase_color = color of drift bar when increasing
+# - bar_decrease_color = color of drift bar when decreasing
+# - drift_value = a 0-1 script value which sets the size and direction of the drift 
+# - target_type = icon type for target value
+# - target_value = a 0-1 script value which sets the position of the target
+# THIS DOES NOT REPLACE THE VANILLA SETUP
+create_com_progress_bar_with_target = {
+    create_com_progress_bar = {
+        progress_bar = $progress_bar$
+        index = $index$
+        color = $color$
+        progress_bar = $progress_bar$
+        bar_increase_color = $bar_increase_color$
+        bar_decrease_color = $bar_decrease_color$
+        drift_value = $drift_value$
+    }
+    set_com_progress_bar_target = {
+        progress_bar = $progress_bar$
+        target_type = $target_type$
+        target_value = $target_value$
     }
 }
 
@@ -105,22 +161,43 @@ set_com_progress_bar_color = {
         }
         else = {
             fix_variable_error = { variable = com_base_color }
-            fix_variable_error = { variable = $color$ }
+            fix_variable_error = { variable = com_$color$_bar }
             scope:com_$progress_bar$ = {
                 set_variable = {
                     name = com_base_color
-                    value = flag:$color$
+                    value = flag:com_$color$_bar
                 }
             }
         }
     }
 }
 
-# Sets the type of drift and the value to be used
+# Unsets the color of progress bar
 # Requires access to 'scope:com_$progress_bar$'
 # - progress_bar = name localization key of progress bar
-# - drift_color = color of drift bar
-# - drift_value = a 0-1 value which sets the size and direction of the drift 
+remove_com_progress_bar_color = {
+    hidden_effect = {
+        if = {
+            limit = {
+                NOT = {
+                    exists = scope:com_$progress_bar$
+                }
+            }
+            error_log = error_no_progress_bar_scope
+        }
+        else = {
+            scope:com_$progress_bar$ = {
+                remove_variable = com_base_color
+            }
+        }
+    }
+}
+# Sets the drift colors and the value to be used
+# Requires access to 'scope:com_$progress_bar$'
+# - progress_bar = name localization key of progress bar
+# - bar_increase_color = color of drift bar when increasing
+# - bar_decrease_color = color of drift bar when decreasing
+# - drift_value = a 0-1 script value which sets the size and direction of the drift 
 set_com_progress_bar_drift = {
     hidden_effect = {
         if = {
@@ -132,14 +209,20 @@ set_com_progress_bar_drift = {
             error_log = error_no_progress_bar_scope
         }
         else = {
-            fix_variable_error = { variable = com_drift_color }
+            fix_variable_error = { variable = com_bar_increase_color }
+            fix_variable_error = { variable = com_bar_decrease_color }
             fix_variable_error = { variable = com_drift_value }
-            fix_variable_error = { variable = $drift_color$ }
+            fix_variable_error = { variable = com_$bar_increase_color$_bar }
+            fix_variable_error = { variable = com_$bar_decrease_color$_bar }
             fix_variable_error = { variable = $drift_value$ }
             scope:com_$progress_bar$ = {
                 set_variable = {
-                    name = com_drift_color
-                    value = flag:$drift_color$
+                    name = com_bar_increase_color
+                    value = flag:com_$bar_increase_color$_bar
+                }
+                set_variable = {
+                    name = com_bar_decrease_color
+                    value = flag:com_$bar_decrease_color$_bar
                 }
                 set_variable = {
                     name = com_drift_value
@@ -150,7 +233,7 @@ set_com_progress_bar_drift = {
     }
 }
 
-# Sets the type of drift and the value to be used
+# Removes the progress bar drift effect
 # Requires access to 'scope:com_$progress_bar$'
 # - progress_bar = name localization key of progress bar
 remove_com_progress_bar_drift = {
@@ -165,18 +248,19 @@ remove_com_progress_bar_drift = {
         }
         else = {
             scope:com_$progress_bar$ = {
-                remove_variable = com_drift_color
+                remove_variable = com_bar_increase_color
+                remove_variable = com_bar_decrease_color
                 remove_variable = com_drift_value
             }
         }
     }
 }
 
-# Sets the type of target and the value to be used
+# Sets the target icon/style and the value to be used
 # Requires access to 'scope:com_$progress_bar$'
 # - progress_bar = name localization key of progress bar
-# - target_icon = icon for target value
-# - target_value = a 0-1 value which sets the position of the target
+# - target_type = icon type for target value
+# - target_value = a 0-1 script value which sets the position of the target
 set_com_progress_bar_target = {
     hidden_effect = {
         if = {
@@ -188,14 +272,14 @@ set_com_progress_bar_target = {
             error_log = error_no_progress_bar_scope
         }
         else = {
-            fix_variable_error = { variable = com_target_icon }
+            fix_variable_error = { variable = com_target_type }
             fix_variable_error = { variable = com_target_value }
-            fix_variable_error = { variable = $target_icon$ }
+            fix_variable_error = { variable = com_target_$target_type$ }
             fix_variable_error = { variable = $target_value$ }
             scope:com_$progress_bar$ = {
                 set_variable = {
-                    name = com_target_icon
-                    value = flag:$target_icon$
+                    name = com_target_type
+                    value = flag:com_target_$target_type$
                 }
                 set_variable = {
                     name = com_target_value
@@ -221,7 +305,7 @@ remove_com_progress_bar_target = {
         }
         else = {
             scope:com_$progress_bar$ = {
-                remove_variable = com_target_icon
+                remove_variable = com_target_type
                 remove_variable = com_target_value
             }
         }
@@ -248,3 +332,16 @@ save_com_progress_bar_scope = {
         }
     }
 }
+
+# Valid bar and drift colors:
+## Blue - blue/default
+## Red - red/bad
+## Green - green
+## Gold - gold
+## White - white
+
+# Valid target types:
+## Journal icon - journal_icon
+## Gold marker icon - gold_marker
+## Gold divider line - gold_line
+## White divider line - white_line

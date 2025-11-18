@@ -93,27 +93,29 @@ types journal_entry_overwrites {
 
                     ### TIMED MODIFIERS
                     flowcontainer = {
-                        background = {
-                            using = fade_left_simple
-                            margin_right = 10
-                        }
-
-                        datamodel = "[JournalEntry.GetTimedModifiers]"
-                        spacing = 5
-                        visible = "[Not(IsDataModelEmpty(JournalEntry.GetTimedModifiers))]"
                         parentanchor = vcenter|right
-                        datamodel_wrap = 2
                         margin = { 10 10 }
                         margin_right = 30
+                        dynamicgridbox = {
+                            flipdirection = yes
+                            background = {
+                                using = fade_left_simple
+                                margin_right = 10
+                            }
+                            datamodel = "[JournalEntry.GetTimedModifiers]"
+                            #spacing = 5
+                            visible = "[Not(IsDataModelEmpty(JournalEntry.GetTimedModifiers))]"
+                            #parentanchor = vcenter|right
+                            datamodel_wrap = 5
 
-                        item = {
-                            icon = {
-                                tooltip = "[TimedModifier.GetTooltip]"
-                                texture = "[TimedModifier.GetIcon]"
-                                size = { 35 35 }
+                            item = {
+                                icon = {
+                                    tooltip = "[TimedModifier.GetTooltip]"
+                                    texture = "[TimedModifier.GetIcon]"
+                                    size = { 35 35 }
+                                }
                             }
                         }
-
                     }
                 }
 

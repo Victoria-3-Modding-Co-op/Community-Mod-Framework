@@ -23,7 +23,8 @@ initialize_com_progress_bar = {
                     struct_type = com_struct_progress_bar
                     struct_scope = com_$progress_bar$
                 }
-                add_to_global_variable_list = {
+                #root scope?
+                add_to_variable_list = {
                     name = com_progress_bar_cache
                     target = scope:com_$progress_bar$
                 }
@@ -52,15 +53,13 @@ initialize_com_progress_bar = {
     }
 }
 
-# General setup for progress bar styling on the current journal
+
+# Basic setup for progress bar styling on the current journal
 # This effect has to be run inside a scope where 'scope:journal_entry' is available!
 # Parameters:
 # - progress_bar = name localization key of progress bar
 # - index = 0-indexed position of the given progress bar in the journal
 # - color = color of base bar
-# - bar_increase_color = color of drift bar when increasing
-# - bar_decrease_color = color of drift bar when decreasing
-# - drift_value = a 0-1 script value which sets the size and direction of the drift 
 # THIS DOES NOT REPLACE THE VANILLA SETUP
 create_com_progress_bar = {
     initialize_com_progress_bar = {
@@ -71,11 +70,51 @@ create_com_progress_bar = {
         progress_bar = $progress_bar$
         color = $color$
     }
+}
+
+# General setup for progress bar styling on the current journal
+# This effect has to be run inside a scope where 'scope:journal_entry' is available!
+# Parameters:
+# - progress_bar = name localization key of progress bar
+# - index = 0-indexed position of the given progress bar in the journal
+# - color = color of base bar
+# - bar_increase_color = color of drift bar when increasing
+# - bar_decrease_color = color of drift bar when decreasing
+# - drift_value = a 0-1 script value which sets the size and direction of the drift 
+# THIS DOES NOT REPLACE THE VANILLA SETUP
+create_com_progress_bar_with_drift = {
+    create_com_progress_bar = {
+        progress_bar = $progress_bar$
+        index = $index$
+        color = $color$
+    }
     set_com_progress_bar_drift = {
         progress_bar = $progress_bar$
         bar_increase_color = $bar_increase_color$
         bar_decrease_color = $bar_decrease_color$
         drift_value = $drift_value$
+    }
+}
+
+# General setup for progress bar styling on the current journal
+# This effect has to be run inside a scope where 'scope:journal_entry' is available!
+# Parameters:
+# - progress_bar = name localization key of progress bar
+# - index = 0-indexed position of the given progress bar in the journal
+# - color = color of base bar
+# - target_type = icon type for target value
+# - target_value = a 0-1 script value which sets the position of the target
+# THIS DOES NOT REPLACE THE VANILLA SETUP
+create_com_progress_bar_with_target = {
+    create_com_progress_bar = {
+        progress_bar = $progress_bar$
+        index = $index$
+        color = $color$
+    }
+    set_com_progress_bar_target = {
+        progress_bar = $progress_bar$
+        target_type = $target_type$
+        target_value = $target_value$
     }
 }
 
@@ -91,11 +130,14 @@ create_com_progress_bar = {
 # - target_type = icon type for target value
 # - target_value = a 0-1 script value which sets the position of the target
 # THIS DOES NOT REPLACE THE VANILLA SETUP
-create_com_progress_bar_with_target = {
+create_com_progress_bar_with_both = {
     create_com_progress_bar = {
         progress_bar = $progress_bar$
         index = $index$
         color = $color$
+    }
+    set_com_progress_bar_drift = {
+        progress_bar = $progress_bar$
         bar_increase_color = $bar_increase_color$
         bar_decrease_color = $bar_decrease_color$
         drift_value = $drift_value$
@@ -110,7 +152,6 @@ create_com_progress_bar_with_target = {
 # This effect should be run when the journal entry concludes
 # Parameters:
 # - progress_bar = name localization key of progress bar
-# This effect has to be run inside a scope where 'scope:journal_entry' is available!
 remove_com_progress_bar = {
     hidden_effect = {
         if = {
@@ -123,7 +164,7 @@ remove_com_progress_bar = {
         }
         else = {
             # Retrieve progress bar
-            random_in_global_list = {
+            random_in_list = {
                 variable = com_progress_bar_cache
                 limit = {
                     var:com_id ?= flag:$progress_bar$
@@ -133,7 +174,7 @@ remove_com_progress_bar = {
             }
 
             # Remove progress bar from cache
-            remove_list_global_variable = {
+            remove_list_variable = {
                 name = com_progress_bar_cache
                 target = scope:com_internal_scope
             }
@@ -322,7 +363,7 @@ save_com_progress_bar_scope = {
             limit = {
                 exists_com_progress_bar = { progress_bar = $progress_bar$ }
             }
-            random_in_global_list = {
+            random_in_list = {
                 variable = com_progress_bar_cache
                 limit = {
                     var:com_id ?= flag:$progress_bar$
@@ -330,6 +371,9 @@ save_com_progress_bar_scope = {
                 }
                 save_scope_as = com_$progress_bar$
             }
+        }
+        else = {
+            error_log = error_no_progress_bar_scope
         }
     }
 }
@@ -344,11 +388,15 @@ save_com_progress_bar_scope = {
 # Valid target types:
 ## Journal icon - journal_icon
 ## Gold marker icon - gold_marker
-## Gold divider line - gold_line
+## Gold divider bar - gold_bar
+## Red divider line - red_line
+## Blue divider line - blue_line
+## Green divider line - green_line
 ## White divider line - white_line
+## Gold divider line - gold_line
 
 com_debug_progress_bar = {
-    random_in_global_list = {
+    random_in_list = {
         variable = com_progress_bar_cache
         save_scope_as = com_test
     }

@@ -19,7 +19,7 @@ macro = {
 macro = {
     description = "Set progress bar increase color"
     definition = "ComProgressBarSetBaseColor(Color)"
-    replace_with = "And(ComProgressBarBaseColor.IsSet, ObjectsEqual(ComProgressBarBaseColor.GetFlagName,Color))"
+    replace_with = "And(ComProgressBarBaseColor.IsSet, ObjectsEqual(ComProgressBarBaseColor.GetFlagName, Color))"
 }
 
 macro = {
@@ -31,19 +31,19 @@ macro = {
 macro = {
     description = "Get progress bar drift script value"
     definition = "ComProgressBarDriftSValue"
-    replace_with = "Select_CFixedPoint(ComProgressBarDrift.IsSet,JournalEntry.GetCountry.MakeScope.ScriptValue(ComProgressBarDrift.GetFlagName),'(CFixedPoint)0')"
+    replace_with = "JournalEntry.GetCountry.MakeScope.ScriptValue(ComProgressBarDrift.GetFlagName)"
 }
 
 macro = {
     description = "Is progress bar value increasing"
     definition = "ComProgressBarIsIncreasing"
-    replace_with = "GreaterThan_float(FixedPointToFloat(ComProgressBarDriftSValue), JournalEntry.GetCurrentBarProgress(ScriptedProgressBar.Self) )"
+    replace_with = "And3(ComProgressBarDrift.IsSet, Not(StringIsEmpty(ComProgressBarDrift.GetFlagName)), GreaterThan_float(FixedPointToFloat(ComProgressBarDriftSValue), JournalEntry.GetCurrentBarProgress(ScriptedProgressBar.Self) ) )"
 }
 
 macro = {
     description = "Is progress bar value decreasing"
     definition = "ComProgressBarIsDecreasing"
-    replace_with = "GreaterThan_float(JournalEntry.GetCurrentBarProgress(ScriptedProgressBar.Self), FixedPointToFloat(ComProgressBarDriftSValue))"
+    replace_with = "And3(ComProgressBarDrift.IsSet, Not(StringIsEmpty(ComProgressBarDrift.GetFlagName)), GreaterThan_float(JournalEntry.GetCurrentBarProgress(ScriptedProgressBar.Self), FixedPointToFloat(ComProgressBarDriftSValue) ) )"
 }
 
 macro = {
@@ -55,7 +55,7 @@ macro = {
 macro = {
     description = "Set progress bar increase color"
     definition = "ComProgressBarSetIncreaseColor(Color)"
-    replace_with = "And3(ComProgressBarIncreaseColor.IsSet, ObjectsEqual(ComProgressBarIncreaseColor.GetFlagName,Color), ComProgressBarIsIncreasing)"
+    replace_with = "And3(ComProgressBarIncreaseColor.IsSet, ObjectsEqual(ComProgressBarIncreaseColor.GetFlagName, Color), ComProgressBarIsIncreasing)"
 }
 
 macro = {
@@ -67,7 +67,7 @@ macro = {
 macro = {
     description = "Set progress bar drift down color"
     definition = "ComProgressBarSetDecreaseColor(Color)"
-    replace_with = "And3(ComProgressBarDecreaseColor.IsSet, ObjectsEqual(ComProgressBarDecreaseColor.GetFlagName,Color), ComProgressBarIsDecreasing)"
+    replace_with = "And3(ComProgressBarDecreaseColor.IsSet, ObjectsEqual(ComProgressBarDecreaseColor.GetFlagName, Color), ComProgressBarIsDecreasing)"
 }
 
 macro = {
@@ -79,12 +79,12 @@ macro = {
 macro = {
     description = "Get progress bar target"
     definition = "ComProgressBarTargetSValue"
-    replace_with = "Select_CFixedPoint(ComProgressBarTarget.IsSet,JournalEntry.GetCountry.MakeScope.ScriptValue(ComProgressBarTarget.GetFlagName),'(CFixedPoint)0')"
+    replace_with = "JournalEntry.GetCountry.MakeScope.ScriptValue(ComProgressBarTarget.GetFlagName)"
 }
 
 macro = {
     description = "Get progress bar target type"
     definition = "ComProgressBarTargetTypeCompare(Value)"
-    replace_with = "And(ComProgressBarTarget.IsSet,ObjectsEqual(Localize(ComProgressBar.Var('com_target_type').GetFlagName),Value))"
+    replace_with = "And3(ComProgressBarTarget.IsSet, ComProgressBar.Var('com_target_type').IsSet, ObjectsEqual(Localize(ComProgressBar.Var('com_target_type').GetFlagName), Value))"
 }
 

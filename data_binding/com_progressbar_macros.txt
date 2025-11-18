@@ -31,18 +31,18 @@ macro = {
 macro = {
     description = "Get progress bar drift script value"
     definition = "ComProgressBarDriftSValue"
-    replace_with = "JournalEntry.GetCountry.MakeScope.ScriptValue(ComProgressBarDrift.GetFlagName)"
+    replace_with = "Select_CFixedPoint(ComProgressBarDrift.IsSet,JournalEntry.GetCountry.MakeScope.ScriptValue(ComProgressBarDrift.GetFlagName),'(CFixedPoint)0')"
 }
 
 macro = {
     description = "Is progress bar value increasing"
-    definition = "ComIsProgressBarIncreasing"
+    definition = "ComProgressBarIsIncreasing"
     replace_with = "GreaterThan_float(FixedPointToFloat(ComProgressBarDriftSValue), JournalEntry.GetCurrentBarProgress(ScriptedProgressBar.Self) )"
 }
 
 macro = {
     description = "Is progress bar value decreasing"
-    definition = "ComIsProgressBarDecreasing"
+    definition = "ComProgressBarIsDecreasing"
     replace_with = "GreaterThan_float(JournalEntry.GetCurrentBarProgress(ScriptedProgressBar.Self), FixedPointToFloat(ComProgressBarDriftSValue))"
 }
 
@@ -55,7 +55,7 @@ macro = {
 macro = {
     description = "Set progress bar increase color"
     definition = "ComProgressBarSetIncreaseColor(Color)"
-    replace_with = "And3(ComProgressBarDecreaseColor.IsSet, ObjectsEqual(ComProgressBarIncreaseColor.GetFlagName,Color), ComIsProgressBarIncreasing )"
+    replace_with = "And3(ComProgressBarIncreaseColor.IsSet, ObjectsEqual(ComProgressBarIncreaseColor.GetFlagName,Color), ComProgressBarIsIncreasing)"
 }
 
 macro = {
@@ -67,7 +67,7 @@ macro = {
 macro = {
     description = "Set progress bar drift down color"
     definition = "ComProgressBarSetDecreaseColor(Color)"
-    replace_with = "And3(ComProgressBarDecreaseColor.IsSet, ObjectsEqual(ComProgressBarDecreaseColor.GetFlagName,Color), ComIsProgressBarDecreasing )"
+    replace_with = "And3(ComProgressBarDecreaseColor.IsSet, ObjectsEqual(ComProgressBarDecreaseColor.GetFlagName,Color), ComProgressBarIsDecreasing)"
 }
 
 macro = {
@@ -79,12 +79,12 @@ macro = {
 macro = {
     description = "Get progress bar target"
     definition = "ComProgressBarTargetSValue"
-    replace_with = "JournalEntry.GetCountry.MakeScope.ScriptValue(ComProgressBarTarget.GetFlagName)"
+    replace_with = "Select_CFixedPoint(ComProgressBarTarget.IsSet,JournalEntry.GetCountry.MakeScope.ScriptValue(ComProgressBarTarget.GetFlagName),'(CFixedPoint)0')"
 }
 
 macro = {
     description = "Get progress bar target type"
     definition = "ComProgressBarTargetTypeCompare(Value)"
-    replace_with = "ObjectsEqual(ComProgressBar.Var('com_target_type').GetFlagName,Value)"
+    replace_with = "And(ComProgressBarTarget.IsSet,ObjectsEqual(Localize(ComProgressBar.Var('com_target_type').GetFlagName),Value))"
 }
 

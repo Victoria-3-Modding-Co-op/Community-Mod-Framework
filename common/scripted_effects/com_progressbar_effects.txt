@@ -28,6 +28,9 @@ initialize_com_progress_bar = {
                     target = scope:com_$progress_bar$
                 }
             }
+            else = {
+                save_com_progress_bar_scope = { progress_bar = $progress_bar$ }
+            }
             fix_variable_error = { variable = com_progress_bar_$index$ }
             fix_variable_error = { variable = com_$progress_bar$ }
             fix_variable_error = { variable = $progress_bar$ }
@@ -93,7 +96,6 @@ create_com_progress_bar_with_target = {
         progress_bar = $progress_bar$
         index = $index$
         color = $color$
-        progress_bar = $progress_bar$
         bar_increase_color = $bar_increase_color$
         bar_decrease_color = $bar_decrease_color$
         drift_value = $drift_value$
@@ -110,8 +112,7 @@ create_com_progress_bar_with_target = {
 # - progress_bar = name localization key of progress bar
 # This effect has to be run inside a scope where 'scope:journal_entry' is available!
 remove_com_progress_bar = {
-    custom_tooltip = {
-        text = effect_remove_com_progress_bar
+    hidden_effect = {
         if = {
             limit = {
                 NOT = {
@@ -345,3 +346,38 @@ save_com_progress_bar_scope = {
 ## Gold marker icon - gold_marker
 ## Gold divider line - gold_line
 ## White divider line - white_line
+
+com_debug_progress_bar = {
+    random_in_global_list = {
+        variable = com_progress_bar_cache
+        save_scope_as = com_test
+    }
+    set_variable = {
+        name = com_id
+        value = scope:com_test.var:com_id
+    }
+    set_variable = {
+        name = com_base_color
+        value = scope:com_test.var:com_base_color
+    }
+    set_variable = {
+        name = com_bar_increase_color
+        value = scope:com_test.var:com_bar_increase_color
+    }
+    set_variable = {
+        name = com_bar_decrease_color
+        value = scope:com_test.var:com_bar_decrease_color
+    }
+    set_variable = {
+        name = com_drift_value
+        value = scope:com_test.var:com_drift_value
+    }
+    set_variable = {
+        name = com_target_type
+        value = scope:com_test.var:com_target_type
+    }
+    set_variable = {
+        name = com_target_value
+        value = scope:com_test.var:com_target_value
+    }
+}

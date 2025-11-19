@@ -35,6 +35,7 @@ community_framework_events.1 = { # Variable Error Suppression
 		# CMF Sidebar Framework
 		fix_variable_error = { variable = custom_button_list }
 		fix_variable_error = { variable = custom_button_list_flag }
+		fix_variable_error = { variable = com_sidebar_button_sgui }
 		
 		# CMF Structs Framework
 		fix_variable_error = { variable = is_struct }
@@ -145,67 +146,18 @@ community_framework_events.2 = { # GUI window testing
 	}
 }
 
-community_framework_events.3 = { # GUI window testing
+community_framework_events.999 = { # GUI window testing
 	type = country_event
-	placement = root
+	hidden = yes
 	orphan = yes
 	
-	title = community_framework_events.t
-	desc = community_framework_events.d
-	flavor = community_framework_events.f
-	
-	left_icon = scope:left_icon
-	right_icon = scope:right_icon
-	
-	gui_window = event_window_europa_modern
-	
-	event_image = {
-		texture = "gfx/loadingscreens/victoria3_load_0.dds"
-	}
-	
-	icon = "gfx/interface/icons/event_icons/event_default.dds"
-	
-	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
-	on_opened_soundeffect = "event:/SFX/Events/misc/1Character_Banner"
-	
-	duration = 3
-	
 	trigger = {
-		# Testing only
+		# For debug only
 	}
-	
 	immediate = {
-		ruler = {
-			save_scope_as = left_icon
+		add_to_global_variable_list = {
+			name = custom_button_list_flag
+			target = flag:com_sidebar_button_sgui
 		}
-		ruler = {
-			save_scope_as = right_icon
-		}
-	}
-	
-	option = {
-		name = community_framework_events.a
-		default_option = yes
-		custom_tooltip = community_framework_events.tt
-	}
-	
-	option = {
-		name = community_framework_events.b
-		custom_tooltip = community_framework_events.tt
-	}
-	
-	option = {
-		name = community_framework_events.c
-		custom_tooltip = community_framework_events.tt
-	}
-	
-	option = {
-		name = community_framework_events.e
-		custom_tooltip = community_framework_events.tt
-	}
-	
-	option = {
-		name = community_framework_events.james
-		custom_tooltip = community_framework_events.james_tt
 	}
 }

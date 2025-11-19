@@ -482,7 +482,7 @@ types event_window_types {
 										}
 
 										textbox = {
-											visible = [InDebugMode]
+											visible = "[InDebugMode]"
 											parentanchor = hcenter
 											align = hcenter
 											raw_text = "Event ID: [Event.GetKey|v]"
@@ -599,4 +599,5 @@ com_event_window_newspaper = {}
 #### CMF Europa Universalis Variants
 event_window_europa_classic = {}
 event_window_europa_1_char = {}
+event_window_europa_1_char_portrait = {}
 event_window_europa_2_char = {}

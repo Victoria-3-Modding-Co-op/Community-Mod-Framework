@@ -161,11 +161,8 @@ community_framework_events.3 = { # GUI window testing
 	desc = community_framework_events.d
 	flavor = community_framework_events.f
 	
-	gui_window = event_window_europa_2_char
+	gui_window = event_window_europa_1_char_portrait
 	left_icon = scope:left_icon
-	right_icon = scope:right_icon
-	minor_left_icon = scope:minor_left_icon
-	minor_right_icon = scope:minor_right_icon
 	
 	event_image = {
 		video = "unspecific_ruler_speaking_to_people"

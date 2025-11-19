@@ -263,6 +263,35 @@ types com_europa_window_types {
 						loop = no
 					}
 					
+					#char
+					container = {
+						parentanchor = bottom|left
+						position = { 100 4 }
+						
+						datacontext = "[Event.GetIcon('left_icon')]"
+						visible = "[EventIcon.IsPortrait]"
+						
+						character_portrait_base = {
+							datacontext = "[EventIcon.GetCharacter]"
+							blockoverride "show_hat" {}
+							blockoverride "portrait_mask" {
+								mask = "gfx/interface/portraits/portrait_mask_no_fade_bottom.dds"
+							}
+							blockoverride "portrait_icons" {}
+							blockoverride "portrait_size" {
+								size = { 188 244 }
+							}
+							blockoverride "portrait_texture" {
+								portrait_texture = "[Character.GetAnimatedPortrait(
+									ComSelectPortraitVar('com_character_environment','environment_standard'),
+									ComSelectPortraitVar('com_character_camera','camera_event_left'),
+									ComSelectPortraitVar('com_character_animation','idle'),
+									GetPortraitRenderSize(PdxGuiWidget.Self)
+								)]"
+							}
+						}
+					}
+					
 					icon = {
 						parentanchor = center
 						size = { 100% 100% }
@@ -464,6 +493,64 @@ types com_europa_window_types {
 						loop = no
 					}
 					
+					# 1st char
+					container = {
+						parentanchor = bottom|left
+						position = { 100 4 }
+						
+						datacontext = "[Event.GetIcon('left_icon')]"
+						visible = "[EventIcon.IsPortrait]"
+						
+						character_portrait_base = {
+							datacontext = "[EventIcon.GetCharacter]"
+							blockoverride "show_hat" {}
+							blockoverride "portrait_mask" {
+								mask = "gfx/interface/portraits/portrait_mask_no_fade_bottom.dds"
+							}
+							blockoverride "portrait_icons" {}
+							blockoverride "portrait_size" {
+								size = { 188 244 }
+							}
+							blockoverride "portrait_texture" {
+								portrait_texture = "[Character.GetAnimatedPortrait(
+									ComSelectPortraitVar('com_character_environment','environment_standard'),
+									ComSelectPortraitVar('com_character_camera','camera_event_left'),
+									ComSelectPortraitVar('com_character_animation','idle'),
+									GetPortraitRenderSize(PdxGuiWidget.Self)
+								)]"
+							}
+						}
+					}
+					
+					# 2nd char
+					container = {
+						parentanchor = bottom|right
+						position = { -100 4 }
+						
+						datacontext = "[Event.GetIcon('right_icon')]"
+						visible = "[EventIcon.IsPortrait]"
+						
+						character_portrait_base = {
+							datacontext = "[EventIcon.GetCharacter]"
+							blockoverride "show_hat" {}
+							blockoverride "portrait_mask" {
+								mask = "gfx/interface/portraits/portrait_mask_no_fade_bottom.dds"
+							}
+							blockoverride "portrait_icons" {}
+							blockoverride "portrait_size" {
+								size = { 188 244 }
+							}
+							blockoverride "portrait_texture" {
+								portrait_texture = "[Character.GetAnimatedPortrait(
+									ComSelectPortraitVar('com_character_environment','environment_standard'),
+									ComSelectPortraitVar('com_character_camera','camera_event_right'),
+									ComSelectPortraitVar('com_character_animation','idle'),
+									GetPortraitRenderSize(PdxGuiWidget.Self)
+								)]"
+							}
+						}
+					}
+					
 					icon = {
 						parentanchor = center
 						size = { 100% 100% }
@@ -478,6 +565,23 @@ types com_europa_window_types {
 						
 						modify_texture = {
 							using = texture_velvet
+						}
+					}
+					
+					event_icon = {
+						parentanchor = top|left
+						position = { -14 -34 }
+						datacontext = "[Event.GetIcon('minor_left_icon')]"
+						blockoverride "event_icon_size" {
+							size = { 50 50 }
+						}
+					}
+					event_icon = {
+						parentanchor = top|right
+						position = { 14 -34 }
+						datacontext = "[Event.GetIcon('minor_right_icon')]"
+						blockoverride "event_icon_size" {
+							size = { 50 50 }
 						}
 					}
 				}

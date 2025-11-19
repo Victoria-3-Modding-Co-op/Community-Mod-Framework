@@ -540,3 +540,7 @@ com_event_window_letter_paper = {}
 com_event_window_letter_image = {}
 com_event_window_telegram = {}
 com_event_window_newspaper = {}
+
+#### CMF Europa Universalis Variants
+event_window_europa_classic = {}
+event_window_europa_modern = {}

@@ -543,4 +543,5 @@ com_event_window_newspaper = {}
 
 #### CMF Europa Universalis Variants
 event_window_europa_classic = {}
-event_window_europa_modern = {}
+event_window_europa_1_char = {}
+event_window_europa_2_char = {}

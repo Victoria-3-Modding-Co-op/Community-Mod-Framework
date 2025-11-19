@@ -11,6 +11,7 @@ namespace = community_framework_events
 ####################
 
 community_framework_events.1 = { # Variable Error Suppression
+	type = country_event
 	hidden = yes
 	orphan = yes
 	
@@ -86,10 +87,11 @@ community_framework_events.1 = { # Variable Error Suppression
 community_framework_events.2 = { # GUI window testing
 	type = country_event
 	placement = root
+	orphan = yes
 	
-	title = community_framework_events.2.t
-	desc = community_framework_events.2.d
-	flavor = community_framework_events.2.f
+	title = community_framework_events.t
+	desc = community_framework_events.d
+	flavor = community_framework_events.f
 	
 	gui_window = event_window_europa_classic
 	
@@ -117,38 +119,45 @@ community_framework_events.2 = { # GUI window testing
 	}
 	
 	option = {
-		name = community_framework_events.2.a
+		name = community_framework_events.a
 		default_option = yes
+		custom_tooltip = community_framework_events.tt
 	}
 	
 	option = {
-		name = community_framework_events.2.b
+		name = community_framework_events.b
+		custom_tooltip = community_framework_events.tt
 	}
 	
 	option = {
-		name = community_framework_events.2.c
+		name = community_framework_events.c
+		custom_tooltip = community_framework_events.tt
 	}
 	
 	option = {
-		name = community_framework_events.2.e
+		name = community_framework_events.e
+		custom_tooltip = community_framework_events.tt
 	}
 	
-	orphan = yes
-	
+	option = {
+		name = community_framework_events.james
+		custom_tooltip = community_framework_events.james_tt
+	}
 }
 
 community_framework_events.3 = { # GUI window testing
 	type = country_event
 	placement = root
+	orphan = yes
 	
-	title = community_framework_events.2.t
-	desc = community_framework_events.2.d
-	flavor = community_framework_events.2.f
+	title = community_framework_events.t
+	desc = community_framework_events.d
+	flavor = community_framework_events.f
 	
 	left_icon = scope:left_icon
 	right_icon = scope:right_icon
 	
-	gui_window = event_window_struggle
+	gui_window = event_window_europa_modern
 	
 	event_image = {
 		texture = "gfx/loadingscreens/victoria3_load_0.dds"
@@ -175,22 +184,28 @@ community_framework_events.3 = { # GUI window testing
 	}
 	
 	option = {
-		name = community_framework_events.2.a
+		name = community_framework_events.a
 		default_option = yes
+		custom_tooltip = community_framework_events.tt
 	}
 	
 	option = {
-		name = community_framework_events.2.b
+		name = community_framework_events.b
+		custom_tooltip = community_framework_events.tt
 	}
 	
 	option = {
-		name = community_framework_events.2.c
+		name = community_framework_events.c
+		custom_tooltip = community_framework_events.tt
 	}
 	
 	option = {
-		name = community_framework_events.2.e
+		name = community_framework_events.e
+		custom_tooltip = community_framework_events.tt
 	}
 	
-	orphan = yes
-	
+	option = {
+		name = community_framework_events.james
+		custom_tooltip = community_framework_events.james_tt
+	}
 }

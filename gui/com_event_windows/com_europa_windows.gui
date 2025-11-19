@@ -497,6 +497,23 @@ types com_europa_window_types {
 						loop = no
 					}
 					
+					icon = {
+						parentanchor = center
+						size = { 100% 100% }
+						texture = "gfx/interface/event_window/event_inner_frame_fullscreen_horizontal.dds"
+						alpha = 0.9
+					}
+					
+					icon = {
+						parentanchor = center
+						size = { 576 240 }
+						texture = "gfx/interface/backgrounds/popup_bg_frame_frontend.dds"
+						
+						modify_texture = {
+							using = texture_velvet
+						}
+					}
+					
 					#char
 					container = {
 						datacontext = "[Event.GetIcon('left_icon')]"
@@ -519,27 +536,9 @@ types com_europa_window_types {
 							blockoverride "portrait_icons" {} # Error Suppression
 							blockoverride "portrait_button" {} # Error Suppression
 							
-							textbox = {
-								parentanchor = center
-								position = { 0 112 }
-								size = { 150 35 }
-								
-								raw_text = "[Character.GetPrimaryRoleName] in [Character.GetHomeCountry.GetNameNoFlag]"
-								autoresize = yes
-								max_width = 190
-								elide = right
-								using = fontsize_large
-								
-								background = {
-									using = dark_area
-									alpha = 0.5
-									margin = { 5 0 }
-								}
-							}
-							
 							default_header_clean_faded = {
 								parentanchor = center
-								size = { 180 35 }
+								size = { 340 35 }
 								position = { 0 88 }
 								
 								textbox = {
@@ -547,33 +546,30 @@ types com_europa_window_types {
 									parentanchor = center
 									position = { 0 -2 }
 									autoresize = yes
-									max_width = 190
 									elide = right
 									using = fontsize_large
 								}
-								
 								blockoverride "text" {}
 							}
 							
+							default_header_clean_faded = {
+								parentanchor = center
+								size = { 280 35 }
+								position = { 0 115 }
+								
+								textbox = {
+									raw_text = "[Character.GetPrimaryRoleName] in [Character.GetHomeCountry.GetNameNoFlag]"
+									parentanchor = center
+									position = { 0 -2 }
+									autoresize = yes
+									elide = right
+									using = fontsize_large
+								}
+								blockoverride "text" {}
+							}
 						}
 					}
 					
-					icon = {
-						parentanchor = center
-						size = { 100% 100% }
-						texture = "gfx/interface/event_window/event_inner_frame_fullscreen_horizontal.dds"
-						alpha = 0.9
-					}
-					
-					icon = {
-						parentanchor = center
-						size = { 576 240 }
-						texture = "gfx/interface/backgrounds/popup_bg_frame_frontend.dds"
-						
-						modify_texture = {
-							using = texture_velvet
-						}
-					}
 				}
 				
 				flowcontainer = {

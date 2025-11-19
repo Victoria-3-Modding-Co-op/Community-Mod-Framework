@@ -524,7 +524,7 @@ types event_window_types {
 				datacontext = "[EventWindow.GetEvent]"
 				
 				block "deer_texture" { # I figure this is a fun little option to include -Alexedishi
-					texture = "gfx/interface/error_deer.dds"
+					texture = "gfx/interface/event_window/error_deer.dds"
 				}
 				
 				state = {

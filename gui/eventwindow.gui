@@ -198,6 +198,9 @@ types event_window_types {
 					}
 				}
 				
+				### DEBUG DEER FOR EUROPA EVENTS - CMF ADDITION
+				block "event_debug_header" {}
+				
 				state = {
 					trigger_on_create = yes
 					name = 1
@@ -491,6 +494,58 @@ types event_window_types {
 					}
 				}
 			}
+		}
+	}
+	
+	### DEBUG DEER
+	type event_debug_deer = widget {
+		visible = "[InDebugMode]"
+		block "deer_size" {
+			size = { 53 53 }
+		}
+		block "deer_location" {
+			parentanchor = left
+			position = { 3 10 }
+		}
+		icon = {
+			size = { 100% 100% }
+			using = selected_sidepanel_animation
+			alwaystransparent = yes
+			parentanchor = center
+			using = default_fade_in_out
+		}
+		button_icon_round = {
+			size = { 100% 100% }
+			onclick = "[EventWindow.AccessEvent.OpenInEditor]"
+			icon = {
+				size = { 100% 100% }
+				alwaystransparent = yes
+				
+				datacontext = "[EventWindow.GetEvent]"
+				
+				block "deer_texture" { # I figure this is a fun little option to include -Alexedishi
+					texture = "gfx/interface/error_deer.dds"
+				}
+				
+				state = {
+					trigger_on_create = yes
+					name = 1
+					next = 2
+					
+					duration = 1
+					using = Animation_Curve_Default
+					position = { 4 0 }
+				}
+				state = {
+					name = 2
+					next = 1
+					
+					duration = 1
+					using = Animation_Curve_Default
+					position = { -4 0 }
+				}
+			}
+			tooltip = com_debug_deer
 		}
 	}
 }

@@ -26,6 +26,10 @@ types com_europa_window_types {
 	type event_window_europa_classic = event_window {
 		name = "event_window_europa_classic"
 		
+		blockoverride "event_debug_header" {
+			event_debug_deer = {}
+		}
+		
 		blockoverride "event_content" {
 			### SETTING SIZE OF WINDOW
 			flowcontainer = {
@@ -222,10 +226,402 @@ types com_europa_window_types {
 	### EUROPA 1 CHARACTER WINDOW
 	type event_window_europa_1_char = event_window {
 		name = "event_window_europa_1_char"
+		
+		blockoverride "event_debug_header" {
+			event_debug_deer = {}
+		}
+		
+		blockoverride "event_content" {
+			### SETTING SIZE OF WINDOW
+			flowcontainer = {
+				direction = vertical
+				resizeparent = yes
+				margin_top = 100
+				margin_left = 30
+				margin_right = 30
+				margin_bottom = 10
+				
+				### EVENT IMAGE / CONTENT
+				widget = {
+					parentanchor = top|hcenter
+					size = { 540 220 }
+					
+					# image in case we have no video?
+					icon = {
+						visible = "[Event.HasTexture]"
+						texture = "[Event.GetTexture]"
+						alwaystransparent = yes
+						size = { 100% 100% }
+					}
+					
+					# animated video ( most images should have this )
+					video_icon = {
+						visible = "[Event.HasVideo]"
+						video = "[Event.GetVideo]"
+						size = { 100% 100% }
+						alwaystransparent = yes
+						loop = no
+					}
+					
+					icon = {
+						parentanchor = center
+						size = { 100% 100% }
+						texture = "gfx/interface/event_window/event_inner_frame_fullscreen_horizontal.dds"
+						alpha = 0.9
+					}
+					
+					icon = {
+						parentanchor = center
+						size = { 576 240 }
+						texture = "gfx/interface/backgrounds/popup_bg_frame_frontend.dds"
+						
+						modify_texture = {
+							using = texture_velvet
+						}
+					}
+				}
+				
+				flowcontainer = {
+					direction = vertical
+					spacing = 30
+					parentanchor = center
+					margin = { 0 25 }
+					
+					textbox = {
+						name = "description"
+						multiline = yes
+						autoresize = yes
+						minimumsize = { 480 -1 }
+						maximumsize = { 520 -1 }
+						parentanchor = top|hcenter
+						align = nobaseline
+						margin = { 10 0 }
+						using = fontsize_medium
+						raw_text = "#bold [EventWindow.GetDescription]#!"
+						
+						background = {
+							margin = { 10 10 }
+							using = light_bg
+							using = frame_small_mask
+							
+							block "entry_bg_fancy_bg_alpha" {
+								alpha = 0.8
+							}
+						}
+						background = {
+							margin = { 10 10 }
+							using = frame_small
+						}
+					}
+					
+					textbox = {
+						name = "flavortext"
+						multiline = yes
+						autoresize = yes
+						minimumsize = { 480 -1 }
+						maximumsize = { 500 -1 }
+						parentanchor = top|hcenter
+						align = top|left
+						margin = { 10 10 }
+						using = fontsize_medium
+						raw_text = "#lore [EventWindow.GetFlavor]#!"
+						
+						background = {
+							margin = { 10 10 }
+							using = light_bg
+							using = frame_small_mask
+							
+							block "entry_bg_fancy_bg_alpha" {
+								alpha = 0.3
+							}
+						}
+						background = {
+							margin = { 10 10 }
+							using = frame_small
+						}
+					}
+					
+					flowcontainer = {
+						direction = vertical
+						using = default_list_position
+						datamodel = "[EventWindow.GetOptions]"
+						spacing = 5
+						
+						item = {
+							container = {
+								widget = {
+									visible = "[EventOption.IsHighlightedOption]"
+									button = {
+										size = { 96% 100% }
+										parentanchor = hcenter
+										using = default_button_primary_action
+										tooltip = "[EventOption.GetDesc]"
+										using = tooltip_ws
+										using = confirm_button_sound
+										onclick = "[EventOption.Select]"
+										enabled = "[EventOption.IsEnabled]"
+									}
+									
+									textbox = {
+										resizeparent = yes
+										minimumsize = { 500 42 }
+										maximumsize = { 500 -1 }
+										multiline = yes
+										align = "[GetEventOptionTextAlignment]"
+										autoresize = yes
+										margin = { 30 10 }
+										text = "[EventOption.GetText]"
+									}
+								}
+								
+								widget = {
+									visible = "[Not(EventOption.IsHighlightedOption)]"
+									button = {
+										size = { 96% 100% }
+										parentanchor = hcenter
+										using = default_button_action
+										tooltip = "EVENT_OPTION_TOOLTIP"
+										using = tooltip_ws
+										using = confirm_button_sound
+										onclick = "[EventOption.Select]"
+										enabled = "[EventOption.IsEnabled]"
+									}
+									
+									textbox = {
+										resizeparent = yes
+										minimumsize = { 500 42 }
+										maximumsize = { 500 -1 }
+										text = "[EventOption.GetText]"
+										multiline = yes
+										align = "[GetEventOptionTextAlignment]"
+										autoresize = yes
+										margin = { 25 10 }
+										margin_right = 50
+									}
+									
+									### Time until the default option will be picked
+									round_progress_default = {
+										visible = "[EventOption.IsDefaultOption]"
+										parentanchor = right|vcenter
+										position = { -20 0.5 }
+										size = { 27 27 }
+										tooltip = "DEFAULT_EVENT_OPTION"
+										value = "[Event.GetPercentageRemainingDays]"
+										
+										icon = {
+											size = { 26 26 }
+											position = { -0.2 -0.2 }
+											parentanchor = center
+											texture = "gfx/interface/icons/generic_icons/event_default_option.dds"
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
 	}
 	
 	### EUROPA 2 CHARACTER WINDOW
 	type event_window_europa_2_char = event_window {
 		name = "event_window_europa_2_char"
+		
+		blockoverride "event_debug_header" {
+			event_debug_deer = {}
+		}
+		
+		blockoverride "event_content" {
+			### SETTING SIZE OF WINDOW
+			flowcontainer = {
+				direction = vertical
+				resizeparent = yes
+				margin_top = 100
+				margin_left = 30
+				margin_right = 30
+				margin_bottom = 10
+				
+				### EVENT IMAGE / CONTENT
+				widget = {
+					parentanchor = top|hcenter
+					size = { 540 220 }
+					
+					# image in case we have no video?
+					icon = {
+						visible = "[Event.HasTexture]"
+						texture = "[Event.GetTexture]"
+						alwaystransparent = yes
+						size = { 100% 100% }
+					}
+					
+					# animated video ( most images should have this )
+					video_icon = {
+						visible = "[Event.HasVideo]"
+						video = "[Event.GetVideo]"
+						size = { 100% 100% }
+						alwaystransparent = yes
+						loop = no
+					}
+					
+					icon = {
+						parentanchor = center
+						size = { 100% 100% }
+						texture = "gfx/interface/event_window/event_inner_frame_fullscreen_horizontal.dds"
+						alpha = 0.9
+					}
+					
+					icon = {
+						parentanchor = center
+						size = { 576 240 }
+						texture = "gfx/interface/backgrounds/popup_bg_frame_frontend.dds"
+						
+						modify_texture = {
+							using = texture_velvet
+						}
+					}
+				}
+				
+				flowcontainer = {
+					direction = vertical
+					spacing = 30
+					parentanchor = center
+					margin = { 0 25 }
+					
+					textbox = {
+						name = "description"
+						multiline = yes
+						autoresize = yes
+						minimumsize = { 480 -1 }
+						maximumsize = { 520 -1 }
+						parentanchor = top|hcenter
+						align = nobaseline
+						margin = { 10 0 }
+						using = fontsize_medium
+						raw_text = "#bold [EventWindow.GetDescription]#!"
+						
+						background = {
+							margin = { 10 10 }
+							using = light_bg
+							using = frame_small_mask
+							
+							block "entry_bg_fancy_bg_alpha" {
+								alpha = 0.8
+							}
+						}
+						background = {
+							margin = { 10 10 }
+							using = frame_small
+						}
+					}
+					
+					textbox = {
+						name = "flavortext"
+						multiline = yes
+						autoresize = yes
+						minimumsize = { 480 -1 }
+						maximumsize = { 500 -1 }
+						parentanchor = top|hcenter
+						align = top|left
+						margin = { 10 10 }
+						using = fontsize_medium
+						raw_text = "#lore [EventWindow.GetFlavor]#!"
+						
+						background = {
+							margin = { 10 10 }
+							using = light_bg
+							using = frame_small_mask
+							
+							block "entry_bg_fancy_bg_alpha" {
+								alpha = 0.3
+							}
+						}
+						background = {
+							margin = { 10 10 }
+							using = frame_small
+						}
+					}
+					
+					flowcontainer = {
+						direction = vertical
+						using = default_list_position
+						datamodel = "[EventWindow.GetOptions]"
+						spacing = 5
+						
+						item = {
+							container = {
+								widget = {
+									visible = "[EventOption.IsHighlightedOption]"
+									button = {
+										size = { 96% 100% }
+										parentanchor = hcenter
+										using = default_button_primary_action
+										tooltip = "[EventOption.GetDesc]"
+										using = tooltip_ws
+										using = confirm_button_sound
+										onclick = "[EventOption.Select]"
+										enabled = "[EventOption.IsEnabled]"
+									}
+									
+									textbox = {
+										resizeparent = yes
+										minimumsize = { 500 42 }
+										maximumsize = { 500 -1 }
+										multiline = yes
+										align = "[GetEventOptionTextAlignment]"
+										autoresize = yes
+										margin = { 30 10 }
+										text = "[EventOption.GetText]"
+									}
+								}
+								
+								widget = {
+									visible = "[Not(EventOption.IsHighlightedOption)]"
+									button = {
+										size = { 96% 100% }
+										parentanchor = hcenter
+										using = default_button_action
+										tooltip = "EVENT_OPTION_TOOLTIP"
+										using = tooltip_ws
+										using = confirm_button_sound
+										onclick = "[EventOption.Select]"
+										enabled = "[EventOption.IsEnabled]"
+									}
+									
+									textbox = {
+										resizeparent = yes
+										minimumsize = { 500 42 }
+										maximumsize = { 500 -1 }
+										text = "[EventOption.GetText]"
+										multiline = yes
+										align = "[GetEventOptionTextAlignment]"
+										autoresize = yes
+										margin = { 25 10 }
+										margin_right = 50
+									}
+									
+									### Time until the default option will be picked
+									round_progress_default = {
+										visible = "[EventOption.IsDefaultOption]"
+										parentanchor = right|vcenter
+										position = { -20 0.5 }
+										size = { 27 27 }
+										tooltip = "DEFAULT_EVENT_OPTION"
+										value = "[Event.GetPercentageRemainingDays]"
+										
+										icon = {
+											size = { 26 26 }
+											position = { -0.2 -0.2 }
+											parentanchor = center
+											texture = "gfx/interface/icons/generic_icons/event_default_option.dds"
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
 	}
 }

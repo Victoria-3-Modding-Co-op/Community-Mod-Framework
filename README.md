@@ -115,6 +115,7 @@ Current Scope:
 14) Support for more than 3 unit types in GUI (Credit to lil jimmy & 1230James)
 15) Support for more mobilization options per category in GUI (Credit to lil jimmy & 1230James)
 16) Configurable Character portraits (Credit to Bahmut & CaesarVincens)
+17) Journal progress bars can be styled with 'drift' and target effects (Credit to CaesarVincens, idea from MasterOfGrey)
 
 ## Alternative Event Windows
 
@@ -217,12 +218,17 @@ set_variable = {
 **I recommend doing this in the history file of a country `common/history/countries`**
 
 ## Custom Progress Bar Colors
+> **NOTE**  These custom colors still work, but have been superceded by a [more advanced progress bar framework](/docs/Progress_bars.md).
 
 This works by setting specific variables in the journal entry scope. These will change which progress bar is displayed. Currently, the following variables are used:
 - `com_double_bad_gold_marker` -- replaces the journal entry marker in double_sided_bad with the marker from double_sided_gold
 - `com_double_bad_white_bar` -- replaced double_sided_bad with white_progressbar_horizontal
 - `com_double_bad_gold_bar` -- replaced double_sided_bad with gold_progressbar_horizontal
 - `com_bear_spray_applied` -- removes the bear and lion icons from double_sided_gold and resizes the progress bar
+
+## Wrap Journal Modifiers
+
+This works by setting the variable `com_flex_je_modifiers` in the journal entry scope. This causes the journal modifiers to wrap in lines of 5. Now, up to 15 modifiers looks fine and doesn't just cross the screen.
 
 ## Sidebar Button
 

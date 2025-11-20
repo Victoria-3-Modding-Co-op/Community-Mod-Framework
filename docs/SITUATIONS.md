@@ -18,7 +18,7 @@ A full list of them can be found below.
   * [Modifying a situation](#modifying-a-situation)
   * [Scoping to side leaders](#scoping-to-side-leaders)
   * [Victory conditions](#victory-conditions)
-  * [Example Journal](#victory-conditions)
+  * [Example Journal](#example-journal)
   * [Optional features](#optional-features)
     * [Factions](#factions)
     * [Button Groups](#button-groups)

@@ -103,9 +103,7 @@ types journal_entry_overwrites {
                                 margin_right = 10
                             }
                             datamodel = "[JournalEntry.GetTimedModifiers]"
-                            #spacing = 5
-                            visible = "[Not(IsDataModelEmpty(JournalEntry.GetTimedModifiers))]"
-                            #parentanchor = vcenter|right
+                            visible = "[And(JournalEntry.MakeScope.Var('com_flex_je_modifiers').IsSet, Not(IsDataModelEmpty(JournalEntry.GetTimedModifiers)) )]"
                             datamodel_wrap = 5
 
                             item = {
@@ -116,6 +114,29 @@ types journal_entry_overwrites {
                                 }
                             }
                         }
+                    }
+                    flowcontainer = {
+                        background = {
+                            using = fade_left_simple
+                            margin_right = 10
+                        }
+
+                        datamodel = "[JournalEntry.GetTimedModifiers]"
+                        spacing = 5
+                        visible = "[Nor(JournalEntry.MakeScope.Var('com_flex_je_modifiers').IsSet, IsDataModelEmpty(JournalEntry.GetTimedModifiers))]"
+                        parentanchor = vcenter|right
+                        datamodel_wrap = 2
+                        margin = { 10 10 }
+                        margin_right = 30
+
+                        item = {
+                            icon = {
+                                tooltip = "[TimedModifier.GetTooltip]"
+                                texture = "[TimedModifier.GetIcon]"
+                                size = { 35 35 }
+                            }
+                        }
+
                     }
                 }
 

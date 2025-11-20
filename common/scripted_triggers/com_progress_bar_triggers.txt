@@ -1,0 +1,13 @@
+﻿# Check whether the given progress bar id exists
+# Parameters:
+# - progress_bar = progress bar localization key
+exists_com_progress_bar = {
+    custom_description = {
+        text = exists_com_progress_bar
+        any_in_list = {
+            variable = com_progress_bar_cache
+            var:com_id ?= flag:$progress_bar$
+            var:com_type ?= com_struct_progress_bar
+        }
+    }
+}

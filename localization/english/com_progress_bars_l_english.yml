@@ -1,0 +1,23 @@
+﻿l_english:
+# Effects
+# Triggers
+ trigger_exists_com_progress_bar: "The specificed progress bar exists"
+ trigger_exists_com_progress_bar_not: "The specificed progress bar does not exist"
+ error_no_progress_bar_scope: "CMF: No com_$progress_bar$ scope defined"
+ com_default_bar: "com_blue_bar"
+ com_blue_bar: "com_blue_bar"
+ com_green_bar: "com_green_bar"
+ com_bad_bar: "com_red_bar"
+ com_red_bar: "com_red_bar"
+ com_gold_bar: "com_gold_bar"
+ com_white_bar: "com_white_bar"
+ com_target_journal_icon: "com_target_journal_icon"
+ com_target_gold_marker: "com_target_gold_marker"
+ com_target_gold_bar: "com_target_gold_bar"
+ com_target_gold_line: "com_target_gold_line"
+ com_target_white_line: "com_target_white_line"
+ com_target_red_line: "com_target_red_line"
+ com_target_bad_line: "com_target_red_line"
+ com_target_blue_line: "com_target_blue_line"
+ com_target_default_line: "com_target_blue_line"
+ com_target_green_line: "com_target_green_line"

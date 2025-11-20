@@ -1,20 +1,37 @@
 ﻿com_toggle_debug = {
-    scope = none
+	scope = none
 
-    effect = {
-        if = {
-            limit = {
-                NOT = {
-                    has_global_variable = com_debug
-                }
-            }
-            set_global_variable = com_debug
-        }
-        else_if = {
-            limit = {
-                has_global_variable = com_debug
-            }
-            remove_global_variable = com_debug
-        }
-    }
+	effect = {
+		if = {
+			limit = {
+				NOT = {
+					has_global_variable = com_debug
+				}
+			}
+			set_global_variable = com_debug
+		}
+		else_if = {
+			limit = {
+				has_global_variable = com_debug
+			}
+			remove_global_variable = com_debug
+		}
+	}
+}
+
+com_sidebar_button_sgui = {
+	scope = none
+	effect = {
+		if = {
+			limit = {
+				NOT = {
+					has_global_variable = cmf_toggle_debug
+				}
+			}
+			set_global_variable = cmf_toggle_debug
+		}
+		else = {
+			remove_global_variable = cmf_toggle_debug
+		}
+	}
 }

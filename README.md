@@ -9,7 +9,7 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=3385002128
 
 ## Contents
 * [Setting Dependency](#setting-dependency)
-* [Debug Mode](#debug-mode)
+* [Debug Features](#debug-features)
 * [Political Movements](#political-movements)
     * [Adding New Ideologies](#adding-new-ideologies)
     * [Modifying Movement Weights](#modifying-movement-weights)
@@ -55,11 +55,9 @@ To set this mod as a dependency to your own mod, you will need to add this to yo
 ```
 **Also remember to add the mod to your required items on your own mods steam page.**
 
-# Debug Mode
-
-The keybinding `CTRL + ALT + D` toggles the global variable `com_debug`.
-
-This can be used to enable or disable debug content like debug Decisions or Events.
+# Debug Features
+- Event `community_framework_events.999` will add a debug button to the sidebar. This button will toggle the game in and out of debug mode.
+- The keybinding `CTRL + ALT + D` toggles the global variable `com_debug`. This can be used to enable or disable debug content like debug Decisions or Events.
 
 # Political Movements
 
@@ -155,6 +153,11 @@ Paper Style Window:
 - [com_event_window_letter_paper](docs/event_windows/com_event_window_letter_paper_transcribed.png) (Transcribed View)
 - [com_event_window_telegram](docs/event_windows/com_event_window_telegram.png)
 - [com_event_window_newspaper](docs/event_windows/com_event_window_newspaper.png)
+
+Europa Universalis V Style Windows:
+- [event_window_europa_classic](docs/event_windows/event_window_europa_variants.png)
+- [event_window_europa_1_char](docs/event_windows/event_window_europa_variants.png)
+- [event_window_europa_2_char](docs/event_windows/event_window_europa_variants.png)
 
 ### Usage Notes
 - For ease of use, any modded windows with characters will expect a character scope for the arguments `left_icon = scope:some_character`, `right_icon = scope:some_character` and `center_icon = scope:some_character` if the event has three characters. Just like the vanilla events do.

@@ -15,14 +15,17 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=3385002128
     * [Modifying Movement Weights](#modifying-movement-weights)
 * [GUI Framework](#gui-framework)
     * [Alternative Event Windows](#alternative-event-windows)
-    * [EU5 Style Situation Journal Entries](#eu5-style-situation-journal-entries)
     * [Hiding Objective Header](#hiding-objective-header)
     * [Custom Social Hierarchies](#custom-social-hierarchies)
     * [Sidebar Button](#sidebar-button)
-    * [Characters in Journal Entry](#characters-in-journal-entry)
     * [Character Animation, Camera and Environment](#character-animation-camera-and-environment)
     * [Custom Owner Buildings](#custom-owner-buildings)
     * [Multi-line Production Methods](#multi-line-production-methods)
+    * [Journal Extensions](#journal-extensions)
+      * [Hide/Show Journal Entry Groups](#hideshow-journal-entry-groups)
+      * [EU5 Style Situation Journal Entries](#eu5-style-situation-journal-entries)
+      * [Progress Bar Syling](#progress-bar-syling)
+      * [Characters in Journal Entry](#characters-in-journal-entry)
 * [Structs](#structs)
     * [Creating a new Struct](#creating-a-new-struct)
     * [Setting Variables on a Struct](#setting-variables-on-a-struct)
@@ -35,7 +38,6 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=3385002128
 * [Additional Modifier Icons](#additional-modifier-icons)
 * [Heir Blocker](#heir-blocker)
 * [Weekly Event Framework](#weekly-event-framework)
-* [Hide/Show Journal Entry Groups](#hideshow-journal-entry-groups)
 * [Formation Event Blocker](#formation-event-blocker)
 * [Built-In Universal Names Compatibility](#built-in-universal-names-compatibility)
 
@@ -188,20 +190,6 @@ or a multiple of that to keep the aspect ratio correct.
   - Bottom Left & Top Right
 - The Buttons do not support classical text but are optimized for texticons (i.e. `@innovation!`)
 
-## EU5 Style Situation Journal Entries
-Situations are meant to model international events, such as clashes between factions, pandemics, and more.
-
-Each situation can have multiple, different journal entries associated with it and provides a tool to model complex power struggles.
-
-In the background, situations are Journal Entries with a few extra variables and a whole new UI.
-This means using them should come natural to modders who have already used those.
-
-Situations were inspired by [EU5](https://forum.paradoxplaza.com/forum/developer-diary/tinto-talks-70-2nd-of-july-2025.1823383/).
-
-[The usage documentation can be found here.](docs/SITUATIONS.md)
-
-[While the script documentation can be found here.](docs/SITUATIONS_SCRIPT_DOCS.md)
-
 ## Hiding Objective Header
 
 The Objective header can be hidden by setting the global variable `community_gui_objective_var` like this:
@@ -219,19 +207,6 @@ set_variable = {
 }
 ```
 **I recommend doing this in the history file of a country `common/history/countries`**
-
-## Custom Progress Bar Colors
-> **NOTE**  These custom colors still work, but have been superceded by a [more advanced progress bar framework](/docs/Progress_bars.md).
-
-This works by setting specific variables in the journal entry scope. These will change which progress bar is displayed. Currently, the following variables are used:
-- `com_double_bad_gold_marker` -- replaces the journal entry marker in double_sided_bad with the marker from double_sided_gold
-- `com_double_bad_white_bar` -- replaced double_sided_bad with white_progressbar_horizontal
-- `com_double_bad_gold_bar` -- replaced double_sided_bad with gold_progressbar_horizontal
-- `com_bear_spray_applied` -- removes the bear and lion icons from double_sided_gold and resizes the progress bar
-
-## Wrap Journal Modifiers
-
-This works by setting the variable `com_flex_je_modifiers` in the journal entry scope. This causes the journal modifiers to wrap in lines of 5. Now, up to 15 modifiers looks fine and doesn't just cross the screen.
 
 ## Sidebar Button
 
@@ -334,52 +309,6 @@ If you have multiple alerts which should all open the same panel you can use ful
 ```
 > **NOTE:** If using this in a widget; you will need a scripted widget definition in `gui\scripted_widgets\` to load your widget.
 
-## Characters in Journal Entry
-
-Screenshots: [Single Character with Opinion](docs/example_journal_entry_character_01.png), [Multiple Characters without Opinions](docs/example_journal_entry_character_02.png)
-
-To add one or more characters to a journal entry you need
-to add them to a variable list called `com_journal_characters` in
-the immediate block of a journal entry.
-
-Here is an example where a countries ruler is added to a journal entry, but theoretically you can add whoever you want:
-```
-je_example_entry = {
-	...
-	immediate = {
-		every_scope_character = {
-			limit = {
-				exists = this
-				is_character_alive = yes
-				is_ruler = yes
-			}
-			save_temporary_scope_as = list_character
-			scope:journal_entry = {
-				add_to_variable_list = {
-					name = com_journal_characters
-					target = scope:list_character
-				}
-			}
-		}
-	}
-	...
-}
-```
-
-### Opinions
-
-Characters in journal entries can also have opinions.
-To define them, you need to set the flag variable `com_opinion` on the character.
-```
-set_variable = {
-    name = com_opinion
-    value = flag:gui_character_opinion_example
-}
-```
-The text behind `flag:` is a localization key (See [com_gui_l_english.yml](localization/english/com_gui_l_english.yml)).
-
-**NOTE: Only one opinion can be set on a character at a time. So if you are using a character in multiple journal entries be aware of this.**
-
 ## Character Animation, Camera and Environment
 
 To change a characters animation,
@@ -465,7 +394,35 @@ gui/map_list_panel.gui
 ```
 **NOTE: Note that military buildings, such as barracks and naval bases, are NOT INTENDED TO BE USED WITH MPM due to the new unit graphics being displayed alongside the PMGs which now take up most of the space that the extra PMGs would overflow into.**
 
-## DLC Icons in Journal Entries
+## Journal Extensions
+CMF adds several extensions for the journal system, including hidden entries, EU5-alike situations, and more.
+
+### Hide/Show Journal Entry Groups
+
+This allows for hiding and showing any Journal Entry Group.
+
+Usage:
+`com_hide_journal_entry_group = { name = je_group_historical_content }` 
+This would hide all National Agenda (`je_group_historical_content`) Journal Entries.
+
+`com_show_journal_entry_group = { name = je_group_historical_content }` 
+This would show them again.
+
+### EU5 Style Situation Journal Entries
+Situations are meant to model international events, such as clashes between factions, pandemics, and more.
+
+Each situation can have multiple, different journal entries associated with it and provides a tool to model complex power struggles.
+
+In the background, situations are Journal Entries with a few extra variables and a whole new UI.
+This means using them should come natural to modders who have already used those.
+
+Situations were inspired by [EU5](https://forum.paradoxplaza.com/forum/developer-diary/tinto-talks-70-2nd-of-july-2025.1823383/).
+
+[The usage documentation can be found here.](docs/SITUATIONS.md)
+
+[While the script documentation can be found here.](docs/SITUATIONS_SCRIPT_DOCS.md)
+
+### DLC Icons in Journal Entries
 
 To add DLC/Mod information to a journal entry, CMF offers the scripted effect `add_com_dlc_icon`.
 
@@ -484,6 +441,67 @@ je_some_journal = {
     # some more journal definition
 }
 ```
+
+### Characters in Journal Entry
+
+Screenshots: [Single Character with Opinion](docs/example_journal_entry_character_01.png), [Multiple Characters without Opinions](docs/example_journal_entry_character_02.png)
+
+To add one or more characters to a journal entry you need
+to add them to a variable list called `com_journal_characters` in
+the immediate block of a journal entry.
+
+Here is an example where a countries ruler is added to a journal entry, but theoretically you can add whoever you want:
+```
+je_example_entry = {
+	...
+	immediate = {
+		every_scope_character = {
+			limit = {
+				exists = this
+				is_character_alive = yes
+				is_ruler = yes
+			}
+			save_temporary_scope_as = list_character
+			scope:journal_entry = {
+				add_to_variable_list = {
+					name = com_journal_characters
+					target = scope:list_character
+				}
+			}
+		}
+	}
+	...
+}
+```
+
+### Progress Bar Syling
+Scripted progress bars can be styled with a color, a drift effect, and a target marker, all dynamically settable and unsettable. For more details, see the [progress bar documentation](/docs/Progress_bars.md)
+
+> **NOTE**  The following custom color styles still work, but have been superceded by the more advanced progress bar framework.
+
+These work by setting specific variables in the journal entry scope. These will change which progress bar is displayed. Currently, the following variables are used:
+- `com_double_bad_gold_marker` -- replaces the journal entry marker in double_sided_bad with the marker from double_sided_gold
+- `com_double_bad_white_bar` -- replaced double_sided_bad with white_progressbar_horizontal
+- `com_double_bad_gold_bar` -- replaced double_sided_bad with gold_progressbar_horizontal
+- `com_bear_spray_applied` -- removes the bear and lion icons from double_sided_gold and resizes the progress bar
+
+### Wrap Journal Modifiers
+
+This works by setting the variable `com_flex_je_modifiers` in the journal entry scope. This causes the journal modifiers to wrap in lines of 5. Now, up to 15 modifiers looks fine and don't just cross the screen.
+
+#### Opinions
+
+Characters in journal entries can also have opinions.
+To define them, you need to set the flag variable `com_opinion` on the character.
+```
+set_variable = {
+    name = com_opinion
+    value = flag:gui_character_opinion_example
+}
+```
+The text behind `flag:` is a localization key (See [com_gui_l_english.yml](localization/english/com_gui_l_english.yml)).
+
+**NOTE: Only one opinion can be set on a character at a time. So if you are using a character in multiple journal entries be aware of this.**
 
 
 # Structs
@@ -734,18 +752,6 @@ To use:
 3. Add your own `on_action` to the `on_monthly_pulse` from step 1.
 4. Add the `com_run_weekly_event_country_effect` into this new on_action and set the two parameters. Example: `com_run_weekly_event_country_effect = { weekday = 1 on_action = another_on_action }`. Weekday decides the weekday ranging from 0 (Sunday) to 6 (Saturday).
 5. Define your new on_action (`another_on_action` in the example in 4.)
-
-
-# Hide/Show Journal Entry Groups
-
-This allows for hiding and showing any Journal Entry Group.
-
-Usage:
-`com_hide_journal_entry_group = { name = je_group_historical_content }` 
-This would hide all National Agenda (`je_group_historical_content`) Journal Entries.
-
-`com_show_journal_entry_group = { name = je_group_historical_content }` 
-This would show them again.
 
 # Formation Event Blocker
 

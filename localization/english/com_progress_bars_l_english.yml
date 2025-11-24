@@ -3,6 +3,8 @@
 # Triggers
  trigger_exists_com_progress_bar: "The specificed progress bar exists"
  trigger_exists_com_progress_bar_not: "The specificed progress bar does not exist"
+ trigger_is_com_progress_bar_hidden: "The specificed progress bar is hidden"
+ trigger_is_com_progress_bar_hidden_not: "The specificed progress bar is visible"
  error_no_progress_bar_scope: "CMF: No com_$progress_bar$ scope defined"
  com_default_bar: "com_blue_bar"
  com_blue_bar: "com_blue_bar"

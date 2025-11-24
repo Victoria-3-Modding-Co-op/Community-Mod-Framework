@@ -1,0 +1,119 @@
+﻿je_com_progress_in_style = {
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	group = je_group_tutorial
+
+	scripted_button = sb_com_progress_in_style_test
+	scripted_button = sb_com_progress_in_style_test2
+	scripted_button = sb_com_progress_in_style_test3
+
+	scripted_progress_bar = spb_com_progress_in_style
+
+	immediate = {
+		# Styled progressbars MUST be set up in the journal entry, as they require scope:journal_entry
+		# These style effects only work with scripted progress bars
+		create_com_progress_bar_with_both = {
+			progress_bar = spb_com_progress_in_style		#recommend using the progress bar key as the id
+			index = 0										#index is the 0-indexed position of the progress bar in the journal entry
+			color = blue									#color overwrites whatever base color the bar type has
+			bar_increase_color = green						#color when the progress bar is increasing in value
+			bar_decrease_color = red						#color when the progress bar is decreasing in value
+			drift_value = spb_com_progress_in_style_drift	#script value that sets the position/value of the drift
+			target_type = gold_bar							#style of target marker
+			target_value = spb_com_progress_in_style_target	#script value that sets the position/value of the target
+		}
+		# We're using variables to set the drift and target position for the example, but they are set by script value and can be anything
+		set_variable = {
+			name = com_progress_in_style_drift
+			value = 30 #start with 15% positive drift (out of max 200)
+		}
+		set_variable = {
+			name = com_progress_in_style_target
+			value = 0.75 #start at 75%
+		}
+		run_in_com_progress_bar_scope = { #wrapper scripted effect
+			progress_bar = spb_com_progress_in_style
+			effect = "set_ideology = ideology:com_icon_progress_in_style" #just add your effect here; here we set a custom ideology to use a custom icon as a target marker
+		}
+	}
+
+	on_weekly_pulse = {
+		effect = {
+			if = {
+				limit = { 
+					scope:journal_entry = {
+						scripted_bar_progress = {
+							name = spb_com_progress_in_style
+							value >= 150
+						}
+					}
+				}
+				set_variable = {
+					name = com_progress_in_style_target
+					value = 0.25 #"invert"
+				}
+				change_variable = {
+					name = com_progress_in_style_drift
+					multiply = -1 #invert
+				}
+				set_com_progress_bar_color = {
+					progress_bar = spb_com_progress_in_style
+					color = white									#change base color to white
+				}
+				set_com_progress_bar_drift = {
+					progress_bar = spb_com_progress_in_style
+					bar_increase_color = blue						#change increase color to "neutral bad"
+					bar_decrease_color = gold						#change decrease color to "neutral good"
+					drift_value = spb_com_progress_in_style_drift	#same drift value
+				}
+			}
+			if = {
+				limit = { 
+					scope:journal_entry = {
+						scripted_bar_progress = {
+							name = spb_com_progress_in_style
+							value <= 50
+						}
+					}
+				}
+				set_variable = {
+					name = com_progress_in_style_target
+					value = 0.75 #"invert"
+				}
+				change_variable = {
+					name = com_progress_in_style_drift
+					multiply = -1 #invert
+				}
+				set_com_progress_bar_color = {
+					progress_bar = spb_com_progress_in_style
+					color = blue									#return to start value
+				}
+				set_com_progress_bar_drift = {
+					progress_bar = spb_com_progress_in_style
+					bar_increase_color = green						#return to start value
+					bar_decrease_color = red						#return to start value
+					drift_value = spb_com_progress_in_style_drift	#same drift value
+				}
+			}
+		}
+	}
+	on_complete = {
+		
+	}
+
+	on_fail = {
+		
+	}
+
+	complete = {
+	}
+
+	fail = {
+	}
+
+	transferable = no
+	can_revolution_inherit = yes
+
+	weight = 200
+	should_be_pinned_by_default = yes
+}

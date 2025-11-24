@@ -187,7 +187,6 @@ remove_com_progress_bar = {
 }
 
 # Sets the color of progress bar
-# Requires access to 'scope:com_$progress_bar$'
 # - progress_bar = name localization key of progress bar
 # - color = color of base bar
 set_com_progress_bar_color = {
@@ -195,12 +194,13 @@ set_com_progress_bar_color = {
 		if = {
 			limit = {
 				NOT = {
-					exists = scope:com_$progress_bar$
+					exists_com_progress_bar = { progress_bar = $progress_bar$ }
 				}
 			}
 			error_log = error_no_progress_bar_scope
 		}
 		else = {
+			save_com_progress_bar_scope = { progress_bar = $progress_bar$ }
 			fix_variable_error = { variable = com_base_color }
 			fix_variable_error = { variable = com_$color$_bar }
 			scope:com_$progress_bar$ = {
@@ -214,19 +214,19 @@ set_com_progress_bar_color = {
 }
 
 # Unsets the color of progress bar
-# Requires access to 'scope:com_$progress_bar$'
 # - progress_bar = name localization key of progress bar
 remove_com_progress_bar_color = {
 	hidden_effect = {
 		if = {
 			limit = {
 				NOT = {
-					exists = scope:com_$progress_bar$
+					exists_com_progress_bar = { progress_bar = $progress_bar$ }
 				}
 			}
 			error_log = error_no_progress_bar_scope
 		}
 		else = {
+			save_com_progress_bar_scope = { progress_bar = $progress_bar$ }
 			scope:com_$progress_bar$ = {
 				remove_variable = com_base_color
 			}
@@ -234,7 +234,6 @@ remove_com_progress_bar_color = {
 	}
 }
 # Sets the drift colors and the value to be used
-# Requires access to 'scope:com_$progress_bar$'
 # - progress_bar = name localization key of progress bar
 # - bar_increase_color = color of drift bar when increasing
 # - bar_decrease_color = color of drift bar when decreasing
@@ -244,12 +243,13 @@ set_com_progress_bar_drift = {
 		if = {
 			limit = {
 				NOT = {
-					exists = scope:com_$progress_bar$
+					exists_com_progress_bar = { progress_bar = $progress_bar$ }
 				}
 			}
 			error_log = error_no_progress_bar_scope
 		}
 		else = {
+			save_com_progress_bar_scope = { progress_bar = $progress_bar$ }
 			fix_variable_error = { variable = com_bar_increase_color }
 			fix_variable_error = { variable = com_bar_decrease_color }
 			fix_variable_error = { variable = com_drift_value }
@@ -275,19 +275,19 @@ set_com_progress_bar_drift = {
 }
 
 # Removes the progress bar drift effect
-# Requires access to 'scope:com_$progress_bar$'
 # - progress_bar = name localization key of progress bar
 remove_com_progress_bar_drift = {
 	hidden_effect = {
 		if = {
 			limit = {
 				NOT = {
-					exists = scope:com_$progress_bar$
+					exists_com_progress_bar = { progress_bar = $progress_bar$ }
 				}
 			}
 			error_log = error_no_progress_bar_scope
 		}
 		else = {
+			save_com_progress_bar_scope = { progress_bar = $progress_bar$ }
 			scope:com_$progress_bar$ = {
 				remove_variable = com_bar_increase_color
 				remove_variable = com_bar_decrease_color
@@ -298,7 +298,6 @@ remove_com_progress_bar_drift = {
 }
 
 # Sets the target icon/style and the value to be used
-# Requires access to 'scope:com_$progress_bar$'
 # - progress_bar = name localization key of progress bar
 # - target_type = icon type for target value
 # - target_value = a 0-1 script value which sets the position of the target
@@ -307,12 +306,13 @@ set_com_progress_bar_target = {
 		if = {
 			limit = {
 				NOT = {
-					exists = scope:com_$progress_bar$
+					exists_com_progress_bar = { progress_bar = $progress_bar$ }
 				}
 			}
 			error_log = error_no_progress_bar_scope
 		}
 		else = {
+			save_com_progress_bar_scope = { progress_bar = $progress_bar$ }
 			fix_variable_error = { variable = com_target_type }
 			fix_variable_error = { variable = com_target_value }
 			fix_variable_error = { variable = com_target_$target_type$ }
@@ -332,22 +332,65 @@ set_com_progress_bar_target = {
 }
 
 # Removes the progress bar target
-# Requires access to 'scope:com_$progress_bar$'
 # - progress_bar = name localization key of progress bar
 remove_com_progress_bar_target = {
 	hidden_effect = {
 		if = {
 			limit = {
 				NOT = {
-					exists = scope:com_$progress_bar$
+					exists_com_progress_bar = { progress_bar = $progress_bar$ }
 				}
 			}
 			error_log = error_no_progress_bar_scope
 		}
 		else = {
+			save_com_progress_bar_scope = { progress_bar = $progress_bar$ }
 			scope:com_$progress_bar$ = {
 				remove_variable = com_target_type
 				remove_variable = com_target_value
+			}
+		}
+	}
+}
+
+# Hides the progress bar, so it is no longer shown
+# - progress_bar = name localization key of progress bar
+hide_com_progress_bar = {
+	hidden_effect = {
+		if = {
+			limit = {
+				NOT = {
+					exists_com_progress_bar = { progress_bar = $progress_bar$ }
+				}
+			}
+			error_log = error_no_progress_bar_scope
+		}
+		else = {
+			save_com_progress_bar_scope = { progress_bar = $progress_bar$ }
+			fix_variable_error = { variable = com_hide_progress_bar }
+			scope:com_$progress_bar$ = {
+				set_variable = com_hide_progress_bar
+			}
+		}
+	}
+}
+
+# Unhides the progress bar
+# - progress_bar = name localization key of progress bar
+unhide_com_progress_bar = {
+	hidden_effect = {
+		if = {
+			limit = {
+				NOT = {
+					exists_com_progress_bar = { progress_bar = $progress_bar$ }
+				}
+			}
+			error_log = error_no_progress_bar_scope
+		}
+		else = {
+			save_com_progress_bar_scope = { progress_bar = $progress_bar$ }
+			scope:com_$progress_bar$ = {
+				remove_variable = com_hide_progress_bar
 			}
 		}
 	}
@@ -359,21 +402,36 @@ remove_com_progress_bar_target = {
 save_com_progress_bar_scope = {
 	hidden_effect = {
 		if = {
-			limit = {
-				exists_com_progress_bar = { progress_bar = $progress_bar$ }
-			}
-			random_in_list = {
-				variable = com_progress_bar_cache
+			limit = { NOT = { exists = scope:com_$progress_bar$ } }
+			if = {
 				limit = {
-					var:com_id ?= flag:$progress_bar$
-					var:com_type ?= com_struct_progress_bar
+					exists_com_progress_bar = { progress_bar = $progress_bar$ }
 				}
-				save_scope_as = com_$progress_bar$
+				random_in_list = {
+					variable = com_progress_bar_cache
+					limit = {
+						var:com_id ?= flag:$progress_bar$
+						var:com_type ?= com_struct_progress_bar
+					}
+					save_scope_as = com_$progress_bar$
+				}
+			}
+			else = {
+				error_log = error_no_progress_bar_scope
 			}
 		}
-		else = {
-			error_log = error_no_progress_bar_scope
-		}
+	}
+}
+
+# A wrapper effect to easily run an effect inside 'scope:com_$progress_bar$'
+# - progress_bar = name localization key of progress bar
+# - effect = effect or series of effects to be run inside 'scope:com_$progress_bar$'
+run_in_com_progress_bar_scope = {
+	save_com_progress_bar_scope = {
+		progress_bar = $progress_bar$
+	}
+	scope:com_$progress_bar$ ?= {
+		$effect$
 	}
 }
 

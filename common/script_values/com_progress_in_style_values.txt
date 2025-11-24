@@ -1,0 +1,19 @@
+﻿# Progress bar drift and target values are expected to be called in country scope
+# This script value sets the size and direction of the drift effect, it should generally reflect or set the actual progress bar periodic change
+spb_com_progress_in_style_drift = {
+	value = var:com_progress_in_style_drift
+	add = je:je_com_progress_in_style.scripted_bar_progress:spb_com_progress_in_style # We add the current bar value so the drift is the difference
+	divide = 200 #must divide by max value to get a 0-1 scaled value
+}
+
+# We're using this to set the progress, so we undo the effects above, or for simple script values, just set it anew
+spb_com_progress_in_style_drift_diff = {
+	value = spb_com_progress_in_style_drift
+	multiply = 200
+	subtract = je:je_com_progress_in_style.scripted_bar_progress:spb_com_progress_in_style
+}
+
+# This script value sets the target position
+spb_com_progress_in_style_target = {
+	value = var:com_progress_in_style_target
+}

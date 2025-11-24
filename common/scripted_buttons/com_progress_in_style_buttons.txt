@@ -1,0 +1,177 @@
+﻿sb_com_progress_in_style_test = {
+	name = sb_com_progress_in_style_test
+	desc = sb_com_progress_in_style_test_desc
+
+	possible = {
+		OR = {
+			is_com_progress_bar_hidden = {
+				progress_bar = spb_com_progress_in_style
+			}
+			NOT = {
+				is_com_progress_bar_hidden = {
+					progress_bar = spb_com_progress_in_style
+				}
+			}
+		}
+	}
+
+	ai_chance = {
+		value = 100
+	}
+
+	effect = {
+		if = {
+			limit = {
+				has_variable = com_progress_in_style_bar_hidden
+			}
+			custom_tooltip = {
+				text = sb_com_progress_in_style_test_tt1
+				unhide_com_progress_bar = {
+					progress_bar = spb_com_progress_in_style
+				}
+				remove_variable = com_progress_in_style_bar_hidden
+			}
+		}
+		else = {
+			custom_tooltip = {
+				text = sb_com_progress_in_style_test_tt2
+				set_variable = com_progress_in_style_bar_hidden
+				hide_com_progress_bar = {
+					progress_bar = spb_com_progress_in_style
+				}
+			}
+		}
+	}
+}
+
+sb_com_progress_in_style_test2 = {
+	name = sb_com_progress_in_style_test2
+	desc = sb_com_rise_of_communism_test_desc
+
+	possible = {
+		always = yes
+	}
+
+	ai_chance = {
+		value = 100
+	}
+
+	effect = {
+		custom_tooltip = {
+			text = sb_com_progress_in_style_test2_tt
+			fix_variable_error = { variable = com_red_bar }
+			fix_variable_error = { variable = com_green_bar }
+			fix_variable_error = { variable = com_gold_bar }
+			fix_variable_error = { variable = com_white_bar }
+			fix_variable_error = { variable = com_blue_bar }
+		}
+		run_in_com_progress_bar_scope = {
+			progress_bar = spb_com_progress_in_style
+			effect = "
+			switch = {
+				trigger = var:com_base_color
+				flag:com_blue_bar = {
+					custom_tooltip = Red
+					set_variable = {
+						name = com_base_color
+						value = flag:com_red_bar
+					}
+				}
+				flag:com_red_bar = {
+					custom_tooltip = Green
+					set_variable = {
+						name = com_base_color
+						value = flag:com_green_bar
+					}
+				}
+				flag:com_green_bar = {
+					custom_tooltip = Gold
+					set_variable = {
+						name = com_base_color
+						value = flag:com_gold_bar
+					}
+				}
+				flag:com_gold_bar = {
+					custom_tooltip = White
+					set_variable = {
+						name = com_base_color
+						value = flag:com_white_bar
+					}
+				}
+				fallback = {
+					custom_tooltip = Blue
+					set_variable = {
+						name = com_base_color
+						value = flag:com_blue_bar
+					}
+				}
+			}"
+		}
+	}
+}
+
+sb_com_progress_in_style_test3 = {
+	name = sb_com_progress_in_style_test3
+	desc = sb_com_rise_of_communism_test_desc
+
+	possible = {
+		always = yes
+	}
+
+	ai_chance = {
+		value = 100
+	}
+
+	effect = {
+		custom_tooltip = {
+			text = sb_com_progress_in_style_test3_tt
+			fix_variable_error = { variable = com_target_journal_icon }
+			fix_variable_error = { variable = com_target_custom_icon }
+			fix_variable_error = { variable = com_target_gold_marker }
+			fix_variable_error = { variable = com_target_white_line }
+			fix_variable_error = { variable = com_target_gold_bar }
+		}
+		run_in_com_progress_bar_scope = {
+			progress_bar = spb_com_progress_in_style
+		effect = "
+			switch = {
+				trigger = var:com_target_type
+				flag:com_target_gold_bar = {
+					custom_tooltip = com_spb_journal_icon
+					set_variable = {
+						name = com_target_type
+						value = flag:com_target_journal_icon
+					}
+				}
+				flag:com_target_journal_icon = {
+					custom_tooltip = com_spb_custom_icon
+					set_variable = {
+						name = com_target_type
+						value = flag:com_target_custom_icon
+					}
+				}
+				flag:com_target_custom_icon = {
+					custom_tooltip = com_spb_gold_marker
+					set_variable = {
+						name = com_target_type
+						value = flag:com_target_gold_marker
+					}
+				}
+				flag:com_target_gold_marker = {
+					custom_tooltip = com_spb_white_line
+					set_variable = {
+						name = com_target_type
+						value = flag:com_target_white_line
+					}
+				}
+				fallback = {
+					custom_tooltip = com_spb_gold_bar
+					set_variable = {
+						name = com_target_type
+						value = flag:com_target_gold_bar
+					}
+				}
+			}"
+		}
+	}
+}

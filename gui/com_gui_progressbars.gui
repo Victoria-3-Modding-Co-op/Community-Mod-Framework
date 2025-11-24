@@ -487,7 +487,7 @@ types progressbar_overwrites {
 				}
 				#New style, with drift and target setting
 				container = {
-					visible = "[ComProgressBar.IsSet]"
+					visible = "[And(ComProgressBar.IsSet, Not(ComProgressBar.Var('com_hide_progress_bar').IsSet))]"
 					# Default
 					com_progressbar_default = {
 						visible = "[Or(
@@ -751,7 +751,7 @@ types progressbar_overwrites {
 								}
 								marker = {
 									icon = {
-										size = { 65 33 }
+										size = { 40 20 }
 										parentanchor = vcenter
 										widgetanchor = center
 										texture = "gfx/interface/progressbar/progressbar_marker.dds"
@@ -856,7 +856,7 @@ types progressbar_overwrites {
 				}
 				#New style, with drift and target setting
 				container = {
-					visible = "[ComProgressBar.IsSet]"
+					visible = "[And(ComProgressBar.IsSet, Not(ComProgressBar.Var('com_hide_progress_bar').IsSet))]"
 					block "com_progressbar" {
 						# Default
 						com_progressbar_default = {
@@ -869,6 +869,16 @@ types progressbar_overwrites {
 								block "progressbar_size" {
 									size = { 420 10 }
 								}
+							}
+							blockoverride "journal_icon_size" {
+								size = { 35 35 }
+							}
+							blockoverride "custom_icon_size" {
+								size = { 18 18 }
+								position = { 0 1 }
+							}
+							blockoverride "gold_marker_size" {
+								size = { 40 20 }
 							}
 						}
 						
@@ -884,6 +894,16 @@ types progressbar_overwrites {
 									size = { 420 10 }
 								}
 							}
+							blockoverride "journal_icon_size" {
+								size = { 35 35 }
+							}
+							blockoverride "custom_icon_size" {
+								size = { 18 18 }
+								position = { 0 1 }
+							}
+							blockoverride "gold_marker_size" {
+								size = { 40 20 }
+							}
 						}
 						
 						#Default Green
@@ -898,6 +918,16 @@ types progressbar_overwrites {
 									size = { 420 10 }
 								}
 							}
+							blockoverride "journal_icon_size" {
+								size = { 35 35 }
+							}
+							blockoverride "custom_icon_size" {
+								size = { 18 18 }
+								position = { 0 1 }
+							}
+							blockoverride "gold_marker_size" {
+								size = { 40 20 }
+							}
 						}
 						
 						# Double-sided Bad with icon selected by framework
@@ -908,6 +938,16 @@ types progressbar_overwrites {
 								block "progressbar_size" {
 									size = { 420 10 }
 								}
+							}
+							blockoverride "journal_icon_size" {
+								size = { 35 35 }
+							}
+							blockoverride "custom_icon_size" {
+								size = { 18 18 }
+								position = { 0 1 }
+							}
+							blockoverride "gold_marker_size" {
+								size = { 40 20 }
 							}
 							progressbar = {
 								visible = "[Not(ComProgressBarTarget.IsSet)]"
@@ -940,6 +980,16 @@ types progressbar_overwrites {
 									size = { 420 10 }
 								}
 							}
+							blockoverride "journal_icon_size" {
+								size = { 35 35 }
+							}
+							blockoverride "custom_icon_size" {
+								size = { 18 18 }
+								position = { 0 1 }
+							}
+							blockoverride "gold_marker_size" {
+								size = { 40 20 }
+							}
 						}
 						
 						# gold bar
@@ -950,6 +1000,16 @@ types progressbar_overwrites {
 								block "progressbar_size" {
 									size = { 420 10 }
 								}
+							}
+							blockoverride "journal_icon_size" {
+								size = { 35 35 }
+							}
+							blockoverride "custom_icon_size" {
+								size = { 18 18 }
+								position = { 0 1 }
+							}
+							blockoverride "gold_marker_size" {
+								size = { 40 20 }
 							}
 						}
 
@@ -964,6 +1024,16 @@ types progressbar_overwrites {
 								block "progressbar_size" {
 									size = { 420 10 }
 								}
+							}
+							blockoverride "journal_icon_size" {
+								size = { 35 35 }
+							}
+							blockoverride "custom_icon_size" {
+								size = { 18 18 }
+								position = { 0 1 }
+							}
+							blockoverride "gold_marker_size" {
+								size = { 40 20 }
 							}
 							progressbar = {
 								visible = "[Not(ComProgressBarTarget.IsSet)]"
@@ -1257,6 +1327,24 @@ types com_progressbars {
 					}
 				}
 			}
+			progressbar = { #custom icon marker (using ideology hack)
+				visible = "[ComProgressBarTargetTypeCompare('com_target_custom_icon')]"
+				using = com_target_bar
+	
+				marker = {
+					icon = {
+						block "custom_icon_size" {
+							size = { 50 50 }
+							position = { 0 1 }
+						}
+						parentanchor = vcenter
+						widgetanchor = center
+						block "com_target_progress_texture" {
+							texture = "[ComProgressBar.GetCharacter.GetIdeology.GetTexture]"
+						}
+					}
+				}
+			}
 			progressbar = { #journal icon marker (like vanilla double_sided_bad)
 				visible = "[ComProgressBarTargetTypeCompare('com_target_journal_icon')]"
 				using = com_target_bar
@@ -1281,7 +1369,9 @@ types com_progressbars {
 	
 				marker = {
 					icon = {
-						size = { 65 33 }
+						block "gold_marker_size" {
+							size = { 65 33 }
+						}
 						parentanchor = vcenter
 						widgetanchor = center
 						texture = "gfx/interface/progressbar/progressbar_marker.dds"

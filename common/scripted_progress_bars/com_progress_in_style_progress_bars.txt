@@ -1,0 +1,18 @@
+﻿spb_com_progress_in_style = {
+ 	name = "spb_com_progress_in_style_name"
+ 	desc = "spb_com_progress_in_style_desc"
+ 	second_desc = "spb_com_progress_in_style_right_desc"
+
+ 	default = yes
+
+ 	weekly_progress = {
+		add = {
+			desc = "spb_com_progress_in_style_drift_desc"
+			value = spb_com_progress_in_style_drift_diff #using the drift amount (less the current amount) to set progress saves duplication of work
+		}
+ 	}
+
+ 	start_value = 100
+ 	min_value = 0
+ 	max_value = 200
+}

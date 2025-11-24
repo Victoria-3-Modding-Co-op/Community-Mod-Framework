@@ -45,29 +45,62 @@ any_com_situation_countries_percent = {
 has_com_situation_faction = {
     global = trigger_has_com_situation_faction
     global_not = trigger_has_com_situation_faction_not
+    first = trigger_has_com_situation_faction
+    first_not = trigger_has_com_situation_faction_not
+    third = trigger_has_com_situation_faction
+    third_not = trigger_has_com_situation_faction_not
 }
 
 has_any_com_situation_factions = {
     global = trigger_has_any_com_situation_factions
     global_not = trigger_has_any_com_situation_factions_not
+    first = trigger_has_any_com_situation_factions
+    first_not = trigger_has_any_com_situation_factions_not
+    third = trigger_has_any_com_situation_factions
+    third_not = trigger_has_any_com_situation_factions_not
 }
 
 num_com_situation_faction_members = {
     global = trigger_num_com_situation_faction_members
     global_not = trigger_num_com_situation_faction_members_not
+    first = trigger_num_com_situation_faction_members
+    first_not = trigger_num_com_situation_faction_members_not
+    third = trigger_num_com_situation_faction_members
+    third_not = trigger_num_com_situation_faction_members_not
 }
 
 exists_com_situation = {
     global = trigger_exists_com_situation
     global_not = trigger_exists_com_situation_not
+    first = trigger_exists_com_situation
+    first_not = trigger_exists_com_situation_not
+    third = trigger_exists_com_situation
+    third_not = trigger_exists_com_situation_not
 }
 
 exists_com_situation_side = {
     global = trigger_exists_com_situation_side
     global_not = trigger_exists_com_situation_side_not
+    first = trigger_exists_com_situation_side
+    first_not = trigger_exists_com_situation_side_not
+    third = trigger_exists_com_situation_side
+    third_not = trigger_exists_com_situation_side_not
 }
 
 exists_com_progress_bar = {
     global = trigger_exists_com_progress_bar
     global_not = trigger_exists_com_progress_bar_not
+    first = trigger_exists_com_progress_bar
+    first_not = trigger_exists_com_progress_bar_not
+    third = trigger_exists_com_progress_bar
+    third_not = trigger_exists_com_progress_bar_not
+}
+
+is_com_progress_bar_hidden = {
+    global = trigger_is_com_progress_bar_hidden
+    global_not = trigger_is_com_progress_bar_hidden_not
+    first = trigger_is_com_progress_bar_hidden
+    first_not = trigger_is_com_progress_bar_hidden_not
+    third = trigger_is_com_progress_bar_hidden
+    third_not = trigger_is_com_progress_bar_hidden_not
 }

@@ -11,3 +11,37 @@ exists_com_progress_bar = {
         }
     }
 }
+
+# Check whether the given progress bar has been hidden
+# Parameters:
+# - progress_bar = progress bar localization key
+is_com_progress_bar_hidden = {
+    custom_description = {
+        text = is_com_progress_bar_hidden
+        test_in_com_progress_bar_scope = {
+            progress_bar = $progress_bar$
+            trigger = "has_variable = com_hide_progress_bar"
+        }
+    }
+}
+# Wrapper trigger to check triggers in 'scope:com_$progress_bar$'' easily
+# Parameters:
+# - progress_bar = progress bar localization key
+# - trigger = trigger or series of triggers to be checked in 'scope:com_$progress_bar$''
+test_in_com_progress_bar_scope = {
+    hidden_trigger = {
+		trigger_if = {
+			limit = { NOT = { exists = scope:com_$progress_bar$ } }
+            any_in_list = {
+                variable = com_progress_bar_cache
+                var:com_id ?= flag:$progress_bar$
+                var:com_type ?= com_struct_progress_bar
+                save_temporary_scope_as = com_$progress_bar$
+            }
+            debug_log_details = true
+		}
+	}
+	scope:com_$progress_bar$ ?= {
+		$trigger$
+	}
+}

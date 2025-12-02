@@ -116,7 +116,7 @@ def main(sizes = [8, 16, 32, 64, 128, 256, 512]):
     output_file = os.path.join(script_dir, "com_floatarray.txt")
     
     # Write to file
-    with open(output_file, 'w', encoding='utf-8') as f:
+    with open(output_path, 'w', encoding='utf_8_sig') as f:
         f.write(all_scripts)
     
     # Get first size for examples
@@ -124,8 +124,9 @@ def main(sizes = [8, 16, 32, 64, 128, 256, 512]):
     last_index = example_size - 1
     
     print(f"""
-✓ Generated floatarray utilities: {output_file}
+✓ Successfully generated: {output_path}
   - Sizes: {', '.join(map(str, sizes))}
+  Max depth: {max_depth}
 """)
 
 if __name__ == "__main__":

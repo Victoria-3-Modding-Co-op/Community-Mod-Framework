@@ -1,0 +1,3 @@
+﻿l_english:
+  trigger_com_floatarray_min_size: "The array is at least X size"
+  trigger_com_floatarray_min_size_not: "The array is less than X size"

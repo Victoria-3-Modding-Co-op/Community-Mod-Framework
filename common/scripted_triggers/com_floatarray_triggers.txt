@@ -1,0 +1,12 @@
+﻿
+com_floatarray_min_size = {
+	custom_description = {
+		text = com_floatarray_min_size
+		var:com_fa_$NAME$_size >= $VALUE$
+		flag:$NAME$ = { save_temporary_scope_as = array_name }
+		save_temporary_scope_value_as = {
+			name = array_size
+			value = $VALUE$
+		}
+	}
+}

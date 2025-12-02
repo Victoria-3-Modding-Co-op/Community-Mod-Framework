@@ -104,3 +104,12 @@ is_com_progress_bar_hidden = {
     third = trigger_is_com_progress_bar_hidden
     third_not = trigger_is_com_progress_bar_hidden_not
 }
+
+com_floatarray_min_size = {
+    global = trigger_com_floatarray_min_size
+    global_not = trigger_com_floatarray_min_size_not
+    first = trigger_com_floatarray_min_size
+    first_not = trigger_com_floatarray_min_size_not
+    third = trigger_com_floatarray_min_size
+    third_not = trigger_com_floatarray_min_size_not
+}

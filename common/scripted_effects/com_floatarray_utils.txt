@@ -8,14 +8,18 @@ com_floatarray_set_index = {
     custom_tooltip = {
         text = com_floatarray_set_index
         set_variable = { name = com_fa_index value = $VALUE$ }
+		fix_variable_error = { variable = com_fa_local_index }
+		set_local_variable = { name = com_fa_local_index value = $VALUE$ }
     }
 }
 
 # Wrapper effect for the value variable used in various effects
 com_floatarray_set_value = {
-    custom_tooltip = {
-        text = com_floatarray_set_value
+	custom_tooltip = {
+		text = com_floatarray_set_value
         set_variable = { name = com_fa_value value = $VALUE$ }
+		fix_variable_error = { variable = com_fa_local_value }
+		set_local_variable = { name = com_fa_local_value value = $VALUE$ }
     }
 }
 
@@ -72,8 +76,13 @@ com_floatarray_clear = {
 }
 
 com_floatarray_initialize_core = {
-    fix_variable_error = { variable = com_fa_$NAME$_$INDEX$ }
-	set_variable = { name = com_fa_$NAME$_$INDEX$ value = 0 }
+	if = {
+		limit = { #Don't overwrite
+			NOT = { has_variable = com_fa_$NAME$_$INDEX$ }
+		}
+		fix_variable_error = { variable = com_fa_$NAME$_$INDEX$ }
+		set_variable = { name = com_fa_$NAME$_$INDEX$ value = 0 }
+	}
 }
 
 # ===== CORE GET/SET WRAPPERS =====
@@ -97,7 +106,7 @@ com_floatarray_set_at = {
 
 com_floatarray_getset_1 = {
 	if = {
-		limit = { var:com_fa_index <= $LOWER_0$ }
+		limit = { var:com_fa_index < $UPPER_0$ }
 		com_floatarray_$GETSET$_at = { NAME = $NAME$ INDEX = $LOWER_0$ }
 	}
 	else = {
@@ -107,7 +116,7 @@ com_floatarray_getset_1 = {
 
 com_floatarray_getset_2 = {
 	if = {
-		limit = { var:com_fa_index <= $UPPER_0$ }
+		limit = { var:com_fa_index < $LOWER_1$ }
 		com_floatarray_getset_1 = {
 			NAME = $NAME$
 			GETSET = $GETSET$
@@ -125,7 +134,7 @@ com_floatarray_getset_2 = {
 
 com_floatarray_getset_4 = {
 	if = {
-		limit = { var:com_fa_index <= $UPPER_1$ }
+		limit = { var:com_fa_index < $LOWER_2$ }
 		com_floatarray_getset_2 = {
 			NAME = $NAME$
 			GETSET = $GETSET$
@@ -145,7 +154,7 @@ com_floatarray_getset_4 = {
 
 com_floatarray_getset_8 = {
 	if = {
-		limit = { var:com_fa_index <= $UPPER_3$ }
+		limit = { var:com_fa_index < $LOWER_4$ }
 		com_floatarray_getset_4 = {
 			NAME = $NAME$
 			GETSET = $GETSET$
@@ -169,7 +178,7 @@ com_floatarray_getset_8 = {
 
 com_floatarray_getset_16 = {
 	if = {
-		limit = { var:com_fa_index <= $UPPER_7$ }
+		limit = { var:com_fa_index < $LOWER_8$ }
 		com_floatarray_getset_8 = {
 			NAME = $NAME$
 			GETSET = $GETSET$
@@ -201,7 +210,7 @@ com_floatarray_getset_16 = {
 
 com_floatarray_getset_32 = {
 	if = {
-		limit = { var:com_fa_index <= $UPPER_15$ }
+		limit = { var:com_fa_index < $LOWER_16$ }
 		com_floatarray_getset_16 = {
 			NAME = $NAME$
 			GETSET = $GETSET$
@@ -249,7 +258,7 @@ com_floatarray_getset_32 = {
 
 com_floatarray_getset_64 = {
 	if = {
-		limit = { var:com_fa_index <= $UPPER_31$ }
+		limit = { var:com_fa_index < $LOWER_32$ }
 		com_floatarray_getset_32 = {
 			NAME = $NAME$
 			GETSET = $GETSET$
@@ -329,7 +338,7 @@ com_floatarray_getset_64 = {
 
 com_floatarray_getset_128 = {
 	if = {
-		limit = { var:com_fa_index <= $UPPER_63$ }
+		limit = { var:com_fa_index < $LOWER_64$ }
 		com_floatarray_getset_64 = {
 			NAME = $NAME$
 			GETSET = $GETSET$
@@ -473,7 +482,7 @@ com_floatarray_getset_128 = {
 
 com_floatarray_getset_256 = {
 	if = {
-		limit = { var:com_fa_index <= $UPPER_127$ }
+		limit = { var:com_fa_index < $LOWER_128$ }
 		com_floatarray_getset_128 = {
 			NAME = $NAME$
 			GETSET = $GETSET$
@@ -743,6 +752,7 @@ com_floatarray_getset_256 = {
 	}
 }
 
+# Core effect of foreach
 com_floatarray_foreach_core = {
 	set_variable = { name = com_fa_value value = var:com_fa_$NAME$_$IND$ }
 	set_variable = { name = com_fa_index value = $IND$ }

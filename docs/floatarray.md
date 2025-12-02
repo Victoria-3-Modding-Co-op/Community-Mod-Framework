@@ -82,35 +82,35 @@ Deletes all variables belonging to the array.
 ```
 com_test_floatarray = {
     # 1. Initialize array
-    com_floatarray_8_initialize = { NAME = mydata }
+    com_floatarray_128_initialize = { NAME = mydata }
     
     # 2. Fill array with foreach
-    com_floatarray_8_foreach = {
+    com_floatarray_128_foreach = {
         NAME = mydata
         BODY = body_fill
     }
     
     # 3. Get value from index 5
     set_variable = { name = INDEX value = 5 }
-    com_floatarray_8_get = { NAME = mydata }
+    com_floatarray_128_get = { NAME = mydata }
     # var:returned now contains 5
     
     # 4. Set value at index 5
     set_variable = { name = INDEX value = 5 }
     set_variable = { name = VALUE value = 42 }
-    com_floatarray_8_set = { NAME = mydata }
+    com_floatarray_128_set = { NAME = mydata }
     
     # 5. Initialize sum variable
     set_variable = { name = sum value = 0 }
     
     # 6. Sum all values with foreach
-    com_floatarray_8_foreach = {
+    com_floatarray_128_foreach = {
         NAME = mydata
         BODY = body_sum
     }
     
     # 7. Clear array when done
-    com_floatarray_8_clear = { NAME = mydata }
+    # com_floatarray_256_clear = { NAME = mydata }
 }
 
 # Body effect for foreach - executed for each element

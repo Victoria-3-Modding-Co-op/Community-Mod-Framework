@@ -1,0 +1,6 @@
+﻿
+com_floatarray_check_size = {
+	hidden_trigger = {
+		var:com_fa_$NAME$_size $OP$ $VALUE$
+	}
+}

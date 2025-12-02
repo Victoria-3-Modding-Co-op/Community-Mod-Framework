@@ -32,6 +32,7 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=3385002128
     * [Destroying a Struct](#destroying-a-struct)
 * [Fixing Variable Errors](#fixing-variable-errors)
 * [Dictionaries](#dictionaries)
+* [Float Arrays](#float-arrays)
 * [Parties](#parties)
 * [Community Mod Triggers](#community-mod-triggers)
 * [Keybinds](#keybinds)
@@ -664,6 +665,10 @@ every_country = {
   }
 }
 ```
+# Float Arrays
+Floatarrays are a custom data type implemented through scripted variables, enabling efficient indexed storage similar to float arrays in traditional programming languages. Credit to BigBruh and CaesarVincens.
+
+See [the documentation page for details](/docs/floatarray.md) on effects and triggers.
 
 # Parties
 

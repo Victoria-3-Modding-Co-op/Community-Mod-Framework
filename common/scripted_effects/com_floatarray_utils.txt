@@ -1,0 +1,761 @@
+﻿# Core functionality for float arrays; these are not likely to be changed much
+# Array name macro: $NAME$
+# Variable prefix: com_fa_
+# Variable naming: com_fa_$NAME$_INDEX (e.g., com_fa_mydata_0, com_fa_mydata_1, ...)
+
+# Wrapper effect for the index variable used in various effects
+com_floatarray_set_index = {
+    custom_tooltip = {
+        text = com_floatarray_set_index
+        set_variable = { name = com_fa_index value = $VALUE$ }
+		fix_variable_error = { variable = com_fa_local_index }
+		set_local_variable = { name = com_fa_local_index value = $VALUE$ }
+    }
+}
+
+# Wrapper effect for the value variable used in various effects
+com_floatarray_set_value = {
+	custom_tooltip = {
+		text = com_floatarray_set_value
+        set_variable = { name = com_fa_value value = $VALUE$ }
+		fix_variable_error = { variable = com_fa_local_value }
+		set_local_variable = { name = com_fa_local_value value = $VALUE$ }
+    }
+}
+
+# ===== Wrapper effects =====
+# These allow for easier calling of arrays, by moving the number to a parameter and giving an error message on mismatch
+
+# NAME is name of array
+# SIZE is array size
+# BODY is scripted effect to run on array
+com_floatarray_foreach = {
+	if = {
+		limit = { var:com_fa_$NAME$_size = $SIZE$ }
+        com_floatarray_$SIZE$_foreach = { NAME = $NAME$ BODY = $BODY$ }
+    }
+    else = {
+        error_log = com_floatarray_size_mismatch
+    }
+}
+
+# NAME is name of array
+# SIZE is array size
+com_floatarray_get = {
+	if = {
+		limit = { var:com_fa_$NAME$_size = $SIZE$ }
+        com_floatarray_$SIZE$_get = { NAME = $NAME$ }
+    }
+    else = {
+        error_log = com_floatarray_size_mismatch
+    }
+}
+
+# NAME is name of array
+# SIZE is array size
+com_floatarray_set = {
+	if = {
+		limit = { var:com_fa_$NAME$_size = $SIZE$ }
+        com_floatarray_$SIZE$_set = { NAME = $NAME$ }
+    }
+    else = {
+        error_log = com_floatarray_size_mismatch
+    }
+}
+
+# NAME is name of array
+# SIZE is array size
+com_floatarray_clear = {
+	if = {
+		limit = { var:com_fa_$NAME$_size = $SIZE$ }
+        com_floatarray_$SIZE$_clear = { NAME = $NAME$ }
+    }
+    else = {
+        error_log = com_floatarray_size_mismatch
+    }
+}
+
+com_floatarray_initialize_core = {
+	if = {
+		limit = { #Don't overwrite
+			NOT = { has_variable = com_fa_$NAME$_$INDEX$ }
+		}
+		fix_variable_error = { variable = com_fa_$NAME$_$INDEX$ }
+		set_variable = { name = com_fa_$NAME$_$INDEX$ value = 0 }
+	}
+}
+
+# ===== CORE GET/SET WRAPPERS =====
+# These are shared by all array sizes
+
+# Base get function - requires INDEX to be an integer
+# Can be called as a standalone for easy value return from specified index
+# NAME is name of array
+# INDEX is position of value
+com_floatarray_get_at = {
+	set_variable = { name = com_fa_return value = var:com_fa_$NAME$_$INDEX$ }
+}
+
+# Base set function - requires INDEX to be an integer and var:com_fa_value to be set
+# Can be called as a standalone for easy value set on specified index
+# NAME is name of array
+# INDEX is position of value
+com_floatarray_set_at = {
+	set_variable = { name = com_fa_$NAME$_$INDEX$ value = var:com_fa_value }
+}
+
+com_floatarray_getset_1 = {
+	if = {
+		limit = { var:com_fa_index < $UPPER_0$ }
+		com_floatarray_$GETSET$_at = { NAME = $NAME$ INDEX = $LOWER_0$ }
+	}
+	else = {
+		com_floatarray_$GETSET$_at = { NAME = $NAME$ INDEX = $UPPER_0$ }
+	}
+}
+
+com_floatarray_getset_2 = {
+	if = {
+		limit = { var:com_fa_index < $LOWER_1$ }
+		com_floatarray_getset_1 = {
+			NAME = $NAME$
+			GETSET = $GETSET$
+			LOWER_0 = $LOWER_0$ UPPER_0 = $UPPER_0$
+		}
+	}
+	else = {
+		com_floatarray_getset_1 = {
+			NAME = $NAME$
+			GETSET = $GETSET$
+			LOWER_0 = $LOWER_1$ UPPER_0 = $UPPER_1$
+		}
+	}
+}
+
+com_floatarray_getset_4 = {
+	if = {
+		limit = { var:com_fa_index < $LOWER_2$ }
+		com_floatarray_getset_2 = {
+			NAME = $NAME$
+			GETSET = $GETSET$
+			LOWER_0 = $LOWER_0$ UPPER_0 = $UPPER_0$
+			LOWER_1 = $LOWER_1$ UPPER_1 = $UPPER_1$
+		}
+	}
+	else = {
+		com_floatarray_getset_2 = {
+			NAME = $NAME$
+			GETSET = $GETSET$
+			LOWER_0 = $LOWER_2$ UPPER_0 = $UPPER_2$
+			LOWER_1 = $LOWER_3$ UPPER_1 = $UPPER_3$
+		}
+	}
+}
+
+com_floatarray_getset_8 = {
+	if = {
+		limit = { var:com_fa_index < $LOWER_4$ }
+		com_floatarray_getset_4 = {
+			NAME = $NAME$
+			GETSET = $GETSET$
+			LOWER_0 = $LOWER_0$ UPPER_0 = $UPPER_0$
+			LOWER_1 = $LOWER_1$ UPPER_1 = $UPPER_1$
+			LOWER_2 = $LOWER_2$ UPPER_2 = $UPPER_2$
+			LOWER_3 = $LOWER_3$ UPPER_3 = $UPPER_3$
+		}
+	}
+	else = {
+		com_floatarray_getset_4 = {
+			NAME = $NAME$
+			GETSET = $GETSET$
+			LOWER_0 = $LOWER_4$ UPPER_0 = $UPPER_4$
+			LOWER_1 = $LOWER_5$ UPPER_1 = $UPPER_5$
+			LOWER_2 = $LOWER_6$ UPPER_2 = $UPPER_6$
+			LOWER_3 = $LOWER_7$ UPPER_3 = $UPPER_7$
+		}
+	}
+}
+
+com_floatarray_getset_16 = {
+	if = {
+		limit = { var:com_fa_index < $LOWER_8$ }
+		com_floatarray_getset_8 = {
+			NAME = $NAME$
+			GETSET = $GETSET$
+			LOWER_0 = $LOWER_0$ UPPER_0 = $UPPER_0$
+			LOWER_1 = $LOWER_1$ UPPER_1 = $UPPER_1$
+			LOWER_2 = $LOWER_2$ UPPER_2 = $UPPER_2$
+			LOWER_3 = $LOWER_3$ UPPER_3 = $UPPER_3$
+			LOWER_4 = $LOWER_4$ UPPER_4 = $UPPER_4$
+			LOWER_5 = $LOWER_5$ UPPER_5 = $UPPER_5$
+			LOWER_6 = $LOWER_6$ UPPER_6 = $UPPER_6$
+			LOWER_7 = $LOWER_7$ UPPER_7 = $UPPER_7$
+		}
+	}
+	else = {
+		com_floatarray_getset_8 = {
+			NAME = $NAME$
+			GETSET = $GETSET$
+			LOWER_0 = $LOWER_8$ UPPER_0 = $UPPER_8$
+			LOWER_1 = $LOWER_9$ UPPER_1 = $UPPER_9$
+			LOWER_2 = $LOWER_10$ UPPER_2 = $UPPER_10$
+			LOWER_3 = $LOWER_11$ UPPER_3 = $UPPER_11$
+			LOWER_4 = $LOWER_12$ UPPER_4 = $UPPER_12$
+			LOWER_5 = $LOWER_13$ UPPER_5 = $UPPER_13$
+			LOWER_6 = $LOWER_14$ UPPER_6 = $UPPER_14$
+			LOWER_7 = $LOWER_15$ UPPER_7 = $UPPER_15$
+		}
+	}
+}
+
+com_floatarray_getset_32 = {
+	if = {
+		limit = { var:com_fa_index < $LOWER_16$ }
+		com_floatarray_getset_16 = {
+			NAME = $NAME$
+			GETSET = $GETSET$
+			LOWER_0 = $LOWER_0$ UPPER_0 = $UPPER_0$
+			LOWER_1 = $LOWER_1$ UPPER_1 = $UPPER_1$
+			LOWER_2 = $LOWER_2$ UPPER_2 = $UPPER_2$
+			LOWER_3 = $LOWER_3$ UPPER_3 = $UPPER_3$
+			LOWER_4 = $LOWER_4$ UPPER_4 = $UPPER_4$
+			LOWER_5 = $LOWER_5$ UPPER_5 = $UPPER_5$
+			LOWER_6 = $LOWER_6$ UPPER_6 = $UPPER_6$
+			LOWER_7 = $LOWER_7$ UPPER_7 = $UPPER_7$
+			LOWER_8 = $LOWER_8$ UPPER_8 = $UPPER_8$
+			LOWER_9 = $LOWER_9$ UPPER_9 = $UPPER_9$
+			LOWER_10 = $LOWER_10$ UPPER_10 = $UPPER_10$
+			LOWER_11 = $LOWER_11$ UPPER_11 = $UPPER_11$
+			LOWER_12 = $LOWER_12$ UPPER_12 = $UPPER_12$
+			LOWER_13 = $LOWER_13$ UPPER_13 = $UPPER_13$
+			LOWER_14 = $LOWER_14$ UPPER_14 = $UPPER_14$
+			LOWER_15 = $LOWER_15$ UPPER_15 = $UPPER_15$
+		}
+	}
+	else = {
+		com_floatarray_getset_16 = {
+			NAME = $NAME$
+			GETSET = $GETSET$
+			LOWER_0 = $LOWER_16$ UPPER_0 = $UPPER_16$
+			LOWER_1 = $LOWER_17$ UPPER_1 = $UPPER_17$
+			LOWER_2 = $LOWER_18$ UPPER_2 = $UPPER_18$
+			LOWER_3 = $LOWER_19$ UPPER_3 = $UPPER_19$
+			LOWER_4 = $LOWER_20$ UPPER_4 = $UPPER_20$
+			LOWER_5 = $LOWER_21$ UPPER_5 = $UPPER_21$
+			LOWER_6 = $LOWER_22$ UPPER_6 = $UPPER_22$
+			LOWER_7 = $LOWER_23$ UPPER_7 = $UPPER_23$
+			LOWER_8 = $LOWER_24$ UPPER_8 = $UPPER_24$
+			LOWER_9 = $LOWER_25$ UPPER_9 = $UPPER_25$
+			LOWER_10 = $LOWER_26$ UPPER_10 = $UPPER_26$
+			LOWER_11 = $LOWER_27$ UPPER_11 = $UPPER_27$
+			LOWER_12 = $LOWER_28$ UPPER_12 = $UPPER_28$
+			LOWER_13 = $LOWER_29$ UPPER_13 = $UPPER_29$
+			LOWER_14 = $LOWER_30$ UPPER_14 = $UPPER_30$
+			LOWER_15 = $LOWER_31$ UPPER_15 = $UPPER_31$
+		}
+	}
+}
+
+com_floatarray_getset_64 = {
+	if = {
+		limit = { var:com_fa_index < $LOWER_32$ }
+		com_floatarray_getset_32 = {
+			NAME = $NAME$
+			GETSET = $GETSET$
+			LOWER_0 = $LOWER_0$ UPPER_0 = $UPPER_0$
+			LOWER_1 = $LOWER_1$ UPPER_1 = $UPPER_1$
+			LOWER_2 = $LOWER_2$ UPPER_2 = $UPPER_2$
+			LOWER_3 = $LOWER_3$ UPPER_3 = $UPPER_3$
+			LOWER_4 = $LOWER_4$ UPPER_4 = $UPPER_4$
+			LOWER_5 = $LOWER_5$ UPPER_5 = $UPPER_5$
+			LOWER_6 = $LOWER_6$ UPPER_6 = $UPPER_6$
+			LOWER_7 = $LOWER_7$ UPPER_7 = $UPPER_7$
+			LOWER_8 = $LOWER_8$ UPPER_8 = $UPPER_8$
+			LOWER_9 = $LOWER_9$ UPPER_9 = $UPPER_9$
+			LOWER_10 = $LOWER_10$ UPPER_10 = $UPPER_10$
+			LOWER_11 = $LOWER_11$ UPPER_11 = $UPPER_11$
+			LOWER_12 = $LOWER_12$ UPPER_12 = $UPPER_12$
+			LOWER_13 = $LOWER_13$ UPPER_13 = $UPPER_13$
+			LOWER_14 = $LOWER_14$ UPPER_14 = $UPPER_14$
+			LOWER_15 = $LOWER_15$ UPPER_15 = $UPPER_15$
+			LOWER_16 = $LOWER_16$ UPPER_16 = $UPPER_16$
+			LOWER_17 = $LOWER_17$ UPPER_17 = $UPPER_17$
+			LOWER_18 = $LOWER_18$ UPPER_18 = $UPPER_18$
+			LOWER_19 = $LOWER_19$ UPPER_19 = $UPPER_19$
+			LOWER_20 = $LOWER_20$ UPPER_20 = $UPPER_20$
+			LOWER_21 = $LOWER_21$ UPPER_21 = $UPPER_21$
+			LOWER_22 = $LOWER_22$ UPPER_22 = $UPPER_22$
+			LOWER_23 = $LOWER_23$ UPPER_23 = $UPPER_23$
+			LOWER_24 = $LOWER_24$ UPPER_24 = $UPPER_24$
+			LOWER_25 = $LOWER_25$ UPPER_25 = $UPPER_25$
+			LOWER_26 = $LOWER_26$ UPPER_26 = $UPPER_26$
+			LOWER_27 = $LOWER_27$ UPPER_27 = $UPPER_27$
+			LOWER_28 = $LOWER_28$ UPPER_28 = $UPPER_28$
+			LOWER_29 = $LOWER_29$ UPPER_29 = $UPPER_29$
+			LOWER_30 = $LOWER_30$ UPPER_30 = $UPPER_30$
+			LOWER_31 = $LOWER_31$ UPPER_31 = $UPPER_31$
+		}
+	}
+	else = {
+		com_floatarray_getset_32 = {
+			NAME = $NAME$
+			GETSET = $GETSET$
+			LOWER_0 = $LOWER_32$ UPPER_0 = $UPPER_32$
+			LOWER_1 = $LOWER_33$ UPPER_1 = $UPPER_33$
+			LOWER_2 = $LOWER_34$ UPPER_2 = $UPPER_34$
+			LOWER_3 = $LOWER_35$ UPPER_3 = $UPPER_35$
+			LOWER_4 = $LOWER_36$ UPPER_4 = $UPPER_36$
+			LOWER_5 = $LOWER_37$ UPPER_5 = $UPPER_37$
+			LOWER_6 = $LOWER_38$ UPPER_6 = $UPPER_38$
+			LOWER_7 = $LOWER_39$ UPPER_7 = $UPPER_39$
+			LOWER_8 = $LOWER_40$ UPPER_8 = $UPPER_40$
+			LOWER_9 = $LOWER_41$ UPPER_9 = $UPPER_41$
+			LOWER_10 = $LOWER_42$ UPPER_10 = $UPPER_42$
+			LOWER_11 = $LOWER_43$ UPPER_11 = $UPPER_43$
+			LOWER_12 = $LOWER_44$ UPPER_12 = $UPPER_44$
+			LOWER_13 = $LOWER_45$ UPPER_13 = $UPPER_45$
+			LOWER_14 = $LOWER_46$ UPPER_14 = $UPPER_46$
+			LOWER_15 = $LOWER_47$ UPPER_15 = $UPPER_47$
+			LOWER_16 = $LOWER_48$ UPPER_16 = $UPPER_48$
+			LOWER_17 = $LOWER_49$ UPPER_17 = $UPPER_49$
+			LOWER_18 = $LOWER_50$ UPPER_18 = $UPPER_50$
+			LOWER_19 = $LOWER_51$ UPPER_19 = $UPPER_51$
+			LOWER_20 = $LOWER_52$ UPPER_20 = $UPPER_52$
+			LOWER_21 = $LOWER_53$ UPPER_21 = $UPPER_53$
+			LOWER_22 = $LOWER_54$ UPPER_22 = $UPPER_54$
+			LOWER_23 = $LOWER_55$ UPPER_23 = $UPPER_55$
+			LOWER_24 = $LOWER_56$ UPPER_24 = $UPPER_56$
+			LOWER_25 = $LOWER_57$ UPPER_25 = $UPPER_57$
+			LOWER_26 = $LOWER_58$ UPPER_26 = $UPPER_58$
+			LOWER_27 = $LOWER_59$ UPPER_27 = $UPPER_59$
+			LOWER_28 = $LOWER_60$ UPPER_28 = $UPPER_60$
+			LOWER_29 = $LOWER_61$ UPPER_29 = $UPPER_61$
+			LOWER_30 = $LOWER_62$ UPPER_30 = $UPPER_62$
+			LOWER_31 = $LOWER_63$ UPPER_31 = $UPPER_63$
+		}
+	}
+}
+
+com_floatarray_getset_128 = {
+	if = {
+		limit = { var:com_fa_index < $LOWER_64$ }
+		com_floatarray_getset_64 = {
+			NAME = $NAME$
+			GETSET = $GETSET$
+			LOWER_0 = $LOWER_0$ UPPER_0 = $UPPER_0$
+			LOWER_1 = $LOWER_1$ UPPER_1 = $UPPER_1$
+			LOWER_2 = $LOWER_2$ UPPER_2 = $UPPER_2$
+			LOWER_3 = $LOWER_3$ UPPER_3 = $UPPER_3$
+			LOWER_4 = $LOWER_4$ UPPER_4 = $UPPER_4$
+			LOWER_5 = $LOWER_5$ UPPER_5 = $UPPER_5$
+			LOWER_6 = $LOWER_6$ UPPER_6 = $UPPER_6$
+			LOWER_7 = $LOWER_7$ UPPER_7 = $UPPER_7$
+			LOWER_8 = $LOWER_8$ UPPER_8 = $UPPER_8$
+			LOWER_9 = $LOWER_9$ UPPER_9 = $UPPER_9$
+			LOWER_10 = $LOWER_10$ UPPER_10 = $UPPER_10$
+			LOWER_11 = $LOWER_11$ UPPER_11 = $UPPER_11$
+			LOWER_12 = $LOWER_12$ UPPER_12 = $UPPER_12$
+			LOWER_13 = $LOWER_13$ UPPER_13 = $UPPER_13$
+			LOWER_14 = $LOWER_14$ UPPER_14 = $UPPER_14$
+			LOWER_15 = $LOWER_15$ UPPER_15 = $UPPER_15$
+			LOWER_16 = $LOWER_16$ UPPER_16 = $UPPER_16$
+			LOWER_17 = $LOWER_17$ UPPER_17 = $UPPER_17$
+			LOWER_18 = $LOWER_18$ UPPER_18 = $UPPER_18$
+			LOWER_19 = $LOWER_19$ UPPER_19 = $UPPER_19$
+			LOWER_20 = $LOWER_20$ UPPER_20 = $UPPER_20$
+			LOWER_21 = $LOWER_21$ UPPER_21 = $UPPER_21$
+			LOWER_22 = $LOWER_22$ UPPER_22 = $UPPER_22$
+			LOWER_23 = $LOWER_23$ UPPER_23 = $UPPER_23$
+			LOWER_24 = $LOWER_24$ UPPER_24 = $UPPER_24$
+			LOWER_25 = $LOWER_25$ UPPER_25 = $UPPER_25$
+			LOWER_26 = $LOWER_26$ UPPER_26 = $UPPER_26$
+			LOWER_27 = $LOWER_27$ UPPER_27 = $UPPER_27$
+			LOWER_28 = $LOWER_28$ UPPER_28 = $UPPER_28$
+			LOWER_29 = $LOWER_29$ UPPER_29 = $UPPER_29$
+			LOWER_30 = $LOWER_30$ UPPER_30 = $UPPER_30$
+			LOWER_31 = $LOWER_31$ UPPER_31 = $UPPER_31$
+			LOWER_32 = $LOWER_32$ UPPER_32 = $UPPER_32$
+			LOWER_33 = $LOWER_33$ UPPER_33 = $UPPER_33$
+			LOWER_34 = $LOWER_34$ UPPER_34 = $UPPER_34$
+			LOWER_35 = $LOWER_35$ UPPER_35 = $UPPER_35$
+			LOWER_36 = $LOWER_36$ UPPER_36 = $UPPER_36$
+			LOWER_37 = $LOWER_37$ UPPER_37 = $UPPER_37$
+			LOWER_38 = $LOWER_38$ UPPER_38 = $UPPER_38$
+			LOWER_39 = $LOWER_39$ UPPER_39 = $UPPER_39$
+			LOWER_40 = $LOWER_40$ UPPER_40 = $UPPER_40$
+			LOWER_41 = $LOWER_41$ UPPER_41 = $UPPER_41$
+			LOWER_42 = $LOWER_42$ UPPER_42 = $UPPER_42$
+			LOWER_43 = $LOWER_43$ UPPER_43 = $UPPER_43$
+			LOWER_44 = $LOWER_44$ UPPER_44 = $UPPER_44$
+			LOWER_45 = $LOWER_45$ UPPER_45 = $UPPER_45$
+			LOWER_46 = $LOWER_46$ UPPER_46 = $UPPER_46$
+			LOWER_47 = $LOWER_47$ UPPER_47 = $UPPER_47$
+			LOWER_48 = $LOWER_48$ UPPER_48 = $UPPER_48$
+			LOWER_49 = $LOWER_49$ UPPER_49 = $UPPER_49$
+			LOWER_50 = $LOWER_50$ UPPER_50 = $UPPER_50$
+			LOWER_51 = $LOWER_51$ UPPER_51 = $UPPER_51$
+			LOWER_52 = $LOWER_52$ UPPER_52 = $UPPER_52$
+			LOWER_53 = $LOWER_53$ UPPER_53 = $UPPER_53$
+			LOWER_54 = $LOWER_54$ UPPER_54 = $UPPER_54$
+			LOWER_55 = $LOWER_55$ UPPER_55 = $UPPER_55$
+			LOWER_56 = $LOWER_56$ UPPER_56 = $UPPER_56$
+			LOWER_57 = $LOWER_57$ UPPER_57 = $UPPER_57$
+			LOWER_58 = $LOWER_58$ UPPER_58 = $UPPER_58$
+			LOWER_59 = $LOWER_59$ UPPER_59 = $UPPER_59$
+			LOWER_60 = $LOWER_60$ UPPER_60 = $UPPER_60$
+			LOWER_61 = $LOWER_61$ UPPER_61 = $UPPER_61$
+			LOWER_62 = $LOWER_62$ UPPER_62 = $UPPER_62$
+			LOWER_63 = $LOWER_63$ UPPER_63 = $UPPER_63$
+		}
+	}
+	else = {
+		com_floatarray_getset_64 = {
+			NAME = $NAME$
+			GETSET = $GETSET$
+			LOWER_0 = $LOWER_64$ UPPER_0 = $UPPER_64$
+			LOWER_1 = $LOWER_65$ UPPER_1 = $UPPER_65$
+			LOWER_2 = $LOWER_66$ UPPER_2 = $UPPER_66$
+			LOWER_3 = $LOWER_67$ UPPER_3 = $UPPER_67$
+			LOWER_4 = $LOWER_68$ UPPER_4 = $UPPER_68$
+			LOWER_5 = $LOWER_69$ UPPER_5 = $UPPER_69$
+			LOWER_6 = $LOWER_70$ UPPER_6 = $UPPER_70$
+			LOWER_7 = $LOWER_71$ UPPER_7 = $UPPER_71$
+			LOWER_8 = $LOWER_72$ UPPER_8 = $UPPER_72$
+			LOWER_9 = $LOWER_73$ UPPER_9 = $UPPER_73$
+			LOWER_10 = $LOWER_74$ UPPER_10 = $UPPER_74$
+			LOWER_11 = $LOWER_75$ UPPER_11 = $UPPER_75$
+			LOWER_12 = $LOWER_76$ UPPER_12 = $UPPER_76$
+			LOWER_13 = $LOWER_77$ UPPER_13 = $UPPER_77$
+			LOWER_14 = $LOWER_78$ UPPER_14 = $UPPER_78$
+			LOWER_15 = $LOWER_79$ UPPER_15 = $UPPER_79$
+			LOWER_16 = $LOWER_80$ UPPER_16 = $UPPER_80$
+			LOWER_17 = $LOWER_81$ UPPER_17 = $UPPER_81$
+			LOWER_18 = $LOWER_82$ UPPER_18 = $UPPER_82$
+			LOWER_19 = $LOWER_83$ UPPER_19 = $UPPER_83$
+			LOWER_20 = $LOWER_84$ UPPER_20 = $UPPER_84$
+			LOWER_21 = $LOWER_85$ UPPER_21 = $UPPER_85$
+			LOWER_22 = $LOWER_86$ UPPER_22 = $UPPER_86$
+			LOWER_23 = $LOWER_87$ UPPER_23 = $UPPER_87$
+			LOWER_24 = $LOWER_88$ UPPER_24 = $UPPER_88$
+			LOWER_25 = $LOWER_89$ UPPER_25 = $UPPER_89$
+			LOWER_26 = $LOWER_90$ UPPER_26 = $UPPER_90$
+			LOWER_27 = $LOWER_91$ UPPER_27 = $UPPER_91$
+			LOWER_28 = $LOWER_92$ UPPER_28 = $UPPER_92$
+			LOWER_29 = $LOWER_93$ UPPER_29 = $UPPER_93$
+			LOWER_30 = $LOWER_94$ UPPER_30 = $UPPER_94$
+			LOWER_31 = $LOWER_95$ UPPER_31 = $UPPER_95$
+			LOWER_32 = $LOWER_96$ UPPER_32 = $UPPER_96$
+			LOWER_33 = $LOWER_97$ UPPER_33 = $UPPER_97$
+			LOWER_34 = $LOWER_98$ UPPER_34 = $UPPER_98$
+			LOWER_35 = $LOWER_99$ UPPER_35 = $UPPER_99$
+			LOWER_36 = $LOWER_100$ UPPER_36 = $UPPER_100$
+			LOWER_37 = $LOWER_101$ UPPER_37 = $UPPER_101$
+			LOWER_38 = $LOWER_102$ UPPER_38 = $UPPER_102$
+			LOWER_39 = $LOWER_103$ UPPER_39 = $UPPER_103$
+			LOWER_40 = $LOWER_104$ UPPER_40 = $UPPER_104$
+			LOWER_41 = $LOWER_105$ UPPER_41 = $UPPER_105$
+			LOWER_42 = $LOWER_106$ UPPER_42 = $UPPER_106$
+			LOWER_43 = $LOWER_107$ UPPER_43 = $UPPER_107$
+			LOWER_44 = $LOWER_108$ UPPER_44 = $UPPER_108$
+			LOWER_45 = $LOWER_109$ UPPER_45 = $UPPER_109$
+			LOWER_46 = $LOWER_110$ UPPER_46 = $UPPER_110$
+			LOWER_47 = $LOWER_111$ UPPER_47 = $UPPER_111$
+			LOWER_48 = $LOWER_112$ UPPER_48 = $UPPER_112$
+			LOWER_49 = $LOWER_113$ UPPER_49 = $UPPER_113$
+			LOWER_50 = $LOWER_114$ UPPER_50 = $UPPER_114$
+			LOWER_51 = $LOWER_115$ UPPER_51 = $UPPER_115$
+			LOWER_52 = $LOWER_116$ UPPER_52 = $UPPER_116$
+			LOWER_53 = $LOWER_117$ UPPER_53 = $UPPER_117$
+			LOWER_54 = $LOWER_118$ UPPER_54 = $UPPER_118$
+			LOWER_55 = $LOWER_119$ UPPER_55 = $UPPER_119$
+			LOWER_56 = $LOWER_120$ UPPER_56 = $UPPER_120$
+			LOWER_57 = $LOWER_121$ UPPER_57 = $UPPER_121$
+			LOWER_58 = $LOWER_122$ UPPER_58 = $UPPER_122$
+			LOWER_59 = $LOWER_123$ UPPER_59 = $UPPER_123$
+			LOWER_60 = $LOWER_124$ UPPER_60 = $UPPER_124$
+			LOWER_61 = $LOWER_125$ UPPER_61 = $UPPER_125$
+			LOWER_62 = $LOWER_126$ UPPER_62 = $UPPER_126$
+			LOWER_63 = $LOWER_127$ UPPER_63 = $UPPER_127$
+		}
+	}
+}
+
+com_floatarray_getset_256 = {
+	if = {
+		limit = { var:com_fa_index < $LOWER_128$ }
+		com_floatarray_getset_128 = {
+			NAME = $NAME$
+			GETSET = $GETSET$
+			LOWER_0 = $LOWER_0$ UPPER_0 = $UPPER_0$
+			LOWER_1 = $LOWER_1$ UPPER_1 = $UPPER_1$
+			LOWER_2 = $LOWER_2$ UPPER_2 = $UPPER_2$
+			LOWER_3 = $LOWER_3$ UPPER_3 = $UPPER_3$
+			LOWER_4 = $LOWER_4$ UPPER_4 = $UPPER_4$
+			LOWER_5 = $LOWER_5$ UPPER_5 = $UPPER_5$
+			LOWER_6 = $LOWER_6$ UPPER_6 = $UPPER_6$
+			LOWER_7 = $LOWER_7$ UPPER_7 = $UPPER_7$
+			LOWER_8 = $LOWER_8$ UPPER_8 = $UPPER_8$
+			LOWER_9 = $LOWER_9$ UPPER_9 = $UPPER_9$
+			LOWER_10 = $LOWER_10$ UPPER_10 = $UPPER_10$
+			LOWER_11 = $LOWER_11$ UPPER_11 = $UPPER_11$
+			LOWER_12 = $LOWER_12$ UPPER_12 = $UPPER_12$
+			LOWER_13 = $LOWER_13$ UPPER_13 = $UPPER_13$
+			LOWER_14 = $LOWER_14$ UPPER_14 = $UPPER_14$
+			LOWER_15 = $LOWER_15$ UPPER_15 = $UPPER_15$
+			LOWER_16 = $LOWER_16$ UPPER_16 = $UPPER_16$
+			LOWER_17 = $LOWER_17$ UPPER_17 = $UPPER_17$
+			LOWER_18 = $LOWER_18$ UPPER_18 = $UPPER_18$
+			LOWER_19 = $LOWER_19$ UPPER_19 = $UPPER_19$
+			LOWER_20 = $LOWER_20$ UPPER_20 = $UPPER_20$
+			LOWER_21 = $LOWER_21$ UPPER_21 = $UPPER_21$
+			LOWER_22 = $LOWER_22$ UPPER_22 = $UPPER_22$
+			LOWER_23 = $LOWER_23$ UPPER_23 = $UPPER_23$
+			LOWER_24 = $LOWER_24$ UPPER_24 = $UPPER_24$
+			LOWER_25 = $LOWER_25$ UPPER_25 = $UPPER_25$
+			LOWER_26 = $LOWER_26$ UPPER_26 = $UPPER_26$
+			LOWER_27 = $LOWER_27$ UPPER_27 = $UPPER_27$
+			LOWER_28 = $LOWER_28$ UPPER_28 = $UPPER_28$
+			LOWER_29 = $LOWER_29$ UPPER_29 = $UPPER_29$
+			LOWER_30 = $LOWER_30$ UPPER_30 = $UPPER_30$
+			LOWER_31 = $LOWER_31$ UPPER_31 = $UPPER_31$
+			LOWER_32 = $LOWER_32$ UPPER_32 = $UPPER_32$
+			LOWER_33 = $LOWER_33$ UPPER_33 = $UPPER_33$
+			LOWER_34 = $LOWER_34$ UPPER_34 = $UPPER_34$
+			LOWER_35 = $LOWER_35$ UPPER_35 = $UPPER_35$
+			LOWER_36 = $LOWER_36$ UPPER_36 = $UPPER_36$
+			LOWER_37 = $LOWER_37$ UPPER_37 = $UPPER_37$
+			LOWER_38 = $LOWER_38$ UPPER_38 = $UPPER_38$
+			LOWER_39 = $LOWER_39$ UPPER_39 = $UPPER_39$
+			LOWER_40 = $LOWER_40$ UPPER_40 = $UPPER_40$
+			LOWER_41 = $LOWER_41$ UPPER_41 = $UPPER_41$
+			LOWER_42 = $LOWER_42$ UPPER_42 = $UPPER_42$
+			LOWER_43 = $LOWER_43$ UPPER_43 = $UPPER_43$
+			LOWER_44 = $LOWER_44$ UPPER_44 = $UPPER_44$
+			LOWER_45 = $LOWER_45$ UPPER_45 = $UPPER_45$
+			LOWER_46 = $LOWER_46$ UPPER_46 = $UPPER_46$
+			LOWER_47 = $LOWER_47$ UPPER_47 = $UPPER_47$
+			LOWER_48 = $LOWER_48$ UPPER_48 = $UPPER_48$
+			LOWER_49 = $LOWER_49$ UPPER_49 = $UPPER_49$
+			LOWER_50 = $LOWER_50$ UPPER_50 = $UPPER_50$
+			LOWER_51 = $LOWER_51$ UPPER_51 = $UPPER_51$
+			LOWER_52 = $LOWER_52$ UPPER_52 = $UPPER_52$
+			LOWER_53 = $LOWER_53$ UPPER_53 = $UPPER_53$
+			LOWER_54 = $LOWER_54$ UPPER_54 = $UPPER_54$
+			LOWER_55 = $LOWER_55$ UPPER_55 = $UPPER_55$
+			LOWER_56 = $LOWER_56$ UPPER_56 = $UPPER_56$
+			LOWER_57 = $LOWER_57$ UPPER_57 = $UPPER_57$
+			LOWER_58 = $LOWER_58$ UPPER_58 = $UPPER_58$
+			LOWER_59 = $LOWER_59$ UPPER_59 = $UPPER_59$
+			LOWER_60 = $LOWER_60$ UPPER_60 = $UPPER_60$
+			LOWER_61 = $LOWER_61$ UPPER_61 = $UPPER_61$
+			LOWER_62 = $LOWER_62$ UPPER_62 = $UPPER_62$
+			LOWER_63 = $LOWER_63$ UPPER_63 = $UPPER_63$
+			LOWER_64 = $LOWER_64$ UPPER_64 = $UPPER_64$
+			LOWER_65 = $LOWER_65$ UPPER_65 = $UPPER_65$
+			LOWER_66 = $LOWER_66$ UPPER_66 = $UPPER_66$
+			LOWER_67 = $LOWER_67$ UPPER_67 = $UPPER_67$
+			LOWER_68 = $LOWER_68$ UPPER_68 = $UPPER_68$
+			LOWER_69 = $LOWER_69$ UPPER_69 = $UPPER_69$
+			LOWER_70 = $LOWER_70$ UPPER_70 = $UPPER_70$
+			LOWER_71 = $LOWER_71$ UPPER_71 = $UPPER_71$
+			LOWER_72 = $LOWER_72$ UPPER_72 = $UPPER_72$
+			LOWER_73 = $LOWER_73$ UPPER_73 = $UPPER_73$
+			LOWER_74 = $LOWER_74$ UPPER_74 = $UPPER_74$
+			LOWER_75 = $LOWER_75$ UPPER_75 = $UPPER_75$
+			LOWER_76 = $LOWER_76$ UPPER_76 = $UPPER_76$
+			LOWER_77 = $LOWER_77$ UPPER_77 = $UPPER_77$
+			LOWER_78 = $LOWER_78$ UPPER_78 = $UPPER_78$
+			LOWER_79 = $LOWER_79$ UPPER_79 = $UPPER_79$
+			LOWER_80 = $LOWER_80$ UPPER_80 = $UPPER_80$
+			LOWER_81 = $LOWER_81$ UPPER_81 = $UPPER_81$
+			LOWER_82 = $LOWER_82$ UPPER_82 = $UPPER_82$
+			LOWER_83 = $LOWER_83$ UPPER_83 = $UPPER_83$
+			LOWER_84 = $LOWER_84$ UPPER_84 = $UPPER_84$
+			LOWER_85 = $LOWER_85$ UPPER_85 = $UPPER_85$
+			LOWER_86 = $LOWER_86$ UPPER_86 = $UPPER_86$
+			LOWER_87 = $LOWER_87$ UPPER_87 = $UPPER_87$
+			LOWER_88 = $LOWER_88$ UPPER_88 = $UPPER_88$
+			LOWER_89 = $LOWER_89$ UPPER_89 = $UPPER_89$
+			LOWER_90 = $LOWER_90$ UPPER_90 = $UPPER_90$
+			LOWER_91 = $LOWER_91$ UPPER_91 = $UPPER_91$
+			LOWER_92 = $LOWER_92$ UPPER_92 = $UPPER_92$
+			LOWER_93 = $LOWER_93$ UPPER_93 = $UPPER_93$
+			LOWER_94 = $LOWER_94$ UPPER_94 = $UPPER_94$
+			LOWER_95 = $LOWER_95$ UPPER_95 = $UPPER_95$
+			LOWER_96 = $LOWER_96$ UPPER_96 = $UPPER_96$
+			LOWER_97 = $LOWER_97$ UPPER_97 = $UPPER_97$
+			LOWER_98 = $LOWER_98$ UPPER_98 = $UPPER_98$
+			LOWER_99 = $LOWER_99$ UPPER_99 = $UPPER_99$
+			LOWER_100 = $LOWER_100$ UPPER_100 = $UPPER_100$
+			LOWER_101 = $LOWER_101$ UPPER_101 = $UPPER_101$
+			LOWER_102 = $LOWER_102$ UPPER_102 = $UPPER_102$
+			LOWER_103 = $LOWER_103$ UPPER_103 = $UPPER_103$
+			LOWER_104 = $LOWER_104$ UPPER_104 = $UPPER_104$
+			LOWER_105 = $LOWER_105$ UPPER_105 = $UPPER_105$
+			LOWER_106 = $LOWER_106$ UPPER_106 = $UPPER_106$
+			LOWER_107 = $LOWER_107$ UPPER_107 = $UPPER_107$
+			LOWER_108 = $LOWER_108$ UPPER_108 = $UPPER_108$
+			LOWER_109 = $LOWER_109$ UPPER_109 = $UPPER_109$
+			LOWER_110 = $LOWER_110$ UPPER_110 = $UPPER_110$
+			LOWER_111 = $LOWER_111$ UPPER_111 = $UPPER_111$
+			LOWER_112 = $LOWER_112$ UPPER_112 = $UPPER_112$
+			LOWER_113 = $LOWER_113$ UPPER_113 = $UPPER_113$
+			LOWER_114 = $LOWER_114$ UPPER_114 = $UPPER_114$
+			LOWER_115 = $LOWER_115$ UPPER_115 = $UPPER_115$
+			LOWER_116 = $LOWER_116$ UPPER_116 = $UPPER_116$
+			LOWER_117 = $LOWER_117$ UPPER_117 = $UPPER_117$
+			LOWER_118 = $LOWER_118$ UPPER_118 = $UPPER_118$
+			LOWER_119 = $LOWER_119$ UPPER_119 = $UPPER_119$
+			LOWER_120 = $LOWER_120$ UPPER_120 = $UPPER_120$
+			LOWER_121 = $LOWER_121$ UPPER_121 = $UPPER_121$
+			LOWER_122 = $LOWER_122$ UPPER_122 = $UPPER_122$
+			LOWER_123 = $LOWER_123$ UPPER_123 = $UPPER_123$
+			LOWER_124 = $LOWER_124$ UPPER_124 = $UPPER_124$
+			LOWER_125 = $LOWER_125$ UPPER_125 = $UPPER_125$
+			LOWER_126 = $LOWER_126$ UPPER_126 = $UPPER_126$
+			LOWER_127 = $LOWER_127$ UPPER_127 = $UPPER_127$
+		}
+	}
+	else = {
+		com_floatarray_getset_128 = {
+			NAME = $NAME$
+			GETSET = $GETSET$
+			LOWER_0 = $LOWER_128$ UPPER_0 = $UPPER_128$
+			LOWER_1 = $LOWER_129$ UPPER_1 = $UPPER_129$
+			LOWER_2 = $LOWER_130$ UPPER_2 = $UPPER_130$
+			LOWER_3 = $LOWER_131$ UPPER_3 = $UPPER_131$
+			LOWER_4 = $LOWER_132$ UPPER_4 = $UPPER_132$
+			LOWER_5 = $LOWER_133$ UPPER_5 = $UPPER_133$
+			LOWER_6 = $LOWER_134$ UPPER_6 = $UPPER_134$
+			LOWER_7 = $LOWER_135$ UPPER_7 = $UPPER_135$
+			LOWER_8 = $LOWER_136$ UPPER_8 = $UPPER_136$
+			LOWER_9 = $LOWER_137$ UPPER_9 = $UPPER_137$
+			LOWER_10 = $LOWER_138$ UPPER_10 = $UPPER_138$
+			LOWER_11 = $LOWER_139$ UPPER_11 = $UPPER_139$
+			LOWER_12 = $LOWER_140$ UPPER_12 = $UPPER_140$
+			LOWER_13 = $LOWER_141$ UPPER_13 = $UPPER_141$
+			LOWER_14 = $LOWER_142$ UPPER_14 = $UPPER_142$
+			LOWER_15 = $LOWER_143$ UPPER_15 = $UPPER_143$
+			LOWER_16 = $LOWER_144$ UPPER_16 = $UPPER_144$
+			LOWER_17 = $LOWER_145$ UPPER_17 = $UPPER_145$
+			LOWER_18 = $LOWER_146$ UPPER_18 = $UPPER_146$
+			LOWER_19 = $LOWER_147$ UPPER_19 = $UPPER_147$
+			LOWER_20 = $LOWER_148$ UPPER_20 = $UPPER_148$
+			LOWER_21 = $LOWER_149$ UPPER_21 = $UPPER_149$
+			LOWER_22 = $LOWER_150$ UPPER_22 = $UPPER_150$
+			LOWER_23 = $LOWER_151$ UPPER_23 = $UPPER_151$
+			LOWER_24 = $LOWER_152$ UPPER_24 = $UPPER_152$
+			LOWER_25 = $LOWER_153$ UPPER_25 = $UPPER_153$
+			LOWER_26 = $LOWER_154$ UPPER_26 = $UPPER_154$
+			LOWER_27 = $LOWER_155$ UPPER_27 = $UPPER_155$
+			LOWER_28 = $LOWER_156$ UPPER_28 = $UPPER_156$
+			LOWER_29 = $LOWER_157$ UPPER_29 = $UPPER_157$
+			LOWER_30 = $LOWER_158$ UPPER_30 = $UPPER_158$
+			LOWER_31 = $LOWER_159$ UPPER_31 = $UPPER_159$
+			LOWER_32 = $LOWER_160$ UPPER_32 = $UPPER_160$
+			LOWER_33 = $LOWER_161$ UPPER_33 = $UPPER_161$
+			LOWER_34 = $LOWER_162$ UPPER_34 = $UPPER_162$
+			LOWER_35 = $LOWER_163$ UPPER_35 = $UPPER_163$
+			LOWER_36 = $LOWER_164$ UPPER_36 = $UPPER_164$
+			LOWER_37 = $LOWER_165$ UPPER_37 = $UPPER_165$
+			LOWER_38 = $LOWER_166$ UPPER_38 = $UPPER_166$
+			LOWER_39 = $LOWER_167$ UPPER_39 = $UPPER_167$
+			LOWER_40 = $LOWER_168$ UPPER_40 = $UPPER_168$
+			LOWER_41 = $LOWER_169$ UPPER_41 = $UPPER_169$
+			LOWER_42 = $LOWER_170$ UPPER_42 = $UPPER_170$
+			LOWER_43 = $LOWER_171$ UPPER_43 = $UPPER_171$
+			LOWER_44 = $LOWER_172$ UPPER_44 = $UPPER_172$
+			LOWER_45 = $LOWER_173$ UPPER_45 = $UPPER_173$
+			LOWER_46 = $LOWER_174$ UPPER_46 = $UPPER_174$
+			LOWER_47 = $LOWER_175$ UPPER_47 = $UPPER_175$
+			LOWER_48 = $LOWER_176$ UPPER_48 = $UPPER_176$
+			LOWER_49 = $LOWER_177$ UPPER_49 = $UPPER_177$
+			LOWER_50 = $LOWER_178$ UPPER_50 = $UPPER_178$
+			LOWER_51 = $LOWER_179$ UPPER_51 = $UPPER_179$
+			LOWER_52 = $LOWER_180$ UPPER_52 = $UPPER_180$
+			LOWER_53 = $LOWER_181$ UPPER_53 = $UPPER_181$
+			LOWER_54 = $LOWER_182$ UPPER_54 = $UPPER_182$
+			LOWER_55 = $LOWER_183$ UPPER_55 = $UPPER_183$
+			LOWER_56 = $LOWER_184$ UPPER_56 = $UPPER_184$
+			LOWER_57 = $LOWER_185$ UPPER_57 = $UPPER_185$
+			LOWER_58 = $LOWER_186$ UPPER_58 = $UPPER_186$
+			LOWER_59 = $LOWER_187$ UPPER_59 = $UPPER_187$
+			LOWER_60 = $LOWER_188$ UPPER_60 = $UPPER_188$
+			LOWER_61 = $LOWER_189$ UPPER_61 = $UPPER_189$
+			LOWER_62 = $LOWER_190$ UPPER_62 = $UPPER_190$
+			LOWER_63 = $LOWER_191$ UPPER_63 = $UPPER_191$
+			LOWER_64 = $LOWER_192$ UPPER_64 = $UPPER_192$
+			LOWER_65 = $LOWER_193$ UPPER_65 = $UPPER_193$
+			LOWER_66 = $LOWER_194$ UPPER_66 = $UPPER_194$
+			LOWER_67 = $LOWER_195$ UPPER_67 = $UPPER_195$
+			LOWER_68 = $LOWER_196$ UPPER_68 = $UPPER_196$
+			LOWER_69 = $LOWER_197$ UPPER_69 = $UPPER_197$
+			LOWER_70 = $LOWER_198$ UPPER_70 = $UPPER_198$
+			LOWER_71 = $LOWER_199$ UPPER_71 = $UPPER_199$
+			LOWER_72 = $LOWER_200$ UPPER_72 = $UPPER_200$
+			LOWER_73 = $LOWER_201$ UPPER_73 = $UPPER_201$
+			LOWER_74 = $LOWER_202$ UPPER_74 = $UPPER_202$
+			LOWER_75 = $LOWER_203$ UPPER_75 = $UPPER_203$
+			LOWER_76 = $LOWER_204$ UPPER_76 = $UPPER_204$
+			LOWER_77 = $LOWER_205$ UPPER_77 = $UPPER_205$
+			LOWER_78 = $LOWER_206$ UPPER_78 = $UPPER_206$
+			LOWER_79 = $LOWER_207$ UPPER_79 = $UPPER_207$
+			LOWER_80 = $LOWER_208$ UPPER_80 = $UPPER_208$
+			LOWER_81 = $LOWER_209$ UPPER_81 = $UPPER_209$
+			LOWER_82 = $LOWER_210$ UPPER_82 = $UPPER_210$
+			LOWER_83 = $LOWER_211$ UPPER_83 = $UPPER_211$
+			LOWER_84 = $LOWER_212$ UPPER_84 = $UPPER_212$
+			LOWER_85 = $LOWER_213$ UPPER_85 = $UPPER_213$
+			LOWER_86 = $LOWER_214$ UPPER_86 = $UPPER_214$
+			LOWER_87 = $LOWER_215$ UPPER_87 = $UPPER_215$
+			LOWER_88 = $LOWER_216$ UPPER_88 = $UPPER_216$
+			LOWER_89 = $LOWER_217$ UPPER_89 = $UPPER_217$
+			LOWER_90 = $LOWER_218$ UPPER_90 = $UPPER_218$
+			LOWER_91 = $LOWER_219$ UPPER_91 = $UPPER_219$
+			LOWER_92 = $LOWER_220$ UPPER_92 = $UPPER_220$
+			LOWER_93 = $LOWER_221$ UPPER_93 = $UPPER_221$
+			LOWER_94 = $LOWER_222$ UPPER_94 = $UPPER_222$
+			LOWER_95 = $LOWER_223$ UPPER_95 = $UPPER_223$
+			LOWER_96 = $LOWER_224$ UPPER_96 = $UPPER_224$
+			LOWER_97 = $LOWER_225$ UPPER_97 = $UPPER_225$
+			LOWER_98 = $LOWER_226$ UPPER_98 = $UPPER_226$
+			LOWER_99 = $LOWER_227$ UPPER_99 = $UPPER_227$
+			LOWER_100 = $LOWER_228$ UPPER_100 = $UPPER_228$
+			LOWER_101 = $LOWER_229$ UPPER_101 = $UPPER_229$
+			LOWER_102 = $LOWER_230$ UPPER_102 = $UPPER_230$
+			LOWER_103 = $LOWER_231$ UPPER_103 = $UPPER_231$
+			LOWER_104 = $LOWER_232$ UPPER_104 = $UPPER_232$
+			LOWER_105 = $LOWER_233$ UPPER_105 = $UPPER_233$
+			LOWER_106 = $LOWER_234$ UPPER_106 = $UPPER_234$
+			LOWER_107 = $LOWER_235$ UPPER_107 = $UPPER_235$
+			LOWER_108 = $LOWER_236$ UPPER_108 = $UPPER_236$
+			LOWER_109 = $LOWER_237$ UPPER_109 = $UPPER_237$
+			LOWER_110 = $LOWER_238$ UPPER_110 = $UPPER_238$
+			LOWER_111 = $LOWER_239$ UPPER_111 = $UPPER_239$
+			LOWER_112 = $LOWER_240$ UPPER_112 = $UPPER_240$
+			LOWER_113 = $LOWER_241$ UPPER_113 = $UPPER_241$
+			LOWER_114 = $LOWER_242$ UPPER_114 = $UPPER_242$
+			LOWER_115 = $LOWER_243$ UPPER_115 = $UPPER_243$
+			LOWER_116 = $LOWER_244$ UPPER_116 = $UPPER_244$
+			LOWER_117 = $LOWER_245$ UPPER_117 = $UPPER_245$
+			LOWER_118 = $LOWER_246$ UPPER_118 = $UPPER_246$
+			LOWER_119 = $LOWER_247$ UPPER_119 = $UPPER_247$
+			LOWER_120 = $LOWER_248$ UPPER_120 = $UPPER_248$
+			LOWER_121 = $LOWER_249$ UPPER_121 = $UPPER_249$
+			LOWER_122 = $LOWER_250$ UPPER_122 = $UPPER_250$
+			LOWER_123 = $LOWER_251$ UPPER_123 = $UPPER_251$
+			LOWER_124 = $LOWER_252$ UPPER_124 = $UPPER_252$
+			LOWER_125 = $LOWER_253$ UPPER_125 = $UPPER_253$
+			LOWER_126 = $LOWER_254$ UPPER_126 = $UPPER_254$
+			LOWER_127 = $LOWER_255$ UPPER_127 = $UPPER_255$
+		}
+	}
+}
+
+# Core effect of foreach
+com_floatarray_foreach_core = {
+	set_variable = { name = com_fa_value value = var:com_fa_$NAME$_$IND$ }
+	set_variable = { name = com_fa_index value = $IND$ }
+	$BODY$
+	set_variable = { name = com_fa_$NAME$_$IND$ value = var:com_fa_value }
+}

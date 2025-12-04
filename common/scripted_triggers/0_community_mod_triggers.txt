@@ -6,11 +6,11 @@
 #
 # If a mod contained in this file is not loaded, its trigger will return false.
 #
-# If any of the compatibility triggers in this file belong to an active mod, the trigger definition from this file should be overwritten by the one from that mod.
+# If any of the compatibility triggers in this file belong to an active mod, the trigger definition from this file should be overwritten by the one from that mod using the REPLACE_OR_CREATE mode.
 #
-# For example, to overwrite the trigger in this file for Morgenrote and make your script think it is active, insert the following in a scripted_trigger file:
+# For example, to overwrite the trigger in this file for Morgenröte and make your script think it is active, insert the following in a scripted_trigger file:
 #  
-# morgenrote_is_active = {
+# REPLACE_OR_CREATE:morgenrote_is_active = {
 #		always = yes
 # }
 #
@@ -19,123 +19,158 @@
 # Your scripted trigger files goes in the /common/scripted_triggers folder of your mod.
 #
 
-anno1836_is_active = { # Anno 1836
+####---------- General Mod Triggers ----------####
+# Anno 1836
+anno1836_is_active = {
 	always = no
 }
 
-anzfp_is_active = { # Australia & New Zealand Flavor Pack
+# Australia & New Zealand Flavor Pack
+anzfp_is_active = {
 	always = no
 }
 
-basileia_is_active = { # Basileia Romaion
+# Basileia Romaion
+basileia_is_active = {
 	always = no
 }
 
-betterdecrees_is_active = { # Better Decrees
+# Better Decrees
+betterdecrees_is_active = {
 	always = no
 }
 
-BPM_is_active_trigger = { # Better Politics Mod
+# Better Politics Mod
+BPM_is_active_trigger = {
 	always = no
 }
 
-chilam_balam_is_active_trigger = { # Chilam Balam
+# Chilam Balam
+chilam_balam_is_active_trigger = {
 	always = no
 }
 
-com_is_active = { # Community Outfit Mod
+# Community Outfit Mod
+com_is_active = {
 	always = no
 }
 
-EACP_is_active_trigger = { # East Asian Clothes Patch
+# East Asian Clothes Patch
+EACP_is_active_trigger = {
 	always = no
 }
 
-ecchi_r_is_active = { # ECCHI Redux
+# ECCHI Redux
+ecchi_r_is_active = {
 	always = no
 }
 
-GGGG_is_active_trigger = { # Gas, Guns, Garb, & Grub
+# Gas, Guns, Garb, & Grub
+GGGG_is_active_trigger = {
 	always = no
 }
 
-gilded_age_is_active_trigger = { # Gilded Age
+# Gilded Age
+gilded_age_is_active_trigger = {
 	always = no
 }
 
-grefm_is_active = { # Gates of the Bosphorus
+# Gates of the Bosphorus
+grefm_is_active = {
 	always = no
 }
 
-IEX_is_active_trigger = { # Industry Expanded
+# Industry Expanded
+IEX_is_active_trigger = {
 	always = no
 }
 
-is_usfp_active = { # Hail, Columbia! (USA Flavor)
+# Hail, Columbia! (USA Flavor)
+is_usfp_active = {
 	always = no
 }
 
-jotn_is_active_trigger = { # Jewel of the Nile (Egypt Flavor)
+# Jewel of the Nile (Egypt Flavor)
+jotn_is_active_trigger = {
 	always = no
 }
 
-JKFP_is_active_trigger = { # James's Korea Flavor Pack
+# James's Korea Flavor Pack
+JKFP_is_active_trigger = {
 	always = no
 }
 
-kog_is_active_trigger = { # Kingdom of God
+# Kingdom of God
+kog_is_active_trigger = {
 	always = no
 }
 
-magic_gate_is_active = { # Manaflow: Ankaris Arrival
+# Manaflow: Ankaris Arrival
+magic_gate_is_active = {
 	always = no
 }
 
-war_goal_framework_is_active = { # War Goal Framework
+# Mandate of Heaven
+mandate_o_h_is_active = {
 	always = no
 }
 
-mandate_o_h_is_active = { # Mandate of Heaven
+# Morgenröte: Dawn of Flavor
+morgenrote_is_active = {
 	always = no
 }
 
-morgenrote_is_active = { # Morgenrote: Dawn of Flavor
+# Newspapers Mod
+newspapers_is_active_triger = {
 	always = no
 }
 
-newspapers_is_active_triger = { # Newspapers Mod
+# James's Pop Clothing Tweaks
+PCT_is_active_trigger = {
 	always = no
 }
 
-PCT_is_active_trigger = { # James's Pop Clothing Tweaks
+# Maharlika (Philippines Flavor)
+phfp_is_active = {
 	always = no
 }
 
-phfp_is_active = { # Maharlika (Philippines Flavor)
+# PI (States & Pops Overhaul)
+pi_is_active = {
 	always = no
 }
 
-RRK_is_active_trigger = { # Rally Round the King
+# Rally Round the King
+RRK_is_active_trigger = {
 	always = no
 }
 
-STMS_is_active_trigger = { # States That Make Sense
+# States That Make Sense
+STMS_is_active_trigger = {
 	always = no
 }
 
-tlim_is_active_trigger = { # This Land is Mine (Arabia & Islam Flavor)
+# This Land is Mine (Arabia & Islam Flavor)
+tlim_is_active_trigger = {
 	always = no
 }
 
-vtm_is_active_trigger = { # Victoria Tweaks Mod
+# Victoria Tweaks Mod
+vtm_is_active_trigger = {
 	always = no
 }
 
-WCR_is_active_trigger = { # Western Clothes: Redux
+# War Goal Framework
+war_goal_framework_is_active = {
 	always = no
 }
 
-#### Grey's Little Reworks ####
+# Western Clothes: Redux
+WCR_is_active_trigger = {
+	always = no
+}
+
+####---------- Grey's Little Reworks ----------####
 Grey_CIR_is_active = { # Clothing Industry Rework
 	always = no
 }

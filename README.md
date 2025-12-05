@@ -677,22 +677,27 @@ See [the documentation page for details](/docs/floatarray.md) on effects and tri
 For naming, you need to include loc keys to avoid load-up error. These can be blank and overwritten by your own mod. 
 
 # Community Mod Triggers
+The *Community Mod Triggers* is used to share scripted triggers to detect each others mods. This file is maintained on the CMF GitHub repo. If you wish to add your own trigger, either submit a request on the CMF Channel in the Modding Co-op or open a pull request on the repo. If you encounter issues or need assistance, reach out on the co-op. If you copy this file directly into your mod, you are assuming the duty of keeping it up to date with CMF.
 
 ## Usage
-Request to have CMF add a trigger for your mod into the CMF compatibility file `01_community_mod_compatibility_triggers.txt`.
-This file contains the scripted triggers all set to return false by default. This is intentional. Your trigger should look like this:
+1. Submit a scripted trigger key for use in CMF. It should take a format as follows: 
+
+`YOURMOD_is_active_trigger`
+2. Ensure users of your mod are also using CMF. The scripted triggers in `00_community_mod_compatibility_triggers.txt` are all set to return false by default. This is intentional.
+
+    *This is how your trigger will look in CMF:*
 ```
-YOURMODNAME_is_active_trigger = {
-   always = no
+YOURMOD_is_active_trigger = {
+    always = no
 }
 ```
-Create another file with the name `zz_YOURMODNAME_compatibility_triggers.txt` in the `/common/scripted_triggers` folder of your mod,
-that contains the following:
+3. Create a file in the `\common\scripted_triggers` folder ***of your mod*** that contains the following:
 ```
-YOURMODNAME_is_active_trigger = {
-   always = yes
+REPLACE_OR_CREATE:YOURMOD_is_active_trigger = {
+    always = yes
 }
 ```
+*If everything was done correctly, CMF will return your trigger as false when your mod is not loaded, and true when it is loaded.*
 
 ## Currently Included
 * Anno 1836

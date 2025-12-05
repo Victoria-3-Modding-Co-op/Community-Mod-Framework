@@ -691,15 +691,17 @@ YOURMOD_is_active_trigger = {
     always = no
 }
 ```
-3. Create a file in the `\common\scripted_triggers` folder ***of your mod*** that contains the following:
+3. Create a file with the name `zz_YOURMOD_compatibility_triggers.txt` in the `\common\scripted_triggers` folder ***of your mod***. Prefixing the file with `zz_` is intentional due to file load order behavior.
+
+   *YOUR file should contain the following script:*
 ```
 REPLACE_OR_CREATE:YOURMOD_is_active_trigger = {
     always = yes
 }
 ```
-*If everything was done correctly, CMF will return your trigger as false when your mod is not loaded, and true when it is loaded.*
+*If everything was done correctly, CMF will return your trigger as false when your mod is not loaded, and as true when it is loaded.*
 
-## Currently Included
+## Currently Included Mod Triggers
 * Anno 1836
 * Australia & New Zealand Flavor Pack
 * Basileia Romaion

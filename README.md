@@ -159,6 +159,7 @@ Paper Style Window:
 
 Europa Universalis V Style Windows:
 - [event_window_europa_classic](docs/event_windows/event_window_europa_variants.png)
+- event_window_europa_1_char_portrait
 - [event_window_europa_1_char](docs/event_windows/event_window_europa_variants.png)
 - [event_window_europa_2_char](docs/event_windows/event_window_europa_variants.png)
 
@@ -478,13 +479,14 @@ je_example_entry = {
 ### Progress Bar Syling
 Scripted progress bars can be styled with a color, a drift effect, and a target marker, all dynamically settable and unsettable. For more details, see the [progress bar documentation](/docs/Progress_bars.md)
 
-> **NOTE**  The following custom color styles still work, but have been superceded by the more advanced progress bar framework.
+> **NOTE**  The following custom color styles still work, but have been superseded by the more advanced progress bar framework.
 
 These work by setting specific variables in the journal entry scope. These will change which progress bar is displayed. Currently, the following variables are used:
 - `com_double_bad_gold_marker` -- replaces the journal entry marker in double_sided_bad with the marker from double_sided_gold
 - `com_double_bad_white_bar` -- replaced double_sided_bad with white_progressbar_horizontal
 - `com_double_bad_gold_bar` -- replaced double_sided_bad with gold_progressbar_horizontal
 - `com_bear_spray_applied` -- removes the bear and lion icons from double_sided_gold and resizes the progress bar
+- `com_moon_moon_on_deck` -- replaces the lion icon in double_sided_gold with a wolf icon
 
 ### Wrap Journal Modifiers
 
@@ -698,21 +700,30 @@ YOURMODNAME_is_active_trigger = {
 * Basileia Romaion
 * Better Decrees
 * Better Politics Mod
+* Chilam Balam
 * Community Outfit Mod
 * East Asian Clothes Patch
 * Gas, Guns, Garb, & Grub
 * Gilded Age
-* Greece, Byzantium, & the Balkans Flavor
+* Gates of the Bosphorus
 * Grey's Little Reworks
 * Hail, Columbia!
+* Industry Expanded
 * James's Korea Flavor Pack
 * James's Pop Clothing Tweaks
+* Jewel of the Nile
+* Kingdom of God
 * Manaflow: Ankaris Arrival
-* War Goal Framework
-* Morgenrote: Dawn of Flavor
+* Mandate of Heaven
+* Maharlika
+* Morgenröte: Dawn of Flavor
 * Newspapers Mod
+* PI
 * Rally Round the King
 * States That Make Sense
+* This Land is Mine
+* Victoria Tweaks Mod
+* War Goal Framework
 * Western Clothes: Redux
 
 # Keybinds

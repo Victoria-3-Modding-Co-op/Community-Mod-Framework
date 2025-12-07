@@ -1,6 +1,7 @@
 ﻿com_enable_debug_button_decision = {
 	is_shown = {
 		is_player = yes
+		has_global_variable = com_debug
 	}
 	possible = {
 		hidden_trigger = {

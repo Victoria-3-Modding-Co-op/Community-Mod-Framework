@@ -1,0 +1,24 @@
+﻿com_enable_debug_button_decision = {
+	is_shown = {
+		is_player = yes
+	}
+	possible = {
+		hidden_trigger = {
+			NOT = {
+				any_in_global_list = {
+					variable = custom_button_list_flag
+					flag:com_toggle_debug_sgui ?= this
+				}
+			}
+		}
+	}
+	when_taken = {
+		custom_tooltip = {
+			text = com_enable_debug_button_decision_effect
+			add_to_global_variable_list = {
+				name = custom_button_list_flag
+				target = flag:com_toggle_debug_sgui
+			}
+		}
+	}
+}

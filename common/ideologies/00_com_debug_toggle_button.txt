@@ -1,4 +1,4 @@
-﻿com_sidebar_button_sgui = { # Toggle Debug Sidebar SGUI
+﻿com_toggle_debug_sgui = { # Toggle Debug Sidebar SGUI
 	icon = "gfx/interface/icons/company_icons/vic3_mod_coop.dds"
 	
 	show_in_list = no

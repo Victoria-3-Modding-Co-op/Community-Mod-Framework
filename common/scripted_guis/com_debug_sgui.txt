@@ -19,19 +19,19 @@
 	}
 }
 
-com_sidebar_button_sgui = {
+com_toggle_debug_sgui = {
 	scope = none
 	effect = {
 		if = {
 			limit = {
 				NOT = {
-					has_global_variable = cmf_toggle_debug
+					has_global_variable = com_toggle_debug_mode
 				}
 			}
-			set_global_variable = cmf_toggle_debug
+			set_global_variable = com_toggle_debug_mode
 		}
 		else = {
-			remove_global_variable = cmf_toggle_debug
+			remove_global_variable = com_toggle_debug_mode
 		}
 	}
 }

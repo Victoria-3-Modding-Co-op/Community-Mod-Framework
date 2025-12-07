@@ -17,10 +17,10 @@ widget = {
     }
 	
 	widget = {
-		visible = "[GetGlobalVariable('cmf_toggle_debug').IsSet]"
+		visible = "[GetGlobalVariable('com_toggle_debug_mode').IsSet]"
 		state = {
 			name = _show
-			on_finish = "[GetScriptedGui('com_sidebar_button_sgui').Execute( GuiScope.SetRoot( GetPlayer.MakeScope ).End )]"
+			on_finish = "[GetScriptedGui('com_toggle_debug_sgui').Execute( GuiScope.SetRoot( GetPlayer.MakeScope ).End )]"
 			on_finish = "[GetVariableSystem.Clear('com_open_window')]"
 			on_finish = "[ExecuteConsoleCommand('debug_mode')]"
 		}

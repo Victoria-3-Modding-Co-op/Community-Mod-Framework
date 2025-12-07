@@ -59,8 +59,8 @@ To set this mod as a dependency to your own mod, you will need to add this to yo
 **Also remember to add the mod to your required items on your own mods steam page.**
 
 # Debug Features
-- Event `community_framework_events.999` will add a debug button to the sidebar. This button will toggle the game in and out of debug mode.
 - The keybinding `CTRL + ALT + D` toggles the global variable `com_debug`. This can be used to enable or disable debug content like debug Decisions or Events.
+- The global variable `com_debug` will enable a decision that will add a debug button to the CMF sidebar. This button will toggle the game in and out of debug mode.
 
 # Political Movements
 

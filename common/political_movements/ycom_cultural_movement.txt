@@ -1,4 +1,4 @@
-﻿movement_cultural_majority = {
+﻿REPLACE:movement_cultural_majority = {
 	category = movement_category_cultural_majority
 	
 	ideology = ideology_ethno_nationalist_movement
@@ -9,9 +9,10 @@
 	}
 	
 	can_cause_obstinance = yes
-
+	
 	creation_trigger = {
-		NOR = { # Will not spawn if you're an un-unified German or Italian state
+		NOR = {
+			# Will not spawn if you're an un-unified German or Italian state
 			AND = {
 				OR = {
 					country_has_primary_culture = cu:north_german
@@ -37,13 +38,16 @@
 	creation_weight = {
 		value = 100
 	}
-	on_created = {}
+	on_created = { }
 	
 	character_support_trigger = {
 		culture = {
 			is_primary_culture_of = root.owner
 		}
 		character_is_pro_cultural_majority = yes #Compatibility Trigger
+		NOT = {
+			has_variable = anti_nationalist_var
+		}
 	}
 	character_support_weight = {
 		value = 100
@@ -84,10 +88,11 @@
 			culture = {
 				is_primary_culture_of = root.owner
 			}
-			trigger_if = { #anzfp
+			trigger_if = {
+				#anzfp
 				limit = {
 					anzfp_is_active = yes
-					pop_acceptance > acceptance_status_4 
+					pop_acceptance > acceptance_status_4
 					owner = {
 						or = {
 							country_has_primary_culture = cu:australian
@@ -99,7 +104,7 @@
 			}
 		}
 	}
-
+	
 	pop_support_factors = {
 		movement_support_national_awakening
 		movement_support_cultural_fervor
@@ -113,7 +118,7 @@
 		movement_support_nationalism_tech
 		movement_support_pan_nationalism_tech
 	}
-
+	
 	pop_support_weight = {
 		if = {
 			limit = {
@@ -151,7 +156,7 @@
 				}
 			}
 		}
-
+		
 		if = {
 			limit = {
 				strata = upper
@@ -237,7 +242,7 @@
 				}
 			}
 		}
-
+		
 		if = {
 			limit = {
 				state = {
@@ -249,7 +254,7 @@
 				desc = "COLONIAL_SETTLERS"
 			}
 		}
-
+		
 		if = {
 			limit = {
 				owner ?= {
@@ -273,14 +278,15 @@
 			}
 		}
 		
-		multiply = { # Range from x0.775 to 2.275
+		multiply = {
+			# Range from x0.775 to 2.275
 			desc = "POP_CULTURE_FERVOR"
 			value = culture.culture_current_fervor
 			subtract = 15
 			multiply = 0.015
 			add = 1
 		}
-
+		
 		if = {
 			limit = {
 				culture ?= {
@@ -292,8 +298,9 @@
 				desc = "POP_ACTIVE_NATIONAL_AWAKENING"
 			}
 		}
-
-		if = { # If a more radical movement exists, it'll poach radicals from this one.
+		
+		if = {
+			# If a more radical movement exists, it'll poach radicals from this one.
 			limit = {
 				owner ?= {
 					any_political_movement = {
@@ -310,12 +317,12 @@
 				subtract = pop_radical_fraction
 			}
 		}
-
+		
 		if = {
 			limit = {
 				anzfp_is_active = yes
 				has_pop_culture = british
-				pop_acceptance < acceptance_status_5 
+				pop_acceptance < acceptance_status_5
 			}
 			multiply = {
 				value = 0.1
@@ -328,14 +335,14 @@
 		possible = {
 			political_movement_support >= 0.05
 		}
-	
+		
 		weight = {
 			value = 100
 		}
-
+		
 		state_weight = {
 			value = 1
-
+			
 			if = {
 				limit = {
 					is_capital = no
@@ -343,7 +350,7 @@
 					primary_cultures_percent_state >= 0.05
 				}
 				add = 10
-
+				
 				if = {
 					limit = {
 						primary_cultures_percent_state >= 0.75
@@ -385,17 +392,18 @@
 		weight = {
 			value = 1000
 		}
-
+		
 		state_weight = {
 			value = 0
-
+			
 			if = {
 				limit = {
 					is_capital = no
 					is_homeland_of_country_cultures = owner
 					primary_cultures_percent_state >= 0.05
 				}
-				add = { # These three values must add up to more than 1 - 5 x Obstinance, 1/2 Turmoil, percent of pops of primary cultures
+				add = {
+					# These three values must add up to more than 1 - 5 x Obstinance, 1/2 Turmoil, percent of pops of primary cultures
 					value = -1
 					add = "this.primary_cultures_percent_state"
 					add = {
@@ -438,7 +446,7 @@
 			min = 0
 			desc = "STANDARD_OF_LIVING_FOR_PRIMARY_CULTURES"
 		}
-
+		
 		if = {
 			limit = {
 				owner = {
@@ -461,19 +469,19 @@
 	}
 }
 
-movement_cultural_minority = {
+REPLACE:movement_cultural_minority = {
 	category = movement_category_cultural
-		
+	
 	ideology = ideology_pluralist_movement_1
 	character_ideologies = {
 		ideology_reformer
 		ideology_gbbf_ottomanist #GOTB
-
+		
 	}
-
+	
 	can_cause_obstinance = yes
 	
-	creation_trigger = {}
+	creation_trigger = { }
 	creation_weight = {
 		value = 100
 		if = {
@@ -530,7 +538,8 @@ movement_cultural_minority = {
 							mog_plp_nat_sup_culture_minority_trigger = yes
 						}
 					}
-					AND = {	# Vanilla
+					AND = {
+						# Vanilla
 						AND = {
 							Grey_PLP_is_active = no
 							Grey_SPA_is_active = no
@@ -547,7 +556,7 @@ movement_cultural_minority = {
 					}
 				}
 			}
-			set_core_ideology = ideology_pluralist_movement_1	 # National Supremacy
+			set_core_ideology = ideology_pluralist_movement_1     # National Supremacy
 		}
 		else_if = {
 			limit = {
@@ -561,7 +570,8 @@ movement_cultural_minority = {
 							mog_plp_rac_seg_culture_minority_trigger = yes
 						}
 					}
-					AND = {	# Vanilla
+					AND = {
+						# Vanilla
 						AND = {
 							Grey_PLP_is_active = no
 							Grey_SPA_is_active = no
@@ -576,7 +586,7 @@ movement_cultural_minority = {
 					}
 				}
 			}
-			set_core_ideology = ideology_pluralist_movement_2	# Racial Segregation
+			set_core_ideology = ideology_pluralist_movement_2    # Racial Segregation
 		}
 		else_if = {
 			limit = {
@@ -591,11 +601,13 @@ movement_cultural_minority = {
 						}
 					}
 					AND = {
-						AND = {	# Vanilla
+						AND = {
+							# Vanilla
 							Grey_PLP_is_active = no
 							Grey_SPA_is_active = no
 						}
-						culture = {	# Vanilla
+						culture = {
+							# Vanilla
 							OR = {
 								shares_heritage_trait_group_with_any_primary_culture = root.owner
 								shares_language_trait_with_any_primary_culture = root.owner
@@ -626,7 +638,7 @@ movement_cultural_minority = {
 			}
 		}
 	}
-
+	
 	disband_trigger = {
 		scope:political_movement ?= {
 			OR = {
@@ -696,7 +708,7 @@ movement_cultural_minority = {
 	}
 	culture_selection_weight = {
 		value = 100
-
+		
 		if = {
 			limit = {
 				scope:country = {
@@ -714,7 +726,7 @@ movement_cultural_minority = {
 	}
 	
 	character_support_trigger = {
-		trigger_if = { 
+		trigger_if = {
 			limit = {
 				is_usfp_active = yes
 			}
@@ -750,7 +762,6 @@ movement_cultural_minority = {
 			has_ideology = ideology:ideology_sovereignist_leader
 			has_ideology = ideology:ideology_reformer
 			has_ideology = ideology:ideology_usfp_abolitionist_radical
-			has_ideology = ideology:ideology_turkfm_reformer #GOTB
 			has_ideology = ideology:ideology_gbbf_ottomanist #GOTB
 			#USFP: African-heritage characters of any ideology can join the Afro-American movement
 			AND = {
@@ -760,6 +771,9 @@ movement_cultural_minority = {
 					has_discrimination_trait_group = heritage_group_african
 				}
 			}
+		}
+		NOT = {
+			has_variable = anti_nationalist_var # Please stop becoming a Polish nationalist, Rosa.
 		}
 	}
 	character_support_weight = {
@@ -781,7 +795,15 @@ movement_cultural_minority = {
 				}
 			}
 			multiply = {
-				value = 2
+				value = 5
+			}
+		}
+		else_if = {
+			limit = {
+				has_socialist_ideology = yes
+			}
+			multiply = {
+				value = 0.5
 			}
 		}
 		if = {
@@ -799,7 +821,7 @@ movement_cultural_minority = {
 	pop_support_trigger = {
 		culture = scope:culture
 	}
-
+	
 	pop_support_factors = {
 		movement_support_national_awakening
 		movement_support_cultural_fervor
@@ -1006,20 +1028,21 @@ movement_cultural_minority = {
 			limit = {
 				standard_of_living < state.average_expected_sol
 			}
-			add = { # Increases likelihood of support if impoverished
+			add = {
+				# Increases likelihood of support if impoverished
 				desc = "POP_POVERTY"
 				value = state.average_expected_sol
 				subtract = standard_of_living
 				max = 10
 			}
 		}
-
+		
 		# Grey_PLP
 		multiply = {
 			value = mog_plp_movement_cultural_minority_pop_support_weight_mult
-			desc = "STANDARD_OF_LIVING_FOR_CULTURE"								# Desc only shows when value =/= 1
+			desc = "STANDARD_OF_LIVING_FOR_CULTURE"                                # Desc only shows when value =/= 1
 		}
-
+		
 		if = {
 			limit = {
 				state = {
@@ -1029,26 +1052,29 @@ movement_cultural_minority = {
 					}
 				}
 			}
-			add = { # From +2 at 80 to +10 at 0
+			add = {
+				# From +2 at 80 to +10 at 0
 				desc = "POP_DISCRIMINATED"
 				value = 100
 				subtract = pop_acceptance
 				divide = 10
 			}
 		}
-		else = { # Non-discriminated pops are less likely to form separatist movements
+		else = {
+			# Non-discriminated pops are less likely to form separatist movements
 			multiply = {
 				desc = "POP_ACCEPTANCE"
 				value = 0.25
 			}
 		}
-
-		multiply = { # Multiplied by 2x max
+		
+		multiply = {
+			# Multiplied by 2x max
 			desc = "POP_RADICALS"
 			value = pop_radical_fraction
 			add = 1
 		}
-
+		
 		if = {
 			limit = {
 				owner ?= {
@@ -1072,15 +1098,17 @@ movement_cultural_minority = {
 			}
 		}
 		
-		multiply = { # Range from x0.775 to 2.275
+		multiply = {
+			# Range from x0.775 to 2.275
 			desc = "POP_CULTURE_FERVOR"
 			value = culture.culture_current_fervor
 			subtract = 15
 			multiply = 0.015
 			add = 1
 		}
-
-		if = { # Funnel people into Indias unique movements
+		
+		if = {
+			# Funnel people into Indias unique movements
 			limit = {
 				owner ?= {
 					c:BIC ?= this
@@ -1088,7 +1116,7 @@ movement_cultural_minority = {
 				culture = { has_discrimination_trait_group = heritage_group_south_asian }
 			}
 			multiply = 0.5
-
+			
 			if = {
 				limit = {
 					owner ?= {
@@ -1111,7 +1139,7 @@ movement_cultural_minority = {
 				desc = "FAILED_TANZIMAT_REFORMS"
 			}
 		}
-
+		
 		if = {
 			limit = {
 				owner ?= {
@@ -1124,7 +1152,7 @@ movement_cultural_minority = {
 				desc = "je_matter_of_hungary"
 			}
 		}
-
+		
 		if = {
 			limit = {
 				culture ?= {
@@ -1136,7 +1164,7 @@ movement_cultural_minority = {
 				desc = "POP_ACTIVE_NATIONAL_AWAKENING"
 			}
 		}
-
+		
 		if = {
 			limit = {
 				owner = {
@@ -1166,24 +1194,24 @@ movement_cultural_minority = {
 					culture_percent_state = {
 						target = root.culture
 						value >= com_movement_cultural_minority_secession_possible_culture_percent_state #vanilla value: 0.05
-					}					
+					}
 				}
 				trigger_if = {
 					limit = {
-						turkfm_revolt_mechanics_trigger = yes
+						eqfm_revolt_mechanics_trigger = yes
 					}
-					turkfm_minority_revolt_possible_trigger = yes
+					eqfm_minority_revolt_possible_trigger = yes
 				}
 			}
 		}
-	
+		
 		weight = {
 			value = 1000
 		}
 		
 		state_weight = {
 			value = 0
-		
+			
 			if = {
 				limit = {
 					is_capital = no
@@ -1193,7 +1221,8 @@ movement_cultural_minority = {
 						value >= com_movement_cultural_minority_secession_state_weight_culture_percent_state_0 #vanilla value: 0.05
 					}
 				}
-				add = { # These three values must add up to more than 1 - 5 x Obstinance, 1/2 Turmoil, percent of pops of this culture
+				add = {
+					# These three values must add up to more than 1 - 5 x Obstinance, 1/2 Turmoil, percent of pops of this culture
 					value = -1
 					add = "this.culture_percent_state(scope:political_movement.culture)"
 					add = {
@@ -1203,8 +1232,8 @@ movement_cultural_minority = {
 					add = {
 						value = this.obstinance
 						multiply = 5
-				}
-				multiply = 100
+					}
+					multiply = 100
 				}
 			}
 			# Grey_PLP - always put last
@@ -1212,7 +1241,7 @@ movement_cultural_minority = {
 				value = mog_plp_movement_all_general_state_weight_mult
 			}
 		}
-
+		
 		interest_group_can_join = {
 			trigger_if = {
 				limit = {
@@ -1223,18 +1252,19 @@ movement_cultural_minority = {
 			trigger_else_if = {
 				limit = {
 					owner = {
-						is_country_type = colonial
+						country_is_colonial_or_company = yes
 					}
 				}
 				NOT = {
 					has_ideology = ideology:ideology_colonialist
 				}
 			}
-			trigger_else = { # For example - the Austrian Aristocracy can only secede with a Polish uprising if the leader of the IG is Polish
+			trigger_else = {
+				# For example - the Austrian Aristocracy can only secede with a Polish uprising if the leader of the IG is Polish
 				leader = { culture = scope:political_movement.culture }
 			}
 		}
-
+		
 		target_fraction_of_states = {
 			value = political_movement_identity_support
 			add = scope:clout
@@ -1243,11 +1273,11 @@ movement_cultural_minority = {
 				limit = {
 					grefm_is_active = yes
 					owner = {
-						turkfm_revolt_mechanics_trigger = yes
+						eqfm_revolt_mechanics_trigger = yes
 					}
 				}
 				multiply = 0
-				add = turkfm_target_fraction_of_states_value
+				add = eqfm_target_fraction_of_states_value
 			}
 			min = {
 				value = com_movement_cultural_minority_secession_target_fraction_of_states_min #vanilla value: 0.15
@@ -1255,11 +1285,11 @@ movement_cultural_minority = {
 					limit = {
 						grefm_is_active = yes
 						owner = {
-							turkfm_revolt_mechanics_trigger = yes
+							eqfm_revolt_mechanics_trigger = yes
 						}
 					}
 					multiply = 0
-					add = turkfm_movement_cultural_minority_secession_target_fraction_of_states_min
+					add = eqfm_movement_cultural_minority_secession_target_fraction_of_states_min
 				}
 			}
 			max = com_movement_cultural_minority_secession_target_fraction_of_states_max #vanilla value: 0.75
@@ -1269,10 +1299,11 @@ movement_cultural_minority = {
 	additional_radicalism_factors = {
 		add = {
 			if = {
-				limit = { Grey_PLP_is_active = yes } 
+				limit = { Grey_PLP_is_active = yes }
 				value = "owner.average_sol_for_primary_cultures"
 			}
-			else = { # Vanila
+			else = {
+				# Vanila
 				value = "owner.average_sol"
 			}
 			subtract = "owner.average_sol_for_culture(scope:culture)"
@@ -1328,7 +1359,7 @@ movement_cultural_minority = {
 				}
 			}
 		}
-
+		
 		if = {
 			limit = {
 				owner = {
@@ -1346,14 +1377,14 @@ movement_cultural_minority = {
 				value = support_separatism_radicalism
 			}
 		}
-
+		
 		subtract = {
 			value = 0.25
 			subtract = political_movement_identity_support
 			min = 0
 			desc = "LOW_MOVEMENT_IDENTITY_SUPPORT"
 		}
-
+		
 		if = {
 			limit = {
 				owner = { cultural_acceptance_base = { target = scope:culture value <= acceptance_status_4 } }
@@ -1364,7 +1395,7 @@ movement_cultural_minority = {
 				divide = 400
 			}
 		}
-
+		
 		if = {
 			limit = {
 				owner = {
@@ -1376,7 +1407,7 @@ movement_cultural_minority = {
 				value = 0.15
 			}
 		}
-
+		
 		if = {
 			limit = {
 				owner = {
@@ -1396,7 +1427,7 @@ movement_cultural_minority = {
 				value = 0.15
 			}
 		}
-
+		
 		if = {
 			limit = {
 				owner = {
@@ -1418,7 +1449,8 @@ movement_cultural_minority = {
 							limit = {
 								exists = this.political_movement_identity_support
 							}
-							add = { # Identity support can get a bit high
+							add = {
+								# Identity support can get a bit high
 								value = this.political_movement_identity_support
 								multiply = 0.5
 							}
@@ -1434,23 +1466,23 @@ movement_cultural_minority = {
 		}
 		
 		# Grey_PLP
-		add = { 
+		add = {
 			value = mog_plp_movement_cultural_minority_additional_radicalism_factor_add
-			desc = "INSTITUTION_FUNDING_LEVEL_colonial_affairs"								# Desc only shows when value =/= 0
+			desc = "INSTITUTION_FUNDING_LEVEL_colonial_affairs"                                # Desc only shows when value =/= 0
 		}
 	}
 }
 
-movement_minority_rights = {
+REPLACE:movement_minority_rights = {
 	category = movement_category_ideological
-
+	
 	ideology = ideology_pluralist_movement_3
 	character_ideologies = {
 		ideology_reformer
 		ideology_gbbf_ottomanist #GOTB
 	}
-
-	creation_trigger = {}
+	
+	creation_trigger = { }
 	creation_weight = {
 		value = 50
 		if = {
@@ -1464,7 +1496,7 @@ movement_minority_rights = {
 			}
 		}
 	}
-
+	
 	character_support_trigger = {
 		trigger_if = {
 			limit = {
@@ -1505,7 +1537,7 @@ movement_minority_rights = {
 			}
 		}
 	}
-
+	
 	pop_support_trigger = {
 		culture = {
 			NOT = { is_primary_culture_of = root.owner } # BugFix from PLP (root.owner, not owner)
@@ -1514,7 +1546,7 @@ movement_minority_rights = {
 			cultural_acceptance_base = { target = root.culture value < acceptance_status_5 }
 		}
 	}
-
+	
 	pop_support_factors = {
 		movement_support_high_literacy
 		movement_support_cultural_discrimination
@@ -1525,7 +1557,7 @@ movement_minority_rights = {
 		movement_support_nationalism_tech
 		movement_support_pan_nationalism_tech
 	}
-
+	
 	pop_support_weight = {
 		if = {
 			limit = {
@@ -1563,12 +1595,12 @@ movement_minority_rights = {
 				}
 			}
 		}
-
+		
 		add = {
 			value = 10
 			desc = "POP_BASE_SUPPORT"
 		}
-
+		
 		if = {
 			limit = {
 				strata = upper
@@ -1634,12 +1666,13 @@ movement_minority_rights = {
 				}
 			}
 		}
-
+		
 		if = {
 			limit = {
 				standard_of_living < state.average_expected_sol
 			}
-			add = { # Increases likelihood of support if impoverished
+			add = {
+				# Increases likelihood of support if impoverished
 				desc = "POP_POVERTY"
 				value = state.average_expected_sol
 				subtract = standard_of_living
@@ -1650,7 +1683,7 @@ movement_minority_rights = {
 		# Grey_PLP
 		multiply = {
 			value = mog_plp_movement_minority_rights_pop_support_weight_mult
-			desc = "STANDARD_OF_LIVING_FOR_CULTURE"								# Desc only shows when value =/= 1
+			desc = "STANDARD_OF_LIVING_FOR_CULTURE"                                # Desc only shows when value =/= 1
 		}
 		
 		if = {
@@ -1662,7 +1695,8 @@ movement_minority_rights = {
 					}
 				}
 			}
-			multiply = { # From 1.21x at 79 to 2x at 0
+			multiply = {
+				# From 1.21x at 79 to 2x at 0
 				desc = "POP_DISCRIMINATED"
 				value = 100
 				subtract = pop_acceptance
@@ -1670,20 +1704,23 @@ movement_minority_rights = {
 				add = 1
 			}
 		}
-		else = { # Non-discriminated pops are less likely to form separatist movements
+		else = {
+			# Non-discriminated pops are less likely to form separatist movements
 			multiply = {
 				desc = "POP_ACCEPTANCE"
 				value = 0.10
 			}
 		}
-
-		multiply = { # Illiterate pops participate at 1/8 the rate of fully literate pops
+		
+		multiply = {
+			# Illiterate pops participate at 1/8 the rate of fully literate pops
 			desc = "POP_LITERACY"
 			value = literacy_rate
 			add = 0.15
 		}
-
-		if = { # If a more radical movement exists, it'll poach radicals from this one.
+		
+		if = {
+			# If a more radical movement exists, it'll poach radicals from this one.
 			limit = {
 				owner ?= {
 					OR = {
@@ -1710,7 +1747,7 @@ movement_minority_rights = {
 				min = 0
 			}
 		}
-
+		
 		if = {
 			limit = {
 				owner ?= {
@@ -1723,7 +1760,7 @@ movement_minority_rights = {
 				desc = "FAILED_TANZIMAT_REFORMS"
 			}
 		}
-
+		
 		if = {
 			limit = {
 				owner ?= {
@@ -1736,7 +1773,7 @@ movement_minority_rights = {
 				desc = "je_matter_of_hungary"
 			}
 		}
-
+		
 		if = {
 			limit = {
 				owner ?= { has_journal_entry = je_springtime_of_the_peoples }
@@ -1747,7 +1784,7 @@ movement_minority_rights = {
 				desc = "SPRINGTIME_OF_THE_PEOPLES_UNDERWAY"
 			}
 		}
-
+		
 		# Funnel small cultures into this movement
 		if = {
 			limit = {
@@ -1767,8 +1804,9 @@ movement_minority_rights = {
 			}
 			multiply = 2.5
 		}
-
-		if = { # Funnel people into Indias unique movements
+		
+		if = {
+			# Funnel people into Indias unique movements
 			limit = {
 				owner ?= {
 					c:BIC ?= this
@@ -1776,7 +1814,7 @@ movement_minority_rights = {
 				culture = { has_discrimination_trait_group = heritage_group_south_asian }
 			}
 			multiply = 0.5
-
+			
 			if = {
 				limit = {
 					owner ?= {
@@ -1787,10 +1825,10 @@ movement_minority_rights = {
 			}
 		}
 	}
-
+	
 	law_enactment_radicalism_multiplier = 2
 	active_law_radicalism_multiplier = 2
-
+	
 	additional_radicalism_factors = {
 		if = {
 			limit = {
@@ -1826,16 +1864,16 @@ movement_minority_rights = {
 			}
 		}
 	}
-
+	
 	revolution = {
 		possible = {
 			political_movement_support >= 0.10
 		}
-
+		
 		weight = {
 			value = 50
 		}
-
+		
 		state_weight = {
 			value = 1
 			

@@ -98,10 +98,10 @@ types journal_entry_overwrites {
                         margin_right = 30
                         dynamicgridbox = {
                             flipdirection = yes
-                            background = {
-                                using = fade_left_simple
-                                margin_right = 10
-                            }
+                        background = {
+                            using = fade_left_simple
+                            margin_right = 10
+                        }
                             datamodel = "[JournalEntry.GetTimedModifiers]"
                             visible = "[And(JournalEntry.MakeScope.Var('com_flex_je_modifiers').IsSet, Not(IsDataModelEmpty(JournalEntry.GetTimedModifiers)) )]"
                             datamodel_wrap = 5
@@ -291,6 +291,42 @@ types journal_entry_overwrites {
                             using = entry_bg
                         }
                     }
+					
+					flowcontainer = {
+						visible = "[Not( IsDataModelEmpty( JournalEntry.GetInvolvedCountries ) )]"
+						direction = vertical
+						using = default_list_position
+						min_width = @panel_width_minus_30
+						max_width = @panel_width_minus_30
+						
+						textbox = {
+							autoresize = yes
+							text = "INVOLVED_COUNTRIES"
+							using = fontsize_large
+							parentanchor = hcenter
+							align = nobaseline
+							margin = { 15 15 }
+						}
+						
+						dynamicgridbox = {
+							parentanchor = hcenter
+							datamodel = "[JournalEntry.GetInvolvedCountries]"
+							datamodel_wrap = 8
+							flipdirection = yes
+							
+							item = {
+								widget = {
+									size = { 60 60 }
+									
+									small_flag = {}
+								}
+							}
+						}
+						
+						background = {
+							using = entry_bg
+						}
+					}
 
                     flowcontainer = {
                         direction = vertical
@@ -655,4 +691,5 @@ types journal_entry_overwrites {
 			}
 		}
 	}
+	
 }

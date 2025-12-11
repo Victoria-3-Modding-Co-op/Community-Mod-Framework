@@ -1,1 +1,3 @@
-﻿je_group_com_situations = {}
+﻿je_group_international_organizations = {
+	context = none
+}

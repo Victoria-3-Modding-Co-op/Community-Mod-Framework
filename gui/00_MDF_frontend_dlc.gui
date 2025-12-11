@@ -15,7 +15,7 @@ types dlc_types {
         # Vanilla
         flowcontainer = {
             # datamodel = "[GetDlcCollection]" # MDF
-            datamodel = "[DataModelFirst( GetDlcCollection, '(int32)9' )]" # MDF - Set arg 2 to current number of real DLCs in menu
+            datamodel = "[DataModelFirst( GetDlcCollection, '(int32)10' )]" # MDF - Set arg 2 to current number of real DLCs in menu
             spacing = 10
 
             item = {
@@ -40,13 +40,13 @@ types dlc_types {
         }
 
         vertical_divider = {
-            visible = "[GreaterThan_int32( GetDataModelSize(GetDlcCollection), '(int32)9' )]" # MDF - Set arg 2 to # of real DLCs
+            visible = "[GreaterThan_int32( GetDataModelSize(GetDlcCollection), '(int32)10' )]" # MDF - Set arg 2 to # of real DLCs
         }
 
         # Mods
         flowcontainer = {
             # datamodel = "[GetDlcCollection]" # MDF
-            datamodel = "[DataModelSkipFirst( GetDlcCollection, '(int32)9' )]" # MDF - Set arg 2 to # of real DLCs
+            datamodel = "[DataModelSkipFirst( GetDlcCollection, '(int32)10' )]" # MDF - Set arg 2 to # of real DLCs
             spacing = 10
             min_height = 80 # MPM - needed to keep mod DLCs at same height as vanilla minor DLCs
 

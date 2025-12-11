@@ -6,11 +6,12 @@
 
 ####################
 
-namespace = community_framework_events
+namespace = com_debug
 
 ####################
 
-community_framework_events.1 = { # Variable Error Suppression
+com_debug.1 = {
+	# Variable Error Suppression
 	type = country_event
 	hidden = yes
 	orphan = yes
@@ -42,10 +43,12 @@ community_framework_events.1 = { # Variable Error Suppression
 		fix_variable_error = { variable = com_type }
 		
 		# CMF Progressbar Framework
+		fix_variable_error = { variable = com_transparent_bar }
 		fix_variable_error = { variable = com_double_bad_gold_marker }
 		fix_variable_error = { variable = com_double_bad_white_bar }
 		fix_variable_error = { variable = com_double_bad_gold_bar }
 		fix_variable_error = { variable = com_bear_spray_applied }
+		fix_variable_error = { variable = com_moon_moon_on_deck }
 		
 		# CMF on_action Overrides
 		fix_variable_error = { variable = no_heirs }
@@ -73,10 +76,10 @@ community_framework_events.1 = { # Variable Error Suppression
 		fix_variable_error = { variable = com_reason_location }
 		
 		# Float arrays
-        fix_variable_error = { variable = com_fa_index }
+		fix_variable_error = { variable = com_fa_index }
 		fix_variable_error = { variable = com_fa_return }
 		fix_variable_error = { variable = com_fa_value }
-
+		
 		# Miscellaneous
 		fix_variable_error = { variable = had_progressive_era }
 		fix_variable_error = { variable = ccp_land_revolution_ig }
@@ -87,17 +90,19 @@ community_framework_events.1 = { # Variable Error Suppression
 		fix_variable_error = { variable = kvp_value }
 		fix_variable_error = { variable = kvp }
 		fix_variable_error = { variable = whigs_party }
+		fix_variable_error = { variable = com_sidebar_button_sgui }
 	}
 }
 
-community_framework_events.2 = { # GUI window testing
+com_debug.2 = {
+	# GUI window testing
 	type = country_event
 	placement = root
 	orphan = yes
 	
-	title = community_framework_events.t
-	desc = community_framework_events.d
-	flavor = community_framework_events.f
+	title = com_debug.t
+	desc = com_debug.d
+	flavor = com_debug.f
 	
 	minor_left_icon = scope:minor_left_icon
 	minor_right_icon = scope:minor_right_icon
@@ -131,40 +136,41 @@ community_framework_events.2 = { # GUI window testing
 	}
 	
 	option = {
-		name = community_framework_events.a
+		name = com_debug.a
 		default_option = yes
-		custom_tooltip = community_framework_events.tt
+		custom_tooltip = com_debug.tt
 	}
 	
 	option = {
-		name = community_framework_events.b
-		custom_tooltip = community_framework_events.tt
+		name = com_debug.b
+		custom_tooltip = com_debug.tt
 	}
 	
 	option = {
-		name = community_framework_events.c
-		custom_tooltip = community_framework_events.tt
+		name = com_debug.c
+		custom_tooltip = com_debug.tt
 	}
 	
 	option = {
-		name = community_framework_events.e
-		custom_tooltip = community_framework_events.tt
+		name = com_debug.e
+		custom_tooltip = com_debug.tt
 	}
 	
 	option = {
-		name = community_framework_events.james
-		custom_tooltip = community_framework_events.james_tt
+		name = com_debug.james
+		custom_tooltip = com_debug.james_tt
 	}
 }
 
-community_framework_events.3 = { # GUI window testing
+com_debug.3 = {
+	# GUI window testing
 	type = country_event
 	placement = root
 	orphan = yes
 	
-	title = community_framework_events.t
-	desc = community_framework_events.d
-	flavor = community_framework_events.f
+	title = com_debug.t
+	desc = com_debug.d
+	flavor = com_debug.f
 	
 	gui_window = event_window_europa_1_char_portrait
 	left_icon = scope:left_icon
@@ -198,28 +204,28 @@ community_framework_events.3 = { # GUI window testing
 	}
 	
 	option = {
-		name = community_framework_events.a
+		name = com_debug.a
 		default_option = yes
-		custom_tooltip = community_framework_events.tt
+		custom_tooltip = com_debug.tt
 	}
 	
 	option = {
-		name = community_framework_events.b
-		custom_tooltip = community_framework_events.tt
+		name = com_debug.b
+		custom_tooltip = com_debug.tt
 	}
 	
 	option = {
-		name = community_framework_events.c
-		custom_tooltip = community_framework_events.tt
+		name = com_debug.c
+		custom_tooltip = com_debug.tt
 	}
 	
 	option = {
-		name = community_framework_events.e
-		custom_tooltip = community_framework_events.tt
+		name = com_debug.e
+		custom_tooltip = com_debug.tt
 	}
 	
 	option = {
-		name = community_framework_events.james
-		custom_tooltip = community_framework_events.james_tt
+		name = com_debug.james
+		custom_tooltip = com_debug.james_tt
 	}
 }

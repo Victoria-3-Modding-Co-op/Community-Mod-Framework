@@ -1,4 +1,4 @@
-﻿fix_variable_error = {
+﻿REPLACE_OR_CREATE:fix_variable_error = {
     if = {
         limit = {has_variable = $variable$ var:$variable$ = flag:$variable$ exists = scope:$variable$ scope:$variable$ = flag:$variable$}
         set_variable = {name = $variable$ value = flag:$variable$} flag:$variable$ = {save_scope_as = $variable$}

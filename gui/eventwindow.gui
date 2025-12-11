@@ -53,6 +53,7 @@ types event_window_types {
 	### EVENT WINDOW BASE TYPE
 	type event_window = widget {
 		size = { 100% 100% }
+		datacontext = "[EventWindow.GetEvent]"
 		
 		block "event_window_full_block" {
 			window = {
@@ -60,8 +61,6 @@ types event_window_types {
 				movable = yes
 				layer = popups
 				allow_outside = yes
-				
-				datacontext = "[EventWindow.GetEvent]"
 
 				alpha = 0
 
@@ -297,15 +296,15 @@ types event_window_types {
 								block "event_dlc_icon" {
 									flowcontainer = {
 										visible = "[Event.IsDLCContent]"
-										tooltip = "EVENT_DLC_TOOLTIP"
 										spacing = 10
 										parentanchor = bottom|left
 										position = { 10 -10 }
+										tooltip = "EVENT_DLC_TOOLTIP"
 
 										icon = {
 											size = { 40 40 }
-											texture = "gfx/interface/backgrounds/round_frame_dec.dds"
 											parentanchor = bottom|left
+											texture = "gfx/interface/backgrounds/round_frame_dec.dds"
 
 											icon = {
 												size = { 40 40 }
@@ -461,8 +460,8 @@ types event_window_types {
 										}
 
 										button = {
-											parentanchor = hcenter
 											visible = "[InDebugMode]"
+											parentanchor = hcenter
 											size = { 480 62 }
 											using = default_button
 											raw_text = "DEBUG: Open Event in text editor"
@@ -470,15 +469,16 @@ types event_window_types {
 										}
 
 										textbox = {
-											background = {
-												using = default_background
-											}
+											visible = "[InDebugMode]"
 											parentanchor = hcenter
 											size = { 480 62 }
-											visible = "[InDebugMode]"
 											raw_text = "DEBUG: Trigger description"
 											tooltip = "[Event.GetTriggerDesc]"
 											align = hcenter|nobaseline
+											
+											background = {
+												using = default_background
+											}
 										}
 
 										textbox = {
@@ -520,8 +520,6 @@ types event_window_types {
 			icon = {
 				size = { 100% 100% }
 				alwaystransparent = yes
-				
-				datacontext = "[EventWindow.GetEvent]"
 				
 				block "deer_texture" { # I figure this is a fun little option to include -Alexedishi
 					texture = "gfx/interface/event_window/error_deer.dds"

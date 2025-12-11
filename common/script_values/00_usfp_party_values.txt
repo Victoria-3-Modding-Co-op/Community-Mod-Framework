@@ -53,7 +53,7 @@ usfp_party_weight_liberal_add = {
 			limit = {
 				is_usfp_active = yes
 				owner = {
-					country_is_in_north_america = yes
+					is_in_geographic_region = geographic_region_north_america
 					usfp_country_is_american = yes
 					has_law = law_type:law_presidential_republic
 				}
@@ -244,7 +244,7 @@ usfp_party_weight_free_trade_add = {
 			limit = {
 				is_usfp_active = yes
 				owner = {
-					country_is_in_north_america = yes
+					is_in_geographic_region = geographic_region_north_america
 					usfp_country_is_american = yes
 					has_law = law_type:law_presidential_republic
 				}
@@ -427,7 +427,7 @@ usfp_party_weight_agrarian_add = {
 			limit = {
 				is_usfp_active = yes
 				owner = {
-					country_is_in_north_america = yes
+					is_in_geographic_region = geographic_region_north_america
 					usfp_country_is_american = yes
 					has_law = law_type:law_presidential_republic
 				}

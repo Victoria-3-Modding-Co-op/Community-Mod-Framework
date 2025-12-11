@@ -1,0 +1,95 @@
+﻿com_progressbar_transparent = {
+    icon = "gfx/interface/icons/generic_icons/transparent.dds"
+    show_in_list = no
+    priority = 0
+}
+com_progressbar_glow_transparent = {
+    icon = "gfx/interface/icons/generic_icons/transparent.dds"
+    show_in_list = no
+    priority = 0
+}
+com_progressbar_glow_line_transparent = {
+    icon = "gfx/interface/icons/generic_icons/transparent.dds"
+    show_in_list = no
+    priority = 0
+}
+#Blue/default
+com_progressbar_default = {
+    icon = "gfx/interface/progressbar/progressbar_default.dds"
+    show_in_list = no
+    priority = 0
+}
+com_progressbar_glow_default = {
+    icon = "gfx/interface/progressbar/progressbar_default_glow.dds"
+    show_in_list = no
+    priority = 0
+}
+com_progressbar_glow_line_default = {
+    icon = "gfx/interface/progressbar/progressbar_default_glow_line.dds"
+    show_in_list = no
+    priority = 0
+}
+#Red/bad
+com_progressbar_bad = {
+    icon = "gfx/interface/progressbar/progressbar_bad.dds"
+    show_in_list = no
+    priority = 0
+}
+com_progressbar_glow_bad = {
+    icon = "gfx/interface/progressbar/progressbar_bad_glow.dds"
+    show_in_list = no
+    priority = 0
+}
+com_progressbar_glow_line_bad = {
+    icon = "gfx/interface/progressbar/progressbar_bad_glow_line.dds"
+    show_in_list = no
+    priority = 0
+}
+#Green
+com_progressbar_green = {
+    icon = "gfx/interface/progressbar/progressbar_green.dds"
+    show_in_list = no
+    priority = 0
+}
+com_progressbar_glow_green = {
+    icon = "gfx/interface/progressbar/progressbar_green_glow.dds"
+    show_in_list = no
+    priority = 0
+}
+com_progressbar_glow_line_green = {
+    icon = "gfx/interface/progressbar/progressbar_green_glow_line.dds"
+    show_in_list = no
+    priority = 0
+}
+#Gold
+com_progressbar_gold = {
+    icon = "gfx/interface/progressbar/progressbar_gold.dds"
+    show_in_list = no
+    priority = 0
+}
+com_progressbar_glow_gold = {
+    icon = "gfx/interface/progressbar/progressbar_gold_glow.dds"
+    show_in_list = no
+    priority = 0
+}
+com_progressbar_glow_line_gold = {
+    icon = "gfx/interface/progressbar/progressbar_gold_glow_line.dds"
+    show_in_list = no
+    priority = 0
+}
+#White
+com_progressbar_white = {
+    icon = "gfx/interface/progressbar/progressbar_white.dds"
+    show_in_list = no
+    priority = 0
+}
+com_progressbar_glow_white = {
+    icon = "gfx/interface/progressbar/progressbar_white_glow.dds"
+    show_in_list = no
+    priority = 0
+}
+com_progressbar_glow_line_white = {
+    icon = "gfx/interface/progressbar/progressbar_white_glow_line.dds"
+    show_in_list = no
+    priority = 0
+}

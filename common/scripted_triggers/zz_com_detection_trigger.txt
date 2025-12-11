@@ -2,6 +2,6 @@
 # COMMUNITY FRAMEWORK DETECTION TRIGGER #
 #########################################
 
-community_framework_is_active = {
+REPLACE_OR_CREATE:community_framework_is_active = {
 	always = yes
 }

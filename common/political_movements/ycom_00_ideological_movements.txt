@@ -7029,7 +7029,7 @@ REPLACE:movement_reactionary = {
 	}
 }
 
-movement_modernizer = { # This movement loves you and wants you to succeed. It exists to help you catch up.
+REPLACE:movement_modernizer = { # This movement loves you and wants you to succeed. It exists to help you catch up.
 	category = movement_category_ideological
 	
 	ideology = ideology_modernizer_movement_1

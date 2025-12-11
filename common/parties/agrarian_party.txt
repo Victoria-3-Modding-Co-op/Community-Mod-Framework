@@ -23,49 +23,49 @@ agrarian_party = {
 				desc = party_irish_national_land_league
 				trigger = {
 					exists = c:IRE
-					THIS = c:IRE
+					c:IRE ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_independent_agriculture_party
 				trigger = {
 					exists = c:GBR
-					THIS = c:GBR
+					c:GBR ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_farmers_party
 				trigger = {
 					exists = c:NOR
-					THIS = c:NOR
+					c:NOR ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_free_peoples_party
 				trigger = {
 					exists = c:DEN
-					THIS = c:DEN
+					c:DEN ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_farmers_league
 				trigger = {
 					exists = c:SWE
-					THIS = c:SWE
+					c:SWE ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_peoples_party
 				trigger = {
 					exists = c:FIN
-					THIS = c:FIN
+					c:FIN ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_agrarian_and_farmer_party
 				trigger = {
 					exists = c:FRA
-					THIS = c:FRA
+					c:FRA ?= THIS
 				}
 			}
 			triggered_desc = {
@@ -82,7 +82,7 @@ agrarian_party = {
 				desc = party_fatherland_front
 				trigger = {
 					exists = c:AUS
-					THIS = c:AUS
+					c:AUS ?= THIS
 					any_interest_group = {
 						is_in_government = yes
 						party ?= {
@@ -97,7 +97,7 @@ agrarian_party = {
 				desc = party_landbund
 				trigger = {
 					exists = c:AUS
-					THIS = c:AUS
+					c:AUS ?= THIS
 					NAND = {
 						any_interest_group = {
 							is_in_government = yes
@@ -114,43 +114,28 @@ agrarian_party = {
 				desc = party_national_peasant_accord
 				trigger = {
 					exists = c:SER
-					THIS = c:SER
+					c:SER ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_agrarian_national_union
 				trigger = {
 					exists = c:BUL
-					THIS = c:BUL
+					c:BUL ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_national_farmer_party
 				trigger = {
 					exists = c:HUN
-					THIS = c:HUN
+					c:HUN ?= THIS
 				}
 			}
-			#USFP
 			triggered_desc = {
 				desc = party_peoples_party
 				trigger = {
 					exists = c:USA
-					THIS = c:USA
-					OR = {
-						is_usfp_active = no
-						exists = owner.py:conservative_party
-					}
-				}
-			}
-			#USFP
-			triggered_desc = {
-				desc = party_us_democrats
-				trigger = {
-					is_usfp_active = yes
-					exists = c:USA
-					THIS = c:USA
-					NOT = { exists = owner.py:conservative_party }
+					c:USA ?= THIS
 				}
 			}
 			# MoH
@@ -225,7 +210,7 @@ agrarian_party = {
 		owner = {
 			country_has_voting_franchise = yes
 			ig:ig_rural_folk ?= {
-				is_marginal = no
+				ig_counts_as_marginal = no
 			}
 		}
 	}
@@ -272,10 +257,8 @@ agrarian_party = {
 				desc = "south_america_two_party_system"
 			}
 		}
-		#Vanilla two party system
 		if = {
 			limit = {
-				is_usfp_active = no
 				owner = {
 					is_in_geographic_region = geographic_region_north_america
 					OR = {
@@ -448,6 +431,7 @@ agrarian_party = {
 			limit = {
 				OR = {
 					has_ideology = ideology:ideology_meritocratic
+					has_ideology = ideology:ideology_cartist
 					has_ideology = ideology:ideology_agrarian
 					leader ?= {
 						has_ideology = ideology:ideology_social_democrat
@@ -650,6 +634,21 @@ agrarian_party = {
 				desc = "from_no_rural_folk_in_party" # this should probably never actually display in game because the party won't exist
 			}
 		}
+		if = { # Carlists and Miguelists were against participating in electoral politics for a good while
+			limit = {
+				NOT = { owner = { has_technology_researched = political_agitation } }
+				leader = {
+					OR = {
+						has_ideology = ideology:ideology_carlist
+						has_ideology = ideology:ideology_miguelist
+					}
+				}
+			}
+			add = {
+				value = -20
+				desc = "from_traditionalist_monarchism"
+			}
+		}
 		if = {
 			limit = {
 				is_interest_group_type = ig_rural_folk
@@ -664,7 +663,7 @@ agrarian_party = {
 			limit = {
 				scope:number = 1
 				is_powerful = no
-				is_marginal = no
+				ig_counts_as_marginal = no
 			}
 			multiply = {
 				value = 2

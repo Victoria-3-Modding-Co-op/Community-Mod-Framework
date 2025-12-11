@@ -13,7 +13,7 @@
 	disband_trigger = {
 		has_law_or_variant = law_type:law_slavery_banned
 	}
-	on_disbanded = { }
+	on_disbanded = {}
 	
 	creation_trigger = {
 		NOT = { has_law_or_variant = law_type:law_slavery_banned }
@@ -23,8 +23,7 @@
 		value = 100
 		if = {
 			limit = {
-				owner ?= {
-					# If a movement of this type exists in a neighbouring country, make it more likely to spawn here as well
+				owner ?= { # If a movement of this type exists in a neighbouring country, make it more likely to spawn here as well
 					any_neighbouring_state = {
 						owner = {
 							prestige > ROOT.owner.prestige
@@ -304,8 +303,7 @@
 			if = {
 				limit = {
 					owner ?= {
-						any_political_movement = {
-							# Pops would rather support liberal/radical movements if slavery is confined to the colonies
+						any_political_movement = { # Pops would rather support liberal/radical movements if slavery is confined to the colonies
 							OR = {
 								is_political_movement_type = movement_liberal
 								is_political_movement_type = movement_radical
@@ -330,8 +328,7 @@
 			desc = "anz_antitransportation"                # Desc only shows when value =/= 1
 		}
 		
-		multiply = {
-			# Illiterate pops participate at 1/10 the rate of fully literate pops
+		multiply = { # Illiterate pops participate at 1/10 the rate of fully literate pops
 			desc = "POP_LITERACY"
 			value = literacy_rate
 			add = 0.10
@@ -625,8 +622,7 @@ REPLACE:movement_pro_slavery = {
 		value = 100
 		if = {
 			limit = {
-				owner ?= {
-					# If a movement of this type exists in a neighbouring country, make it more likely to spawn here as well
+				owner ?= { # If a movement of this type exists in a neighbouring country, make it more likely to spawn here as well
 					any_neighbouring_state = {
 						owner = {
 							prestige > ROOT.owner.prestige
@@ -812,8 +808,7 @@ REPLACE:movement_pro_slavery = {
 			}
 		}
 		
-		multiply = {
-			# Illiterate pops participate at 1/10 the rate of fully literate pops
+		multiply = { # Illiterate pops participate at 1/10 the rate of fully literate pops
 			desc = "POP_LITERACY"
 			value = literacy_rate
 			add = 0.10
@@ -964,8 +959,7 @@ REPLACE:movement_pro_slavery = {
 					owner ?= { has_journal_entry = je_acw_countdown }
 				}
 				
-				if = {
-					# Ensure the union retains Washington DC/Maryland/Delaware in case of southern secession
+				if = { # Ensure the union retains Washington DC/Maryland/Delaware in case of southern secession
 					limit = {
 						OR = {
 							state_region = s:STATE_MARYLAND
@@ -976,8 +970,7 @@ REPLACE:movement_pro_slavery = {
 					
 					multiply = 0.0
 				}
-				else_if = {
-					# Virginia should be CSA capital
+				else_if = { # Virginia should be CSA capital
 					limit = {
 						state_region = s:STATE_VIRGINIA
 					}
@@ -1177,7 +1170,7 @@ REPLACE:movement_royalist_absolutist = {
 	}
 	
 	creation_trigger = {
-		has_law_or_variant = law_type:law_monarchy
+		has_law = law_type:law_monarchy
 		country_has_voting_franchise = no
 		NOT = {
 			any_political_movement = {
@@ -1198,8 +1191,7 @@ REPLACE:movement_royalist_absolutist = {
 		value = 100
 		if = {
 			limit = {
-				owner ?= {
-					# If a movement of this type exists in a neighbouring country, make it more likely to spawn here as well
+				owner ?= { # If a movement of this type exists in a neighbouring country, make it more likely to spawn here as well
 					any_neighbouring_state = {
 						owner = {
 							prestige > ROOT.owner.prestige
@@ -1388,7 +1380,7 @@ REPLACE:movement_royalist_absolutist = {
 		if = {
 			limit = {
 				owner ?= {
-					has_law_or_variant = law_type:law_monarchy
+					has_law = law_type:law_monarchy
 				}
 				owner.ruler ?= {
 					NOT = { has_trait = trait_child }
@@ -1398,8 +1390,7 @@ REPLACE:movement_royalist_absolutist = {
 					}
 				}
 			}
-			multiply = {
-				# Absolutist are more reliant on the monarchs popularity than constitutionalists
+			multiply = { # Absolutist are more reliant on the monarchs popularity than constitutionalists
 				add = owner.ruler.popularity
 				multiply = 0.01
 				add = 1
@@ -1411,7 +1402,7 @@ REPLACE:movement_royalist_absolutist = {
 		else_if = {
 			limit = {
 				owner ?= {
-					has_law_or_variant = law_type:law_monarchy
+					has_law = law_type:law_monarchy
 				}
 				owner.ruler ?= {
 					has_trait = trait_child
@@ -1429,7 +1420,7 @@ REPLACE:movement_royalist_absolutist = {
 		else_if = {
 			limit = {
 				owner ?= {
-					has_law_or_variant = law_type:law_monarchy
+					has_law = law_type:law_monarchy
 				}
 				owner.ruler ?= {
 					law_stance = {
@@ -1444,8 +1435,7 @@ REPLACE:movement_royalist_absolutist = {
 			}
 		}
 		
-		multiply = {
-			# Illiterate pops participate at 1/10 the rate of fully literate pops
+		multiply = { # Illiterate pops participate at 1/10 the rate of fully literate pops
 			desc = "POP_LITERACY"
 			value = literacy_rate
 			add = 0.2
@@ -1471,7 +1461,7 @@ REPLACE:movement_royalist_absolutist = {
 			if = {
 				limit = { is_capital = yes }
 				if = {
-					limit = { owner ?= { has_law_or_variant = law_type:law_monarchy } }
+					limit = { owner ?= { has_law = law_type:law_monarchy } }
 					multiply = 10.0
 				}
 				else = {
@@ -1503,7 +1493,7 @@ REPLACE:movement_royalist_absolutist = {
 			if = {
 				limit = { is_capital = yes }
 				if = {
-					limit = { owner ?= { has_law_or_variant = law_type:law_monarchy } }
+					limit = { owner ?= { has_law = law_type:law_monarchy } }
 					multiply = 10.0
 				}
 				else = {
@@ -1530,7 +1520,7 @@ REPLACE:movement_royalist_absolutist = {
 		owner ?= {
 			if = {
 				limit = {
-					has_law_or_variant = law_type:law_monarchy
+					has_law = law_type:law_monarchy
 				}
 				
 				if = {
@@ -1550,8 +1540,7 @@ REPLACE:movement_royalist_absolutist = {
 					}
 				}
 				else = {
-					add = {
-						# Only care about legitimacy in the context of a monarchy that isn't under direct threat
+					add = { # Only care about legitimacy in the context of a monarchy that isn't under direct threat
 						value = 50
 						subtract = legitimacy
 						multiply = 0.005
@@ -1599,7 +1588,7 @@ REPLACE:movement_royalist_constitutional = {
 	}
 	
 	creation_trigger = {
-		has_law_or_variant = law_type:law_monarchy
+		has_law = law_type:law_monarchy
 		country_has_voting_franchise = yes
 		NOT = {
 			any_political_movement = {
@@ -1612,8 +1601,7 @@ REPLACE:movement_royalist_constitutional = {
 		value = 100
 		if = {
 			limit = {
-				owner ?= {
-					# If a movement of this type exists in a neighbouring country, make it more likely to spawn here as well
+				owner ?= { # If a movement of this type exists in a neighbouring country, make it more likely to spawn here as well
 					any_neighbouring_state = {
 						owner = {
 							prestige > ROOT.owner.prestige
@@ -1813,14 +1801,13 @@ REPLACE:movement_royalist_constitutional = {
 		if = {
 			limit = {
 				owner ?= {
-					has_law_or_variant = law_type:law_monarchy
+					has_law = law_type:law_monarchy
 				}
 				owner.ruler ?= {
 					NOT = { has_trait = trait_child }
 				}
 			}
-			multiply = {
-				# Constitutionalists are less reliant on the monarchs popularity than absolutists
+			multiply = { # Constitutionalists are less reliant on the monarchs popularity than absolutists
 				add = owner.ruler.popularity
 				multiply = 0.01
 				add = 1
@@ -1832,7 +1819,7 @@ REPLACE:movement_royalist_constitutional = {
 		else_if = {
 			limit = {
 				owner ?= {
-					has_law_or_variant = law_type:law_monarchy
+					has_law = law_type:law_monarchy
 				}
 				owner.ruler ?= {
 					has_trait = trait_child
@@ -1844,8 +1831,7 @@ REPLACE:movement_royalist_constitutional = {
 			}
 		}
 		
-		multiply = {
-			# Illiterate pops participate at 1/10 the rate of fully literate pops
+		multiply = { # Illiterate pops participate at 1/10 the rate of fully literate pops
 			desc = "POP_LITERACY"
 			value = literacy_rate
 			add = 0.10
@@ -1877,7 +1863,7 @@ REPLACE:movement_royalist_constitutional = {
 			if = {
 				limit = { is_capital = yes }
 				if = {
-					limit = { owner ?= { has_law_or_variant = law_type:law_monarchy } }
+					limit = { owner ?= { has_law = law_type:law_monarchy } }
 					multiply = 10.0
 				}
 				else = {
@@ -1912,7 +1898,7 @@ REPLACE:movement_royalist_constitutional = {
 			if = {
 				limit = { is_capital = yes }
 				if = {
-					limit = { owner ?= { has_law_or_variant = law_type:law_monarchy } }
+					limit = { owner ?= { has_law = law_type:law_monarchy } }
 					multiply = 10.0
 				}
 				else = {
@@ -1939,7 +1925,7 @@ REPLACE:movement_royalist_constitutional = {
 		owner ?= {
 			if = {
 				limit = {
-					has_law_or_variant = law_type:law_monarchy
+					has_law = law_type:law_monarchy
 				}
 				
 				if = {
@@ -1959,8 +1945,7 @@ REPLACE:movement_royalist_constitutional = {
 					}
 				}
 				else = {
-					add = {
-						# Only care about legitimacy in the context of a monarchy that isn't under direct threat
+					add = { # Only care about legitimacy in the context of a monarchy that isn't under direct threat
 						value = 50
 						subtract = legitimacy
 						multiply = 0.005
@@ -1992,9 +1977,8 @@ REPLACE:movement_royalist_constitutional = {
 	}
 }
 
-REPLACE:movement_labor = {
-	# Explicitly non-socialist labour movement
-	category = movement_category_ideological
+REPLACE:movement_labor = { # Explicitly non-socialist labour movement
+		category = movement_category_ideological
 	
 	ideology = ideology_proletarian_movement
 	character_ideologies = {
@@ -2014,8 +1998,7 @@ REPLACE:movement_labor = {
 		value = 100
 		if = {
 			limit = {
-				owner ?= {
-					# If a movement of this type exists in a neighbouring country, make it more likely to spawn here as well
+				owner ?= { # If a movement of this type exists in a neighbouring country, make it more likely to spawn here as well
 					any_neighbouring_state = {
 						owner = {
 							prestige > ROOT.owner.prestige
@@ -2062,8 +2045,7 @@ REPLACE:movement_labor = {
 				value = 2
 			}
 		}
-		if = {
-			# Labour movement is the natural habitat of non-socialist trade unions characters
+		if = { # Labour movement is the natural habitat of non-socialist trade unions characters
 			limit = {
 				is_interest_group_type = ig_trade_unions
 				has_socialist_ideology = no
@@ -2072,8 +2054,7 @@ REPLACE:movement_labor = {
 				value = 2
 			}
 		}
-		if = {
-			# Communists will support the labour movement if they really, really have to
+		if = { # Communists will support the labour movement if they really, really have to
 			limit = {
 				owner ?= {
 					any_political_movement = {
@@ -2267,8 +2248,7 @@ REPLACE:movement_labor = {
 			limit = {
 				standard_of_living < state.average_expected_sol # It is intentional that a labourer being well-off doesn't decrease support for this.
 			}
-			add = {
-				# Increases likelihood of support if impoverished.
+			add = { # Increases likelihood of support if impoverished.
 				desc = "IS_BELOW_EXPECTED_SOL"
 				value = state.average_expected_sol
 				subtract = standard_of_living
@@ -2276,15 +2256,13 @@ REPLACE:movement_labor = {
 			}
 		}
 		
-		multiply = {
-			# Illiterate pops participate at 1/10 the rate of fully literate pops
+		multiply = { # Illiterate pops participate at 1/10 the rate of fully literate pops
 			desc = "POP_LITERACY"
 			value = literacy_rate
 			add = 0.10
 		}
 		
-		if = {
-			# If a more radical movement exists, it'll poach radicals from this one.
+		if = { # If a more radical movement exists, it'll poach radicals from this one.
 			limit = {
 				owner ?= {
 					any_political_movement = {
@@ -2426,8 +2404,7 @@ REPLACE:movement_socialist = {
 		value = 100
 		if = {
 			limit = {
-				owner ?= {
-					# If a movement of this type exists in a neighbouring country, make it more likely to spawn here as well
+				owner ?= { # If a movement of this type exists in a neighbouring country, make it more likely to spawn here as well
 					any_neighbouring_state = {
 						owner = {
 							prestige > ROOT.owner.prestige
@@ -2456,7 +2433,7 @@ REPLACE:movement_socialist = {
 			}
 		}
 	}
-	on_disbanded = { }
+	on_disbanded = {}
 	
 	character_support_trigger = {
 		OR = {
@@ -2469,8 +2446,7 @@ REPLACE:movement_socialist = {
 	}
 	character_support_weight = {
 		value = 200
-		if = {
-			# Very vulnerable to fragmentation once the more focused movements emerge
+		if = { # Very vulnerable to fragmentation once the more focused movements emerge
 			limit = {
 				OR = {
 					has_ideology = ideology:ideology_vanguardist
@@ -2649,8 +2625,7 @@ REPLACE:movement_socialist = {
 				standard_of_living < state.average_expected_sol
 				strata = lower
 			}
-			add = {
-				# Increases likelihood of support if impoverished
+			add = { # Increases likelihood of support if impoverished
 				desc = "IS_BELOW_EXPECTED_SOL"
 				value = state.average_expected_sol
 				subtract = standard_of_living
@@ -2674,23 +2649,20 @@ REPLACE:movement_socialist = {
 				standard_of_living > state.average_expected_sol
 				strata = lower
 			}
-			add = {
-				# Decreases likelihood of support if well-off
+			add = { # Decreases likelihood of support if well-off
 				desc = "IS_ABOVE_EXPECTED_SOL"
 				value = state.average_expected_sol
 				subtract = standard_of_living
 			}
 		}
 		
-		multiply = {
-			# Illiterate pops participate at 1/10 the rate of fully literate pops
+		multiply = { # Illiterate pops participate at 1/10 the rate of fully literate pops
 			desc = "POP_LITERACY"
 			value = literacy_rate
 			add = 0.10
 		}
 		
-		multiply = {
-			# Multiplied by 1.5x max
+		multiply = { # Multiplied by 1.5x max
 			desc = "POP_RADICALS"
 			value = pop_radical_fraction
 			divide = 2
@@ -2888,8 +2860,7 @@ REPLACE:movement_anarchist = {
 		value = 100
 		if = {
 			limit = {
-				owner ?= {
-					# If a movement of this type exists in a neighbouring country, make it more likely to spawn here as well
+				owner ?= { # If a movement of this type exists in a neighbouring country, make it more likely to spawn here as well
 					any_neighbouring_state = {
 						owner = {
 							prestige > ROOT.owner.prestige
@@ -2944,7 +2915,6 @@ REPLACE:movement_anarchist = {
 		movement_support_high_literacy
 		movement_support_below_expected_sol
 		movement_support_radicalization
-		movement_support_academics
 		movement_support_laborers
 		movement_support_machinists
 		movement_support_tenant_farmers_law
@@ -2999,10 +2969,6 @@ REPLACE:movement_anarchist = {
 		if = {
 			limit = {
 				strata = middle
-			}
-			multiply = {
-				value = 0.10
-				desc = "MIDDLE_NO_ICON"
 			}
 			if = {
 				limit = {
@@ -3107,8 +3073,7 @@ REPLACE:movement_anarchist = {
 				standard_of_living < state.average_expected_sol
 				strata = lower # Impoverished middle class pops will support fascists instead
 			}
-			add = {
-				# Increases likelihood of support if impoverished
+			add = { # Increases likelihood of support if impoverished
 				desc = "IS_BELOW_EXPECTED_SOL"
 				value = state.average_expected_sol
 				subtract = standard_of_living
@@ -3143,23 +3108,20 @@ REPLACE:movement_anarchist = {
 				standard_of_living > state.average_expected_sol
 				strata = lower
 			}
-			add = {
-				# Decreases likelihood of support if well-off
+			add = { # Decreases likelihood of support if well-off
 				desc = "IS_ABOVE_EXPECTED_SOL"
 				value = state.average_expected_sol
 				subtract = standard_of_living
 			}
 		}
 		
-		multiply = {
-			# Illiterate pops participate at 1/10 the rate of fully literate pops
+		multiply = { # Illiterate pops participate at 1/10 the rate of fully literate pops
 			desc = "POP_LITERACY"
 			value = literacy_rate
 			add = 0.10
 		}
 		
-		multiply = {
-			# Multiplied by 2x max
+		multiply = { # Multiplied by 2x max
 			desc = "POP_RADICALS"
 			value = pop_radical_fraction
 			add = 1
@@ -3188,7 +3150,7 @@ REPLACE:movement_anarchist = {
 			OR = {
 				scope:clout <= 0
 				trigger_if = {
-					limit = {
+					limit = { #vanilla bugfix?
 						NOT = {
 							owner = {
 								has_journal_entry = je_spanish_anarchism # So the Spanish anarchists will always launch a revolution if possible
@@ -3288,8 +3250,7 @@ REPLACE:movement_communist = {
 		value = 100
 		if = {
 			limit = {
-				owner ?= {
-					# If a movement of this type exists in a neighbouring country, make it more likely to spawn here as well
+				owner ?= { # If a movement of this type exists in a neighbouring country, make it more likely to spawn here as well
 					any_neighbouring_state = {
 						owner = {
 							prestige > ROOT.owner.prestige
@@ -3483,8 +3444,7 @@ REPLACE:movement_communist = {
 				standard_of_living < state.average_expected_sol
 				strata = lower
 			}
-			add = {
-				# Increases likelihood of support if impoverished
+			add = { # Increases likelihood of support if impoverished
 				desc = "IS_BELOW_EXPECTED_SOL"
 				value = state.average_expected_sol
 				subtract = standard_of_living
@@ -3520,23 +3480,20 @@ REPLACE:movement_communist = {
 				standard_of_living > state.average_expected_sol
 				strata = lower
 			}
-			add = {
-				# Decreases likelihood of support if well-off
+			add = { # Decreases likelihood of support if well-off
 				desc = "IS_ABOVE_EXPECTED_SOL"
 				value = state.average_expected_sol
 				subtract = standard_of_living
 			}
 		}
 		
-		multiply = {
-			# Illiterate pops participate at 1/10 the rate of fully literate pops
+		multiply = { # Illiterate pops participate at 1/10 the rate of fully literate pops
 			desc = "POP_LITERACY"
 			value = literacy_rate
 			add = 0.10
 		}
 		
-		multiply = {
-			# Multiplied by 2x max
+		multiply = { # Multiplied by 2x max
 			desc = "POP_RADICALS"
 			value = pop_radical_fraction
 			add = 1
@@ -3655,8 +3612,7 @@ REPLACE:movement_fascist = {
 		value = 100
 		if = {
 			limit = {
-				owner ?= {
-					# If a movement of this type exists in a neighbouring country, make it more likely to spawn here as well
+				owner ?= { # If a movement of this type exists in a neighbouring country, make it more likely to spawn here as well
 					any_neighbouring_state = {
 						owner = {
 							prestige > ROOT.owner.prestige
@@ -3938,8 +3894,7 @@ REPLACE:movement_fascist = {
 				standard_of_living < state.average_expected_sol
 				strata = middle
 			}
-			add = {
-				# Increases likelihood of support if impoverished
+			add = { # Increases likelihood of support if impoverished
 				desc = "IS_BELOW_EXPECTED_SOL"
 				value = state.average_expected_sol
 				subtract = standard_of_living
@@ -3951,8 +3906,7 @@ REPLACE:movement_fascist = {
 				standard_of_living > state.average_expected_sol
 				strata = middle
 			}
-			add = {
-				# Decreases likelihood of support if well-off
+			add = { # Decreases likelihood of support if well-off
 				desc = "IS_ABOVE_EXPECTED_SOL"
 				value = state.average_expected_sol
 				subtract = standard_of_living
@@ -3970,8 +3924,7 @@ REPLACE:movement_fascist = {
 			}
 		}
 		
-		multiply = {
-			# Illiterate pops participate at 1/10 the rate of fully literate pops
+		multiply = { # Illiterate pops participate at 1/10 the rate of fully literate pops
 			desc = "POP_LITERACY"
 			value = literacy_rate
 			add = 0.10
@@ -4075,8 +4028,7 @@ REPLACE:movement_corporatist = {
 		value = 100
 		if = {
 			limit = {
-				owner ?= {
-					# If a movement of this type exists in a neighbouring country, make it more likely to spawn here as well
+				owner ?= { # If a movement of this type exists in a neighbouring country, make it more likely to spawn here as well
 					any_neighbouring_state = {
 						owner = {
 							prestige > ROOT.owner.prestige
@@ -4342,8 +4294,7 @@ REPLACE:movement_corporatist = {
 				standard_of_living < state.average_expected_sol
 				strata = middle
 			}
-			add = {
-				# Increases likelihood of support if impoverished
+			add = { # Increases likelihood of support if impoverished
 				desc = "IS_BELOW_EXPECTED_SOL"
 				value = state.average_expected_sol
 				subtract = standard_of_living
@@ -4355,8 +4306,7 @@ REPLACE:movement_corporatist = {
 				standard_of_living > state.average_expected_sol
 				strata = middle
 			}
-			add = {
-				# Decreases likelihood of support if well-off
+			add = { # Decreases likelihood of support if well-off
 				desc = "IS_ABOVE_EXPECTED_SOL"
 				value = state.average_expected_sol
 				subtract = standard_of_living
@@ -4374,15 +4324,13 @@ REPLACE:movement_corporatist = {
 			}
 		}
 		
-		multiply = {
-			# Illiterate pops participate at 1/10 the rate of fully literate pops
+		multiply = { # Illiterate pops participate at 1/10 the rate of fully literate pops
 			desc = "POP_LITERACY"
 			value = literacy_rate
 			add = 0.10
 		}
 		
-		multiply = {
-			# Intentional that this is different from fascism
+		multiply = { # Intentional that this is different from fascism
 			value = 0.01
 			multiply = pop_acceptance
 			add = 0.20
@@ -4494,7 +4442,7 @@ REPLACE:movement_liberal = {
 		value = 100
 		if = {
 			limit = {
-				has_law_or_variant = law_type:law_monarchy
+				has_law = law_type:law_monarchy
 				country_has_voting_franchise = no
 			}
 			multiply = {
@@ -4503,8 +4451,7 @@ REPLACE:movement_liberal = {
 		}
 		if = {
 			limit = {
-				owner ?= {
-					# If a movement of this type exists in a neighbouring country, make it more likely to spawn here as well
+				owner ?= { # If a movement of this type exists in a neighbouring country, make it more likely to spawn here as well
 					any_neighbouring_state = {
 						owner = {
 							prestige > ROOT.owner.prestige
@@ -4591,8 +4538,7 @@ REPLACE:movement_liberal = {
 				value = 2
 			}
 		}
-		if = {
-			# Liberal agitators just inherently love liberalism
+		if = { # Liberal agitators just inherently love liberalism
 			limit = {
 				scope:interest_group ?= {
 					OR = {
@@ -4790,8 +4736,7 @@ REPLACE:movement_liberal = {
 			}
 		}
 		
-		multiply = {
-			# Illiterate pops participate at 1/10 the rate of fully literate pops
+		multiply = { # Illiterate pops participate at 1/10 the rate of fully literate pops
 			desc = "POP_LITERACY"
 			value = literacy_rate
 			add = 0.10
@@ -4965,7 +4910,7 @@ REPLACE:movement_radical = {
 		value = 100
 		if = {
 			limit = {
-				has_law_or_variant = law_type:law_monarchy
+				has_law = law_type:law_monarchy
 				country_has_voting_franchise = no
 			}
 			multiply = {
@@ -4982,8 +4927,7 @@ REPLACE:movement_radical = {
 		}
 		if = {
 			limit = {
-				owner ?= {
-					# If a movement of this type exists in a neighbouring country, make it more likely to spawn here as well
+				owner ?= { # If a movement of this type exists in a neighbouring country, make it more likely to spawn here as well
 					any_neighbouring_state = {
 						owner = {
 							prestige > ROOT.owner.prestige
@@ -5255,15 +5199,13 @@ REPLACE:movement_radical = {
 			}
 		}
 		
-		multiply = {
-			# Illiterate pops participate at 1/10 the rate of fully literate pops
+		multiply = { # Illiterate pops participate at 1/10 the rate of fully literate pops
 			desc = "POP_LITERACY"
 			value = literacy_rate
 			add = 0.10
 		}
 		
-		multiply = {
-			# Multiplied by 2x max
+		multiply = { # Multiplied by 2x max
 			desc = "POP_RADICALS"
 			value = pop_radical_fraction
 			add = 1
@@ -5421,8 +5363,7 @@ REPLACE:movement_nihilist = {
 		value = 100
 		if = {
 			limit = {
-				owner ?= {
-					# If a movement of this type exists in a neighbouring country, make it more likely to spawn here as well
+				owner ?= { # If a movement of this type exists in a neighbouring country, make it more likely to spawn here as well
 					any_neighbouring_state = {
 						owner = {
 							prestige > ROOT.owner.prestige
@@ -5612,15 +5553,13 @@ REPLACE:movement_nihilist = {
 			}
 		}
 		
-		multiply = {
-			# Illiterate pops participate at 1/10 the rate of fully literate pops
+		multiply = { # Illiterate pops participate at 1/10 the rate of fully literate pops
 			desc = "POP_LITERACY"
 			value = literacy_rate
 			add = 0.10
 		}
 		
-		multiply = {
-			# Multiplied by 2x max
+		multiply = { # Multiplied by 2x max
 			desc = "POP_RADICALS"
 			value = pop_radical_fraction
 			add = 1
@@ -5708,8 +5647,7 @@ REPLACE:movement_positivist = {
 				value = 50
 			}
 		}
-		if = {
-			# Catholicism without God
+		if = { # Catholicism without God
 			limit = {
 				NOR = {
 					country_has_state_religion = rel:catholic
@@ -5722,8 +5660,7 @@ REPLACE:movement_positivist = {
 		}
 		if = {
 			limit = {
-				owner ?= {
-					# If a movement of this type exists in a neighbouring country, make it more likely to spawn here as well
+				owner ?= { # If a movement of this type exists in a neighbouring country, make it more likely to spawn here as well
 					any_neighbouring_state = {
 						owner = {
 							prestige > ROOT.owner.prestige
@@ -6027,8 +5964,7 @@ REPLACE:movement_positivist = {
 			}
 		}
 		
-		multiply = {
-			# Illiterate pops participate at 1/10 the rate of fully literate pops
+		multiply = { # Illiterate pops participate at 1/10 the rate of fully literate pops
 			desc = "POP_LITERACY"
 			value = literacy_rate
 			add = 0.10
@@ -6121,8 +6057,7 @@ REPLACE:movement_land_reform = {
 		value = 100
 		if = {
 			limit = {
-				owner ?= {
-					# If a movement of this type exists in a neighbouring country, make it more likely to spawn here as well
+				owner ?= { # If a movement of this type exists in a neighbouring country, make it more likely to spawn here as well
 					any_neighbouring_state = {
 						owner = {
 							prestige > ROOT.owner.prestige
@@ -6309,8 +6244,7 @@ REPLACE:movement_land_reform = {
 			limit = {
 				standard_of_living < state.average_expected_sol
 			}
-			add = {
-				# Increases likelihood of support if impoverished
+			add = { # Increases likelihood of support if impoverished
 				desc = "IS_BELOW_EXPECTED_SOL"
 				value = state.average_expected_sol
 				subtract = standard_of_living
@@ -6321,8 +6255,7 @@ REPLACE:movement_land_reform = {
 			limit = {
 				standard_of_living > state.average_expected_sol
 			}
-			add = {
-				# Decreases likelihood of support if well-off
+			add = { # Decreases likelihood of support if well-off
 				desc = "IS_ABOVE_EXPECTED_SOL"
 				value = state.average_expected_sol
 				subtract = standard_of_living
@@ -6330,16 +6263,14 @@ REPLACE:movement_land_reform = {
 			}
 		}
 		
-		multiply = {
-			# Illiterate pops participate at 1/4 the rate of fully literate pops
+		multiply = { # Illiterate pops participate at 1/4 the rate of fully literate pops
 			desc = "POP_LITERACY"
 			value = literacy_rate
 			add = 0.25
 			max = 1.1 # Needs a less high literacy rate to get started, but caps out the same as other movements
 		}
 		
-		multiply = {
-			# Multiplied by 1.25x max
+		multiply = { # Multiplied by 1.25x max
 			desc = "POP_RADICALS"
 			value = pop_radical_fraction
 			divide = 4
@@ -6450,8 +6381,7 @@ REPLACE:movement_feminist = {
 		value = 100
 		if = {
 			limit = {
-				owner ?= {
-					# If a movement of this type exists in a neighbouring country, make it more likely to spawn here as well
+				owner ?= { # If a movement of this type exists in a neighbouring country, make it more likely to spawn here as well
 					any_neighbouring_state = {
 						owner = {
 							prestige > ROOT.owner.prestige
@@ -6635,15 +6565,13 @@ REPLACE:movement_feminist = {
 			}
 		}
 		
-		multiply = {
-			# Illiterate pops participate at 1/10 the rate of fully literate pops
+		multiply = { # Illiterate pops participate at 1/10 the rate of fully literate pops
 			desc = "POP_LITERACY"
 			value = literacy_rate
 			add = 0.10
 		}
 		
-		multiply = {
-			# Multiplied by 1.25x max
+		multiply = { # Multiplied by 1.25x max
 			desc = "POP_RADICALS"
 			value = pop_radical_fraction
 			divide = 4
@@ -6717,15 +6645,10 @@ REPLACE:movement_reactionary = {
 	}
 	
 	creation_trigger = {
-		NOT = {
-			has_law_or_variant = law_type:law_traditionalism
-			has_law_or_variant = law_type:law_serfdom
-		}
 		country_should_exclusively_focus_on_modernization = no
 		has_law_or_variant = law_type:law_slavery_banned
 		country_has_voting_franchise = yes
-		NOT = {
-			# Reactionary and Legitimist movements cannot co-exist
+		NOT = { # Reactionary and Legitimist movements cannot co-exist
 			any_political_movement = {
 				OR = {
 					is_political_movement_type = movement_legitimist
@@ -6745,8 +6668,7 @@ REPLACE:movement_reactionary = {
 		value = 100
 		if = {
 			limit = {
-				owner ?= {
-					# If a movement of this type exists in a neighbouring country, make it more likely to spawn here as well
+				owner ?= { # If a movement of this type exists in a neighbouring country, make it more likely to spawn here as well
 					any_neighbouring_state = {
 						owner = {
 							prestige > ROOT.owner.prestige
@@ -6767,10 +6689,6 @@ REPLACE:movement_reactionary = {
 	}
 	
 	disband_trigger = {
-		OR = {
-			c:FRA ?= this
-			civil_war_origin_country ?= c:FRA
-		}
 		any_political_movement = {
 			OR = {
 				is_political_movement_type = movement_legitimist
@@ -7017,8 +6935,7 @@ REPLACE:movement_reactionary = {
 			}
 		}
 		
-		multiply = {
-			# Illiterate pops participate at 1/10 the rate of fully literate pops
+		multiply = { # Illiterate pops participate at 1/10 the rate of fully literate pops
 			desc = "POP_LITERACY"
 			value = literacy_rate
 			add = 0.10
@@ -7030,8 +6947,7 @@ REPLACE:movement_reactionary = {
 			desc = "ACCEPTANCE"
 		}
 		
-		if = {
-			# If a more radical movement exists, it'll poach radicals from this one.
+		if = { # If a more radical movement exists, it'll poach radicals from this one.
 			limit = {
 				owner ?= {
 					any_political_movement = {
@@ -7113,8 +7029,7 @@ REPLACE:movement_reactionary = {
 	}
 }
 
-REPLACE:movement_modernizer = {
-	# This movement loves you and wants you to succeed. It exists to help you catch up.
+movement_modernizer = { # This movement loves you and wants you to succeed. It exists to help you catch up.
 	category = movement_category_ideological
 	
 	ideology = ideology_modernizer_movement_1
@@ -7130,7 +7045,7 @@ REPLACE:movement_modernizer = {
 	creation_trigger = {
 		has_technology_researched = academia
 		ig:ig_intelligentsia ?= {
-			is_marginal = no
+			ig_counts_as_marginal = no
 		}
 		country_has_laws_in_need_of_critical_modernization = yes
 		NOR = {
@@ -7143,8 +7058,7 @@ REPLACE:movement_modernizer = {
 		value = 100
 		if = {
 			limit = {
-				owner ?= {
-					# If a movement of this type exists in a neighbouring country, make it more likely to spawn here as well
+				owner ?= { # If a movement of this type exists in a neighbouring country, make it more likely to spawn here as well
 					any_neighbouring_state = {
 						owner = {
 							prestige > ROOT.owner.prestige
@@ -7160,6 +7074,7 @@ REPLACE:movement_modernizer = {
 			}
 		}
 	}
+
 	on_created = {
 		add_movement_enthusiasm_modifier = yes
 		if = {
@@ -7193,6 +7108,7 @@ REPLACE:movement_modernizer = {
 			}
 		}
 	}
+
 	character_support_weight = {
 		value = 200
 		if = {
@@ -7455,15 +7371,13 @@ REPLACE:movement_modernizer = {
 			}
 		}
 		
-		multiply = {
-			# Illiterate pops participate at 1/10 the rate of fully literate pops
+		multiply = { # Illiterate pops participate at 1/10 the rate of fully literate pops
 			desc = "POP_LITERACY"
 			value = literacy_rate
 			add = 0.10
 		}
 		
-		multiply = {
-			# "What are you doing?" factor
+		multiply = { # "What are you doing?" factor
 			desc = "BACKWARDSNESS"
 			value = 1
 			add = {

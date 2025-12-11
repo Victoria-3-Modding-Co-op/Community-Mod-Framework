@@ -38,7 +38,7 @@
 	creation_weight = {
 		value = 100
 	}
-	on_created = { }
+	on_created = {}
 	
 	religion_selection_trigger = {
 		this = rel:hindu
@@ -191,8 +191,7 @@
 					desc = "from_communal_divides_completed_je"
 				}
 			}
-			add = {
-				# Weakened by increasing literacy rates
+			add = { # Weakened by increasing literacy rates
 				desc = "POP_LITERACY"
 				this = {
 					value = literacy_rate
@@ -369,8 +368,7 @@ REPLACE:movement_muslim_nationalist = {
 	
 	creation_trigger = {
 		NOT = {
-			any_political_movement = {
-				# Can only ever spawn once
+			any_political_movement = { # Can only ever spawn once
 				is_political_movement_type = movement_muslim_nationalist
 			}
 		}
@@ -413,7 +411,7 @@ REPLACE:movement_muslim_nationalist = {
 	
 	can_cause_obstinance = yes
 	
-	on_created = { }
+	on_created = {}
 	
 	religion_selection_trigger = {
 		OR = {
@@ -527,8 +525,7 @@ REPLACE:movement_muslim_nationalist = {
 					religion = rel:ibadi
 				}
 			}
-			add = {
-				# Base acceptance values higher due to being a minority
+			add = { # Base acceptance values higher due to being a minority
 				value = 25
 				desc = "POP_MUSLIM"
 			}
@@ -590,8 +587,7 @@ REPLACE:movement_muslim_nationalist = {
 					desc = "from_communal_divides_completed_je"
 				}
 			}
-			add = {
-				# Weakened by increasing literacy rates
+			add = { # Weakened by increasing literacy rates
 				desc = "POP_LITERACY"
 				this = {
 					value = literacy_rate
@@ -728,8 +724,7 @@ REPLACE:movement_muslim_nationalist = {
 							limit = {
 								exists = this.political_movement_identity_support
 							}
-							add = {
-								# Identity support can get a bit high
+							add = { # Identity support can get a bit high
 								value = this.political_movement_identity_support
 								multiply = 0.5
 							}

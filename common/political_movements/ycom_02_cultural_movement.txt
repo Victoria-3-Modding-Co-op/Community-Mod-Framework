@@ -11,8 +11,7 @@
 	can_cause_obstinance = yes
 	
 	creation_trigger = {
-		NOR = {
-			# Will not spawn if you're an un-unified German or Italian state
+		NOR = { # Will not spawn if you're an un-unified German or Italian state
 			AND = {
 				OR = {
 					country_has_primary_culture = cu:north_german
@@ -278,8 +277,7 @@
 			}
 		}
 		
-		multiply = {
-			# Range from x0.775 to 2.275
+		multiply = { # Range from x0.775 to 2.275
 			desc = "POP_CULTURE_FERVOR"
 			value = culture.culture_current_fervor
 			subtract = 15
@@ -299,8 +297,7 @@
 			}
 		}
 		
-		if = {
-			# If a more radical movement exists, it'll poach radicals from this one.
+		if = { # If a more radical movement exists, it'll poach radicals from this one.
 			limit = {
 				owner ?= {
 					any_political_movement = {
@@ -402,8 +399,7 @@
 					is_homeland_of_country_cultures = owner
 					primary_cultures_percent_state >= 0.05
 				}
-				add = {
-					# These three values must add up to more than 1 - 5 x Obstinance, 1/2 Turmoil, percent of pops of primary cultures
+				add = { # These three values must add up to more than 1 - 5 x Obstinance, 1/2 Turmoil, percent of pops of primary cultures
 					value = -1
 					add = "this.primary_cultures_percent_state"
 					add = {
@@ -481,7 +477,7 @@ REPLACE:movement_cultural_minority = {
 	
 	can_cause_obstinance = yes
 	
-	creation_trigger = { }
+	creation_trigger = {}
 	creation_weight = {
 		value = 100
 		if = {
@@ -1028,8 +1024,7 @@ REPLACE:movement_cultural_minority = {
 			limit = {
 				standard_of_living < state.average_expected_sol
 			}
-			add = {
-				# Increases likelihood of support if impoverished
+			add = { # Increases likelihood of support if impoverished
 				desc = "POP_POVERTY"
 				value = state.average_expected_sol
 				subtract = standard_of_living
@@ -1052,24 +1047,21 @@ REPLACE:movement_cultural_minority = {
 					}
 				}
 			}
-			add = {
-				# From +2 at 80 to +10 at 0
+			add = { # From +2 at 80 to +10 at 0
 				desc = "POP_DISCRIMINATED"
 				value = 100
 				subtract = pop_acceptance
 				divide = 10
 			}
 		}
-		else = {
-			# Non-discriminated pops are less likely to form separatist movements
+		else = { # Non-discriminated pops are less likely to form separatist movements
 			multiply = {
 				desc = "POP_ACCEPTANCE"
 				value = 0.25
 			}
 		}
 		
-		multiply = {
-			# Multiplied by 2x max
+		multiply = { # Multiplied by 2x max
 			desc = "POP_RADICALS"
 			value = pop_radical_fraction
 			add = 1
@@ -1098,8 +1090,7 @@ REPLACE:movement_cultural_minority = {
 			}
 		}
 		
-		multiply = {
-			# Range from x0.775 to 2.275
+		multiply = { # Range from x0.775 to 2.275
 			desc = "POP_CULTURE_FERVOR"
 			value = culture.culture_current_fervor
 			subtract = 15
@@ -1107,8 +1098,7 @@ REPLACE:movement_cultural_minority = {
 			add = 1
 		}
 		
-		if = {
-			# Funnel people into Indias unique movements
+		if = { # Funnel people into Indias unique movements
 			limit = {
 				owner ?= {
 					c:BIC ?= this
@@ -1221,8 +1211,7 @@ REPLACE:movement_cultural_minority = {
 						value >= com_movement_cultural_minority_secession_state_weight_culture_percent_state_0 #vanilla value: 0.05
 					}
 				}
-				add = {
-					# These three values must add up to more than 1 - 5 x Obstinance, 1/2 Turmoil, percent of pops of this culture
+				add = { # These three values must add up to more than 1 - 5 x Obstinance, 1/2 Turmoil, percent of pops of this culture
 					value = -1
 					add = "this.culture_percent_state(scope:political_movement.culture)"
 					add = {
@@ -1259,8 +1248,7 @@ REPLACE:movement_cultural_minority = {
 					has_ideology = ideology:ideology_colonialist
 				}
 			}
-			trigger_else = {
-				# For example - the Austrian Aristocracy can only secede with a Polish uprising if the leader of the IG is Polish
+			trigger_else = { # For example - the Austrian Aristocracy can only secede with a Polish uprising if the leader of the IG is Polish
 				leader = { culture = scope:political_movement.culture }
 			}
 		}
@@ -1449,8 +1437,7 @@ REPLACE:movement_cultural_minority = {
 							limit = {
 								exists = this.political_movement_identity_support
 							}
-							add = {
-								# Identity support can get a bit high
+							add = { # Identity support can get a bit high
 								value = this.political_movement_identity_support
 								multiply = 0.5
 							}
@@ -1482,7 +1469,7 @@ REPLACE:movement_minority_rights = {
 		ideology_gbbf_ottomanist #GOTB
 	}
 	
-	creation_trigger = { }
+	creation_trigger = {}
 	creation_weight = {
 		value = 50
 		if = {
@@ -1671,8 +1658,7 @@ REPLACE:movement_minority_rights = {
 			limit = {
 				standard_of_living < state.average_expected_sol
 			}
-			add = {
-				# Increases likelihood of support if impoverished
+			add = { # Increases likelihood of support if impoverished
 				desc = "POP_POVERTY"
 				value = state.average_expected_sol
 				subtract = standard_of_living
@@ -1695,8 +1681,7 @@ REPLACE:movement_minority_rights = {
 					}
 				}
 			}
-			multiply = {
-				# From 1.21x at 79 to 2x at 0
+			multiply = { # From 1.21x at 79 to 2x at 0
 				desc = "POP_DISCRIMINATED"
 				value = 100
 				subtract = pop_acceptance
@@ -1704,23 +1689,20 @@ REPLACE:movement_minority_rights = {
 				add = 1
 			}
 		}
-		else = {
-			# Non-discriminated pops are less likely to form separatist movements
+		else = { # Non-discriminated pops are less likely to form separatist movements
 			multiply = {
 				desc = "POP_ACCEPTANCE"
 				value = 0.10
 			}
 		}
 		
-		multiply = {
-			# Illiterate pops participate at 1/8 the rate of fully literate pops
+		multiply = { # Illiterate pops participate at 1/8 the rate of fully literate pops
 			desc = "POP_LITERACY"
 			value = literacy_rate
 			add = 0.15
 		}
 		
-		if = {
-			# If a more radical movement exists, it'll poach radicals from this one.
+		if = { # If a more radical movement exists, it'll poach radicals from this one.
 			limit = {
 				owner ?= {
 					OR = {
@@ -1805,8 +1787,7 @@ REPLACE:movement_minority_rights = {
 			multiply = 2.5
 		}
 		
-		if = {
-			# Funnel people into Indias unique movements
+		if = { # Funnel people into Indias unique movements
 			limit = {
 				owner ?= {
 					c:BIC ?= this

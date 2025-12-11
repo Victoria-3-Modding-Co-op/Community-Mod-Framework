@@ -26,7 +26,7 @@ fascist_party = {
 				desc = party_austrian_nazi_party
 				trigger = {
 					exists = c:AUS
-					THIS = c:AUS
+					c:AUS ?= THIS
 					any_interest_group = {
 						party ?= {
 							is_party_type = fascist_party
@@ -54,7 +54,7 @@ fascist_party = {
 				desc = party_greater_german_peoples_party
 				trigger = {
 					exists = c:AUS
-					THIS = c:AUS
+					c:AUS ?= THIS
 					NOT = {
 						any_interest_group = {
 							party ?= {
@@ -84,7 +84,7 @@ fascist_party = {
 				desc = party_fatherland_front
 				trigger = {
 					exists = c:AUS
-					THIS = c:AUS
+					c:AUS ?= THIS
 					any_interest_group = {
 						is_in_government = yes
 						party ?= {
@@ -99,112 +99,112 @@ fascist_party = {
 				desc = party_british_union_of_fascists
 				trigger = {
 					exists = c:GBR
-					THIS = c:GBR
+					c:GBR ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_mouvement_franciste
 				trigger = {
 					exists = c:FRA
-					THIS = c:FRA
+					c:FRA ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_national_front
 				trigger = {
 					exists = c:SWI
-					THIS = c:SWI
+					c:SWI ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_nasjonal_samling
 				trigger = {
 					exists = c:NOR
-					THIS = c:NOR
+					c:NOR ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_dnsap
 				trigger = {
 					exists = c:DEN
-					THIS = c:DEN
+					c:DEN ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_lapua_movement
 				trigger = {
 					exists = c:FIN
-					THIS = c:FIN
+					c:FIN ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_national_league_of_sweden
 				trigger = {
 					exists = c:SWE
-					THIS = c:SWE
+					c:SWE ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_national_union
 				trigger = {
 					exists = c:NET
-					THIS = c:NET
+					c:NET ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_rexist_party
 				trigger = {
 					exists = c:BEL
-					THIS = c:BEL
+					c:BEL ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_volksdeutsche_bewegung
 				trigger = {
 					exists = c:LUX
-					THIS = c:LUX
+					c:LUX ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_national_socialist_movement
 				trigger = {
 					exists = c:CHL
-					THIS = c:CHL
+					c:CHL ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_ratnik_party
 				trigger = {
 					exists = c:BUL
-					THIS = c:BUL
+					c:BUL ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_ustasha
 				trigger = {
 					exists = c:CRO
-					THIS = c:CRO
+					c:CRO ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_zbor
 				trigger = {
 					exists = c:SER
-					THIS = c:SER
+					c:SER ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_all_russian_fascist_party
 				trigger = {
 					exists = c:RUS
-					THIS = c:RUS
+					c:RUS ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_argentine_patriotic_league
 				trigger = {
 					exists = c:ARG
-					THIS = c:ARG
+					c:ARG ?= THIS
 				}
 			}
 			triggered_desc = {
@@ -212,7 +212,7 @@ fascist_party = {
 				trigger = {
 					is_usfp_active = no
 					exists = c:USA
-					THIS = c:USA
+					c:USA ?= THIS
 				}
 			}
 			#USFP
@@ -221,21 +221,21 @@ fascist_party = {
 				trigger = {
 					is_usfp_active = yes
 					exists = c:USA
-					THIS = c:USA
+					c:USA ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_freedom_party
 				trigger = {
 					exists = c:CSA
-					THIS = c:CSA
+					c:CSA ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_national_union_of_greece
 				trigger = {
 					exists = c:GRE
-					THIS = c:GRE
+					c:GRE ?= THIS
 				}
 			}
 			triggered_desc = {
@@ -277,7 +277,17 @@ fascist_party = {
 			triggered_desc = {
 				desc = integralist_party
 				trigger = {
-					country_has_primary_culture = cu:portuguese
+					c:POR ?= this
+					NOT = {
+						has_technology_researched = mass_propaganda
+					}
+				}
+			}
+			triggered_desc = {
+				desc = national_syndicalist_movement
+				trigger = {
+					c:POR ?= this
+					has_technology_researched = mass_propaganda
 				}
 			}
 			triggered_desc = {
@@ -302,6 +312,12 @@ fascist_party = {
 				desc = integralist_action_party
 				trigger = {
 					country_has_primary_culture = cu:brazilian
+				}
+			}
+			triggered_desc = {
+				desc = circle_trigon_party
+				trigger = {
+					country_has_primary_culture = cu:iberian
 				}
 			}
 			triggered_desc = {
@@ -681,6 +697,7 @@ fascist_party = {
 			limit = {
 				OR = {
 					has_ideology = ideology:ideology_meritocratic
+					has_ideology = ideology:ideology_cartist
 					AND = {
 						has_ideology = ideology:ideology_loyalist
 						owner = {
@@ -715,7 +732,7 @@ fascist_party = {
 			limit = {
 				scope:number = 1
 				is_powerful = no
-				is_marginal = no
+				ig_counts_as_marginal = no
 			}
 			multiply = {
 				value = 2

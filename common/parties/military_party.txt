@@ -21,7 +21,7 @@ military_party = {
 				desc = party_fatherland_front
 				trigger = {
 					exists = c:AUS
-					THIS = c:AUS
+					c:AUS ?= THIS
 					any_interest_group = {
 						is_in_government = yes
 						party ?= {
@@ -36,28 +36,28 @@ military_party = {
 				desc = party_true_peoples_party
 				trigger = {
 					exists = c:MON
-					THIS = c:MON
+					c:MON ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_national_party
 				trigger = {
 					exists = c:SER
-					THIS = c:SER
+					c:SER ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_union_of_rights
 				trigger = {
 					exists = c:FRA
-					THIS = c:FRA
+					c:FRA ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_imperial_clan_party
 				trigger = {
 					exists = c:CHI
-					THIS = c:CHI
+					c:CHI ?= THIS
 					has_law_or_variant = law_type:law_monarchy
 				}
 			}
@@ -88,24 +88,24 @@ military_party = {
 				desc = party_russian_assembly
 				trigger = {
 					exists = c:RUS
-					THIS = c:RUS
-					has_law_or_variant = law_type:law_monarchy
+					c:RUS ?= THIS
+					has_law = law_type:law_monarchy
 				}
 			}
 			triggered_desc = {
 				desc = party_russian_all_military_union
 				trigger = {
 					exists = c:RUS
-					THIS = c:RUS
-					NOT = { has_law_or_variant = law_type:law_monarchy }
+					c:RUS ?= THIS
+					NOT = { has_law = law_type:law_monarchy }
 				}
 			}
 			triggered_desc = {
 				desc = party_imperial_way_party
 				trigger = {
 					exists = c:JAP
-					THIS = c:JAP
-					has_law_or_variant = law_type:law_monarchy
+					c:JAP ?= THIS
+					has_law = law_type:law_monarchy
 				}
 			}
 			triggered_desc = {
@@ -158,7 +158,7 @@ military_party = {
 		owner = {
 			country_has_voting_franchise = yes
 			ig:ig_armed_forces ?= {
-				is_marginal = no
+				ig_counts_as_marginal = no
 			}
 		}
 	}
@@ -318,10 +318,13 @@ military_party = {
 				desc = "from_peasant_levies"
 			}
 		}
-		if = { # loyalist-proletarian alliance for tax reform
+		if = { # loyalist/proletarian/meritocratic alliance for tax reform
 			limit = {
 				OR = {
+					has_ideology = ideology:ideology_loyalist
 					has_ideology = ideology:ideology_proletarian
+					has_ideology = ideology:ideology_meritocratic
+					has_ideology = ideology:ideology_cartist
 					leader ?= {
 						has_ideology = ideology:ideology_social_democrat
 					}
@@ -337,7 +340,7 @@ military_party = {
 						}
 					}
 				}
-				owner = {
+				owner ?= {
 					NOR = {
 						has_law_or_variant = law_type:law_proportional_taxation
 						has_law_or_variant = law_type:law_per_capita_based_taxation
@@ -345,12 +348,7 @@ military_party = {
 					}
 				}
 			}
-			add = {
-				value = 3
-				desc = "from_no_graduated_taxation"
-			}
-		}
-		if = { # loyalist-meritocratic alliance for tax reform
+			if = {
 			limit = {
 				OR = {
 					has_ideology = ideology:ideology_meritocratic
@@ -370,7 +368,8 @@ military_party = {
 			}
 			add = {
 				value = 3
-				desc = "from_no_proportional_or_per_capita_tax"
+					desc = "from_lacking_tax_laws"
+				}
 			}
 		}
 		# alliance for stricter internal security
@@ -433,6 +432,21 @@ military_party = {
 				desc = from_authoritarian
 			}
 		}
+		if = { # Carlists and Miguelists were against participating in electoral politics for a good while
+			limit = {
+				NOT = { owner = { has_technology_researched = political_agitation } }
+				leader = {
+					OR = {
+						has_ideology = ideology:ideology_carlist
+						has_ideology = ideology:ideology_miguelist
+					}
+				}
+			}
+			add = {
+				value = -20
+				desc = "from_traditionalist_monarchism"
+			}
+		}
 		if = {
 			limit = {
 				is_interest_group_type = ig_armed_forces
@@ -447,7 +461,7 @@ military_party = {
 			limit = {
 				scope:number = 1
 				is_powerful = no
-				is_marginal = no
+				ig_counts_as_marginal = no
 			}
 			multiply = {
 				value = 2
@@ -572,7 +586,7 @@ military_party = {
 				}
 				owner = {
 					c:FRA ?= this
-					has_law_or_variant = law_type:law_monarchy
+					has_law = law_type:law_monarchy
 				}
 			}
 			add = {

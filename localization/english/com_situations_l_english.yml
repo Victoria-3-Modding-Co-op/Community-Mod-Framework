@@ -3,7 +3,7 @@
  com_situation_vs: "vs."
  com_situation_leader: "Leader"
  com_situation_interactions: "Interactions"
- com_victory_conditions: "Victory Condition"
+ com_situation_victory_conditions: "Victory Condition"
  com_situation_header_leader_for: "[Scope.Var('com_leader').GetCountry.GetName] is the [concept_com_situation_leader] for the #header [Scope.Var('com_name').GetFlagName]#! side."
  com_situation_completion_conditions: "Completion Condition"
  com_situation_failure_conditions: "Failure Condition"
@@ -73,5 +73,3 @@
  trigger_any_com_situation_countries_COUNT: "$PARAMETERS$ $FILTER$[concept_country] in the [concept_com_situation]"
  trigger_any_com_situation_countries_COUNT_FIRST: "$PARAMETERS$ $FILTER$[concept_country] in the [concept_com_situation]"
  trigger_any_com_situation_countries_COUNT_THIRD: "$PARAMETERS$ $FILTER$[concept_country] in the [concept_com_situation]"
-# Journal Group
- je_group_com_situations: "International [Concept('concept_com_situation','$concept_com_situations$')]"

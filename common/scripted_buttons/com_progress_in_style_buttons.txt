@@ -69,39 +69,39 @@ sb_com_progress_in_style_test2 = {
 			progress_bar = spb_com_progress_in_style
 			effect = "
 			switch = {
-				trigger = var:com_base_color
+				trigger = var:com_left_color
 				flag:com_blue_bar = {
-					custom_tooltip = Red
+					custom_tooltip = com_red_bar
 					set_variable = {
-						name = com_base_color
+						name = com_left_color
 						value = flag:com_red_bar
 					}
 				}
 				flag:com_red_bar = {
-					custom_tooltip = Green
+					custom_tooltip = com_green_bar
 					set_variable = {
-						name = com_base_color
+						name = com_left_color
 						value = flag:com_green_bar
 					}
 				}
 				flag:com_green_bar = {
-					custom_tooltip = Gold
+					custom_tooltip = com_gold_bar
 					set_variable = {
-						name = com_base_color
+						name = com_left_color
 						value = flag:com_gold_bar
 					}
 				}
 				flag:com_gold_bar = {
-					custom_tooltip = White
+					custom_tooltip = com_white_bar
 					set_variable = {
-						name = com_base_color
+						name = com_left_color
 						value = flag:com_white_bar
 					}
 				}
 				fallback = {
-					custom_tooltip = Blue
+					custom_tooltip = com_blue_bar
 					set_variable = {
-						name = com_base_color
+						name = com_left_color
 						value = flag:com_blue_bar
 					}
 				}
@@ -133,7 +133,7 @@ sb_com_progress_in_style_test3 = {
 		}
 		run_in_com_progress_bar_scope = {
 			progress_bar = spb_com_progress_in_style
-		effect = "
+			effect = "
 			switch = {
 				trigger = var:com_target_type
 				flag:com_target_gold_bar = {
@@ -169,6 +169,79 @@ sb_com_progress_in_style_test3 = {
 					set_variable = {
 						name = com_target_type
 						value = flag:com_target_gold_bar
+					}
+				}
+			}"
+		}
+	}
+}
+
+sb_com_progress_in_style_test4 = {
+	name = sb_com_progress_in_style_test4
+	desc = sb_com_rise_of_communism_test_desc
+
+	possible = {
+		always = yes
+	}
+
+	ai_chance = {
+		value = 100
+	}
+
+	effect = {
+		custom_tooltip = {
+			text = sb_com_progress_in_style_test4_tt
+			fix_variable_error = { variable = com_red_bar }
+			fix_variable_error = { variable = com_green_bar }
+			fix_variable_error = { variable = com_gold_bar }
+			fix_variable_error = { variable = com_white_bar }
+			fix_variable_error = { variable = com_blue_bar }
+		}
+		run_in_com_progress_bar_scope = {
+			progress_bar = spb_com_progress_in_style
+			effect = "
+			switch = {
+				trigger = var:com_right_color
+				flag:com_transparent_bar = {
+					custom_tooltip = com_blue_bar
+					set_variable = {
+						name = com_right_color
+						value = flag:com_blue_bar
+					}
+				}
+				flag:com_blue_bar = {
+					custom_tooltip = com_red_bar
+					set_variable = {
+						name = com_right_color
+						value = flag:com_red_bar
+					}
+				}
+				flag:com_red_bar = {
+					custom_tooltip = com_green_bar
+					set_variable = {
+						name = com_right_color
+						value = flag:com_green_bar
+					}
+				}
+				flag:com_green_bar = {
+					custom_tooltip = com_gold_bar
+					set_variable = {
+						name = com_right_color
+						value = flag:com_gold_bar
+					}
+				}
+				flag:com_gold_bar = {
+					custom_tooltip = com_white_bar
+					set_variable = {
+						name = com_right_color
+						value = flag:com_white_bar
+					}
+				}
+				fallback = {
+					custom_tooltip = com_transparent_bar
+					set_variable = {
+						name = com_right_color
+						value = flag:com_transparent_bar
 					}
 				}
 			}"

@@ -16,7 +16,7 @@
 #
 # Make sure your scripted trigger file is loaded AFTER this one. You can do this by adding zz_ to the filename.
 #
-# Your scripted trigger files goes in the /common/scripted_triggers folder of your mod.
+# Your scripted trigger files goes in the /common/scripted_triggers folder of YOUR mod.
 #
 
 ####---------- General Mod Triggers ----------####

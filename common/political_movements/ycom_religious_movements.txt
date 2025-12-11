@@ -1,4 +1,4 @@
-﻿movement_religious_majority = {
+﻿REPLACE:movement_religious_majority = {
 	category = movement_category_religious
 	
 	ideology = ideology_traditionalist_movement
@@ -8,24 +8,40 @@
 		ideology_gbbf_islamist_leader #GOTB
 		ideology_usfp_social_gospel_leader #USFP
 	}
-
+	
 	can_cause_obstinance = yes
 	
 	creation_trigger = {
 		NOT = {
 			has_law_or_variant = law_type:law_state_atheism
 		}
-	}	
+	}
 	creation_weight = {
 		value = 100
-	}	
-	on_created = {}
-
+		if = {
+			limit = {
+				owner ?= {
+					any_political_movement = {
+						OR = {
+							is_political_movement_type = movement_legitimist
+							is_political_movement_type = movement_carlist
+							is_political_movement_type = movement_miguelist
+						}
+					}
+				}
+			}
+			multiply = {
+				value = 0.05
+			}
+		}
+	}
+	on_created = { }
+	
 	disband_trigger = {
 		scope:political_movement ?= {
 			religion = {
 				NOT = { is_state_religion = root }
-			}		
+			}
 		}
 	}
 	
@@ -41,7 +57,7 @@
 		OR = {
 			is_interest_group_type = ig_devout
 			character_is_pro_religious_majority = yes #Compatibility Trigger
-		}		
+		}
 	}
 	character_support_weight = {
 		value = 100
@@ -75,12 +91,12 @@
 				value = 2
 			}
 		}
-	}	
+	}
 	
 	pop_support_trigger = {
 		religion = scope:religion
 	}
-
+	
 	pop_support_factors = {
 		movement_support_low_urbanization
 		movement_support_low_literacy
@@ -89,7 +105,7 @@
 		movement_support_peasants
 		movement_support_corporatism_tech
 	}
-
+	
 	pop_support_weight = {
 		if = {
 			limit = {
@@ -127,19 +143,19 @@
 				}
 			}
 		}
-
+		
 		add = {
 			desc = "URBAN_STATE" # Increases support in rural states, decreases in urban
 			value = 0.5
 			subtract = state.state_urbanization_rate
 			multiply = 10
 		}
-
+		
 		add = {
 			value = 10
 			desc = "POP_BASE_SUPPORT"
 		}
-
+		
 		if = {
 			limit = {
 				is_pop_type = clergymen
@@ -167,23 +183,25 @@
 				desc = "POP_PEASANTS"
 			}
 		}
-
+		
 		if = {
 			limit = {
 				NOT = {
 					is_pop_type = clergymen
 				}
 			}
-		add = { # Weakened by increasing literacy rates
-			desc = "POP_LITERACY"
-			this = {
-				value = literacy_rate
-				multiply = -2
+			add = {
+				# Weakened by increasing literacy rates
+				desc = "POP_LITERACY"
+				this = {
+					value = literacy_rate
+					multiply = -2
 				}
 			}
 		}
-
-		if = { # Discriminated pops are less inclined to support the state church
+		
+		if = {
+			# Discriminated pops are less inclined to support the state church
 			limit = {
 				pop_acceptance < acceptance_status_5
 			}
@@ -194,7 +212,7 @@
 				add = 0.25
 			}
 		}
-
+		
 		if = {
 			limit = {
 				owner ?= {
@@ -206,12 +224,16 @@
 				desc = "CORPORATISM_TECH"
 			}
 		}
-
+		
 		if = {
 			limit = {
 				owner ?= {
 					any_political_movement = {
-						is_political_movement_type = movement_legitimist
+						OR = {
+							is_political_movement_type = movement_legitimist
+							is_political_movement_type = movement_carlist
+							is_political_movement_type = movement_miguelist
+						}
 					}
 				}
 			}
@@ -219,26 +241,26 @@
 				value = 0.25
 			}
 		}
-
+		
 		#USFP
 		multiply = {
 			value = usfp_harlem_renaissance_religious_attraction_mult
 			desc = "harlem_renaissance_movement_attraction"
 		}
 	}
-
+	
 	revolution = {
 		weight = {
 			value = 100
 		}
-
+		
 		interest_group_can_join = {
 			leader = { religion = scope:political_movement.religion }
 		}
-
+		
 		state_weight = {
 			value = 1
-
+			
 			if = {
 				limit = {
 					religion_percent_state = {
@@ -281,24 +303,24 @@
 			}
 		}
 	}
-
+	
 	secession = {
 		possible = {
 			political_movement_support >= 0.05
 			scope:clout <= 0
 		}
-
+		
 		weight = {
 			value = 1000
 		}
-
+		
 		interest_group_can_join = {
 			leader = { religion = scope:political_movement.religion }
 		}
-
+		
 		state_weight = {
 			value = 0
-
+			
 			if = {
 				limit = {
 					religion_percent_state = {
@@ -341,7 +363,7 @@
 			}
 		}
 	}
-
+	
 	additional_radicalism_factors = {
 		if = {
 			limit = {
@@ -349,13 +371,13 @@
 					NOT = { religion = root.religion }
 				}
 			}
-
+			
 			add = {
 				value = 0.1
 				desc = "RULER_WRONG_RELIGION"
 			}
 		}
-
+		
 		add = {
 			value = "owner.average_sol"
 			subtract = "owner.average_sol_for_religion(scope:religion)"
@@ -364,7 +386,7 @@
 			min = 0
 			desc = "STANDARD_OF_LIVING_FOR_RELIGION"
 		}
-
+		
 		if = {
 			limit = {
 				owner = {
@@ -387,18 +409,18 @@
 	}
 }
 
-movement_religious_minority = {
+REPLACE:movement_religious_minority = {
 	category = movement_category_religious
-
+	
 	ideology = ideology_traditionalist_minoritarian_movement
 	character_ideologies = {
 		ideology_traditionalist_minoritarian
 		ideology_usfp_universalist #USFP
 		ideology_gbbf_ottomanist #GOTB
 	}
-
+	
 	can_cause_obstinance = yes
-
+	
 	creation_trigger = {
 		NAND = {
 			c:BIC ?= this
@@ -408,8 +430,8 @@ movement_religious_minority = {
 	creation_weight = {
 		value = 200
 	}
-	on_created = {}
-
+	on_created = { }
+	
 	disband_trigger = {
 		OR = {
 			scope:political_movement ?= {
@@ -429,7 +451,7 @@ movement_religious_minority = {
 			}
 		}
 	}
-
+	
 	on_disbanded = {
 		if = {
 			limit = {
@@ -464,7 +486,7 @@ movement_religious_minority = {
 			}
 		}
 	}
-
+	
 	religion_selection_trigger = {
 		NOT = { is_state_religion = scope:country }
 		NOT = { rel:atheist = this }
@@ -478,7 +500,7 @@ movement_religious_minority = {
 	religion_selection_weight = {
 		value = 100
 	}
-
+	
 	character_support_trigger = {
 		religion = scope:religion
 		OR = {
@@ -534,11 +556,11 @@ movement_religious_minority = {
 			multiply = 0.05
 		}
 	}
-
+	
 	pop_support_trigger = {
 		religion = scope:religion
 	}
-
+	
 	pop_support_factors = {
 		movement_support_poverty
 		movement_support_low_literacy
@@ -548,7 +570,7 @@ movement_religious_minority = {
 		movement_support_peasants
 		movement_support_corporatism_tech
 	}
-
+	
 	pop_support_weight = {
 		if = {
 			limit = {
@@ -590,19 +612,20 @@ movement_religious_minority = {
 			value = 10
 			desc = "POP_BASE_SUPPORT"
 		}
-
+		
 		if = {
 			limit = {
 				standard_of_living < state.average_expected_sol
 			}
-			add = { # Increases likelihood of support if impoverished
+			add = {
+				# Increases likelihood of support if impoverished
 				desc = "POP_POVERTY"
 				value = state.average_expected_sol
 				subtract = standard_of_living
 				max = 10
 			}
 		}
-
+		
 		if = {
 			limit = {
 				is_pop_type = clergymen
@@ -630,14 +653,15 @@ movement_religious_minority = {
 				desc = "POP_PEASANTS"
 			}
 		}
-
+		
 		if = {
 			limit = {
 				NOT = {
 					is_pop_type = clergymen
 				}
 			}
-			add = { # Weakened by increasing literacy rates
+			add = {
+				# Weakened by increasing literacy rates
 				desc = "POP_LITERACY"
 				this = {
 					value = literacy_rate
@@ -645,7 +669,7 @@ movement_religious_minority = {
 				}
 			}
 		}
-
+		
 		if = {
 			limit = {
 				owner ?= {
@@ -666,7 +690,7 @@ movement_religious_minority = {
 		# Grey_PLP
 		multiply = {
 			value = mog_plp_movement_religious_minority_pop_support_weight_mult
-			desc = "STANDARD_OF_LIVING_FOR_RELIGION"								# Desc only shows when value =/= 1
+			desc = "STANDARD_OF_LIVING_FOR_RELIGION"                                # Desc only shows when value =/= 1
 		}
 		
 		if = {
@@ -678,20 +702,22 @@ movement_religious_minority = {
 					}
 				}
 			}
-			add = { # From +2 at 80 to +10 at 0
+			add = {
+				# From +2 at 80 to +10 at 0
 				desc = "POP_RELIGIOUS_DISCRIMINATION"
 				value = 100
 				subtract = pop_acceptance
 				divide = 10
 			}
 		}
-		else = { # Non-discriminated pops are less likely to form separatist movements
+		else = {
+			# Non-discriminated pops are less likely to form separatist movements
 			multiply = {
 				desc = "POP_ACCEPTANCE"
 				value = 0.25
 			}
 		}
-
+		
 		if = {
 			limit = {
 				owner ?= {
@@ -703,7 +729,7 @@ movement_religious_minority = {
 				desc = "CORPORATISM_TECH"
 			}
 		}
-
+		
 		# Favor cultural movement if necessary
 		if = {
 			limit = {
@@ -716,31 +742,31 @@ movement_religious_minority = {
 			}
 			if = {
 				limit = {
-					owner = { cultural_acceptance_base = { target = root.culture value <= acceptance_status_1 } }	# BugFix from PLP (root.culture, not culture)
+					owner = { cultural_acceptance_base = { target = root.culture value <= acceptance_status_1 } }    # BugFix from PLP (root.culture, not culture)
 				}
 				multiply = 0.1
 			}
 			else_if = {
 				limit = {
-					owner = { cultural_acceptance_base = { target = root.culture value <= acceptance_status_2 } }	# BugFix from PLP (root.culture, not culture)
+					owner = { cultural_acceptance_base = { target = root.culture value <= acceptance_status_2 } }    # BugFix from PLP (root.culture, not culture)
 				}
 				multiply = 0.25
 			}
 			else_if = {
 				limit = {
-					owner = { cultural_acceptance_base = { target = root.culture value <= acceptance_status_3 } }	# BugFix from PLP (root.culture, not culture)
+					owner = { cultural_acceptance_base = { target = root.culture value <= acceptance_status_3 } }    # BugFix from PLP (root.culture, not culture)
 				}
 				multiply = 0.5
 			}
 		}
-
+		
 		#USFP
 		multiply = {
 			value = usfp_harlem_renaissance_religious_attraction_mult
 			desc = "harlem_renaissance_movement_attraction"
 		}
 	}
-
+	
 	secession = {
 		possible = {
 			owner ?= {
@@ -752,24 +778,24 @@ movement_religious_minority = {
 				}
 				trigger_if = {
 					limit = {
-						turkfm_revolt_mechanics_trigger = yes
+						eqfm_revolt_mechanics_trigger = yes
 					}
-					turkfm_minority_revolt_possible_trigger = yes
+					eqfm_minority_revolt_possible_trigger = yes
 				}
 			}
 		}
-
+		
 		weight = {
 			value = 1000
 		}
-
+		
 		interest_group_can_join = {
 			leader = { religion = scope:political_movement.religion }
 		}
-
+		
 		state_weight = {
 			value = 0
-
+			
 			if = {
 				limit = {
 					is_capital = no
@@ -778,7 +804,8 @@ movement_religious_minority = {
 						value >= com_movement_religious_minority_secession_state_weight_religion_percent_state_0 #vanilla value: 0.05
 					}
 				}
-				add = { # These three values must add up to more than 1 - 5 x Obstinance, 1/2 Turmoil, percent of pops of this religion
+				add = {
+					# These three values must add up to more than 1 - 5 x Obstinance, 1/2 Turmoil, percent of pops of this religion
 					value = -1
 					add = "this.religion_percent_state(scope:political_movement.religion)"
 					add = {
@@ -786,7 +813,7 @@ movement_religious_minority = {
 						multiply = 0.5
 					}
 					add = {
-						value = this.obstinance	# Note: OBSTINANCE_MAX = 0.2
+						value = this.obstinance    # Note: OBSTINANCE_MAX = 0.2
 						multiply = 5
 					}
 					multiply = 100
@@ -797,7 +824,7 @@ movement_religious_minority = {
 				value = mog_plp_movement_all_general_state_weight_mult
 			}
 		}
-
+		
 		target_fraction_of_states = {
 			value = political_movement_identity_support
 			add = scope:clout
@@ -806,11 +833,11 @@ movement_religious_minority = {
 				limit = {
 					grefm_is_active = yes
 					owner = {
-						turkfm_revolt_mechanics_trigger = yes
+						eqfm_revolt_mechanics_trigger = yes
 					}
 				}
 				multiply = 0
-				add = turkfm_target_fraction_of_states_value
+				add = eqfm_target_fraction_of_states_value
 			}
 			min = {
 				value = com_movement_religious_minority_secession_target_fraction_of_states_min #vanilla value: 0.15
@@ -818,24 +845,25 @@ movement_religious_minority = {
 					limit = {
 						grefm_is_active = yes
 						owner = {
-							turkfm_revolt_mechanics_trigger = yes
+							eqfm_revolt_mechanics_trigger = yes
 						}
 					}
 					multiply = 0
-					add = turkfm_movement_religious_minority_secession_target_fraction_of_states_min
+					add = eqfm_movement_religious_minority_secession_target_fraction_of_states_min
 				}
 			}
 			max = com_movement_religious_minority_secession_target_fraction_of_states_max #vanilla value: 0.75
 		}
 	}
-
+	
 	additional_radicalism_factors = {
 		add = {
 			if = {
-				limit = { Grey_PLP_is_active = yes } 
+				limit = { Grey_PLP_is_active = yes }
 				value = "owner.average_sol_for_religion(owner.religion)"
 			}
-			else = { # Vanilla
+			else = {
+				# Vanilla
 				value = "owner.average_sol"
 			}
 			subtract = "owner.average_sol_for_religion(scope:religion)"
@@ -844,14 +872,14 @@ movement_religious_minority = {
 			min = 0
 			desc = "STANDARD_OF_LIVING_FOR_RELIGION"
 		}
-
+		
 		subtract = {
 			value = 0.5
 			subtract = political_movement_identity_support
 			min = 0
 			desc = "LOW_MOVEMENT_IDENTITY_SUPPORT"
 		}
-
+		
 		if = {
 			limit = {
 				owner = {
@@ -871,7 +899,7 @@ movement_religious_minority = {
 				value = 0.15
 			}
 		}
-
+		
 		if = {
 			limit = {
 				owner = {
@@ -893,7 +921,8 @@ movement_religious_minority = {
 							limit = {
 								exists = this.political_movement_identity_support
 							}
-							add = { # Identity support can get a bit high
+							add = {
+								# Identity support can get a bit high
 								value = this.political_movement_identity_support
 								multiply = 0.5
 							}

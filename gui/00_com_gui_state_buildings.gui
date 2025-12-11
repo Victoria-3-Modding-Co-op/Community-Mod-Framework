@@ -392,7 +392,7 @@ types com_state_panel_buildings_overwrites {
 
 						header_building_item = {
 							visible = no
-							datacontext = "[StatesPanel.AccessBuilding('building_barracks')]"
+							datacontext = "[StatesPanel.AccessBuilding('building_barrack')]"
 
 							tooltipwidget = {
 								FancyTooltip_Building = {}
@@ -462,7 +462,7 @@ types com_state_panel_buildings_overwrites {
 			parentanchor = hcenter
 
 			buildings_list_item = {
-				datacontext = "[StatesPanel.AccessBuilding('building_barracks')]"
+				datacontext = "[StatesPanel.AccessBuilding('building_barrack')]"
 			}
 
 			buildings_list_item = {

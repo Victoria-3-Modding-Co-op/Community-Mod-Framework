@@ -35,6 +35,7 @@ initialize_com_progress_bar = {
 			fix_variable_error = { variable = com_progress_bar_$index$ }
 			fix_variable_error = { variable = com_$progress_bar$ }
 			fix_variable_error = { variable = $progress_bar$ }
+			fix_variable_error = { variable = com_right_color }
 			# Set progress bar
 			scope:journal_entry = {
 				set_variable = {
@@ -47,6 +48,10 @@ initialize_com_progress_bar = {
 				set_variable = {
 					name = com_id
 					value = flag:$progress_bar$
+				}
+				set_variable = {
+					name = com_right_color
+					value = flag:com_transparent_bar
 				}
 			}
 		}
@@ -68,6 +73,7 @@ create_com_progress_bar = {
 	set_com_progress_bar_color = {
 		progress_bar = $progress_bar$
 		color = $color$
+		side = left
 	}
 }
 
@@ -188,7 +194,8 @@ remove_com_progress_bar = {
 
 # Sets the color of progress bar
 # - progress_bar = name localization key of progress bar
-# - color = color of base bar
+# - color = color of bar
+# - side = 'left' or 'right'
 set_com_progress_bar_color = {
 	hidden_effect = {
 		if = {
@@ -201,11 +208,11 @@ set_com_progress_bar_color = {
 		}
 		else = {
 			save_com_progress_bar_scope = { progress_bar = $progress_bar$ }
-			fix_variable_error = { variable = com_base_color }
+			fix_variable_error = { variable = com_$side$_color }
 			fix_variable_error = { variable = com_$color$_bar }
 			scope:com_$progress_bar$ = {
 				set_variable = {
-					name = com_base_color
+					name = com_$side$_color
 					value = flag:com_$color$_bar
 				}
 			}
@@ -228,7 +235,8 @@ remove_com_progress_bar_color = {
 		else = {
 			save_com_progress_bar_scope = { progress_bar = $progress_bar$ }
 			scope:com_$progress_bar$ = {
-				remove_variable = com_base_color
+				remove_variable = com_left_color
+				remove_variable = com_right_color
 			}
 		}
 	}
@@ -470,8 +478,8 @@ com_debug_progress_bar = {
 		value = scope:com_test.var:com_id
 	}
 	set_variable = {
-		name = com_base_color
-		value = scope:com_test.var:com_base_color
+		name = com_left_color
+		value = scope:com_test.var:com_left_color
 	}
 	set_variable = {
 		name = com_bar_increase_color

@@ -1240,7 +1240,7 @@ conservative_party = {
 		if = {
 			limit = {
 				owner = {
-					country_is_in_south_america = yes
+					is_in_geographic_region = geographic_region_south_america
 					any_primary_culture = {
 						has_discrimination_trait = language_hispanophone
 					}

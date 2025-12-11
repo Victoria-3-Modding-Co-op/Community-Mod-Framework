@@ -58,7 +58,8 @@ To set this mod as a dependency to your own mod, you will need to add this to yo
 ```
 **Also remember to add the mod to your required items on your own mods steam page.**
 
-# Debug Features
+# Debug Mode
+
 - The keybinding `CTRL + ALT + D` toggles the global variable `com_debug`. This can be used to enable or disable debug content like debug Decisions or Events.
 - The global variable `com_debug` will enable a decision that will add a debug button to the CMF sidebar. This button will toggle the game in and out of debug mode.
 
@@ -159,7 +160,6 @@ Paper Style Window:
 
 Europa Universalis V Style Windows:
 - [event_window_europa_classic](docs/event_windows/event_window_europa_variants.png)
-- event_window_europa_1_char_portrait
 - [event_window_europa_1_char](docs/event_windows/event_window_europa_variants.png)
 - [event_window_europa_2_char](docs/event_windows/event_window_europa_variants.png)
 
@@ -411,6 +411,8 @@ This would hide all National Agenda (`je_group_historical_content`) Journal Entr
 This would show them again.
 
 ### EU5 Style Situation Journal Entries
+**NOTE: CMF Situations are not yet tested with the new global journal entries and may not work correctly**
+
 Situations are meant to model international events, such as clashes between factions, pandemics, and more.
 
 Each situation can have multiple, different journal entries associated with it and provides a tool to model complex power struggles.
@@ -479,14 +481,13 @@ je_example_entry = {
 ### Progress Bar Syling
 Scripted progress bars can be styled with a color, a drift effect, and a target marker, all dynamically settable and unsettable. For more details, see the [progress bar documentation](/docs/Progress_bars.md)
 
-> **NOTE**  The following custom color styles still work, but have been superseded by the more advanced progress bar framework.
+> **NOTE**  The following custom color styles still work, but have been superceded by the more advanced progress bar framework.
 
 These work by setting specific variables in the journal entry scope. These will change which progress bar is displayed. Currently, the following variables are used:
 - `com_double_bad_gold_marker` -- replaces the journal entry marker in double_sided_bad with the marker from double_sided_gold
 - `com_double_bad_white_bar` -- replaced double_sided_bad with white_progressbar_horizontal
 - `com_double_bad_gold_bar` -- replaced double_sided_bad with gold_progressbar_horizontal
 - `com_bear_spray_applied` -- removes the bear and lion icons from double_sided_gold and resizes the progress bar
-- `com_moon_moon_on_deck` -- replaces the lion icon in double_sided_gold with a wolf icon
 
 ### Wrap Journal Modifiers
 
@@ -569,7 +570,7 @@ fix_variable_error = {
 	variable = variable_or_flag_name
 }
 ```
-Usage examples can be found [here](events/community_framework_events.txt).
+Usage examples can be found [here](events/com_debug.txt).
 
 **NOTE**: This works for both **variables** and **flags**.
 
@@ -677,60 +678,44 @@ See [the documentation page for details](/docs/floatarray.md) on effects and tri
 For naming, you need to include loc keys to avoid load-up error. These can be blank and overwritten by your own mod. 
 
 # Community Mod Triggers
-The *Community Mod Triggers* is used to share scripted triggers to detect each others mods. This file is maintained on the CMF GitHub repo. If you wish to add your own trigger, either submit a request on the CMF Channel in the Modding Co-op or open a pull request on the repo. If you encounter issues or need assistance, reach out on the co-op. If you copy this file directly into your mod, you are assuming the duty of keeping it up to date with CMF.
 
 ## Usage
-1. Submit a scripted trigger key for use in CMF. It should take a format as follows: 
-
-`YOURMOD_is_active_trigger`
-2. Ensure users of your mod are also using CMF. The scripted triggers in `00_community_mod_compatibility_triggers.txt` are all set to return false by default. This is intentional.
-
-    *This is how your trigger will look in CMF:*
+Request to have CMF add a trigger for your mod into the CMF compatibility file `01_community_mod_compatibility_triggers.txt`.
+This file contains the scripted triggers all set to return false by default. This is intentional. Your trigger should look like this:
 ```
-YOURMOD_is_active_trigger = {
-    always = no
+YOURMODNAME_is_active_trigger = {
+   always = no
 }
 ```
-3. Create a file with the name `zz_YOURMOD_compatibility_triggers.txt` in the `\common\scripted_triggers` folder ***of your mod***. Prefixing the file with `zz_` is intentional due to file load order behavior.
-
-   *YOUR file should contain the following script:*
+Create another file with the name `zz_YOURMODNAME_compatibility_triggers.txt` in the `/common/scripted_triggers` folder of your mod,
+that contains the following:
 ```
-REPLACE_OR_CREATE:YOURMOD_is_active_trigger = {
-    always = yes
+YOURMODNAME_is_active_trigger = {
+   always = yes
 }
 ```
-*If everything was done correctly, CMF will return your trigger as false when your mod is not loaded, and as true when it is loaded.*
 
-## Currently Included Mod Triggers
+## Currently Included
 * Anno 1836
 * Australia & New Zealand Flavor Pack
 * Basileia Romaion
 * Better Decrees
 * Better Politics Mod
-* Chilam Balam
 * Community Outfit Mod
 * East Asian Clothes Patch
 * Gas, Guns, Garb, & Grub
 * Gilded Age
-* Gates of the Bosphorus
+* Greece, Byzantium, & the Balkans Flavor
 * Grey's Little Reworks
 * Hail, Columbia!
-* Industry Expanded
 * James's Korea Flavor Pack
 * James's Pop Clothing Tweaks
-* Jewel of the Nile
-* Kingdom of God
 * Manaflow: Ankaris Arrival
-* Mandate of Heaven
-* Maharlika
-* Morgenröte: Dawn of Flavor
+* War Goal Framework
+* Morgenrote: Dawn of Flavor
 * Newspapers Mod
-* PI
 * Rally Round the King
 * States That Make Sense
-* This Land is Mine
-* Victoria Tweaks Mod
-* War Goal Framework
 * Western Clothes: Redux
 
 # Keybinds

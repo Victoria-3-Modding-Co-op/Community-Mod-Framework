@@ -1,7 +1,7 @@
 ﻿je_com_rise_of_communism = {
 	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
 
-	group = je_group_com_situations
+	group = je_group_global_international_situations
 
 	scripted_button = sb_com_rise_of_communism_test
     scripted_button = sb_com_rise_of_communism_test2
@@ -10,6 +10,22 @@
     status_desc = {
         desc = je_com_rise_of_communism_status
     }
+	
+	is_shown_when_inactive = {
+		always = no
+	}
+	
+	should_be_involved = {
+		always = no
+	}
+	
+	should_show_when_not_involved = {
+		always = no
+	}
+	
+	possible = {
+		always = no
+	}
 
 	immediate = {
         # Setup base situation

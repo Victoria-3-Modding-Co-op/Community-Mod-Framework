@@ -1,7 +1,7 @@
-﻿turkfm_revolt_mechanics_trigger = {
+﻿eqfm_revolt_mechanics_trigger = {
 	always = no
 }
 
-turkfm_minority_revolt_possible_trigger = {
+eqfm_minority_revolt_possible_trigger = {
 	always = yes
 }

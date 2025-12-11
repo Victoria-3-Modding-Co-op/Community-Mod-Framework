@@ -1,4 +1,4 @@
-﻿has_liberal_ideology = {
+﻿REPLACE:has_liberal_ideology = {
 	OR = {
 		has_ideology = ideology:ideology_republican_leader
 		has_ideology = ideology:ideology_radical
@@ -10,7 +10,7 @@
 	}
 }
 
-has_progressive_ideology = {
+REPLACE:has_progressive_ideology = {
 	OR = {
 		has_ideology = ideology:ideology_nihilist
 		has_ideology = ideology:ideology_radical
@@ -24,7 +24,7 @@ has_progressive_ideology = {
 	}
 }
 
-has_socialist_ideology = {
+REPLACE:has_socialist_ideology = {
 	OR = {
 		has_ideology = ideology:ideology_communist
 		has_ideology = ideology:ideology_vanguardist
@@ -32,7 +32,7 @@ has_socialist_ideology = {
 	}
 }
 
-has_reactionary_ideology = {
+REPLACE:has_reactionary_ideology = {
 	OR = {
 		has_ideology = ideology:ideology_traditionalist
 		has_ideology = ideology:ideology_fascist
@@ -47,7 +47,7 @@ has_reactionary_ideology = {
 	}
 }
 
-has_conservative_ideology = {
+REPLACE:has_conservative_ideology = {
 	OR = {
 		has_ideology = ideology:ideology_traditionalist
 		has_ideology = ideology:ideology_slaver
@@ -59,7 +59,7 @@ has_conservative_ideology = {
 	}
 }
 
-has_monarchist_ideology = {
+REPLACE:has_monarchist_ideology = {
 	OR = {
 		has_ideology = ideology:ideology_royalist
 		has_ideology = ideology:ideology_orleanist
@@ -68,7 +68,7 @@ has_monarchist_ideology = {
 	}
 }
 
-has_paternalist_ideology = {
+REPLACE:has_paternalist_ideology = {
 	OR = {
 		has_ideology = ideology:ideology_paternalistic
 		has_ideology = ideology:ideology_scholar_paternalistic

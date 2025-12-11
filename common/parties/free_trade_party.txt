@@ -204,7 +204,7 @@ free_trade_party = {
 		if = {
 			limit = {
 				owner = {
-					country_is_in_south_america = yes
+					is_in_geographic_region = geographic_region_south_america
 					any_primary_culture = {
 						has_discrimination_trait = language_hispanophone
 					}
@@ -220,7 +220,7 @@ free_trade_party = {
 			limit = {
 				is_usfp_active = no
 				owner = {
-					country_is_in_north_america = yes
+					is_in_geographic_region = geographic_region_north_america
 					OR = {
 						country_has_primary_culture = cu:yankee
 						country_has_primary_culture = cu:dixie

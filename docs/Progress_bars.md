@@ -55,7 +55,7 @@ The progress bar drift and target each require an associated script value. The d
 The target script value can be set to match the current value, replicating base game behavior, or it be set to a static or dynamic value to create a visual target for the bar to approach. This value is also in the range 0-1.
 
 ### Colors and icons
-The progress bar and the drift style can be given one of five colors, `default`/`blue`, `bad`/`red`, `green`, `gold`, and `white`. 
+The progress bar and the drift style can be given one of five colors, `default`/`blue`, `bad`/`red`, `green`, `gold`, and `white`, or made blank with `transparent`. 
 
 ## Example progress bar setup
 There is an example journal entry which was used for testing in the Community Mod Framework.
@@ -121,7 +121,7 @@ THIS DOES NOT REPLACE THE VANILLA SETUP!
 **Parameters:**
 - `progress_bar` localization key identifier of progress bar
 - `index` 0-indexed position of the progress bar in the journal
-- `color` color of base bar, valid colors are `default`/`blue`, `bad`/`red`, `green`, `gold`, and `white`
+- `color` color of base bar, valid colors are `default`/`blue`, `bad`/`red`, `green`, `gold`, and `white`, or `transparent`
 
 ### Effect: `create_com_progress_bar_with_drift`
 Extension of `initialize_com_progress_bar` that also sets the color and drift style of the progress bar.
@@ -131,7 +131,7 @@ THIS DOES NOT REPLACE THE VANILLA SETUP!
 **Parameters:**
 - `progress_bar` localization key identifier of progress bar
 - `index` 0-indexed position of the progress bar in the journal
-- `color` color of base bar, valid colors are `default`/`blue`, `bad`/`red`, `green`, `gold`, and `white`
+- `color` color of base bar, valid colors are `default`/`blue`, `bad`/`red`, `green`, `gold`, and `white`, or `transparent`
 - `bar_increase_color` color of drift bar when increasing, same valid colors as the base
 - `bar_decrease_color` color of drift bar when decreasing, same valid colors as the base
 - `drift_value` a 0-1 script value key which sets the size and direction of the drift 
@@ -144,7 +144,7 @@ THIS DOES NOT REPLACE THE VANILLA SETUP!
 **Parameters:**
 - `progress_bar` localization key identifier of progress bar
 - `index` 0-indexed position of the progress bar in the journal
-- `color` color of base bar, valid colors are `default`/`blue`, `bad`/`red`, `green`, `gold`, and `white`
+- `color` color of base bar, valid colors are `default`/`blue`, `bad`/`red`, `green`, `gold`, and `white`, or `transparent`
 - `target_type` = icon type for target value, valid values are `journal_icon`, `gold_marker`, `gold_bar`, and `"color"_line`, where "color" is any of the valid colors
 - `target_value` = a 0-1 script value key which sets the position of the target
 
@@ -156,7 +156,7 @@ THIS DOES NOT REPLACE THE VANILLA SETUP!
 **Parameters:**
 - `progress_bar` localization key identifier of progress bar
 - `index` 0-indexed position of the progress bar in the journal
-- `color` color of base bar, valid colors are `default`/`blue`, `bad`/`red`, `green`, `gold`, and `white`
+- `color` color of base bar, valid colors are `default`/`blue`, `bad`/`red`, `green`, `gold`, and `white`, or `transparent`
 - `bar_increase_color` color of drift bar when increasing, same valid colors as the base
 - `bar_decrease_color` color of drift bar when decreasing, same valid colors as the base
 - `drift_value` a 0-1 script value key which sets the size and direction of the drift 
@@ -174,7 +174,8 @@ Sets the color of the progress bar.
 
 **Parameters:**
 - `progress_bar` localization key identifier of progress bar
-- `color` color of base bar, valid colors are `default`/`blue`, `bad`/`red`, `green`, `gold`, and `white`
+- `color` color of bar, valid colors are `default`/`blue`, `bad`/`red`, `green`, `gold`, and `white`, or `transparent`
+- `side` which side to color, 'left' or 'right'
 
 ### Effect: `remove_com_progress_bar_color`
 Unsets the color of the progress bar, i.e. returns it to base game color
@@ -187,7 +188,7 @@ Sets the drift style of the progress bar.
 
 **Parameters:**
 - `progress_bar` localization key identifier of progress bar
-- `bar_increase_color` color of drift bar when increasing, valid colors are `default`/`blue`, `bad`/`red`, `green`, `gold`, and `white`
+- `bar_increase_color` color of drift bar when increasing, valid colors are `default`/`blue`, `bad`/`red`, `green`, `gold`, and `white`, or `transparent`
 - `bar_decrease_color` color of drift bar when decreasing, same valid colors as the increase colors
 - `drift_value` a 0-1 script value key which sets the size and direction of the drift 
 

@@ -1,13 +1,13 @@
-﻿movement_india_pan_national = {
+﻿REPLACE:movement_india_pan_national = {
 	category = movement_category_pan_national
-
+	
 	ideology = ideology_sovereignist_movement
 	character_ideologies = {
 		ideology_sovereignist_leader
 		ideology_social_democrat
 		ideology_humanitarian
 	}
-
+	
 	can_cause_obstinance = yes
 	
 	creation_trigger = {
@@ -23,14 +23,14 @@
 			}
 		}
 		has_technology_researched = pan-nationalism
-	}	
+	}
 	creation_weight = {
 		value = 5000
 	}
 	on_created = {
 		add_movement_enthusiasm_modifier = yes
 	}
-
+	
 	character_support_trigger = {
 		OR = {
 			has_ideology = ideology:ideology_sovereignist
@@ -72,7 +72,7 @@
 			has_discrimination_trait_group = heritage_group_south_asian
 		}
 	}
-
+	
 	pop_support_factors = {
 		movement_support_national_awakening
 		movement_support_cultural_fervor
@@ -88,7 +88,7 @@
 		movement_support_nationalism_tech
 		movement_support_pan_nationalism_tech
 	}
-
+	
 	pop_support_weight = {
 		if = {
 			limit = {
@@ -126,7 +126,7 @@
 				}
 			}
 		}
-
+		
 		if = {
 			limit = {
 				culture = {
@@ -173,49 +173,53 @@
 					desc = "POP_CAPITALISTS"
 				}
 			}
-
+			
 			add = {
 				desc = "URBAN_STATE"
 				value = 10
 				multiply = state.state_urbanization_rate
 			}
-
+			
 			if = {
 				limit = {
 					standard_of_living < state.average_expected_sol
 				}
-				add = { # Increases likelihood of support if impoverished
+				add = {
+					# Increases likelihood of support if impoverished
 					desc = "POP_POVERTY"
 					value = state.average_expected_sol
 					subtract = standard_of_living
 					max = 10
 				}
 			}
-
+			
 			if = {
 				limit = {
 					state = {
 						state_cultural_acceptance = {
 							target = PREV.culture
 							value < acceptance_status_5
-						}	
+						}
 					}
 				}
-				add = { # From 1.21x at 79 to 2x at 0
+				add = {
+					# From 1.21x at 79 to 2x at 0
 					desc = "POP_DISCRIMINATED"
 					value = 100
 					subtract = pop_acceptance
 					divide = 10
 				}
 			}
-			else = { # Non-discriminated pops are less likely to form separatist movements
+			else = {
+				# Non-discriminated pops are less likely to form separatist movements
 				multiply = {
 					desc = "POP_ACCEPTANCE"
 					value = 0.25
 				}
 			}
-
-			multiply = { # Multiplied by 2x max
+			
+			multiply = {
+				# Multiplied by 2x max
 				desc = "POP_RADICALS"
 				value = pop_radical_fraction
 				add = 1
@@ -243,15 +247,16 @@
 					desc = "NATIONALISM_TECH"
 				}
 			}
-
-			multiply = { # Range from x0.775 to 2.275
+			
+			multiply = {
+				# Range from x0.775 to 2.275
 				desc = "POP_CULTURE_FERVOR"
 				value = culture.culture_current_fervor
 				subtract = 15
 				multiply = 0.015
 				add = 1
 			}
-
+			
 			if = {
 				limit = {
 					culture ?= {
@@ -270,18 +275,18 @@
 		possible = {
 			political_movement_support >= 0.05
 		}
-	
+		
 		weight = {
 			value = 100
 		}
-	
+		
 		state_weight = {
 			add = {
 				value = state_urbanization_rate
 				multiply = 5
 			}
 		}
-
+		
 		forced_tags = {
 			BHT = {
 				trigger = {
@@ -291,7 +296,7 @@
 			}
 		}
 	}
-
+	
 	secession = {
 		possible = {
 			political_movement_support >= 0.05
@@ -354,7 +359,7 @@
 				divide = 500
 			}
 		}
-
+		
 		if = {
 			limit = {
 				owner = {
@@ -377,9 +382,9 @@
 	}
 }
 
-movement_german_national = {
+REPLACE:movement_german_national = {
 	category = movement_category_pan_national
-
+	
 	ideology = ideology_national_liberal_movement
 	character_ideologies = {
 		ideology_ethno_nationalist
@@ -388,9 +393,9 @@ movement_german_national = {
 		ideology_republican_leader
 		ideology_radical
 	}
-
+	
 	can_cause_obstinance = yes
-
+	
 	creation_trigger = {
 		OR = {
 			country_has_primary_culture = cu:north_german
@@ -408,7 +413,8 @@ movement_german_national = {
 		value = 100
 		if = {
 			limit = {
-				owner ?= { # If a movement of this type exists in a neighbouring country, make it more likely to spawn here as well
+				owner ?= {
+					# If a movement of this type exists in a neighbouring country, make it more likely to spawn here as well
 					any_neighbouring_state = {
 						owner = {
 							prestige > ROOT.owner.prestige
@@ -427,11 +433,11 @@ movement_german_national = {
 	on_created = {
 		add_movement_enthusiasm_modifier = yes
 	}
-
+	
 	disband_trigger = {
 		c:GER ?= this
 	}
-
+	
 	on_disbanded = {
 		if = {
 			limit = {
@@ -442,7 +448,7 @@ movement_german_national = {
 			}
 		}
 	}
-
+	
 	character_support_trigger = {
 		culture = {
 			has_discrimination_trait = heritage_germanic
@@ -482,13 +488,13 @@ movement_german_national = {
 			}
 		}
 	}
-
+	
 	pop_support_trigger = {
 		culture = {
 			has_discrimination_trait = heritage_germanic
 		}
 	}
-
+	
 	pop_support_factors = {
 		movement_support_national_awakening
 		movement_support_cultural_fervor
@@ -502,7 +508,7 @@ movement_german_national = {
 		movement_support_nationalism_tech
 		movement_support_pan_nationalism_tech
 	}
-
+	
 	pop_support_weight = {
 		if = {
 			limit = {
@@ -540,7 +546,7 @@ movement_german_national = {
 				}
 			}
 		}
-
+		
 		if = {
 			limit = {
 				strata = upper
@@ -628,13 +634,13 @@ movement_german_national = {
 				}
 			}
 		}
-
+		
 		add = {
 			desc = "URBAN_STATE"
 			value = 10
 			multiply = state.state_urbanization_rate
 		}
-
+		
 		if = {
 			limit = {
 				owner ?= {
@@ -657,15 +663,16 @@ movement_german_national = {
 				desc = "NATIONALISM_TECH"
 			}
 		}
-
-		multiply = { # Range from x0.775 to 2.275
+		
+		multiply = {
+			# Range from x0.775 to 2.275
 			desc = "POP_CULTURE_FERVOR"
 			value = culture.culture_current_fervor
 			subtract = 15
 			multiply = 0.015
 			add = 1
 		}
-
+		
 		if = {
 			limit = {
 				culture ?= {
@@ -677,8 +684,9 @@ movement_german_national = {
 				desc = "POP_ACTIVE_NATIONAL_AWAKENING"
 			}
 		}
-
-		if = { # If a more radical movement exists, it'll poach radicals from this one.
+		
+		if = {
+			# If a more radical movement exists, it'll poach radicals from this one.
 			limit = {
 				owner ?= {
 					any_political_movement = {
@@ -695,27 +703,28 @@ movement_german_national = {
 				subtract = pop_radical_fraction
 			}
 		}
-
-		multiply = { # Illiterate pops participate at 1/10 the rate of fully literate pops
+		
+		multiply = {
+			# Illiterate pops participate at 1/10 the rate of fully literate pops
 			desc = "POP_LITERACY"
 			value = literacy_rate
 			add = 0.10
 		}
 	}
-
+	
 	revolution = {
 		possible = {
 			political_movement_support >= 0.05
 		}
-
+		
 		weight = {
 			value = 100
 		}
-
+		
 		state_weight = {
 			value = 1
 			if = {
-			   limit = {
+				limit = {
 					NOT = {
 						state_is_homeland_of_german_cultures = yes
 					}
@@ -724,7 +733,7 @@ movement_german_national = {
 			}
 		}
 	}
-
+	
 	secession = {
 		possible = {
 			owner ?= {
@@ -733,15 +742,15 @@ movement_german_national = {
 			political_movement_support >= 0.05
 			scope:clout <= 0
 		}
-
+		
 		weight = {
 			value = 1000
 		}
-
+		
 		state_weight = {
 			value = 1
 			if = {
-			   limit = {
+				limit = {
 					NOT = {
 						state_is_homeland_of_german_cultures = yes
 					}
@@ -749,7 +758,7 @@ movement_german_national = {
 				multiply = 0
 			}
 		}
-
+		
 		forced_tags = {
 			NGF = {
 				trigger = {
@@ -769,7 +778,7 @@ movement_german_national = {
 			}
 		}
 	}
-
+	
 	additional_radicalism_factors = {
 		if = {
 			limit = {
@@ -777,7 +786,7 @@ movement_german_national = {
 					NOT = { culture = { is_primary_culture_of = root.owner } }
 				}
 			}
-
+			
 			add = {
 				value = 0.1
 				desc = "RULER_NOT_PRIMARY_CULTURE"
@@ -794,7 +803,7 @@ movement_german_national = {
 				value = 0.10
 			}
 		}
-
+		
 		if = {
 			limit = {
 				owner ?= {
@@ -818,9 +827,9 @@ movement_german_national = {
 			else_if = {
 				limit = {
 					owner ?= {
-								NOT = {
+						NOT = {
 							is_unification_candidate = GER
-								}
+						}
 						any_diplomatically_relevant_country = {
 							is_unification_candidate = GER
 						}
@@ -863,7 +872,7 @@ movement_german_national = {
 				}
 			}
 		}
-
+		
 		if = {
 			limit = {
 				owner = {
@@ -883,7 +892,7 @@ movement_german_national = {
 				value = 0.15
 			}
 		}
-
+		
 		add = {
 			desc = "FERVOR_OF_GERMAN_CULTURE_ACTIVISM"
 			value = owner.average_german_fervor
@@ -892,9 +901,9 @@ movement_german_national = {
 	}
 }
 
-movement_italian_national = {
+REPLACE:movement_italian_national = {
 	category = movement_category_pan_national
-
+	
 	ideology = ideology_national_liberal_movement
 	character_ideologies = {
 		ideology_ethno_nationalist
@@ -903,9 +912,9 @@ movement_italian_national = {
 		ideology_republican_leader
 		ideology_radical
 	}
-
+	
 	can_cause_obstinance = yes
-
+	
 	creation_trigger = {
 		OR = {
 			country_has_primary_culture = cu:north_italian
@@ -926,7 +935,8 @@ movement_italian_national = {
 		value = 100
 		if = {
 			limit = {
-				owner ?= { # If a movement of this type exists in a neighbouring country, make it more likely to spawn here as well
+				owner ?= {
+					# If a movement of this type exists in a neighbouring country, make it more likely to spawn here as well
 					any_neighbouring_state = {
 						owner = {
 							prestige > ROOT.owner.prestige
@@ -945,11 +955,11 @@ movement_italian_national = {
 	on_created = {
 		add_movement_enthusiasm_modifier = yes
 	}
-
+	
 	disband_trigger = {
 		c:ITA ?= this
 	}
-
+	
 	on_disbanded = {
 		if = {
 			limit = {
@@ -960,7 +970,7 @@ movement_italian_national = {
 			}
 		}
 	}
-
+	
 	character_support_trigger = {
 		culture = {
 			has_discrimination_trait = heritage_italic
@@ -1000,13 +1010,13 @@ movement_italian_national = {
 			}
 		}
 	}
-
+	
 	pop_support_trigger = {
 		culture = {
 			has_discrimination_trait = heritage_italic
 		}
 	}
-
+	
 	pop_support_factors = {
 		movement_support_national_awakening
 		movement_support_cultural_fervor
@@ -1020,7 +1030,7 @@ movement_italian_national = {
 		movement_support_nationalism_tech
 		movement_support_pan_nationalism_tech
 	}
-
+	
 	pop_support_weight = {
 		if = {
 			limit = {
@@ -1058,7 +1068,7 @@ movement_italian_national = {
 				}
 			}
 		}
-
+		
 		if = {
 			limit = {
 				strata = upper
@@ -1146,13 +1156,13 @@ movement_italian_national = {
 				}
 			}
 		}
-
+		
 		add = {
 			desc = "URBAN_STATE"
 			value = 10
 			multiply = state.state_urbanization_rate
 		}
-
+		
 		if = {
 			limit = {
 				owner ?= {
@@ -1175,15 +1185,16 @@ movement_italian_national = {
 				desc = "NATIONALISM_TECH"
 			}
 		}
-
-		multiply = { # Range from x0.775 to 2.275
+		
+		multiply = {
+			# Range from x0.775 to 2.275
 			desc = "POP_CULTURE_FERVOR"
 			value = culture.culture_current_fervor
 			subtract = 15
 			multiply = 0.015
 			add = 1
 		}
-
+		
 		if = {
 			limit = {
 				culture ?= {
@@ -1195,8 +1206,9 @@ movement_italian_national = {
 				desc = "POP_ACTIVE_NATIONAL_AWAKENING"
 			}
 		}
-
-		if = { # If a more radical movement exists, it'll poach radicals from this one.
+		
+		if = {
+			# If a more radical movement exists, it'll poach radicals from this one.
 			limit = {
 				owner ?= {
 					any_political_movement = {
@@ -1213,8 +1225,9 @@ movement_italian_national = {
 				subtract = pop_radical_fraction
 			}
 		}
-
-		multiply = { # Illiterate pops participate at 1/10 the rate of fully literate pops
+		
+		multiply = {
+			# Illiterate pops participate at 1/10 the rate of fully literate pops
 			desc = "POP_LITERACY"
 			value = literacy_rate
 			add = 0.10
@@ -1224,15 +1237,15 @@ movement_italian_national = {
 		possible = {
 			political_movement_support >= 0.05
 		}
-
+		
 		weight = {
 			value = 100
 		}
-
+		
 		state_weight = {
 			value = 1
 			if = {
-			   limit = {
+				limit = {
 					NOT = {
 						state_is_homeland_of_italian_cultures = yes
 					}
@@ -1241,7 +1254,7 @@ movement_italian_national = {
 			}
 		}
 	}
-
+	
 	secession = {
 		possible = {
 			owner ?= {
@@ -1250,15 +1263,15 @@ movement_italian_national = {
 			political_movement_support >= 0.05
 			scope:clout <= 0
 		}
-
+		
 		weight = {
 			value = 1000
 		}
-
+		
 		state_weight = {
 			value = 1
 			if = {
-			   limit = {
+				limit = {
 					NOT = {
 						state_is_homeland_of_italian_cultures = yes
 					}
@@ -1266,7 +1279,7 @@ movement_italian_national = {
 				multiply = 0
 			}
 		}
-
+		
 		forced_tags = {
 			ITA = {
 				trigger = {
@@ -1276,7 +1289,7 @@ movement_italian_national = {
 			}
 		}
 	}
-
+	
 	additional_radicalism_factors = {
 		if = {
 			limit = {
@@ -1284,7 +1297,7 @@ movement_italian_national = {
 					NOT = { culture = { is_primary_culture_of = root.owner } }
 				}
 			}
-
+			
 			add = {
 				value = 0.1
 				desc = "RULER_NOT_PRIMARY_CULTURE"
@@ -1313,9 +1326,9 @@ movement_italian_national = {
 			else_if = {
 				limit = {
 					owner ?= {
-								NOT = {
+						NOT = {
 							is_unification_candidate = ITA
-								}
+						}
 						any_diplomatically_relevant_country = {
 							is_unification_candidate = ITA
 						}
@@ -1358,7 +1371,7 @@ movement_italian_national = {
 				}
 			}
 		}
-
+		
 		if = {
 			limit = {
 				owner = {
@@ -1378,7 +1391,7 @@ movement_italian_national = {
 				value = 0.15
 			}
 		}
-
+		
 		add = {
 			desc = "FERVOR_OF_ITALIAN_CULTURE_ACTIVISM"
 			value = owner.average_italian_fervor
@@ -1387,9 +1400,9 @@ movement_italian_national = {
 	}
 }
 
-movement_yugoslav_national = {
+REPLACE:movement_yugoslav_national = {
 	category = movement_category_pan_national
-
+	
 	ideology = ideology_national_liberal_movement
 	character_ideologies = {
 		ideology_ethno_nationalist
@@ -1398,9 +1411,9 @@ movement_yugoslav_national = {
 		ideology_republican_leader
 		ideology_radical
 	}
-
+	
 	can_cause_obstinance = yes
-
+	
 	creation_trigger = {
 		OR = {
 			country_has_primary_culture = cu:croat
@@ -1426,7 +1439,8 @@ movement_yugoslav_national = {
 		value = 100
 		if = {
 			limit = {
-				owner ?= { # If a movement of this type exists in a neighbouring country, make it more likely to spawn here as well
+				owner ?= {
+					# If a movement of this type exists in a neighbouring country, make it more likely to spawn here as well
 					any_neighbouring_state = {
 						owner = {
 							prestige > ROOT.owner.prestige
@@ -1445,11 +1459,11 @@ movement_yugoslav_national = {
 	on_created = {
 		add_movement_enthusiasm_modifier = yes
 	}
-
+	
 	disband_trigger = {
 		c:YUG ?= this
 	}
-
+	
 	on_disbanded = {
 		if = {
 			limit = {
@@ -1460,7 +1474,7 @@ movement_yugoslav_national = {
 			}
 		}
 	}
-
+	
 	character_support_trigger = {
 		culture = {
 			has_discrimination_trait = heritage_south_slavic
@@ -1500,13 +1514,13 @@ movement_yugoslav_national = {
 			}
 		}
 	}
-
+	
 	pop_support_trigger = {
 		culture = {
 			has_discrimination_trait = heritage_south_slavic
 		}
 	}
-
+	
 	pop_support_factors = {
 		movement_support_national_awakening
 		movement_support_cultural_fervor
@@ -1520,7 +1534,7 @@ movement_yugoslav_national = {
 		movement_support_nationalism_tech
 		movement_support_pan_nationalism_tech
 	}
-
+	
 	pop_support_weight = {
 		if = {
 			limit = {
@@ -1558,7 +1572,7 @@ movement_yugoslav_national = {
 				}
 			}
 		}
-
+		
 		if = {
 			limit = {
 				strata = upper
@@ -1646,13 +1660,13 @@ movement_yugoslav_national = {
 				}
 			}
 		}
-
+		
 		add = {
 			desc = "URBAN_STATE"
 			value = 10
 			multiply = state.state_urbanization_rate
 		}
-
+		
 		if = {
 			limit = {
 				owner ?= {
@@ -1675,15 +1689,16 @@ movement_yugoslav_national = {
 				desc = "NATIONALISM_TECH"
 			}
 		}
-
-		multiply = { # Range from x0.775 to 2.275
+		
+		multiply = {
+			# Range from x0.775 to 2.275
 			desc = "POP_CULTURE_FERVOR"
 			value = culture.culture_current_fervor
 			subtract = 15
 			multiply = 0.015
 			add = 1
 		}
-
+		
 		if = {
 			limit = {
 				culture ?= {
@@ -1695,8 +1710,9 @@ movement_yugoslav_national = {
 				desc = "POP_ACTIVE_NATIONAL_AWAKENING"
 			}
 		}
-
-		if = { # If a more radical movement exists, it'll poach radicals from this one.
+		
+		if = {
+			# If a more radical movement exists, it'll poach radicals from this one.
 			limit = {
 				owner ?= {
 					any_political_movement = {
@@ -1713,8 +1729,9 @@ movement_yugoslav_national = {
 				subtract = pop_radical_fraction
 			}
 		}
-
-		multiply = { # Illiterate pops participate at 1/10 the rate of fully literate pops
+		
+		multiply = {
+			# Illiterate pops participate at 1/10 the rate of fully literate pops
 			desc = "POP_LITERACY"
 			value = literacy_rate
 			add = 0.10
@@ -1724,15 +1741,15 @@ movement_yugoslav_national = {
 		possible = {
 			political_movement_support >= 0.05
 		}
-
+		
 		weight = {
 			value = 100
 		}
-
+		
 		state_weight = {
 			value = 1
 			if = {
-			   limit = {
+				limit = {
 					NOT = {
 						state_is_homeland_of_yugoslav_cultures = yes
 					}
@@ -1740,7 +1757,7 @@ movement_yugoslav_national = {
 				multiply = 0
 			}
 		}
-
+		
 		forced_tags = {
 			YUG = {
 				trigger = {
@@ -1750,7 +1767,7 @@ movement_yugoslav_national = {
 			}
 		}
 	}
-
+	
 	secession = {
 		possible = {
 			owner ?= {
@@ -1759,15 +1776,15 @@ movement_yugoslav_national = {
 			political_movement_support >= 0.05
 			scope:clout <= 0
 		}
-
+		
 		weight = {
 			value = 1000
 		}
-
+		
 		state_weight = {
 			value = 1
 			if = {
-			   limit = {
+				limit = {
 					NOT = {
 						state_is_homeland_of_yugoslav_cultures = yes
 					}
@@ -1775,7 +1792,7 @@ movement_yugoslav_national = {
 				multiply = 0
 			}
 		}
-
+		
 		forced_tags = {
 			YUG = {
 				trigger = {
@@ -1785,7 +1802,7 @@ movement_yugoslav_national = {
 			}
 		}
 	}
-
+	
 	additional_radicalism_factors = {
 		if = {
 			limit = {
@@ -1793,13 +1810,13 @@ movement_yugoslav_national = {
 					NOT = { culture = { is_primary_culture_of = root.owner } }
 				}
 			}
-
+			
 			add = {
 				value = 0.1
 				desc = "RULER_NOT_PRIMARY_CULTURE"
 			}
 		}
-
+		
 		if = {
 			limit = {
 				owner ?= {
@@ -1870,7 +1887,7 @@ movement_yugoslav_national = {
 				}
 			}
 		}
-
+		
 		if = {
 			limit = {
 				owner = {
@@ -1890,11 +1907,388 @@ movement_yugoslav_national = {
 				value = 0.15
 			}
 		}
-
+		
 		add = {
 			desc = "FERVOR_OF_SOUTH_SLAVIC_CULTURE_ACTIVISM"
 			value = owner.average_south_slavic_fervor
 			divide = 400
 		}
+	}
+}
+
+REPLACE:movement_dominican_national = {
+	category = movement_category_pan_national # Caribeños, Spaniard, and Afro-Caribeños in Santo Domingo should all be into this
+	
+	ideology = ideology_national_liberal_movement
+	character_ideologies = {
+		ideology_ethno_nationalist
+		ideology_market_liberal
+		ideology_liberal_leader
+		ideology_republican_leader
+		ideology_radical
+		ideology_reformer
+	}
+	
+	can_cause_obstinance = yes
+	
+	creation_trigger = {
+		any_scope_state = {
+			state_region = s:STATE_SANTO_DOMINGO
+		}
+		NOT = {
+			country_has_primary_culture = cu:caribeno
+		}
+	}
+	creation_weight = {
+		value = 100
+	}
+	on_created = {
+		add_movement_enthusiasm_modifier = yes
+	}
+	
+	disband_trigger = {
+		NOT = {
+			any_scope_state = {
+				state_region = s:STATE_SANTO_DOMINGO
+			}
+		}
+	}
+	
+	on_disbanded = {
+	}
+	
+	character_support_trigger = {
+		culture = {
+			has_discrimination_trait = language_hispanophone
+		}
+	}
+	character_support_weight = {
+		value = 100
+		if = {
+			limit = {
+				OR = {
+					has_ideology = ideology:ideology_ethno_nationalist
+				}
+			}
+			multiply = {
+				value = 5
+			}
+		}
+	}
+	
+	pop_support_trigger = {
+		culture = {
+			has_discrimination_trait = language_hispanophone
+		}
+		state = {
+			OR = {
+				state_region = s:STATE_SANTO_DOMINGO
+				state_region = s:STATE_HAITI
+			}
+		}
+	}
+	
+	pop_support_factors = {
+		movement_support_national_awakening
+		movement_support_cultural_fervor
+		movement_support_high_urbanization
+		movement_support_italic_heritage
+		movement_support_academics
+		movement_support_clerks
+		movement_support_shopkeepers
+		movement_support_officers
+		movement_support_soldiers
+		movement_support_nationalism_tech
+		movement_support_pan_nationalism_tech
+	}
+	
+	pop_support_weight = {
+		if = {
+			limit = {
+				exists = scope:political_movement
+				scope:political_movement ?= {
+					OR = {
+						is_being_suppressed = yes
+						is_being_bolstered = yes
+					}
+				}
+			}
+			if = {
+				limit = {
+					scope:political_movement = {
+						is_being_suppressed = yes
+					}
+				}
+				add = {
+					value = suppression_base_value
+					multiply = {
+						value = -0.5
+						add = owner.modifier:country_suppression_attraction_factor
+					}
+					desc = "concept_suppressed"
+				}
+			}
+			else = {
+				add = {
+					value = bolstering_base_value
+					multiply = {
+						value = 0.5
+						add = owner.modifier:country_bolster_attraction_factor
+					}
+					desc = "concept_bolstered"
+				}
+			}
+		}
+		
+		if = {
+			limit = {
+				owner = {
+					has_journal_entry = je_haitian_debt
+				}
+			}
+			if = {
+				limit = {
+					owner = {
+						je:je_haitian_debt ?= {
+							has_modifier = modifier_french_independence_payments_4
+						}
+					}
+				}
+				add = {
+					value = 200
+					desc = "modifier_french_independence_payments_4_desc"
+				}
+			}
+			else_if = {
+				limit = {
+					owner = {
+						je:je_haitian_debt ?= {
+							has_modifier = modifier_french_independence_payments_3
+						}
+					}
+				}
+				add = {
+					value = 150
+					desc = "modifier_french_independence_payments_3_desc"
+				}
+			}
+			else_if = {
+				limit = {
+					owner = {
+						je:je_haitian_debt ?= {
+							has_modifier = modifier_french_independence_payments_2
+						}
+					}
+				}
+				add = {
+					value = 100
+					desc = "modifier_french_independence_payments_2_desc"
+				}
+			}
+			else_if = {
+				limit = {
+					owner = {
+						je:je_haitian_debt ?= {
+							has_modifier = modifier_french_independence_payments_1
+						}
+					}
+				}
+				add = {
+					value = 50
+					desc = "modifier_french_independence_payments_1_desc"
+				}
+			}
+		}
+		
+		if = {
+			limit = {
+				strata = upper
+			}
+			if = {
+				limit = {
+					is_pop_type = capitalists
+				}
+				add = {
+					value = 35
+					desc = "POP_CAPITALISTS"
+				}
+			}
+			else = {
+				add = {
+					value = 30
+					desc = "UPPER_NO_ICON"
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				strata = middle
+			}
+			if = {
+				limit = {
+					is_pop_type = academics
+				}
+				add = {
+					value = 35
+					desc = "POP_ACADEMICS"
+				}
+			}
+			else_if = {
+				limit = {
+					is_pop_type = shopkeepers
+				}
+				add = {
+					value = 30
+					desc = "POP_SHOPKEEPERS"
+				}
+			}
+			else_if = {
+				limit = {
+					is_pop_type = officers
+				}
+				add = {
+					value = 30
+					desc = "POP_OFFICERS"
+				}
+			}
+			else = {
+				add = {
+					value = 20
+					desc = "MIDDLE_NO_ICON"
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				strata = lower
+			}
+			if = {
+				limit = {
+					is_pop_type = clerks
+				}
+				add = {
+					value = 25
+					desc = "POP_CLERKS"
+				}
+			}
+			else_if = {
+				limit = {
+					is_pop_type = soldiers
+				}
+				add = {
+					value = 25
+					desc = "POP_SOLDIERS"
+				}
+			}
+			else = {
+				add = {
+					value = 15
+					desc = "LOWER_NO_ICON"
+				}
+			}
+		}
+		
+		add = {
+			desc = "URBAN_STATE"
+			value = 10
+			multiply = state.state_urbanization_rate
+		}
+		
+		if = {
+			limit = {
+				owner ?= {
+					has_technology_researched = pan-nationalism
+				}
+			}
+			multiply = {
+				value = 1.5
+				desc = "PAN_NATIONALISM_TECH"
+			}
+		}
+		else_if = {
+			limit = {
+				owner ?= {
+					has_technology_researched = nationalism
+				}
+			}
+			multiply = {
+				value = 1.25
+				desc = "NATIONALISM_TECH"
+			}
+		}
+		
+		multiply = {
+			# Range from x0.775 to 2.275
+			desc = "POP_CULTURE_FERVOR"
+			value = culture.culture_current_fervor
+			subtract = 15
+			multiply = 0.015
+			add = 1
+		}
+		
+		if = {
+			limit = {
+				culture ?= {
+					culture_has_national_awakening = yes
+				}
+			}
+			multiply = {
+				value = 1.5
+				desc = "POP_ACTIVE_NATIONAL_AWAKENING"
+			}
+		}
+		
+		if = {
+			# If a more radical movement exists, it'll poach radicals from this one.
+			limit = {
+				owner ?= {
+					any_political_movement = {
+						OR = {
+							is_political_movement_type = movement_radical
+							is_political_movement_type = movement_fascist
+						}
+					}
+				}
+			}
+			multiply = {
+				desc = "POP_RADICAL_MOVEMENT_LOSSES"
+				value = 1
+				subtract = pop_radical_fraction
+			}
+		}
+	}
+	
+	secession = {
+		possible = {
+			political_movement_support >= 0.05
+		}
+		
+		weight = {
+			value = 1000
+		}
+		
+		state_weight = {
+			value = 1
+			if = {
+				limit = {
+					NOT = {
+						state_region = s:STATE_SANTO_DOMINGO
+					}
+				}
+				multiply = 0
+			}
+		}
+		
+		forced_tags = {
+			DOM = {
+				trigger = {
+					always = yes
+				}
+				weight = 1000
+			}
+		}
+	}
+	
+	additional_radicalism_factors = {
 	}
 }

@@ -6,6 +6,7 @@
 	scripted_button = sb_com_progress_in_style_test
 	scripted_button = sb_com_progress_in_style_test2
 	scripted_button = sb_com_progress_in_style_test3
+	scripted_button = sb_com_progress_in_style_test4
 
 	scripted_progress_bar = spb_com_progress_in_style
 
@@ -59,6 +60,7 @@
 				set_com_progress_bar_color = {
 					progress_bar = spb_com_progress_in_style
 					color = white									#change base color to white
+					side = left
 				}
 				set_com_progress_bar_drift = {
 					progress_bar = spb_com_progress_in_style
@@ -87,6 +89,7 @@
 				set_com_progress_bar_color = {
 					progress_bar = spb_com_progress_in_style
 					color = blue									#return to start value
+					side = left
 				}
 				set_com_progress_bar_drift = {
 					progress_bar = spb_com_progress_in_style

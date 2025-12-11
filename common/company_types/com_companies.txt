@@ -1,13 +1,13 @@
 ﻿
 company_vic3_mod_coop = {
 	icon = "gfx/interface/icons/company_icons/vic3_mod_coop.dds"
-	background = "gfx/interface/icons/company_icons/company_backgrounds/comp_illu_manufactering_light.dds"
+	background = "gfx/interface/icons/company_icons/company_backgrounds/comp_illu_manufacturing_light.dds"
 	flavored_company = yes
 	building_types = {
-		building_arts_academy
+		building_art_academy
 	}
 	extension_building_types = {
-		building_paper_mills
+		building_paper_mill
 		building_electrics_industry
 		building_gold_mine
 	}
@@ -25,7 +25,7 @@ company_vic3_mod_coop = {
 		any_scope_state = {
 			is_incorporated = yes
 			any_scope_building = {
-				is_building_type = building_arts_academy
+				is_building_type = building_art_academy
 				level >= 20
 			}
 		}
@@ -42,7 +42,7 @@ company_vic3_mod_coop = {
 			any_scope_state = {
 				is_incorporated = yes
 				any_scope_building = {
-					is_building_type = building_arts_academy
+					is_building_type = building_art_academy
 					level >= 20
 				}
 			}
@@ -59,7 +59,7 @@ company_vic3_mod_coop = {
 		any_scope_state = {
 			is_incorporated = yes
 			any_scope_building = {
-				is_building_type = building_arts_academy
+				is_building_type = building_art_academy
 				level >= 20
 			}
 		}
@@ -73,7 +73,7 @@ company_vic3_mod_coop = {
 		value = 3
 	}
 	ai_construction_targets = {
-		building_arts_academy = {
+		building_art_academy = {
 			level = 20
 			state_trigger = {
 				is_incorporated = yes

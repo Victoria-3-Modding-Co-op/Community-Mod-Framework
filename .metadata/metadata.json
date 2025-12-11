@@ -1,10 +1,10 @@
 {
-  "name" : "[1.11] Community Mod Framework",
+  "name" : "[1.12] Community Mod Framework",
   "id" : "com.github.Victoria-3-Modding-Co-op.Community-Mod-Framework",
-  "version" : "1.36.0",
+  "version" : "1.37.0",
   "game_id" : "victoria3",
   "picture" : null,
-  "supported_game_version" : "1.11.*",
+  "supported_game_version" : "1.12.*",
   "short_description" : "This is a framework to enable easy integration between mods.",
   "tags" : [ "1.11" ],
   "relationships" : [ ],

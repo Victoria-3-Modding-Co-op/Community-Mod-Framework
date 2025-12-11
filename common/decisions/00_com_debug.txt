@@ -2,16 +2,15 @@
 	is_shown = {
 		is_player = yes
 		has_global_variable = com_debug
-	}
-	possible = {
-		hidden_trigger = {
-			NOT = {
-				any_in_global_list = {
-					variable = custom_button_list_flag
-					flag:com_toggle_debug_sgui ?= this
-				}
+		NOT = {
+			any_in_global_list = {
+				variable = custom_button_list_flag
+				flag:com_toggle_debug_sgui ?= this
 			}
 		}
+	}
+	possible = {
+		always = yes
 	}
 	when_taken = {
 		custom_tooltip = {

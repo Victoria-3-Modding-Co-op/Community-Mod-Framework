@@ -1,4 +1,4 @@
-﻿movement_utilitarian = {
+﻿REPLACE:movement_utilitarian = {
 	category = movement_category_ideological
 	
 	ideology = ideology_utilitarian_movement
@@ -18,7 +18,8 @@
 		value = 100
 		if = {
 			limit = {
-				owner ?= { # If a movement of this type exists in a neighbouring country, make it more likely to spawn here as well
+				owner ?= {
+					# If a movement of this type exists in a neighbouring country, make it more likely to spawn here as well
 					any_neighbouring_state = {
 						owner = {
 							prestige > ROOT.owner.prestige
@@ -62,12 +63,12 @@
 			}
 		}
 	}
-
+	
 	pop_support_trigger = {
 		OR = {
 			AND = {
 				owner = {
-					is_country_type = colonial
+					country_is_colonial_or_company = yes
 				}
 				culture = {
 					has_discrimination_trait_group = heritage_group_european
@@ -86,7 +87,7 @@
 			is_pop_type = slaves
 		}
 	}
-
+	
 	pop_support_factors = {
 		movement_support_colonial_rule
 		movement_support_high_acceptance
@@ -133,7 +134,7 @@
 				}
 			}
 		}
-
+		
 		add = {
 			value = 1
 			desc = "POP_BASE_SUPPORT"
@@ -142,7 +143,7 @@
 		if = {
 			limit = {
 				owner = {
-					is_country_type = colonial
+					country_is_colonial_or_company = yes
 				}
 				culture = {
 					has_discrimination_trait_group = heritage_group_european
@@ -159,7 +160,7 @@
 				}
 			}
 		}
-
+		
 		if = {
 			limit = {
 				is_pop_type = bureaucrats
@@ -205,50 +206,51 @@
 				value = 3
 			}
 		}
-
-		multiply = { # Illiterate pops participate at 1/10 the rate of fully literate pops
+		
+		multiply = {
+			# Illiterate pops participate at 1/10 the rate of fully literate pops
 			desc = "POP_LITERACY"
 			value = literacy_rate
 			add = 0.10
 		}
-
+		
 		multiply = {
 			desc = "POP_ACCEPTANCE"
 			value = pop_acceptance
 			divide = 75
 		}
 	}
-
+	
 	revolution = {
 		possible = {
 			political_movement_support >= 0.05
 		}
-	
+		
 		weight = {
 			value = 100
 		}
-	
+		
 		state_weight = {
 			value = 1
 			if = {
 				limit = {
-					# OR = {
+					OR = {
 						any_scope_building = {
 							is_building_group = bg_bureaucracy
 							level >= 10
 						}
-					# }
+					}
 				}
 				multiply = 10
 			}
 			else_if = {
 				limit = {
-					# OR = {
+					OR = {
 						any_scope_building = {
 							is_building_group = bg_bureaucracy
 							level >= 5
 						}
-					# }
+					}
 				}
 				multiply = 5
 			}
@@ -276,23 +278,23 @@
 			value = 1
 			if = {
 				limit = {
-					# OR = {
+					OR = {
 						any_scope_building = {
 							is_building_group = bg_bureaucracy
 							level >= 10
 						}
-					# }
+					}
 				}
 				multiply = 10
 			}
 			else_if = {
 				limit = {
-					# OR = {
+					OR = {
 						any_scope_building = {
 							is_building_group = bg_bureaucracy
 							level >= 5
 						}
-					# }
+					}
 				}
 				multiply = 5
 			}
@@ -347,7 +349,7 @@
 	}
 }
 
-movement_orleanist = {
+REPLACE:movement_orleanist = {
 	category = movement_category_ideological
 	
 	ideology = ideology_orleanist_movement
@@ -376,7 +378,8 @@ movement_orleanist = {
 		value = 100
 		if = {
 			limit = {
-				owner ?= { # If a movement of this type exists in a neighbouring country, make it more likely to spawn here as well
+				owner ?= {
+					# If a movement of this type exists in a neighbouring country, make it more likely to spawn here as well
 					any_neighbouring_state = {
 						owner = {
 							prestige > ROOT.owner.prestige
@@ -443,7 +446,7 @@ movement_orleanist = {
 			is_pop_type = slaves
 		}
 	}
-
+	
 	pop_support_factors = {
 		movement_support_high_urbanization
 		movement_support_high_literacy
@@ -492,18 +495,18 @@ movement_orleanist = {
 				}
 			}
 		}
-
+		
 		add = {
 			value = 3
 			desc = "POP_BASE_SUPPORT"
 		}
-
+		
 		add = {
 			desc = "URBAN_STATE"
 			value = 10
 			multiply = state.state_urbanization_rate
 		}
-
+		
 		if = {
 			limit = {
 				strata = upper
@@ -585,19 +588,20 @@ movement_orleanist = {
 				}
 			}
 		}
-
-		multiply = { # Illiterate pops participate at 1/10 the rate of fully literate pops
+		
+		multiply = {
+			# Illiterate pops participate at 1/10 the rate of fully literate pops
 			desc = "POP_LITERACY"
 			value = literacy_rate
 			add = 0.10
 		}
 	}
-
+	
 	revolution = {
 		possible = {
 			political_movement_support >= 0.05
 		}
-	
+		
 		weight = {
 			value = 100
 		}
@@ -613,7 +617,7 @@ movement_orleanist = {
 			value = 1000
 		}
 	}
-
+	
 	additional_radicalism_factors = {
 		if = {
 			limit = {
@@ -653,7 +657,7 @@ movement_orleanist = {
 	}
 }
 
-movement_bonapartist = {
+REPLACE:movement_bonapartist = {
 	category = movement_category_ideological
 	
 	ideology = ideology_bonapartist_movement
@@ -682,7 +686,8 @@ movement_bonapartist = {
 		value = 100
 		if = {
 			limit = {
-				owner ?= { # If a movement of this type exists in a neighbouring country, make it more likely to spawn here as well
+				owner ?= {
+					# If a movement of this type exists in a neighbouring country, make it more likely to spawn here as well
 					any_neighbouring_state = {
 						owner = {
 							prestige > ROOT.owner.prestige
@@ -750,7 +755,7 @@ movement_bonapartist = {
 			is_pop_type = slaves
 		}
 	}
-
+	
 	pop_support_factors = {
 		movement_support_high_literacy
 		movement_support_capitalists
@@ -800,12 +805,12 @@ movement_bonapartist = {
 				}
 			}
 		}
-
+		
 		add = {
 			value = 5
 			desc = "POP_BASE_SUPPORT"
 		}
-
+		
 		if = {
 			limit = {
 				strata = upper
@@ -905,24 +910,25 @@ movement_bonapartist = {
 				}
 			}
 		}
-
-		multiply = { # Illiterate pops participate at 1/10 the rate of fully literate pops
+		
+		multiply = {
+			# Illiterate pops participate at 1/10 the rate of fully literate pops
 			desc = "POP_LITERACY"
 			value = literacy_rate
 			add = 0.10
 		}
 	}
-
+	
 	revolution = {
 		possible = {
 			political_movement_support >= 0.05
 		}
-	
+		
 		weight = {
 			value = 100
 		}
 	}
-
+	
 	secession = {
 		possible = {
 			political_movement_support >= 0.05
@@ -933,7 +939,7 @@ movement_bonapartist = {
 			value = 1000
 		}
 	}
-
+	
 	additional_radicalism_factors = {
 		if = {
 			limit = {
@@ -973,7 +979,7 @@ movement_bonapartist = {
 	}
 }
 
-movement_legitimist = {
+REPLACE:movement_legitimist = {
 	category = movement_category_ideological
 	
 	ideology = ideology_legitimist_movement
@@ -1002,7 +1008,8 @@ movement_legitimist = {
 		value = 100
 		if = {
 			limit = {
-				owner ?= { # If a movement of this type exists in a neighbouring country, make it more likely to spawn here as well
+				owner ?= {
+					# If a movement of this type exists in a neighbouring country, make it more likely to spawn here as well
 					any_neighbouring_state = {
 						owner = {
 							prestige > ROOT.owner.prestige
@@ -1065,14 +1072,14 @@ movement_legitimist = {
 			}
 		}
 	}
-
+	
 	pop_support_trigger = {
 		NOT = {
 			is_pop_type = slaves
 		}
 		religion = rel:catholic
 	}
-
+	
 	pop_support_factors = {
 		movement_support_low_urbanization
 		movement_support_high_literacy
@@ -1082,7 +1089,7 @@ movement_legitimist = {
 		movement_support_clergymen
 		movement_support_officers
 	}
-
+	
 	pop_support_weight = {
 		if = {
 			limit = {
@@ -1120,19 +1127,19 @@ movement_legitimist = {
 				}
 			}
 		}
-
+		
 		add = {
 			desc = "URBAN_STATE" # Increases support in rural states, decreases in urban
 			value = 0.5
 			subtract = state.state_urbanization_rate
 			multiply = 10
 		}
-
+		
 		add = {
 			value = 5
 			desc = "POP_BASE_SUPPORT"
 		}
-
+		
 		if = {
 			limit = {
 				is_pop_type = aristocrats
@@ -1179,19 +1186,20 @@ movement_legitimist = {
 			}
 		}
 		
-		multiply = { # Illiterate pops participate at 1/10 the rate of fully literate pops
+		multiply = {
+			# Illiterate pops participate at 1/10 the rate of fully literate pops
 			desc = "POP_LITERACY"
 			value = literacy_rate
 			add = 0.2
 			max = 0.7 # Starts more powerful but caps out early
 		}
 	}
-
+	
 	revolution = {
 		possible = {
 			political_movement_support >= 0.05
 		}
-	
+		
 		weight = {
 			value = 100
 		}
@@ -1207,7 +1215,7 @@ movement_legitimist = {
 			value = 1000
 		}
 	}
-
+	
 	additional_radicalism_factors = {
 		if = {
 			limit = {
@@ -1246,3 +1254,425 @@ movement_legitimist = {
 		}
 	}
 }
+
+REPLACE:movement_carlist = {
+	category = movement_category_ideological
+	
+	ideology = ideology_carlist_movement
+	character_ideologies = {
+		ideology_carlist
+	}
+	
+	creation_trigger = {
+		OR = {
+			country_has_primary_culture = cu:spanish
+			country_has_primary_culture = cu:catalan
+			country_has_primary_culture = cu:basque
+		}
+		NOT = {
+			has_variable = monarchy_stamped_out_var
+		}
+	}
+	creation_weight = {
+		value = 100
+	}
+	on_created = {
+		add_movement_enthusiasm_modifier = yes
+	}
+	
+	disband_trigger = {
+		has_variable = monarchy_stamped_out_var
+	}
+	
+	character_support_trigger = {
+		OR = {
+			has_ideology = ideology:ideology_carlist
+			has_ideology = ideology:ideology_traditionalist
+			has_ideology = ideology:ideology_royalist
+			has_ideology = ideology:ideology_integralist
+			has_ideology = ideology:ideology_theocrat
+			AND = {
+				law_stance = {
+					law = law_type:law_monarchy
+					value > neutral
+				}
+				law_stance = {
+					law = law_type:law_state_religion
+					value > neutral
+				}
+			}
+		}
+	}
+	character_support_weight = {
+		value = 200
+		if = {
+			limit = {
+				has_ideology = ideology:ideology_carlist
+			}
+			multiply = {
+				value = 5
+			}
+		}
+	}
+	
+	pop_support_trigger = {
+		NOT = {
+			is_pop_type = slaves
+		}
+		religion = rel:catholic
+	}
+	
+	pop_support_factors = {
+		movement_support_low_urbanization
+		movement_support_high_literacy
+		movement_support_aristocrats
+		movement_support_farmers
+		movement_support_peasants
+		movement_support_clergymen
+		movement_support_officers
+	}
+	
+	pop_support_weight = {
+		add = {
+			desc = "URBAN_STATE" # Increases support in rural states, decreases in urban
+			value = 0.5
+			subtract = state.state_urbanization_rate
+			multiply = 10
+		}
+		
+		add = {
+			value = 5
+			desc = "POP_BASE_SUPPORT"
+		}
+		
+		if = {
+			limit = {
+				is_pop_type = aristocrats
+			}
+			add = {
+				value = 25
+				desc = "POP_ARISTOCRATS"
+			}
+		}
+		else_if = {
+			limit = {
+				is_pop_type = farmers
+			}
+			add = {
+				value = 15
+				desc = "POP_FARMERS"
+			}
+		}
+		else_if = {
+			limit = {
+				is_pop_type = peasants
+			}
+			add = {
+				value = 15
+				desc = "POP_PEASANTS"
+			}
+		}
+		else_if = {
+			limit = {
+				is_pop_type = clergymen
+			}
+			add = {
+				value = 15
+				desc = "POP_CLERGYMEN"
+			}
+		}
+		else_if = {
+			limit = {
+				is_pop_type = officers
+			}
+			add = {
+				value = 15
+				desc = "POP_OFFICERS"
+			}
+		}
+		else_if = {
+			limit = {
+				is_pop_type = soldiers
+			}
+			add = {
+				value = 5
+				desc = "POP_SOLDIERS"
+			}
+		}
+		
+		if = {
+			limit = {
+				# Only Catholics can support this anyway
+				culture = {
+					NOT = {
+						cu:spanish ?= this
+					}
+					has_discrimination_trait_group = heritage_group_european
+				}
+			}
+			multiply = {
+				# Less accepted pops like Basques and Catalans tend to like this movement
+				desc = "POP_LOW_ACCEPTANCE"
+				value = 100
+				subtract = pop_acceptance
+				divide = 25
+			}
+		}
+
+		if = {
+			limit = {
+				owner ?= {
+					OR = {
+						c:SPC ?= this
+						has_variable = is_carlist_spain
+					}
+				}
+				culture ?= cu:spanish
+			}
+			multiply = { # Carlists love Carlism
+				desc = "SPC"
+				value = 2
+			}
+		}
+		
+		multiply = {
+			# Illiterate pops participate at 1/10 the rate of fully literate pops
+			desc = "POP_LITERACY"
+			value = literacy_rate
+			add = 0.2
+			max = 0.7 # Starts more powerful but caps out early
+		}
+	}
+	
+	revolution = {
+		possible = {
+			political_movement_support >= 0.05
+		}
+		
+		forced_tags = {
+			SPC = {
+				trigger = {
+					owner ?= { country_has_primary_culture = cu:spanish }
+				}
+				weight = 1000
+			}
+		}
+		
+		weight = {
+			value = 100
+		}
+	}
+	
+	secession = {
+		possible = {
+			political_movement_support >= 0.05
+			scope:clout <= 0
+		}
+		
+		weight = {
+			value = 1000
+		}
+	}
+	
+	additional_radicalism_factors = {
+		if = {
+			limit = {
+				owner ?= {
+					has_law = law_type:law_monarchy
+					ruler ?= {
+						NOT = {
+							has_ideology = ideology:ideology_carlist
+						}
+					}
+				}
+			}
+			add = {
+				value = 0.25
+				desc = "NON_CARLIST_MONARCH"
+			}
+		}
+	}
+}
+
+REPLACE:movement_miguelist = {
+	category = movement_category_ideological
+	
+	ideology = ideology_miguelist_movement
+	character_ideologies = {
+		ideology_miguelist
+	}
+	
+	creation_trigger = {
+		country_has_primary_culture = cu:portuguese
+		NOT = {
+			has_variable = monarchy_stamped_out_var
+		}
+	}
+	creation_weight = {
+		value = 100
+	}
+	on_created = {
+		add_movement_enthusiasm_modifier = yes
+	}
+	
+	disband_trigger = {
+		has_variable = monarchy_stamped_out_var
+	}
+	
+	character_support_trigger = {
+		OR = {
+			has_ideology = ideology:ideology_miguelist
+			has_ideology = ideology:ideology_traditionalist
+			has_ideology = ideology:ideology_royalist
+			has_ideology = ideology:ideology_integralist
+			has_ideology = ideology:ideology_theocrat
+			AND = {
+				law_stance = {
+					law = law_type:law_monarchy
+					value > neutral
+				}
+				law_stance = {
+					law = law_type:law_state_religion
+					value > neutral
+				}
+			}
+		}
+	}
+	character_support_weight = {
+		value = 200
+		if = {
+			limit = {
+				has_ideology = ideology:ideology_miguelist
+			}
+			multiply = {
+				value = 5
+			}
+		}
+	}
+	
+	pop_support_trigger = {
+		NOT = {
+			is_pop_type = slaves
+		}
+		religion = rel:catholic
+	}
+	
+	pop_support_factors = {
+		movement_support_low_urbanization
+		movement_support_high_literacy
+		movement_support_aristocrats
+		movement_support_farmers
+		movement_support_peasants
+		movement_support_clergymen
+		movement_support_officers
+	}
+	
+	pop_support_weight = {
+		add = {
+			desc = "URBAN_STATE" # Increases support in rural states, decreases in urban
+			value = 0.5
+			subtract = state.state_urbanization_rate
+			multiply = 10
+		}
+		
+		add = {
+			value = 5
+			desc = "POP_BASE_SUPPORT"
+		}
+		
+		if = {
+			limit = {
+				is_pop_type = aristocrats
+			}
+			add = {
+				value = 25
+				desc = "POP_ARISTOCRATS"
+			}
+		}
+		else_if = {
+			limit = {
+				is_pop_type = farmers
+			}
+			add = {
+				value = 15
+				desc = "POP_FARMERS"
+			}
+		}
+		else_if = {
+			limit = {
+				is_pop_type = peasants
+			}
+			add = {
+				value = 15
+				desc = "POP_PEASANTS"
+			}
+		}
+		else_if = {
+			limit = {
+				is_pop_type = clergymen
+			}
+			add = {
+				value = 15
+				desc = "POP_CLERGYMEN"
+			}
+		}
+		else_if = {
+			limit = {
+				is_pop_type = officers
+			}
+			add = {
+				value = 15
+				desc = "POP_OFFICERS"
+			}
+		}
+		
+		multiply = {
+			# Illiterate pops participate at 1/10 the rate of fully literate pops
+			desc = "POP_LITERACY"
+			value = literacy_rate
+			add = 0.2
+			max = 0.7 # Starts more powerful but caps out early
+		}
+	}
+	
+	revolution = {
+		possible = {
+			political_movement_support >= 0.05
+		}
+		
+		weight = {
+			value = 100
+		}
+	}
+	
+	secession = {
+		possible = {
+			political_movement_support >= 0.05
+			scope:clout <= 0
+		}
+		
+		weight = {
+			value = 1000
+		}
+	}
+	
+	additional_radicalism_factors = {
+		if = {
+			limit = {
+				owner ?= {
+					has_law = law_type:law_monarchy
+					ruler ?= {
+						NOT = {
+							has_ideology = ideology:ideology_miguelist
+						}
+					}
+				}
+			}
+			add = {
+				value = 0.25
+				desc = "NON_MIGUELIST_MONARCH"
+			}
+		}
+	}
+}
+

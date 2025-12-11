@@ -6,8 +6,11 @@
   "picture" : null,
   "supported_game_version" : "1.12.*",
   "short_description" : "This is a framework to enable easy integration between mods.",
-  "tags" : [ "1.11" ],
-  "relationships" : [ ],
+  "tags" : [
+    "Utilities",
+    "1.12"
+  ],
+  "relationships" : [],
   "game_custom_data" : {
     "multiplayer_synchronized" : true
   }

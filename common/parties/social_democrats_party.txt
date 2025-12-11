@@ -45,126 +45,125 @@ social_democrat_party = {
 				desc = party_labour_party
 				trigger = {
 					exists = c:GBR
-					THIS = c:GBR
+					c:GBR ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_psoe
 				trigger = {
 					exists = c:SPA
-					THIS = c:SPA
+					c:SPA ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_labour_party
 				trigger = {
 					exists = c:IRE
-					THIS = c:IRE
+					c:IRE ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_portuguese_socialist_party
 				trigger = {
-					exists = c:POR
-					THIS = c:POR
+					c:POR ?= this
 				}
 			}
 			triggered_desc = {
 				desc = party_ftsf
 				trigger = {
 					exists = c:FRA
-					THIS = c:FRA
+					c:FRA ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_menshevik_party
 				trigger = {
 					exists = c:RUS
-					THIS = c:RUS
+					c:RUS ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_finnish_labor_party
 				trigger = {
 					exists = c:FIN
-					THIS = c:FIN
+					c:FIN ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_belgian_workers_party
 				trigger = {
 					exists = c:BEL
-					THIS = c:BEL
+					c:BEL ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_sdapo
 				trigger = {
 					exists = c:AUS
-					THIS = c:AUS
+					c:AUS ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_brsdp
 				trigger = {
 					exists = c:BUL
-					THIS = c:BUL
+					c:BUL ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_mszdp
 				trigger = {
 					exists = c:HUN
-					THIS = c:HUN
+					c:HUN ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_social_democratic_workers_party
 				trigger = {
 					exists = c:NET
-					THIS = c:NET
+					c:NET ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_common_peoples_party
 				trigger = {
 					exists = c:JAP
-					THIS = c:JAP
+					c:JAP ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_democrat_party
 				trigger = {
 					exists = c:PER
-					THIS = c:PER
+					c:PER ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_socialist_workers_federation
 				trigger = {
 					exists = c:TUR
-					THIS = c:TUR
+					c:TUR ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_laborist_party
 				trigger = {
 					exists = c:MEX
-					THIS = c:MEX
+					c:MEX ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_confederate_socialist_party
 				trigger = {
 					exists = c:CSA
-					THIS = c:CSA
+					c:CSA ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_seke
 				trigger = {
 					exists = c:GRE
-					THIS = c:GRE
+					c:GRE ?= THIS
 				}
 			}
 			# MoH
@@ -277,13 +276,13 @@ social_democrat_party = {
 			country_has_voting_franchise = yes
 			OR = {
 				any_interest_group = {
-					is_marginal = no
+					ig_counts_as_marginal = no
 					leader ?= {
 						has_ideology = ideology:ideology_social_democrat
 					}
 				}
 				ig:ig_trade_unions ?= {
-					is_marginal = no
+					ig_counts_as_marginal = no
 				}
 			}
 		}
@@ -297,6 +296,7 @@ social_democrat_party = {
 				has_ideology = ideology:ideology_integralist
 				has_ideology = ideology:ideology_ethno_nationalist
 				has_ideology = ideology:ideology_traditionalist
+				has_ideology = ideology:ideology_carlist
 				has_ideology = ideology:ideology_royalist
 				has_ideology = ideology:ideology_orleanist
 				has_ideology = ideology:ideology_bonapartist
@@ -505,6 +505,7 @@ social_democrat_party = {
 				OR = {
 					has_ideology = ideology:ideology_meritocratic
 					has_ideology = ideology:ideology_agrarian
+					has_ideology = ideology:ideology_cartist
 					leader ?= {
 						has_ideology = ideology:ideology_social_democrat
 					}
@@ -568,7 +569,7 @@ social_democrat_party = {
 				}
 				owner = {
 					OR = {
-						has_law_or_variant = law_type:law_monarchy
+						has_law = law_type:law_monarchy
 						has_law_or_variant = law_type:law_theocracy
 					}
 				}
@@ -603,6 +604,7 @@ social_democrat_party = {
 					has_ideology = ideology:ideology_agrarian
 					has_ideology = ideology:ideology_paternalistic
 					has_ideology = ideology:ideology_magnatial
+					has_ideology = ideology:ideology_carlist_ig
 					# ANZFP
 					trigger_if = {
 						limit = {
@@ -818,7 +820,7 @@ social_democrat_party = {
 			limit = {
 				scope:number = 1
 				is_powerful = no
-				is_marginal = no
+				ig_counts_as_marginal = no
 			}
 			multiply = {
 				value = 2

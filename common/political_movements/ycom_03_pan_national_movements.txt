@@ -184,8 +184,7 @@
 				limit = {
 					standard_of_living < state.average_expected_sol
 				}
-				add = {
-					# Increases likelihood of support if impoverished
+				add = { # Increases likelihood of support if impoverished
 					desc = "POP_POVERTY"
 					value = state.average_expected_sol
 					subtract = standard_of_living
@@ -202,24 +201,21 @@
 						}
 					}
 				}
-				add = {
-					# From 1.21x at 79 to 2x at 0
+				add = { # From 1.21x at 79 to 2x at 0
 					desc = "POP_DISCRIMINATED"
 					value = 100
 					subtract = pop_acceptance
 					divide = 10
 				}
 			}
-			else = {
-				# Non-discriminated pops are less likely to form separatist movements
+			else = { # Non-discriminated pops are less likely to form separatist movements
 				multiply = {
 					desc = "POP_ACCEPTANCE"
 					value = 0.25
 				}
 			}
 			
-			multiply = {
-				# Multiplied by 2x max
+			multiply = { # Multiplied by 2x max
 				desc = "POP_RADICALS"
 				value = pop_radical_fraction
 				add = 1
@@ -248,8 +244,7 @@
 				}
 			}
 			
-			multiply = {
-				# Range from x0.775 to 2.275
+			multiply = { # Range from x0.775 to 2.275
 				desc = "POP_CULTURE_FERVOR"
 				value = culture.culture_current_fervor
 				subtract = 15
@@ -413,8 +408,7 @@ REPLACE:movement_german_national = {
 		value = 100
 		if = {
 			limit = {
-				owner ?= {
-					# If a movement of this type exists in a neighbouring country, make it more likely to spawn here as well
+				owner ?= { # If a movement of this type exists in a neighbouring country, make it more likely to spawn here as well
 					any_neighbouring_state = {
 						owner = {
 							prestige > ROOT.owner.prestige
@@ -664,8 +658,7 @@ REPLACE:movement_german_national = {
 			}
 		}
 		
-		multiply = {
-			# Range from x0.775 to 2.275
+		multiply = { # Range from x0.775 to 2.275
 			desc = "POP_CULTURE_FERVOR"
 			value = culture.culture_current_fervor
 			subtract = 15
@@ -685,8 +678,7 @@ REPLACE:movement_german_national = {
 			}
 		}
 		
-		if = {
-			# If a more radical movement exists, it'll poach radicals from this one.
+		if = { # If a more radical movement exists, it'll poach radicals from this one.
 			limit = {
 				owner ?= {
 					any_political_movement = {
@@ -704,8 +696,7 @@ REPLACE:movement_german_national = {
 			}
 		}
 		
-		multiply = {
-			# Illiterate pops participate at 1/10 the rate of fully literate pops
+		multiply = { # Illiterate pops participate at 1/10 the rate of fully literate pops
 			desc = "POP_LITERACY"
 			value = literacy_rate
 			add = 0.10
@@ -935,8 +926,7 @@ REPLACE:movement_italian_national = {
 		value = 100
 		if = {
 			limit = {
-				owner ?= {
-					# If a movement of this type exists in a neighbouring country, make it more likely to spawn here as well
+				owner ?= { # If a movement of this type exists in a neighbouring country, make it more likely to spawn here as well
 					any_neighbouring_state = {
 						owner = {
 							prestige > ROOT.owner.prestige
@@ -1186,8 +1176,7 @@ REPLACE:movement_italian_national = {
 			}
 		}
 		
-		multiply = {
-			# Range from x0.775 to 2.275
+		multiply = { # Range from x0.775 to 2.275
 			desc = "POP_CULTURE_FERVOR"
 			value = culture.culture_current_fervor
 			subtract = 15
@@ -1207,8 +1196,7 @@ REPLACE:movement_italian_national = {
 			}
 		}
 		
-		if = {
-			# If a more radical movement exists, it'll poach radicals from this one.
+		if = { # If a more radical movement exists, it'll poach radicals from this one.
 			limit = {
 				owner ?= {
 					any_political_movement = {
@@ -1226,8 +1214,7 @@ REPLACE:movement_italian_national = {
 			}
 		}
 		
-		multiply = {
-			# Illiterate pops participate at 1/10 the rate of fully literate pops
+		multiply = { # Illiterate pops participate at 1/10 the rate of fully literate pops
 			desc = "POP_LITERACY"
 			value = literacy_rate
 			add = 0.10
@@ -1439,8 +1426,7 @@ REPLACE:movement_yugoslav_national = {
 		value = 100
 		if = {
 			limit = {
-				owner ?= {
-					# If a movement of this type exists in a neighbouring country, make it more likely to spawn here as well
+				owner ?= { # If a movement of this type exists in a neighbouring country, make it more likely to spawn here as well
 					any_neighbouring_state = {
 						owner = {
 							prestige > ROOT.owner.prestige
@@ -1690,8 +1676,7 @@ REPLACE:movement_yugoslav_national = {
 			}
 		}
 		
-		multiply = {
-			# Range from x0.775 to 2.275
+		multiply = { # Range from x0.775 to 2.275
 			desc = "POP_CULTURE_FERVOR"
 			value = culture.culture_current_fervor
 			subtract = 15
@@ -1711,8 +1696,7 @@ REPLACE:movement_yugoslav_national = {
 			}
 		}
 		
-		if = {
-			# If a more radical movement exists, it'll poach radicals from this one.
+		if = { # If a more radical movement exists, it'll poach radicals from this one.
 			limit = {
 				owner ?= {
 					any_political_movement = {
@@ -1730,8 +1714,7 @@ REPLACE:movement_yugoslav_national = {
 			}
 		}
 		
-		multiply = {
-			# Illiterate pops participate at 1/10 the rate of fully literate pops
+		multiply = { # Illiterate pops participate at 1/10 the rate of fully literate pops
 			desc = "POP_LITERACY"
 			value = literacy_rate
 			add = 0.10
@@ -2217,8 +2200,7 @@ REPLACE:movement_dominican_national = {
 			}
 		}
 		
-		multiply = {
-			# Range from x0.775 to 2.275
+		multiply = { # Range from x0.775 to 2.275
 			desc = "POP_CULTURE_FERVOR"
 			value = culture.culture_current_fervor
 			subtract = 15
@@ -2238,8 +2220,7 @@ REPLACE:movement_dominican_national = {
 			}
 		}
 		
-		if = {
-			# If a more radical movement exists, it'll poach radicals from this one.
+		if = { # If a more radical movement exists, it'll poach radicals from this one.
 			limit = {
 				owner ?= {
 					any_political_movement = {

@@ -18,8 +18,7 @@
 		value = 100
 		if = {
 			limit = {
-				owner ?= {
-					# If a movement of this type exists in a neighbouring country, make it more likely to spawn here as well
+				owner ?= { # If a movement of this type exists in a neighbouring country, make it more likely to spawn here as well
 					any_neighbouring_state = {
 						owner = {
 							prestige > ROOT.owner.prestige
@@ -207,8 +206,7 @@
 			}
 		}
 		
-		multiply = {
-			# Illiterate pops participate at 1/10 the rate of fully literate pops
+		multiply = { # Illiterate pops participate at 1/10 the rate of fully literate pops
 			desc = "POP_LITERACY"
 			value = literacy_rate
 			add = 0.10
@@ -378,8 +376,7 @@ REPLACE:movement_orleanist = {
 		value = 100
 		if = {
 			limit = {
-				owner ?= {
-					# If a movement of this type exists in a neighbouring country, make it more likely to spawn here as well
+				owner ?= { # If a movement of this type exists in a neighbouring country, make it more likely to spawn here as well
 					any_neighbouring_state = {
 						owner = {
 							prestige > ROOT.owner.prestige
@@ -589,8 +586,7 @@ REPLACE:movement_orleanist = {
 			}
 		}
 		
-		multiply = {
-			# Illiterate pops participate at 1/10 the rate of fully literate pops
+		multiply = { # Illiterate pops participate at 1/10 the rate of fully literate pops
 			desc = "POP_LITERACY"
 			value = literacy_rate
 			add = 0.10
@@ -622,7 +618,7 @@ REPLACE:movement_orleanist = {
 		if = {
 			limit = {
 				owner ?= {
-					has_law_or_variant = law_type:law_monarchy
+					has_law = law_type:law_monarchy
 					ruler ?= {
 						NOT = {
 							has_ideology = ideology:ideology_orleanist
@@ -686,8 +682,7 @@ REPLACE:movement_bonapartist = {
 		value = 100
 		if = {
 			limit = {
-				owner ?= {
-					# If a movement of this type exists in a neighbouring country, make it more likely to spawn here as well
+				owner ?= { # If a movement of this type exists in a neighbouring country, make it more likely to spawn here as well
 					any_neighbouring_state = {
 						owner = {
 							prestige > ROOT.owner.prestige
@@ -911,8 +906,7 @@ REPLACE:movement_bonapartist = {
 			}
 		}
 		
-		multiply = {
-			# Illiterate pops participate at 1/10 the rate of fully literate pops
+		multiply = { # Illiterate pops participate at 1/10 the rate of fully literate pops
 			desc = "POP_LITERACY"
 			value = literacy_rate
 			add = 0.10
@@ -944,7 +938,7 @@ REPLACE:movement_bonapartist = {
 		if = {
 			limit = {
 				owner ?= {
-					has_law_or_variant = law_type:law_monarchy
+					has_law = law_type:law_monarchy
 					ruler ?= {
 						NOT = {
 							has_ideology = ideology:ideology_bonapartist
@@ -1008,8 +1002,7 @@ REPLACE:movement_legitimist = {
 		value = 100
 		if = {
 			limit = {
-				owner ?= {
-					# If a movement of this type exists in a neighbouring country, make it more likely to spawn here as well
+				owner ?= { # If a movement of this type exists in a neighbouring country, make it more likely to spawn here as well
 					any_neighbouring_state = {
 						owner = {
 							prestige > ROOT.owner.prestige
@@ -1186,8 +1179,7 @@ REPLACE:movement_legitimist = {
 			}
 		}
 		
-		multiply = {
-			# Illiterate pops participate at 1/10 the rate of fully literate pops
+		multiply = { # Illiterate pops participate at 1/10 the rate of fully literate pops
 			desc = "POP_LITERACY"
 			value = literacy_rate
 			add = 0.2
@@ -1220,7 +1212,7 @@ REPLACE:movement_legitimist = {
 		if = {
 			limit = {
 				owner ?= {
-					has_law_or_variant = law_type:law_monarchy
+					has_law = law_type:law_monarchy
 					ruler ?= {
 						NOT = {
 							has_ideology = ideology:ideology_legitimist
@@ -1272,6 +1264,9 @@ REPLACE:movement_carlist = {
 		NOT = {
 			has_variable = monarchy_stamped_out_var
 		}
+		capital = {
+			is_in_geographic_region = geographic_region_iberia
+		}
 	}
 	creation_weight = {
 		value = 100
@@ -1281,7 +1276,14 @@ REPLACE:movement_carlist = {
 	}
 	
 	disband_trigger = {
+		OR = {
 		has_variable = monarchy_stamped_out_var
+			NOT = {
+				capital = {
+					is_in_geographic_region = geographic_region_iberia
+				}
+			}
+		}
 	}
 	
 	character_support_trigger = {
@@ -1396,13 +1398,12 @@ REPLACE:movement_carlist = {
 			}
 			add = {
 				value = 5
-				desc = "POP_SOLDIERS"
+				desc = "POP_SERVICEMEN"
 			}
 		}
 		
 		if = {
-			limit = {
-				# Only Catholics can support this anyway
+			limit = { # Only Catholics can support this anyway
 				culture = {
 					NOT = {
 						cu:spanish ?= this
@@ -1410,8 +1411,7 @@ REPLACE:movement_carlist = {
 					has_discrimination_trait_group = heritage_group_european
 				}
 			}
-			multiply = {
-				# Less accepted pops like Basques and Catalans tend to like this movement
+			multiply = { # Less accepted pops like Basques and Catalans tend to like this movement
 				desc = "POP_LOW_ACCEPTANCE"
 				value = 100
 				subtract = pop_acceptance
@@ -1435,8 +1435,7 @@ REPLACE:movement_carlist = {
 			}
 		}
 		
-		multiply = {
-			# Illiterate pops participate at 1/10 the rate of fully literate pops
+		multiply = { # Illiterate pops participate at 1/10 the rate of fully literate pops
 			desc = "POP_LITERACY"
 			value = literacy_rate
 			add = 0.2
@@ -1507,6 +1506,9 @@ REPLACE:movement_miguelist = {
 		NOT = {
 			has_variable = monarchy_stamped_out_var
 		}
+		capital = {
+			is_in_geographic_region = geographic_region_iberia
+		}
 	}
 	creation_weight = {
 		value = 100
@@ -1516,7 +1518,14 @@ REPLACE:movement_miguelist = {
 	}
 	
 	disband_trigger = {
+		OR = {
 		has_variable = monarchy_stamped_out_var
+			NOT = {
+				capital = {
+					is_in_geographic_region = geographic_region_iberia
+				}
+			}
+		}
 	}
 	
 	character_support_trigger = {
@@ -1626,8 +1635,7 @@ REPLACE:movement_miguelist = {
 			}
 		}
 		
-		multiply = {
-			# Illiterate pops participate at 1/10 the rate of fully literate pops
+		multiply = { # Illiterate pops participate at 1/10 the rate of fully literate pops
 			desc = "POP_LITERACY"
 			value = literacy_rate
 			add = 0.2

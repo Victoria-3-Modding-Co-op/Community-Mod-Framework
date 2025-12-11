@@ -35,7 +35,7 @@
 			}
 		}
 	}
-	on_created = { }
+	on_created = {}
 	
 	disband_trigger = {
 		scope:political_movement ?= {
@@ -190,8 +190,7 @@
 					is_pop_type = clergymen
 				}
 			}
-			add = {
-				# Weakened by increasing literacy rates
+			add = { # Weakened by increasing literacy rates
 				desc = "POP_LITERACY"
 				this = {
 					value = literacy_rate
@@ -200,8 +199,7 @@
 			}
 		}
 		
-		if = {
-			# Discriminated pops are less inclined to support the state church
+		if = { # Discriminated pops are less inclined to support the state church
 			limit = {
 				pop_acceptance < acceptance_status_5
 			}
@@ -238,7 +236,7 @@
 				}
 			}
 			multiply = {
-				value = 0.25
+				value = 0.05
 			}
 		}
 		
@@ -430,7 +428,7 @@ REPLACE:movement_religious_minority = {
 	creation_weight = {
 		value = 200
 	}
-	on_created = { }
+	on_created = {}
 	
 	disband_trigger = {
 		OR = {
@@ -617,8 +615,7 @@ REPLACE:movement_religious_minority = {
 			limit = {
 				standard_of_living < state.average_expected_sol
 			}
-			add = {
-				# Increases likelihood of support if impoverished
+			add = { # Increases likelihood of support if impoverished
 				desc = "POP_POVERTY"
 				value = state.average_expected_sol
 				subtract = standard_of_living
@@ -660,8 +657,7 @@ REPLACE:movement_religious_minority = {
 					is_pop_type = clergymen
 				}
 			}
-			add = {
-				# Weakened by increasing literacy rates
+			add = { # Weakened by increasing literacy rates
 				desc = "POP_LITERACY"
 				this = {
 					value = literacy_rate
@@ -702,16 +698,14 @@ REPLACE:movement_religious_minority = {
 					}
 				}
 			}
-			add = {
-				# From +2 at 80 to +10 at 0
+			add = { # From +2 at 80 to +10 at 0
 				desc = "POP_RELIGIOUS_DISCRIMINATION"
 				value = 100
 				subtract = pop_acceptance
 				divide = 10
 			}
 		}
-		else = {
-			# Non-discriminated pops are less likely to form separatist movements
+		else = { # Non-discriminated pops are less likely to form separatist movements
 			multiply = {
 				desc = "POP_ACCEPTANCE"
 				value = 0.25
@@ -804,8 +798,7 @@ REPLACE:movement_religious_minority = {
 						value >= com_movement_religious_minority_secession_state_weight_religion_percent_state_0 #vanilla value: 0.05
 					}
 				}
-				add = {
-					# These three values must add up to more than 1 - 5 x Obstinance, 1/2 Turmoil, percent of pops of this religion
+				add = { # These three values must add up to more than 1 - 5 x Obstinance, 1/2 Turmoil, percent of pops of this religion
 					value = -1
 					add = "this.religion_percent_state(scope:political_movement.religion)"
 					add = {
@@ -813,7 +806,7 @@ REPLACE:movement_religious_minority = {
 						multiply = 0.5
 					}
 					add = {
-						value = this.obstinance    # Note: OBSTINANCE_MAX = 0.2
+						value = this.obstinance
 						multiply = 5
 					}
 					multiply = 100
@@ -921,8 +914,7 @@ REPLACE:movement_religious_minority = {
 							limit = {
 								exists = this.political_movement_identity_support
 							}
-							add = {
-								# Identity support can get a bit high
+							add = { # Identity support can get a bit high
 								value = this.political_movement_identity_support
 								multiply = 0.5
 							}

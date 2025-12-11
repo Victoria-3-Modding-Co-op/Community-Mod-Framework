@@ -9,21 +9,21 @@ liberal_party = {
 				desc = party_civilista_party
 				trigger = {
 					exists = c:PEU
-					THIS = c:PEU
+					c:PEU ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_national_civic_union
 				trigger = {
 					exists = c:ARG
-					THIS = c:ARG
+					c:ARG ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_whigs
 				trigger = {
 					exists = c:GBR
-					THIS = c:GBR
+					c:GBR ?= THIS
 					NOT = { has_law_or_variant = law_type:law_free_trade }
 				}
 			}
@@ -40,7 +40,7 @@ liberal_party = {
 				trigger = {
 					is_usfp_active = no
 					exists = c:USA
-					THIS = c:USA
+					c:USA ?= THIS
 					has_global_variable = american_civil_war
 				}
 			}
@@ -68,15 +68,15 @@ liberal_party = {
 				desc = party_liberal_democrats
 				trigger = {
 					exists = c:SWI
-					THIS = c:SWI
+					c:SWI ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_movement_party
 				trigger = {
 					exists = c:FRA
-					THIS = c:FRA
-					has_law_or_variant = law_type:law_monarchy
+					c:FRA ?= THIS
+					has_law = law_type:law_monarchy
 					ruler = {
 						has_ideology = ideology:ideology_orleanist
 					}
@@ -86,29 +86,23 @@ liberal_party = {
 				desc = party_republican_party
 				trigger = {
 					exists = c:FRA
-					THIS = c:FRA
+					c:FRA ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_exalted_liberal
 				trigger = {
 					country_has_primary_culture = cu:brazilian
-					has_law_or_variant = law_type:law_monarchy
-					ruler = {
-						has_trait = trait_child
-					}
+					has_law = law_type:law_monarchy
+					has_gov_regency = yes
 				}
 			}
 			triggered_desc = {
 				desc = party_liberal
 				trigger = {
 					country_has_primary_culture = cu:brazilian
-					has_law_or_variant = law_type:law_monarchy
-					NOT = {
-						ruler = {
-							has_trait = trait_child
-						}
-					}
+					has_law = law_type:law_monarchy
+					has_gov_regency = no
 				}
 			}
 			triggered_desc = {
@@ -117,7 +111,7 @@ liberal_party = {
 					country_has_primary_culture = cu:brazilian
 					game_date < 1925.1.1
 					NOT = {
-						has_law_or_variant = law_type:law_monarchy
+						has_law = law_type:law_monarchy
 					}
 				}
 			}
@@ -132,91 +126,91 @@ liberal_party = {
 				desc = party_kadets_party
 				trigger = {
 					exists = c:RUS
-					THIS = c:RUS
+					c:RUS ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_opposition_party
 				trigger = {
 					exists = c:HUN
-					THIS = c:HUN
+					c:HUN ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_peoples_party
 				trigger = {
 					exists = c:SWE
-					THIS = c:SWE
+					c:SWE ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_liberal_union
 				trigger = {
 					exists = c:NET
-					THIS = c:NET
+					c:NET ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_liberal_league
 				trigger = {
 					exists = c:LUX
-					THIS = c:LUX
+					c:LUX ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_young_finnish_party
 				trigger = {
 					exists = c:FIN
-					THIS = c:FIN
+					c:FIN ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_constitutional_party
 				trigger = {
 					exists = c:AUS
-					THIS = c:AUS
+					c:AUS ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_peoples_party
 				trigger = {
 					exists = c:CRO
-					THIS = c:CRO
+					c:CRO ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_society_for_progress
 				trigger = {
 					exists = c:PER
-					THIS = c:PER
+					c:PER ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_blue_party
 				trigger = {
 					exists = c:PRG
-					THIS = c:PRG
+					c:PRG ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_great_liberal_party
 				trigger = {
 					exists = c:VNZ
-					THIS = c:VNZ
+					c:VNZ ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_colorado_party
 				trigger = {
 					exists = c:URU
-					THIS = c:URU
+					c:URU ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_empire_reform_association
 				trigger = {
 					exists = c:CHI
-					THIS = c:CHI
+					c:CHI ?= THIS
 					has_law_or_variant = law_type:law_monarchy
 				}
 			}
@@ -262,31 +256,31 @@ liberal_party = {
 				desc = party_freedom_and_accord_party
 				trigger = {
 					exists = c:TUR
-					THIS = c:TUR
-					has_law_or_variant = law_type:law_monarchy
+					c:TUR ?= THIS
+					has_law = law_type:law_monarchy
 				}
 			}
 			triggered_desc = {
 				desc = party_progressive_republican_party
 				trigger = {
 					exists = c:TUR
-					THIS = c:TUR
-					NOT = { has_law_or_variant = law_type:law_monarchy }
+					c:TUR ?= THIS
+					NOT = { has_law = law_type:law_monarchy }
 				}
 			}
 			triggered_desc = {
 				desc = party_constitutional_reform_party
 				trigger = {
 					exists = c:JAP
-					THIS = c:JAP
+					c:JAP ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_constitutional_party
 				trigger = {
 					exists = c:GRE
-					THIS = c:GRE
-					has_law_or_variant = law_type:law_monarchy
+					c:GRE ?= THIS
+					has_law = law_type:law_monarchy
 					ruler = {
 						culture = {
 							has_discrimination_trait = heritage_germanic
@@ -298,7 +292,7 @@ liberal_party = {
 				desc = party_neoteristikon_komma
 				trigger = {
 					exists = c:GRE
-					THIS = c:GRE
+					c:GRE ?= THIS
 				}
 			}
 			triggered_desc = {
@@ -329,13 +323,11 @@ liberal_party = {
 						AND = {
 							country_has_primary_culture = cu:dixie
 							NOT = {
-								exists = c:USA
-								THIS = c:USA
+								c:USA ?= this
 							}
 						}
 						AND = {
-							exists = c:USA
-							THIS = c:USA
+							c:USA ?= this
 							NOT = { has_global_variable = american_civil_war }
 						}
 					}
@@ -374,19 +366,88 @@ liberal_party = {
 			triggered_desc = {
 				desc = party_progressive_party
 				trigger = {
-					OR = {
 						country_has_primary_culture = cu:spanish
-						country_has_primary_culture = cu:portuguese
+				}
+			}
+			triggered_desc = {
+				desc = party_vintista_party
+				trigger = {
+					c:POR ?= this
+					has_law = law_type:law_oligarchy
+				}
+			}
+			triggered_desc = {
+				desc = party_month_of_revolution
+				trigger = {
+					c:POR ?= this
+					has_law = law_type:law_monarchy
+					NOT = {
+						has_law = law_type:law_oligarchy
+					}
+					ruler ?= {
+						has_template = POR_maria_ii_de_braganca
+					}
+				}
+			}
+			triggered_desc = {
+				desc = party_historic_party
+				trigger = {
+					c:POR ?= this
+					has_law = law_type:law_monarchy
+					ruler ?= {
+						NOT = {
+							has_template = POR_maria_ii_de_braganca
+						}
+					}
+				}
+			}
+			triggered_desc = { # Merger of the Reformist and Historic Parties - in our terms, a Radical-Liberal party.
+				desc = party_progressive_party
+				trigger = {
+					c:POR ?= this
+					has_law = law_type:law_monarchy
+					any_interest_group = {
+						OR = {
+							leader = {
+								has_ideology = ideology:ideology_radical
+							}
+							is_interest_group_type = ig_trade_unions
+						}
+					}
+				}
+			}
+			triggered_desc = { # Centre-right split of the Republican Party in the aftermath of the declaration of the Republic
+				desc = party_evolutionist_party
+				trigger = {
+					c:POR ?= this
+					NOR = {
+						has_law = law_type:law_monarchy
+						has_law = law_type:law_theocracy
+					}
+				}
+			}
+			triggered_desc = { # Historically a merger of the Evolutionists and Unionists into a conservative-liberal bloc
+				desc = party_liberal_republican_party
+				trigger = {
+					c:POR ?= this
+					NOR = {
+						has_law = law_type:law_monarchy
+						has_law = law_type:law_theocracy
+					}
+					any_interest_group = {
+						OR = {
+							interest_group_has_conservative_ideology = yes
+							leader = {
+								has_conservative_ideology = yes
+							}
+						}
 					}
 				}
 			}
 			triggered_desc = {
 				desc = party_venstre
 				trigger = {
-					OR = {
-						country_has_primary_culture = cu:norwegian
-						country_has_primary_culture = cu:spanish
-					}
+					country_has_primary_culture = cu:norwegian
 				}
 			}
 			triggered_desc = {
@@ -410,15 +471,24 @@ liberal_party = {
 	available_for_interest_group = {
 		owner = {
 			country_has_voting_franchise = yes
-			#USFP: Liberal party can exist without Intelligentsia
-			OR = {				
+			OR = {
 				ig:ig_intelligentsia ?= {
-					is_marginal = no
+					ig_counts_as_marginal = no
 				}
-				AND = {
+				ig:ig_petty_bourgeoisie ?= {
+					ig_counts_as_marginal = no
+				}
+				ig:ig_industrialists ?= {
+					ig_counts_as_marginal = no
+				}
+			}
+			#USFP: replace with custom party
+			trigger_if = {
+				limit = {
 					is_usfp_active = yes
-					usfp_country_is_american = yes
+					c:USA ?= this
 				}
+				usfp_has_constitutional_government = no
 			}
 		}
 		leader ?= { # far right and far left won't join liberal parties
@@ -436,6 +506,7 @@ liberal_party = {
 	# Root - IG considering joining
 	# scope:number - the number of IGs that would join this party before the root IG
 	join_weight = {
+		
 		value = {
 			value = -5
 			desc = "base_value"
@@ -469,6 +540,7 @@ liberal_party = {
 						has_ideology = ideology:ideology_radical
 						has_ideology = ideology:ideology_reformer
 						has_ideology = ideology:ideology_market_liberal
+						has_ideology = ideology:ideology_liberal_leader
 						has_ideology = ideology:ideology_humanitarian
 						has_ideology = ideology:ideology_humanitarian_royalist
 					}
@@ -479,7 +551,10 @@ liberal_party = {
 				if = {
 					limit = {
 						leader ?= {
-							has_ideology = ideology:ideology_reformer
+							OR = {
+								has_ideology = ideology:ideology_reformer
+								has_ideology = ideology:ideology_liberal_leader
+							}
 						}
 					}
 					add = 10
@@ -505,24 +580,8 @@ liberal_party = {
 				}
 			}
 		}
-		if = { # liberals love liberalism
+		if = { # liberals love liberalism - Vanilla removed this block but ANZFP is leftover
 			limit = {
-				leader ?= {
-					has_ideology = ideology:ideology_radical
-				}
-			}
-			add = {
-				value = 3
-				desc = "from_radical"
-			}
-		}
-		if = { # liberals love liberalism
-			limit = {
-				OR = {
-					has_ideology = ideology:ideology_liberal
-					has_ideology = ideology:ideology_liberal_modern
-					has_ideology = ideology:ideology_laissez_faire
-
 					# ANZFP
 					trigger_if = {
 						limit = {
@@ -531,8 +590,7 @@ liberal_party = {
 						anz_laissez_faire_ideologies = yes
 					}
 				}
-			}
-			add = {
+							add = {
 				value = 5
 				desc = "from_liberalism"
 			}
@@ -561,6 +619,7 @@ liberal_party = {
 				leader ?= {
 					OR = {
 						has_ideology = ideology:ideology_traditionalist
+						has_ideology = ideology:ideology_carlist
 						has_ideology = ideology:ideology_royalist
 						has_ideology = ideology:ideology_theocrat
 						has_ideology = ideology:ideology_slaver
@@ -580,6 +639,7 @@ liberal_party = {
 			limit = {
 				OR = {
 					has_ideology = ideology:ideology_meritocratic
+					has_ideology = ideology:ideology_cartist
 					has_ideology = ideology:ideology_anti_clerical
 				}
 				owner = {
@@ -589,6 +649,48 @@ liberal_party = {
 			add = {
 				value = 3
 				desc = "from_hereditary_offices"
+			}
+		}
+		if = { # for greater suffrage
+			limit = {
+				OR = {
+					has_ideology = ideology:ideology_meritocratic
+					has_ideology = ideology:ideology_republican
+					has_ideology = ideology:ideology_populist
+				}
+			}
+			if = {
+				limit = {
+					owner ?= {
+						has_law = law_type:law_landed_voting
+					}
+				}
+				add = {
+					value = 5
+					desc = "from_increased_suffrage"
+				}
+			}
+			if = {
+				limit = {
+					owner ?= {
+						has_law = law_type:law_wealth_voting
+					}
+				}
+				add = {
+					value = 3
+					desc = "from_increased_suffrage"
+				}
+			}
+			if = {
+				limit = {
+					owner ?= {
+						has_law = law_type:law_census_voting
+					}
+				}
+				add = {
+					value = 1
+					desc = "from_increased_suffrage"
+				}
 			}
 		}
 		if = { # armed forces will join if a more powerful member has jingoist leader
@@ -672,6 +774,21 @@ liberal_party = {
 					}
 					add = 2
 				}
+			}
+		}
+		if = { # Spanish church will not be liberal
+			limit = {
+				OR = {
+					has_ideology = ideology:ideology_pious
+					has_ideology = ideology:ideology_corporatist
+				}
+				owner = {
+					c:SPA ?= this
+				}
+			}
+			add = {
+				value = -20
+				desc = "from_liberal_anticlericalism"
 			}
 		}
 		if = { # against illiteracy and religious education
@@ -821,7 +938,7 @@ liberal_party = {
 				}
 				owner = {
 					OR = {
-						has_law_or_variant = law_type:law_monarchy
+						has_law = law_type:law_monarchy
 						has_law_or_variant = law_type:law_theocracy
 					}
 				}
@@ -838,7 +955,7 @@ liberal_party = {
 				}
 				OR = {
 					has_ideology = ideology:ideology_particularist
-					leader = {
+					leader ?= {
 						character_is_anti_slavery = yes
 					}
 
@@ -924,6 +1041,7 @@ liberal_party = {
 			limit = {
 				is_interest_group_type = ig_trade_unions
 				is_powerful = no
+				owner = { has_technology_researched = labor_movement }
 				NOT = {
 					has_ideology = ideology:ideology_socialist
 				}
@@ -966,7 +1084,7 @@ liberal_party = {
 						has_journal_entry = je_acw_war #vanilla bugfix
 						AND = { # JE not active yet at initialization
 							exists = c:USA
-							this = c:USA
+							c:USA ?= THIS
 							year < 1837						
 						}
 					}				
@@ -1069,7 +1187,7 @@ liberal_party = {
 			limit = {
 				owner = {
 					c:FRA ?= this
-					has_law_or_variant = law_type:law_monarchy
+					has_law = law_type:law_monarchy
 				}
 				OR = {
 					has_ideology = ideology:ideology_liberal
@@ -1093,7 +1211,7 @@ liberal_party = {
 			limit = {
 				owner = {
 	         		country_has_primary_culture = cu:brazilian
-					ruler = {
+					heir ?= {
 						has_template = BRZ_emperor_pedro_02
 						has_trait = trait_child
 					}
@@ -1190,6 +1308,21 @@ liberal_party = {
 				}
 			}
 		}
+		if = { # Carlists and Miguelists were against participating in electoral politics for a good while
+			limit = {
+				NOT = { owner = { has_technology_researched = political_agitation } }
+				leader = {
+					OR = {
+						has_ideology = ideology:ideology_carlist
+						has_ideology = ideology:ideology_miguelist
+					}
+				}
+			}
+			add = {
+				value = -20
+				desc = "from_traditionalist_monarchism"
+			}
+		}
 
 		if = {
 			limit = {
@@ -1239,7 +1372,7 @@ liberal_party = {
 			limit = {
 				scope:number <= 1
 				is_powerful = no
-				is_marginal = no
+				ig_counts_as_marginal = no
 			}
 			multiply = {
 				value = 2
@@ -1260,7 +1393,7 @@ liberal_party = {
 				scope:number = 3
 			}
 			multiply = {
-				value = 0.25
+				value = 0.05
 				desc = "from_three_prior_members"
 			}
 		}
@@ -1269,7 +1402,7 @@ liberal_party = {
 				scope:number > 3
 			}
 			multiply = {
-				value = 0.1
+				value = 0.0
 				desc = "from_more_than_three_prior_members"
 			}
 		}

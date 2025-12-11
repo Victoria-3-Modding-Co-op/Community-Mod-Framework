@@ -40,7 +40,7 @@ conservative_party = {
 				desc = party_fatherland_front
 				trigger = {
 					exists = c:AUS
-					THIS = c:AUS
+					c:AUS ?= THIS
 					any_interest_group = {
 						is_in_government = yes
 						party ?= {
@@ -55,7 +55,7 @@ conservative_party = {
 				desc = party_christian_social_party
 				trigger = {
 					exists = c:AUS
-					THIS = c:AUS
+					c:AUS ?= THIS
 					NAND = {
 						any_interest_group = {
 							is_in_government = yes
@@ -72,84 +72,156 @@ conservative_party = {
 				desc = party_constitutional_party
 				trigger = {
 					exists = c:PEU
-					THIS = c:PEU
+					c:PEU ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_national_autonomist
 				trigger = {
 					exists = c:ARG
-					THIS = c:ARG
+					c:ARG ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_tories
 				trigger = {
 					exists = c:GBR
-					THIS = c:GBR
+					c:GBR ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_us_democrats
 				trigger = {
 					exists = c:USA
-					THIS = c:USA
+					c:USA ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_moderate_party
 				trigger = {
 					exists = c:SPA
-					THIS = c:SPA
+					c:SPA ?= THIS
+				}
+			}
+			triggered_desc = {
+				desc = party_cartist_party
+				trigger = {
+					c:POR ?= this
+					has_law = law_type:law_monarchy
+					ruler ?= {
+						has_template = POR_maria_ii_de_braganca
+					}
 				}
 			}
 			triggered_desc = {
 				desc = party_regenerator_party
 				trigger = {
-					exists = c:POR
-					THIS = c:POR
+					c:POR ?= this
+					has_law = law_type:law_monarchy
+					ruler ?= {
+						NOT = {
+							has_template = POR_maria_ii_de_braganca
+						}
+					}
+				}
+			}
+			triggered_desc = { # Right-wing split of the Republican Party
+				desc = party_republican_union_party
+				trigger = {
+					c:POR ?= this
+					NOR = {
+						has_law = law_type:law_monarchy
+						has_law = law_type:law_theocracy
+					}
+					NOT = {
+						has_technology_researched = mass_propaganda
+					}
+				}
+			}
+			triggered_desc = { # Political wing of Sidonism
+				desc = party_national_republican_party
+				trigger = {
+					c:POR ?= this
+					NOR = {
+						has_law = law_type:law_monarchy
+						has_law = law_type:law_theocracy
+					}
+					any_interest_group = {
+						leader = {
+							has_template = POR_sidonio_pais
+						}
+					}
+				}
+			}
+			triggered_desc = { # Pre-Salazar conservatives
+				desc = party_nationalist_republican_party
+				trigger = {
+					c:POR ?= this
+					NOR = {
+						has_law = law_type:law_monarchy
+						has_law = law_type:law_theocracy
+					}
+					NOT = {
+						any_interest_group = {
+							leader = {
+								has_template = POR_sidonio_pais
+							}
+						}
+					}
+					has_technology_researched = mass_propaganda
+				}
+			}
+			triggered_desc = { # Salazar's non-partisan party
+				desc = party_national_union
+				trigger = {
+					c:POR ?= this
+					NOR = {
+						has_law = law_type:law_monarchy
+						has_law = law_type:law_theocracy
+					}
+					has_law = law_type:law_single_party_state
 				}
 			}
 			triggered_desc = {
 				desc = party_lantmanna_party
 				trigger = {
 					exists = c:SWE
-					THIS = c:SWE
+					c:SWE ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_finnish_party
 				trigger = {
 					exists = c:FIN
-					THIS = c:FIN
+					c:FIN ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_catholic_party
 				trigger = {
 					exists = c:BEL
-					THIS = c:BEL
+					c:BEL ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_party_of_the_right
 				trigger = {
 					exists = c:LUX
-					THIS = c:LUX
+					c:LUX ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_peoples_party
 				trigger = {
 					exists = c:MON
-					THIS = c:MON
+					c:MON ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_resistance_party
 				trigger = {
 					exists = c:FRA
-					THIS = c:FRA
+					c:FRA ?= THIS
 					has_variable = orleanist_restoration_var
 				}
 			}
@@ -157,7 +229,7 @@ conservative_party = {
 				desc = party_party_of_order
 				trigger = {
 					exists = c:FRA
-					THIS = c:FRA
+					c:FRA ?= THIS
 					NOT = { has_variable = orleanist_restoration_var }
 				}
 			}
@@ -165,10 +237,10 @@ conservative_party = {
 				desc = party_moderate_party
 				trigger = {
 					country_has_primary_culture = cu:brazilian
-					has_law_or_variant = law_type:law_monarchy
+					has_law = law_type:law_monarchy
 					OR = {
 						game_date <= 1837.1.1
-						has_modifier = brz_regency
+						has_gov_regency = yes
 					}
 				}
 			}
@@ -176,9 +248,9 @@ conservative_party = {
 				desc = party_conservative
 				trigger = {
 					country_has_primary_culture = cu:brazilian
-					has_law_or_variant = law_type:law_monarchy
+					has_law = law_type:law_monarchy
 					NOT = {
-						has_modifier = brz_regency
+						has_gov_regency = yes
 					}
 				}
 			}
@@ -294,15 +366,15 @@ conservative_party = {
 				desc = party_octobrist_party
 				trigger = {
 					exists = c:RUS
-					THIS = c:RUS
-					has_law_or_variant = law_type:law_monarchy
+					c:RUS ?= THIS
+					has_law = law_type:law_monarchy
 				}
 			}
 			triggered_desc = {
 				desc = party_constitutional_association
 				trigger = {
 					exists = c:CHI
-					THIS = c:CHI
+					c:CHI ?= THIS
 					has_law_or_variant = law_type:law_monarchy
 				}
 			}
@@ -335,23 +407,23 @@ conservative_party = {
 				desc = party_imperial_rule_party
 				trigger = {
 					exists = c:JAP
-					THIS = c:JAP
-					has_law_or_variant = law_type:law_monarchy
+					c:JAP ?= THIS
+					has_law = law_type:law_monarchy
 				}
 			}
 			triggered_desc = {
 				desc = party_moderate_socialists_party
 				trigger = {
 					exists = c:PER
-					THIS = c:PER
+					c:PER ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_napist_party
 				trigger = {
 					exists = c:GRE
-					THIS = c:GRE
-					has_law_or_variant = law_type:law_monarchy
+					c:GRE ?= THIS
+					has_law = law_type:law_monarchy
 					ruler = {
 						culture = {
 							has_discrimination_trait = heritage_germanic
@@ -363,21 +435,21 @@ conservative_party = {
 				desc = party_ethnikon_komma
 				trigger = {
 					exists = c:GRE
-					THIS = c:GRE
+					c:GRE ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_blanco_party
 				trigger = {
 					exists = c:URU
-					THIS = c:URU
+					c:URU ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_colorado_party
 				trigger = {
 					exists = c:PRG
-					THIS = c:PRG
+					c:PRG ?= THIS
 				}
 			}
 			triggered_desc = {
@@ -448,14 +520,22 @@ conservative_party = {
 			country_has_voting_franchise = yes
 			OR = {
 				ig:ig_landowners ?= {
-				is_marginal = no
+					ig_counts_as_marginal = no
 				}
 				ig:ig_devout ?= {
-					is_marginal = no
+					ig_counts_as_marginal = no
 				}
 				ig:ig_petty_bourgeoisie ?= {
-					is_marginal = no
+					ig_counts_as_marginal = no
 				}
+			}
+			#USFP: replace with custom party
+			trigger_if = {
+				limit = {
+					is_usfp_active = yes
+					c:USA ?= this
+				}
+				usfp_has_constitutional_government = no
 			}
 		}
 		# unions can never be conservative
@@ -531,8 +611,7 @@ conservative_party = {
 		if = { # conservatives love conservativism
 			limit = {
 				OR = {
-					has_ideology = ideology:ideology_paternalistic
-					has_ideology = ideology:ideology_magnatial
+					has_paternalist_ideology = yes
 					has_ideology = ideology:ideology_hierarchic
 					has_ideology = ideology:ideology_patriarchal
 					has_ideology = ideology:ideology_moralist
@@ -650,8 +729,7 @@ conservative_party = {
 			limit = {
 				OR = {
 					has_ideology = ideology:ideology_plutocratic
-					has_ideology = ideology:ideology_paternalistic
-					has_ideology = ideology:ideology_magnatial
+					has_paternalist_ideology = yes
 
 					# ANZFP
 					trigger_if = {
@@ -883,6 +961,8 @@ conservative_party = {
 					has_ideology = ideology:ideology_moralist
 					has_ideology = ideology:ideology_paternalistic
 					has_ideology = ideology:ideology_magnatial
+					has_ideology = ideology:ideology_carlist_ig
+					has_ideology = ideology:ideology_moderantist
 
 					# ANZFP
 					trigger_if = {
@@ -1018,6 +1098,30 @@ conservative_party = {
 				desc = "from_corporatism"
 			}
 		}
+
+		# His Highness Marshal Baldomero Espartero, Viceroy of Navarre, Prince of Vergara, Duke of la Victoria, Duke of Morella, Count of Luchana, and Viscount of Banderas will never, ever join the Moderate Party.
+		if = {
+			limit = {
+				leader = {
+					has_template = SPA_baldomero_espartero
+				}
+			}
+			add = {
+				value = -1000
+				desc = "from_baldomero_espartero"
+			}
+		}
+		else_if = { # Narváez totally will, though
+			limit = {
+				leader = {
+					has_template = SPA_ramon_maria_narvaez
+				}
+			}
+			add = {
+				value = 100
+				desc = "from_conservative_leader"
+			}
+		}
 	
 		# Special weights for ACW
 		if = {
@@ -1027,7 +1131,7 @@ conservative_party = {
 						has_journal_entry = je_acw_countdown 
 						AND = { # JE not active yet at initialization
 							exists = c:USA
-							this = c:USA
+							c:USA ?= THIS
 							year < 1837						
 						}
 					}				
@@ -1047,21 +1151,22 @@ conservative_party = {
 					desc = "from_abolitionist_leader"
 				}					
 			}				
-			if = {
-				limit = {
-					is_usfp_active = yes
-					is_interest_group_type = ig_rural_folk
-					NOT = {
-						leader = { character_is_anti_slavery = yes }
+		}
+		if = { # Carlists and Miguelists were against participating in electoral politics for a good while
+			limit = {
+				NOT = { owner = { has_technology_researched = political_agitation } }
+				leader = {
+					OR = {
+						has_ideology = ideology:ideology_carlist
+						has_ideology = ideology:ideology_miguelist
 					}
 				}
-				add = {
-					value = 100
-					desc = "from_archetype_party"
-				}
-			}				
+			}
+			add = {
+				value = -20
+				desc = "from_traditionalist_monarchism"
+			}
 		}
-		
 
 		if = {
 			limit = {
@@ -1077,7 +1182,7 @@ conservative_party = {
 			limit = {
 				scope:number = 1
 				is_powerful = no
-				is_marginal = no
+				ig_counts_as_marginal = no
 			}
 			multiply = {
 				value = 2

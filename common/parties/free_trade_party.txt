@@ -29,72 +29,71 @@ free_trade_party = {
 				desc = party_democratic_alliance
 				trigger = {
 					exists = c:FRA
-					THIS = c:FRA
+					c:FRA ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_peelites
 				trigger = {
 					exists = c:GBR
-					THIS = c:GBR
-				}
-			}
-			triggered_desc = {
-				desc = party_historic_party
-				trigger = {
-					exists = c:POR
-					THIS = c:POR
+					c:GBR ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_old_lantmanna_party
 				trigger = {
 					exists = c:SWE
-					THIS = c:SWE
+					c:SWE ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_communications_clique
 				trigger = {
 					exists = c:CHI
-					THIS = c:CHI
+					c:CHI ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_national_party
 				trigger = {
 					exists = c:CHL
-					THIS = c:CHL
+					c:CHL ?= THIS
+				}
+			}
+			triggered_desc = {
+				desc = party_independent_party
+				trigger = {
+					c:POR ?= this
+					has_law = law_type:law_oligarchy
+				}
+			}
+			triggered_desc = {
+				desc = party_liberal_regenerator_party
+				trigger = {
+					c:POR ?= this
+					ruler ?= {
+						NOT = {
+							has_template = POR_maria_ii_de_braganca
+						}
+					}
 				}
 			}
 			triggered_desc = {
 				desc = party_party_of_peaceful_renovation
 				trigger = {
 					exists = c:RUS
-					THIS = c:RUS
-					has_law_or_variant = law_type:law_monarchy
+					c:RUS ?= THIS
+					has_law = law_type:law_monarchy
 				}
 			}
 			triggered_desc = {
 				desc = party_constitutional_union_party
 				trigger = {
-					is_usfp_active = no
 					exists = c:USA
-					THIS = c:USA
+					c:USA ?= THIS
 					NOT = {
 						has_global_variable = american_civil_war
 					}
-				}
-			}
-			#USFP
-			triggered_desc = {
-				desc = party_constitutional_union_party
-				trigger = {
-					is_usfp_active = yes
-					exists = c:USA
-					THIS = c:USA
-					exists = owner.py:liberal_party
-					NOT = { has_global_variable = american_civil_war }
 				}
 			}
 			#USFP
@@ -104,24 +103,14 @@ free_trade_party = {
 					is_usfp_active = yes
 					exists = c:USA
 					THIS = c:USA
-					exists = owner.py:liberal_party
-				}
-			}
-			#USFP
-			triggered_desc = {
-				desc = party_republicans
-				trigger = {
-					is_usfp_active = yes
-					exists = c:USA
-					THIS = c:USA
-					NOT = { exists = owner.py:liberal_party }
+					has_global_variable = american_civil_war
 				}
 			}
 			triggered_desc = {
 				desc = party_federalist_party
 				trigger = {
 					exists = c:NEN
-					THIS = c:NEN
+					c:NEN ?= THIS
 				}
 			}
 			triggered_desc = {
@@ -161,7 +150,7 @@ free_trade_party = {
 		owner = {
 			country_has_voting_franchise = yes
 			any_interest_group = {
-				is_marginal = no
+				ig_counts_as_marginal = no
 				OR = {
 					is_interest_group_type = ig_industrialists
 					leader ?= {
@@ -215,10 +204,9 @@ free_trade_party = {
 				desc = "south_america_two_party_system"
 			}
 		}
-		#Vanilla US weights
+
 		if = {
 			limit = {
-				is_usfp_active = no
 				owner = {
 					is_in_geographic_region = geographic_region_north_america
 					OR = {
@@ -231,6 +219,22 @@ free_trade_party = {
 			add = {
 				value = -10
 				desc = "usa_two_party_system"
+			}
+		}
+		# Spain and Portugal have two parties at game start
+		if = {
+			limit = {
+				owner = {
+					has_law = law_type:law_oligarchy
+					OR = {
+						country_has_primary_culture = cu:spanish
+						country_has_primary_culture = cu:portuguese
+					}
+				}
+			}
+			add = {
+				value = -10
+				desc = "from_two_party_system"
 			}
 		}
 		
@@ -314,7 +318,7 @@ free_trade_party = {
 			limit = {
 				is_powerful = no
 				owner = {
-					ig:ig_industrialists = {
+					ig:ig_industrialists ?= {
 						is_powerful = yes
 					}
 				}
@@ -463,6 +467,8 @@ free_trade_party = {
 				OR = {
 					has_ideology = ideology:ideology_paternalistic
 					has_ideology = ideology:ideology_magnatial
+					has_ideology = ideology:ideology_carlist_ig
+					has_ideology = ideology:ideology_moderantist
 					leader ?= {
 						has_ideology = ideology:ideology_fascist
 					}
@@ -493,6 +499,7 @@ free_trade_party = {
 				OR = {
 					has_ideology = ideology:ideology_plutocratic
 					has_ideology = ideology:ideology_meritocratic
+					has_ideology = ideology:ideology_cartist
 
 					# ANZFP
 					trigger_if = {
@@ -524,6 +531,7 @@ free_trade_party = {
 				OR = {
 					has_ideology = ideology:ideology_plutocratic
 					has_ideology = ideology:ideology_meritocratic
+					has_ideology = ideology:ideology_cartist
 					has_ideology = ideology:ideology_hierarchic
 				}
 				
@@ -581,6 +589,8 @@ free_trade_party = {
 				OR = {
 					has_ideology = ideology:ideology_paternalistic
 					has_ideology = ideology:ideology_magnatial
+					has_ideology = ideology:ideology_carlist_ig
+					has_ideology = ideology:ideology_moderantist
 					has_ideology = ideology:ideology_laissez_faire
 					has_ideology = ideology:ideology_agrarian
 				
@@ -681,7 +691,7 @@ free_trade_party = {
 			limit = {
 				scope:number = 1
 				is_powerful = no
-				is_marginal = no
+				ig_counts_as_marginal = no
 			}
 			multiply = {
 				value = 2

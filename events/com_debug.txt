@@ -53,6 +53,7 @@ com_debug.1 = {
 		# CMF on_action Overrides
 		fix_variable_error = { variable = no_heirs }
 		fix_variable_error = { variable = com_no_formation_events }
+		fix_variable_error = { variable = com_no_regencies }
 		
 		# CMF Character Animations Framework
 		fix_variable_error = { variable = com_character_override }

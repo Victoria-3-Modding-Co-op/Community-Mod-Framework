@@ -1,0 +1,254 @@
+﻿on_new_ruler = {
+	effect = {
+		if = {
+			limit = {
+				owner = {
+					NOT = {
+						has_variable = com_no_regencies # CMF Addition to block the 1.12 Regencies
+					}
+				}
+			}
+			if = {
+				limit = {
+					owner = {
+						NOT = {
+							has_variable = hide_ruler_change_notification
+						}
+					}
+					age >= define:NCharacters|ADULT_AGE
+				}
+				post_notification = new_ruler
+			}
+			if = {
+				limit = {
+					owner = {
+						has_law_or_variant = law_type:law_theocracy
+					}
+					NOT = { religion = owner.religion }
+				}
+				change_character_religion = owner.religion
+			}
+			if = {
+				limit = {
+					owner = {
+						has_law = law_type:law_monarchy
+						has_gov_regency = no
+					}
+					age < define:NCharacters|ADULT_AGE
+					NOT = { has_variable = regency_complete }
+				}
+				owner = {
+					trigger_event = {
+						id = regency.1
+						popup = yes
+					}
+				}
+			}
+			if = {
+				limit = {
+					owner = {
+						c:PAN ?= this
+						has_journal_entry = je_sikh_sovereignty
+					}
+				}
+				if = {
+					limit = {
+						NOT = {
+							has_variable = sikh_maharaja_enthroned
+						}
+					}
+					owner = {
+						je:je_sikh_sovereignty = {
+							set_bar_progress = { value = 0 name = sikh_empire_progress_bar }
+						}
+					}
+					set_variable = sikh_maharaja_enthroned
+					owner = {
+						change_variable = { name = sikh_dead_maharajas_var add = 1 }
+					}
+				}
+			}
+			if = { # Override to make the ruler of British India always an Industrialist
+				limit = {
+					is_ruler = yes
+					c:BIC ?= owner
+					NOT = {
+						is_interest_group_type = ig_industrialists
+					}
+				}
+				owner = {
+					ig:ig_industrialists ?= {
+						leader = {
+							set_character_as_ruler = yes
+						}
+					}
+					generate_new_eic_government_leader = yes
+				}
+			}
+			if = {
+				limit = {
+					owner = {
+						c:ZAN ?= this
+						any_primary_culture = {
+							cu:bedouin = this
+						}
+					}
+					culture = {
+						NOT = { cu:bedouin = this }
+					}
+					NOT = {
+						has_global_variable = decided_future_of_zanzibar
+					}
+				}
+				owner = {
+					trigger_event = { id = zanzibar.6 popup = yes }
+				}
+			}
+			
+			### Monarchial succession - add all successions here.
+			if = {
+				limit = {
+					is_ruler = yes
+					owner ?= {
+						has_law = law_type:law_monarchy
+					}
+				}
+				### Russian Monarchs
+				if = {
+					limit = {
+						owner ?= {
+							c:RUS ?= this
+						}
+					}
+					character_russia_ruler_succession_chain_effect = yes
+				}
+				### Swedish Monarchs
+				if = {
+					limit = {
+						owner = {
+							OR = {
+								c:SWE ?= this
+								was_formed_from = SWE
+							}
+						}
+					}
+					character_sweden_ruler_succession_chain_effect = yes
+				}
+				### Austrian Monarchs
+				if = {
+					limit = {
+						owner = {
+							OR = {
+								c:AUS ?= this
+								was_formed_from = AUS
+							}
+						}
+					}
+					character_austria_ruler_succession_chain_effect = yes
+				}
+				### Serbian Monarchs
+				if = {
+					limit = {
+						owner ?= {
+							OR = {
+								c:SER ?= this
+								was_formed_from = SER
+							}
+						}
+					}
+					character_serbia_ruler_succession_chain_effect = yes
+				}
+				### Ottoman Monarchs
+				if = {
+					limit = {
+						owner ?= {
+							c:TUR ?= this
+						}
+					}
+					character_ottoman_ruler_succession_chain_effect = yes
+				}
+				### French Monarchs
+				if = {
+					limit = {
+						owner ?= {
+							c:FRA ?= this
+						}
+					}
+					character_france_ruler_succession_chain_effect = yes
+				}
+				### Spanish Monarchs
+				if = {
+					limit = {
+						owner ?= {
+							OR = {
+								c:SPA ?= this
+								was_formed_from = SPA
+							}
+						}
+					}
+					character_spain_ruler_succession_chain_effect = yes
+				}
+				### Portuguese Monarchs
+				if = {
+					limit = {
+						owner ?= {
+							OR = {
+								c:POR ?= this
+								was_formed_from = POR
+							}
+						}
+					}
+					character_portugal_ruler_succession_chain_effect = yes
+				}
+				### Morocco Monarchs
+				if = {
+					limit = {
+						owner ?= {
+							OR = {
+								c:MOR ?= this
+								was_formed_from = MOR
+							}
+						}
+					}
+					character_morocco_ruler_succession_chain_effect = yes
+				}
+			}
+			
+			if = { # For handling the Succession Rights treaty article in the case of ruler death
+				limit = {
+					exists = c:BRZ
+					exists = c:POR
+					owner = {
+						c:POR ?= this
+						NOT = {
+							has_diplomatic_pact = {
+								who = c:BRZ
+								type = personal_union
+							}
+						}
+						any_scope_treaty = {
+							binds = c:BRZ
+							any_scope_article = {
+								has_type = amend_succession
+								source_country = c:BRZ
+							}
+						}
+					}
+				}
+				save_temporary_scope_as = portuguese_monarch_scope
+				c:BRZ ?= {
+					heir ?= {
+						if = {
+							limit = {
+								is_character_alive = yes
+								NOT = { c:POR ?= THIS.ruler }
+							}
+							kill_character = { hidden = yes }
+						}
+					}
+					set_heir = scope:portuguese_monarch_scope
+				}
+			}
+		}
+	}
+}

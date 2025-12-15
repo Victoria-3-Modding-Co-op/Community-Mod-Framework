@@ -37,9 +37,10 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=3385002128
 * [Community Mod Triggers](#community-mod-triggers)
 * [Keybinds](#keybinds)
 * [Additional Modifier Icons](#additional-modifier-icons)
-* [Heir Blocker](#heir-blocker)
 * [Weekly Event Framework](#weekly-event-framework)
+* [Heir Blocker](#heir-blocker)
 * [Formation Event Blocker](#formation-event-blocker)
+* [Regency Blocker](#regency-blocker)
 * [Built-In Universal Names Compatibility](#built-in-universal-names-compatibility)
 
 # Setting Dependency
@@ -732,6 +733,17 @@ Note: It is possible to add additional keybinds if there are no keybinds left.
 Over 100 new modifier icons for more variety. Credit to Caelreader. PSD template available in docs.
 Screenshot: [Modifier Icons](docs/timed_modifier_icons.png)
 
+# Weekly Event Framework
+
+This is a framework to allow for a weekly firing script event on any day of the week, without a hidden journal entry being used.
+
+To use:
+1. Create a new `on_monthly_pulse` or reuse an existing one.
+2. Set it up like in `com_weekly_on_action.txt`:
+3. Add your own `on_action` to the `on_monthly_pulse` from step 1.
+4. Add the `com_run_weekly_event_country_effect` into this new on_action and set the two parameters. Example: `com_run_weekly_event_country_effect = { weekday = 1 on_action = another_on_action }`. Weekday decides the weekday ranging from 0 (Sunday) to 6 (Saturday).
+5. Define your new on_action (`another_on_action` in the example in 4.)
+
 # Heir Blocker
 
 Mods interested in having specially generated heirs (especially for things like historical heirs) in countries with hereditary transfers of power can utilize the Heir Blocking Framework's feature to prevent the visual appearance of an heir. That is, while the heir technically is generated (as there is no useful way to prevent that), we can intercept the new heir and remove them whilst blocking the "Heir Born" message at the same time, giving the *appearance* to the user that no heirs are actually being born.
@@ -750,17 +762,6 @@ Note:
 1. No considerations have been made regarding any failsafes. You are solely responsible for unblocking heirs later, even if the country switches away from a government type with hereditary transfer of power.
 2. Heirs created via `create_character` and heirs set via `set_heir` are *not* blocked, as they do not count as a "natural" heir birth. This means the variable does not need to be briefly unset when generating or setting heirs via script, such as for historical heirs.
 
-# Weekly Event Framework
-
-This is a framework to allow for a weekly firing script event on any day of the week, without a hidden journal entry being used.
-
-To use:
-1. Create a new `on_monthly_pulse` or reuse an existing one.
-2. Set it up like in `com_weekly_on_action.txt`:
-3. Add your own `on_action` to the `on_monthly_pulse` from step 1.
-4. Add the `com_run_weekly_event_country_effect` into this new on_action and set the two parameters. Example: `com_run_weekly_event_country_effect = { weekday = 1 on_action = another_on_action }`. Weekday decides the weekday ranging from 0 (Sunday) to 6 (Saturday).
-5. Define your new on_action (`another_on_action` in the example in 4.)
-
 # Formation Event Blocker
 
 This allows for blocking the formation events that occur whenever the player forms a country. This can be used for blocking the events' effect of adding claims to all homeland states which is vanilla behavior.
@@ -777,6 +778,24 @@ To allow formation events again, simply remove the variable.
 Notes:
 1. No considerations have been made regarding any failsafes. You are solely responsible for unblocking formation events later, even if the country successfully completes additional formations.
 2. Changing country via the `change_tag` effect will **not** remove the `com_no_formation_events`variable.
+
+# Regency Blocker
+
+This allows for preventing `on_new_ruler` from firing as needed. This on action is very aggressive and will interrupt mid-event chain and create a regency even if you immediately replace your ruler immediately after an effect that removed the previous ruler.
+
+To use it, just set a variable named `com_no_regencies` in the country that should have regencies blocks; e.g.,
+```
+c:GRE = {
+    set_variable = com_no_regencies
+}
+```
+
+To allow regencies again, simply remove the variable.
+
+Notes:
+1. No considerations have been made regarding any failsafes. You are solely responsible for unblocking regencies later, even if the country changes government types and transfer of power.
+2. Changing country via the `change_tag` effect will **not** remove the `com_no_regencies` variable.
+3. Setting the variable *after* removing the ruler will **not** prevent the regency on action from firing.
 
 # Built-In Universal Names Compatibility
 

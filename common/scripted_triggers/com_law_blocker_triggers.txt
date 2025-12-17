@@ -1,0 +1,52 @@
+﻿#################################################
+# COMMUNITY MOD FRAMEWORK: LAW BLOCKER TRIGGERS #
+#################################################
+
+# The primary trigger is a variable check to allow for quickly hiding and showing law types
+# The alternative trigger should always evaluate to FALSE within CMF; these are meant to be overridden by other mods for more flexibility
+# Both triggers should check for a true state within the law definition itself
+
+####----------- Governance Principles Laws ----------####
+# Monarchy
+com_law_monarchy_trigger = {
+	NOT = {
+		has_variable = com_hide_law_monarchy
+	}
+}
+com_law_monarchy_alternative_trigger = {
+	always = no
+}
+
+
+####----------- Distribution of Power Laws ----------####
+# Autocracy
+com_law_autocracy_trigger = {
+	NOT = {
+		has_variable = com_hide_law_autocracy
+	}
+}
+com_law_autocracy_alternative_trigger = {
+	always = no
+}
+
+# Oligarchy
+com_law_oligarchy_trigger = {
+	NOT = {
+		has_variable = com_hide_law_oligarchy
+	}
+}
+com_law_oligarchy_alternative_trigger = {
+	always = no
+}
+
+
+####----------- Bureaucracy Laws ----------####
+# Hereditary Bureaucrats
+com_law_hereditary_bureaucrats_trigger = {
+	NOT = {
+		has_variable = com_hide_law_hereditary_bureaucrats
+	}
+}
+com_law_hereditary_bureaucrats_alternative_trigger = {
+	always = no
+}

@@ -471,7 +471,7 @@ REPLACE:movement_cultural_minority = {
 	ideology = ideology_pluralist_movement_1
 	character_ideologies = {
 		ideology_reformer
-		ideology_gbbf_ottomanist #GOTB
+		ideology_gbbf_ottomanist_leader #GOTB
 		
 	}
 	
@@ -758,7 +758,7 @@ REPLACE:movement_cultural_minority = {
 			has_ideology = ideology:ideology_sovereignist_leader
 			has_ideology = ideology:ideology_reformer
 			has_ideology = ideology:ideology_usfp_abolitionist_radical
-			has_ideology = ideology:ideology_gbbf_ottomanist #GOTB
+			has_ideology = ideology:ideology_gbbf_ottomanist_leader #GOTB
 			#USFP: African-heritage characters of any ideology can join the Afro-American movement
 			AND = {
 				is_usfp_active = yes
@@ -1466,7 +1466,7 @@ REPLACE:movement_minority_rights = {
 	ideology = ideology_pluralist_movement_3
 	character_ideologies = {
 		ideology_reformer
-		ideology_gbbf_ottomanist #GOTB
+		ideology_gbbf_ottomanist_leader #GOTB
 	}
 	
 	creation_trigger = {}
@@ -1498,7 +1498,7 @@ REPLACE:movement_minority_rights = {
 			has_ideology = ideology:ideology_humanitarian_royalist
 			has_ideology = ideology:ideology_sovereignist_leader
 			has_ideology = ideology:ideology_reformer
-			has_ideology = ideology:ideology_gbbf_ottomanist #GOTB
+			has_ideology = ideology:ideology_gbbf_ottomanist_leader #GOTB
 		}
 	}
 	character_support_weight = {
@@ -1516,7 +1516,7 @@ REPLACE:movement_minority_rights = {
 				OR = {
 					has_ideology = ideology:ideology_humanitarian
 					has_ideology = ideology:ideology_reformer
-					has_ideology = ideology:ideology_gbbf_ottomanist #GOTB
+					has_ideology = ideology:ideology_gbbf_ottomanist_leader #GOTB
 				}
 			}
 			multiply = {

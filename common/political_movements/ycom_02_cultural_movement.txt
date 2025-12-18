@@ -1,4 +1,5 @@
-﻿REPLACE:movement_cultural_majority = {
+﻿
+REPLACE:movement_cultural_majority = {
 	category = movement_category_cultural_majority
 	
 	ideology = ideology_ethno_nationalist_movement
@@ -34,10 +35,11 @@
 			}
 		}
 	}
+
 	creation_weight = {
 		value = 100
 	}
-	on_created = { }
+	on_created = {}
 	
 	character_support_trigger = {
 		culture = {
@@ -552,7 +554,7 @@ REPLACE:movement_cultural_minority = {
 					}
 				}
 			}
-			set_core_ideology = ideology_pluralist_movement_1     # National Supremacy
+			set_core_ideology = ideology_pluralist_movement_1
 		}
 		else_if = {
 			limit = {
@@ -582,7 +584,7 @@ REPLACE:movement_cultural_minority = {
 					}
 				}
 			}
-			set_core_ideology = ideology_pluralist_movement_2    # Racial Segregation
+			set_core_ideology = ideology_pluralist_movement_2
 		}
 		else_if = {
 			limit = {
@@ -612,7 +614,7 @@ REPLACE:movement_cultural_minority = {
 					}
 				}
 			}
-			set_core_ideology = ideology_pluralist_movement_3 # Cultural Exclusion
+			set_core_ideology = ideology_pluralist_movement_3
 		}
 		else = {
 			set_core_ideology = ideology_pluralist_movement_4

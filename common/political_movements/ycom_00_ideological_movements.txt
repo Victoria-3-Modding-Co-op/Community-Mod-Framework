@@ -7,7 +7,7 @@
 		ideology_abolitionist
 		ideology_humanitarian
 		ideology_usfp_abolitionist_radical #USFP
-		ideology_gbbf_ottomanist #GOTB
+		ideology_gbbf_ottomanist_leader #GOTB
 	}
 	
 	disband_trigger = {
@@ -1580,7 +1580,7 @@ REPLACE:movement_royalist_constitutional = {
 		ideology_royalist
 		ideology_humanitarian_royalist
 		ideology_gbbf_constitutionalist #GOTB
-		ideology_gbbf_ottomanist #GOTB
+		ideology_gbbf_ottomanist_leader #GOTB
 	}
 	
 	disband_trigger = {
@@ -1626,7 +1626,7 @@ REPLACE:movement_royalist_constitutional = {
 			has_ideology = ideology:ideology_royalist
 			has_ideology = ideology:ideology_humanitarian_royalist
 			has_ideology = ideology:ideology_gbbf_constitutionalist #GOTB
-			has_ideology = ideology:ideology_gbbf_ottomanist #GOTB
+			has_ideology = ideology:ideology_gbbf_ottomanist_leader #GOTB
 			AND = {
 				OR = {
 					is_interest_group_type = ig_landowners
@@ -4427,7 +4427,7 @@ REPLACE:movement_liberal = {
 		ideology_humanitarian
 		ideology_gbbf_constitutionalist #GOTB
 		ideology_gbbf_venizelist_leader #GOTB
-		ideology_gbbf_ottomanist #GOTB
+		ideology_gbbf_ottomanist_leader #GOTB
 		ideology_gbbf_dacianist #GOTB
 		ideology_moh_revolutionary # MoH Revolutionary
 		ideology_moh_kmt # MoH Kuomintang Nationalist
@@ -7039,7 +7039,7 @@ REPLACE:movement_modernizer = { # This movement loves you and wants you to succe
 		ideology_protectionist
 		ideology_market_liberal
 		ideology_abolitionist
-		ideology_gbbf_ottomanist #GOTB
+		ideology_gbbf_ottomanist_leader #GOTB
 	}
 	
 	creation_trigger = {

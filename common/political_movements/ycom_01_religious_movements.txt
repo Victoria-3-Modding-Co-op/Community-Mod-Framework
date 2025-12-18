@@ -414,7 +414,7 @@ REPLACE:movement_religious_minority = {
 	character_ideologies = {
 		ideology_traditionalist_minoritarian
 		ideology_usfp_universalist #USFP
-		ideology_gbbf_ottomanist #GOTB
+		ideology_gbbf_ottomanist_leader #GOTB
 	}
 	
 	can_cause_obstinance = yes

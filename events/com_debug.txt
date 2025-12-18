@@ -76,6 +76,12 @@ com_debug.1 = {
 		fix_variable_error = { variable = com_victory_effect }
 		fix_variable_error = { variable = com_reason_location }
 		
+		## CMF Law Blocker Framework
+		fix_variable_error = { variable = com_hide_law_hereditary_bureaucrats }
+		fix_variable_error = { variable = com_hide_law_monarchy }
+		fix_variable_error = { variable = com_hide_law_autocracy }
+		fix_variable_error = { variable = com_hide_law_oligarchy}
+		
 		# Float arrays
 		fix_variable_error = { variable = com_fa_index }
 		fix_variable_error = { variable = com_fa_return }

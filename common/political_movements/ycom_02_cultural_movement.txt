@@ -474,7 +474,6 @@ REPLACE:movement_cultural_minority = {
 	character_ideologies = {
 		ideology_reformer
 		ideology_gbbf_ottomanist_leader #GOTB
-		
 	}
 	
 	can_cause_obstinance = yes
@@ -811,7 +810,7 @@ REPLACE:movement_cultural_minority = {
 				has_ideology = ideology:ideology_usfp_abolitionist_radical
 			}
 			multiply = {
-				value = 5
+				value = 10
 			}
 		}
 	}

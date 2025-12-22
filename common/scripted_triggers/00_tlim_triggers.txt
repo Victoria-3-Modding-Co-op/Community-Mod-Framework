@@ -1,0 +1,5 @@
+﻿CREATE:tlim_land_grab_war_goal_possible_trigger = {
+	hidden_trigger = {
+		always = yes
+		}
+	}

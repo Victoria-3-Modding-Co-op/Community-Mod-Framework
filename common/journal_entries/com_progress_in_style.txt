@@ -7,6 +7,8 @@
 	scripted_button = sb_com_progress_in_style_test2
 	scripted_button = sb_com_progress_in_style_test3
 	scripted_button = sb_com_progress_in_style_test4
+	scripted_button = sb_com_progress_in_style_test5
+	scripted_button = sb_com_progress_in_style_test6
 
 	scripted_progress_bar = spb_com_progress_in_style
 

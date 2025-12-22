@@ -12,6 +12,7 @@ A full list of them can be found below in the [script docs](#script-docs).
   * [Modifying a progress bar](#modifying-a-progress-bar)
   * [Drift and target values](#drift-and-target-values)
     * [Colors and icons](#colors-and-icons)
+  * [Progress bar levels](#progress-bar-levels)
   * [Example progress bar setup](#example-progress-bar-setup)
 * [Script docs](#script-docs)
   * [Effects](#effects)
@@ -57,10 +58,15 @@ The target script value can be set to match the current value, replicating base 
 ### Colors and icons
 The progress bar and the drift style can be given one of five colors, `default`/`blue`, `bad`/`red`, `green`, `gold`, and `white`, or made blank with `transparent`. 
 
+## Progress bar levels
+The progress bar can be given visual level indicators, similar to the levels of legitimacy, liberty desire, or power bloc cohesion. The number of levels is dynamically changeable, and additionally the highlighting effect for the current level can be set or removed.
+
 ## Example progress bar setup
 There is an example journal entry which was used for testing in the Community Mod Framework.
 
 [This journal entry can be found here.](/common/journal_entries/com_progress_in_style.txt)
+
+Use the effect `add_journal_entry = { type = je_com_progress_in_style }` to activate the entry
 
 # Script docs
 These are following effects and triggers available to use for styling progress bars:
@@ -80,6 +86,12 @@ These are following effects and triggers available to use for styling progress b
 * [remove_com_progress_bar_drift](#effect-remove_com_progress_bar_drift)
 * [set_com_progress_bar_target](#effect-set_com_progress_bar_target)
 * [remove_com_progress_bar_target](#effect-remove_com_progress_bar_target)
+* [set_com_progress_bar_levels](#effect-set_com_progress_bar_levels)
+* [remove_com_progress_bar_levels](#effect-remove_com_progress_bar_levels)
+* [set_com_progress_bar_level_highlight](#effect-set_com_progress_bar_level_highlight)
+* [remove_com_progress_bar_level_highlight](#effect-remove_com_progress_bar_level_highlight)
+* [hide_com_progress_bar](#effect-hide_com_progress_bar)
+* [unhide_com_progress_bar](#effect-unhide_com_progress_bar)
 * [com_debug_progress_bar](#effect-com_debug_progress_bar)
 
 ## Triggers
@@ -107,7 +119,7 @@ A wrapper effect to easily run an effect inside '**scope:com_$progress_bar$**'
 ### Effect: `initialize_com_progress_bar`
 This is the basic initialization effect to set up a progress bar for styling.
 This effect has to be run inside a scope where '**scope:journal_entry**' is available! Typically, this in the `immediate` block.
-THIS DOES NOT REPLACE THE VANILLA SETUP!
+THIS DOES NOT REPLACE THE BASE GAME SETUP!
 
 **Parameters:**
 - `progress_bar` localization key identifier of progress bar
@@ -116,7 +128,7 @@ THIS DOES NOT REPLACE THE VANILLA SETUP!
 ### Effect: `create_com_progress_bar`
 Extension of `initialize_com_progress_bar` that also sets the color of the progress bar.
 This effect has to be run inside a scope where '**scope:journal_entry**' is available! Typically, this in the `immediate` block.
-THIS DOES NOT REPLACE THE VANILLA SETUP!
+THIS DOES NOT REPLACE THE BASE GAME SETUP!
 
 **Parameters:**
 - `progress_bar` localization key identifier of progress bar
@@ -126,7 +138,7 @@ THIS DOES NOT REPLACE THE VANILLA SETUP!
 ### Effect: `create_com_progress_bar_with_drift`
 Extension of `initialize_com_progress_bar` that also sets the color and drift style of the progress bar.
 This effect has to be run inside a scope where '**scope:journal_entry**' is available! Typically, this in the `immediate` block.
-THIS DOES NOT REPLACE THE VANILLA SETUP!
+THIS DOES NOT REPLACE THE BASE GAME SETUP!
 
 **Parameters:**
 - `progress_bar` localization key identifier of progress bar
@@ -139,7 +151,7 @@ THIS DOES NOT REPLACE THE VANILLA SETUP!
 ### Effect: `create_com_progress_bar_with_target`
 Extension of `initialize_com_progress_bar` that also sets the color and target style of the progress bar.
 This effect has to be run inside a scope where '**scope:journal_entry**' is available! Typically, this in the `immediate` block.
-THIS DOES NOT REPLACE THE VANILLA SETUP!
+THIS DOES NOT REPLACE THE BASE GAME SETUP!
 
 **Parameters:**
 - `progress_bar` localization key identifier of progress bar
@@ -151,7 +163,7 @@ THIS DOES NOT REPLACE THE VANILLA SETUP!
 ### Effect: `create_com_progress_bar_with_both`
 Extension of `initialize_com_progress_bar` that also sets the color, drift effect, and target style of the progress bar
 This effect has to be run inside a scope where '**scope:journal_entry**' is available! Typically, this in the `immediate` block.
-THIS DOES NOT REPLACE THE VANILLA SETUP!
+THIS DOES NOT REPLACE THE BASE GAME SETUP!
 
 **Parameters:**
 - `progress_bar` localization key identifier of progress bar
@@ -213,6 +225,31 @@ Removes the target style of the progress bar
 **Parameters:**
 - `progress_bar` localization key identifier of progress bar
 
+### Effect: `set_com_progress_bar_levels`
+Sets the number of levels of the progress bar. This also sets that many dividers minus one. All levels are evenly spaced.
+
+**Parameters:**
+- `progress_bar` localization key identifier of progress bar
+- `levels` = A positive integer for the number of levels on the bar
+
+### Effect: `remove_com_progress_bar_levels`
+Removes the levels of the progress bar
+
+**Parameters:**
+- `progress_bar` localization key identifier of progress bar
+
+### Effect: `set_com_progress_bar_level_highlight`
+Sets a highlight effect on the current level of the progress bar, no effect if the bar does not have levels set with `set_com_progress_bar_levels`
+
+**Parameters:**
+- `progress_bar` localization key identifier of progress bar
+
+### Effect: `remove_com_progress_bar_level_highlight`
+Removes highlight effect from the progress bar
+
+**Parameters:**
+- `progress_bar` localization key identifier of progress bar
+
 ### Effect: `hide_com_progress_bar`
 Hides the specified progress bar from the journal
 
@@ -253,6 +290,6 @@ A wrapper effect to easily check a trigger inside '**scope:com_$progress_bar$**'
 - `trigger` trigger or series of triggers to be run inside '**scope:com_$progress_bar$**'
 
 # Compatibility notes
-If you do not want to make the Community Mod Framework a required dependency for you mod, but you want the styles to be used when the CMF is enabled, you can define a set of dummy scripted effects and triggers with the same names as everything in the [script docs](#script-docs), these should in a file that comes before `com_progressbar_effects.txt` so that it is overwritten by CMF and the effects can be active.
+If you do not want to make the Community Mod Framework a required dependency for your mod, but you want the styles to be used when the CMF is enabled, you can define a set of dummy scripted effects and triggers with the same names as everything in the [script docs](#script-docs), these should in a file that comes before `com_progressbar_effects.txt` so that it is overwritten by CMF and the effects can be active.
 
 To avoid errors because of the parameters, you can have the dummy effects set a local variable for each parameter, such as `set_local_variable = $progress_bar$`

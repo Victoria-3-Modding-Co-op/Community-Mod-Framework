@@ -1,0 +1,5 @@
+﻿l_german:
+ concept_com_international_organization: "International Organization"
+ concept_com_international_organization_desc: "A group of [Concept('concept_country','$concept_countries$')] bound together by some type of supranational entity."
+ concept_com_international_organizations: "International Organizations"
+ je_group_international_organizations: "[Concept('concept_com_international_organization','$concept_com_international_organizations$')]"

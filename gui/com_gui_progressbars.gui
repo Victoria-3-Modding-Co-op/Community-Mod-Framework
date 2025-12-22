@@ -26,7 +26,9 @@ types progressbar_overwrites {
 		direction = vertical
 		
 		datamodel = "[JournalEntry.GetScriptedProgressBars]"
-		visible = "[Not( IsDataModelEmpty( JournalEntry.GetScriptedProgressBars ) )]"
+		block "scripted_progress_bars_visibility" {
+			visible = "[Not( IsDataModelEmpty( JournalEntry.GetScriptedProgressBars ) )]"
+		}
 		
 		spacing = 15
 		
@@ -778,7 +780,9 @@ types progressbar_overwrites {
 		direction = vertical
 		
 		datamodel = "[JournalEntry.GetScriptedProgressBars]"
-		visible = "[Not( IsDataModelEmpty( JournalEntry.GetScriptedProgressBars ) )]"
+		block "scripted_progress_bars_visibility" {
+			visible = "[Not( IsDataModelEmpty( JournalEntry.GetScriptedProgressBars ) )]"
+		}
 		
 		spacing = 10
 		
@@ -1453,6 +1457,11 @@ types com_progressbars {
 				margin = { 3 3 }
 			}
 		}
+		#levels
+		com_progressbar_levels = {
+			visible = "[ComProgressBar.Var('com_progress_bar_levels').IsSet]"
+			datamodel = "[DataModelRepeatedItem( FixedPointToInt( ComProgressBar.Var('com_progress_bar_levels').GetValue ) )]"
+		}
 		#target markers
 		block "com_progressbar_target" {
 			progressbar = { #gold left/right icon marker (default for double_sided_gold and double_sided_spain)
@@ -1635,6 +1644,69 @@ types com_progressbars {
 		}
 		blockoverride "noprogresstexture" {
 			noprogresstexture = "gfx/interface/progressbar/progressbar_default.dds"
+		}
+	}
+	type com_progressbar_levels = hbox {
+		layoutpolicy_horizontal = expanding
+		spacing = 3
+		item = {
+			widget = {
+				size = { 0 100% }
+				layoutpolicy_horizontal = expanding
+				block "item_properties" {}
+				using = tooltip_se
+				
+				widget = {
+					size = { 4 100% }
+					position { 3 0 }
+					parentanchor = right
+					block "last_level" {
+						visible = "[Not(
+							EqualTo_int32(
+								IntToFrameIndex(PdxGuiWidget.GetIndexInDataModel),
+								FixedPointToInt( ComProgressBarInLevels.Var('com_progress_bar_levels').GetValue )
+							)
+						)]" #IntToFrameIndex adds 1
+					}
+					background = {
+						margin { 0 1 }
+						texture = "gfx/interface/progressbar/progressbar_center_divider.dds"
+						spriteType = Corneredstretched
+						spriteborder = { 0 0 }
+						texture_density = 2
+					}
+				}
+				# active indicator
+				widget = {
+					size = { 100% 100% }
+					block "level_active" {
+						visible = "[And(
+							ComProgressBarInLevels.Var('com_progress_bar_level_highlight').IsSet,
+							BetweenInclusiveOfMax_float(
+								JournalEntry.GetCurrentBarProgress(ScriptedProgressBar.Self),
+								Divide_float(
+									IntToFloat(PdxGuiWidget.GetIndexInDataModel),
+									FixedPointToFloat(ComProgressBarInLevels.Var('com_progress_bar_levels').GetValue)
+								),
+								Divide_float(
+									IntToFloat(IntToFrameIndex(PdxGuiWidget.GetIndexInDataModel)),
+									FixedPointToFloat(ComProgressBarInLevels.Var('com_progress_bar_levels').GetValue)
+								)
+							)
+						)]" #IntToFrameIndex adds 1
+					}
+					block "level_predicted" {}
+					icon = {
+						size = { 100% 100% }
+						texture = "gfx/interface/progressbar/progressbar_active_level.dds"
+						spriteType = Corneredstretched
+						spriteborder = { 6 6 }
+						texture_density = 2
+						
+						using = shimmer
+					}
+				}
+			}
 		}
 	}
 

@@ -114,6 +114,12 @@ sb_com_progress_in_style_test3 = {
 	name = sb_com_progress_in_style_test3
 	desc = sb_com_rise_of_communism_test_desc
 
+	visible = {
+		test_in_com_progress_bar_scope = {
+			progress_bar = spb_com_progress_in_style
+			trigger = "has_variable = com_target_type"
+		}
+	}
 	possible = {
 		always = yes
 	}
@@ -245,6 +251,126 @@ sb_com_progress_in_style_test4 = {
 					}
 				}
 			}"
+		}
+	}
+}
+
+sb_com_progress_in_style_test5 = {
+	name = sb_com_progress_in_style_test5
+	desc = sb_com_rise_of_communism_test_desc
+
+	possible = {
+		always = yes
+	}
+
+	ai_chance = {
+		value = 100
+	}
+
+	effect = {
+		custom_tooltip = {
+			text = sb_com_progress_in_style_test5_tt
+			fix_variable_error = { variable = com_progress_bar_levels }
+		}
+		if = {
+			limit = {
+				test_in_com_progress_bar_scope = {
+					progress_bar = spb_com_progress_in_style
+					trigger = "has_variable = com_progress_bar_levels"
+				}
+			}
+			run_in_com_progress_bar_scope = {
+				progress_bar = spb_com_progress_in_style
+				effect = "
+				switch = {
+					trigger = var:com_progress_bar_levels
+					3 = {
+						custom_tooltip = com_progress_bar_levels_4
+						set_variable = {
+							name = com_progress_bar_levels
+							value = 4
+						}
+					}
+					4 = {
+						custom_tooltip = com_progress_bar_levels_5
+						set_variable = {
+							name = com_progress_bar_levels
+							value = 5
+						}
+					}
+					fallback = {
+						custom_tooltip = com_progress_bar_levels_clear
+						remove_variable = com_progress_bar_levels
+					}
+				}"
+			}
+		}
+		else = {
+			custom_tooltip = com_progress_bar_levels_3
+			set_com_progress_bar_levels = {
+				progress_bar = spb_com_progress_in_style
+				levels = 3
+			}
+		}
+	}
+}
+
+sb_com_progress_in_style_test6 = {
+	name = sb_com_progress_in_style_test6
+	desc = sb_com_progress_in_style_test_desc
+
+	visible = {
+		test_in_com_progress_bar_scope = {
+			progress_bar = spb_com_progress_in_style
+			trigger = "has_variable = com_progress_bar_levels"
+		}
+	}
+	possible = {
+		OR = {
+			custom_tooltip = {
+				text = sb_com_progress_in_style_test6_tt
+				test_in_com_progress_bar_scope = {
+					progress_bar = spb_com_progress_in_style
+					trigger = "has_variable = com_progress_bar_level_highlight"
+				}
+			}
+			custom_tooltip = {
+				text = sb_com_progress_in_style_test6_tt2
+				NOT = {
+					test_in_com_progress_bar_scope = {
+						progress_bar = spb_com_progress_in_style
+						trigger = "has_variable = com_progress_bar_level_highlight"
+					}
+				}
+			}
+		}
+	}
+
+	ai_chance = {
+		value = 100
+	}
+
+	effect = {
+		if = {
+			limit = {
+				has_variable = com_progress_in_style_bar_highlight
+			}
+			custom_tooltip = {
+				text = sb_com_progress_in_style_test_tt4
+				remove_com_progress_bar_level_highlight = {
+					progress_bar = spb_com_progress_in_style
+				}
+				remove_variable = com_progress_in_style_bar_highlight
+			}
+		}
+		else = {
+			custom_tooltip = {
+				text = sb_com_progress_in_style_test_tt3
+				set_variable = com_progress_in_style_bar_highlight
+				set_com_progress_bar_level_highlight = {
+					progress_bar = spb_com_progress_in_style
+				}
+			}
 		}
 	}
 }

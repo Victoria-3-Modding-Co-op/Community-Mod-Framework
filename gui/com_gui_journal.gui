@@ -283,6 +283,9 @@ types journal_overwrites {
 										blockoverride "iconsize" {
 											size = { 35 35 }
 										}
+										blockoverride "scripted_progress_bars_visibility" {
+											visible = no
+										}
 									}
 								}
 							}

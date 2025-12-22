@@ -361,6 +361,96 @@ remove_com_progress_bar_target = {
 	}
 }
 
+# Sets the number of levels for the progress bar
+# - progress_bar = name localization key of progress bar
+# - levels = number of levels/parts to the progress bar, evenly spaced
+set_com_progress_bar_levels = {
+	hidden_effect = {
+		if = {
+			limit = {
+				NOT = {
+					exists_com_progress_bar = { progress_bar = $progress_bar$ }
+				}
+			}
+			error_log = error_no_progress_bar_scope
+		}
+		else = {
+			save_com_progress_bar_scope = { progress_bar = $progress_bar$ }
+			fix_variable_error = { variable = com_progress_bar_levels }
+			scope:com_$progress_bar$ = {
+				set_variable = {
+					name = com_progress_bar_levels
+					value = $levels$
+				}
+			}
+		}
+	}
+}
+
+# Removes the levels for the progress bar
+# - progress_bar = name localization key of progress bar
+remove_com_progress_bar_levels = {
+	hidden_effect = {
+		if = {
+			limit = {
+				NOT = {
+					exists_com_progress_bar = { progress_bar = $progress_bar$ }
+				}
+			}
+			error_log = error_no_progress_bar_scope
+		}
+		else = {
+			save_com_progress_bar_scope = { progress_bar = $progress_bar$ }
+			scope:com_$progress_bar$ = {
+				remove_variable = com_progress_bar_levels
+			}
+		}
+	}
+}
+
+# Sets level highlight for the progress bar
+# - progress_bar = name localization key of progress bar
+set_com_progress_bar_level_highlight = {
+	hidden_effect = {
+		if = {
+			limit = {
+				NOT = {
+					exists_com_progress_bar = { progress_bar = $progress_bar$ }
+				}
+			}
+			error_log = error_no_progress_bar_scope
+		}
+		else = {
+			save_com_progress_bar_scope = { progress_bar = $progress_bar$ }
+			fix_variable_error = { variable = com_progress_bar_level_highlight }
+			scope:com_$progress_bar$ = {
+				set_variable = com_progress_bar_level_highlight
+			}
+		}
+	}
+}
+
+# Removes level highlight for the progress bar
+# - progress_bar = name localization key of progress bar
+remove_com_progress_bar_level_highlight = {
+	hidden_effect = {
+		if = {
+			limit = {
+				NOT = {
+					exists_com_progress_bar = { progress_bar = $progress_bar$ }
+				}
+			}
+			error_log = error_no_progress_bar_scope
+		}
+		else = {
+			save_com_progress_bar_scope = { progress_bar = $progress_bar$ }
+			scope:com_$progress_bar$ = {
+				remove_variable = com_progress_bar_level_highlight
+			}
+		}
+	}
+}
+
 # Hides the progress bar, so it is no longer shown
 # - progress_bar = name localization key of progress bar
 hide_com_progress_bar = {

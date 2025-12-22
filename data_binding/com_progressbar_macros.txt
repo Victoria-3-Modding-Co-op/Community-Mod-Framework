@@ -115,3 +115,15 @@ macro = {
         )
     )"
 }
+
+macro = {
+    description = "Scripted progress bar index in journal entry"
+    definition = "ComProgressBarIndexInLevels"
+    replace_with = "Localize(Concatenate( 'com_progress_bar_', ToString_int32(PdxGuiWidget.AccessParent.AccessParent.AccessParent.GetIndexInDataModel) ))"
+}
+
+macro = {
+    description = "Get progress bar struct"
+    definition = "ComProgressBarInLevels"
+    replace_with = "JournalEntry.MakeScope.Var(ComProgressBarIndexInLevels)"
+}

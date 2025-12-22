@@ -1,0 +1,94 @@
+﻿com_character_name_extraction = {
+    scope = character
+
+    saved_scopes = {
+        com_name_full
+        com_name_full_no_formatting
+        com_name_full_title
+        com_name_full_title_no_formatting
+        com_name_first
+        com_name_first_no_formatting
+        com_name_last
+        com_name_last_no_formatting
+    }
+
+    effect = {
+        error_log = "extract"
+        debug_log_scopes = yes
+        if = {
+            limit = {
+                exists = scope:com_name_full
+            }
+            set_variable = {
+                name = com_name_full
+                value = scope:com_name_full
+            }
+        }
+        if = {
+            limit = {
+                exists = scope:com_name_full_no_formatting
+            }
+            set_variable = {
+                name = com_name_full_no_formatting
+                value = scope:com_name_full_no_formatting
+            }
+        }
+
+        if = {
+            limit = {
+                exists = scope:com_name_full_title
+            }
+            set_variable = {
+                name = com_name_full_title
+                value = scope:com_name_full_title
+            }
+        }
+        if = {
+            limit = {
+                exists = scope:com_name_full_title_no_formatting
+            }
+            set_variable = {
+                name = com_name_full_title_no_formatting
+                value = scope:com_name_full_title_no_formatting
+            }
+        }
+
+        if = {
+            limit = {
+                exists = scope:com_name_first
+            }
+            set_variable = {
+                name = com_name_first
+                value = scope:com_name_first
+            }
+        }
+        if = {
+            limit = {
+                exists = scope:com_name_first_no_formatting
+            }
+            set_variable = {
+                name = com_name_first_no_formatting
+                value = scope:com_name_first_no_formatting
+            }
+        }
+
+        if = {
+            limit = {
+                exists = scope:com_name_last
+            }
+            set_variable = {
+                name = com_name_last
+                value = scope:com_name_last
+            }
+        }
+        if = {
+            limit = {
+                exists = scope:com_name_last_no_formatting
+            }
+            set_variable = {
+                name = com_name_last_no_formatting
+                value = scope:com_name_last_no_formatting
+            }
+        }
+    }
+}

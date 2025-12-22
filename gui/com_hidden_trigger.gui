@@ -4,10 +4,10 @@
 widget = {
     datacontext = "[GetMetaPlayer.GetPlayedOrObservedCountry]"
     visible = "[GetMetaPlayer.GetPlayedOrObservedCountry.IsValid]"
-    size = { 0 0 }
+    size = { 500 500 }
     name = com_hidden_trigger
     allow_outside = yes
-    alpha = 0
+    alpha = 1
 
     button = {
         size = { 0 0 }
@@ -25,4 +25,29 @@ widget = {
 			on_finish = "[ExecuteConsoleCommand('debug_mode')]"
 		}
 	}
+
+    flowcontainer = {
+        visible = "[DataModelHasItems(GetGlobalList('com_character_name_extract'))]"
+        datamodel = "[GetGlobalList('com_character_name_extract')]"
+        item = {
+            widget = {
+                datacontext = "[Scope.GetCharacter]"
+                state = {
+                    trigger_when = "[Scope.IsSet]"
+                    on_finish = "[GetScriptedGui('com_character_name_extraction').Execute(GuiScope
+                        .SetRoot(Character.MakeScope)
+                        .AddScope('com_name_full', MakeScopeFlag(Character.GetFullName))
+                        .AddScope('com_name_full_no_formatting', MakeScopeFlag(Character.GetFullNameNoFormatting))
+                        .AddScope('com_name_full_title', MakeScopeFlag(Character.GetFullNameWithTitle))
+                        .AddScope('com_name_full_title_no_formatting', MakeScopeFlag(Character.GetFullNameWithTitleNoFormatting))
+                        .AddScope('com_name_first', MakeScopeFlag(Character.GetFirstName))
+                        .AddScope('com_name_first_no_formatting', MakeScopeFlag(Character.GetFirstNameNoFormatting))
+                        .AddScope('com_name_last', MakeScopeFlag(Character.GetLastName))
+                        .AddScope('com_name_last_no_formatting', MakeScopeFlag(Character.GetLastNameNoFormatting))
+                        .End
+                    )]"
+                }
+            }
+        }
+    }
 }

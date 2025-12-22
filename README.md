@@ -31,6 +31,7 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=3385002128
     * [Setting Variables on a Struct](#setting-variables-on-a-struct)
     * [Destroying a Struct](#destroying-a-struct)
 * [Fixing Variable Errors](#fixing-variable-errors)
+* [Extracting Character Names](#extracting-character-names)
 * [Dictionaries](#dictionaries)
 * [Float Arrays](#float-arrays)
 * [Parties](#parties)
@@ -574,6 +575,20 @@ fix_variable_error = {
 Usage examples can be found [here](events/com_debug.txt).
 
 **NOTE**: This works for both **variables** and **flags**.
+
+# Extracting Character Names
+CMF has the ability to set character names as **flag** variables on the characters scope.
+To do this just add the character to the `com_character_name_extract` global list.
+
+In the background a GUI hack will be used to set the following variables on the character:
+- `com_name_full`
+- `com_name_full_no_formatting`
+- `com_name_full_title`
+- `com_name_full_title_no_formatting`
+- `com_name_first`
+- `com_name_first_no_formatting`
+- `com_name_last`
+- `com_name_last_no_formatting`
 
 # Dictionaries
 

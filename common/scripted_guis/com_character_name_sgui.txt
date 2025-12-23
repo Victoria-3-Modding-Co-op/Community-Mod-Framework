@@ -13,8 +13,6 @@
     }
 
     effect = {
-        error_log = "extract"
-        debug_log_scopes = yes
         if = {
             limit = {
                 exists = scope:com_name_full

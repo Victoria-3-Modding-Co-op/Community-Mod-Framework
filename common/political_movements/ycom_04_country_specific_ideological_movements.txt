@@ -601,6 +601,15 @@ REPLACE:movement_orleanist = {
 		weight = {
 			value = 100
 		}
+
+		state_weight = {
+			value = 1
+			
+			# Grey_PLP
+			multiply = {
+				value = mog_plp_movement_all_general_state_weight_mult
+			}
+		}
 	}
 	
 	secession = {
@@ -611,6 +620,15 @@ REPLACE:movement_orleanist = {
 		
 		weight = {
 			value = 1000
+		}
+
+		state_weight = {
+			value = 1
+			
+			# Grey_PLP
+			multiply = {
+				value = mog_plp_movement_all_general_state_weight_mult
+			}
 		}
 	}
 	
@@ -921,6 +939,15 @@ REPLACE:movement_bonapartist = {
 		weight = {
 			value = 100
 		}
+
+		state_weight = {
+			value = 1
+			
+			# Grey_PLP
+			multiply = {
+				value = mog_plp_movement_all_general_state_weight_mult
+			}
+		}
 	}
 	
 	secession = {
@@ -931,6 +958,15 @@ REPLACE:movement_bonapartist = {
 		
 		weight = {
 			value = 1000
+		}
+
+		state_weight = {
+			value = 1
+			
+			# Grey_PLP
+			multiply = {
+				value = mog_plp_movement_all_general_state_weight_mult
+			}
 		}
 	}
 	
@@ -1195,6 +1231,15 @@ REPLACE:movement_legitimist = {
 		weight = {
 			value = 100
 		}
+
+		state_weight = {
+			value = 1
+			
+			# Grey_PLP
+			multiply = {
+				value = mog_plp_movement_all_general_state_weight_mult
+			}
+		}
 	}
 	
 	secession = {
@@ -1205,6 +1250,15 @@ REPLACE:movement_legitimist = {
 		
 		weight = {
 			value = 1000
+		}
+
+		state_weight = {
+			value = 1
+			
+			# Grey_PLP
+			multiply = {
+				value = mog_plp_movement_all_general_state_weight_mult
+			}
 		}
 	}
 	
@@ -1460,6 +1514,15 @@ REPLACE:movement_carlist = {
 		weight = {
 			value = 100
 		}
+
+		state_weight = {
+			value = 1
+			
+			# Grey_PLP
+			multiply = {
+				value = mog_plp_movement_all_general_state_weight_mult
+			}
+		}
 	}
 	
 	secession = {
@@ -1470,6 +1533,15 @@ REPLACE:movement_carlist = {
 		
 		weight = {
 			value = 1000
+		}
+
+		state_weight = {
+			value = 1
+			
+			# Grey_PLP
+			multiply = {
+				value = mog_plp_movement_all_general_state_weight_mult
+			}
 		}
 	}
 	
@@ -1651,6 +1723,15 @@ REPLACE:movement_miguelist = {
 		weight = {
 			value = 100
 		}
+
+		state_weight = {
+			value = 1
+			
+			# Grey_PLP
+			multiply = {
+				value = mog_plp_movement_all_general_state_weight_mult
+			}
+		}
 	}
 	
 	secession = {
@@ -1661,6 +1742,15 @@ REPLACE:movement_miguelist = {
 		
 		weight = {
 			value = 1000
+		}
+
+		state_weight = {
+			value = 1
+			
+			# Grey_PLP
+			multiply = {
+				value = mog_plp_movement_all_general_state_weight_mult
+			}
 		}
 	}
 	

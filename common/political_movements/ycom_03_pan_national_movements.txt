@@ -280,6 +280,10 @@
 				value = state_urbanization_rate
 				multiply = 5
 			}
+			# Grey_PLP
+			multiply = {
+				value = mog_plp_movement_all_general_state_weight_mult
+			}
 		}
 		
 		forced_tags = {
@@ -300,6 +304,15 @@
 		
 		weight = {
 			value = 1000
+		}
+
+		state_weight = {
+			value = 1
+			
+			# Grey_PLP
+			multiply = {
+				value = mog_plp_movement_all_general_state_weight_mult
+			}
 		}
 		
 		forced_tags = {
@@ -722,6 +735,10 @@ REPLACE:movement_german_national = {
 				}
 				multiply = 0
 			}
+			# Grey_PLP
+			multiply = {
+				value = mog_plp_movement_all_general_state_weight_mult
+			}
 		}
 	}
 	
@@ -747,6 +764,10 @@ REPLACE:movement_german_national = {
 					}
 				}
 				multiply = 0
+			}
+			# Grey_PLP
+			multiply = {
+				value = mog_plp_movement_all_general_state_weight_mult
 			}
 		}
 		
@@ -1239,6 +1260,10 @@ REPLACE:movement_italian_national = {
 				}
 				multiply = 0
 			}
+			# Grey_PLP
+			multiply = {
+				value = mog_plp_movement_all_general_state_weight_mult
+			}
 		}
 	}
 	
@@ -1264,6 +1289,10 @@ REPLACE:movement_italian_national = {
 					}
 				}
 				multiply = 0
+			}
+			# Grey_PLP
+			multiply = {
+				value = mog_plp_movement_all_general_state_weight_mult
 			}
 		}
 		
@@ -1739,6 +1768,10 @@ REPLACE:movement_yugoslav_national = {
 				}
 				multiply = 0
 			}
+			# Grey_PLP
+			multiply = {
+				value = mog_plp_movement_all_general_state_weight_mult
+			}
 		}
 		
 		forced_tags = {
@@ -1773,6 +1806,10 @@ REPLACE:movement_yugoslav_national = {
 					}
 				}
 				multiply = 0
+			}
+			# Grey_PLP
+			multiply = {
+				value = mog_plp_movement_all_general_state_weight_mult
 			}
 		}
 		
@@ -2257,6 +2294,10 @@ REPLACE:movement_dominican_national = {
 					}
 				}
 				multiply = 0
+			}
+			# Grey_PLP
+			multiply = {
+				value = mog_plp_movement_all_general_state_weight_mult
 			}
 		}
 		

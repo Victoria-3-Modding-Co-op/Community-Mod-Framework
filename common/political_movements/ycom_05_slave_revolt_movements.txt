@@ -342,6 +342,10 @@
 					multiply = 100
 				}
 			}
+			# Grey_PLP - always put last
+			multiply = {
+				value = mog_plp_movement_all_general_state_weight_mult
+			}
 		}
 	}
 
@@ -378,6 +382,10 @@
 					}
 					multiply = 100
 				}
+			}
+			# Grey_PLP - always put last
+			multiply = {
+				value = mog_plp_movement_all_general_state_weight_mult
 			}
 		}
 	}

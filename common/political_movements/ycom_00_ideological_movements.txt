@@ -3159,6 +3159,15 @@ REPLACE:movement_anarchist = {
 		weight = {
 			value = 100
 		}
+
+		state_weight = {
+			value = 1
+			
+			# Grey_PLP
+			multiply = {
+				value = mog_plp_movement_all_general_state_weight_mult
+			}
+		}
 	}
 	
 	secession = {
@@ -3197,6 +3206,15 @@ REPLACE:movement_anarchist = {
 		
 		weight = {
 			value = 1000
+		}
+
+		state_weight = {
+			value = 1
+			
+			# Grey_PLP
+			multiply = {
+				value = mog_plp_movement_all_general_state_weight_mult
+			}
 		}
 	}
 	
@@ -3571,6 +3589,15 @@ REPLACE:movement_communist = {
 		weight = {
 			value = 100
 		}
+
+		state_weight = {
+			value = 1
+			
+			# Grey_PLP
+			multiply = {
+				value = mog_plp_movement_all_general_state_weight_mult
+			}
+		}
 	}
 	
 	secession = {
@@ -3581,6 +3608,15 @@ REPLACE:movement_communist = {
 		
 		weight = {
 			value = 1000
+		}
+
+		state_weight = {
+			value = 1
+			
+			# Grey_PLP
+			multiply = {
+				value = mog_plp_movement_all_general_state_weight_mult
+			}
 		}
 	}
 	
@@ -4142,6 +4178,15 @@ REPLACE:movement_fascist = {
 		weight = {
 			value = 1000
 		}
+
+		state_weight = {
+			value = 1
+			
+			# Grey_PLP
+			multiply = {
+				value = mog_plp_movement_all_general_state_weight_mult
+			}
+		}
 	}
 	
 	additional_radicalism_factors = {
@@ -4560,6 +4605,15 @@ REPLACE:movement_corporatist = {
 		
 		weight = {
 			value = 1000
+		}
+
+		state_weight = {
+			value = 1
+			
+			# Grey_PLP
+			multiply = {
+				value = mog_plp_movement_all_general_state_weight_mult
+			}
 		}
 	}
 	
@@ -6194,6 +6248,15 @@ REPLACE:movement_positivist = {
 		weight = {
 			value = 1000
 		}
+
+		state_weight = {
+			value = 1
+			
+			# Grey_PLP
+			multiply = {
+				value = mog_plp_movement_all_general_state_weight_mult
+			}
+		}
 	}
 	
 	additional_radicalism_factors = {
@@ -6797,6 +6860,15 @@ REPLACE:movement_feminist = {
 		weight = {
 			value = 1000
 		}
+
+		state_weight = {
+			value = 1
+			
+			# Grey_PLP
+			multiply = {
+				value = mog_plp_movement_all_general_state_weight_mult
+			}
+		}
 	}
 	
 	additional_radicalism_factors = {
@@ -7185,6 +7257,15 @@ REPLACE:movement_reactionary = {
 		
 		weight = {
 			value = 1000
+		}
+
+		state_weight = {
+			value = 1
+			
+			# Grey_PLP
+			multiply = {
+				value = mog_plp_movement_all_general_state_weight_mult
+			}
 		}
 	}
 	
@@ -7609,6 +7690,15 @@ REPLACE:movement_modernizer = { # This movement loves you and wants you to succe
 		
 		weight = {
 			value = 1000
+		}
+
+		state_weight = {
+			value = 1
+			
+			# Grey_PLP
+			multiply = {
+				value = mog_plp_movement_all_general_state_weight_mult
+			}
 		}
 	}
 	

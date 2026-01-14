@@ -19,19 +19,19 @@ macro = {
 macro = {
     description = "Overwrites portrait value if set, or uses specified default"
     definition = "ComSelectPortraitVar(Variable,Default)"
-    replace_with = "SelectLocalization( Character.MakeScope.Var(Variable).IsSet, Character.MakeScope.Var(Variable).GetFlagName, Default )"
+    replace_with = "Select_CString( Character.MakeScope.Var(Variable).IsSet, Character.MakeScope.Var(Variable).GetFlagName, Default )"
 }
 
 macro = {
     description = "Selects situation ending conditions if set specifically"
     definition = "ComVictoryCondition(Type)"
-    replace_with = "SelectLocalization(Scope.Var('com_victory_condition').IsSet,Scope.Var('com_victory_condition').GetFlagName,Type)"
+    replace_with = "Select_CString(Scope.Var('com_victory_condition').IsSet,Scope.Var('com_victory_condition').GetFlagName,Type)"
 }
 
 macro = {
     description = "Selects situation ending effects if set specifically"
     definition = "ComVictoryEffect(Type)"
-    replace_with = "SelectLocalization(Scope.Var('com_victory_effect').IsSet,Scope.Var('com_victory_effect').GetFlagName,Type)"
+    replace_with = "Select_CString(Scope.Var('com_victory_effect').IsSet,Scope.Var('com_victory_effect').GetFlagName,Type)"
 }
 
 macro = {

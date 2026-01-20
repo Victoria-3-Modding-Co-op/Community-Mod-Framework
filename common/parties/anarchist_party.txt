@@ -120,10 +120,15 @@ anarchist_party = {
 	available_for_interest_group = {
 		owner = {
 			country_has_voting_franchise = yes
-			any_interest_group = {
-				ig_counts_as_marginal = no
-				leader ?= {
-					has_ideology = ideology:ideology_anarchist
+			OR = {
+				py:anarchist_party ?= {
+					any_member = {}
+				}			
+				any_interest_group = {
+					ig_counts_as_marginal = no
+					leader ?= {
+						has_ideology = ideology:ideology_anarchist
+					}
 				}
 			}
 		}

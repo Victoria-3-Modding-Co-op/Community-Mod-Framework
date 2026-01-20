@@ -114,10 +114,33 @@ religious_party = {
 				}
 			}
 			triggered_desc = {
+				desc = party_legitimist_party
+				trigger = {
+					c:FRA ?= this
+					any_interest_group = {
+						party ?= {
+							is_party_type = religious_party
+						}
+						leader ?= {
+							has_ideology = ideology:ideology_legitimist
+						}
+					}
+				}
+			}
+			triggered_desc = {
 				desc = party_clerical_party
 				trigger = {
-					exists = c:FRA
-					THIS = c:FRA
+					c:FRA ?= this
+					NOT = {
+						any_interest_group = {
+							party ?= {
+								is_party_type = religious_party
+							}
+							leader ?= {
+								has_ideology = ideology:ideology_legitimist
+							}
+						}
+					}
 				}
 			}
 			triggered_desc = {
@@ -342,6 +365,20 @@ religious_party = {
 				desc = "from_theocracy"
 			}
 		}
+		if = {
+			limit = {
+				leader = {
+					has_ideology = ideology:ideology_legitimist
+				}
+				owner = {
+					country_has_primary_culture = cu:french
+				}
+			}
+			add = {
+				value = 20
+				desc = "ideology_legitimist"
+			}
+		}
 		if = { # nobody will join if the devout don't join
 			limit = {
 				NOT = { is_interest_group_type = ig_devout }
@@ -383,7 +420,7 @@ religious_party = {
 				leader ?= {
 					OR = {
 						has_ideology = ideology:ideology_traditionalist
-						has_ideology = ideology:ideology_carlist
+						character_has_carlist_ideology = yes
 						has_ideology = ideology:ideology_theocrat
 						has_ideology = ideology:ideology_corporatist_leader
 					}
@@ -449,11 +486,11 @@ religious_party = {
 		}
 		if = { # Carlists and Miguelists were against participating in electoral politics for a good while
 			limit = {
-				NOT = { owner = { has_technology_researched = political_agitation } }
+				NOT = { owner = { has_technology_researched = corporatism } }
 				leader = {
 					OR = {
-						has_ideology = ideology:ideology_carlist
-						has_ideology = ideology:ideology_miguelist
+						character_has_carlist_ideology = yes
+						character_has_miguelist_ideology = yes
 					}
 				}
 			}

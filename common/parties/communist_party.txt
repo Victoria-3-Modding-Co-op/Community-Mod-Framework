@@ -363,12 +363,17 @@ communist_party = {
 	available_for_interest_group = {
 		owner = {
 			country_has_voting_franchise = yes
+			OR = {
+				py:communist_party ?= {
+					any_member = {}
+				}		
 			any_interest_group = {
 				leader ?= {
 					OR = {
 						has_ideology = ideology:ideology_communist
 						has_ideology = ideology:ideology_vanguardist
 						has_ideology = ideology:ideology_anarchist
+						}
 					}
 				}
 			}
@@ -384,7 +389,7 @@ communist_party = {
 				has_ideology = ideology:ideology_ethno_nationalist
 				has_ideology = ideology:ideology_market_liberal
 				has_ideology = ideology:ideology_traditionalist
-				has_ideology = ideology:ideology_carlist
+				character_has_carlist_ideology = yes
 				has_ideology = ideology:ideology_royalist
 				has_ideology = ideology:ideology_orleanist
 				has_ideology = ideology:ideology_bonapartist

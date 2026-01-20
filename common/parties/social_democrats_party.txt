@@ -275,6 +275,9 @@ social_democrat_party = {
 		owner = {
 			country_has_voting_franchise = yes
 			OR = {
+				py:social_democrat_party ?= {
+					any_member = {}
+				}
 				any_interest_group = {
 					ig_counts_as_marginal = no
 					leader ?= {
@@ -296,7 +299,7 @@ social_democrat_party = {
 				has_ideology = ideology:ideology_integralist
 				has_ideology = ideology:ideology_ethno_nationalist
 				has_ideology = ideology:ideology_traditionalist
-				has_ideology = ideology:ideology_carlist
+				character_has_carlist_ideology = yes
 				has_ideology = ideology:ideology_royalist
 				has_ideology = ideology:ideology_orleanist
 				has_ideology = ideology:ideology_bonapartist
@@ -604,7 +607,7 @@ social_democrat_party = {
 					has_ideology = ideology:ideology_agrarian
 					has_ideology = ideology:ideology_paternalistic
 					has_ideology = ideology:ideology_magnatial
-					has_ideology = ideology:ideology_carlist_ig
+					ig_has_carlist_ideology = yes
 					# ANZFP
 					trigger_if = {
 						limit = {

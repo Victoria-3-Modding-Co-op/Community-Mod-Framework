@@ -209,8 +209,13 @@ agrarian_party = {
 		}
 		owner = {
 			country_has_voting_franchise = yes
-			ig:ig_rural_folk ?= {
-				ig_counts_as_marginal = no
+			OR = {
+				py:agrarian_party ?= {
+					any_member = {}
+				}
+				ig:ig_rural_folk ?= {
+					ig_counts_as_marginal = no
+				}
 			}
 		}
 	}
@@ -636,11 +641,11 @@ agrarian_party = {
 		}
 		if = { # Carlists and Miguelists were against participating in electoral politics for a good while
 			limit = {
-				NOT = { owner = { has_technology_researched = political_agitation } }
+				NOT = { owner = { has_technology_researched = corporatism } }
 				leader = {
 					OR = {
-						has_ideology = ideology:ideology_carlist
-						has_ideology = ideology:ideology_miguelist
+						character_has_carlist_ideology = yes
+						character_has_miguelist_ideology = yes
 					}
 				}
 			}

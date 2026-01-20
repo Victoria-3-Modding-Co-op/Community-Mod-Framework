@@ -519,6 +519,9 @@ conservative_party = {
 		owner = {
 			country_has_voting_franchise = yes
 			OR = {
+				py:conservative_party ?= {
+					any_member = {}
+				}			
 				ig:ig_landowners ?= {
 					ig_counts_as_marginal = no
 				}
@@ -961,7 +964,7 @@ conservative_party = {
 					has_ideology = ideology:ideology_moralist
 					has_ideology = ideology:ideology_paternalistic
 					has_ideology = ideology:ideology_magnatial
-					has_ideology = ideology:ideology_carlist_ig
+					ig_has_carlist_ideology = yes
 					has_ideology = ideology:ideology_moderantist
 
 					# ANZFP
@@ -977,7 +980,7 @@ conservative_party = {
 				}
 				owner = {
 					NOR = {
-						has_law_or_variant = law_type:law_monarchy
+						has_law = law_type:law_monarchy
 						has_law_or_variant = law_type:law_theocracy
 					}
 				}
@@ -1154,11 +1157,11 @@ conservative_party = {
 		}
 		if = { # Carlists and Miguelists were against participating in electoral politics for a good while
 			limit = {
-				NOT = { owner = { has_technology_researched = political_agitation } }
+				NOT = { owner = { has_technology_researched = corporatism } }
 				leader = {
 					OR = {
-						has_ideology = ideology:ideology_carlist
-						has_ideology = ideology:ideology_miguelist
+						character_has_carlist_ideology = yes
+						character_has_miguelist_ideology = yes
 					}
 				}
 			}

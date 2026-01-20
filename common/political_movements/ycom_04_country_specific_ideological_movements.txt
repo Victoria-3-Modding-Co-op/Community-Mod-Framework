@@ -1281,6 +1281,22 @@ REPLACE:movement_legitimist = {
 		}
 		if = {
 			limit = {
+				exists = c:PAP
+				c:PAP ?= {
+					country_has_state_religion = rel:catholic
+					has_law_or_variant = law_type:law_theocracy
+				}
+				"owner.relations(c:PAP)" < 0
+			}
+			add = {
+				desc = "POOR_RELATIONS_WITH_PAPACY"
+				value = "owner.relations(c:PAP)"
+				divide = 100
+				multiply = -0.25
+			}
+		}
+		if = {
+			limit = {
 				owner = {
 					any_neighbouring_state = {
 						owner = {
@@ -1327,6 +1343,14 @@ REPLACE:movement_carlist = {
 	}
 	on_created = {
 		add_movement_enthusiasm_modifier = yes
+		if = {
+			limit = {
+				owner = {
+					has_technology_researched = corporatism
+				}
+			}
+			set_core_ideology = ideology_carlist_movement_2
+		}
 	}
 	
 	disband_trigger = {
@@ -1342,7 +1366,7 @@ REPLACE:movement_carlist = {
 	
 	character_support_trigger = {
 		OR = {
-			has_ideology = ideology:ideology_carlist
+			character_has_carlist_ideology = yes
 			has_ideology = ideology:ideology_traditionalist
 			has_ideology = ideology:ideology_royalist
 			has_ideology = ideology:ideology_integralist
@@ -1363,7 +1387,7 @@ REPLACE:movement_carlist = {
 		value = 200
 		if = {
 			limit = {
-				has_ideology = ideology:ideology_carlist
+				character_has_carlist_ideology = yes
 			}
 			multiply = {
 				value = 5
@@ -1552,7 +1576,7 @@ REPLACE:movement_carlist = {
 					has_law = law_type:law_monarchy
 					ruler ?= {
 						NOT = {
-							has_ideology = ideology:ideology_carlist
+							character_has_carlist_ideology = yes
 						}
 					}
 				}
@@ -1560,6 +1584,34 @@ REPLACE:movement_carlist = {
 			add = {
 				value = 0.25
 				desc = "NON_CARLIST_MONARCH"
+			}
+		}
+		if = {
+			limit = {
+				exists = c:PAP
+				c:PAP ?= {
+					country_has_state_religion = rel:catholic
+					has_law_or_variant = law_type:law_theocracy
+				}
+				"owner.relations(c:PAP)" < 0
+			}
+			add = {
+				desc = "POOR_RELATIONS_WITH_PAPACY"
+				value = "owner.relations(c:PAP)"
+				divide = 100
+				multiply = -0.25
+			}
+		}
+		if = {
+			limit = {
+				owner ?= {
+					c:SPA ?= this
+					has_journal_entry = je_the_first_carlist_war
+				}
+			}
+			add = {
+				value = -0.95
+				desc = "INSURRECTIONARY_CARLISTS"
 			}
 		}
 	}
@@ -1587,6 +1639,14 @@ REPLACE:movement_miguelist = {
 	}
 	on_created = {
 		add_movement_enthusiasm_modifier = yes
+		if = {
+			limit = {
+				owner = {
+					has_technology_researched = corporatism
+				}
+			}
+			set_core_ideology = ideology_miguelist_movement_2
+		}
 	}
 	
 	disband_trigger = {
@@ -1602,7 +1662,7 @@ REPLACE:movement_miguelist = {
 	
 	character_support_trigger = {
 		OR = {
-			has_ideology = ideology:ideology_miguelist
+			character_has_miguelist_ideology = yes
 			has_ideology = ideology:ideology_traditionalist
 			has_ideology = ideology:ideology_royalist
 			has_ideology = ideology:ideology_integralist
@@ -1623,7 +1683,7 @@ REPLACE:movement_miguelist = {
 		value = 200
 		if = {
 			limit = {
-				has_ideology = ideology:ideology_miguelist
+				character_has_miguelist_ideology = yes
 			}
 			multiply = {
 				value = 5
@@ -1761,7 +1821,7 @@ REPLACE:movement_miguelist = {
 					has_law = law_type:law_monarchy
 					ruler ?= {
 						NOT = {
-							has_ideology = ideology:ideology_miguelist
+							character_has_miguelist_ideology = yes
 						}
 					}
 				}
@@ -1769,6 +1829,22 @@ REPLACE:movement_miguelist = {
 			add = {
 				value = 0.25
 				desc = "NON_MIGUELIST_MONARCH"
+			}
+		}
+		if = {
+			limit = {
+				exists = c:PAP
+				c:PAP ?= {
+					country_has_state_religion = rel:catholic
+					has_law_or_variant = law_type:law_theocracy
+				}
+				"owner.relations(c:PAP)" < 0
+			}
+			add = {
+				desc = "POOR_RELATIONS_WITH_PAPACY"
+				value = "owner.relations(c:PAP)"
+				divide = 100
+				multiply = -0.25
 			}
 		}
 	}

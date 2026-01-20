@@ -472,6 +472,9 @@ liberal_party = {
 		owner = {
 			country_has_voting_franchise = yes
 			OR = {
+				py:liberal_party ?= {
+					any_member = {}
+				}
 				ig:ig_intelligentsia ?= {
 					ig_counts_as_marginal = no
 				}
@@ -619,7 +622,7 @@ liberal_party = {
 				leader ?= {
 					OR = {
 						has_ideology = ideology:ideology_traditionalist
-						has_ideology = ideology:ideology_carlist
+						character_has_carlist_ideology = yes
 						has_ideology = ideology:ideology_royalist
 						has_ideology = ideology:ideology_theocrat
 						has_ideology = ideology:ideology_slaver
@@ -1206,24 +1209,6 @@ liberal_party = {
 				value = 10
 				desc = "from_july_monarchy"
 			}
-		}
-		if = {
-			limit = {
-				owner = {
-	         		country_has_primary_culture = cu:brazilian
-					heir ?= {
-						has_template = BRZ_emperor_pedro_02
-						has_trait = trait_child
-					}
-	         	}
-				leader ?= {
-					has_template = BRZ_diogo_antonio_feijo
-				}
-			}
-			add = {
-				value = -50
-				desc = "from_feijo_regency"
-			}
 		}	
 		if = {
 			limit = {
@@ -1310,11 +1295,11 @@ liberal_party = {
 		}
 		if = { # Carlists and Miguelists were against participating in electoral politics for a good while
 			limit = {
-				NOT = { owner = { has_technology_researched = political_agitation } }
+				NOT = { owner = { has_technology_researched = corporatism } }
 				leader = {
 					OR = {
-						has_ideology = ideology:ideology_carlist
-						has_ideology = ideology:ideology_miguelist
+						character_has_carlist_ideology = yes
+						character_has_miguelist_ideology = yes
 					}
 				}
 			}

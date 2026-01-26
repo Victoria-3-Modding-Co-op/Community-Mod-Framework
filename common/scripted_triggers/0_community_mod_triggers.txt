@@ -55,6 +55,11 @@ com_is_active = {
 	always = no
 }
 
+# Community State Framework
+csf_is_active_trigger = {
+	always = no
+}
+
 # East Asian Clothes Patch
 EACP_is_active_trigger = {
 	always = no

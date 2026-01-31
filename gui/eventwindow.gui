@@ -586,6 +586,7 @@ event_window_widescreen_newspaper = {}
 #### CMF Special Window Variants
 event_window_special = {} # placeholder
 event_window_ethics = {}
+event_window_com_focus_text = {}
 
 #### CMF Letter Window Variants
 com_event_window_letter_simple = {}

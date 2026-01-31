@@ -149,8 +149,9 @@ Widescreen Windows:
 - [event_window_widescreen_classic](docs/event_windows/event_window_widescreen_classic.png)
 - [event_window_widescreen_newspaper](docs/event_windows/event_window_widescreen_newspaper.png)
 
-Ethics Style Window:
+Special Windows:
 - [event_window_ethics](docs/event_windows/event_window_ethics.png)
+- [event_window_com_focus_text](docs/event_windows/event_window_com_focus_text.png)
 
 Paper Style Window:
 - [com_event_window_letter_simple](docs/event_windows/com_event_window_letter_simple.png)
@@ -171,6 +172,7 @@ Europa Universalis V Style Windows:
   - This is activated by setting the variable com_event_window_2char_duel_var
   - The progress bar will pull the value from this variable; it has a maximum of 100 and a minimum of 0
 - `event_window_crisis` uses six character scopes saved as variables; documentation is provided in the `eventwindow.gui` file
+- `event_window_com_focus_text` needs an additional localization key `<event_id>.st` to define the header for the buttons
 
 ### Newspaper Events
 The Newspaper event allows overwriting of the header texts.

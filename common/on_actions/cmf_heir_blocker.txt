@@ -1,4 +1,4 @@
-﻿# Up to date as of 1.8.6
+﻿# Up to date as of 1.12.4
 # Root = Character
 on_heir_born = {
     effect = {
@@ -14,53 +14,147 @@ on_heir_born = {
             }
         }
         else = { # Vanilla logic sits in this else block
-            post_notification = heir_born_notification
+            if = {
+                limit = {
+                    owner ?= {
+                        has_gov_regency = no
+                    }
+                }
+                post_notification = heir_born_notification
+            }
+            else = { # Regents should not produce heirs, TODO remove this hack once we have code support
+                this = { kill_character = { hidden = yes } }
+            }
             if = {
                 limit = {
                     owner = {
                         c:FRA ?= this
-                        ruler = {
-                            has_variable = orleanist_leader
+                    }
+                }
+                if = {
+                    limit = {
+                        owner.ruler ?= {
+                            has_variable = house_orleans
                         }
                     }
                 }
                 owner = {
-                    heir = {
-                        set_variable = { name = orleanist_leader }
+                    heir ?= {
+                        set_variable = house_orleans
                         set_ideology = ideology:ideology_orleanist
                     }
                 }
             }
             if = {
                 limit = {
-                    owner = {
-                        c:FRA ?= this
-                        ruler = {
-                            has_variable = legitimist_leader
-                        }
+                    owner.ruler ?= {
+                        has_variable = legitimist_leader
                     }
                 }
                 owner = {
-                    heir = {
-                        set_variable = { name = legitimist_leader }
+                    heir ?= {
+                        set_variable = legitimist_leader
                         set_ideology = ideology:ideology_legitimist
                     }
                 }
             }
-
             if = {
                 limit = {
-                    owner = {
-                        c:FRA ?= this
-                        ruler = {
-                            has_variable = bonapartist_leader
-                        }
+                    owner.ruler ?= {
+                        has_variable = house_bonaparte
                     }
                 }
                 owner = {
-                    heir = {
-                        set_variable = { name = bonapartist_leader }
+                    heir ?= {
+                        set_variable = house_bonaparte
                         set_ideology = ideology:ideology_bonapartist
+                    }
+                }
+            }
+            if = {
+                limit = {
+                    owner.ruler ?= {
+                        has_variable = house_savoy
+                    }
+                }
+                owner = {
+                    heir ?= {
+                        set_variable = house_savoy
+                    }
+                }
+            }
+            if = {
+                limit = {
+                    owner.ruler ?= {
+                        has_variable = house_braganca
+                    }
+                }
+                owner = {
+                    heir ?= {
+                        set_variable = house_braganca
+                    }
+                }
+            }
+            if = {
+                limit = {
+                    owner.ruler ?= {
+                        has_variable = house_espartero
+                    }
+                }
+                owner = {
+                    heir ?= {
+                        set_variable = house_espartero
+                    }
+                }
+            }
+            if = {
+                limit = {
+                    owner.ruler ?= {
+                        has_variable = house_bourbon
+                    }
+                }
+                owner = {
+                    heir ?= {
+                        set_variable = house_bourbon
+                    }
+                }
+            }
+            if = {
+                limit = {
+                    owner.ruler ?= {
+                        has_variable = house_hohenzollern
+                    }
+                }
+                owner = {
+                    heir ?= {
+                        set_variable = house_hohenzollern
+                    }
+                }
+            }
+            if = {
+                limit = {
+                    owner = {
+                        c:SER ?= this
+                    }
+                }
+                if = {
+                    limit = {
+                        owner.ruler ?= {
+                            has_variable = house_obrenovic
+                        }
+                    }
+                    owner.heir ?= {
+                        set_variable = house_obrenovic
+                    }
+                }
+                else_if = {
+                    limit = {
+                        owner.ruler ?= {
+                            has_variable = house_karadordevic
+                        }
+                    }
+                    owner.heir ?= {
+                        set_variable = house_karadordevic
                     }
                 }
             }

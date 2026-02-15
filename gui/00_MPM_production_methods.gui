@@ -431,7 +431,7 @@ types production_methods
 
 					spacing = 10
 
-                    hbox = {
+					container = {
 						# MPM
 						# If only 1 or 2 PMGs, use vanilla container and not the scrollarea
 						visible = "[LessThanOrEqualTo_int32(
@@ -439,8 +439,11 @@ types production_methods
 							'(int32)2'
 						)]"
 
-						hbox = {
+						fixedgridbox = {
 							datamodel = "[BuildingProductionMethodsEntry.GetBuildingType.AccessProductionMethodGroups]"
+							flipdirection = yes
+							addcolumn = 52
+							addrow = 50
 
 							item = {
 								widget = {
@@ -524,8 +527,11 @@ types production_methods
 						scrollwidget = {
 							### production methods grouped
 							# container = { # MPM # this is a duplicate of the vanilla container above, but we dont need the container for this spot specifically
-								hbox = {
+								fixedgridbox = {
 									datamodel = "[BuildingProductionMethodsEntry.GetBuildingType.AccessProductionMethodGroups]"
+									flipdirection = yes
+									addcolumn = 52
+									addrow = 50
 
 									item = {
 										widget = {

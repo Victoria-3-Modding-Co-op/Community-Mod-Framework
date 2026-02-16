@@ -15,15 +15,12 @@ widget = {
         input_action = "input_ctrl_alt_d"
         onclick = "[GetScriptedGui('com_toggle_debug').Execute(GuiScope.End)]"
     }
-	
-	widget = {
-		visible = "[GetGlobalVariable('com_toggle_debug_mode').IsSet]"
-		state = {
-			name = _show
-			on_finish = "[GetScriptedGui('com_toggle_debug_sgui').Execute( GuiScope.SetRoot( GetPlayer.MakeScope ).End )]"
-			on_finish = "[GetVariableSystem.Clear('com_open_window')]"
-			on_finish = "[ExecuteConsoleCommand('debug_mode')]"
-		}
+
+	button = {
+		size = { 0 0 }
+		enabled = "[Country.IsValid]"
+		input_action = "input_ctrl_alt_q"
+		onclick = "[ExecuteConsoleCommand('debug_mode')]"
 	}
 
     flowcontainer = {

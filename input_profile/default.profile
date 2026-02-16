@@ -415,13 +415,23 @@ input_context={
 
 	input_action = {
 		name = "input_ctrl_alt_d"
-		text = "SETTING_INPUT_ACTION_CTRL_ALT_D" # Activate Debug
+		text = "SETTING_INPUT_ACTION_CTRL_ALT_D" # Set com_debug global variable
 		binding = { # ctrl + alt + d
 			scancode = 7
 			modifier = ctrl
 			modifier = alt
 		}
 	}
+
+	input_action = {
+    		name = "input_ctrl_alt_t"
+    		text = "SETTING_INPUT_ACTION_CTRL_ALT_T" # Execute the debug_mode console command
+    		binding = { # ctrl + alt + d
+    			scancode = 23
+    			modifier = ctrl
+    			modifier = alt
+    		}
+    	}
 
 	input_action = {
 		name = "input_h"
@@ -501,6 +511,15 @@ input_context={
 		binding = { # ctrl + a
 			scancode = 4
 			modifier = ctrl
+		}
+	}
+
+	input_action = {
+		name = "input_ctrl_k"
+		text = "SETTING_INPUT_ACTION_CTRL_K" # Reserved for Kingdom of God
+		binding = { # ctrl + k
+			scancode = 14
+        	modifier = ctrl
 		}
 	}
 

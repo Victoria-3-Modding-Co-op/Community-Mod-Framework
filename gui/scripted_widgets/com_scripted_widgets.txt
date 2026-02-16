@@ -1,1 +1,2 @@
 ﻿gui/com_hidden_trigger.gui = com_hidden_trigger
+gui/com_hidden_trigger.gui = com_console_debug_mode

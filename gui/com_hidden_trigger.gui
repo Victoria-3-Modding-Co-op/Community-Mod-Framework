@@ -15,16 +15,6 @@ widget = {
         input_action = "input_ctrl_alt_d"
         onclick = "[GetScriptedGui('com_toggle_debug').Execute(GuiScope.End)]"
     }
-	
-	widget = {
-		visible = "[GetGlobalVariable('com_debug').IsSet]"
-		state = {
-			name = _show
-			on_finish = "[GetScriptedGui('com_toggle_debug').Execute( GuiScope.SetRoot( GetPlayer.MakeScope ).End )]"
-			on_finish = "[GetVariableSystem.Clear('com_open_window')]"
-			on_finish = "[ExecuteConsoleCommand('debug_mode')]"
-		}
-	}
 
     flowcontainer = {
         visible = "[DataModelHasItems(GetGlobalList('com_character_name_extract'))]"
@@ -50,4 +40,30 @@ widget = {
             }
         }
     }
+}
+
+# Like above, this is an "empty" widget that monitors for the input_ctrl_alt_t input and does its magic
+widget = {
+	datacontext = "[GetMetaPlayer.GetPlayedOrObservedCountry]"
+	visible = "[GetMetaPlayer.GetPlayedOrObservedCountry.IsValid]"
+	size = { 500 500 }
+	name = com_console_debug_mode
+	allow_outside = yes
+	alpha = 1
+
+	button = {
+		size = { 0 0 }
+		enabled = "[Country.IsValid]"
+		input_action = "input_ctrl_alt_t"
+		onclick = "[GetScriptedGui('com_console_debug_mode').Execute(GuiScope.End)]"
+	}
+
+	widget = {
+		visible = "[GetGlobalVariable('com_console_debug_mode').IsSet]"
+		state = {
+			name = _show
+			on_finish = "[GetScriptedGui('com_console_debug_mode').Execute( GuiScope.SetRoot( GetPlayer.MakeScope ).End )]"
+			on_finish = "[ExecuteConsoleCommand('debug_mode')]"
+		}
+	}
 }

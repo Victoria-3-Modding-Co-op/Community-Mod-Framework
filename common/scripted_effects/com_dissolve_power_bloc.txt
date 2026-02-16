@@ -1,44 +1,51 @@
-﻿# Dissolves the specified power bloc
+﻿# Disbands/dissolves the specified power bloc
 # Arguments:
 #    power_bloc - Scope pointing to the power bloc to shatter
-com_dissolve_power_bloc = {
+com_disband_power_bloc = {
     add_to_global_variable_list = {
-        name   = com_dissolving_blocs
+        name   = com_disbanding_blocs
         target = $power_bloc$
         months = 1 # Auto cleanup; effect should be immediate but just in case
     }
-    
+
     # Apparently one of the few times `can_lead_power_bloc` is evaluated is when the country's rank (or maybe just
     # country type?) changes. Vanilla uses this to kick the Ottomans out of the leader spot for their bloc.
     # We'll use it here with our custom `can_lead_power_bloc` logic to force the specified bloc to dissolve
-    $power_bloc$.power_bloc_leader = {
-        if = {
-            limit = {
-                is_country_type = recognized
+    $power_bloc$ ?= {
+        save_scope_as = power_bloc # For tooltipping
+        custom_tooltip = {
+            text = com_tooltip.disband_bloc
+
+            power_bloc_leader ?= {
+                if = {
+                    limit = {
+                        is_country_type = recognized
+                    }
+                    set_country_type = unrecognized
+                    set_country_type = recognized
+                }
+                else_if = {
+                    limit = {
+                        is_country_type = colonial
+                    }
+                    set_country_type = unrecognized
+                    set_country_type = colonial
+                }
+                else_if = {
+                    limit = {
+                        is_country_type = unrecognized
+                    }
+                    set_country_type = recognized
+                    set_country_type = unrecognized
+                }
+                else_if = {
+                    limit = {
+                        is_country_type = company
+                    }
+                    set_country_type = unrecognized
+                    set_country_type = company
+                }
             }
-            set_country_type = unrecognized
-            set_country_type = recognized
-        }
-        else_if = {
-            limit = {
-                is_country_type = colonial
-            }
-            set_country_type = unrecognized
-            set_country_type = colonial
-        }
-        else_if = {
-            limit = {
-                is_country_type = unrecognized
-            }
-            set_country_type = recognized
-            set_country_type = unrecognized
-        }
-        else_if = {
-            limit = {
-                is_country_type = company
-            }
-            set_country_type = unrecognized
-            set_country_type = company
         }
     }
 }

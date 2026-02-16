@@ -24,7 +24,7 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=3385002128
     * [Journal Extensions](#journal-extensions)
       * [Hide/Show Journal Entry Groups](#hideshow-journal-entry-groups)
       * [EU5 Style Situation Journal Entries](#eu5-style-situation-journal-entries)
-      * [Progress Bar Syling](#progress-bar-syling)
+      * [Progress Bar Styling](#progress-bar-styling)
       * [Characters in Journal Entry](#characters-in-journal-entry)
 * [Structs](#structs)
     * [Creating a new Struct](#creating-a-new-struct)
@@ -60,24 +60,24 @@ To set this mod as a dependency to your own mod, you will need to add this to yo
 ```
 **Also remember to add the mod to your required items on your own mods steam page.**
 
-# Debug Mode
+# Debug Features
 
 - The keybinding `CTRL + ALT + D` toggles the global variable `com_debug`. This can be used to enable or disable debug content like debug Decisions or Events.
-- The global variable `com_debug` will enable a decision that will add a debug button to the CMF sidebar. This button will toggle the game in and out of debug mode.
+- The keybinding `CTRL + ALT + Q` will toggle the game in and out of debug mode. This executes the `debug_mode` console command. This will break achievements if used.
 
 # Political Movements
 
 CMF overwrites vanilla Political Movement definitions with versions that have scripted triggers to aid in mod compatibility
 
 ## Adding New Ideologies
-To add dummy ideologies from your mods into political movements, allowing them to spawn with the appropiate mod enabled:
+To add dummy ideologies from your mods into political movements, allowing them to spawn with the appropriate mod enabled:
 * Add a dummy ideology to CMF with the same name as your mod ideology in a file named `00_dummy_ideologies_<your_mod>`.
-* Assign the ideology to the appropiate political movements (and scripted triggers if needed).
+* Assign the ideology to the appropriate political movements (and scripted triggers if needed).
 * Ensure the ideologies in your mod are in a file that will overwrite the dummy one (see [File Naming](.github/CONTRIBUTING.md#file-naming)).
 * Your mod will overwrite the ideology definition and allow it to spawn in the specified political movements.
 
 ## Modifying Movement Weights
-Depending on whether your mod must depend on CMF, or is able to be used in a standalone capacity, what you do may be slightly different.
+Depending on whether your mod must depend on CMF, or functions in a standalone capacity, what you do may be slightly different.
 * Work out where you need to either add or multiply values for a particular movement.
 * Add a bloc to the CMF movement that looks like:
 ```
@@ -109,7 +109,7 @@ Current Scope:
 4) Modification to society_panel to add the ability to use custom social hierarchies. (Credit to Bahmut)
 5) Integration of the "Modded DLC Framework" (Credit to 1230James)
 6) Modification to the outliner and journal GUIs to hide custom objectives during gameplay (Credit to Taylor)
-7) Several "superevent" windows for extra flavor (Credit to Bananaman & Klein for the Newspaper window, Credit to Alexedishi for all others)
+7) Several custom event windows for extra flavor (Credit to Bananaman & Klein for the OG superevent window, Credit to Alexedishi & Bahmut for most others)
 8) Modification to Journal Entry GUI to allow players to show characters (Credit to Bahmut and Mori)
 9) Integration of the "Multi-line PM Framework" (Credit to 1230James)
 10) Alerts can now open custom windows (Credit to Bahmut)
@@ -205,7 +205,7 @@ set_global_variable = community_gui_objective_var
 
 ## Custom Social Hierarchies
 
-To enable a custom social hierachy you have to execute this effect in a countries scope:
+To enable a custom social hierarchy you have to execute this effect in a countries scope:
 ```
 set_variable = {
     name = custom_social_hierarchy
@@ -482,10 +482,10 @@ je_example_entry = {
 }
 ```
 
-### Progress Bar Syling
+### Progress Bar Styling
 Scripted progress bars can be styled with a color, a drift effect, and a target marker, all dynamically settable and unsettable. For more details, see the [progress bar documentation](/docs/Progress_bars.md)
 
-> **NOTE**  The following custom color styles still work, but have been superceded by the more advanced progress bar framework.
+> **NOTE**  The following custom color styles still work, but have been superseded by the more advanced progress bar framework.
 
 These work by setting specific variables in the journal entry scope. These will change which progress bar is displayed. Currently, the following variables are used:
 - `com_double_bad_gold_marker` -- replaces the journal entry marker in double_sided_bad with the marker from double_sided_gold
@@ -601,11 +601,11 @@ Keys can be any number from 0 to 2047
 Values can be any number from -45035996273.70496 to 45035996273.70495  
 
 ⚠️ Dictionaries store both the key and value in a single number using bit shifts, you must be careful to ensure your keys and values do not overflow.
-For performance reasons there are no internal saftey checks. Using numbers outside of these ranges will result in undefined behaviour.
+For performance reasons there are no internal safety checks. Using numbers outside of these ranges will result in undefined behavior.
 
 Alternatively, you can use a more specialized scope value map. This allows mapping any scope to numeric values. It uses dictionaries behind
 the scenes, so is limited to 2048 keys and the same value range. Scope value maps do not support removing elements once they are added! Attempting
-to remove elements from the map will result in undefined behaviour.
+to remove elements from the map will result in undefined behavior.
 
 ## Set
 ```

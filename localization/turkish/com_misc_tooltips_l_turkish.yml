@@ -1,0 +1,2 @@
+﻿l_turkish:
+ com_tooltip.disband_bloc: "[SCOPE.sPowerBloc('power_bloc').GetName] is disbanded"

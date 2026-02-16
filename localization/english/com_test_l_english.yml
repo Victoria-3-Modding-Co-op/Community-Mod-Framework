@@ -1,10 +1,4 @@
 ﻿l_english:
- com_enable_debug_button_decision: "Enable Debug Sidebar Button"
- com_enable_debug_button_decision_desc: ""
- com_enable_debug_button_decision_effect: "This will add a button to the CMF sidebar that will toggle debug mode."
- com_toggle_debug_sgui: "com_toggle_debug_sgui"
- com_toggle_debug_sgui_desc: "Toggle Debug Mode"
- 
  com_debug_deer: "#header #todo Debug Information#!#!\n$TOOLTIP_DELIMITER$\n#bold Event ID: [Event.GetKey|v]\n$TOOLTIP_DELIMITER$\n#bold Trigger Description:\n[Event.GetTriggerDesc]\n@information! Click to open Event in text editor"
  
  com_debug.t: "Community GUI Test Event"

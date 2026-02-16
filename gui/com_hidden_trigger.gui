@@ -17,7 +17,7 @@ widget = {
     }
 	
 	widget = {
-		visible = "[GetGlobalVariable('com_toggle_debug_mode').IsSet]"
+		visible = "[GetGlobalVariable('com_debug').IsSet]"
 		state = {
 			name = _show
 			on_finish = "[GetScriptedGui('com_toggle_debug_sgui').Execute( GuiScope.SetRoot( GetPlayer.MakeScope ).End )]"

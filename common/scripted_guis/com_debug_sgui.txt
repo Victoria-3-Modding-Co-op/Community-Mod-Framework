@@ -18,24 +18,3 @@
 		}
 	}
 }
-
-com_console_debug_mode = {
-	scope = none
-
-	effect = {
-		if = {
-			limit = {
-				NOT = {
-					has_global_variable = com_console_debug_mode
-				}
-			}
-			set_global_variable = com_console_debug_mode
-		}
-		else_if = {
-			limit = {
-				has_global_variable = com_console_debug_mode
-			}
-			remove_global_variable = com_console_debug_mode
-		}
-	}
-}

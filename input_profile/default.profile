@@ -424,10 +424,10 @@ input_context={
 	}
 
 	input_action = {
-    		name = "input_ctrl_alt_t"
-    		text = "SETTING_INPUT_ACTION_CTRL_ALT_T" # Execute the debug_mode console command
-    		binding = { # ctrl + alt + d
-    			scancode = 23
+    		name = "input_ctrl_alt_q"
+    		text = "SETTING_INPUT_ACTION_CTRL_ALT_q" # Execute the debug_mode console command
+    		binding = { # ctrl + alt + q
+    			scancode = 20	# Q
     			modifier = ctrl
     			modifier = alt
     		}

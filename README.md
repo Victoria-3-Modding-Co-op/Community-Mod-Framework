@@ -120,6 +120,7 @@ Current Scope:
 15) Support for more mobilization options per category in GUI (Credit to lil jimmy & 1230James)
 16) Configurable Character portraits (Credit to Bahmut & CaesarVincens)
 17) Journal progress bars can be styled with 'drift' and target effects (Credit to CaesarVincens, idea from MasterOfGrey)
+18) Framework for a two character journal entry (Credit to Bagel)
 
 ## Alternative Event Windows
 

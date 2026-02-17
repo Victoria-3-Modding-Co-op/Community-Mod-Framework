@@ -483,6 +483,99 @@ je_example_entry = {
 }
 ```
 
+### Two Characters Journal Entry (country rulers)
+
+Screenshots: [Single Character with Opinion](docs/two_char_je_example.png), 
+
+To use the two characters in a journal entry you must use the following variables:
+
+com_style_two_characters -> in immediate block, used to designate a je as using this gui
+
+ex. scope:journal_entry = {
+			set_variable = {
+            	name = com_style_two_characters
+        	}
+		}
+
+com_character_country_right -> in immediate block, used to designate what country's ruler is on the right side
+
+ex. scope:journal_entry = {
+			set_variable = {
+            	name = com_character_country_right
+           		value = c:GBR
+        	}
+		}
+
+com_character_country_left -> in immediate block, used to designate what country's ruler is on the left side
+
+ex. scope:journal_entry = {
+			set_variable = {
+            	name = com_character_country_left
+           		value = c:BIC
+        	}
+		}
+  
+com_character_country_right_title -> in immediate block, used to designate the text on the top right
+
+ex. scope:journal_entry = {
+			set_variable = {
+            	name = com_character_country_right_title
+           		value = flag:british_government_text
+        	}
+		}
+
+com_character_country_left_title -> in immediate block, used to designate the text on the top left
+
+ex. scope:journal_entry = {
+			set_variable = {
+            	name = com_character_country_left_title
+           		value = flag:company_shareholder_text
+        	}
+		}
+
+Here is an example where the ruler of Great Britain and the East India Company are used, but theoretically you can use whatever country you want to:
+```
+je_example_entry = {
+	...
+	immediate = {
+		scope:journal_entry = {
+			set_variable = {
+            	name = com_style_two_characters
+        	}
+		}
+
+		scope:journal_entry = {
+			set_variable = {
+            	name = com_character_country_right_title
+           		value = flag:british_government_text
+        	}
+		}
+
+		scope:journal_entry = {
+			set_variable = {
+            	name = com_character_country_left_title
+           		value = flag:company_shareholder_text
+        	}
+		}
+
+		scope:journal_entry = {
+			set_variable = {
+            	name = com_character_country_right
+           		value = c:GBR
+        	}
+		}
+
+		scope:journal_entry = {
+			set_variable = {
+            	name = com_character_country_left
+           		value = c:BIC
+        	}
+		}
+	}
+	...
+}
+```
+
 ### Progress Bar Styling
 Scripted progress bars can be styled with a color, a drift effect, and a target marker, all dynamically settable and unsettable. For more details, see the [progress bar documentation](/docs/Progress_bars.md)
 

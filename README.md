@@ -485,7 +485,7 @@ je_example_entry = {
 
 ### Two Characters Journal Entry (country rulers)
 
-Screenshots: [Single Character with Opinion](docs/two_char_je_example.png), 
+Screenshots: [Britain and EIC as example](docs/two_char_je_example.png), 
 
 To use the two characters in a journal entry you must use the following variables:
 

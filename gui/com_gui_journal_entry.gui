@@ -731,10 +731,10 @@ types journal_entry_overwrites {
                             size = { @panel_width_plus_14 44 }
                         }
                         blockoverride "text1" {
-                            text = "com_style_two_characters_left_text"
+                            raw_text = "[JournalEntry.MakeScope.Var('com_character_country_left_title').GetFlagName]"
                         }
                         blockoverride "text2" {
-                            text = "com_style_two_characters_right_text"
+                            raw_text = "[JournalEntry.MakeScope.Var('com_character_country_right_title').GetFlagName]"
                         }
                     }
                     flowcontainer = {

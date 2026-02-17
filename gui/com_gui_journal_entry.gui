@@ -47,7 +47,7 @@ types journal_entry_overwrites {
 
                 widget  = {
                     size = { @panel_width_plus_20 120 }
-
+    				visible = "[Not(EqualTo_string(JournalEntry.GetName, Localize('je_company_equity')))]"
                     parentanchor = hcenter
 
                     background = {
@@ -139,6 +139,22 @@ types journal_entry_overwrites {
 
                     }
                 }
+
+                container = {
+					parentanchor = hcenter
+					visible = "[EqualTo_string(JournalEntry.GetName, Localize('je_company_equity'))]"
+					minimumsize = { @panel_width_minus_30 -1 }
+					background = {
+						texture = "gfx/interface/illustrations/top_illus/top_illu_companies.dds"
+						alpha = 0.4
+					}
+					      
+					container = { 
+						visible = "[EqualTo_string(JournalEntry.GetName, Localize('je_company_equity'))]"
+						parentanchor = hcenter
+						company_equity = {}
+					}
+				}
 
                 ####################################
                 ### CMF: Journal Entry Character ###

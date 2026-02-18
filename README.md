@@ -120,6 +120,7 @@ Current Scope:
 15) Support for more mobilization options per category in GUI (Credit to lil jimmy & 1230James)
 16) Configurable Character portraits (Credit to Bahmut & CaesarVincens)
 17) Journal progress bars can be styled with 'drift' and target effects (Credit to CaesarVincens, idea from MasterOfGrey)
+18) Framework for a two character journal entry (Credit to Bagel)
 
 ## Alternative Event Windows
 
@@ -476,6 +477,99 @@ je_example_entry = {
 					target = scope:list_character
 				}
 			}
+		}
+	}
+	...
+}
+```
+
+### Two Characters Journal Entry (country rulers)
+
+Screenshots: [Britain and EIC as example](docs/two_char_je_example.png), 
+
+To use the two characters in a journal entry you must use the following variables:
+
+com_style_two_characters -> in immediate block, used to designate a je as using this gui
+
+ex. scope:journal_entry = {
+			set_variable = {
+            	name = com_style_two_characters
+        	}
+		}
+
+com_character_country_right -> in immediate block, used to designate what country's ruler is on the right side
+
+ex. scope:journal_entry = {
+			set_variable = {
+            	name = com_character_country_right
+           		value = c:GBR
+        	}
+		}
+
+com_character_country_left -> in immediate block, used to designate what country's ruler is on the left side
+
+ex. scope:journal_entry = {
+			set_variable = {
+            	name = com_character_country_left
+           		value = c:BIC
+        	}
+		}
+  
+com_character_country_right_title -> in immediate block, used to designate the text on the top right
+
+ex. scope:journal_entry = {
+			set_variable = {
+            	name = com_character_country_right_title
+           		value = flag:british_government_text
+        	}
+		}
+
+com_character_country_left_title -> in immediate block, used to designate the text on the top left
+
+ex. scope:journal_entry = {
+			set_variable = {
+            	name = com_character_country_left_title
+           		value = flag:company_shareholder_text
+        	}
+		}
+
+Here is an example where the ruler of Great Britain and the East India Company are used, but theoretically you can use whatever country you want to:
+```
+je_example_entry = {
+	...
+	immediate = {
+		scope:journal_entry = {
+			set_variable = {
+            	name = com_style_two_characters
+        	}
+		}
+
+		scope:journal_entry = {
+			set_variable = {
+            	name = com_character_country_right_title
+           		value = flag:british_government_text
+        	}
+		}
+
+		scope:journal_entry = {
+			set_variable = {
+            	name = com_character_country_left_title
+           		value = flag:company_shareholder_text
+        	}
+		}
+
+		scope:journal_entry = {
+			set_variable = {
+            	name = com_character_country_right
+           		value = c:GBR
+        	}
+		}
+
+		scope:journal_entry = {
+			set_variable = {
+            	name = com_character_country_left
+           		value = c:BIC
+        	}
 		}
 	}
 	...

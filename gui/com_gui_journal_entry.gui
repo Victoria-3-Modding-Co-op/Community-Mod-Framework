@@ -47,7 +47,7 @@ types journal_entry_overwrites {
 
                 widget  = {
                     size = { @panel_width_plus_20 120 }
-
+    				visible = "[Not(JournalEntry.MakeScope.Var('com_style_two_characters').IsSet)]"
                     parentanchor = hcenter
 
                     background = {
@@ -139,6 +139,8 @@ types journal_entry_overwrites {
 
                     }
                 }
+
+                com_style_two_characters = {}
 
                 ####################################
                 ### CMF: Journal Entry Character ###
@@ -691,5 +693,152 @@ types journal_entry_overwrites {
 			}
 		}
 	}
+
+    type com_style_two_characters = container {
+
+        parentanchor = hcenter
+        visible = "[JournalEntry.MakeScope.Var('com_style_two_characters').IsSet]"
+        minimumsize = { @panel_width_minus_30 -1 }
+        background = {
+            texture = "gfx/interface/illustrations/top_illus/top_illu_companies.dds"
+            alpha = 0.4
+        }
+                
+        container = { 
+            visible = "[JournalEntry.MakeScope.Var('com_style_two_characters').IsSet]"
+            parentanchor = hcenter
+            container = {
+                using = sidepanel_plus_sidebar_size
+                layoutpolicy_vertical = expanding
+                alwaystransparent = no
+                using = clickthrough_blocker
+                layer = layer_ingame_menu
+
+                container = {
+                    parentanchor = center
+                    widget = {
+                        using = entry_bg_fancy
+                        size = { 540 315 }
+                        alpha = 0.7
+                    }
+                }        
+                
+                flowcontainer = {
+                    direction = vertical
+                    default_header_2texts_clean = {
+                        using = default_list_position
+                        blockoverride "size" {
+                            size = { @panel_width_plus_14 44 }
+                        }
+                        blockoverride "text1" {
+                            raw_text = "[JournalEntry.MakeScope.Var('com_character_country_left_title').GetFlagName]"
+                        }
+                        blockoverride "text2" {
+                            raw_text = "[JournalEntry.MakeScope.Var('com_character_country_right_title').GetFlagName]"
+                        }
+                    }
+                    flowcontainer = {
+                        direction = horizontal
+                        minimumsize = { @panel_width_plus_14 44 }
+                        #using = default_list_position
+                        parentanchor = hcenter|top
+                        widgetanchor = hcenter|top
+                        
+                        #left side country ruler
+                        
+                        character_portrait_base = {
+                            datacontext = "[JournalEntry.MakeScope.Var('com_character_country_left').GetCountry.GetRuler]"
+
+                            parentanchor = hcenter
+                            size = { 250 265 }
+
+                            blockoverride "portrait_size" {
+                                block "character_portrait_size" {
+                                    size = { 300 300 }
+                                }
+                            }
+
+                            blockoverride "portrait_position" {
+                                position = { 0 6 }
+                            }
+
+                            blockoverride "portrait_texture" {
+                                portrait_texture = "[Character.GetAnimatedPortrait('pop_environment', 'camera_body', 'idle', PdxGetWidgetScreenSize(PdxGuiWidget.Self))]"
+                            }
+
+                            blockoverride "portrait_icons" {}
+                            blockoverride "tooltip" {}
+                            blockoverride "show_hat" {}
+                            blockoverride "highlight" {}
+
+                            blockoverride "portrait_button" {
+                                button = {
+                                    parentanchor = hcenter
+                                    size = { 100% 100% }
+
+                                    block "portrait_button_onclick" {
+                                        onclick = "[InformationPanelBar.OpenCommanderPanel(Character.AccessSelf)]"
+                                    }
+
+                                    block "portrait_button_onrightclick" {
+                                        onrightclick = "[RightClickMenuManager.ShowForCharacter(Character.AccessSelf)]"
+                                    }
+
+                                    onmousehierarchyenter = "[AccessHighlightManager.HighlightCharacter( PowerBloc.GetLeader.GetRuler )]"
+                                    onmousehierarchyleave = "[AccessHighlightManager.RemoveHighlight]"
+                                }
+                            }
+                        }
+
+                        #right side country ruler
+
+                        character_portrait_base = {
+                            datacontext = "[JournalEntry.MakeScope.Var('com_character_country_right').GetCountry.GetRuler]"
+
+                            parentanchor = right
+                            size = { 250 265 }
+
+                            blockoverride "portrait_size" {
+                                block "character_portrait_size" {
+                                    size = { 300 300 }
+                                }
+                            }
+
+                            blockoverride "portrait_position" {
+                                position = { 65 6 }
+                            }
+
+                            blockoverride "portrait_texture" {
+                                portrait_texture = "[Character.GetAnimatedPortrait('pop_environment', 'camera_body', 'idle', PdxGetWidgetScreenSize(PdxGuiWidget.Self))]"
+                            }
+
+                            blockoverride "portrait_icons" {}
+                            blockoverride "tooltip" {}
+                            blockoverride "show_hat" {}
+                            blockoverride "highlight" {}
+
+                            blockoverride "portrait_button" {
+                                button = {
+                                    parentanchor = hcenter
+                                    size = { 100% 100% }
+
+                                    block "portrait_button_onclick" {
+                                        onclick = "[InformationPanelBar.OpenCommanderPanel(Character.AccessSelf)]"
+                                    }
+
+                                    block "portrait_button_onrightclick" {
+                                        onrightclick = "[RightClickMenuManager.ShowForCharacter(Character.AccessSelf)]"
+                                    }
+
+                                    onmousehierarchyenter = "[AccessHighlightManager.HighlightCharacter( PowerBloc.GetLeader.GetRuler )]"
+                                    onmousehierarchyleave = "[AccessHighlightManager.RemoveHighlight]"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 	
 }

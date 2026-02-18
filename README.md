@@ -43,6 +43,7 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=3385002128
 * [Formation Event Blocker](#formation-event-blocker)
 * [Regency Blocker](#regency-blocker)
 * [Built-In Universal Names Compatibility](#built-in-universal-names-compatibility)
+* [Power Bloc Disbander](#power-bloc-disbander)
 
 # Setting Dependency
 
@@ -932,3 +933,36 @@ improved_text: "Hello, my name is [Character.GetCustom('GetUniversalFullNameNoFo
 Consider a Korean character whose name in the real world would be written as `Yi Sun-sin`. Korean names are `Last-First` names, so `Sun-sin` is the given name and `Yi` is the surname.
 - With `original_text`, it would render as `Hello, my name is Sun-sin Yi`. In reality this would be *incorrect*.
 - With `improved_text`, it would render as `Hello, my name is Yi Sun-sin`. This is correct and improves character flavor!
+
+# Power Bloc Disbander
+
+CMF provides a scripted effect to disband a power bloc arbitrarily. To disband a power bloc, use the `com_disband_power_bloc` scripted effect:
+```
+com_disband_power_bloc = {
+    power_bloc = scope_to_some_power_bloc
+}
+```
+This scripted effect expects a `power_bloc` argument, and the argument must point to the scope of the power bloc to be disbanded.
+
+For example, to dissolve the British Empire power bloc, you can write any one of the following examples:
+```
+# Example 1
+com_disband_power_bloc = {
+    power_bloc = c:GBR.power_bloc
+}
+
+# Example 2
+c:GBR = {
+    com_disband_power_bloc = {
+        power_bloc = power_bloc
+    }
+}
+
+# Example 3
+c:GBR.power_bloc = {
+    save_scope_as = bloc_i_want_to_get_rid_of
+}
+com_disband_power_bloc = {
+    power_bloc = scope:bloc_i_want_to_get_rid_of
+}
+```

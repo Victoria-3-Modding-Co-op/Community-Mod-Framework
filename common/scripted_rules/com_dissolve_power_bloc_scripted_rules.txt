@@ -1,0 +1,14 @@
+﻿# Root = Country
+REPLACE:can_lead_power_bloc = {
+    country_rank >= rank_value:major_power
+
+    # [CMF] Bloc shattering logic
+    power_bloc ?= {
+        NOT = {
+            is_target_in_global_variable_list = {
+                name   = com_disbanding_blocs
+                target = THIS
+            }
+        }
+    }
+}

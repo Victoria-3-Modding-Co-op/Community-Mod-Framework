@@ -98,6 +98,7 @@ com_debug.1 = {
 		fix_variable_error = { variable = kvp }
 		fix_variable_error = { variable = whigs_party }
 		fix_variable_error = { variable = com_sidebar_button_sgui }
+		fix_variable_error = { variable = com_disbanding_blocs }
 
 		# Character Name Extraction
 		fix_variable_error = { variable = com_character_name_extract }

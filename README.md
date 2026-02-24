@@ -577,6 +577,32 @@ je_example_entry = {
 }
 ```
 
+### Removing Icons in Journal Entries
+If you want to remove the icon from the top of the journal entry screen for any reason CMF has a feature to do so.
+
+To remove the icon from a journal entry the following variable is needed:
+
+`com_remove_journal_icon-` -> in the immediate block
+
+Here is an example:
+
+```
+je_example_entry = {
+	...
+	immediate = {
+		scope:journal_entry = {
+			set_variable = {
+        name = com_remove_journal_icon
+      }
+		}
+	}
+	...
+}
+```
+
+
+
+
 ### Progress Bar Styling
 Scripted progress bars can be styled with a color, a drift effect, and a target marker, all dynamically settable and unsettable. For more details, see the [progress bar documentation](/docs/Progress_bars.md)
 

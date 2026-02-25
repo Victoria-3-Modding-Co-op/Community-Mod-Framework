@@ -47,7 +47,7 @@ types journal_entry_overwrites {
 
                 widget  = {
                     size = { @panel_width_plus_20 120 }
-    				visible = "[Nor(JournalEntry.MakeScope.Var('com_style_two_characters').IsSet, JournalEntry.MakeScope.Var('com_remove_journal_icon').IsSet))]"
+    				visible = "[Nor(JournalEntry.MakeScope.Var('com_style_two_characters').IsSet, JournalEntry.MakeScope.Var('com_remove_journal_icon').IsSet)]"
                     parentanchor = hcenter
 
                     background = {

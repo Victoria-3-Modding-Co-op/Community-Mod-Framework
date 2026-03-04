@@ -45,6 +45,11 @@ BPM_is_active_trigger = {
 	always = no
 }
 
+# British Flavor Pack - The Imperial Century
+british_flavor_pack_is_active_trigger = {
+	always = no
+}
+
 # Chilam Balam
 chilam_balam_is_active_trigger = {
 	always = no
@@ -147,6 +152,11 @@ pi_is_active = {
 
 # Rally Round the King
 RRK_is_active_trigger = {
+	always = no
+}
+
+# Rule Britannia
+rule_britannia_is_active_trigger = {
 	always = no
 }
 

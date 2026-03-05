@@ -19,7 +19,10 @@
 # Your scripted trigger files goes in the /common/scripted_triggers folder of YOUR mod.
 #
 
-####---------- General Mod Triggers ----------####
+####---------- Community Mod Triggers ----------####
+# These are sorted by MOD NAME, not acronym for ease of searching
+# Grey's mods are sorted at the bottom of this file
+
 # Anno 1836
 anno1836_is_active = {
 	always = no
@@ -90,23 +93,28 @@ grefm_is_active = {
 	always = no
 }
 
-# Industry Expanded
-IEX_is_active_trigger = {
-	always = no
-}
-
 # Hail, Columbia! (USA Flavor)
 is_usfp_active = {
 	always = no
 }
 
-# Jewel of the Nile (Egypt Flavor)
-jotn_is_active_trigger = {
+# Industry Expanded
+IEX_is_active_trigger = {
 	always = no
 }
 
 # James's Korea Flavor Pack
 JKFP_is_active_trigger = {
+	always = no
+}
+
+# James's Pop Clothing Tweaks
+PCT_is_active_trigger = {
+	always = no
+}
+
+# Jewel of the Nile (Egypt Flavor)
+jotn_is_active_trigger = {
 	always = no
 }
 
@@ -125,6 +133,11 @@ mandate_o_h_is_active = {
 	always = no
 }
 
+# Maharlika (Philippines Flavor)
+phfp_is_active = {
+	always = no
+}
+
 # Morgenröte: Dawn of Flavor
 morgenrote_is_active = {
 	always = no
@@ -132,16 +145,6 @@ morgenrote_is_active = {
 
 # Newspapers Mod
 newspapers_is_active_triger = {
-	always = no
-}
-
-# James's Pop Clothing Tweaks
-PCT_is_active_trigger = {
-	always = no
-}
-
-# Maharlika (Philippines Flavor)
-phfp_is_active = {
 	always = no
 }
 

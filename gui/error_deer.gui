@@ -24,7 +24,7 @@ widget = {
 			using = Animation_Curve_Default
 		}
 		button = {
-			texture = "gfx/interface/error_deer.dds"
+			texture = "gfx/interface/error_manul.dds"
 			size = { 100 120 }
 			#scale = 0.9
 			position = { 0 0 }
@@ -40,6 +40,24 @@ widget = {
 				onalt = "[ExecuteConsoleCommandsForced('tweak')]"
 			}
 			tooltip = "com_error_deer_tooltip"
+
+			state = {
+				trigger_on_create = yes
+				name = 1
+				next = 2
+
+				duration = 1
+				using = Animation_Curve_Default
+				position = { 0 0 }
+			}
+			state = {
+				name = 2
+				next = 1
+
+				duration = 1
+				using = Animation_Curve_Default
+				position = { -10 0 }
+			}
 		}
 		# Error count
 		widget = {

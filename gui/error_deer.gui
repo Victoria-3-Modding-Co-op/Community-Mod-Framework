@@ -1,0 +1,91 @@
+widget = {
+	name = "error_deer"
+	parentanchor = bottom|hcenter
+	visible = "[And(InDebugMode, And(ErrorDeer.HasErrors, IsInGame))]"
+	layer = layer_error_deer
+	size = { 280 120 }
+	position = { 480 4 }
+	using = clickthrough_blocker
+	allow_outside = yes
+	onmousehierarchyenter = "[SetCanOpenRightClickContextMenu( '(bool)no' )]"
+	onmousehierarchyleave = "[SetCanOpenRightClickContextMenu( '(bool)yes' )]"
+	container = {
+		visible = "[IsGamePaused]"
+		state = {
+			name = _show
+			duration = 0.1
+			position_y = 0
+			using = Animation_Curve_Default
+		}
+		state = {
+			name = _hide
+			duration = 0.1
+			position_y = 12
+			using = Animation_Curve_Default
+		}
+		button = {
+			texture = "gfx/interface/error_manul.dds"
+			size = { 100 120 }
+			#scale = 0.9
+			position = { 0 0 }
+			parentanchor = vcenter
+			click_modifiers = {
+				ondefault = "[ExecuteConsoleCommandsForced('log_status')]"
+				onshift = "[ExecuteConsoleCommandsForced('explorer')]"
+				onalt = "[ExecuteConsoleCommandsForced('TickTask.List')]"
+			}
+			rightclick_modifiers = {
+				ondefault = "[ExecuteConsoleCommandsForced('Log.ResetErrorCount;Log.clearerrorlog')]"
+				onshift = "[ExecuteConsoleCommandsForced('3dstats')]"
+				onalt = "[ExecuteConsoleCommandsForced('tweak')]"
+			}
+			tooltip = "com_error_deer_tooltip"
+
+			state = {
+				trigger_on_create = yes
+				name = 1
+				next = 2
+
+				duration = 1
+				using = Animation_Curve_Default
+				position = { 0 0 }
+			}
+			state = {
+				name = 2
+				next = 1
+
+				duration = 1
+				using = Animation_Curve_Default
+				position = { -10 0 }
+			}
+		}
+		# Error count
+		widget = {
+			position = { 0 78 }
+			name = "error_counter"
+			background = {
+				using = dark_area
+				alpha = 0.4
+				margin_top = -5
+				margin_right = -28
+				margin_left = -88
+			}
+			visible = "[And(ErrorDeer.HasErrors, IsInGame)]"
+			size = { 300 30 }
+
+			textbox = {
+				position = { 25 2 }
+				name = "error_text"
+				autoresize = yes
+				parentanchor = center
+				align = center|nobaseline
+				multiline = yes
+				maximumsize = { 250 -1 }
+				text = "com_error_counter"
+				using = fontsize_large
+				margin = { 10 5 }
+				tooltip = "com_error_counter_tooltip"
+			}
+		}
+	}
+}

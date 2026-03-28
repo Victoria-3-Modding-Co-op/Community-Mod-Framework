@@ -1,0 +1,12 @@
+types com_bpm_compatibility_event_windows 
+{
+    type bpm_event_window_superevent_newspaper = event_window {
+       name = "bpm_event_window_superevent_newspaper"
+    }
+    type event_window_form_government = default_popup {
+        name = "event_window_form_government"
+    }
+    type event_window_choose_pm = default_popup {
+        name = "event_window_choose_pm"
+    }
+}

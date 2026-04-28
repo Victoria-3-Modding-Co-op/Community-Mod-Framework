@@ -529,7 +529,7 @@
 						character_is_pro_slavery = yes #Compatibility Trigger
 						AND = {
 							character_is_anti_slavery = no
-							interest_group = {
+							interest_group ?= {
 								OR = {
 									has_ideology = ideology:ideology_pro_slavery
 									has_ideology = ideology:ideology_pro_slavery_colonial

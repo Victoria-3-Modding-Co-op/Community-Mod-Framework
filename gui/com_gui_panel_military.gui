@@ -43,7 +43,7 @@ types mobilization_options {
 					parentanchor = vcenter
 					multiline = yes
 					autoresize = yes
-					text = "[MilitaryFormation.GetName]"
+					text = "[MilitaryFormation.GetNameNoIcon]"
 					align = nobaseline
 					elide = right
 					margin_right = 3

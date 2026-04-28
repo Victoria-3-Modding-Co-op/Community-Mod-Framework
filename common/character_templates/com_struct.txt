@@ -9,6 +9,8 @@
 		set_variable = is_struct
 		place_character_in_void = 10000
 		set_character_immortal = yes
-		set_variable = memento_mori_immunity
+		set_career_length = {
+			years = 10000
+		}
 	}
 }

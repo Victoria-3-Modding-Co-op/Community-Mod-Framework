@@ -190,7 +190,7 @@ types character_types {
                 size = { 100% 100% }
 
                 block "portrait_button_onclick" {
-                    onclick = "[InformationPanelBar.OpenCommanderPanel(Character.AccessSelf)]"
+                    onclick = "[InformationPanelBar.OpenCharacterPanel(Character.AccessSelf)]"
                 }
 
                 block "portrait_button_onrightclick" {

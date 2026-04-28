@@ -9,41 +9,35 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=3385002128
 
 ## Contents
 * [Setting Dependency](#setting-dependency)
-* [Debug Features](#debug-features)
+* [Debug Features](#debug-mode)
 * [Political Movements](#political-movements)
     * [Adding New Ideologies](#adding-new-ideologies)
     * [Modifying Movement Weights](#modifying-movement-weights)
 * [GUI Framework](#gui-framework)
     * [Alternative Event Windows](#alternative-event-windows)
+    * [Custom Journal Entry Elements](#custom-journal-entry-elements)
     * [Hiding Objective Header](#hiding-objective-header)
     * [Custom Social Hierarchies](#custom-social-hierarchies)
     * [Sidebar Button](#sidebar-button)
     * [Character Animation, Camera and Environment](#character-animation-camera-and-environment)
     * [Custom Owner Buildings](#custom-owner-buildings)
     * [Multi-line Production Methods](#multi-line-production-methods)
-    * [Journal Extensions](#journal-extensions)
-      * [Hide/Show Journal Entry Groups](#hideshow-journal-entry-groups)
-      * [EU5 Style Situation Journal Entries](#eu5-style-situation-journal-entries)
-      * [Progress Bar Styling](#progress-bar-styling)
-      * [Characters in Journal Entry](#characters-in-journal-entry)
+    * [Hide/Show Journal Entry Groups](#hideshow-journal-entry-groups)
 * [Structs](#structs)
     * [Creating a new Struct](#creating-a-new-struct)
     * [Setting Variables on a Struct](#setting-variables-on-a-struct)
     * [Destroying a Struct](#destroying-a-struct)
 * [Fixing Variable Errors](#fixing-variable-errors)
-* [Extracting Character Names](#extracting-character-names)
 * [Dictionaries](#dictionaries)
 * [Float Arrays](#float-arrays)
 * [Parties](#parties)
 * [Community Mod Triggers](#community-mod-triggers)
 * [Keybinds](#keybinds)
 * [Additional Modifier Icons](#additional-modifier-icons)
-* [Weekly Event Framework](#weekly-event-framework)
 * [Heir Blocker](#heir-blocker)
+* [Weekly Event Framework](#weekly-event-framework)
 * [Formation Event Blocker](#formation-event-blocker)
-* [Regency Blocker](#regency-blocker)
 * [Built-In Universal Names Compatibility](#built-in-universal-names-compatibility)
-* [Power Bloc Disbander](#power-bloc-disbander)
 
 # Setting Dependency
 
@@ -61,10 +55,10 @@ To set this mod as a dependency to your own mod, you will need to add this to yo
 ```
 **Also remember to add the mod to your required items on your own mods steam page.**
 
-# Debug Features
+# Debug Mode
 
 - The keybinding `CTRL + ALT + D` toggles the global variable `com_debug`. This can be used to enable or disable debug content like debug Decisions or Events.
-- The keybinding `CTRL + ALT + Q` will toggle the game in and out of debug mode. This executes the `debug_mode` console command. This will break achievements if used.
+- The global variable `com_debug` will enable a decision that will add a debug button to the CMF sidebar. This button will toggle the game in and out of debug mode.
 
 # Political Movements
 
@@ -78,7 +72,7 @@ To add dummy ideologies from your mods into political movements, allowing them t
 * Your mod will overwrite the ideology definition and allow it to spawn in the specified political movements.
 
 ## Modifying Movement Weights
-Depending on whether your mod must depend on CMF, or functions in a standalone capacity, what you do may be slightly different.
+Depending on whether your mod must depend on CMF, or is usable in a standalone capacity, what you do may be slightly different.
 * Work out where you need to either add or multiply values for a particular movement.
 * Add a bloc to the CMF movement that looks like:
 ```
@@ -110,7 +104,7 @@ Current Scope:
 4) Modification to society_panel to add the ability to use custom social hierarchies. (Credit to Bahmut)
 5) Integration of the "Modded DLC Framework" (Credit to 1230James)
 6) Modification to the outliner and journal GUIs to hide custom objectives during gameplay (Credit to Taylor)
-7) Several custom event windows for extra flavor (Credit to Bananaman & Klein for the OG superevent window, Credit to Alexedishi & Bahmut for most others)
+7) Several "superevent" windows for extra flavor (Credit to Bananaman & Klein for the Newspaper window, Credit to Alexedishi for all others)
 8) Modification to Journal Entry GUI to allow players to show characters (Credit to Bahmut and Mori)
 9) Integration of the "Multi-line PM Framework" (Credit to 1230James)
 10) Alerts can now open custom windows (Credit to Bahmut)
@@ -121,7 +115,6 @@ Current Scope:
 15) Support for more mobilization options per category in GUI (Credit to lil jimmy & 1230James)
 16) Configurable Character portraits (Credit to Bahmut & CaesarVincens)
 17) Journal progress bars can be styled with 'drift' and target effects (Credit to CaesarVincens, idea from MasterOfGrey)
-18) Framework for a two character journal entry (Credit to Bagel)
 
 ## Alternative Event Windows
 
@@ -151,9 +144,8 @@ Widescreen Windows:
 - [event_window_widescreen_classic](docs/event_windows/event_window_widescreen_classic.png)
 - [event_window_widescreen_newspaper](docs/event_windows/event_window_widescreen_newspaper.png)
 
-Special Windows:
+Ethics Style Window:
 - [event_window_ethics](docs/event_windows/event_window_ethics.png)
-- [event_window_com_focus_text](docs/event_windows/event_window_com_focus_text.png)
 
 Paper Style Window:
 - [com_event_window_letter_simple](docs/event_windows/com_event_window_letter_simple.png)
@@ -174,7 +166,6 @@ Europa Universalis V Style Windows:
   - This is activated by setting the variable com_event_window_2char_duel_var
   - The progress bar will pull the value from this variable; it has a maximum of 100 and a minimum of 0
 - `event_window_crisis` uses six character scopes saved as variables; documentation is provided in the `eventwindow.gui` file
-- `event_window_com_focus_text` needs an additional localization key `<event_id>.st` to define the header for the buttons
 
 ### Newspaper Events
 The Newspaper event allows overwriting of the header texts.
@@ -197,6 +188,14 @@ or a multiple of that to keep the aspect ratio correct.
   - Bottom Right & Top Left
   - Bottom Left & Top Right
 - The Buttons do not support classical text but are optimized for texticons (i.e. `@innovation!`)
+
+## Custom Journal Entry Elements
+
+Since 1.13 Journal Entries can have custom GUI elements injected into them.
+
+The Community Mod Framework provides a set of custom elements for modders to use in their mods. Below you can find a list and how to use them.
+
+The [full list can be found here](docs/JOURNAL_ENTRY.md)
 
 ## Hiding Objective Header
 
@@ -402,10 +401,7 @@ gui/map_list_panel.gui
 ```
 **NOTE: Note that military buildings, such as barracks and naval bases, are NOT INTENDED TO BE USED WITH MPM due to the new unit graphics being displayed alongside the PMGs which now take up most of the space that the extra PMGs would overflow into.**
 
-## Journal Extensions
-CMF adds several extensions for the journal system, including hidden entries, EU5-alike situations, and more.
-
-### Hide/Show Journal Entry Groups
+## Hide/Show Journal Entry Groups
 
 This allows for hiding and showing any Journal Entry Group.
 
@@ -415,223 +411,6 @@ This would hide all National Agenda (`je_group_historical_content`) Journal Entr
 
 `com_show_journal_entry_group = { name = je_group_historical_content }` 
 This would show them again.
-
-### EU5 Style Situation Journal Entries
-**NOTE: CMF Situations are not yet tested with the new global journal entries and may not work correctly**
-
-Situations are meant to model international events, such as clashes between factions, pandemics, and more.
-
-Each situation can have multiple, different journal entries associated with it and provides a tool to model complex power struggles.
-
-In the background, situations are Journal Entries with a few extra variables and a whole new UI.
-This means using them should come natural to modders who have already used those.
-
-Situations were inspired by [EU5](https://forum.paradoxplaza.com/forum/developer-diary/tinto-talks-70-2nd-of-july-2025.1823383/).
-
-[The usage documentation can be found here.](docs/SITUATIONS.md)
-
-[While the script documentation can be found here.](docs/SITUATIONS_SCRIPT_DOCS.md)
-
-### DLC Icons in Journal Entries
-
-To add DLC/Mod information to a journal entry, CMF offers the scripted effect `add_com_dlc_icon`.
-
-It needs to be run in the journal entry scope.
-The best place for that is the `immediate` block of a journal entry:
-```
-je_some_journal = {
-    # journal definition
-    immediate = {
-        scope:journal_entry = {
-            add_com_dlc_icon = {
-                dlc = dlc_magic_gate
-            }
-        }
-    }
-    # some more journal definition
-}
-```
-
-### Characters in Journal Entry
-
-Screenshots: [Single Character with Opinion](docs/example_journal_entry_character_01.png), [Multiple Characters without Opinions](docs/example_journal_entry_character_02.png)
-
-To add one or more characters to a journal entry you need
-to add them to a variable list called `com_journal_characters` in
-the immediate block of a journal entry.
-
-Here is an example where a countries ruler is added to a journal entry, but theoretically you can add whoever you want:
-```
-je_example_entry = {
-	...
-	immediate = {
-		every_scope_character = {
-			limit = {
-				exists = this
-				is_character_alive = yes
-				is_ruler = yes
-			}
-			save_temporary_scope_as = list_character
-			scope:journal_entry = {
-				add_to_variable_list = {
-					name = com_journal_characters
-					target = scope:list_character
-				}
-			}
-		}
-	}
-	...
-}
-```
-
-### Two Characters Journal Entry (country rulers)
-
-Screenshots: [Britain and EIC as example](docs/two_char_je_example.png), 
-
-To use the two characters in a journal entry you must use the following variables:
-
-com_style_two_characters -> in immediate block, used to designate a je as using this gui
-
-ex. scope:journal_entry = {
-			set_variable = {
-            	name = com_style_two_characters
-        	}
-		}
-
-com_character_country_right -> in immediate block, used to designate what country's ruler is on the right side
-
-ex. scope:journal_entry = {
-			set_variable = {
-            	name = com_character_country_right
-           		value = c:GBR
-        	}
-		}
-
-com_character_country_left -> in immediate block, used to designate what country's ruler is on the left side
-
-ex. scope:journal_entry = {
-			set_variable = {
-            	name = com_character_country_left
-           		value = c:BIC
-        	}
-		}
-  
-com_character_country_right_title -> in immediate block, used to designate the text on the top right
-
-ex. scope:journal_entry = {
-			set_variable = {
-            	name = com_character_country_right_title
-           		value = flag:british_government_text
-        	}
-		}
-
-com_character_country_left_title -> in immediate block, used to designate the text on the top left
-
-ex. scope:journal_entry = {
-			set_variable = {
-            	name = com_character_country_left_title
-           		value = flag:company_shareholder_text
-        	}
-		}
-
-Here is an example where the ruler of Great Britain and the East India Company are used, but theoretically you can use whatever country you want to:
-```
-je_example_entry = {
-	...
-	immediate = {
-		scope:journal_entry = {
-			set_variable = {
-            	name = com_style_two_characters
-        	}
-		}
-
-		scope:journal_entry = {
-			set_variable = {
-            	name = com_character_country_right_title
-           		value = flag:british_government_text
-        	}
-		}
-
-		scope:journal_entry = {
-			set_variable = {
-            	name = com_character_country_left_title
-           		value = flag:company_shareholder_text
-        	}
-		}
-
-		scope:journal_entry = {
-			set_variable = {
-            	name = com_character_country_right
-           		value = c:GBR
-        	}
-		}
-
-		scope:journal_entry = {
-			set_variable = {
-            	name = com_character_country_left
-           		value = c:BIC
-        	}
-		}
-	}
-	...
-}
-```
-
-### Removing Icons in Journal Entries
-If you want to remove the icon from the top of the journal entry screen for any reason CMF has a feature to do so.
-
-To remove the icon from a journal entry the following variable is needed:
-
-`com_remove_journal_icon-` -> in the immediate block
-
-Here is an example:
-
-```
-je_example_entry = {
-	...
-	immediate = {
-		scope:journal_entry = {
-			set_variable = {
-        name = com_remove_journal_icon
-      }
-		}
-	}
-	...
-}
-```
-
-
-
-
-### Progress Bar Styling
-Scripted progress bars can be styled with a color, a drift effect, and a target marker, all dynamically settable and unsettable. For more details, see the [progress bar documentation](/docs/Progress_bars.md)
-
-> **NOTE**  The following custom color styles still work, but have been superseded by the more advanced progress bar framework.
-
-These work by setting specific variables in the journal entry scope. These will change which progress bar is displayed. Currently, the following variables are used:
-- `com_double_bad_gold_marker` -- replaces the journal entry marker in double_sided_bad with the marker from double_sided_gold
-- `com_double_bad_white_bar` -- replaced double_sided_bad with white_progressbar_horizontal
-- `com_double_bad_gold_bar` -- replaced double_sided_bad with gold_progressbar_horizontal
-- `com_bear_spray_applied` -- removes the bear and lion icons from double_sided_gold and resizes the progress bar
-
-### Wrap Journal Modifiers
-
-This works by setting the variable `com_flex_je_modifiers` in the journal entry scope. This causes the journal modifiers to wrap in lines of 5. Now, up to 15 modifiers looks fine and don't just cross the screen.
-
-#### Opinions
-
-Characters in journal entries can also have opinions.
-To define them, you need to set the flag variable `com_opinion` on the character.
-```
-set_variable = {
-    name = com_opinion
-    value = flag:gui_character_opinion_example
-}
-```
-The text behind `flag:` is a localization key (See [com_gui_l_english.yml](localization/english/com_gui_l_english.yml)).
-
-**NOTE: Only one opinion can be set on a character at a time. So if you are using a character in multiple journal entries be aware of this.**
-
 
 # Structs
 
@@ -698,20 +477,6 @@ fix_variable_error = {
 Usage examples can be found [here](events/com_debug.txt).
 
 **NOTE**: This works for both **variables** and **flags**.
-
-# Extracting Character Names
-CMF has the ability to set character names as **flag** variables on the characters scope.
-To do this just add the character to the `com_character_name_extract` global list.
-
-In the background a GUI hack will be used to set the following variables on the character:
-- `com_name_full`
-- `com_name_full_no_formatting`
-- `com_name_full_title`
-- `com_name_full_title_no_formatting`
-- `com_name_first`
-- `com_name_first_no_formatting`
-- `com_name_last`
-- `com_name_last_no_formatting`
 
 # Dictionaries
 
@@ -808,9 +573,9 @@ every_country = {
 }
 ```
 # Float Arrays
-Floatarrays are a custom data type implemented through scripted variables, enabling efficient indexed storage similar to float arrays in traditional programming languages. Credit to BigBruh and CaesarVincens.
+Float arrays are a custom data type implemented through scripted variables, enabling efficient indexed storage similar to float arrays in traditional programming languages. Credit to BigBruh and CaesarVincens.
 
-See [the documentation page for details](/docs/floatarray.md) on effects and triggers.
+See [the documentation page for details](docs/floatarray.md) on effects and triggers.
 
 # Parties
 
@@ -860,7 +625,7 @@ YOURMODNAME_is_active_trigger = {
 # Keybinds
 
 You can take a free keybind by doing this:
-1) Check default.profile and see which keybind is still free. You can find free keybinds at the bottom of the file.
+1) Check `default.profile` and see which keybind is still free. You can find free keybinds at the bottom of the file.
 2) Add input_action = "input_$your_input$" to the button you want to use it for.
 3) Add a localization for your button to "localization/language_x/replace" and use the name of the input_action.
 
@@ -870,17 +635,6 @@ Note: It is possible to add additional keybinds if there are no keybinds left.
 
 Over 100 new modifier icons for more variety. Credit to Caelreader. PSD template available in docs.
 Screenshot: [Modifier Icons](docs/timed_modifier_icons.png)
-
-# Weekly Event Framework
-
-This is a framework to allow for a weekly firing script event on any day of the week, without a hidden journal entry being used.
-
-To use:
-1. Create a new `on_monthly_pulse` or reuse an existing one.
-2. Set it up like in `com_weekly_on_action.txt`:
-3. Add your own `on_action` to the `on_monthly_pulse` from step 1.
-4. Add the `com_run_weekly_event_country_effect` into this new on_action and set the two parameters. Example: `com_run_weekly_event_country_effect = { weekday = 1 on_action = another_on_action }`. Weekday decides the weekday ranging from 0 (Sunday) to 6 (Saturday).
-5. Define your new on_action (`another_on_action` in the example in 4.)
 
 # Heir Blocker
 
@@ -897,8 +651,19 @@ Modified on action logic for heir births will take care of the rest automaticall
 To allow randomly-generated heirs again, simply remove the variable.
 
 Note:
-1. No considerations have been made regarding any failsafes. You are solely responsible for unblocking heirs later, even if the country switches away from a government type with hereditary transfer of power.
+1. No considerations have been made regarding any fail-safe. You are solely responsible for unblocking heirs later, even if the country switches away from a government type with hereditary transfer of power.
 2. Heirs created via `create_character` and heirs set via `set_heir` are *not* blocked, as they do not count as a "natural" heir birth. This means the variable does not need to be briefly unset when generating or setting heirs via script, such as for historical heirs.
+
+# Weekly Event Framework
+
+This is a framework to allow for a weekly firing script event on any day of the week, without a hidden journal entry being used.
+
+To use:
+1. Create a new `on_monthly_pulse` or reuse an existing one.
+2. Set it up like in `com_weekly_on_action.txt`:
+3. Add your own `on_action` to the `on_monthly_pulse` from step 1.
+4. Add the `com_run_weekly_event_country_effect` into this new on_action and set the two parameters. Example: `com_run_weekly_event_country_effect = { weekday = 1 on_action = another_on_action }`. Weekday decides the weekday ranging from 0 (Sunday) to 6 (Saturday).
+5. Define your new on_action (`another_on_action` in the example in 4.)
 
 # Formation Event Blocker
 
@@ -914,26 +679,8 @@ c:GRE = {
 To allow formation events again, simply remove the variable.
 
 Notes:
-1. No considerations have been made regarding any failsafes. You are solely responsible for unblocking formation events later, even if the country successfully completes additional formations.
+1. No considerations have been made regarding any fail-safe. You are solely responsible for unblocking formation events later, even if the country successfully completes additional formations.
 2. Changing country via the `change_tag` effect will **not** remove the `com_no_formation_events`variable.
-
-# Regency Blocker
-
-This allows for preventing `on_new_ruler` from firing as needed. This on action is very aggressive and will interrupt mid-event chain and create a regency even if you immediately replace your ruler immediately after an effect that removed the previous ruler.
-
-To use it, just set a variable named `com_no_regencies` in the country that should have regencies blocks; e.g.,
-```
-c:GRE = {
-    set_variable = com_no_regencies
-}
-```
-
-To allow regencies again, simply remove the variable.
-
-Notes:
-1. No considerations have been made regarding any failsafes. You are solely responsible for unblocking regencies later, even if the country changes government types and transfer of power.
-2. Changing country via the `change_tag` effect will **not** remove the `com_no_regencies` variable.
-3. Setting the variable *after* removing the ruler will **not** prevent the regency on action from firing.
 
 # Built-In Universal Names Compatibility
 
@@ -959,36 +706,3 @@ improved_text: "Hello, my name is [Character.GetCustom('GetUniversalFullNameNoFo
 Consider a Korean character whose name in the real world would be written as `Yi Sun-sin`. Korean names are `Last-First` names, so `Sun-sin` is the given name and `Yi` is the surname.
 - With `original_text`, it would render as `Hello, my name is Sun-sin Yi`. In reality this would be *incorrect*.
 - With `improved_text`, it would render as `Hello, my name is Yi Sun-sin`. This is correct and improves character flavor!
-
-# Power Bloc Disbander
-
-CMF provides a scripted effect to disband a power bloc arbitrarily. To disband a power bloc, use the `com_disband_power_bloc` scripted effect:
-```
-com_disband_power_bloc = {
-    power_bloc = scope_to_some_power_bloc
-}
-```
-This scripted effect expects a `power_bloc` argument, and the argument must point to the scope of the power bloc to be disbanded.
-
-For example, to dissolve the British Empire power bloc, you can write any one of the following examples:
-```
-# Example 1
-com_disband_power_bloc = {
-    power_bloc = c:GBR.power_bloc
-}
-
-# Example 2
-c:GBR = {
-    com_disband_power_bloc = {
-        power_bloc = power_bloc
-    }
-}
-
-# Example 3
-c:GBR.power_bloc = {
-    save_scope_as = bloc_i_want_to_get_rid_of
-}
-com_disband_power_bloc = {
-    power_bloc = scope:bloc_i_want_to_get_rid_of
-}
-```

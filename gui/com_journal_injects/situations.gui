@@ -1,0 +1,815 @@
+# COPY-PASTED FOR NOW
+@panel_width_minus_30 = 510
+@panel_width_minus_20 = 520
+@panel_width_minus_10 = 530			# used to be 450
+@panel_width = 540  				# used to be 460
+@panel_width_half = 270				# used to be 230
+@panel_width_plus_10 = 550  		# used to be 470
+@panel_width_plus_14 = 554			# used to be 474
+@panel_width_plus_14_half = 277		# used to be 237
+@panel_width_plus_20 = 560			# used to be 480
+@panel_width_plus_30 = 570			# used to be 490
+@panel_width_plus_70 = 610			# used to be 530
+
+# CMF Situation specific
+@com_character_width = 200
+
+types journal_entry_injects {
+
+	type com_situation_header = flowcontainer {
+		direction = vertical
+		using = default_list_position
+		spacing = 10
+		minimumsize = { @panel_width 160 }
+		background = {
+			margin_top = -44
+			margin_bottom = -20
+			texture = "[ComSituation.GetCharacter.GetIdeology.GetTexture]"
+			alpha = 0.5
+			block "com_situation_header_background_alt" {}
+			modify_texture = {
+				texture = "gfx/interface/masks/fade_vertical_bottom.dds"
+				spriteType = Corneredstretched
+				spriteborder = { 0 0 }
+				blend_mode = alphamultiply
+				alpha = 0.9
+			}
+		}
+
+		# Side names header
+		block "com_situation_header_top_text" {
+			default_header_clean = {
+				using = default_list_position
+				blockoverride "size" {
+					size = { @panel_width_plus_14 44 }
+				}
+				blockoverride "text" {
+					raw_text = ""
+				}
+			}
+		}
+
+		# Leader country ruler characters
+		block "com_situation_vs_characters" {
+			flowcontainer = {
+				direction = horizontal
+				minimumsize = { @panel_width_plus_14 44 }
+				using = default_list_position
+
+				com_journal_entry_character_situation_left = {
+					visible = "[ComSituationLeft.IsSet]"
+					datacontext = "[ComSituationLeft.Var('com_leader').GetCountry.GetRuler]"
+					datacontext = "[ComSituationLeft.Var('com_leader').GetCountry]"
+				}
+				widget = {
+					# Spacer
+					size = {
+						@[ panel_width - ( com_character_width * 2 ) ]
+						20
+					}
+				}
+				com_journal_entry_character_situation_right = {
+					visible = "[ComSituationRight.IsSet]"
+					datacontext = "[ComSituationRight.Var('com_leader').GetCountry.GetRuler]"
+					datacontext = "[ComSituationRight.Var('com_leader').GetCountry]"
+				}
+			}
+		}
+
+		# reason text on image
+		block "com_situation_reason_background" {
+			flowcontainer = {
+				direction = vertical
+				margin = { 0 10 }
+				spacing = 30
+				using = default_list_position
+				minimumsize = { @panel_width_plus_14 200 }
+				#divider_decorative = {}
+				textbox = {
+					visible = "[ComSituation.Var('com_reason_location').IsSet]"
+					autoresize = yes
+					text = "[JournalEntry.GetReason]"
+					min_width = @panel_width_minus_30
+					max_width = @panel_width_minus_30
+
+					multiline = yes
+					using = default_list_position
+
+					align = nobaseline
+					default_format = "#default_text"
+
+					margin = { 15 15 }
+
+					background = {
+						alpha = 0.6
+						using = entry_bg_fancy_dark
+					}
+				}
+			}
+		}
+
+		# Leader country names
+		block "com_situation_header_bottom_text" {
+			flowcontainer = {
+				direction = horizontal
+				using = default_list_position
+
+				com_leader_header_left = {
+					visible = "[ComSituationLeft.IsSet]"
+					blockoverride "text" {
+						raw_text = "[ComSituationLeft.Var('com_leader').GetCountry.GetName]"
+					}
+					blockoverride "size" {
+						size = { @[ panel_width_plus_14 / 2 - 20 ] 40 }
+					}
+				}
+
+				widget = {
+					visible = "[And(ComSituationLeft.IsSet, ComSituationRight.IsSet)]"
+					size = { 40 40 }
+					textbox = {
+						parentanchor = hcenter|vcenter
+						align = center
+						size = { 40 40 }
+						default_format = "#header"
+						using = fontsize_large
+						text = com_situation_vs
+					}
+				}
+
+				com_leader_header_right = {
+					visible = "[ComSituationRight.IsSet]"
+					blockoverride "text" {
+						align = right
+						raw_text = "[ComSituationRight.Var('com_leader').GetCountry.GetName]"
+					}
+					blockoverride "size" {
+						size = { @[ panel_width_plus_14 / 2 - 20 ] 40 }
+					}
+				}
+			}
+		}
+	}
+
+	type com_situation_header_versus = com_situation_header {
+		name = com_situation_header_versus
+		visible = "[And(ComSituationLeft.IsSet, ComSituationRight.IsSet)]"
+		blockoverride "com_situation_header_top_text" {
+			default_header_2texts_clean = {
+				using = default_list_position
+				blockoverride "size" {
+					size = { @panel_width_plus_14 44 }
+				}
+				blockoverride "text1" {
+					datacontext = "[ComSituationLeft]"
+					using = com_side_header_properties
+				}
+				blockoverride "text2" {
+					datacontext = "[ComSituationRight]"
+					using = com_side_header_properties
+				}
+			}
+		}
+		blockoverride "com_situation_reason_background" {}
+	}
+
+	type com_situation_header_single = com_situation_header {
+		name = com_situation_header_single
+		visible = "[Xor(ComSituationLeft.IsSet, ComSituationRight.IsSet)]"
+		blockoverride "com_situation_header_top_text" {
+			default_header_clean = {
+				using = default_list_position
+				blockoverride "size" {
+					size = { @panel_width_plus_14 44 }
+				}
+				visible = "[ComSituationLeft.IsSet]"
+				blockoverride "text" {
+					datacontext = "[ComSituationLeft]"
+					using = com_side_header_properties
+				}
+			}
+			default_header_clean = {
+				using = default_list_position
+				blockoverride "size" {
+					size = { @panel_width_plus_14 44 }
+				}
+				visible = "[ComSituationRight.IsSet]"
+				blockoverride "text" {
+					datacontext = "[ComSituationRight]"
+					using = com_side_header_properties
+				}
+			}
+		}
+		blockoverride "com_situation_vs_characters" {
+			flowcontainer = {
+				direction = horizontal
+				minimumsize = { @panel_width_plus_14 44 }
+				#using = default_list_position
+				parentanchor = hcenter|top
+				widgetanchor = hcenter|top
+				com_journal_entry_character_situation_single = {
+					widgetanchor = hcenter|top
+					visible = "[ComSituationLeft.IsSet]"
+					datacontext = "[ComSituationLeft.Var('com_leader').GetCountry.GetRuler]"
+					datacontext = "[ComSituationLeft.Var('com_leader').GetCountry]"
+				}
+				com_journal_entry_character_situation_single = {
+					visible = "[ComSituationRight.IsSet]"
+					datacontext = "[ComSituationRight.Var('com_leader').GetCountry.GetRuler]"
+					datacontext = "[ComSituationRight.Var('com_leader').GetCountry]"
+				}
+			}
+		}
+		blockoverride "com_situation_reason_background" {}
+		blockoverride "com_situation_header_bottom_text" {
+			com_leader_header_single = {
+				visible = "[ComSituationLeft.IsSet]"
+				blockoverride "text" {
+					raw_text = "[ComSituationLeft.Var('com_leader').GetCountry.GetName]"
+				}
+			}
+			com_leader_header_single = {
+				visible = "[ComSituationRight.IsSet]"
+				blockoverride "text" {
+					raw_text = "[ComSituationRight.Var('com_leader').GetCountry.GetName]"
+				}
+			}
+		}
+	}
+
+	type com_situation_header_no_side = com_situation_header {
+		name = com_situation_header_no_side
+		visible = "[Nor(ComSituationLeft.IsSet, ComSituationRight.IsSet)]"
+		blockoverride "com_situation_header_background_alt" { #TODO; come up with more generic solution to framing/size
+			spriteType = CorneredTiled
+			spriteborder_bottom = 840
+		}
+		blockoverride "com_situation_vs_characters" {}
+		blockoverride "com_situation_header_bottom_text" {
+			default_header_clean = {
+				visible = "[JournalEntry.CanTimeOut]"
+				blockoverride "text" {
+					raw_text = "[JournalEntry.GetTimeoutTooltip]"
+				}
+			}
+			default_header_clean = {
+				visible = "[Not(JournalEntry.CanTimeOut)]"
+				blockoverride "text" {
+					raw_text = ""
+				}
+			}
+		}
+	}
+
+	type com_situation_header_text = flowcontainer {
+		name = com_situation_header_text
+		visible = "[ComSituation.Var('com_header').IsSet]"
+		margin_top = 10
+		using = default_list_position
+		minimumsize = { @panel_width_minus_30 40 }
+		maximumsize = { @panel_width_minus_30 -1 }
+
+		textbox = {
+			using = default_list_position
+			minimumsize = { @panel_width_minus_30 40 }
+			maximumsize = { @panel_width_minus_30 -1 }
+			raw_text = "[ComSituation.Var('com_header').GetFlagName]"
+			align = center
+			using = fontsize_xl
+			multiline = yes
+			autoresize = yes
+			default_format = "#title"
+		}
+	}
+
+	type com_situation_victory_conditions = flowcontainer {
+		name = com_situation_victory_conditions
+		minimumsize = { @panel_width_plus_14 -1 }
+		direction = vertical
+		using = default_list_position
+		spacing = 10
+
+		com_situation_victory = {
+			blockoverride "neutral" {} #show only complete/fail or left/right
+		}
+		com_situation_victory = { #show only alternate ending
+			blockoverride "left" {}
+			blockoverride "right" {}
+		}
+	}
+
+	type com_situation_faction_list = flowcontainer {
+		name = com_situation_faction_list
+		minimumsize = { @panel_width_plus_14 -1 }
+		direction = vertical
+		using = default_list_position
+		spacing = 10
+		# Factions header
+		default_header_clean = {
+			using = default_list_position
+			# At least one side needs to have factions for them to show up
+			visible = "[Nand(
+                IsDataModelEmpty(ComSituationLeft.GetList('com_factions')),
+                IsDataModelEmpty(ComSituationRight.GetList('com_factions'))
+            )]"
+			blockoverride "text" {
+				raw_text = "[Concept('concept_com_situation_faction', Localize('concept_com_situation_factions'))]"
+			}
+			blockoverride "size" {
+				size = { @panel_width_plus_14 44 }
+			}
+		}
+
+		# Factions
+		flowcontainer = {
+			direction = horizontal
+			spacing = 20
+			margin = { 20 10 }
+
+			# At least one side needs to have factions for them to show up
+			visible = "[Nand(
+                IsDataModelEmpty(ComSituationLeft.GetList('com_factions')),
+                IsDataModelEmpty(ComSituationRight.GetList('com_factions'))
+            )]"
+
+			com_situation_factions = {
+				blockoverride "context" {
+					datacontext = "[ComSituationLeft]"
+				}
+			}
+			com_situation_factions = {
+				blockoverride "context" {
+					datacontext = "[ComSituationRight]"
+				}
+			}
+		}
+
+		# Neutral factions header
+		default_header_clean = {
+			using = default_list_position
+			# At least one side needs to have factions for them to show up
+			visible = "[And(
+                Not( IsDataModelEmpty( ComSituation.Var('com_side_neutral').GetList('com_factions') ) ),
+                Nand(
+                    IsDataModelEmpty( ComSituationLeft.GetList('com_factions') ),
+                    IsDataModelEmpty( ComSituationRight.GetList('com_factions') )
+                )
+            )]"
+			blockoverride "text" {
+				raw_text = "[Concept('concept_com_situation_faction_neutral', Localize('concept_com_situation_factions_neutral'))]"
+			}
+			blockoverride "size" {
+				size = { @panel_width_plus_14 44 }
+			}
+		}
+		# No sides factions
+		default_header_clean = {
+			using = default_list_position
+			# At least one side needs to have factions for them to show up
+			visible = "[And(
+                Not( IsDataModelEmpty( ComSituation.Var('com_side_neutral').GetList('com_factions') ) ),
+                And(
+                    IsDataModelEmpty( ComSituationLeft.GetList('com_factions') ),
+                    IsDataModelEmpty( ComSituationRight.GetList('com_factions') )
+                )
+            )]"
+			blockoverride "text" {
+				raw_text = "[Concept('concept_com_situation_faction_neutral', Localize('concept_com_situation_countries'))]"
+			}
+			blockoverride "size" {
+				size = { @panel_width_plus_14 44 }
+			}
+		}
+
+		# Factions
+		flowcontainer = {
+			direction = horizontal
+			spacing = 20
+			margin = { 20 10 }
+
+			# At least one side needs to have factions for them to show up
+			visible = "[Not(IsDataModelEmpty(ComSituation.Var('com_side_neutral').GetList('com_factions')))]"
+
+			com_situation_neutral_factions = {}
+		}
+	}
+
+	type com_situation_victory = flowcontainer {
+		direction = horizontal
+		using = default_list_position
+		spacing = 20
+
+		block "left" {
+			visible = "[Or(JournalEntry.CanComplete, ComSituationLeft.Var('com_victory_condition').IsSet)]" #only show left victory/complete if one exists
+			com_victory_conditions = { #Left side victory, either set as regular complete or custom condition and effect
+				visible = "[ComSituationLeft.IsSet]"
+				tooltip = "[ComVictoryCondition(JournalEntry.GetCompletionTooltip)][ConcatIfNeitherEmpty(Localize('NEWLINE'), ComVictoryEffect(JournalEntry.GetOnCompleteTooltip) )]"
+				datacontext = "[ComSituationLeft]"
+			}
+			com_victory_conditions = { #Regular completion, only visible if left side is not set
+				visible = "[Not(ComSituationLeft.IsSet)]"
+				blockoverride "text" { raw_text = "[Localize('com_situation_completion_conditions')]" }
+				tooltip = "[JournalEntry.GetCompletionTooltip][ConcatIfNeitherEmpty(Localize('NEWLINE'), JournalEntry.GetOnCompleteTooltip )]"
+			}
+		}
+
+		block "right" {
+			visible = "[Or(Not(StringIsEmpty(JournalEntry.GetFailureTooltip)), ComSituationRight.Var('com_victory_condition').IsSet)]" #only show right victory/failure if one exists
+			com_victory_conditions = { #Right side victory, either set as regular failure or custom condition and effect
+				visible = "[ComSituationRight.IsSet]"
+				tooltip = "[ComVictoryCondition(JournalEntry.GetFailureTooltip)][ConcatIfNeitherEmpty(Localize('NEWLINE'), ComVictoryEffect(JournalEntry.GetOnFailTooltip) )]"
+				datacontext = "[ComSituationRight]"
+			}
+			com_victory_conditions = { #Regular failure, only visible if right side is not set
+				visible = "[Not(ComSituationRight.IsSet)]"
+				blockoverride "text" { raw_text = "[Localize('com_situation_failure_conditions')]" }
+				tooltip = "[JournalEntry.GetFailureTooltip][ConcatIfNeitherEmpty(Localize('NEWLINE'), JournalEntry.GetOnFailTooltip )]"
+			}
+		}
+		block "neutral" {
+			com_victory_conditions = { #only visible if custom ending condition is set
+				visible = "[Scope.Var('com_victory_condition').IsSet]"
+				tooltip = "[Scope.Var('com_victory_condition').GetFlagName]"
+				blockoverride "text" { raw_text = "[Localize('com_situation_alternate_ending_conditions')]" }
+				datacontext = "[ComSituation.Var('com_side_neutral')]"
+			}
+		}
+	}
+
+	type com_situation_factions = flowcontainer {
+		block "context" {}
+		direction = vertical
+		spacing = 20
+		datamodel = "[Scope.GetList('com_factions')]"
+
+		item = {
+			flowcontainer = {
+				margin_top = -2
+				background = {
+					using = simple_frame
+				}
+
+				default_header_clean_faded = {
+					blockoverride "text" {
+						raw_text = "[Scope.Var('com_name').GetFlagName]"
+						tooltipwidget = {
+							RegularTooltip = {
+								blockoverride "tooltip_content" {
+									custom_tooltip_textbox = {
+										raw_text = "[Scope.Var('com_name').GetFlagName]"
+										default_format = "#header"
+									}
+									custom_tooltip_textbox = {
+										raw_text = "[Scope.Var('com_desc').GetFlagName]"
+									}
+								}
+							}
+						}
+					}
+					blockoverride "size" {
+						size = { @[panel_width_half - 20] 45 }
+					}
+				}
+				direction = vertical
+
+				dynamicgridbox = {
+					parentanchor = hcenter
+					datamodel = "[Scope.GetList('com_countries')]"
+					datamodel_wrap = 6
+					flipdirection = yes
+
+					item = {
+						flowcontainer = {
+							visible = "[Scope.GetCountry.IsValid]"
+							margin = { 5 10 }
+							minimumsize = { 27 18 }
+							tiny_flag = {
+								datacontext = "[Scope.GetCountry]"
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	type com_situation_neutral_factions = flowcontainer {
+		datacontext = "[ComSituation.Var('com_side_neutral')]"
+		direction = vertical
+		spacing = 20
+		datamodel = "[Scope.GetList('com_factions')]"
+
+		item = {
+			flowcontainer = {
+				margin_top = -2
+				background = {
+					using = simple_frame
+				}
+
+				default_header_clean_faded = {
+					blockoverride "text" {
+						raw_text = "[Scope.Var('com_name').GetFlagName]"
+						tooltipwidget = {
+							RegularTooltip = {
+								blockoverride "tooltip_content" {
+									custom_tooltip_textbox = {
+										raw_text = "[Scope.Var('com_name').GetFlagName]"
+										default_format = "#header"
+									}
+									custom_tooltip_textbox = {
+										raw_text = "[Scope.Var('com_desc').GetFlagName]"
+									}
+								}
+							}
+						}
+					}
+					blockoverride "size" {
+						size = { @panel_width_minus_20 45 }
+					}
+				}
+				direction = vertical
+
+				dynamicgridbox = {
+					parentanchor = hcenter
+					datamodel = "[Scope.GetList('com_countries')]"
+					datamodel_wrap = 8
+					flipdirection = yes
+
+					item = {
+						flowcontainer = {
+							visible = "[Scope.GetCountry.IsValid]"
+							margin = { 6 10 }
+							minimumsize = { 27 18 }
+							small_flag = {
+								datacontext = "[Scope.GetCountry]"
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	type com_victory_conditions = flowcontainer {
+		background = {
+			using = simple_frame
+		}
+		margin = { 5 5 }
+		textbox = {
+			default_format = "#yellow"
+			block "text" { raw_text = "[Scope.Var('com_name').GetFlagName] [Localize('com_situation_victory_conditions')]" }
+			multiline = yes
+			autoresize = yes
+			maximumsize = { 240 -1 }
+			minimumsize = { 240 40 }
+			align = center
+		}
+	}
+
+	type com_situation_buttons = flowcontainer {
+		using = default_list_position
+		direction = vertical
+
+		# Fallback - No groups defined
+		flowcontainer = {
+			direction = vertical
+			visible = "[And(
+                Not(IsDataModelEmpty(JournalEntry.GetScriptedButtons)),
+                IsDataModelEmpty(ComSituation.GetList('com_button_groups'))
+            )]"
+			spacing = 10
+
+			default_header_clean = {
+				using = default_list_position
+				blockoverride "text" {
+					text = com_situation_interactions
+				}
+				blockoverride "size" {
+					size = { @panel_width_plus_14 44 }
+				}
+			}
+
+			dynamicgridbox = {
+				parentanchor = hcenter
+				datamodel = "[JournalEntry.GetScriptedButtons]"
+				datamodel_wrap = 2
+				flipdirection = yes
+
+				item = {
+					widget = {
+						size = { 260 60 }
+
+						scripted_journal_entry_button = {
+							parentanchor = center
+						}
+
+						# Buttons for which the selected trigger is true have a different appearance and tooltip, but share all behaviors.
+						# This means that even selected buttons are clickable as usual, assuming the possible trigger does not prevent it.
+						# This enables more use cases, such as using buttons as on-off toggles, but requires the scripter to disable buttons manually in the possible trigger as needed.
+					}
+				}
+			}
+		}
+
+		# Button groups
+		flowcontainer = {
+			direction = vertical
+			visible = "[And(
+                Not(IsDataModelEmpty(JournalEntry.GetScriptedButtons)),
+                Not(IsDataModelEmpty(ComSituation.GetList('com_button_groups')))
+            )]"
+			spacing = 10
+			datamodel = "[ComSituation.GetList('com_button_groups')]"
+
+			item = {
+				flowcontainer = {
+					using = default_list_position
+					direction = vertical
+					visible = "[Not(IsDataModelEmpty(Scope.GetList('com_buttons')))]"
+					spacing = 10
+
+					default_header_clean = {
+						using = default_list_position
+						blockoverride "text" {
+							raw_text = "[Scope.Var('com_name').GetFlagName]"
+							tooltip = "[Scope.Var('com_desc').GetFlagName]"
+						}
+						blockoverride "size" {
+							size = { @panel_width_plus_14 44 }
+						}
+					}
+
+					dynamicgridbox = {
+						datamodel = "[Scope.GetList('com_buttons')]"
+						parentanchor = hcenter
+						datamodel_wrap = 2
+						flipdirection = yes
+
+						item = {
+							flowcontainer = {
+								datamodel = "[JournalEntry.GetScriptedButtons]"
+								direction = vertical
+
+								item = {
+									widget = {
+										visible = "[EqualTo_string(ScriptedButton.GetName, Scope.GetFlagName)]"
+										size = { 260 60 }
+
+										scripted_journal_entry_button = {
+											parentanchor = center
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	type com_leader_header_left = default_header {
+		blockoverride "deco" {}
+		blockoverride "header_background" {
+			background = {
+				using = default_header_bg
+				blockoverride "header_fade_mask" {
+					modify_texture = {
+						texture = "gfx/interface/masks/fade_horizontal_right.dds"
+						spriteType = Corneredstretched
+						spriteborder = { 0 0 }
+						blend_mode = alphamultiply
+						alpha = 0.9
+					}
+				}
+			}
+		}
+	}
+
+	type com_leader_header_right = default_header {
+		blockoverride "deco" {}
+		blockoverride "header_background" {
+			background = {
+				using = default_header_bg
+				blockoverride "header_fade_mask" {
+					modify_texture = {
+						texture = "gfx/interface/masks/fade_horizontal_left.dds"
+						spriteType = Corneredstretched
+						spriteborder = { 0 0 }
+						blend_mode = alphamultiply
+						alpha = 0.9
+					}
+				}
+			}
+		}
+	}
+
+	type com_leader_header_single = default_header {
+		blockoverride "deco" {}
+		blockoverride "header_background" {
+			background = {
+				using = default_header_bg
+				blockoverride "header_fade_mask" {
+					modify_texture = {
+						texture = "gfx/interface/masks/fade_horizontal_center.dds"
+						spriteType = Corneredstretched
+						spriteborder = { 0 0 }
+						blend_mode = alphamultiply
+						alpha = 0.9
+					}
+				}
+			}
+		}
+	}
+
+	type com_journal_entry_character_situation_left = character_portrait_base {
+		size = { @com_character_width 160 }
+		blockoverride "portrait_size" {
+			size = { @com_character_width 200 }
+		}
+		blockoverride "portrait_texture" {
+			portrait_texture = "[Character.GetAnimatedPortrait(
+                ComSelectPortraitVar('com_character_environment','environment_event_01'),
+                ComSelectPortraitVar('com_character_camera','camera_duel_01'),
+                ComSelectPortraitVar('com_character_animation','idle'),
+                GetPortraitRenderSize(PdxGuiWidget.Self)
+            )]"
+		}
+		blockoverride "portrait_button_onclick" {
+			onclick = "[InformationPanelBar.OpenCountryPanel(Country.Self)]"
+		}
+		blockoverride "portrait_button_onrightclick" {
+			onrightclick = "[RightClickMenuManager.ShowForCountry(Country.AccessSelf)]"
+		}
+		blockoverride "show_hat" {}
+		blockoverride "portrait_icons" {}
+	}
+
+	type com_journal_entry_character_situation_right = character_portrait_base {
+		size = { @com_character_width 160 }
+		blockoverride "portrait_size" {
+			size = { @com_character_width 200 }
+		}
+		blockoverride "portrait_texture" {
+			portrait_texture = "[Character.GetAnimatedPortrait(
+                ComSelectPortraitVar('com_character_environment','environment_event_01'),
+                ComSelectPortraitVar('com_character_camera','camera_duel_02'),
+                ComSelectPortraitVar('com_character_animation','idle'),
+                GetPortraitRenderSize(PdxGuiWidget.Self)
+            )]"
+		}
+		blockoverride "portrait_button_onclick" {
+			onclick = "[InformationPanelBar.OpenCountryPanel(Country.Self)]"
+		}
+		blockoverride "portrait_button_onrightclick" {
+			onrightclick = "[RightClickMenuManager.ShowForCountry(Country.AccessSelf)]"
+		}
+		blockoverride "show_hat" {}
+		blockoverride "portrait_icons" {}
+	}
+
+	type com_journal_entry_character_situation_single = character_portrait_base {
+		size = { @panel_width_plus_14 160 }
+		blockoverride "portrait_size" {
+			size = { @com_character_width 200 }
+		}
+		blockoverride "portrait_texture" {
+			portrait_texture = "[Character.GetAnimatedPortrait(
+                ComSelectPortraitVar('com_character_environment','environment_event_01'),
+                ComSelectPortraitVar('com_character_camera','camera_council'),
+                ComSelectPortraitVar('com_character_animation','idle'),
+                GetPortraitRenderSize(PdxGuiWidget.Self)
+            )]"
+		}
+		blockoverride "portrait_button_onclick" {
+			onclick = "[InformationPanelBar.OpenCountryPanel(Country.Self)]"
+		}
+		blockoverride "portrait_button_onrightclick" {
+			onrightclick = "[RightClickMenuManager.ShowForCountry(Country.AccessSelf)]"
+		}
+		blockoverride "show_hat" {}
+		blockoverride "portrait_icons" {}
+	}
+	
+}
+
+template com_side_header_properties {
+	maximumsize = { 240 44 }
+	raw_text = "#header [Scope.Var('com_name').GetFlagName]#! [Localize('com_situation_leader')]"
+	tooltipwidget = {
+		RegularTooltip = {
+			blockoverride "tooltip_content" {
+				custom_tooltip_textbox = {
+					raw_text = "[Scope.Var('com_name').GetFlagName]"
+					default_format = "#header"
+				}
+				custom_tooltip_textbox_with_empty_line = {
+					text = com_situation_header_leader_for
+				}
+				custom_tooltip_textbox = {
+					raw_text = "[Scope.Var('com_desc').GetFlagName]"
+				}
+			}
+		}
+	}
+}

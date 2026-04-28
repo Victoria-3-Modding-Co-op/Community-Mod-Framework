@@ -326,7 +326,34 @@ types com_state_panel_buildings_overwrites {
 					blockoverride "text" {
 						text = "UNUSED_ARABLE"
 					}
+
+					blockoverride "building_levels_textbox" {
+						flowcontainer = {
+							parentanchor = vcenter
+							textbox = {
+								parentanchor = vcenter
+								align = nobaseline
+								autoresize = yes
+								using = fontsize_xl
+								default_format = "#tooltippable"
+								using = tooltip_ne
+								tooltip = "LAND_TEXT_TOOLTIP"
+								text = "[Building.GetState.GetNumBaseFreeArableLand]"
+							}
+
+							widget = { size = { 5 5 } }
+
+							textbox = {
+								parentanchor = vcenter
+								visible = "[GreaterThan_int32(Building.GetState.GetNumArableLandReservedForSubsistence,'(int32)0')]"
+								align = nobaseline
+								autoresize = yes
+								text = "UNDEVELOPED_ARABLE_LAND"
+							}
+						}
+					}
 				}
+
 
 				divider_clean = {}
 			}
@@ -421,14 +448,14 @@ types com_state_panel_buildings_overwrites {
 
 						header_building_item = {
 							visible = no
-							datacontext = "[StatesPanel.AccessBuilding('building_naval_base')]"
+							datacontext = "[StatesPanel.AccessBuilding('building_naval_administration')]"
 
 							tooltipwidget = {
 								FancyTooltip_Building = {}
 							}
 
 							blockoverride "text" {
-								text = "TOTAL_NAVAL_BASE"
+								text = "TOTAL_NAVAL_ADMINISTRATION"
 							}
 						}
 
@@ -462,15 +489,11 @@ types com_state_panel_buildings_overwrites {
 			parentanchor = hcenter
 
 			buildings_list_item = {
-				datacontext = "[StatesPanel.AccessBuilding('building_barrack')]"
-			}
-
-			buildings_list_item = {
 				datacontext = "[StatesPanel.AccessBuilding('building_conscription_center')]"
 			}
 
 			buildings_list_item = {
-				datacontext = "[StatesPanel.AccessBuilding('building_naval_base')]"
+				datacontext = "[StatesPanel.AccessBuilding('building_naval_administration')]"
 			}
 
 			buildings_list = {

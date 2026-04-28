@@ -25,7 +25,7 @@ types com_widescreen_window_types {
     ## CLASSIC WIDESCREEN WINDOW
     # This window uses the background from the vanilla event window
 
-    type event_window_widescreen_classic = event_window {
+    type event_window_widescreen_classic = event_window_com_base {
         name = "event_window_widescreen_classic"
 
         using = hud_visibility
@@ -330,7 +330,7 @@ types com_widescreen_window_types {
     ## NEWSPAPER WIDESCREEN WINDOW
     # This window uses the background from the newspaper event window
 
-    type event_window_widescreen_newspaper = event_window {
+    type event_window_widescreen_newspaper = event_window_com_base {
         name = "event_window_widescreen_newspaper"
 
         using = hud_visibility

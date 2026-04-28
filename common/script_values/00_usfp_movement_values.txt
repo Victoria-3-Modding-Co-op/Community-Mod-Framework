@@ -20,3 +20,5 @@ usfp_harlem_renaissance_socialism_attraction_mult = { value = 1 }
 usfp_harlem_renaissance_religious_attraction_mult = { value = 1 }
 
 usfp_movement_pro_slavery_pop_support_add = { value =  0 }
+        usfp_cultural_mexican_movement_attraction_mult = { value = 1 }
+        usfp_mexican_movement_radicalism_factor_add = { value = 0 }

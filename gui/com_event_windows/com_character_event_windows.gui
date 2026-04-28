@@ -22,7 +22,7 @@
 types com_character_window_types {
 
 	### 1 CHARACTER ADVENTURE WINDOW
-	type event_window_1char_adventure = event_window {
+	type event_window_1char_adventure = event_window_com_base {
 		name = "event_window_1char_adventure"
 		
 		blockoverride "event_image_size" {
@@ -103,7 +103,7 @@ types com_character_window_types {
 	}
 
 	### 2 CHARACTER ADVENTURE WINDOW
-	type event_window_2char_adventure = event_window {
+	type event_window_2char_adventure = event_window_com_base {
 		name = "event_window_2char_adventure"
 		
 		blockoverride "event_image_size" {
@@ -213,7 +213,7 @@ types com_character_window_types {
 	}
 	
 	### 2 CHARACTER DISCUSSION WINDOW
-	type event_window_2char_discussion = event_window {
+	type event_window_2char_discussion = event_window_com_base {
 		name = "event_window_2char_discussion"
 		
 		blockoverride "event_image_size" {
@@ -474,7 +474,7 @@ types com_character_window_types {
 	# Set the variable com_event_window_2char_duel_var on the country
 	# Adjust your value to be out of 100; this progressbar goes from 0 to 100
 
-	type event_window_2char_duel = event_window {
+	type event_window_2char_duel = event_window_com_base {
 		name = "event_window_2char_duel"
 		
 		blockoverride "event_image_size" {
@@ -482,7 +482,7 @@ types com_character_window_types {
 			parentanchor = center
 		}
 		
-			blockoverride "event_image_content" {
+		blockoverride "event_image_content" {
 			# image
 			icon = {
 				visible = "[Event.HasTexture]"
@@ -754,7 +754,7 @@ types com_character_window_types {
 	}
 	
 	### HIGHLANDER DUEL WINDOW
-	type event_window_highlander = event_window {
+	type event_window_highlander = event_window_com_base {
 		name = "event_window_highlander"
 
 		blockoverride "event_image_size" {
@@ -969,7 +969,7 @@ types com_character_window_types {
 
 			icon = {
 				size = { 40 40 }
-				texture = "gfx/interface/backgrounds/round_frame_dec.dds"
+				#texture = "gfx/interface/backgrounds/round_frame_dec.dds"
 				parentanchor = bottom|left
 
 				icon = {
@@ -998,7 +998,7 @@ types com_character_window_types {
 	
 	### 3 CHARACTER WINDOW
 	# This event window is in the style of event_window_1char_tabloid and event_window_2char
-	type event_window_3char = event_window {
+	type event_window_3char = event_window_com_base {
 		name = "event_window_3char"
 		
 		blockoverride "event_image_size" {
@@ -1094,7 +1094,7 @@ types com_character_window_types {
 	}
 	
 	### 3 CHARACTER SELECTION WINDOW
-	type event_window_3char_selection = event_window {
+	type event_window_3char_selection = event_window_com_base {
 		name = "event_window_3char_selection"
 
 		blockoverride "event_image_size" {
@@ -1319,7 +1319,7 @@ types com_character_window_types {
 
 				icon = {
 					size = { 40 40 }
-					texture = "gfx/interface/backgrounds/round_frame_dec.dds"
+					#texture = "gfx/interface/backgrounds/round_frame_dec.dds"
 					parentanchor = bottom|left
 
 					icon = {

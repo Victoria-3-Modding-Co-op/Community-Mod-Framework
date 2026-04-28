@@ -1,0 +1,95 @@
+# COPY-PASTED FOR NOW
+@panel_width_minus_30 = 510
+@panel_width_minus_20 = 520
+@panel_width_minus_10 = 530            # used to be 450
+@panel_width = 540                # used to be 460
+@panel_width_half = 270                # used to be 230
+@panel_width_plus_10 = 550        # used to be 470
+@panel_width_plus_14 = 554            # used to be 474
+@panel_width_plus_14_half = 277        # used to be 237
+@panel_width_plus_20 = 560            # used to be 480
+@panel_width_plus_30 = 570            # used to be 490
+@panel_width_plus_70 = 610            # used to be 530
+
+types journal_entry_injects {
+    type com_journal_entry_header = widget {
+        name = com_journal_entry_header
+        size = { @panel_width_plus_20 120 }
+        parentanchor = hcenter
+
+        background = {
+            texture = "gfx/interface/illustrations/journal/top_illu_journal_entries.dds"
+            using = top_illu_properties
+        }
+
+        widget = {
+            size = { 250 120 }
+            parentanchor = hcenter
+
+            icon = {
+                parentanchor = hcenter
+                size = { 120 120 }
+                texture = "gfx/interface/backgrounds/round_frame_dec.dds"
+
+                icon = {
+                    parentanchor = center
+                    texture = "[JournalEntry.GetIcon]"
+                    size = { 100 100 }
+                }
+            }
+
+
+
+            # completion in progress
+            icon = {
+                visible = "[JournalEntry.IsProgressing]"
+                parentanchor = right|vcenter
+                size = { 50 50 }
+                texture = "gfx/interface/icons/generic_icons/green_checkmark.dds"
+                tooltip = "JOURNAL_ENTRY_IN_PROGRESS"
+                using = shimmer
+
+                icon = {
+                    parentanchor = center
+                    using = rotate_glow_animation_02
+                    size = { 300% 300% }
+                    alpha = 0.5
+                }
+            }
+        }
+
+        textbox = {
+            visible = "[InDebugMode]"
+            raw_text = "DEBUG_JOURNAL_ENTRY_ID"
+            autoresize = yes
+            align = nobaseline
+            using = fontsize_large
+            parentanchor = hcenter
+        }
+
+        ### CMF: TIMED MODIFIERS (FLEX)
+        flowcontainer = {
+            parentanchor = vcenter|right
+            margin = { 10 10 }
+            margin_right = 30
+            dynamicgridbox = {
+                flipdirection = yes
+                background = {
+                    using = fade_left_simple
+                    margin_right = 10
+                }
+                datamodel = "[JournalEntry.GetTimedModifiers]"
+                visible = "[Not(IsDataModelEmpty(JournalEntry.GetTimedModifiers))]"
+                datamodel_wrap = 5
+
+                item = {
+                    icon = {
+                        tooltip = "[TimedModifier.GetTooltip]"
+                        texture = "[TimedModifier.GetIcon]"
+                        size = { 35 35 }
+                    }
+                }
+            }
+        }
+    }
+}

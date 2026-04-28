@@ -14,6 +14,7 @@
 @social_class_width = 170
 
 types society_panel_overwrites {
+
     # This panel needs to be overwriten so custom social hieracies work
     # look for CUSTOM BLOCK START in this file to see the changes
     type society_panel = default_block_window {
@@ -180,8 +181,15 @@ types society_panel_overwrites {
                 }
             }
 
+            ## CUSTOM BLOCK START ##
             acceptance_group_with_law_status = {
-                visible = "[And(InformationPanel.IsTabSelected('classes'), GetPlayer.HasSpecialSocialHierarchy)]"
+                visible = "[And5(
+                    InformationPanel.IsTabSelected('classes'),
+                    Not(GetPlayer.HasSpecialSocialHierarchyLawGroup('lawgroup_caste_hegemony')),
+                    Not(GetPlayer.HasSpecialSocialHierarchyLawGroup('lawgroup_edo_social_system')),
+                    GetPlayer.HasSpecialSocialHierarchy,
+                    GetPlayer.MakeScope.Var('custom_social_hierarchy').IsSet
+                )]"
 
                 datacontext = "[AccessPlayer.GetSocialHierarchy]"
 
@@ -197,17 +205,74 @@ types society_panel_overwrites {
 
                 blockoverride "law_item"
                 {
-                    ## CUSTOM BLOCK START ##
                     law_item_small = {
-                        visible = "[And(GetPlayer.HasSpecialSocialHierarchy, GetPlayer.MakeScope.Var('custom_social_hierarchy').IsSet)]"
                         datacontext = "[GetPlayer.MakeScope.Var('custom_social_hierarchy').GetLaw.GetActiveGroupLaw]"
                     }
 
+                    textbox = {
+                        visible = "[Not(GetPlayer.HasSpecialSocialHierarchy)]"
+                        margin = { 10 10 }
+                        size = { 240 80 }
+                        multiline = yes
+                        align = nobaseline
+                        text = "DEFAULT_SOCIAL_HIERARCHY_EXTRA_DESC"
+                    }
+                }
+            }
+            ## CUSTOM BLOCK END ##
+
+            acceptance_group_with_law_status = {
+                visible = "[And(InformationPanel.IsTabSelected('classes'), GetPlayer.HasSpecialSocialHierarchyLawGroup('lawgroup_caste_hegemony'))]"
+
+                datacontext = "[AccessPlayer.GetSocialHierarchy]"
+
+                blockoverride "group_label"
+                {
+                    text = "[concept_social_hierarchy]"
+                }
+
+                blockoverride "group_name"
+                {
+                    raw_text = "[SocialHierarchy.GetName]"
+                }
+
+                blockoverride "law_item"
+                {
                     law_item_small = {
-                        visible = "[And(GetPlayer.HasSpecialSocialHierarchy, Not(GetPlayer.MakeScope.Var('custom_social_hierarchy').IsSet))]"
                         datacontext = "[AccessPlayer.AccessActiveLawFromGroup('lawgroup_caste_hegemony')]"
                     }
-                    ## CUSTOM BLOCK END ##
+
+                    textbox = {
+                        visible = "[Not(GetPlayer.HasSpecialSocialHierarchy)]"
+                        margin = { 10 10 }
+                        size = { 240 80 }
+                        multiline = yes
+                        align = nobaseline
+                        text = "DEFAULT_SOCIAL_HIERARCHY_EXTRA_DESC"
+                    }
+                }
+            }
+
+            acceptance_group_with_law_status = {
+                visible = "[And(InformationPanel.IsTabSelected('classes'), GetPlayer.HasSpecialSocialHierarchyLawGroup('lawgroup_edo_social_system'))]"
+
+                datacontext = "[AccessPlayer.GetSocialHierarchy]"
+
+                blockoverride "group_label"
+                {
+                    text = "[concept_social_hierarchy]"
+                }
+
+                blockoverride "group_name"
+                {
+                    raw_text = "[SocialHierarchy.GetName]"
+                }
+
+                blockoverride "law_item"
+                {
+                    law_item_small = {
+                        datacontext = "[AccessPlayer.AccessActiveLawFromGroup('lawgroup_edo_social_system')]"
+                    }
 
                     textbox = {
                         visible = "[Not(GetPlayer.HasSpecialSocialHierarchy)]"
@@ -568,8 +633,13 @@ types society_panel_overwrites {
                     visible = "[InformationPanel.IsTabSelected('cultures')]"
                     using = society_panel_tab_contents_properties
 
+                    state = {
+                        name = _show
+                        on_start = "[SocietyPanel.GetMapModeList.SelectByKey('mm_culture_overview')]"
+                    }
+
                     culture_or_religion_list_dynamicgridbox = {
-                        name = "cultures"
+                        name  = "cultures"
 
                         blockoverride "cr_list_datamodel"
                         {
@@ -628,8 +698,13 @@ types society_panel_overwrites {
                     visible = "[InformationPanel.IsTabSelected('religions')]"
                     using = society_panel_tab_contents_properties
 
+                    state = {
+                        name = _show
+                        on_start = "[SocietyPanel.GetMapModeList.SelectByKey('mm_religion_overview')]"
+                    }
+
                     culture_or_religion_list_dynamicgridbox = {
-                        name = "religions"
+                        name  = "religions"
 
                         blockoverride "cr_list_datamodel"
                         {

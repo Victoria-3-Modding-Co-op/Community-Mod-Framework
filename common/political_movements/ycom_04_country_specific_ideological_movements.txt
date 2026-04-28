@@ -1335,7 +1335,7 @@ REPLACE:movement_carlist = {
 			has_variable = monarchy_stamped_out_var
 		}
 		capital = {
-			is_in_geographic_region = geographic_region_iberia
+			is_in_geographic_region = geographic_region_iberia_old
 		}
 	}
 	creation_weight = {
@@ -1358,7 +1358,7 @@ REPLACE:movement_carlist = {
 		has_variable = monarchy_stamped_out_var
 			NOT = {
 				capital = {
-					is_in_geographic_region = geographic_region_iberia
+					is_in_geographic_region = geographic_region_iberia_old
 				}
 			}
 		}
@@ -1631,7 +1631,7 @@ REPLACE:movement_miguelist = {
 			has_variable = monarchy_stamped_out_var
 		}
 		capital = {
-			is_in_geographic_region = geographic_region_iberia
+			is_in_geographic_region = geographic_region_iberia_old
 		}
 	}
 	creation_weight = {
@@ -1654,7 +1654,7 @@ REPLACE:movement_miguelist = {
 		has_variable = monarchy_stamped_out_var
 			NOT = {
 				capital = {
-					is_in_geographic_region = geographic_region_iberia
+					is_in_geographic_region = geographic_region_iberia_old
 				}
 			}
 		}

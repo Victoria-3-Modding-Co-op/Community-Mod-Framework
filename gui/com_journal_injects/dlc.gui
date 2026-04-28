@@ -1,0 +1,74 @@
+# COPY-PASTED FOR NOW
+@panel_width_minus_30 = 510
+@panel_width_minus_20 = 520
+@panel_width_minus_10 = 530            # used to be 450
+@panel_width = 540                # used to be 460
+@panel_width_half = 270                # used to be 230
+@panel_width_plus_10 = 550        # used to be 470
+@panel_width_plus_14 = 554            # used to be 474
+@panel_width_plus_14_half = 277        # used to be 237
+@panel_width_plus_20 = 560            # used to be 480
+@panel_width_plus_30 = 570            # used to be 490
+@panel_width_plus_70 = 610            # used to be 530
+
+@COM_panel_width_plus_20_half = @[ panel_width_plus_20 / 2 ]
+
+types journal_entry_injects {
+	
+	type com_journal_entry_dlc_icon = flowcontainer {
+		name = com_journal_entry_dlc_icon
+		using = default_list_position
+		margin_top = 10
+		margin_bottom = 10
+		visible = "[JournalEntry.MakeScope.Var('com_dlc').IsSet]"
+
+		divider_clean = {
+			visible = "[JournalEntry.MakeScope.Var('com_dlc').IsSet]"
+		}
+
+		flowcontainer = {
+			background = {
+				using = fade_right_simple
+				margin_left = 10
+			}
+			max_width = @panel_width_plus_14
+			min_width = @panel_width_plus_14
+			datamodel = "[GetDlcCollection]"
+			margin = { 10 5 }
+			margin_left = 30
+
+			item = {
+				flowcontainer = {
+					spacing = 10
+					visible = "[EqualTo_string(Dlc.GetName, JournalEntry.MakeScope.Var('com_dlc').GetFlagName)]"
+					tooltip = "[Dlc.GetName]"
+
+					flowcontainer = {
+						margin_top = 5
+						margin_bottom = 0
+
+						icon = {
+							size = { 40 40 }
+							texture = "gfx/interface/backgrounds/round_frame_dec.dds"
+
+							icon = {
+								size = { 40 40 }
+								position = { 3 -3 }
+								texture = "[Dlc.GetIcon]"
+								parentanchor = center
+							}
+						}
+					}
+
+					textbox = {
+						margin_top = 10
+						minimumsize = { -1 35 }
+						text = "[Dlc.GetName]"
+						#align = vcenter
+					}
+				}
+			}
+		}
+	}
+	
+}

@@ -27,7 +27,11 @@ A full list of them can be found below.
 ## Setting up a new situation
 There are three types of situations: two-sided, one-sided, and no-sided. They are broadly the same, and it is possible to change between the formats dynamically.
 
-All situations can have two main sides, plus a third "neutral" side. These can be set up at the start or later through effects, and there are futher effects to modify sides.
+The first thing a Situation needs is a set-up of the corresponding GUI elements.
+Since version 1.13 of Victoria 3 custom GUI elements can (and need to) be injected into journal entries.
+
+
+All situations can have two main sides, plus a third "neutral" side. These can be set up at the start or later through effects, and there are further effects to modify sides.
 The main sides each have a name, description and a leader country.
 
 - The whole situation itself is identified by its id

@@ -1,0 +1,16 @@
+# General
+com_journal_entry_dlc_icon = {}
+com_journal_entry_header = {} # custom_widget_container_je_icon
+com_journal_entry_progress_bars = {} # com_custom_widget_container_scripted_progress_bars
+
+# Characters
+com_journal_entry_characters = {}
+com_style_two_characters = {}
+
+# Situation Elements
+com_situation_header_versus = {}
+com_situation_header_single = {}
+com_situation_header_no_side = {}
+com_situation_header_text = {}
+com_situation_victory_conditions = {}
+com_situation_faction_list = {}

@@ -390,7 +390,7 @@ types building_browser_panel_types {
 
 			icon = {
 				parentanchor = right
-				size = { 1340 244 }
+				size = { 204 80 }
 
 				texture = "[BuildingBrowserBuildingTypeItem.GetBuildingType.GetBackground]"
 				alpha = 0.3

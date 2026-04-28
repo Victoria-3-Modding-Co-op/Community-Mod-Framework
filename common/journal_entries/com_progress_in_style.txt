@@ -12,6 +12,12 @@
 
 	scripted_progress_bar = spb_com_progress_in_style
 
+	widget = {
+		gui = "gui/com_journal_injects/injects.gui"
+		name = "com_journal_entry_progress_bars"
+		container = "com_custom_widget_container_scripted_progress_bars"
+	}
+
 	immediate = {
 		# Styled progressbars MUST be set up in the journal entry, as they require scope:journal_entry
 		# These style effects only work with scripted progress bars
@@ -120,5 +126,5 @@
 	can_revolution_inherit = yes
 
 	weight = 200
-	should_be_pinned_by_default = yes
+	should_be_pinned_by_default_uninvolved_or_context = no
 }

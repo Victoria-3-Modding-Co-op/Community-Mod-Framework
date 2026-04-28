@@ -1143,6 +1143,12 @@ REPLACE:movement_cultural_minority = {
 				desc = "je_matter_of_hungary"
 			}
 		}
+
+        #usfp
+        multiply = {
+            value = usfp_cultural_mexican_movement_attraction_mult
+            desc = "usfp_je_mexican_occupation"
+        }
 		
 		if = {
 			limit = {
@@ -1458,6 +1464,12 @@ REPLACE:movement_cultural_minority = {
 			value = mog_plp_movement_cultural_minority_additional_radicalism_factor_add
 			desc = "INSTITUTION_FUNDING_LEVEL_colonial_affairs"                                # Desc only shows when value =/= 0
 		}
+
+        #USFP
+        add = {
+            value = usfp_mexican_movement_radicalism_factor_add
+            desc = "concept_civil_war"
+        }
 	}
 }
 

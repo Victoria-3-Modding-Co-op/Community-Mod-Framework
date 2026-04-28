@@ -159,6 +159,7 @@ types com_sidebar_overwrite {
 
                 ### POWER BLOC
 
+
                 #two different buttons for two different onclicks
                 sidebar_label_button = {
                     name = "power_bloc_member"
@@ -442,7 +443,7 @@ types com_sidebar_overwrite {
                     enabled = "[GetMetaPlayer.GetPlayedOrObservedCountry.IsValid]"
                     position = { -100 @diplomatic_position }
                     blockoverride "onclick" {
-                        onclick = "[InformationPanelBar.OpenPanelCycleTabs('diplomatic_overview', 'default|subjects|release_subject|country_browser')]"
+                        onclick = "[InformationPanelBar.OpenPanelCycleTabs('diplomatic_overview', 'default|subjects|release_subject|nation_formation|country_browser')]"
                         input_action = "open_diplomatic"
                     }
                 }
@@ -467,7 +468,7 @@ types com_sidebar_overwrite {
                         blockoverride "button_selected" {
                             visible = "[InformationPanelBar.IsPanelOpen('diplomatic_overview')]"
                         }
-                        onclick = "[InformationPanelBar.OpenPanelCycleTabs('diplomatic_overview', 'default|subjects|release_subject|country_browser')]"
+                        onclick = "[InformationPanelBar.OpenPanelCycleTabs('diplomatic_overview', 'default|subjects|release_subject|nation_formation|country_browser')]"
                     }
                 }
                 sidebar_tooltip_area_small = {

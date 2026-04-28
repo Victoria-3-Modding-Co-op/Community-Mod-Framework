@@ -1278,7 +1278,7 @@ liberal_party = {
 		if = {
 			limit = {
 				leader ?= {
-						has_template = usa_robert_rantoul_character_template # Northern Democrat
+						has_template = USA_robert_rantoul # Northern Democrat
 				}
 			}
 			add = {

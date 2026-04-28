@@ -2,7 +2,8 @@
 	effect = {
 		if = {
 			limit = {
-				owner = {
+				owner = { # Assigning a regent should never fire this on_action
+					has_gov_regency = no
 					NOT = {
 						has_variable = com_no_regencies # CMF Addition to block the 1.12 Regencies
 					}
@@ -36,6 +37,7 @@
 					}
 					age < define:NCharacters|ADULT_AGE
 					NOT = { has_variable = regency_complete }
+					NOT = { has_template = JAP_iemochi_tokugawa } # Has his own event
 				}
 				owner = {
 					trigger_event = {
@@ -68,23 +70,6 @@
 					}
 				}
 			}
-			if = { # Override to make the ruler of British India always an Industrialist
-				limit = {
-					is_ruler = yes
-					c:BIC ?= owner
-					NOT = {
-						is_interest_group_type = ig_industrialists
-					}
-				}
-				owner = {
-					ig:ig_industrialists ?= {
-						leader = {
-							set_character_as_ruler = yes
-						}
-					}
-					generate_new_eic_government_leader = yes
-				}
-			}
 			if = {
 				limit = {
 					owner = {
@@ -108,7 +93,7 @@
 			### Monarchial succession - add all successions here.
 			if = {
 				limit = {
-					is_ruler = yes
+					is_ruler_of_own_country = yes
 					owner ?= {
 						has_law = law_type:law_monarchy
 					}
@@ -212,6 +197,29 @@
 					}
 					character_morocco_ruler_succession_chain_effect = yes
 				}
+				if = {
+					limit = {
+						owner ?= {
+							c:JAP ?= this
+						}
+					}
+					character_japan_ruler_succession_chain_effect = yes
+					if = { # Sitting Emperors don't need this trait
+						limit = {
+							has_trait = special_character_japanese_emperor
+						}
+						remove_trait = special_character_japanese_emperor
+					}
+					if = { # Marks the Shogun as the Shogun
+						limit = {
+							owner = {
+								has_gov_regency = no
+								has_law = law_type:law_bakufu
+							}
+						}
+						set_variable = shogun_var
+					}
+				}
 			}
 			
 			if = { # For handling the Succession Rights treaty article in the case of ruler death
@@ -241,7 +249,7 @@
 						if = {
 							limit = {
 								is_character_alive = yes
-								NOT = { c:POR ?= THIS.ruler }
+								NOT = { c:POR.ruler ?= this  }
 							}
 							kill_character = { hidden = yes }
 						}

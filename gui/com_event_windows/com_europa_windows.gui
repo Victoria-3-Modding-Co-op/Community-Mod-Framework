@@ -23,12 +23,8 @@
 types com_europa_window_types {
 	
 	### EUROPA CLASSIC
-	type event_window_europa_classic = event_window {
+	type event_window_europa_classic = event_window_com_base {
 		name = "event_window_europa_classic"
-		
-		blockoverride "event_debug_header" {
-			event_debug_deer = {}
-		}
 		
 		blockoverride "event_content" {
 			### SETTING SIZE OF WINDOW
@@ -226,12 +222,8 @@ types com_europa_window_types {
 	}
 	
 	### EUROPA 1 CHARACTER WINDOW
-	type event_window_europa_1_char = event_window {
+	type event_window_europa_1_char = event_window_com_base {
 		name = "event_window_europa_1_char"
-		
-		blockoverride "event_debug_header" {
-			event_debug_deer = {}
-		}
 		
 		blockoverride "event_content" {
 			### SETTING SIZE OF WINDOW
@@ -458,12 +450,8 @@ types com_europa_window_types {
 	}
 	
 	### EUROPA 1 CHARACTER PORTRAIT WINDOW
-	type event_window_europa_1_char_portrait = event_window {
+	type event_window_europa_1_char_portrait = event_window_com_base {
 		name = "event_window_europa_1_char_portrait"
-		
-		blockoverride "event_debug_header" {
-			event_debug_deer = {}
-		}
 		
 		blockoverride "event_content" {
 			### SETTING SIZE OF WINDOW
@@ -558,7 +546,7 @@ types com_europa_window_types {
 								position = { 0 115 }
 								
 								textbox = {
-									raw_text = "[Character.GetPrimaryRoleName] in [Character.GetHomeCountry.GetNameNoFlag]"
+									raw_text = "[Character.GetPrimaryRoleTitle] in [Character.GetHomeCountry.GetNameNoFlag]"
 									parentanchor = center
 									position = { 0 -2 }
 									autoresize = yes
@@ -718,12 +706,8 @@ types com_europa_window_types {
 	}
 	
 	### EUROPA 2 CHARACTER WINDOW
-	type event_window_europa_2_char = event_window {
+	type event_window_europa_2_char = event_window_com_base {
 		name = "event_window_europa_2_char"
-		
-		blockoverride "event_debug_header" {
-			event_debug_deer = {}
-		}
 		
 		blockoverride "event_content" {
 			### SETTING SIZE OF WINDOW

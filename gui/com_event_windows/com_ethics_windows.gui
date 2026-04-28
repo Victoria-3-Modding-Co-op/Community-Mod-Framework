@@ -132,7 +132,7 @@ types com_window_types {
 
                         icon = {
                             size = { 40 40 }
-                            texture = "gfx/interface/backgrounds/round_frame_dec.dds"
+                            #texture = "gfx/interface/backgrounds/round_frame_dec.dds"
                             parentanchor = bottom|left
 
                             icon = {

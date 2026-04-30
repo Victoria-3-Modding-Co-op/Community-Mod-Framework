@@ -1,6 +1,3 @@
 ﻿l_korean:
- #trigger_com_floatarray_check_size: "The array is $COMPARATOR$ size $value$"
- #trigger_com_floatarray_check_size_not: "The array is not $COMPARATOR$ size $NUM$"
-
- com_floatarray_set_index: "Set array index variable to [TopScope.GetLocalVariable('com_fa_local_index').GetValue|v0]"
- com_floatarray_set_value: "Set array value variable to [TopScope.GetLocalVariable('com_fa_local_index').GetValue|v0]"
+ com_floatarray_set_index: "배열 인덱스 변수를 [TopScope.GetLocalVariable('com_fa_local_index').GetValue|v0]로 설정"
+ com_floatarray_set_value: "배열 값 변수를 [TopScope.GetLocalVariable('com_fa_local_index').GetValue|v0]로 설정"

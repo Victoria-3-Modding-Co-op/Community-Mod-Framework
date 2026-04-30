@@ -1,13 +1,7 @@
 ﻿l_korean:
-  # Scripted gui used by button
-  gui_sidebar_example_button: "gui_sidebar_example_button"
-  # Name of the button that is shown in the hover popout
-  gui_sidebar_example_button_desc: "Example"
-  # Tooltip shown when hovering over the button
-  gui_sidebar_example_button_tooltip: "When clicking this button nothing happens"
-  # Example Opinion Loc Key
-  gui_character_opinion_example: "Example Opinion"
-
-  com_gui_total_building: "[Building.GetName] size:"
-
-  com_no_sandbox_warning: "@red_cross! $SANDBOX$ is not allowed when an Objective is selected"
+ gui_sidebar_example_button: "gui_sidebar_example_button"
+ gui_sidebar_example_button_desc: "예시"
+ gui_sidebar_example_button_tooltip: "이 버튼을 클릭해도 아무 일도 일어나지 않습니다"
+ gui_character_opinion_example: "예시 의견"
+ com_gui_total_building: "[Building.GetName] 규모:"
+ com_no_sandbox_warning: "@red_cross! 목표가 선택된 상태에서는 $SANDBOX$를 사용할 수 없습니다"

@@ -1,6 +1,4 @@
 ﻿l_korean:
-# Character Portrait Environments
-# Created from: game/gfx/portraits/environments/portrait_environments.txt
  com_environment_standard: "environment_standard"
  com_environment_characters_portrait: "characters_portrait_environment"
  com_environment_characters_portrait_right: "characters_portrait_environment_right"
@@ -17,8 +15,6 @@
  com_environment_general_02: "general_environment_02"
  com_environment_pop: "pop_environment"
  com_environment_pop_small: "small_pop_environment"
-# Character Portrait Cameras
-# Created from: game/gfx/portraits/cameras/portrait_cameras.txt
  com_camera_event_standard: "camera_event_standard"
  com_camera_event_left: "camera_event_left"
  com_camera_event_right: "camera_event_right"
@@ -37,8 +33,6 @@
  com_camera_main_menu_secondary: "camera_main_menu_secondary"
  com_camera_main_menu_main: "camera_main_menu_main"
  com_camera_main_menu_heir: "camera_main_menu_heir"
-# Character Portrait Animations
-# Created from: game/gfx/portraits/portrait_animations/animations.txt
  com_animation_idle: "idle"
  com_animation_commander_vs_left: "commander_vs_left"
  com_animation_commander_vs_right: "commander_vs_right"

@@ -724,6 +724,7 @@ liberal_party = {
 						has_ideology = ideology:ideology_market_liberal
 					}
 					has_ideology = ideology:ideology_laissez_faire
+					has_ideology = ideology:ideology_interventionist
 				}
 			}
 			add = {
@@ -753,6 +754,7 @@ liberal_party = {
 						has_ideology = ideology:ideology_market_liberal
 					}
 					has_ideology = ideology:ideology_laissez_faire
+					has_ideology = ideology:ideology_interventionist
 				}
 			}
 			add = {
@@ -1015,6 +1017,7 @@ liberal_party = {
 					has_ideology = ideology:ideology_egalitarian_modern
 					has_ideology = ideology:ideology_anti_slavery
 					has_ideology = ideology:ideology_laissez_faire
+					has_ideology = ideology:ideology_interventionist
 					has_ideology = ideology:ideology_particularist
 					leader ?= {
 						OR = {

@@ -375,7 +375,7 @@ conservative_party = {
 				trigger = {
 					exists = c:CHI
 					c:CHI ?= THIS
-					has_law_or_variant = law_type:law_monarchy
+					has_law = law_type:law_monarchy
 				}
 			}
 			triggered_desc = {
@@ -615,7 +615,7 @@ conservative_party = {
 			limit = {
 				OR = {
 					has_paternalist_ideology = yes
-					has_ideology = ideology:ideology_hierarchic
+                    has_hierarchic_ideology = yes
 					has_ideology = ideology:ideology_patriarchal
 					has_ideology = ideology:ideology_moralist
 					has_ideology = ideology:ideology_corporatist
@@ -758,7 +758,7 @@ conservative_party = {
 			limit = {
 				OR = {
 					has_ideology = ideology:ideology_plutocratic
-					has_ideology = ideology:ideology_hierarchic
+                    has_hierarchic_ideology = yes
 
 					# ANZFP
 					trigger_if = {
@@ -993,8 +993,9 @@ conservative_party = {
 		if = { # landowners and industrialists hate labor rights
 			limit = {
 				OR = {
-					has_ideology = ideology:ideology_hierarchic
+					has_hierarchic_ideology = yes
 					has_ideology = ideology:ideology_laissez_faire
+                    has_ideology = ideology:ideology_interventionist
 
 					# ANZFP
 					trigger_if = {
@@ -1022,7 +1023,7 @@ conservative_party = {
 		if = { # conservatives hate welfare
 			limit = {
 				OR = {
-					has_ideology = ideology:ideology_hierarchic
+					has_hierarchic_ideology = yes
 					has_ideology = ideology:ideology_individualist
 
 					# ANZFP
@@ -1311,7 +1312,7 @@ conservative_party = {
 				}
 				owner = {
 					c:FRA ?= this
-					has_law_or_variant = law_type:law_monarchy
+					has_law = law_type:law_monarchy
 				}
 			}
 			add = {

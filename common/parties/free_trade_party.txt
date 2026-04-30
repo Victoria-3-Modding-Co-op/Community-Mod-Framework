@@ -339,8 +339,9 @@ free_trade_party = {
 		if = { # landowners and industrialists hate labor rights
 			limit = {
 				OR = {
-					has_ideology = ideology:ideology_hierarchic
+					has_hierarchic_ideology = yes
 					has_ideology = ideology:ideology_laissez_faire
+					has_ideology = ideology:ideology_interventionist
 				}
 				owner = {
 					OR = { #Vanilla Bugfix
@@ -357,7 +358,7 @@ free_trade_party = {
 		if = { # conservatives hate welfare
 			limit = {
 				OR = {
-					has_ideology = ideology:ideology_hierarchic
+                    has_hierarchic_ideology = yes
 					has_ideology = ideology:ideology_individualist
 				}
 				owner = {
@@ -382,6 +383,7 @@ free_trade_party = {
 						has_ideology = ideology:ideology_market_liberal
 					}
 					has_ideology = ideology:ideology_laissez_faire
+					has_ideology = ideology:ideology_interventionist
 				}
 			}
 			add = {
@@ -537,7 +539,7 @@ free_trade_party = {
 					has_ideology = ideology:ideology_plutocratic
 					has_ideology = ideology:ideology_meritocratic
 					has_ideology = ideology:ideology_cartist
-					has_ideology = ideology:ideology_hierarchic
+                    has_hierarchic_ideology = yes
 				}
 				
 				# ANZFP
@@ -565,7 +567,7 @@ free_trade_party = {
 				}
 				OR = {
 					has_ideology = ideology:ideology_agrarian
-					has_ideology = ideology:ideology_hierarchic
+                    has_hierarchic_ideology = yes
 				}
 
 				# ANZFP
@@ -597,6 +599,7 @@ free_trade_party = {
 					ig_has_carlist_ideology = yes
 					has_ideology = ideology:ideology_moderantist
 					has_ideology = ideology:ideology_laissez_faire
+					has_ideology = ideology:ideology_interventionist
 					has_ideology = ideology:ideology_agrarian
 				
 					# ANZFP

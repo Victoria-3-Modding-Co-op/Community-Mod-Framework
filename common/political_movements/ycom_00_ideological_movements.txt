@@ -50,6 +50,11 @@
 				is_interest_group_type = ig_intelligentsia
 				is_interest_group_type = ig_trade_unions
 			}
+            #USFP: Feminism was anti-slavery
+            AND = {
+                is_usfp_active = yes
+                has_ideology = ideology:ideology_feminist
+            }
 		}
 	}
 	character_support_weight = {
@@ -1146,6 +1151,7 @@ REPLACE:movement_royalist_absolutist = {
 					is_political_movement_type = movement_miguelist
 				}
 			}
+			has_law = law_type:law_bakufu
 		}
 	}
 	on_disbanded = {
@@ -1186,6 +1192,13 @@ REPLACE:movement_royalist_absolutist = {
 			}
 		}
 		NOT = { c:FRA ?= this }
+		NOR = {
+			has_law = law_type:law_bakufu
+			AND = {
+				c:JAP ?= this
+				NOT = { has_variable = japan_restoration_complete }
+			}
+		}
 	}
 	creation_weight = {
 		value = 100
@@ -1596,6 +1609,10 @@ REPLACE:movement_royalist_constitutional = {
 			}
 		}
 		NOT = { c:FRA ?= this }
+		NAND = {
+			c:JAP ?= this
+			NOT = { has_variable = japan_restoration_complete }
+		}
 	}
 	creation_weight = {
 		value = 100
@@ -4710,6 +4727,16 @@ REPLACE:movement_liberal = {
 				value = 2
 			}
 		}
+        if = {
+            limit = {
+                c:JAP ?= this
+                has_law = law_type:law_bakufu
+                country_has_pending_meiji_restoration = yes
+            }
+            multiply = {
+                value = 0.01
+            }
+        }
 	}
 	on_created = {
 		add_movement_enthusiasm_modifier = yes
@@ -5148,6 +5175,14 @@ REPLACE:movement_radical = {
 					is_political_movement_type = movement_italian_national
 				}
 			}
+			AND = {
+				c:JAP ?= this
+				has_law = law_type:law_bakufu
+				country_has_pending_meiji_restoration = yes
+				any_political_movement = {
+					is_political_movement_type = movement_meiji_restorationist
+				}
+			}
 		}
 	}
 	creation_weight = {
@@ -5542,7 +5577,7 @@ REPLACE:movement_radical = {
 					}
 				}
 				add = {
-					value = 0.20
+					value = 0.15
 					desc = "NO_UNIVERSAL_SUFFRAGE"
 				}
 			}
@@ -6566,7 +6601,7 @@ REPLACE:movement_land_reform = {
 							any_interest_group = {
 								is_in_government = yes
 								law_stance = {
-									law = law_type:law_homesteading
+									law = law_type:law_peasant_proprietorship
 									value > neutral
 								}
 							}
@@ -7319,7 +7354,18 @@ REPLACE:movement_modernizer = { # This movement loves you and wants you to succe
 			ig_counts_as_marginal = no
 		}
 		country_has_laws_in_need_of_critical_modernization = yes
-		NOR = {
+        NAND = {
+            c:JAP ?= this
+            NOR = {
+                has_variable = monarchy_stamped_out_var
+                has_variable = japan_restoration_complete
+            }
+        }
+        NAND = {
+            c:BIC ?= this
+            is_involved_in_journal_entry = je_uneasy_raj
+        }
+        NOR = {
 			country_has_primary_culture = cu:australian #anzfp
 			anz_country_is_pakeha = yes #anzfp
 		}
@@ -7362,7 +7408,16 @@ REPLACE:movement_modernizer = { # This movement loves you and wants you to succe
 	}
 	
 	disband_trigger = {
+		OR = {
 		country_has_laws_in_need_of_modernization = no # The crisis is past
+			AND = { # Just in case
+				c:JAP ?= this
+				NOR = {
+					has_variable = monarchy_stamped_out_var
+					has_variable = japan_restoration_complete
+				}
+			}
+		}
 	}
 	
 	character_support_trigger = {
@@ -7642,6 +7697,12 @@ REPLACE:movement_modernizer = { # This movement loves you and wants you to succe
 			}
 		}
 		
+		multiply = { # Minority pops are substantially less likely to help modernise a horrific ethnostate
+			value = 0.011
+			multiply = pop_acceptance
+			desc = "ACCEPTANCE"
+		}
+
 		multiply = { # Illiterate pops participate at 1/10 the rate of fully literate pops
 			desc = "POP_LITERACY"
 			value = literacy_rate

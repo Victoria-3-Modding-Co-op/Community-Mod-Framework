@@ -2,213 +2,294 @@
 	effect = {
 		if = {
 			limit = {
-				owner = { # Assigning a regent should never fire this on_action
-					has_gov_regency = no
-					NOT = {
-						has_variable = com_no_regencies # CMF Addition to block the 1.12 Regencies
-					}
-				}
-			}
-			if = {
-				limit = {
-					owner = {
-						NOT = {
-							has_variable = hide_ruler_change_notification
-						}
-					}
-					age >= define:NCharacters|ADULT_AGE
-				}
-				post_notification = new_ruler
-			}
-			if = {
-				limit = {
-					owner = {
-						has_law_or_variant = law_type:law_theocracy
-					}
-					NOT = { religion = owner.religion }
-				}
-				change_character_religion = owner.religion
-			}
-			if = {
-				limit = {
-					owner = {
-						has_law = law_type:law_monarchy
-						has_gov_regency = no
-					}
-					age < define:NCharacters|ADULT_AGE
-					NOT = { has_variable = regency_complete }
-					NOT = { has_template = JAP_iemochi_tokugawa } # Has his own event
-				}
+				# CMF Addition to block regencies
 				owner = {
-					trigger_event = {
-						id = regency.1
-						popup = yes
-					}
-				}
-			}
-			if = {
-				limit = {
-					owner = {
-						c:PAN ?= this
-						has_journal_entry = je_sikh_sovereignty
-					}
-				}
-				if = {
-					limit = {
-						NOT = {
-							has_variable = sikh_maharaja_enthroned
-						}
-					}
-					owner = {
-						je:je_sikh_sovereignty = {
-							set_bar_progress = { value = 0 name = sikh_empire_progress_bar }
-						}
-					}
-					set_variable = sikh_maharaja_enthroned
-					owner = {
-						change_variable = { name = sikh_dead_maharajas_var add = 1 }
-					}
-				}
-			}
-			if = {
-				limit = {
-					owner = {
-						c:ZAN ?= this
-						any_primary_culture = {
-							cu:bedouin = this
-						}
-					}
-					culture = {
-						NOT = { cu:bedouin = this }
-					}
 					NOT = {
-						has_global_variable = decided_future_of_zanzibar
+						has_variable = com_no_regencies
 					}
-				}
-				owner = {
-					trigger_event = { id = zanzibar.6 popup = yes }
 				}
 			}
 			
-			### Monarchial succession - add all successions here.
+			#### VANILLA SCRIPT BEYOND THIS POINT
+			# Last updated for patch 1.13.3 on 30 APR 2026
 			if = {
 				limit = {
-					is_ruler_of_own_country = yes
-					owner ?= {
-						has_law = law_type:law_monarchy
+					owner = { # Assigning a regent should never fire this on_action
+						has_gov_regency = no
 					}
 				}
-				### Russian Monarchs
-				if = {
-					limit = {
-						owner ?= {
-							c:RUS ?= this
-						}
-					}
-					character_russia_ruler_succession_chain_effect = yes
-				}
-				### Swedish Monarchs
 				if = {
 					limit = {
 						owner = {
-							OR = {
-								c:SWE ?= this
-								was_formed_from = SWE
+							NOT = {
+								has_variable = hide_ruler_change_notification
 							}
 						}
+						is_adult = yes
 					}
-					character_sweden_ruler_succession_chain_effect = yes
+					post_notification = new_ruler
 				}
-				### Austrian Monarchs
 				if = {
 					limit = {
 						owner = {
-							OR = {
-								c:AUS ?= this
-								was_formed_from = AUS
-							}
+							has_law_or_variant = law_type:law_theocracy
 						}
+						NOT = { religion = owner.religion }
 					}
-					character_austria_ruler_succession_chain_effect = yes
-				}
-				### Serbian Monarchs
-				if = {
-					limit = {
-						owner ?= {
-							OR = {
-								c:SER ?= this
-								was_formed_from = SER
-							}
-						}
-					}
-					character_serbia_ruler_succession_chain_effect = yes
-				}
-				### Ottoman Monarchs
-				if = {
-					limit = {
-						owner ?= {
-							c:TUR ?= this
-						}
-					}
-					character_ottoman_ruler_succession_chain_effect = yes
-				}
-				### French Monarchs
-				if = {
-					limit = {
-						owner ?= {
-							c:FRA ?= this
-						}
-					}
-					character_france_ruler_succession_chain_effect = yes
-				}
-				### Spanish Monarchs
-				if = {
-					limit = {
-						owner ?= {
-							OR = {
-								c:SPA ?= this
-								was_formed_from = SPA
-							}
-						}
-					}
-					character_spain_ruler_succession_chain_effect = yes
-				}
-				### Portuguese Monarchs
-				if = {
-					limit = {
-						owner ?= {
-							OR = {
-								c:POR ?= this
-								was_formed_from = POR
-							}
-						}
-					}
-					character_portugal_ruler_succession_chain_effect = yes
-				}
-				### Morocco Monarchs
-				if = {
-					limit = {
-						owner ?= {
-							OR = {
-								c:MOR ?= this
-								was_formed_from = MOR
-							}
-						}
-					}
-					character_morocco_ruler_succession_chain_effect = yes
+					change_character_religion = owner.religion
 				}
 				if = {
 					limit = {
-						owner ?= {
-							c:JAP ?= this
+						owner = {
+							has_law = law_type:law_monarchy
+							has_gov_regency = no
+						}
+						is_adult = no
+						NOT = { has_variable = regency_complete }
+						NOT = { has_template = JAP_iemochi_tokugawa } # Has his own event
+					}
+					owner = {
+						trigger_event = {
+							id = regency.1
+							popup = yes
 						}
 					}
-					character_japan_ruler_succession_chain_effect = yes
-					if = { # Sitting Emperors don't need this trait
+				}
+				if = {
+					limit = {
+						owner = {
+							c:PAN ?= this
+							has_journal_entry = je_sikh_sovereignty
+						}
+					}
+					if = {
 						limit = {
-							has_trait = special_character_japanese_emperor
+							NOT = {
+								has_variable = sikh_maharaja_enthroned
+							}
 						}
-						remove_trait = special_character_japanese_emperor
+						owner = {
+							je:je_sikh_sovereignty = {
+								set_bar_progress = { value = 0 name = sikh_empire_progress_bar }
+							}
+						}
+						set_variable = sikh_maharaja_enthroned
+						owner = {
+							change_variable = { name = sikh_dead_maharajas_var add = 1 }
+						}
+					}
+				}
+				if = {
+					limit = {
+						owner = {
+							c:ZAN ?= this
+							any_primary_culture = {
+								cu:bedouin = this
+							}
+						}
+						culture = {
+							NOT = { cu:bedouin = this }
+						}
+						NOT = {
+							has_global_variable = decided_future_of_zanzibar
+						}
+					}
+					owner = {
+						trigger_event = { id = zanzibar.6 popup = yes }
+					}
+				}
+				
+				### Monarchial succession - add all successions here.
+				if = {
+					limit = {
+						is_ruler_of_own_country = yes
+						owner ?= {
+							country_has_monarchy_law = yes
+							country_has_non_monarchy_law = no # To handle an execution order issue
+						}
+					}
+					### Russian Monarchs
+					if = {
+						limit = {
+							owner ?= {
+								c:RUS ?= this
+							}
+						}
+						character_russia_ruler_succession_chain_effect = yes
+					}
+					### Swedish Monarchs
+					if = {
+						limit = {
+							owner = {
+								OR = {
+									c:SWE ?= this
+									was_formed_from = SWE
+								}
+							}
+						}
+						character_sweden_ruler_succession_chain_effect = yes
+					}
+					### Austrian Monarchs
+					if = {
+						limit = {
+							owner = {
+								OR = {
+									c:AUS ?= this
+									was_formed_from = AUS
+								}
+							}
+						}
+						character_austria_ruler_succession_chain_effect = yes
+					}
+					### Serbian Monarchs
+					if = {
+						limit = {
+							owner ?= {
+								OR = {
+									c:SER ?= this
+									was_formed_from = SER
+								}
+							}
+						}
+						character_serbia_ruler_succession_chain_effect = yes
+					}
+					### Ottoman Monarchs
+					if = {
+						limit = {
+							owner ?= {
+								c:TUR ?= this
+							}
+						}
+						character_ottoman_ruler_succession_chain_effect = yes
+					}
+					### French Monarchs
+					if = {
+						limit = {
+							owner ?= {
+								c:FRA ?= this
+							}
+						}
+						character_france_ruler_succession_chain_effect = yes
+					}
+					### Spanish Monarchs
+					if = {
+						limit = {
+							owner ?= {
+								OR = {
+									c:SPA ?= this
+									was_formed_from = SPA
+								}
+							}
+						}
+						character_spain_ruler_succession_chain_effect = yes
+					}
+					### Portuguese Monarchs
+					if = {
+						limit = {
+							owner ?= {
+								OR = {
+									c:POR ?= this
+									was_formed_from = POR
+								}
+							}
+						}
+						character_portugal_ruler_succession_chain_effect = yes
+					}
+					### Morocco Monarchs
+					if = {
+						limit = {
+							owner ?= {
+								OR = {
+									c:MOR ?= this
+									was_formed_from = MOR
+								}
+							}
+						}
+						character_morocco_ruler_succession_chain_effect = yes
+					}
+					if = {
+						limit = {
+							owner ?= {
+								c:JAP ?= this
+							}
+						}
+						character_japan_ruler_succession_chain_effect = yes
+					}
+				}
+				
+				if = { # For handling the Succession Rights treaty article in the case of ruler death
+					limit = {
+						exists = c:BRZ
+						exists = c:POR
+						owner = {
+							c:POR ?= this
+							NOT = {
+								has_diplomatic_pact = {
+									who = c:BRZ
+									type = personal_union
+								}
+							}
+							any_scope_treaty = {
+								binds = c:BRZ
+								any_scope_article = {
+									has_type = amend_succession
+									source_country = c:BRZ
+								}
+							}
+						}
+					}
+					save_temporary_scope_as = portuguese_monarch_scope
+					c:BRZ ?= {
+						heir ?= {
+							if = {
+								limit = {
+									is_character_alive = yes
+									NOT = { c:POR.ruler ?= this  }
+								}
+								kill_character = { hidden = yes }
+							}
+						}
+						set_heir = scope:portuguese_monarch_scope
+					}
+				}
+				
+				if = {
+					limit = {
+						c:JAP ?= owner
+					}
+					if = {
+						limit = {
+							has_variable = house_yamato
+						}
+						save_temporary_scope_as = emperor_to_be_scope
+						c:JAP ?= {
+							set_variable = { name = emperor_var value = scope:emperor_to_be_scope }
+						}
+						if = {
+							limit = {
+								NOT = {
+									has_trait = special_character_japanese_emperor
+								}
+							}
+							add_trait = special_character_japanese_emperor
+						}
+						if = {
+							limit = {
+								owner ?= {
+									has_law = law_type:law_bakufu # If a member of the Imperial Family somehow heads the Bakufu, end it instantly
+								}
+							}
+							owner ?= {
+								deactivate_law = law_type:law_bakufu
+								activate_law = law_type:law_oligarchy
+							}
+						}
+					}
+					if = { # Sitting Emperors don't need this role
+						limit = {
+							has_role = character_role_emperor_of_japan
+						}
+						remove_character_role = character_role_emperor_of_japan
 					}
 					if = { # Marks the Shogun as the Shogun
 						limit = {
@@ -222,40 +303,13 @@
 				}
 			}
 			
-			if = { # For handling the Succession Rights treaty article in the case of ruler death
+			if = { # Handles total years in power, not consecutive years. Mostly for Japan.
 				limit = {
-					exists = c:BRZ
-					exists = c:POR
-					owner = {
-						c:POR ?= this
-						NOT = {
-							has_diplomatic_pact = {
-								who = c:BRZ
-								type = personal_union
-							}
-						}
-						any_scope_treaty = {
-							binds = c:BRZ
-							any_scope_article = {
-								has_type = amend_succession
-								source_country = c:BRZ
-							}
-						}
+					NOT = {
+						has_variable = year_in_power
 					}
 				}
-				save_temporary_scope_as = portuguese_monarch_scope
-				c:BRZ ?= {
-					heir ?= {
-						if = {
-							limit = {
-								is_character_alive = yes
-								NOT = { c:POR.ruler ?= this  }
-							}
-							kill_character = { hidden = yes }
-						}
-					}
-					set_heir = scope:portuguese_monarch_scope
-				}
+				set_variable = { name = year_in_power value = 1 } # In case all else fails
 			}
 		}
 	}

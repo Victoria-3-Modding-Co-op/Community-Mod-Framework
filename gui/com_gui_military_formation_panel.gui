@@ -810,7 +810,7 @@ types military_formation_panel_types {
 
 										item = {
 											widget = {
-												alpha = "[TransparentIfFalse(Or(MobilizationOption.IsActivatedForSelected,IsValid(MobilizationOption.ToggleForSelected)))]" 
+												alpha = "[TransparentIfFalse(Or(MobilizationOption.IsActivatedForSelected,IsValid(MobilizationOption.ToggleForSelected)))]"
 												size = { 50 50 }
 
 												widget = {
@@ -826,18 +826,18 @@ types military_formation_panel_types {
 															using = default_button
 															size = { 100% 100% }
 															visible = "[ShouldAskConfirmation(MobilizationOption.ToggleForSelected)]"
-															
+
 															enabled = "[And(Not(MobilizationOption.IsActivatedForSelected), IsValid(MobilizationOption.ToggleForSelected))]"
 															onclick = "[PopupManager.AskConfirmation(MobilizationOption.ToggleForSelected)]"
 															tooltip = "ACTIVATE_MOBILIZATION_OPTION_FOR_SELECTED_BUTTON_TOOLTIP"
 														}
-														
+
 														# Activate button - no confirmation popup
 														button = {
 															using = default_button
 															size = { 100% 100% }
 															visible = "[Not(ShouldAskConfirmation(MobilizationOption.ToggleForSelected))]"
-															
+
 															enabled = "[And(Not(MobilizationOption.IsActivatedForSelected), IsValid(MobilizationOption.ToggleForSelected))]"
 															onclick = "[Execute(MobilizationOption.ToggleForSelected)]"
 															tooltip = "ACTIVATE_MOBILIZATION_OPTION_FOR_SELECTED_BUTTON_TOOLTIP"
@@ -848,13 +848,13 @@ types military_formation_panel_types {
 													widget = {
 														visible = "[MobilizationOption.IsActivatedForSelected]"
 														size = { 100% 100% }
-														
+
 														# Deactivate button - show confirmation popup
 														button = {
 															using = default_button
 															size = { 100% 100% }
 															visible = "[ShouldAskConfirmation(MobilizationOption.ToggleForSelected)]"
-															
+
 															enabled = "[And(MobilizationOption.IsActivatedForSelected, IsValid(MobilizationOption.ToggleForSelected))]"
 															onclick = "[PopupManager.AskConfirmation(MobilizationOption.ToggleForSelected)]"
 															tooltip = "DEACTIVATE_MOBILIZATION_OPTION_FOR_SELECTED_BUTTON_TOOLTIP"
@@ -865,7 +865,7 @@ types military_formation_panel_types {
 															using = default_button
 															size = { 100% 100% }
 															visible = "[Not(ShouldAskConfirmation(MobilizationOption.ToggleForSelected))]"
-															
+
 															enabled = "[And(MobilizationOption.IsActivatedForSelected, IsValid(MobilizationOption.ToggleForSelected))]"
 															onclick = "[Execute(MobilizationOption.ToggleForSelected)]"
 															tooltip = "DEACTIVATE_MOBILIZATION_OPTION_FOR_SELECTED_BUTTON_TOOLTIP"
@@ -1089,6 +1089,18 @@ types military_formation_panel_types {
 			}
 		}
 		
+		flowcontainer = {
+			datamodel = "[MilitaryFormation.GetActiveNavalBattles]"
+			visible = "[Not(IsDataModelEmpty( MilitaryFormation.GetActiveNavalBattles ))]"
+			spacing = 10
+			parentanchor = hcenter
+			direction = vertical
+
+			item = {
+				naval_battle_item = {}
+			}
+		}
+
 		### UNIT RECRUITMENT
 		default_header = {
 			visible = "[And(MilitaryFormation.GetCountry.IsLocalPlayer, MilitaryFormation.IsArmy)]"
@@ -1155,7 +1167,176 @@ types military_formation_panel_types {
 			}
 		}
 		
-		
+		### PILFERED GOODS
+		default_header = {
+			visible = "[MilitaryFormation.IsOnPiracyMission]"
+			using = default_fade_in_out
+
+			blockoverride "text" {
+				text = "FLEET_PILFERED_GOODS_HEADER"
+			}
+		}
+
+		fixedgridbox = {
+			visible = "[And( MilitaryFormation.IsOnPiracyMission, Not( IsDataModelEmpty( MilitaryFormation.GetPilferedGoods ) ) )]"
+			parentanchor = hcenter
+			datamodel = "[MilitaryFormation.GetPilferedGoods]"
+			flipdirection = yes
+			addcolumn = 105
+			addrow = 45
+			maxhorizontalslots = 5
+
+			item = {
+				button = {
+					size = { 100 40 }
+					using = default_button
+					onclick = "[InformationPanelBar.OpenGoodsPanel( MilitaryFormation.GetCountry.GetMarket.Self, Goods.Self )]"
+					onrightclick = "[RightClickMenuManager.ShowForGoods( Goods.AccessSelf )]"
+
+					tooltipwidget = {
+						FancyTooltip_Goods = {}
+					}
+
+					icon = {
+						size = { 34 34 }
+						parentanchor = left|vcenter
+						position = { 5 0 }
+						texture = "[Goods.GetTexture]"
+					}
+
+					textbox = {
+						size = { 60 40 }
+						parentanchor = right|vcenter
+						margin_right = 8
+						align = right|nobaseline
+						raw_text = "#bold [MilitaryFormation.GetPilferedGoodsAmount(Goods.Self)|v1]#!"
+					}
+				}
+			}
+		}
+
+		flowcontainer = {
+			visible = "[And( MilitaryFormation.IsOnPiracyMission, IsDataModelEmpty( MilitaryFormation.GetPilferedGoods ) )]"
+			parentanchor = hcenter
+			margin = { 0 5 }
+
+			textbox = {
+				text = "FLEET_NO_PILFERED_GOODS"
+				autoresize = yes
+				align = hcenter|nobaseline
+				alpha = 0.5
+			}
+		}
+
+		### TRANSPORTED ARMIES
+		default_header = {
+			visible = "[MilitaryFormation.IsFleet]"
+			using = default_fade_in_out
+
+			blockoverride "text" {
+				text = "FLEET_TRANSPORTED_ARMIES_HEADER"
+			}
+		}
+
+		flowcontainer = {
+			visible = "[And( MilitaryFormation.IsFleet, IsDataModelEmpty( MilitaryFormation.GetTransportedFormations ) )]"
+			parentanchor = hcenter
+			margin = { 0 5 }
+
+			textbox = {
+				text = "FLEET_NO_TRANSPORTED_ARMIES"
+				autoresize = yes
+				align = hcenter|nobaseline
+				alpha = 0.5
+			}
+		}
+
+		flowcontainer = {
+			visible = "[And( MilitaryFormation.IsFleet, Not( IsDataModelEmpty( MilitaryFormation.GetTransportedFormations ) ) )]"
+			parentanchor = hcenter
+			direction = vertical
+
+			flowcontainer = {
+				sort_button = {
+					size = { 250 30 }
+					text = "concept_army"
+					align = left|nobaseline
+					onclick = "[MilitaryFormation.SortTransportedFormations('name')]"
+				}
+				sort_button = {
+					size = { 290 30 }
+					text = "FLEET_SORT_UNITS"
+					align = left|nobaseline
+					onclick = "[MilitaryFormation.SortTransportedFormations('units')]"
+				}
+			}
+
+			flowcontainer = {
+				parentanchor = hcenter
+				direction = vertical
+				datamodel = "[MilitaryFormation.GetTransportedFormations]"
+
+				item = {
+					fleet_formation_entry = {}
+				}
+			}
+		}
+
+		### EMBARKED ARMIES
+		default_header = {
+			visible = "[MilitaryFormation.IsFleet]"
+			using = default_fade_in_out
+
+			blockoverride "text" {
+				text = "FLEET_EMBARKED_ARMIES_HEADER"
+			}
+		}
+
+		flowcontainer = {
+			visible = "[And( MilitaryFormation.IsFleet, IsDataModelEmpty( MilitaryFormation.GetAttachedFormations ) )]"
+			parentanchor = hcenter
+			margin = { 0 5 }
+
+			textbox = {
+				text = "FLEET_NO_EMBARKED_ARMIES"
+				autoresize = yes
+				align = hcenter|nobaseline
+				alpha = 0.5
+			}
+		}
+
+		flowcontainer = {
+			visible = "[And( MilitaryFormation.IsFleet, Not( IsDataModelEmpty( MilitaryFormation.GetAttachedFormations ) ) )]"
+			parentanchor = hcenter
+			direction = vertical
+
+			flowcontainer = {
+				sort_button = {
+					size = { 250 30 }
+					text = "concept_army"
+					align = left|nobaseline
+					onclick = "[MilitaryFormation.SortAttachedFormations('name')]"
+				}
+				sort_button = {
+					size = { 290 30 }
+					text = "FLEET_SORT_UNITS"
+					align = left|nobaseline
+					onclick = "[MilitaryFormation.SortAttachedFormations('units')]"
+				}
+			}
+
+			flowcontainer = {
+				parentanchor = hcenter
+				direction = vertical
+				datamodel = "[MilitaryFormation.GetAttachedFormations]"
+
+				item = {
+					fleet_formation_entry = {}
+				}
+			}
+		}
+
+
 		### UNIT DETAILS
 		default_header = {
 			visible = "[MilitaryFormation.IsArmy]"
@@ -1197,7 +1378,6 @@ types military_formation_panel_types {
 			}
 			
 			textbox = {
-				visible = "[Not(MilitaryFormation.GetCountry.IsPlayer)]"
 				text = "[MilitaryFormation.GetAIDebugInfo]"
 				maximumsize = { @panel_width -1 }
 				max_width = @panel_width_minus_10

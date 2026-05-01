@@ -128,8 +128,7 @@ types event_window_types {
 					### EVENT IMAGE / CONTENT
 					widget = {
 						position = { 3 3 }
-						size = { 850 600 }
-						
+						size = { 100% 100% }
 						block "event_content" {
 							
 							# image in case we have no video?

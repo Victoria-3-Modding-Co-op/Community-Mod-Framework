@@ -54,7 +54,13 @@ types goods_state_panel {
 			}
 
 			icon = {
-				visible = "[Not(GoodsPanelValue.HasBuildingInfo)]"
+				visible = "[GoodsPanelValue.IsPiracy]"
+				texture = "gfx/interface/icons/commander_order_icons/piracy_privateering.dds"
+				size = { 25 25 }
+			}
+
+			icon = {
+				visible = "[And(Not(GoodsPanelValue.HasBuildingInfo),Not(GoodsPanelValue.IsPiracy))]"
 				texture = "gfx/interface/icons/generic_icons/population.dds"
 				size = { 25 25 }
 			}
@@ -100,7 +106,7 @@ types goods_state_panel {
 		}
 
 		flowcontainer = {
-			visible = "[Not(GoodsPanelValue.HasBuildingInfo)]"
+			visible = "[And(GoodsPanelValue.ShowChildValues,Not(GoodsPanelValue.HasBuildingInfo))]"
 			position = { 0 35 }
 			margin_left = 10
 			spacing = 5
@@ -155,7 +161,7 @@ types goods_state_panel {
 					tooltip = "[Building.GetDownsizeTooltip]"
 					onclick = "[Execute( Building.Downsize )]"
 					enabled = "[IsValid( Building.Downsize )]"
-					visible = "[And(Not( ShouldAskConfirmation( Building.Downsize ) ), Not(BuildingType.IsMilitaryBuilding))]"
+					visible = "[And(Not( ShouldAskConfirmation( Building.Downsize ) ), Not(BuildingType.GeneratesCombatUnits))]"
 					using = tooltip_below
 				}
 
@@ -166,7 +172,7 @@ types goods_state_panel {
 					tooltip = "[Building.GetDownsizeTooltip]"
 					onclick = "[PopupManager.AskConfirmation( Building.Downsize )]"
 					enabled = "[IsValid( Building.Downsize )]"
-					visible = "[And(ShouldAskConfirmation( Building.Downsize ), Not(BuildingType.IsMilitaryBuilding))]"
+					visible = "[And(ShouldAskConfirmation( Building.Downsize ), Not(BuildingType.GeneratesCombatUnits))]"
 					using = tooltip_below
 				}
 
@@ -175,7 +181,7 @@ types goods_state_panel {
 					size = { 35 35 }
 					parentanchor = vcenter
 					tooltip = "[Building.GetCancelConstructionTooltip]"
-					visible = "[And(IsValid( Building.CancelConstruction ), Not(BuildingType.IsMilitaryBuilding))]"
+					visible = "[And(IsValid( Building.CancelConstruction ), Not(BuildingType.GeneratesCombatUnits))]"
 					onclick = "[Execute( Building.CancelConstruction )]"
 					using = tooltip_below
 				}

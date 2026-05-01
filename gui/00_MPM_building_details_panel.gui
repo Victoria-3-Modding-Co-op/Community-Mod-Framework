@@ -38,31 +38,6 @@ types building_panels
 				layoutpolicy_vertical = expanding
 				spacing = 5
 
-				vbox = {
-					### DOWNSIZE / EXPAND
-					building_level_controls = {
-						blockoverride "controller_size" {
-							size = { 130 35 }
-						}
-					}
-
-					### BUILD PROGRESS
-					hbox = {
-						visible = "[Building.HasConstructionQueued]"
-
-						default_progressbar_horizontal = {
-							tooltip = "BUILDING_PROGRESS_TOOLTIP"
-							size = { 110 5 }
-
-							blockoverride "values" {
-								value = "[Building.GetConstructionProgressPercentage]"
-								min = 0
-								max = 1
-							}
-						}
-					}
-				}
-
 				### STATE NAME AND BUTTON
 				block "state_name_button" {
 					button = {
@@ -113,23 +88,10 @@ types building_panels
 					}
 				}
 
+				block "action_buttons" {}
+
 				expand = {
 					visible = "[Not(Building.IsBuildingType('building_company_headquarter'))]"
-				}
-
-				block "action_buttons" {
-					building_auto_expand_toggle = {}
-
-					building_subsidize_toggle = {}
-
-					building_privatize_toggle = {}
-
-					building_country_monopoly_icon = {
-						visible = "[BuildingType.HasCountryMonopoly]"
-						datacontext = "[Building.GetBuildingType]"
-					}
-
-					building_nationalize_button = {}
 				}
 
 				hbox = {
@@ -206,8 +168,33 @@ types building_panels
 						}
 					}
 
+					vbox = {
+						### DOWNSIZE / EXPAND
+						building_level_controls = {
+							blockoverride "controller_size" {
+								size = { 130 35 }
+							}
+						}
+
+						### BUILD PROGRESS
+						hbox = {
+							visible = "[Building.HasConstructionQueued]"
+
+							default_progressbar_horizontal = {
+								tooltip = "BUILDING_PROGRESS_TOOLTIP"
+								size = { 110 5 }
+
+								blockoverride "values" {
+									value = "[Building.GetConstructionProgressPercentage]"
+									min = 0
+									max = 1
+								}
+							}
+						}
+					}
+
 					button_icon_round = {
-						size = { 30 30 }
+						size = { 34 34 }
 						onclick = "[RightClickMenuManager.ToggleBuildingActions(Building.AccessSelf, PdxGuiWidget.AccessSelf)]"
 						enabled = "[ObjectsEqual(Building.GetState.GetOwner.Self, GetPlayer.Self)]"
 						tooltip = "SHOW_BUILDING_ACTIONS"

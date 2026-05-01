@@ -256,12 +256,12 @@ types map_list_panel_types {
 				}
 
 				box_vertical_divider = {
-					visible = "[Not(MapListBuildingPanel.GetBuildingType.IsMilitaryBuilding)]"
+					visible = "[Not(MapListBuildingPanel.GetBuildingType.GeneratesCombatUnits)]"
 				}
 
 				# Infrastructure Balance
 				textbox = {
-					visible = "[Not(MapListBuildingPanel.GetBuildingType.IsMilitaryBuilding)]"
+					visible = "[Not(MapListBuildingPanel.GetBuildingType.GeneratesCombatUnits)]"
 
 					layoutpolicy_horizontal = expanding
 					layoutstretchfactor_horizontal = 1
@@ -278,7 +278,7 @@ types map_list_panel_types {
 
 				hbox = {
 					size = { 140 25 }
-					visible = "[Not(MapListBuildingPanel.GetBuildingType.IsMilitaryBuilding)]"
+					visible = "[Not(MapListBuildingPanel.GetBuildingType.GeneratesCombatUnits)]"
 					
 					productivity_or_other_information = {
 						blockoverride "productivity_info_datacontext" {
@@ -325,12 +325,12 @@ types map_list_panel_types {
 				}
 
 				box_vertical_divider = {
-					visible = "[Not(MapListBuildingPanel.GetBuildingType.IsMilitaryBuilding)]"
+					visible = "[Not(MapListBuildingPanel.GetBuildingType.GeneratesCombatUnits)]"
 				}
 
 				# Military units provided text
 				textbox = {
-					visible = "[And(MapListOption.GetBuildingData.GetBuilding.GetBuildingType.IsMilitaryBuilding, NotZero(Building.GetExpansionLevel))]"
+					visible = "[And(MapListOption.GetBuildingData.GetBuilding.GetBuildingType.GeneratesCombatUnits, NotZero(Building.GetExpansionLevel))]"
 					
 					min_width = 85
 					align = right|nobaseline
@@ -345,7 +345,7 @@ types map_list_panel_types {
 
 				# Military units not available text
 				textbox = {
-					visible = "[And(MapListOption.GetBuildingData.GetBuilding.GetBuildingType.IsMilitaryBuilding, IsZero(Building.GetExpansionLevel))]"
+					visible = "[And(MapListOption.GetBuildingData.GetBuilding.GetBuildingType.GeneratesCombatUnits, IsZero(Building.GetExpansionLevel))]"
 					alpha = "[TransparentIfTrue('(bool)yes')]"
 
 					min_width = 85
@@ -358,7 +358,7 @@ types map_list_panel_types {
 				}
 
 				box_vertical_divider = {
-					visible = "[MapListOption.GetBuildingData.GetBuilding.GetBuildingType.IsMilitaryBuilding]"
+					visible = "[MapListOption.GetBuildingData.GetBuilding.GetBuildingType.GeneratesCombatUnits]"
 				}
 
 				# Region name
@@ -369,11 +369,11 @@ types map_list_panel_types {
 					datacontext = "[MapListOption.GetBuildingData.GetBuilding]"
 					raw_text = "#v [Building.GetState.GetStateRegion.GetStrategicRegion.GetName]#!"
 					elide = right
-					visible = "[MapListOption.GetBuildingData.GetBuilding.GetBuildingType.IsMilitaryBuilding]"
+					visible = "[MapListOption.GetBuildingData.GetBuilding.GetBuildingType.GeneratesCombatUnits]"
 				}
 
 				box_vertical_divider = {
-					visible = "[MapListOption.GetBuildingData.GetBuilding.GetBuildingType.IsMilitaryBuilding]"
+					visible = "[MapListOption.GetBuildingData.GetBuilding.GetBuildingType.GeneratesCombatUnits]"
 				}
 
 				# Construction efficiency text
@@ -381,8 +381,8 @@ types map_list_panel_types {
 					min_width = 56
 					align = right|nobaseline
 
-					text = "[State.GetConstructionEfficiency|%1+=]"
-					tooltip = "[State.GetConstructionEfficiencyTooltip]"
+					text = "[State.GetConstructionEfficiencyForBuildingType(MapListOption.GetBuildingData.GetBuilding.GetBuildingType)|%1+=]"
+					tooltip = "[State.GetConstructionEfficiencyForBuildingTypeTooltip(MapListOption.GetBuildingData.GetBuilding.GetBuildingType)]"
 					elide = right
 				}
 
@@ -680,7 +680,7 @@ types map_list_panel_types {
 
 				widget = {
 					size = { 30 30 }
-					visible = "[Or(And(Not(IsDataModelEmpty(Building.AccessConsumedGoods)), Not(IsDataModelEmpty(Building.AccessProducedGoods))), Building.IsMilitaryBuilding )]"
+					visible = "[Or(And(Not(IsDataModelEmpty(Building.AccessConsumedGoods)), Not(IsDataModelEmpty(Building.AccessProducedGoods))), Building.GeneratesCombatUnits )]"
 
 					icon = {
 						size = { 20 20 }
@@ -755,7 +755,7 @@ types map_list_panel_types {
 					tooltip = "UNITS_PROVIDED_FROM_BUILDING_TOOLTIP"
 					elide = right
 					margin_right = 10
-					visible = "[Building.IsMilitaryBuilding]"
+					visible = "[Building.GeneratesCombatUnits]"
 					alpha = "[TransparentIfZero_int32(Building.GetNumActiveUnitsProvidedToFormation(MilitaryFormation.Self))]"
 				}
 			}

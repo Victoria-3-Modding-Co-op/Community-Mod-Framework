@@ -8,6 +8,7 @@ on_country_formed = {
 					has_variable = com_no_formation_events
 				}
             }
+			# Last updated for patch 1.13.3 on 01 May 2026
 			if = {
 				limit = {
 					c:LAO ?= ROOT
@@ -37,6 +38,7 @@ on_country_formed = {
 			else_if = {
 				limit = {
 					c:IBE ?= ROOT
+					NOT = { is_involved_in_journal_entry = je_iberia } # No double events
 				}
 				trigger_event = { id = formation.5 popup = yes }
 			}
@@ -227,6 +229,26 @@ on_country_formed = {
 					has_journal_entry = je_reunify_china
 				}
 				set_global_variable = { name = chinese_central_government value = ROOT }
+			}
+
+			if = {
+				limit = {
+					c:IBE ?= this
+					has_variable_list = spain_accepted_cultures
+				}
+				every_in_list = {
+					variable = spain_accepted_cultures
+					if = {
+						limit = {
+							NOT = {
+								is_primary_culture_of = ROOT
+							}
+						}
+						ROOT = {
+							add_primary_culture = prev
+						}
+					}
+				}
 			}
 		}
 	}

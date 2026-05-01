@@ -73,7 +73,7 @@ types production_methods
 				parentanchor = top        # MPM Framework
 
 				fixedgridbox = {
-					datamodel = "[DataModelFirst(BuildingBrowserBuildingTypeItem.GetBuildingType.AccessProductionMethodGroups, '(int32)4')]" # MPM - Only first 4
+					datamodel = "[BuildingBrowserBuildingTypeItem.GetBuildingType.AccessProductionMethodGroups]"
 					flipdirection = yes
 					addcolumn = 52
 					addrow = 50
@@ -237,20 +237,6 @@ types production_methods
 				position = { -10 50 }    # MPM Framework (original vert was -5; 95 - 5 - 45 = 50
 				spacing = 5
 
-				### expand
-				button_icon_round_map_interaction = {
-					size = { 40 40 }
-					blockoverride "icon" {
-						texture = "gfx/interface/buttons/button_icons/plus.dds"
-					}
-
-					onclick = "[BuildingType.ActivateExpansionLens]"
-					using = select_button_sound
-					visible = "[And(Or( BuildingType.IsBuildable, BuildingType.IsExpandable ), Not(BuildingType.IsMilitaryBuilding))]"
-					tooltip = "EXPAND"
-					using = tooltip_se
-				}
-
 				### nationalize
 				building_type_nationalize_button = {
 					size = { 40 40 }
@@ -272,6 +258,20 @@ types production_methods
 				### auto expand
 				building_type_auto_expand_toggle = {
 					size = { 40 40 }
+				}
+
+				### expand
+				button_icon_round_map_interaction = {
+					size = { 40 40 }
+					blockoverride "icon" {
+						texture = "gfx/interface/buttons/button_icons/plus.dds"
+					}
+
+					onclick = "[BuildingType.ActivateExpansionLens]"
+					using = select_button_sound
+					visible = "[And(Or( BuildingType.IsBuildable, BuildingType.IsExpandable ), Not(BuildingType.GeneratesCombatUnits))]"
+					tooltip = "EXPAND"
+					using = tooltip_se
 				}
 			}
 
@@ -598,11 +598,13 @@ types production_methods
 						}
 					}
 
-					construction_queue_sector_actions = {
-						min_width = 280 # MPM
-						max_width = 378 # MPM
-						layoutpolicy_horizontal = expanding
-						layoutpolicy_vertical = expanding
+					block "construction_content" {
+						construction_queue_sector_actions = {
+							min_width = 280 # MPM
+							max_width = 378 # MPM
+							layoutpolicy_horizontal = expanding
+							layoutpolicy_vertical = expanding
+						}
 					}
 
 				}

@@ -489,7 +489,7 @@ types building_browser_panel_types {
 
 								onclick = "[BuildingType.ActivateExpansionLens]"
 								using = select_button_sound
-								visible = "[And(Or( BuildingType.IsBuildable, BuildingType.IsExpandable ), Not(BuildingType.IsMilitaryBuilding))]"
+								visible = "[And(Or( BuildingType.IsBuildable, BuildingType.IsExpandable ), Not(BuildingType.GeneratesCombatUnits))]"
 								tooltip = "EXPAND"
 							}
 						}

@@ -1,0 +1,10 @@
+﻿com_struct_role = {
+	spawn_characters_to_pool = no
+
+	priority = 99999
+
+	career_length = {
+		99999
+		99999
+	}
+}

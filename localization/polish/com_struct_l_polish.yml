@@ -1,3 +1,5 @@
 ﻿l_polish:
  Blackjack: "Variable"
  and_Hookers: "Struct"
+ com_struct_role: "Hidden"
+ com_struct_role_desc: "If you see this there is an issue with the Community Mod Framework."

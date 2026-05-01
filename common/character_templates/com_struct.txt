@@ -3,6 +3,7 @@
 	# with Blackjack and Hookers
 	first_name = Blackjack
 	last_name = and_Hookers
+	role = com_struct_role
 
 	# We do not want our struct to die ;)
 	on_created = {

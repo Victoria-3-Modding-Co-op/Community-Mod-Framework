@@ -31,6 +31,22 @@ on_com_save_structs = {
 				}
 				if = {
 					limit = {
+						NOT = {
+							has_role = com_struct_role
+						}
+					}
+					remove_character_role = politician
+					remove_character_role = general
+					remove_character_role = admiral
+					remove_character_role = executive
+					remove_character_role = magnate
+					remove_character_role = heir
+					remove_character_role = ruler
+					remove_character_role = agitator
+					add_character_role = com_struct_role
+				}
+				if = {
+					limit = {
 						is_in_void = no
 					}
 					place_character_in_void = 10000

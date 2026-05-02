@@ -102,7 +102,7 @@ This causes the journal modifiers to wrap in lines of 5. Now, up to 15 modifiers
 
 ## Progress Bar Styling
 - **Injection Name:** `com_journal_entry_progress_bars`
-- **Recommended Anchor:** `com_custom_widget_container_scripted_progress_bars` (This may change in the future)
+- **Required Anchor:** `com_custom_widget_container_scripted_progress_bars` (This may change in the future)
 - **Screenshots:** [Example drifting progress bar](journal_entries/example_progress_bars.png)
 
 Scripted progress bars can be styled with a color, a drift effect, and a target marker, all dynamically settable and unsettable. For more details, see the [progress bar documentation](Progress_bars.md)

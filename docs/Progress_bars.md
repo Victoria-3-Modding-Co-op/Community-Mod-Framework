@@ -22,6 +22,15 @@ A full list of them can be found below in the [script docs](#script-docs).
 
 # Usage
 ## Setting up a new progress bar style
+To use the styled progress bars, first add this widget to your journal entry:
+```
+	widget = {
+		gui = "gui/com_journal_injects/injects.gui"
+		name = "com_journal_entry_progress_bars"
+		container = "com_custom_widget_container_scripted_progress_bars"
+	}
+```
+
 Each progress bar in a journal entry can be styled separately, and most stylings are independently settable
 
 - Each bar is identified by its id, which can be any localization key

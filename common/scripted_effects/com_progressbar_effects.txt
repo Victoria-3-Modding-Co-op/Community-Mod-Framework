@@ -4,7 +4,7 @@
 # - progress_bar = name localization key of progress bar
 # - index = 0-indexed position of the given progress bar in the journal
 # THIS DOES NOT REPLACE THE VANILLA SETUP
-initialize_com_progress_bar = {
+REPLACE_OR_CREATE:initialize_com_progress_bar = {
 	hidden_effect = {
 		if = {
 			limit = {
@@ -65,7 +65,7 @@ initialize_com_progress_bar = {
 # - index = 0-indexed position of the given progress bar in the journal
 # - color = color of base bar
 # THIS DOES NOT REPLACE THE VANILLA SETUP
-create_com_progress_bar = {
+REPLACE_OR_CREATE:create_com_progress_bar = {
 	initialize_com_progress_bar = {
 		progress_bar = $progress_bar$
 		index = $index$
@@ -87,7 +87,7 @@ create_com_progress_bar = {
 # - bar_decrease_color = color of drift bar when decreasing
 # - drift_value = a 0-1 script value which sets the size and direction of the drift 
 # THIS DOES NOT REPLACE THE VANILLA SETUP
-create_com_progress_bar_with_drift = {
+REPLACE_OR_CREATE:create_com_progress_bar_with_drift = {
 	create_com_progress_bar = {
 		progress_bar = $progress_bar$
 		index = $index$
@@ -110,7 +110,7 @@ create_com_progress_bar_with_drift = {
 # - target_type = icon type for target value
 # - target_value = a 0-1 script value which sets the position of the target
 # THIS DOES NOT REPLACE THE VANILLA SETUP
-create_com_progress_bar_with_target = {
+REPLACE_OR_CREATE:create_com_progress_bar_with_target = {
 	create_com_progress_bar = {
 		progress_bar = $progress_bar$
 		index = $index$
@@ -135,7 +135,7 @@ create_com_progress_bar_with_target = {
 # - target_type = icon type for target value
 # - target_value = a 0-1 script value which sets the position of the target
 # THIS DOES NOT REPLACE THE VANILLA SETUP
-create_com_progress_bar_with_both = {
+REPLACE_OR_CREATE:create_com_progress_bar_with_both = {
 	create_com_progress_bar = {
 		progress_bar = $progress_bar$
 		index = $index$
@@ -157,7 +157,7 @@ create_com_progress_bar_with_both = {
 # This effect should be run when the journal entry concludes
 # Parameters:
 # - progress_bar = name localization key of progress bar
-remove_com_progress_bar = {
+REPLACE_OR_CREATE:remove_com_progress_bar = {
 	hidden_effect = {
 		if = {
 			limit = {
@@ -196,7 +196,7 @@ remove_com_progress_bar = {
 # - progress_bar = name localization key of progress bar
 # - color = color of bar
 # - side = 'left' or 'right'
-set_com_progress_bar_color = {
+REPLACE_OR_CREATE:set_com_progress_bar_color = {
 	hidden_effect = {
 		if = {
 			limit = {
@@ -222,7 +222,7 @@ set_com_progress_bar_color = {
 
 # Unsets the color of progress bar
 # - progress_bar = name localization key of progress bar
-remove_com_progress_bar_color = {
+REPLACE_OR_CREATE:remove_com_progress_bar_color = {
 	hidden_effect = {
 		if = {
 			limit = {
@@ -246,7 +246,7 @@ remove_com_progress_bar_color = {
 # - bar_increase_color = color of drift bar when increasing
 # - bar_decrease_color = color of drift bar when decreasing
 # - drift_value = a 0-1 script value which sets the size and direction of the drift 
-set_com_progress_bar_drift = {
+REPLACE_OR_CREATE:set_com_progress_bar_drift = {
 	hidden_effect = {
 		if = {
 			limit = {
@@ -284,7 +284,7 @@ set_com_progress_bar_drift = {
 
 # Removes the progress bar drift effect
 # - progress_bar = name localization key of progress bar
-remove_com_progress_bar_drift = {
+REPLACE_OR_CREATE:remove_com_progress_bar_drift = {
 	hidden_effect = {
 		if = {
 			limit = {
@@ -309,7 +309,7 @@ remove_com_progress_bar_drift = {
 # - progress_bar = name localization key of progress bar
 # - target_type = icon type for target value
 # - target_value = a 0-1 script value which sets the position of the target
-set_com_progress_bar_target = {
+REPLACE_OR_CREATE:set_com_progress_bar_target = {
 	hidden_effect = {
 		if = {
 			limit = {
@@ -341,7 +341,7 @@ set_com_progress_bar_target = {
 
 # Removes the progress bar target
 # - progress_bar = name localization key of progress bar
-remove_com_progress_bar_target = {
+REPLACE_OR_CREATE:remove_com_progress_bar_target = {
 	hidden_effect = {
 		if = {
 			limit = {
@@ -364,7 +364,7 @@ remove_com_progress_bar_target = {
 # Sets the number of levels for the progress bar
 # - progress_bar = name localization key of progress bar
 # - levels = number of levels/parts to the progress bar, evenly spaced
-set_com_progress_bar_levels = {
+REPLACE_OR_CREATE:set_com_progress_bar_levels = {
 	hidden_effect = {
 		if = {
 			limit = {
@@ -389,7 +389,7 @@ set_com_progress_bar_levels = {
 
 # Removes the levels for the progress bar
 # - progress_bar = name localization key of progress bar
-remove_com_progress_bar_levels = {
+REPLACE_OR_CREATE:remove_com_progress_bar_levels = {
 	hidden_effect = {
 		if = {
 			limit = {
@@ -410,7 +410,7 @@ remove_com_progress_bar_levels = {
 
 # Sets level highlight for the progress bar
 # - progress_bar = name localization key of progress bar
-set_com_progress_bar_level_highlight = {
+REPLACE_OR_CREATE:set_com_progress_bar_level_highlight = {
 	hidden_effect = {
 		if = {
 			limit = {
@@ -432,7 +432,7 @@ set_com_progress_bar_level_highlight = {
 
 # Removes level highlight for the progress bar
 # - progress_bar = name localization key of progress bar
-remove_com_progress_bar_level_highlight = {
+REPLACE_OR_CREATE:remove_com_progress_bar_level_highlight = {
 	hidden_effect = {
 		if = {
 			limit = {
@@ -453,7 +453,7 @@ remove_com_progress_bar_level_highlight = {
 
 # Hides the progress bar, so it is no longer shown
 # - progress_bar = name localization key of progress bar
-hide_com_progress_bar = {
+REPLACE_OR_CREATE:hide_com_progress_bar = {
 	hidden_effect = {
 		if = {
 			limit = {
@@ -475,7 +475,7 @@ hide_com_progress_bar = {
 
 # Unhides the progress bar
 # - progress_bar = name localization key of progress bar
-unhide_com_progress_bar = {
+REPLACE_OR_CREATE:unhide_com_progress_bar = {
 	hidden_effect = {
 		if = {
 			limit = {
@@ -497,7 +497,7 @@ unhide_com_progress_bar = {
 # Sets up an existing progress bar as an accessible scope
 # This allows using effects and triggers that rely on the 'scope:com_$progress_bar$' outside the event chain
 # - progress_bar = name localization key of progress bar
-save_com_progress_bar_scope = {
+REPLACE_OR_CREATE:save_com_progress_bar_scope = {
 	hidden_effect = {
 		if = {
 			limit = { NOT = { exists = scope:com_$progress_bar$ } }
@@ -524,7 +524,7 @@ save_com_progress_bar_scope = {
 # A wrapper effect to easily run an effect inside 'scope:com_$progress_bar$'
 # - progress_bar = name localization key of progress bar
 # - effect = effect or series of effects to be run inside 'scope:com_$progress_bar$'
-run_in_com_progress_bar_scope = {
+REPLACE_OR_CREATE:run_in_com_progress_bar_scope = {
 	save_com_progress_bar_scope = {
 		progress_bar = $progress_bar$
 	}
@@ -550,7 +550,7 @@ run_in_com_progress_bar_scope = {
 ## White divider line - white_line
 ## Gold divider line - gold_line
 
-com_debug_progress_bar = {
+REPLACE_OR_CREATE:com_debug_progress_bar = {
 	random_in_list = {
 		limit = {
 			var:com_id ?= flag:$progress_bar$
@@ -570,6 +570,10 @@ com_debug_progress_bar = {
 	set_variable = {
 		name = com_left_color
 		value = scope:com_test.var:com_left_color
+	}
+	set_variable = {
+		name = com_right_color
+		value = scope:com_test.var:com_right_color
 	}
 	set_variable = {
 		name = com_bar_increase_color

@@ -14,6 +14,8 @@
 #		always = yes
 # }
 #
+# IMPORTANT: You MUST use the REPLACE_OR_CREATE keyword for this trigger in the mod that it's about.
+#
 # Make sure your scripted trigger file is loaded AFTER this one. You can do this by adding zz_ to the filename.
 #
 # Your scripted trigger files goes in the /common/scripted_triggers folder of YOUR mod.
@@ -193,11 +195,23 @@ Grey_CIR_is_active = { # Clothing Industry Rework
 	always = no
 }
 
+Grey_DIS_is_active = { # Diplomatic Interaction Suite
+	always = no
+}
+
 Grey_FIR_is_active = { # Food Industry Rework
 	always = no
 }
 
+Grey_MFB_is_active = { # Miscellaneous Flavour Bites
+	always = no
+}
+
 Grey_MIR_is_active = { # Military Industry Rework
+	always = no
+}
+
+Grey_PLI_is_active = { # Populist Legal Innovation
 	always = no
 }
 

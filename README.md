@@ -23,6 +23,7 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=3385002128
     * [Custom Owner Buildings](#custom-owner-buildings)
     * [Multi-line Production Methods](#multi-line-production-methods)
     * [Hide/Show Journal Entry Groups](#hideshow-journal-entry-groups)
+    * [Hide/Show Involved Countries](#hideshow-involved-countries)
 * [Structs](#structs)
     * [Creating a new Struct](#creating-a-new-struct)
     * [Setting Variables on a Struct](#setting-variables-on-a-struct)
@@ -411,6 +412,17 @@ This would hide all National Agenda (`je_group_historical_content`) Journal Entr
 
 `com_show_journal_entry_group = { name = je_group_historical_content }` 
 This would show them again.
+
+## Hide/Show Involved Countries
+This allows for hiding and showing the Involved Countries gui element in contextless journal entries.
+
+Usage:
+`scope:journal_entry = { set_variable = com_hide_involved_countries }`
+This will hide the Involved Countries gui element
+
+`scope:journal_entry = { remove_variable = com_hide_involved_countries }`
+This will show them again.
+
 
 # Structs
 

@@ -33,6 +33,7 @@ com_debug.1 = {
 		fix_variable_error = { variable = com_custom_owner_buildings }
 		fix_variable_error = { variable = com_gui_progressbar_var }
 		fix_variable_error = { variable = com_event_window_location_var }
+		fix_variable_error = { variable = com_hide_involved_countries }
 		
 		# CMF Sidebar Framework
 		fix_variable_error = { variable = custom_button_list }

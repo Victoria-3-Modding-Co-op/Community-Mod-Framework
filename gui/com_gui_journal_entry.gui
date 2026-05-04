@@ -41,7 +41,9 @@ types journal_entry_overwrites {
 				direction = vertical
 				using = default_list_position
 				spacing = 10
-
+				
+				## CMF - custom_widget_container_je_icon
+				# Using this anchor will disable the default journal icon and time modifiers container
 				flowcontainer = {
 					name = "custom_widget_container_je_icon"
 					visible = "[JournalEntry.HasCustomWidget('custom_widget_container_je_icon')]"
@@ -185,7 +187,11 @@ types journal_entry_overwrites {
 				}
 
 				textbox = {
-					visible = "[Not(StringIsEmpty(JournalEntry.GetStatusDesc))]"
+					## CMF - the variable "com_hide_status_desc will hide the status_desc
+					visible = "[And(
+						Not(JournalEntry.MakeScope.Var('com_hide_status_desc').IsSet),
+						Not(StringIsEmpty(JournalEntry.GetStatusDesc))
+					)]"
 					text = "[JournalEntry.GetStatusDesc]"
 					autoresize = yes
 					multiline = yes
@@ -238,7 +244,9 @@ types journal_entry_overwrites {
 					parentanchor = hcenter
 					direction = vertical
 				}
-
+				
+				## CMF - com_custom_widget_container_scripted_progress_bars
+				# Using this will disable the default scripted progress bars container
 				flowcontainer = {
 					name = "com_custom_widget_container_scripted_progress_bars"
 					visible = "[JournalEntry.HasCustomWidget('com_custom_widget_container_scripted_progress_bars')]"
@@ -659,6 +667,8 @@ types journal_entry_overwrites {
 					spacing = 20
 
 					textbox = {
+						## CMF - the variable "com_hide_journal_reason will hide the journal _reason
+						visible = "[Not(JournalEntry.MakeScope.Var('com_hide_journal_reason').IsSet)]"
 						autoresize = yes
 						text = "[JournalEntry.GetReason]"
 						min_width = @panel_width_minus_30
@@ -681,6 +691,7 @@ types journal_entry_overwrites {
 					}
 
 					flowcontainer = {
+						## CMF - the variable "com_hide_involved_countries" will hide the involved countries container
 						visible = "[And(
 							Not( IsDataModelEmpty( JournalEntry.GetInvolvedCountries ) ),
 							Not(JournalEntry.MakeScope.Var('com_hide_involved_countries').IsSet)
@@ -727,6 +738,8 @@ types journal_entry_overwrites {
 					}
 
 					flowcontainer = {
+						## CMF - the variable "com_hide_complete_triggers" will hide the completion triggers/effects
+						visible = "[Not(JournalEntry.MakeScope.Var('com_hide_complete_triggers').IsSet)]"
 						direction = vertical
 						max_update_rate = 8
 						using = default_list_position
@@ -789,6 +802,8 @@ types journal_entry_overwrites {
 					}
 
 					flowcontainer = {
+						## CMF - the variable "com_hide_fail_triggers" will hide the failure triggers/effects
+						visible = "[Not(JournalEntry.MakeScope.Var('com_hide_fail_triggers').IsSet)]"
 						name = "fail_text"
 						direction = vertical
 						using = default_list_position

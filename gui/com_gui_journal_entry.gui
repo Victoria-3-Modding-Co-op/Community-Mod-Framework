@@ -168,7 +168,10 @@ types journal_entry_overwrites {
 
 				# time out info
 				flowcontainer = {
-					visible = "[JournalEntry.CanTimeOut]"
+					visible = "[And(
+						JournalEntry.CanTimeOut,
+						Not(JournalEntry.MakeScope.Var('com_hide_timeout').IsSet)
+					)]"
 					spacing = 5
 					parentanchor = hcenter
 					tooltip = "JOURNAL_ENTRY_ON_TIMEOUT_LONG"
@@ -849,7 +852,10 @@ types journal_entry_overwrites {
 
 						textbox = {
 							text = "[JournalEntry.GetOnTimeoutTooltip]"
-							visible = "[Not(StringIsEmpty(JournalEntry.GetOnTimeoutTooltip))]"
+							visible = "[And(
+								Not(StringIsEmpty(JournalEntry.GetOnTimeoutTooltip)),
+								Not(JournalEntry.MakeScope.Var('com_hide_timeout').IsSet)
+							)]"
 							autoresize = yes
 							multiline = yes
 							minimumsize = { @panel_width_minus_30 -1 }

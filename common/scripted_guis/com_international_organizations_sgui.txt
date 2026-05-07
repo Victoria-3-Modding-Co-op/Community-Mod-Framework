@@ -24,3 +24,16 @@ com_international_organization_journal_entry_group_sgui = {
 		}
 	}
 }
+
+com_international_situation_journal_entry_group_sgui = {
+	scope = country
+	saved_scopes = {
+		group_name
+	}
+	is_shown = {
+		is_target_in_global_variable_list = {
+			name = com_international_situation_journal_groups
+			target = scope:group_name
+		}
+	}
+}

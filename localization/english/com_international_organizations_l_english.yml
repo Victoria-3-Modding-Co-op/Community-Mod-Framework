@@ -4,6 +4,10 @@
  concept_com_international_organization_desc: "A group of [Concept('concept_country','$concept_countries$')] bound together by some type of supranational entity."
  concept_com_international_organizations: "International Organizations"
  
+ concept_com_international_situation: "International Situation"
+ concept_com_international_situation_desc: "A group of [Concept('concept_country','$concept_countries$')] bound together by some type of supranational entity."
+ concept_com_international_situations: "International Situations"
+ 
  # Journal Entry Groups
  je_group_com_hidden: "Hidden"
  je_group_com_contextless_hidden: "Hidden"
@@ -34,5 +38,6 @@
  com_gui_organization_members: "@com_offer_embassy! [JournalEntry.MakeScope.Var('com_involved_countries_country_var').GetValue]"
  com_gui_organization_headquarters: "@com_formable_possible! [JournalEntry.MakeScope.Var('com_organization_headquarters_var').GetStateRegion.GetName]"
  com_gui_international_organizations_outliner: "[Concept('concept_com_international_organization','$concept_com_international_organizations$')]"
+ com_gui_international_situations_outliner: "[Concept('concept_com_international_situation','$concept_com_international_situations$')]"
  com_gui_goto_international_orgs_panel: "Go to the [Concept('concept_com_international_organization','$concept_com_international_organizations$')] panel"
  com_gui_additional_members: "There are additional members not displayed. Check the Organization to see all members."

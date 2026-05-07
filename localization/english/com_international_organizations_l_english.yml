@@ -21,6 +21,9 @@
  com_international_organizations_sgui: "com_international_organizations_sgui"
  com_international_organizations_sgui_desc: "International Organizations"
  
+ # Tooltips
+ com_add_international_organization_journal_entry: "The #bold [TopScope.GetLocalVariable('com_flag_loc').GetFlagName]#! [concept_com_international_organization] will be created"
+ 
  # GUI
  com_gui_international_organizations_header: "International Organizations"
  com_gui_power_blocs_header: "Power Blocs"

@@ -9,6 +9,18 @@ com_hide_international_organization_journal_entry_group = {
 	}
 }
 
+com_add_international_organization_journal_entry = {
+	custom_tooltip = {
+		text = com_add_international_organization_journal_entry
+		set_local_variable = {
+			name = com_flag_loc
+			flag:$type$
+		}
+		add_contextless_journal_entry = $type$
+	}
+	com_activate_international_organization_sidebar = yes
+}
+
 com_activate_international_organization_sidebar = {
 	set_global_variable = com_international_ogranization_var
 }

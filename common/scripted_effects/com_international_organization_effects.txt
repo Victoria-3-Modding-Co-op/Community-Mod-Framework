@@ -1,0 +1,14 @@
+com_hide_international_organization_journal_entry_group = {
+	add_to_global_variable_list = {
+		name = com_international_organization_journal_groups
+		target = flag:$name$
+	}
+	add_to_global_variable_list = {
+		name = com_hidden_journal_groups
+		target = flag:$name$
+	}
+}
+
+com_activate_international_organization_sidebar = {
+	set_global_variable = com_international_ogranization_var
+}

@@ -1,9 +1,9 @@
-je_com_international_organization = {
-	group = je_group_com_international_organizations
-	icon = "gfx/interface/icons/generic_icons/international_organizations.dds"
+﻿je_com_supranational_organization = {
+	group = je_group_com_supranational_organizations
+	icon = "gfx/interface/icons/invention_icons/multilateral_alliances.dds"
 	weight = 100
 	
-	should_be_pinned_by_default_involved = yes
+	#should_be_pinned_by_default_involved = yes
 	
 	should_be_involved = {
 		country_rank >= rank_value:great_power
@@ -14,7 +14,7 @@ je_com_international_organization = {
 	}
 	
 	immediate = {
-	
+		com_activate_international_organization_sidebar = yes
 	}
 	
 	complete = {
@@ -22,7 +22,7 @@ je_com_international_organization = {
 	}
 	
 	on_complete = {
-		custom_tooltip = com_debug.2.a
+		custom_tooltip = com_debug.a
 	}
 	
 	fail = {
@@ -30,6 +30,78 @@ je_com_international_organization = {
 	}
 	
 	on_fail = {
-		custom_tooltip = com_debug.2.b
+		custom_tooltip = com_debug.b
+	}
+}
+
+je_com_regional_organization = {
+	group = je_group_com_regional_organizations
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	weight = 100
+	
+	#should_be_pinned_by_default_involved = yes
+	
+	should_be_involved = {
+		country_rank >= rank_value:great_power
+	}
+	
+	should_show_when_not_involved = {
+		country_rank < rank_value:great_power
+	}
+	
+	immediate = {
+		com_activate_international_organization_sidebar = yes
+	}
+	
+	complete = {
+		always = no
+	}
+	
+	on_complete = {
+		custom_tooltip = com_debug.a
+	}
+	
+	fail = {
+		always = no
+	}
+	
+	on_fail = {
+		custom_tooltip = com_debug.b
+	}
+}
+
+je_com_religious_organization = {
+	group = je_group_com_religious_organizations
+	icon = "gfx/interface/icons/religion_icons/catholic.dds"
+	weight = 100
+	
+	#should_be_pinned_by_default_involved = yes
+	
+	should_be_involved = {
+		country_rank >= rank_value:great_power
+	}
+	
+	should_show_when_not_involved = {
+		country_rank < rank_value:great_power
+	}
+	
+	immediate = {
+		com_activate_international_organization_sidebar = yes
+	}
+	
+	complete = {
+		always = no
+	}
+	
+	on_complete = {
+		custom_tooltip = com_debug.a
+	}
+	
+	fail = {
+		always = no
+	}
+	
+	on_fail = {
+		custom_tooltip = com_debug.b
 	}
 }

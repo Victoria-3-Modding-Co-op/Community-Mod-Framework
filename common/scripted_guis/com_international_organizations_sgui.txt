@@ -2,12 +2,25 @@
 	scope = country
 	
 	is_shown = {
-		has_global_variable = com_debug
+		has_global_variable = com_international_ogranization_var
 	}
 	is_valid = {
-		has_global_variable = com_debug
+		has_global_variable = com_international_ogranization_var
 	}
 	effect = {
 		remove_variable = com_show_international_organizations
+	}
+}
+
+com_international_organization_journal_entry_group_sgui = {
+	scope = country
+	saved_scopes = {
+		group_name
+	}
+	is_shown = {
+		is_target_in_global_variable_list = {
+			name = com_international_organization_journal_groups
+			target = scope:group_name
+		}
 	}
 }

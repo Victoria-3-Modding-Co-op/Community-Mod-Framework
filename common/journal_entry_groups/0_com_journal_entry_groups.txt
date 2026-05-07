@@ -1,4 +1,4 @@
-﻿je_group_com_international_organizations = {
+﻿je_group_com_supranational_organizations = {
 	context = none
 }
 je_group_com_regional_organizations = {

@@ -5,14 +5,14 @@
 		target = flag:com_international_organizations_sgui
 	}
 	
-	## Remember to Hide the Magic
-	com_hide_journal_entry_group = {
-		name = je_group_com_international_organizations
+	## Placing
+	com_hide_international_organization_journal_entry_group = {
+		name = je_group_com_supranational_organizations
 	}
-	com_hide_journal_entry_group = {
+	com_hide_international_organization_journal_entry_group = {
 		name = je_group_com_regional_organizations
 	}
-	com_hide_journal_entry_group = {
+	com_hide_international_organization_journal_entry_group = {
 		name = je_group_com_religious_organizations
 	}
 }

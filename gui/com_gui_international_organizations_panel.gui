@@ -215,8 +215,13 @@ types com_international_organizations_types {
 			
 			background = {
 				using = default_header_bg
+				margin = { -5 0 }
 			}
-			using = entry_bg_fancy
+			
+			widget = {
+				size = { 100% 100% }
+				using = entry_bg_fancy
+			}
 			
 			tooltipwidget = {
 				FancyTooltip_JournalEntry = { }

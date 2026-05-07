@@ -1,0 +1,34 @@
+je_com_international_organization = {
+	group = je_group_com_international_organizations
+	icon = "gfx/interface/icons/generic_icons/international_organizations.dds"
+	weight = 100
+	
+	should_be_pinned_by_default_involved = yes
+	
+	should_be_involved = {
+		country_rank >= rank_value:great_power
+	}
+	
+	should_show_when_not_involved = {
+		country_rank < rank_value:great_power
+	}
+	
+	immediate = {
+	}
+	
+	complete = {
+		always = no
+	}
+	
+	on_complete = {
+		custom_tooltip = com_debug.2.a
+	}
+	
+	fail = {
+		always = no
+	}
+	
+	on_fail = {
+		custom_tooltip = com_debug.2.b
+	}
+}

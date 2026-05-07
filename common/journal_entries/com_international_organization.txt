@@ -3,8 +3,6 @@
 	icon = "gfx/interface/icons/invention_icons/multilateral_alliances.dds"
 	weight = 100
 	
-	#should_be_pinned_by_default_involved = yes
-	
 	should_be_involved = {
 		country_rank >= rank_value:great_power
 	}
@@ -14,16 +12,18 @@
 	}
 	
 	immediate = {
+		scope:journal_entry = {
+			com_build_international_organization_list_effect = {
+				type = je_com_supranational_organization
+			}
+			com_update_international_ogranization_members_value_effect = {
+				type = je_com_supranational_organization
+			}
+			com_set_international_organization_headquaters_effect = {
+				state_region = s:STATE_FLANDERS
+			}
+		}
 		com_activate_international_organization_sidebar = yes
-		com_build_international_organization_list_effect = {
-			type = je_com_supranational_organization
-		}
-		com_update_international_ogranization_members_value_effect = {
-			type = je_com_supranational_organization
-		}
-		com_set_international_organization_headquaters_effect = {
-			state_region = s:STATE_FLANDERS
-		}
 	}
 	
 	complete = {
@@ -34,21 +34,15 @@
 		custom_tooltip = com_debug.a
 	}
 	
-	fail = {
-		always = no
-	}
-	
-	on_fail = {
-		custom_tooltip = com_debug.b
-	}
-	
 	on_weekly_pulse = {
 		effect = {
-			com_build_international_organization_list_effect = {
-				type = je_com_supranational_organization
-			}
-			com_update_international_ogranization_members_value_effect = {
-				type = je_com_supranational_organization
+			scope:journal_entry = {
+				com_build_international_organization_list_effect = {
+					type = je_com_supranational_organization
+				}
+				com_update_international_ogranization_members_value_effect = {
+					type = je_com_supranational_organization
+				}
 			}
 		}
 	}
@@ -59,8 +53,6 @@ je_com_regional_organization = {
 	icon = "gfx/interface/icons/event_icons/event_map.dds"
 	weight = 100
 	
-	#should_be_pinned_by_default_involved = yes
-	
 	should_be_involved = {
 		country_rank >= rank_value:great_power
 	}
@@ -70,13 +62,15 @@ je_com_regional_organization = {
 	}
 	
 	immediate = {
+		scope:journal_entry = {
+			com_build_international_organization_list_effect = {
+				type = je_com_regional_organization
+			}
+			com_update_international_ogranization_members_value_effect = {
+				type = je_com_regional_organization
+			}
+		}
 		com_activate_international_organization_sidebar = yes
-		com_build_international_organization_list_effect = {
-			type = je_com_regional_organization
-		}
-		com_update_international_ogranization_members_value_effect = {
-			type = je_com_regional_organization
-		}
 	}
 	
 	complete = {
@@ -87,21 +81,15 @@ je_com_regional_organization = {
 		custom_tooltip = com_debug.a
 	}
 	
-	fail = {
-		always = no
-	}
-	
-	on_fail = {
-		custom_tooltip = com_debug.b
-	}
-	
 	on_weekly_pulse = {
 		effect = {
-			com_build_international_organization_list_effect = {
-				type = je_com_regional_organization
-			}
-			com_update_international_ogranization_members_value_effect = {
-				type = je_com_regional_organization
+			scope:journal_entry = {
+				com_build_international_organization_list_effect = {
+					type = je_com_regional_organization
+				}
+				com_update_international_ogranization_members_value_effect = {
+					type = je_com_regional_organization
+				}
 			}
 		}
 	}
@@ -112,8 +100,6 @@ je_com_religious_organization = {
 	icon = "gfx/interface/icons/religion_icons/catholic.dds"
 	weight = 100
 	
-	#should_be_pinned_by_default_involved = yes
-	
 	should_be_involved = {
 		country_rank >= rank_value:great_power
 	}
@@ -123,16 +109,18 @@ je_com_religious_organization = {
 	}
 	
 	immediate = {
+		scope:journal_entry = {
+			com_build_international_organization_list_effect = {
+				type = je_com_religious_organization
+			}
+			com_update_international_ogranization_members_value_effect = {
+				type = je_com_religious_organization
+			}
+			com_set_international_organization_headquaters_effect = {
+				state_region = s:STATE_LAZIO
+			}
+		}
 		com_activate_international_organization_sidebar = yes
-		com_build_international_organization_list_effect = {
-			type = je_com_religious_organization
-		}
-		com_update_international_ogranization_members_value_effect = {
-			type = je_com_religious_organization
-		}
-		com_set_international_organization_headquaters_effect = {
-			state_region = s:STATE_LAZIO
-		}
 	}
 	
 	complete = {
@@ -143,21 +131,15 @@ je_com_religious_organization = {
 		custom_tooltip = com_debug.a
 	}
 	
-	fail = {
-		always = no
-	}
-	
-	on_fail = {
-		custom_tooltip = com_debug.b
-	}
-	
 	on_weekly_pulse = {
 		effect = {
-			com_build_international_organization_list_effect = {
-				type = je_com_religious_organization
-			}
-			com_update_international_ogranization_members_value_effect = {
-				type = je_com_religious_organization
+			scope:journal_entry = {
+				com_build_international_organization_list_effect = {
+					type = je_com_religious_organization
+				}
+				com_update_international_ogranization_members_value_effect = {
+					type = je_com_religious_organization
+				}
 			}
 		}
 	}

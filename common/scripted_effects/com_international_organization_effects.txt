@@ -14,73 +14,43 @@ com_activate_international_organization_sidebar = {
 }
 
 com_set_international_organization_headquaters_effect = {
-	if = {
-		limit = {
-			exists = scope:journal_entry
-		}
-		scope:journal_entry = {
-			set_variable = {
-				name = com_organization_headquarters_var
-				value = $state_region$
-			}
-		}
-	}
-	else = {
-		error_log = "com_set_international_organization_headquaters_effect was called, but scope:journal_entry was not available."
+	set_variable = {
+		name = com_organization_headquarters_var
+		value = $state_region$
 	}
 }
 
 com_update_international_ogranization_members_value_effect = {
-	if = {
-		limit = {
-			exists = scope:journal_entry
-		}
-		scope:journal_entry = {
-			set_variable = {
-				name = com_involved_countries_country_var
-				value = {
-					every_country = {
-						limit = {
-							is_involved_in_journal_entry = $type$
-						}
-						add = 1
-					}
-					min = 1
+	set_variable = {
+		name = com_involved_countries_country_var
+		value = {
+			every_country = {
+				limit = {
+					is_involved_in_journal_entry = $type$
 				}
+				add = 1
 			}
+			min = 1
 		}
-	}
-	else = {
-		error_log = "com_update_international_ogranization_members_value_effect was called, but scope:journal_entry was not available."
 	}
 }
 
 com_build_international_organization_list_effect = {
-	if = {
+	clear_variable_list = com_involved_countries_display_list
+	save_scope_as = com_journal_entry_scope
+	ordered_country = {
 		limit = {
-			exists = scope:journal_entry
+			is_involved_in_journal_entry = $type$
 		}
-		scope:journal_entry = {
-			clear_variable_list = com_involved_countries_display_list
-			save_scope_as = com_journal_entry_scope
-		}
-		ordered_country = {
-			limit = {
-				is_involved_in_journal_entry = $type$
-			}
-			order_by = prestige
-			min = 1
-			max = 10
-			check_range_bounds = no # If you don't want an error logged if the list is smaller than the min/max
-			scope:com_journal_entry_scope = {
-				add_to_variable_list = {
-					name = com_involved_countries_display_list
-					target = prev
-				}
+		order_by = prestige
+		min = 1
+		max = 10
+		check_range_bounds = no # If you don't want an error logged if the list is smaller than the min/max
+		scope:com_journal_entry_scope = {
+			add_to_variable_list = {
+				name = com_involved_countries_display_list
+				target = prev
 			}
 		}
-	}
-	else = {
-		error_log = "com_build_international_organization_list_effect was called, but scope:journal_entry was not available."
 	}
 }

@@ -4,8 +4,12 @@
  concept_com_international_organization_desc: "A group of [Concept('concept_country','$concept_countries$')] bound together by some type of supranational entity."
  concept_com_international_organizations: "International Organizations"
  
- # Journal Entry Group
+ # Journal Entry Groups
  je_group_com_international_organizations: "International Organizations"
+ je_group_com_regional_organizations: "Regional Organizations"
+ je_group_com_religious_organizations: "Religious Organizations"
+ 
+ # Journal Entries
  je_com_international_organization: "International Organization"
  je_com_international_organization_reason: "International Organization"
  

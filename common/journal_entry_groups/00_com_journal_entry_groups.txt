@@ -1,3 +1,9 @@
 ﻿je_group_com_international_organizations = {
 	context = none
 }
+je_group_com_regional_organizations = {
+	context = none
+}
+je_group_com_religious_organizations = {
+	context = none
+}

@@ -9,4 +9,10 @@
 	com_hide_journal_entry_group = {
 		name = je_group_com_international_organizations
 	}
+	com_hide_journal_entry_group = {
+		name = je_group_com_regional_organizations
+	}
+	com_hide_journal_entry_group = {
+		name = je_group_com_religious_organizations
+	}
 }

@@ -15,11 +15,37 @@ widget = {
 	size { 100% 100% }
 	layer = layer_ingame_menu
 	visible = "[GetMetaPlayer.GetPlayedOrObservedCountry.IsValid]"
+	
+	# This opens the GUI if an alert variable is set
+	com_international_organizations_alert_widget = {}
+	
+	vbox = {
+		parentanchor = top|left
+		layoutpolicy_horizontal = expanding
+		layoutpolicy_vertical = expanding
+		margin_top = 85 #margin topbar
+		
+		widget = {
+			layoutpolicy_horizontal = expanding
+			layoutpolicy_vertical = expanding
+			
+			hbox = {
+				layoutpolicy_horizontal = expanding
+				layoutpolicy_vertical = expanding
+				
+				com_international_organizations_panel = {}
+				
+				expand = {}
+			}
+		}
+	}
 }
 
 
 types com_international_organizations_types {
-	type com_international_organizations_panel = default_block_window {
+	type com_international_organizations_panel = default_block_window_two_lines {
+		name = "tlim_ulema_side_panel"
+		datacontext = "[AccessPlayer]"
 		
 		visible = "[GetVariableSystem.HasValue('com_open_window', 'com_international_organizations_sgui')]"
 		
@@ -46,55 +72,63 @@ types com_international_organizations_types {
 			text = "je_group_com_international_organizations"
 		}
 		
+		blockoverride "window_header_name_line_two" {
+			raw_text = "window_header_name_line_two"
+		}
+		
+		blockoverride "header_back_button" {
+			onclick = "[GetVariableSystem.Clear('com_open_window')]"
+			onclick = "[GetVariableSystem.Clear('com_alert_action')]"
+		}
+		
+		blockoverride "header_close_button" {
+			onclick = "[GetVariableSystem.Clear('com_open_window')]"
+			onclick = "[GetVariableSystem.Clear('com_alert_action')]"
+		}
+		
 		blockoverride "scrollarea_content" {
 			flowcontainer = {
 				direction = vertical
-				using = default_content_fade
-				using = default_list_position
-				direction = vertical
-				margin_top = 10
+				parentanchor = hcenter
+				datamodel = "[AccessPlayer.GetGroupsForActiveJournalEntries]"
+				spacing = 10
+				margin_bottom = 10
 				
-				empty_state = {
-					blockoverride "visible" {
-						visible = "[IsDataModelEmpty(AccessPlayer.AccessActiveNonPlayerObjectiveJournalEntries)]"
-					}
-					blockoverride "text" {
-						text = "NO_JOURNAL_ENTRIES"
-					}
-				}
-				
-				flowcontainer = {
-					direction = vertical
-					parentanchor = hcenter
-					datamodel = "[AccessPlayer.GetGroupsForActiveJournalEntries]"
-					spacing = 10
-					margin_bottom = 10
-					
-					item = {
+				item = {
+					flowcontainer = {
+						visible = "[GetScriptedGui('com_journal_entry_group_hidden').IsShown(GuiScope.SetRoot(AccessPlayer.MakeScope).AddScope('group_name', MakeScopeFlag(JournalEntryGroup.GetKey)).End)]"
+						direction = vertical
+						textbox = {
+							text = "[JournalEntryGroup.GetName]"
+							autoresize = yes
+							align = nobaseline
+							default_format = "#title"
+							margin_left = 3
+						}
 						flowcontainer = {
-							visible = "[Not(GetScriptedGui('com_journal_entry_group_hidden').IsShown(GuiScope.SetRoot(AccessPlayer.MakeScope).AddScope('group_name', MakeScopeFlag(JournalEntryGroup.GetKey)).End))]"
 							direction = vertical
-							textbox = {
-								text = "[JournalEntryGroup.GetName]"
-								autoresize = yes
-								align = nobaseline
-								default_format = "#title"
-								margin_left = 3
-							}
-							flowcontainer = {
-								direction = vertical
-								datamodel = "[JournalEntryGroup.GetActiveJournalEntryTypes(GetPlayer.Self)]"
-								spacing = 2
-								item = {
-									journal_entry = {
-										datacontext = "[AccessPlayer.GetJournalEntry(JournalEntryType.Self)]"
-									}
+							datamodel = "[JournalEntryGroup.GetActiveJournalEntryTypes(GetPlayer.Self)]"
+							spacing = 2
+							item = {
+								journal_entry = {
+									datacontext = "[AccessPlayer.GetJournalEntry(JournalEntryType.Self)]"
 								}
 							}
 						}
 					}
 				}
 			}
+		}
+	}
+	
+	type com_international_organizations_alert_widget = widget {
+		datacontext = "[AccessPlayer]"
+		visible = "[GetPlayer.MakeScope.Var('com_show_international_organizations').IsSet]"
+		enabled = "[GetMetaPlayer.GetPlayedOrObservedCountry.IsValid]"
+		state = {
+			name = _show
+			on_finish = "[GetScriptedGui('com_international_organizations_sgui').Execute( GuiScope.SetRoot( GetPlayer.MakeScope ).End )]"
+			on_finish = "[GetVariableSystem.Set('com_open_window', 'com_international_organizations_sgui')]"
 		}
 	}
 }

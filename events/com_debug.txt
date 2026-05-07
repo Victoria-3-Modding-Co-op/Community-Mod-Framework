@@ -28,13 +28,16 @@ com_debug.1 = {
 		fix_variable_error = { variable = custom_social_hierarchy }
 		fix_variable_error = { variable = com_journal_characters }
 		fix_variable_error = { variable = com_opinion }
-		fix_variable_error = { variable = com_hidden_journal_groups }
 		fix_variable_error = { variable = com_dlc }
 		fix_variable_error = { variable = com_custom_owner_buildings }
 		fix_variable_error = { variable = com_gui_progressbar_var }
 		fix_variable_error = { variable = com_event_window_location_var }
 		
 		# CMF Journal Entry Framework
+		fix_variable_error = { variable = com_hidden_journal_groups }
+		fix_variable_error = { variable = com_international_organizations_sgui }
+		fix_variable_error = { variable = com_show_international_organizations }
+		
 		fix_variable_error = { variable = com_hide_timeout }
 		fix_variable_error = { variable = com_hide_status_desc }
 		fix_variable_error = { variable = com_hide_journal_reason }

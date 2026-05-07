@@ -35,22 +35,28 @@ com_debug.1 = {
 		
 		# CMF Journal Entry Framework
 		fix_variable_error = { variable = com_hidden_journal_groups }
-		fix_variable_error = { variable = com_international_organizations_sgui }
-		fix_variable_error = { variable = com_show_international_organizations }
-		fix_variable_error = { variable = com_international_organization_journal_groups }
-		fix_variable_error = { variable = je_group_com_supranational_organizations }
-		fix_variable_error = { variable = je_group_com_regional_organizations }
-		fix_variable_error = { variable = je_group_com_religious_organizations }
-		fix_variable_error = { variable = com_organization_headquarters_var }
-		fix_variable_error = { variable = com_involved_countries_country_var }
-		fix_variable_error = { variable = com_involved_countries_display_list }
-		
 		fix_variable_error = { variable = com_hide_timeout }
 		fix_variable_error = { variable = com_hide_status_desc }
 		fix_variable_error = { variable = com_hide_journal_reason }
 		fix_variable_error = { variable = com_hide_involved_countries }
 		fix_variable_error = { variable = com_hide_complete_triggers }
 		fix_variable_error = { variable = com_hide_fail_triggers }
+		
+		# CMF International Organizations Framework
+		fix_variable_error = { variable = com_international_organizations_sgui }
+		fix_variable_error = { variable = com_show_international_organizations }
+		fix_variable_error = { variable = com_international_organization_journal_groups }
+		fix_variable_error = { variable = com_international_situation_journal_groups }
+		fix_variable_error = { variable = je_group_com_hidden }
+		fix_variable_error = { variable = je_group_com_contextless_hidden }
+		fix_variable_error = { variable = je_group_com_supranational_organizations }
+		fix_variable_error = { variable = je_group_global_international_situations }
+		fix_variable_error = { variable = je_group_com_regional_organizations }
+		fix_variable_error = { variable = je_group_com_religious_organizations }
+		fix_variable_error = { variable = je_group_com_non_governmental_organizations }
+		fix_variable_error = { variable = com_organization_headquarters_var }
+		fix_variable_error = { variable = com_involved_countries_country_var }
+		fix_variable_error = { variable = com_involved_countries_display_list }
 		
 		# CMF Sidebar Framework
 		fix_variable_error = { variable = custom_button_list }

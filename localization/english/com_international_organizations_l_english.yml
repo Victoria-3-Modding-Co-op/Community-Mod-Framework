@@ -26,3 +26,5 @@
  com_gui_power_blocs_header: "Power Blocs"
  com_gui_organization_members: "@com_offer_embassy! [JournalEntry.MakeScope.Var('com_involved_countries_country_var').GetValue]"
  com_gui_organization_headquarters: "@com_formable_possible! [JournalEntry.MakeScope.Var('com_organization_headquarters_var').GetStateRegion.GetName]"
+ com_gui_international_organizations_outliner: "[Concept('concept_com_international_organization','$concept_com_international_organizations$')]"
+ com_gui_goto_international_orgs_panel: "Go to the [Concept('concept_com_international_organization','$concept_com_international_organizations$')] panel"

@@ -1,13 +1,4 @@
 ﻿texticon = {
-  icon = divider_decorative
-  iconsize = {
-    offset = { 0 3 }
-    texture = "gfx/interface/tooltip/tooltip_divider_decorative.dds"
-    fontsize = 20
-  }
-}
-
-texticon = {
   icon = com_formable_possible
   iconsize = {
     texture = "gfx/interface/icons/alert_icons/formable_possible.dds"
@@ -20,7 +11,7 @@ texticon = {
 texticon = {
   icon = com_offer_embassy
   iconsize = {
-    texture = "gfx/interface/icons/diplomatic_treaties_articles_icons/offer_embassy.dds"
+    texture = "gfx/interface/icons/generic_icons/number_of_countries.dds"
     size = { 25 25 }
     offset = { 0 7 }
     fontsize = 18

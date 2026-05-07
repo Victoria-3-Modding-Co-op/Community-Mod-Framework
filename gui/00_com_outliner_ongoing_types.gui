@@ -2,13 +2,13 @@
 @entry_height = 30
 
 types com_ongoing_outliner_items {
-    # Changes are marked with CMF
-
+	# Changes are marked with CMF
+	
 	### JOURNAL ENTRIES LIST
 	type outliner_journal_entries = flowcontainer {
 		direction = vertical
 		parentanchor = hcenter
-
+		
 		# OBJECTIVES / TUTORIAL
 		textbox = {
 			visible = "[And(Not(GetGlobalVariable('community_gui_objective_var').IsSet),GetPlayer.HasObjective)]" #CMF Hide objective
@@ -19,25 +19,25 @@ types com_ongoing_outliner_items {
 			minimumsize = { 340 -1 }
 			maximumsize = { 340 -1 }
 			margin = { 10 6 }
-
+			
 			background = {
 				using = default_header_bg
 				margin = { -2 0 }
 			}
-
+			
 			flowcontainer = {
 				visible = "[Not(AccessPlayer.IsObjectiveIdle)]"
 				parentanchor = right|vcenter
 				position = { -3 0 }
 				spacing = 5
-
+				
 				flowcontainer = {
 					visible = "[And(GetPlayer.HasObjective, Not(IsDataModelEmpty(AccessPlayer.AccessActivePlayerObjectiveJournalEntries)))]"
-
+					
 					flowcontainer = {
 						visible = "[NotEqualTo_int32(GetDataModelSize(AccessPlayer.AccessActivePlayerObjectiveJournalEntries), GetDataModelSize(AccessPlayer.AccessActivePinnedPlayerObjectiveJournalEntries))]"
 						spacing = 5
-
+						
 						textbox = {
 							text = "NUMBER_OF_PLAYER_OBJECTIVE_JOURNAL_ENTRIES_SHORT"
 							autoresize = yes
@@ -45,7 +45,7 @@ types com_ongoing_outliner_items {
 						}
 					}
 				}
-
+				
 				button_icon_goto = {
 					size = { 25 25 }
 					onclick = "[InformationPanelBar.OpenPanelTab('journal', 'default')]"
@@ -53,7 +53,7 @@ types com_ongoing_outliner_items {
 				}
 			}
 		}
-
+		
 		textbox = {
 			visible = "[And(Not(GetGlobalVariable('community_gui_objective_var').IsSet),GetPlayer.IsObjectiveIdle)]" #CMF Hide objective
 			text = "[AccessPlayer.GetObjective.GetObjectiveType.GetIdleHeader]"
@@ -66,7 +66,7 @@ types com_ongoing_outliner_items {
 			margin_top = 5
 			using = fontsize_large
 		}
-
+		
 		textbox = {
 			visible = "[And(Not(GetGlobalVariable('community_gui_objective_var').IsSet),GetPlayer.IsObjectiveIdle)]" #CMF Hide objective
 			text = "[AccessPlayer.GetObjective.GetObjectiveType.GetIdleHint]"
@@ -78,19 +78,19 @@ types com_ongoing_outliner_items {
 			margin = { 10 0 }
 			margin_bottom = 5
 		}
-
-
+		
+		
 		flowcontainer = {
 			direction = vertical
 			visible = "[Not(GetGlobalVariable('community_gui_objective_var').IsSet)]" #CMF Hide objective
 			parentanchor = hcenter
 			datamodel = "[AccessPlayer.AccessActivePlayerObjectiveJournalEntries]"
-
+			
 			item = {
 				outliner_journal_entry = { }
 			}
 		}
-
+		
 		# OTHER JOURNAL ENTRIES
 		textbox = {
 			text = "ACTIVE_JOURNAL_ENTRIES"
@@ -100,19 +100,19 @@ types com_ongoing_outliner_items {
 			minimumsize = { 340 -1 }
 			maximumsize = { 340 -1 }
 			margin = { 10 6 }
-
+			
 			background = {
 				using = default_header_bg
 				margin = { -2 0 }
 			}
-
+			
 			flowcontainer = {
 				parentanchor = right|vcenter
 				position = { -3 0 }
 				spacing = 5
-
+				
 				textbox = {
-
+					
 					visible = "[And( Not( IsDataModelEmpty(AccessPlayer.AccessActiveNonPlayerObjectiveJournalEntries) ), NotEqualTo_int32( GetDataModelSize(AccessPlayer.AccessActiveNonPlayerObjectiveJournalEntries), GetDataModelSize(AccessPlayer.AccessActivePinnedNonPlayerObjectiveJournalEntries)))]"
 					text = "NUMBER_OF_NON_PLAYER_OBJECTIVE_JOURNAL_ENTRIES_SHORT"
 					autoresize = yes
@@ -123,14 +123,14 @@ types com_ongoing_outliner_items {
 					minimumsize = { 180 -1 }
 					maximumsize = { 180 -1 }
 				}
-
+				
 				textbox = {
 					visible = "[IsDataModelEmpty(AccessPlayer.AccessActiveNonPlayerObjectiveJournalEntries)]"
 					text = "NO_JOURNAL_ENTRIES_OUTLINER"
 					autoresize = yes
 					align = nobaseline
 				}
-
+				
 				button_icon_goto = {
 					size = { 25 25 }
 					onclick = "[InformationPanelBar.OpenPanelTab('journal', 'default')]"
@@ -138,13 +138,13 @@ types com_ongoing_outliner_items {
 				}
 			}
 		}
-
+		
 		flowcontainer = {
 			direction = vertical
 			parentanchor = hcenter
 			visible = "[Not(IsDataModelEmpty(AccessPlayer.AccessActivePinnedNonPlayerObjectiveJournalEntries))]"
 			datamodel = "[AccessPlayer.AccessActivePinnedNonPlayerObjectiveJournalEntries]"
-
+			
 			item = {
 				com_outliner_journal_entry = { } # CMF Hide Journal Entries
 			}
@@ -198,13 +198,6 @@ types com_ongoing_outliner_items {
 	}
 	
 	type com_outliner_journal_entry = journal_entry {
-		# This type of overwritten to provide support for hiding journal entries
-		visible = "[And3(
-			JournalEntry.IsValid,
-			JournalEntry.IsPinnedInOutliner,
-			GetScriptedGui('com_journal_entry_group_hidden').IsShown(GuiScope.SetRoot(AccessPlayer.MakeScope).AddScope('group_name', MakeScopeFlag(JournalEntryGroup.GetKey)).End)
-		)]"
-		
 		using = default_list_position
 		blockoverride "button_style" {
 			using = glow_button
@@ -226,6 +219,12 @@ types com_ongoing_outliner_items {
 				parentanchor = hcenter|bottom
 			}
 		}
+		
+		visible = "[And3(
+			JournalEntry.IsValid,
+			JournalEntry.IsPinnedInOutliner,
+			Not(GetScriptedGui('com_journal_entry_group_hidden').IsShown(GuiScope.SetRoot(AccessPlayer.MakeScope).AddScope('group_name', MakeScopeFlag(JournalEntry.GetType.GetGroup.GetKey)).End))
+		)]"
 		
 		blockoverride "flowcontainer_properties" {
 			margin = { 4 4 }
@@ -252,6 +251,12 @@ types com_ongoing_outliner_items {
 	}
 	
 	type com_outliner_international_organizations = journal_entry {
+		visible = "[And3(
+			JournalEntry.IsValid,
+			JournalEntry.IsPinnedInOutliner,
+			GetScriptedGui('com_journal_entry_group_hidden').IsShown(GuiScope.SetRoot(AccessPlayer.MakeScope).AddScope('group_name', MakeScopeFlag(JournalEntry.GetType.GetGroup.GetKey)).End)
+		)]"
+		
 		using = default_list_position
 		blockoverride "button_style" {
 			using = glow_button
@@ -273,8 +278,6 @@ types com_ongoing_outliner_items {
 				parentanchor = hcenter|bottom
 			}
 		}
-		
-		visible = "[And(JournalEntry.IsValid, JournalEntry.IsPinnedInOutliner)]"
 		
 		blockoverride "flowcontainer_properties" {
 			margin = { 4 4 }

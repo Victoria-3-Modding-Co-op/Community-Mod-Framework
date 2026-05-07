@@ -334,7 +334,6 @@ types journal_overwrites {
 	}
 
 	type journal_entry = button {
-		# Overridden to add support for changing the colors of certain progress bars - Alexedishi
 		highlight_tutorial_ui = {
 			visible = "[JournalEntry.IsBeingTutorialHighlighted]"
 		}

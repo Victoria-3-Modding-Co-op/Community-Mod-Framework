@@ -5,9 +5,13 @@
  concept_com_international_organizations: "International Organizations"
  
  # Journal Entry Groups
+ je_group_com_hidden: "Hidden"
+ je_group_com_contextless_hidden: "Hidden"
+ 
  je_group_com_supranational_organizations: "Supranational Organizations"
  je_group_com_regional_organizations: "Regional Organizations"
  je_group_com_religious_organizations: "Religious Organizations"
+ je_group_com_non_governmental_organizations: "Non-governmental Organizations"
  
  # Journal Entries
  je_com_supranational_organization: "Supranational Organization"

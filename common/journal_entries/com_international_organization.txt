@@ -3,6 +3,12 @@
 	icon = "gfx/interface/icons/invention_icons/multilateral_alliances.dds"
 	weight = 100
 	
+	widget = {
+		gui = "gui/journal_entry_widgets/com_interorg_widgets.gui"
+		name = "widget_com_supranational_organization_base"
+		container = "custom_widget_container_je_icon"
+	}
+	
 	should_be_involved = {
 		country_rank >= rank_value:great_power
 	}
@@ -22,6 +28,10 @@
 			com_set_international_organization_headquaters_effect = {
 				state_region = s:STATE_FLANDERS
 			}
+			set_variable = com_hide_journal_reason
+			set_variable = com_hide_involved_countries
+			set_variable = com_hide_complete_triggers
+			set_variable = com_hide_fail_triggers
 		}
 		com_activate_international_organization_sidebar = yes
 	}

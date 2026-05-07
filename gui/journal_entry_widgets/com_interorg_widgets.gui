@@ -1,0 +1,116 @@
+#### WIDGETS
+flowcontainer = {
+	name = "widget_com_supranational_organization_base"
+	ignoreinvisible = yes
+	
+	flowcontainer = {
+		margin_top = 10
+		direction = vertical
+		
+		com_supranational_organization_spacer = {}
+		com_supranational_organization_panel = {
+			blockoverride "interorg_icon_frame_texture" {
+				texture = "gfx/coat_of_arms/textured_emblems/pb_frame_00.dds"
+			}
+		}
+	}
+}
+
+types com_international_organization_types {
+	type com_supranational_organization_panel = widget {
+		# FRAME SIZE
+		size = { 552 300 }
+		using = Animation_Character_Panel_Refresh
+		
+		# BACKGROUND
+		background = {
+			block "interorg_backdrop_texture" {
+				texture = "gfx/interface/character_panel/backgrounds/char_role_politician.dds"
+				fittype = centercrop
+				using = frame_small_mask
+			}
+		}
+		
+		### CHARACTER HERE
+		
+		# TOP/BOTTOM FADE
+		icon = {
+			using = dark_area
+			parentanchor = top|hcenter
+			size = { 100% 15% }
+			alpha = 0.65
+			position = { 0 2 }
+			
+			modify_texture = {
+				texture = "gfx/interface/masks/fade_vertical_bottom.dds"
+				spriteType = Corneredstretched
+				spriteborder = { 0 0 }
+				blend_mode = alphamultiply
+			}
+		}
+		icon = {
+			using = dark_area
+			parentanchor = bottom|hcenter
+			size = { 100% 12% }
+			alpha = 0.65
+			position = { 0 2 }
+			
+			modify_texture = {
+				texture = "gfx/interface/masks/fade_vertical_top.dds"
+				spriteType = Corneredstretched
+				spriteborder = { 0 0 }
+				blend_mode = alphamultiply
+			}
+		}
+		
+		# FRAME
+		widget = {
+			size = { 100% 100% }
+			background = {
+				texture = "gfx/interface/character_panel/char_bg_frame.dds"
+				margin_left = 18
+				margin_right = 10
+				margin_bottom = 10
+				spriteType = Corneredtiled
+				
+				spriteborder_left = 200
+				spriteborder_right = 60
+				spriteborder_top = 170
+				spriteborder_bottom = 180
+				
+				texture_density = 2
+			}
+		}
+		widget = {
+			parentanchor = top|hcenter
+			size = { 150 150 }
+			position = { 0 -50 }
+			icon = {
+				parentanchor = center
+				size = { 150 150 }
+				texture = "gfx/interface/backgrounds/bg_pb_frame.dds"
+			}
+			icon = {
+				parentanchor = center
+				size = { 150 150 }
+				block "interorg_icon_frame_texture" {
+					texture = "gfx/coat_of_arms/textured_emblems/pb_frame_04.dds"
+				}
+			}
+			icon = {
+				parentanchor = center
+				texture = "[JournalEntry.GetIcon]"
+				block "journal_icon_position" {
+					position = { 0 -10 }
+				}
+				block "journal_icon_size" {
+					size = { 75 75 }
+				}
+			}
+		}
+	}
+	
+	type com_supranational_organization_spacer = widget {
+		size = { 540 30 }
+	}
+}

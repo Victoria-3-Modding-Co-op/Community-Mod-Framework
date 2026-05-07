@@ -11,7 +11,7 @@
 @panel_width_plus_70 = 610			# used to be 530
 
 widget = {
-	name = "com_international_organizations_panel"
+	name = "com_international_organizations_widget"
 	size { 100% 100% }
 	layer = layer_ingame_menu
 	visible = "[GetMetaPlayer.GetPlayedOrObservedCountry.IsValid]"
@@ -41,10 +41,9 @@ widget = {
 	}
 }
 
-
 types com_international_organizations_types {
 	type com_international_organizations_panel = default_block_window_two_lines {
-		name = "tlim_ulema_side_panel"
+		name = "com_international_organizations_panel"
 		datacontext = "[AccessPlayer]"
 		
 		visible = "[GetVariableSystem.HasValue('com_open_window', 'com_international_organizations_sgui')]"
@@ -69,12 +68,10 @@ types com_international_organizations_types {
 		}
 		
 		blockoverride "window_header_name" {
-			text = "je_group_com_international_organizations"
+			text = "com_gui_international_organizations_header"
 		}
 		
-		blockoverride "window_header_name_line_two" {
-			raw_text = "window_header_name_line_two"
-		}
+		blockoverride "window_header_name_line_two" {}
 		
 		blockoverride "header_back_button" {
 			onclick = "[GetVariableSystem.Clear('com_open_window')]"
@@ -86,8 +83,46 @@ types com_international_organizations_types {
 			onclick = "[GetVariableSystem.Clear('com_alert_action')]"
 		}
 		
+		blockoverride "fixed_top" {
+			tab_buttons = {
+				blockoverride "first_button" {
+					text = "com_gui_international_organizations_header"
+				}
+				blockoverride "first_button_click" {
+					onclick = "[GetVariableSystem.Set('com_orgs_tab', 'orgs')]"
+				}
+				blockoverride "first_button_visibility" {
+					visible = "[Or(GetVariableSystem.HasValue('com_orgs_tab', 'orgs'), Not(GetVariableSystem.Exists('com_orgs_tab')))]"
+				}
+				blockoverride "first_button_visibility_checked" {
+					visible = "[And(Not(GetVariableSystem.HasValue('com_orgs_tab', 'orgs')), GetVariableSystem.Exists('com_orgs_tab'))]"
+				}
+				blockoverride "first_button_selected" {
+					text = "com_gui_international_organizations_header"
+				}
+				
+				blockoverride "second_button" {
+					text = "com_gui_power_blocs_header"
+				}
+				blockoverride "second_button_click" {
+					onclick = "[GetVariableSystem.Set('com_orgs_tab', 'blocs')]"
+				}
+				blockoverride "second_button_visibility" {
+					visible = "[GetVariableSystem.HasValue('com_orgs_tab', 'blocs')]"
+				}
+				blockoverride "second_button_visibility_checked" {
+					visible = "[Not(GetVariableSystem.HasValue('com_orgs_tab', 'blocs'))]"
+				}
+				blockoverride "second_button_selected" {
+					text = "com_gui_power_blocs_header"
+				}
+			}
+		}
+		
 		blockoverride "scrollarea_content" {
+			# International Organization Journal Entries
 			flowcontainer = {
+				visible = "[Or(GetVariableSystem.HasValue('com_orgs_tab', 'orgs'), Not(GetVariableSystem.Exists('com_orgs_tab')))]"
 				direction = vertical
 				parentanchor = hcenter
 				datamodel = "[AccessPlayer.GetGroupsForActiveJournalEntries]"
@@ -96,7 +131,7 @@ types com_international_organizations_types {
 				
 				item = {
 					flowcontainer = {
-						visible = "[GetScriptedGui('com_journal_entry_group_hidden').IsShown(GuiScope.SetRoot(AccessPlayer.MakeScope).AddScope('group_name', MakeScopeFlag(JournalEntryGroup.GetKey)).End)]"
+						visible = "[GetScriptedGui('com_international_organization_journal_entry_group_sgui').IsShown(GuiScope.SetRoot(AccessPlayer.MakeScope).AddScope('group_name', MakeScopeFlag(JournalEntryGroup.GetKey)).End)]"
 						direction = vertical
 						textbox = {
 							text = "[JournalEntryGroup.GetName]"
@@ -110,13 +145,263 @@ types com_international_organizations_types {
 							datamodel = "[JournalEntryGroup.GetActiveJournalEntryTypes(GetPlayer.Self)]"
 							spacing = 2
 							item = {
-								journal_entry = {
+								com_international_organization_entry = {
 									datacontext = "[AccessPlayer.GetJournalEntry(JournalEntryType.Self)]"
 								}
 							}
 						}
 					}
 				}
+			}
+			
+			# Striped Down Power Blocs Tab
+			flowcontainer = {
+				visible = "[GetVariableSystem.HasValue('com_orgs_tab', 'blocs')]"
+				direction = vertical
+				using = default_list_position
+				spacing = 5
+				margin_top = 10
+				
+				widget = {
+					size = { 540 50 }
+					background = {
+						using = dark_area
+					}
+					
+					button = {
+						parentanchor = center
+						size = { 240 44 }
+						using = default_button_primary
+						
+						raw_text = "Open Power Blocs Panel"
+						using = fontsize_medium
+						onclick = "[InformationPanelBar.OpenPanel('power_bloc_panel')]"
+						onclick = "[GetVariableSystem.Clear('com_fullscreen')]"
+					}
+				}
+				
+				
+				flowcontainer = {
+					parentanchor = hcenter
+					direction = vertical
+					spacing = 5
+					
+					datamodel = "[GetAllPowerBlocs]"
+					
+					item = {
+						power_bloc_list_item = {}
+					}
+				}
+			}
+		}
+	}
+	
+	type com_international_organization_entry = button {
+		highlight_tutorial_ui = {
+			visible = "[JournalEntry.IsBeingTutorialHighlighted]"
+		}
+		
+		block "button_style" {
+			using = default_button
+		}
+		onclick = "[InformationPanelBar.OpenJournalEntryPanel(JournalEntry.AccessSelf)]"
+		enabled = "[JournalEntry.IsActive]"
+		
+		tooltipwidget = {
+			FancyTooltip_JournalEntry = {}
+		}
+		
+		onmousehierarchyenter = "[PdxGuiWidget.FindChild('journal_pin_button').InterruptThenTriggerAnimation('hide_journal_pin_button','show_journal_pin_button')]"
+		onmousehierarchyleave = "[PdxGuiWidget.FindChild('journal_pin_button').InterruptThenTriggerAnimation('show_journal_pin_button','hide_journal_pin_button')]"
+		
+		block "background" {}
+		
+		flowcontainer = {
+			resizeparent = yes
+			block "minimumsize" {
+				minimumsize = { @panel_width -1 }
+			}
+			block "flowcontainer_properties" {
+				margin = { 10 8 }
+				spacing = 10
+			}
+			
+			flowcontainer = {
+				direction = vertical
+				
+				# journal entry icon
+				icon = {
+					texture = "[JournalEntry.GetIcon]"
+					block "iconsize" {
+						size = { 40 40 }
+					}
+				}
+				
+				# completion in progress
+				icon = {
+					visible = "[JournalEntry.IsProgressing]"
+					parentanchor = hcenter
+					block "completing_iconsize" {
+						size = { 20 20 }
+					}
+					texture = "gfx/interface/icons/generic_icons/green_checkmark.dds"
+					tooltip = "JOURNAL_ENTRY_IN_PROGRESS"
+					using = shimmer
+					
+					icon = {
+						parentanchor = center
+						using = rotate_glow_animation_02
+						size = { 300% 300% }
+						alpha = 0.5
+					}
+				}
+			}
+			
+			flowcontainer = {
+				direction = vertical
+				parentanchor = vcenter
+				
+				# title
+				textbox = {
+					text = "[JournalEntry.GetName]"
+					autoresize = yes
+					align = left|nobaseline
+					multiline = yes
+					default_format = "#header"
+					
+					block "fontsize" {
+						using = fontsize_large
+					}
+					
+					block "textsize" {
+						maximumsize = { 420 -1 }
+						minimumsize = { 420 -1 }
+					}
+				}
+				
+				# status description
+				textbox = {
+					text = "[JournalEntry.GetStatusDesc]"
+					visible = "[Not(StringIsEmpty(JournalEntry.GetStatusDesc))]"
+					autoresize = yes
+					align = left|nobaseline
+					multiline = yes
+					block "textsize" {
+						maximumsize = { 420 -1 }
+						minimumsize = { 420 -1 }
+					}
+				}
+				
+				# number of possible actions
+				textbox = {
+					text = "JOURNAL_ENTRY_POSSIBLE_ACTIONS"
+					visible = "[GreaterThan_int32(JournalEntry.GetNumPossibleScriptedButtons, '(int32)0')]"
+					autoresize = yes
+					align = left|nobaseline
+					multiline = yes
+					block "textsize" {
+						maximumsize = { 420 -1 }
+						minimumsize = { 420 -1 }
+					}
+				}
+				
+				textbox = {
+					
+					autoresize = yes
+				}
+				
+				# progress description
+				textbox = {
+					text = "[JournalEntry.GetProgressDesc]"
+					tooltip = "[JournalEntry.GetGoalDesc]"
+					autoresize = yes
+					align = left|nobaseline
+					multiline = yes
+					block "textsize" {
+						maximumsize = { 420 -1 }
+						minimumsize = { 420 -1 }
+					}
+				}
+				
+				# progress bar
+				flowcontainer = {
+					visible = "[And(JournalEntry.HasProgressBar, JournalEntry.IsActive)]"
+					margin = { 0 10 }
+					default_progressbar_horizontal = {
+						block "progressbar_size" {
+							size = { 420 6 }
+						}
+						blockoverride "values" {
+							value = "[FixedPointToFloat(JournalEntry.GetGoalProgressPercent)]"
+							min = 0
+							max = 1
+						}
+					}
+				}
+				
+				# scripted progress bars
+				com_journal_outliner_progress_bars = {}
+				
+				# time out info
+				flowcontainer = {
+					visible = "[And(JournalEntry.CanTimeOut, JournalEntry.IsActive)]"
+					spacing = 5
+					
+					icon = {
+						size = { 18 18 }
+						texture = "gfx/interface/icons/generic_icons/clock.dds"
+						parentanchor = vcenter
+					}
+					textbox = {
+						text = "[JournalEntry.GetTimeoutTooltip]"
+						autoresize = yes
+						align = left|nobaseline
+						parentanchor = vcenter
+					}
+				}
+			}
+		}
+		
+		# pin button
+		widget = {
+			size = { 23 23 }
+			parentanchor = vcenter|right
+			position = { -5 0 }
+			visible = "[JournalEntry.IsActive]"
+			
+			button = {
+				name = "journal_pin_button"
+				texture = "gfx/interface/outliner/unpinned_icon.dds"
+				using = check_button_sound
+				size = { 100% 100% }
+				visible = "[Not(JournalEntry.IsPinnedInOutliner)]"
+				onclick = "[JournalEntry.TogglePinInOutliner]"
+				tooltip = "PIN"
+				parentanchor = center
+				
+				state = {
+					name = hide_journal_pin_button
+					trigger_on_create = yes
+					alpha = 0
+					duration = 0.2
+					scale = 0.5
+				}
+				
+				state = {
+					name = show_journal_pin_button
+					alpha = 1
+					duration = 0.15
+					scale = 1
+				}
+			}
+			button = {
+				using = check_button_sound
+				texture = "gfx/interface/outliner/pinned_icon.dds"
+				size = { 100% 100% }
+				visible = "[JournalEntry.IsPinnedInOutliner]"
+				onclick = "[JournalEntry.TogglePinInOutliner]"
+				tooltip = "UNPIN"
+				parentanchor = center
 			}
 		}
 	}

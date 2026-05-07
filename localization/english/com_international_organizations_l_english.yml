@@ -5,14 +5,22 @@
  concept_com_international_organizations: "International Organizations"
  
  # Journal Entry Groups
- je_group_com_international_organizations: "International Organizations"
+ je_group_com_supranational_organizations: "Supranational Organizations"
  je_group_com_regional_organizations: "Regional Organizations"
  je_group_com_religious_organizations: "Religious Organizations"
  
  # Journal Entries
- je_com_international_organization: "International Organization"
- je_com_international_organization_reason: "International Organization"
+ je_com_supranational_organization: "Supranational Organization"
+ je_com_supranational_organization_reason: "$je_com_supranational_organization$"
+ je_com_regional_organization: "Regional Organization"
+ je_com_regional_organization_reason: "$je_com_regional_organization$"
+ je_com_religious_organization: "Religious Organization"
+ je_com_religious_organization_reason: "$je_com_religious_organization$"
  
  # Sidebar Ideology
  com_international_organizations_sgui: "com_international_organizations_sgui"
  com_international_organizations_sgui_desc: "International Organizations"
+ 
+ # GUI
+ com_gui_international_organizations_header: "International Organizations"
+ com_gui_power_blocs_header: "Power Blocs"

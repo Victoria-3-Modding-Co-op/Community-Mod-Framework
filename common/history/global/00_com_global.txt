@@ -1,0 +1,12 @@
+﻿GLOBAL = {
+	# Add button to sidebar
+	add_to_global_variable_list = {
+		name = custom_button_list_flag
+		target = flag:com_international_organizations_sgui
+	}
+	
+	## Remember to Hide the Magic
+	com_hide_journal_entry_group = {
+		name = je_group_com_international_organizations
+	}
+}

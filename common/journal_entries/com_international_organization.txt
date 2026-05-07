@@ -15,6 +15,12 @@
 	
 	immediate = {
 		com_activate_international_organization_sidebar = yes
+		com_build_international_organization_list_effect = {
+			type = je_com_supranational_organization
+		}
+		com_update_international_ogranization_value_list = {
+			type = je_com_supranational_organization
+		}
 	}
 	
 	complete = {
@@ -31,6 +37,17 @@
 	
 	on_fail = {
 		custom_tooltip = com_debug.b
+	}
+	
+	on_weekly_pulse = {
+		effect = {
+			com_build_international_organization_list_effect = {
+				type = je_com_supranational_organization
+			}
+			com_update_international_ogranization_value_list = {
+				type = je_com_supranational_organization
+			}
+		}
 	}
 }
 
@@ -51,6 +68,12 @@ je_com_regional_organization = {
 	
 	immediate = {
 		com_activate_international_organization_sidebar = yes
+		com_build_international_organization_list_effect = {
+			type = je_com_regional_organization
+		}
+		com_update_international_ogranization_value_list = {
+			type = je_com_regional_organization
+		}
 	}
 	
 	complete = {
@@ -67,6 +90,17 @@ je_com_regional_organization = {
 	
 	on_fail = {
 		custom_tooltip = com_debug.b
+	}
+	
+	on_weekly_pulse = {
+		effect = {
+			com_build_international_organization_list_effect = {
+				type = je_com_regional_organization
+			}
+			com_update_international_ogranization_value_list = {
+				type = je_com_regional_organization
+			}
+		}
 	}
 }
 
@@ -87,6 +121,12 @@ je_com_religious_organization = {
 	
 	immediate = {
 		com_activate_international_organization_sidebar = yes
+		com_build_international_organization_list_effect = {
+			type = je_com_religious_organization
+		}
+		com_update_international_ogranization_value_list = {
+			type = je_com_religious_organization
+		}
 	}
 	
 	complete = {
@@ -103,5 +143,16 @@ je_com_religious_organization = {
 	
 	on_fail = {
 		custom_tooltip = com_debug.b
+	}
+	
+	on_weekly_pulse = {
+		effect = {
+			com_build_international_organization_list_effect = {
+				type = je_com_religious_organization
+			}
+			com_update_international_ogranization_value_list = {
+				type = je_com_religious_organization
+			}
+		}
 	}
 }

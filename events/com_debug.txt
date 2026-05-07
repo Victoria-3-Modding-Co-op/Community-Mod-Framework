@@ -37,6 +37,9 @@ com_debug.1 = {
 		fix_variable_error = { variable = com_hidden_journal_groups }
 		fix_variable_error = { variable = com_international_organizations_sgui }
 		fix_variable_error = { variable = com_show_international_organizations }
+		fix_variable_error = { variable = je_group_com_supranational_organizations }
+		fix_variable_error = { variable = je_group_com_regional_organizations }
+		fix_variable_error = { variable = je_group_com_religious_organizations }
 		
 		fix_variable_error = { variable = com_hide_timeout }
 		fix_variable_error = { variable = com_hide_status_desc }

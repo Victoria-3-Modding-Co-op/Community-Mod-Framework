@@ -146,8 +146,152 @@ types com_ongoing_outliner_items {
 			datamodel = "[AccessPlayer.AccessActivePinnedNonPlayerObjectiveJournalEntries]"
 
 			item = {
-				outliner_journal_entry = { }
+				com_outliner_journal_entry = { } # CMF Hide Journal Entries
 			}
+		}
+		
+		#### CMF INTERNATIONAL ORG SCRIPT FROM HERE ON
+		textbox = {
+			text = "com_gui_international_organizations_outliner"
+			autoresize = yes
+			multiline = yes
+			align = left|nobaseline
+			minimumsize = { 340 -1 }
+			maximumsize = { 340 -1 }
+			margin = { 10 6 }
+			
+			background = {
+				using = default_header_bg
+				margin = { -2 0 }
+			}
+			
+			flowcontainer = {
+				parentanchor = right|vcenter
+				position = { -3 0 }
+				spacing = 5
+				
+				textbox = {
+					visible = "[IsDataModelEmpty(AccessPlayer.AccessActiveNonPlayerObjectiveJournalEntries)]"
+					text = "NO_JOURNAL_ENTRIES_OUTLINER"
+					autoresize = yes
+					align = nobaseline
+				}
+				
+				button_icon_goto = {
+					size = { 25 25 }
+					onclick = "[GetVariableSystem.Set('com_open_window', 'com_international_organizations_sgui')]"
+					tooltip = "com_gui_goto_international_orgs_panel"
+				}
+			}
+		}
+		
+		flowcontainer = {
+			direction = vertical
+			parentanchor = hcenter
+			visible = "[Not(IsDataModelEmpty(AccessPlayer.AccessActivePinnedNonPlayerObjectiveJournalEntries))]"
+			datamodel = "[AccessPlayer.AccessActivePinnedNonPlayerObjectiveJournalEntries]"
+			
+			item = {
+				com_outliner_international_organizations = { } # CMF Hide Journal Entries
+			}
+		}
+	}
+	
+	type com_outliner_journal_entry = journal_entry {
+		using = default_list_position
+		blockoverride "button_style" {
+			using = glow_button
+		}
+		blockoverride "background" {
+			background = {
+				using = dark_area
+				alpha = 0.3
+				
+				modify_texture = {
+					texture = "gfx/interface/masks/fade_horizontal_center.dds"
+					blend_mode = alphamultiply
+					alpha = 1
+				}
+			}
+			
+			divider_clean = {
+				size = { 95% 2 }
+				parentanchor = hcenter|bottom
+			}
+		}
+		
+		visible = "[And(JournalEntry.IsValid, JournalEntry.IsPinnedInOutliner)]"
+		
+		blockoverride "flowcontainer_properties" {
+			margin = { 4 4 }
+			spacing = 4
+		}
+		blockoverride "minimumsize" {
+			minimumsize = { 340 -1 }
+		}
+		blockoverride "textsize" {
+			maximumsize = { 275 50 }
+			minimumsize = { 275 -1 }
+			fontsize_min = 14
+		}
+		blockoverride "fontsize" {}
+		blockoverride "iconsize" {
+			size = { 27 27 }
+		}
+		blockoverride "completing_iconsize" {
+			size = { 18 18 }
+		}
+		blockoverride "progressbar_size" {
+			size = { 265 10 }
+		}
+	}
+	
+	type com_outliner_international_organizations = journal_entry {
+		using = default_list_position
+		blockoverride "button_style" {
+			using = glow_button
+		}
+		blockoverride "background" {
+			background = {
+				using = dark_area
+				alpha = 0.3
+				
+				modify_texture = {
+					texture = "gfx/interface/masks/fade_horizontal_center.dds"
+					blend_mode = alphamultiply
+					alpha = 1
+				}
+			}
+			
+			divider_clean = {
+				size = { 95% 2 }
+				parentanchor = hcenter|bottom
+			}
+		}
+		
+		visible = "[And(JournalEntry.IsValid, JournalEntry.IsPinnedInOutliner)]"
+		
+		blockoverride "flowcontainer_properties" {
+			margin = { 4 4 }
+			spacing = 4
+		}
+		blockoverride "minimumsize" {
+			minimumsize = { 340 -1 }
+		}
+		blockoverride "textsize" {
+			maximumsize = { 275 50 }
+			minimumsize = { 275 -1 }
+			fontsize_min = 14
+		}
+		blockoverride "fontsize" {}
+		blockoverride "iconsize" {
+			size = { 27 27 }
+		}
+		blockoverride "completing_iconsize" {
+			size = { 18 18 }
+		}
+		blockoverride "progressbar_size" {
+			size = { 265 10 }
 		}
 	}
 }

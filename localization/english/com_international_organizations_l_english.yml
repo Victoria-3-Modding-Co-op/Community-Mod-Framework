@@ -19,7 +19,7 @@
  
  # Sidebar Ideology
  com_international_organizations_sgui: "com_international_organizations_sgui"
- com_international_organizations_sgui_desc: "International Organizations"
+ com_international_organizations_sgui_desc: "Organizations"
  
  # Tooltips
  com_add_international_organization_journal_entry: "The #bold [TopScope.GetLocalVariable('com_flag_loc').GetFlagName]#! [concept_com_international_organization] will be created"
@@ -31,3 +31,4 @@
  com_gui_organization_headquarters: "@com_formable_possible! [JournalEntry.MakeScope.Var('com_organization_headquarters_var').GetStateRegion.GetName]"
  com_gui_international_organizations_outliner: "[Concept('concept_com_international_organization','$concept_com_international_organizations$')]"
  com_gui_goto_international_orgs_panel: "Go to the [Concept('concept_com_international_organization','$concept_com_international_organizations$')] panel"
+ com_gui_additional_members: "There are additional members not displayed. Check the Organization to see all members."

@@ -40,6 +40,7 @@ com_debug.1 = {
 		fix_variable_error = { variable = com_international_organization_journal_groups }
 		fix_variable_error = { variable = je_group_com_supranational_organizations }
 		fix_variable_error = { variable = je_group_com_regional_organizations }
+		fix_variable_error = { variable = je_group_com_religious_organizations }
 		fix_variable_error = { variable = com_organization_headquarters_var }
 		fix_variable_error = { variable = com_involved_countries_country_var }
 		fix_variable_error = { variable = com_involved_countries_display_list }

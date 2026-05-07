@@ -301,8 +301,8 @@ types com_international_organizations_types {
 				
 				textbox = {
 					parentanchor = center
-					
-					raw_text = "YY XXXX"
+					visible = "[JournalEntry.MakeScope.Var('com_involved_countries_country_var').IsSet]"
+					text = "com_gui_organization_members"
 					autoresize = yes
 					align = left|nobaseline
 					multiline = yes
@@ -319,6 +319,7 @@ types com_international_organizations_types {
 			minimumsize = { @panel_width 40 }
 			
 			widget = {
+				visible = "[JournalEntry.MakeScope.Var('com_organization_headquarters_var').IsSet]"
 				size = { 140 30 }
 				
 				background = {
@@ -329,7 +330,7 @@ types com_international_organizations_types {
 				
 				textbox = {
 					parentanchor = center
-					raw_text = "HQ: Egyptian Desert"
+					text = "com_gui_organization_headquarters"
 					autoresize = yes
 					align = left|nobaseline
 					multiline = yes
@@ -339,16 +340,24 @@ types com_international_organizations_types {
 			
 			widget = {
 				size = { 320 30 }
-				
+				visible = "[Not(IsDataModelEmpty(JournalEntry.MakeScope.GetList('com_involved_countries_display_list')))]"
 				background = {
 					using = dark_area
 					alpha = 0.25
 					margin = { 5 0 }
 				}
 				
-				tiny_flag = {}
+				flowcontainer = {
+					minimumsize = { -1 30 }
+					maximumsize = { 320 30 }
+					spacing = 5
+					datamodel = "[JournalEntry.MakeScope.GetList('com_involved_countries_display_list')]"
+					
+					item = {
+						tiny_flag = {}
+					}
+				}
 			}
-			
 		}
 	}
 	

@@ -13,7 +13,24 @@ com_activate_international_organization_sidebar = {
 	set_global_variable = com_international_ogranization_var
 }
 
-com_update_international_ogranization_value_list = {
+com_set_international_organization_headquaters_effect = {
+	if = {
+		limit = {
+			exists = scope:journal_entry
+		}
+		scope:journal_entry = {
+			set_variable = {
+				name = com_organization_headquarters_var
+				value = $state_region$
+			}
+		}
+	}
+	else = {
+		error_log = "com_set_international_organization_headquaters_effect was called, but scope:journal_entry was not available."
+	}
+}
+
+com_update_international_ogranization_value_list_effect = {
 	if = {
 		limit = {
 			exists = scope:journal_entry
@@ -34,7 +51,7 @@ com_update_international_ogranization_value_list = {
 		}
 	}
 	else = {
-		error_log = "com_update_international_ogranization_value_list was called, but scope:journal_entry was not available."
+		error_log = "com_update_international_ogranization_value_list_effect was called, but scope:journal_entry was not available."
 	}
 }
 

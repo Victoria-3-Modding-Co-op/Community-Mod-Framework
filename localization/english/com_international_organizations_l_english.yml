@@ -24,3 +24,5 @@
  # GUI
  com_gui_international_organizations_header: "International Organizations"
  com_gui_power_blocs_header: "Power Blocs"
+ com_gui_organization_members: "@com_offer_embassy! [JournalEntry.MakeScope.Var('com_involved_countries_country_var').GetValue]"
+ com_gui_organization_headquarters: "@com_formable_possible! [JournalEntry.MakeScope.Var('com_organization_headquarters_var').GetStateRegion.GetName]"

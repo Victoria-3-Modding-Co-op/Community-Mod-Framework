@@ -223,7 +223,7 @@ types com_ongoing_outliner_items {
 		visible = "[And3(
 			JournalEntry.IsValid,
 			JournalEntry.IsPinnedInOutliner,
-			Not(GetScriptedGui('com_journal_entry_group_hidden').IsShown(GuiScope.SetRoot(AccessPlayer.MakeScope).AddScope('group_name', MakeScopeFlag(JournalEntry.GetType.GetGroup.GetKey)).End))
+			Not(GetScriptedGui('com_international_organization_journal_groups').IsShown(GuiScope.SetRoot(AccessPlayer.MakeScope).AddScope('group_name', MakeScopeFlag(JournalEntry.GetType.GetGroup.GetKey)).End))
 		)]"
 		
 		blockoverride "flowcontainer_properties" {
@@ -254,7 +254,7 @@ types com_ongoing_outliner_items {
 		visible = "[And3(
 			JournalEntry.IsValid,
 			JournalEntry.IsPinnedInOutliner,
-			GetScriptedGui('com_journal_entry_group_hidden').IsShown(GuiScope.SetRoot(AccessPlayer.MakeScope).AddScope('group_name', MakeScopeFlag(JournalEntry.GetType.GetGroup.GetKey)).End)
+			GetScriptedGui('com_international_organization_journal_groups').IsShown(GuiScope.SetRoot(AccessPlayer.MakeScope).AddScope('group_name', MakeScopeFlag(JournalEntry.GetType.GetGroup.GetKey)).End)
 		)]"
 		
 		using = default_list_position

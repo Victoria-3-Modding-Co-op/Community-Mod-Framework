@@ -355,7 +355,8 @@ types com_international_organizations_types {
 					maximumsize = { 320 30 }
 					margin_top = 5
 					spacing = 5
-					datamodel = "[JournalEntry.GetInvolvedCountries]"
+					datamodel = "[DataModelFirst(JournalEntry.GetInvolvedCountries, '(int32)9' )]"
+					
 					
 					background = {
 						using = dark_area
@@ -368,6 +369,26 @@ types com_international_organizations_types {
 							size = { 30 30 }
 							tiny_flag = {}
 						}
+					}
+					
+				}
+				
+				widget = {
+					parentanchor = right|vcenter
+					size = { 30 30 }
+					visible = "[GreaterThan_int32( GetDataModelSize(JournalEntry.GetInvolvedCountries), '(int32)9' )]"
+					icon = {
+						parentanchor = center
+						position = { 15 0 }
+						size = { 25 25 }
+						texture = gfx/interface/buttons/round_button_big_bg.dds
+						
+						icon = {
+							parentanchor = center
+							size = { 25 25 }
+							texture = "gfx/interface/buttons/button_icons/plus.dds"
+						}
+						tooltip = "com_gui_additional_members"
 					}
 				}
 			}
@@ -384,7 +405,7 @@ types com_international_organizations_types {
 					maximumsize = { 480 30 }
 					margin_top = 5
 					spacing = 5
-					datamodel = "[JournalEntry.GetInvolvedCountries]"
+					datamodel = "[DataModelFirst(JournalEntry.GetInvolvedCountries, '(int32)13' )]"
 					
 					background = {
 						using = dark_area
@@ -398,6 +419,23 @@ types com_international_organizations_types {
 							tiny_flag = {}
 						}
 					}
+				}
+				
+				widget = {
+					parentanchor = right|vcenter
+					size = { 30 30 }
+					visible = "[GreaterThan_int32( GetDataModelSize(JournalEntry.GetInvolvedCountries), '(int32)13' )]"
+					icon = {
+						parentanchor = center
+						size = { 25 25 }
+						texture = gfx/interface/buttons/round_button_big_bg.dds
+					}
+					icon = {
+						parentanchor = center
+						size = { 25 25 }
+						texture = "gfx/interface/buttons/button_icons/plus.dds"
+					}
+					tooltip = "com_gui_additional_members"
 				}
 			}
 		}

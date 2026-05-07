@@ -1,0 +1,100 @@
+# INHERITED FROM BASE GAME
+@panel_width_minus_10 = 530			# used to be 450
+@panel_width_minus_30 = 510
+@panel_width = 540  				# used to be 460
+@panel_width_half = 270				# used to be 230
+@panel_width_plus_10 = 550  		# used to be 470
+@panel_width_plus_14 = 554			# used to be 474
+@panel_width_plus_14_half = 277		# used to be 237
+@panel_width_plus_20 = 560			# used to be 480
+@panel_width_plus_30 = 570			# used to be 490
+@panel_width_plus_70 = 610			# used to be 530
+
+widget = {
+	name = "com_international_organizations_panel"
+	size { 100% 100% }
+	layer = layer_ingame_menu
+	visible = "[GetMetaPlayer.GetPlayedOrObservedCountry.IsValid]"
+}
+
+
+types com_international_organizations_types {
+	type com_international_organizations_panel = default_block_window {
+		
+		visible = "[GetVariableSystem.HasValue('com_open_window', 'com_international_organizations_sgui')]"
+		
+		blockoverride "animation_state_block" {
+			state = {
+				name = _show
+				# Close open panel before showing this one
+				on_start = "[InformationPanelBar.ClosePanel]"
+				on_start = "[MapListPanelManager.CloseCurrentPanel]"
+				start_sound = {
+					soundeffect = "event:/SFX/UI/SideBar/journal"
+				}
+			}
+			state = {
+				name = _hide
+				start_sound = {
+					soundeffect = "event:/SFX/UI/SideBar/journal_stop"
+				}
+				on_finish = "[GetVariableSystem.Clear('com_fullscreen')]"
+			}
+		}
+		
+		blockoverride "window_header_name" {
+			text = "je_group_com_international_organizations"
+		}
+		
+		blockoverride "scrollarea_content" {
+			flowcontainer = {
+				direction = vertical
+				using = default_content_fade
+				using = default_list_position
+				direction = vertical
+				margin_top = 10
+				
+				empty_state = {
+					blockoverride "visible" {
+						visible = "[IsDataModelEmpty(AccessPlayer.AccessActiveNonPlayerObjectiveJournalEntries)]"
+					}
+					blockoverride "text" {
+						text = "NO_JOURNAL_ENTRIES"
+					}
+				}
+				
+				flowcontainer = {
+					direction = vertical
+					parentanchor = hcenter
+					datamodel = "[AccessPlayer.GetGroupsForActiveJournalEntries]"
+					spacing = 10
+					margin_bottom = 10
+					
+					item = {
+						flowcontainer = {
+							visible = "[Not(GetScriptedGui('com_journal_entry_group_hidden').IsShown(GuiScope.SetRoot(AccessPlayer.MakeScope).AddScope('group_name', MakeScopeFlag(JournalEntryGroup.GetKey)).End))]"
+							direction = vertical
+							textbox = {
+								text = "[JournalEntryGroup.GetName]"
+								autoresize = yes
+								align = nobaseline
+								default_format = "#title"
+								margin_left = 3
+							}
+							flowcontainer = {
+								direction = vertical
+								datamodel = "[JournalEntryGroup.GetActiveJournalEntryTypes(GetPlayer.Self)]"
+								spacing = 2
+								item = {
+									journal_entry = {
+										datacontext = "[AccessPlayer.GetJournalEntry(JournalEntryType.Self)]"
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

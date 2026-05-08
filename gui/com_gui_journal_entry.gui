@@ -221,7 +221,10 @@ types journal_entry_overwrites {
 
 				dynamicgridbox = {
 					parentanchor = hcenter
-					visible = "[Not( IsDataModelEmpty( JournalEntry.GetScriptedButtons ) )]"
+					"[And(
+						Not(JournalEntry.MakeScope.Var('com_hide_scripted_buttons').IsSet),
+						Not( IsDataModelEmpty( JournalEntry.GetScriptedButtons ) )
+					)]"
 					datamodel = "[JournalEntry.GetScriptedButtons]"
 					datamodel_wrap = 2
 					flipdirection = yes

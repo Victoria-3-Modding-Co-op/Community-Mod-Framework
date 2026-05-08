@@ -22,6 +22,7 @@ flowcontainer = {
 				texture = "gfx/interface/icons/alert_icons/formable_possible.dds"
 			}
 		}
+		com_international_organization_buttons = {}
 	}
 }
 
@@ -358,13 +359,15 @@ types com_international_organization_types {
 	}
 	
 	type com_international_organization_buttons = flowcontainer {
+		parentanchor = center
 		direction = vertical
+		spacing = 5
 		visible = "[Not( IsDataModelEmpty( JournalEntry.GetScriptedButtons ) )]"
 		datamodel = "[JournalEntry.GetScriptedButtons]"
 		
 		item = {
 			widget = {
-				size = { 260 60 }
+				size = { 400 40 }
 				
 				com_international_organization_scripted_button = {
 					parentanchor = center
@@ -378,7 +381,7 @@ types com_international_organization_types {
 		tooltip = "SCRIPTED_ACTION_TOOLTIP"
 		enabled = "[IsValid( ScriptedButton.ExecuteEffect )]"
 		onclick = "[Execute( ScriptedButton.ExecuteEffect )]"
-		size = { 250 50 }
+		size = { 400 40 }
 		margin = { 20 20 }
 		
 		widget = {

@@ -891,7 +891,7 @@ types journal_entry_overwrites {
 						using = default_button
 						parentanchor = hcenter
 						size = { @panel_width_minus_30 60 }
-						text = "TELL_ME_HOW"
+						text = "TELL_ME_HOW" # TO FEEL ABOUT YOU NOW
 						using = fontsize_large
 						tooltip = "[JournalEntry.CanStartTutorialLessonDesc]"
 						visible = "[JournalEntry.HasHowTutorialLesson]"
@@ -903,7 +903,7 @@ types journal_entry_overwrites {
 						using = default_button
 						parentanchor = hcenter
 						size = { @panel_width_minus_30 60 }
-						text = "TELL_ME_WHY"
+						text = "TELL_ME_WHY" # AINT NOTHING BUT A HEARTACHE
 						using = fontsize_large
 						tooltip = "[JournalEntry.CanStartTutorialLessonDesc]"
 						visible = "[JournalEntry.HasWhyTutorialLesson]"

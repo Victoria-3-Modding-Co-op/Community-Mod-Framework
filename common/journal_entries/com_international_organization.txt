@@ -79,6 +79,10 @@ je_com_regional_organization = {
 			com_update_international_ogranization_members_value_effect = {
 				type = je_com_regional_organization
 			}
+			set_variable = com_hide_journal_reason
+			set_variable = com_hide_involved_countries
+			set_variable = com_hide_complete_triggers
+			set_variable = com_hide_fail_triggers
 		}
 		com_activate_international_organization_sidebar = yes
 	}
@@ -129,6 +133,10 @@ je_com_religious_organization = {
 			com_set_international_organization_headquaters_effect = {
 				state_region = s:STATE_LAZIO
 			}
+			set_variable = com_hide_journal_reason
+			set_variable = com_hide_involved_countries
+			set_variable = com_hide_complete_triggers
+			set_variable = com_hide_fail_triggers
 		}
 		com_activate_international_organization_sidebar = yes
 	}

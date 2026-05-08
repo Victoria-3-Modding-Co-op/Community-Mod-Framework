@@ -7,17 +7,26 @@ flowcontainer = {
 		margin_top = 10
 		direction = vertical
 		
-		com_supranational_organization_spacer = {}
-		com_supranational_organization_panel = {
+		com_international_organization_spacer = {}
+		com_international_organization_panel = {
 			blockoverride "interorg_icon_frame_texture" {
 				texture = "gfx/coat_of_arms/textured_emblems/pb_frame_00.dds"
+			}
+			blockoverride "interorg_detail_1_name" {
+				raw_text = "Organization Type"
+			}
+			blockoverride "interorg_detail_1_content" {
+				raw_text = "Scripting Test Platform"
+			}
+			blockoverride "interorg_detail_1_texture" {
+				texture = "gfx/interface/icons/alert_icons/formable_possible.dds"
 			}
 		}
 	}
 }
 
 types com_international_organization_types {
-	type com_supranational_organization_panel = widget {
+	type com_international_organization_panel = widget {
 		# FRAME SIZE
 		size = { 552 300 }
 		using = Animation_Character_Panel_Refresh
@@ -31,7 +40,74 @@ types com_international_organization_types {
 			}
 		}
 		
-		### CHARACTER HERE
+		### ORGANIZATION LEADER
+		character_portrait_base_no_mask = {
+			parentanchor = left|vcenter
+			ignore_in_debug_draw = yes
+			size = { 340 340 }
+			max_update_rate = 24
+			
+			#visible = "[JournalEntry.MakeScope.Var('com_organization_leader_character_var').IsSet]"
+			datacontext = "[JournalEntry.MakeScope.Var('com_organization_leader_character_var').GetCharacter]"
+			
+			block "character_layout" {
+				position = { -54 -16 }
+			}
+			blockoverride "portrait_size" {
+				block "character_portrait_size" {
+					size = { 340 340 }
+				}
+			}
+			blockoverride "portrait_texture" {
+				datacontext = "[JournalEntry.MakeScope.Var('com_organization_leader_character_var')]"
+				portrait_texture = "[Scope.GetCharacter.GetAnimatedPortrait(
+					'ruler_environment',
+					'camera_event_left',
+					'commander_vs_left',
+					GetPortraitRenderSize(PdxGuiWidget.Self))
+				]"
+			}
+			blockoverride "portrait_icons" {}
+			blockoverride "tooltip" {}
+		}
+		
+		flowcontainer = {
+			direction = vertical
+			parentanchor = bottom|left
+			position = { 10 -20 }
+			spacing = 5
+			margin = { 5 5 }
+			
+			visible = "[JournalEntry.MakeScope.Var('com_organization_leader_character_var').IsSet]"
+			
+			background = {
+				using = dark_area
+				alpha = 0.75
+				
+				modify_texture = {
+					texture = "gfx/interface/masks/fade_horizontal_right.dds"
+					blend_mode = alphamultiply
+				}
+			}
+			
+			textbox = {
+				layoutpolicy_horizontal = expanding
+				size = { 200 18 }
+				text = "MR_CONFERENCE_CHAIR_TITLE"
+				align = left|nobaseline
+				elide = right
+				fontsize_min = 12
+			}
+			textbox = {
+				layoutpolicy_horizontal = expanding
+				size = { 200 20 }
+				text = "MR_CONFERENCE_CHAIR_NAME"
+				align = left|nobaseline
+				elide = right
+				fontsize_min = 12
+				using = fontsize_large
+			}
+		}
 		
 		# TOP/BOTTOM FADE
 		icon = {
@@ -81,6 +157,8 @@ types com_international_organization_types {
 				texture_density = 2
 			}
 		}
+		
+		## ICON
 		widget = {
 			parentanchor = top|hcenter
 			size = { 150 150 }
@@ -108,9 +186,229 @@ types com_international_organization_types {
 				}
 			}
 		}
+		
+		com_international_organization_details = {}
 	}
 	
-	type com_supranational_organization_spacer = widget {
-		size = { 540 30 }
+	type com_international_organization_details = flowcontainer {
+		parentanchor = right|vcenter
+		position = { -8 5 }
+		direction = vertical
+		spacing = 5
+		
+		background = {
+			using = dark_area
+			alpha = 0.75
+			
+			modify_texture = {
+				texture = "gfx/interface/masks/fade_horizontal_left_full.dds"
+				blend_mode = alphamultiply
+			}
+		}
+		
+		### SUBJECT MATTER
+		widget = {
+			size = { 200 50 }
+			
+			divider_clean = {
+				parentanchor = bottom
+			}
+			
+			hbox = {
+				layoutpolicy_horizontal = expanding
+				layoutpolicy_vertical = expanding
+				spacing = 7
+				
+				vbox = {
+					layoutpolicy_horizontal = expanding
+					layoutpolicy_vertical = expanding
+					margin = { 0 5 }
+					
+					textbox = {
+						layoutpolicy_horizontal = expanding
+						size = { 0 16 }
+						block "interorg_detail_1_name" {
+							text = "#todo interorg_detail_1_name#!"
+						}
+						align = right|nobaseline
+						elide = right
+						fontsize_min = 12
+					}
+					textbox = {
+						layoutpolicy_horizontal = expanding
+						size = { 0 20 }
+						block "interorg_detail_1_content" {
+							text = "#todo interorg_detail_1_content#!"
+						}
+						align = right|nobaseline
+						elide = right
+						fontsize_min = 12
+						using = fontsize_large
+					}
+				}
+				
+				icon = {
+					size = { 35 35 }
+					block "interorg_detail_1_texture" {
+						texture = "gfx/interface/icons/generic_icons/maybe_icon.dds"
+					}
+				}
+			}
+		}
+		
+		## HOST COUNTRY
+		widget = {
+			size = { 200 50 }
+			
+			divider_clean = {
+				parentanchor = bottom
+			}
+			
+			hbox = {
+				layoutpolicy_horizontal = expanding
+				layoutpolicy_vertical = expanding
+				spacing = 7
+				
+				vbox = {
+					layoutpolicy_horizontal = expanding
+					layoutpolicy_vertical = expanding
+					margin = { 0 5 }
+					
+					textbox = {
+						layoutpolicy_horizontal = expanding
+						size = { 0 16 }
+						block "interorg_detail_2_name" {
+							text = "#todo interorg_detail_2_name#!"
+						}
+						align = right|nobaseline
+						elide = right
+						fontsize_min = 12
+					}
+					textbox = {
+						layoutpolicy_horizontal = expanding
+						size = { 0 20 }
+						block "interorg_detail_2_content" {
+							text = "#todo interorg_detail_2_content#!"
+						}
+						align = right|nobaseline
+						elide = right
+						fontsize_min = 12
+						using = fontsize_large
+					}
+				}
+				
+				icon = {
+					size = { 35 35 }
+					block "interorg_detail_2_texture" {
+						texture = "gfx/interface/icons/generic_icons/maybe_icon.dds"
+					}
+				}
+			}
+		}
+		
+		### NUMBER OF PARTICIPANTS
+		widget = {
+			size = { 200 50 }
+			
+			divider_clean = {
+				parentanchor = bottom
+			}
+			
+			hbox = {
+				layoutpolicy_horizontal = expanding
+				layoutpolicy_vertical = expanding
+				spacing = 7
+				
+				vbox = {
+					layoutpolicy_horizontal = expanding
+					layoutpolicy_vertical = expanding
+					margin = { 0 5 }
+					
+					textbox = {
+						layoutpolicy_horizontal = expanding
+						size = { 0 16 }
+						block "interorg_detail_3_name" {
+							text = "#todo interorg_detail_3_name#!"
+						}
+						align = right|nobaseline
+						elide = right
+						fontsize_min = 12
+					}
+					textbox = {
+						layoutpolicy_horizontal = expanding
+						size = { 0 20 }
+						block "interorg_detail_3_content" {
+							text = "#todo interorg_detail_3_content#!"
+						}
+						align = right|nobaseline
+						elide = right
+						fontsize_min = 12
+						using = fontsize_large
+					}
+				}
+				
+				icon = {
+					size = { 35 35 }
+					block "interorg_detail_3_texture" {
+						texture = "gfx/interface/icons/generic_icons/maybe_icon.dds"
+					}
+				}
+			}
+		}
+	}
+	
+	type com_international_organization_buttons = flowcontainer {
+		direction = vertical
+		visible = "[Not( IsDataModelEmpty( JournalEntry.GetScriptedButtons ) )]"
+		datamodel = "[JournalEntry.GetScriptedButtons]"
+		
+		item = {
+			widget = {
+				size = { 260 60 }
+				
+				com_international_organization_scripted_button = {
+					parentanchor = center
+				}
+			}
+		}
+	}
+	
+	type com_international_organization_scripted_button = button {
+		using = default_button_action
+		tooltip = "SCRIPTED_ACTION_TOOLTIP"
+		enabled = "[IsValid( ScriptedButton.ExecuteEffect )]"
+		onclick = "[Execute( ScriptedButton.ExecuteEffect )]"
+		size = { 250 50 }
+		margin = { 20 20 }
+		
+		widget = {
+			visible = "[ScriptedButton.IsSelected]"
+			size = { 100% 100% }
+			
+			background = {
+				using = paper_bg
+			}
+		}
+		
+		textbox = {
+			parentanchor = center
+			align = nobaseline
+			autoresize = yes
+			max_width = 230
+			elide = right
+			fontsize_min = 14
+			text = "[ScriptedButton.GetName]"
+		}
+		
+		icon = {
+			visible = "[ScriptedButton.IsSelected]"
+			using = highlighted_square_selection
+		}
+	}
+	
+	type com_international_organization_spacer = widget {
+		block "spacer size" {
+			size = { 540 30 }
+		}
 	}
 }

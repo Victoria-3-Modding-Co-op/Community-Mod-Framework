@@ -1,13 +1,30 @@
+# INHERITED FROM BASE GAME
+@panel_width_minus_30 = 510
+@panel_width_minus_20 = 520
+@panel_width_minus_10 = 530			# used to be 450
+@panel_width = 540  				# used to be 460
+@panel_width_half = 270				# used to be 230
+@panel_width_plus_10 = 550  		# used to be 470
+@panel_width_plus_14 = 554			# used to be 474
+@panel_width_plus_14_half = 277		# used to be 237
+@panel_width_plus_20 = 560			# used to be 480
+@panel_width_plus_30 = 570			# used to be 490
+@panel_width_plus_70 = 610			# used to be 530
+
 #### WIDGETS
 flowcontainer = {
 	name = "widget_com_supranational_organization_base"
 	ignoreinvisible = yes
 	
 	flowcontainer = {
-		margin_top = 10
 		direction = vertical
+		spacing = 10
 		
-		com_international_organization_spacer = {}
+		com_international_organization_spacer = {
+			com_organizations_panel_button = {
+				parentanchor = top|left
+			}
+		}
 		com_international_organization_panel = {
 			blockoverride "interorg_icon_frame_texture" {
 				texture = "gfx/coat_of_arms/textured_emblems/pb_frame_00.dds"
@@ -22,7 +39,47 @@ flowcontainer = {
 				texture = "gfx/interface/icons/alert_icons/formable_possible.dds"
 			}
 		}
-		com_international_organization_buttons = {}
+		flowcontainer = {
+			direction = vertical
+			parentanchor = top|hcenter
+			minimumsize = { 540 -1 }
+			using = entry_bg_fancy
+			spacing = 10
+			margin_bottom = 20
+			
+			default_header_clean_faded = {
+				blockoverride "text" {
+					text = "com_gui_main_actions"
+				}
+				blockoverride "size" {
+					size = { 540 45 }
+				}
+			}
+			com_international_organization_buttons = {
+				background = {
+					using = entry_bg
+					margin = { 50 10 }
+				}
+			}
+		}
+		flowcontainer = {
+			direction = vertical
+			parentanchor = top|hcenter
+			minimumsize = { 540 -1 }
+			using = entry_bg_fancy
+			spacing = 10
+			margin_bottom = 20
+			
+			default_header_clean_faded = {
+				blockoverride "text" {
+					text = "com_gui_members"
+				}
+				blockoverride "size" {
+					size = { 540 45 }
+				}
+			}
+			com_international_organization_members = {}
+		}
 	}
 }
 
@@ -359,7 +416,7 @@ types com_international_organization_types {
 	}
 	
 	type com_international_organization_buttons = flowcontainer {
-		parentanchor = center
+		parentanchor = top|hcenter
 		direction = vertical
 		spacing = 5
 		visible = "[Not( IsDataModelEmpty( JournalEntry.GetScriptedButtons ) )]"
@@ -381,7 +438,7 @@ types com_international_organization_types {
 		tooltip = "SCRIPTED_ACTION_TOOLTIP"
 		enabled = "[IsValid( ScriptedButton.ExecuteEffect )]"
 		onclick = "[Execute( ScriptedButton.ExecuteEffect )]"
-		size = { 400 40 }
+		size = { 440 38 }
 		margin = { 20 20 }
 		
 		widget = {
@@ -409,9 +466,50 @@ types com_international_organization_types {
 		}
 	}
 	
+	type com_international_organization_members = flowcontainer {
+		direction = vertical
+		using = default_list_position
+		min_width = @panel_width_minus_30
+		max_width = @panel_width_minus_30
+		
+		dynamicgridbox = {
+			parentanchor = hcenter
+			datamodel = "[JournalEntry.GetInvolvedCountries]"
+			datamodel_wrap = 8
+			flipdirection = yes
+			
+			item = {
+				widget = {
+					size = { 60 60 }
+					
+					small_flag = {}
+				}
+			}
+		}
+	}
+	
 	type com_international_organization_spacer = widget {
 		block "spacer size" {
 			size = { 540 30 }
 		}
+	}
+	
+	type com_organizations_panel_button = button {
+		using = default_button_action
+		size = { 200 20 }
+		margin = { 20 20 }
+		onclick = "[GetVariableSystem.Set('com_open_window', 'com_international_organizations_sgui')]"
+		tooltip = "com_gui_goto_international_orgs_panel"
+		
+		textbox = {
+			parentanchor = center
+			align = nobaseline
+			autoresize = yes
+			max_width = 230
+			elide = right
+			fontsize_min = 14
+			text = "com_gui_international_organizations_outliner"
+		}
+		
 	}
 }

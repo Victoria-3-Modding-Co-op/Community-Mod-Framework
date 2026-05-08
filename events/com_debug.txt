@@ -37,6 +37,7 @@ com_debug.1 = {
 		fix_variable_error = { variable = com_hidden_journal_groups }
 		fix_variable_error = { variable = com_hide_timeout }
 		fix_variable_error = { variable = com_hide_status_desc }
+		fix_variable_error = { variable = com_hide_scripted_buttons }
 		fix_variable_error = { variable = com_hide_journal_reason }
 		fix_variable_error = { variable = com_hide_involved_countries }
 		fix_variable_error = { variable = com_hide_complete_triggers }

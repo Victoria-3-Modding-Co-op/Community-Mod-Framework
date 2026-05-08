@@ -9,6 +9,10 @@
 		container = "custom_widget_container_je_icon"
 	}
 	
+	scripted_button = sb_international_organizations_test_1
+	scripted_button = sb_international_organizations_test_2
+	scripted_button = sb_international_organizations_test_3
+	
 	should_be_involved = {
 		country_rank >= rank_value:great_power
 	}

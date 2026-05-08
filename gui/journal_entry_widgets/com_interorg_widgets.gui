@@ -86,7 +86,7 @@ flowcontainer = {
 types com_international_organization_types {
 	type com_international_organization_panel = widget {
 		# FRAME SIZE
-		size = { 552 300 }
+		size = { 540 300 }
 		using = Animation_Character_Panel_Refresh
 		
 		# BACKGROUND

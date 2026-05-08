@@ -30,9 +30,31 @@ types journal_entry_overwrites {
 		{
 			text = "[LabelingHelper.CapitalizeOnlyFirst(JournalEntry.GetName)]"
 		}
-
-		blockoverride "window_header_name_line_two" {
-			text = "JOURNAL_ENTRY_HEADING"
+		
+		## CMF overridden to allow for insertion of flag variables
+		blockoverride "window_header_container_line_two" {
+			textbox = {
+				visible = "[Not(JournalEntry.MakeScope.Var('com_header_var').IsSet)]"
+				parentanchor = vcenter
+				using = fontsize_large
+				autoresize = yes
+				text = "JOURNAL_ENTRY_HEADING"
+				max_width = 350
+				fontsize_min = 14
+				elide = right
+				align = hcenter|nobaseline
+			}
+			textbox = {
+				visible = "[JournalEntry.MakeScope.Var('com_header_var').IsSet]"
+				parentanchor = vcenter
+				using = fontsize_large
+				autoresize = yes
+				text = "JOURNAL_ENTRY_HEADING"
+				max_width = 350
+				fontsize_min = 14
+				elide = right
+				align = hcenter|nobaseline
+			}
 		}
 
 		blockoverride "scrollarea_content" {
@@ -167,6 +189,7 @@ types journal_entry_overwrites {
 				}
 
 				# time out info
+				## CMF - the variable com_hide_timeout will hide the timeout info
 				flowcontainer = {
 					visible = "[And(
 						JournalEntry.CanTimeOut,
@@ -190,7 +213,7 @@ types journal_entry_overwrites {
 				}
 
 				textbox = {
-					## CMF - the variable "com_hide_status_desc will hide the status_desc
+					## CMF - the variable com_hide_status_desc will hide the status_desc
 					visible = "[And(
 						Not(JournalEntry.MakeScope.Var('com_hide_status_desc').IsSet),
 						Not(StringIsEmpty(JournalEntry.GetStatusDesc))
@@ -218,7 +241,8 @@ types journal_entry_overwrites {
 					parentanchor = hcenter
 					direction = vertical
 				}
-
+				
+				## CMF - the variable com_hide_scripted_buttons will hide the scripted buttons
 				dynamicgridbox = {
 					parentanchor = hcenter
 					"[And(
@@ -852,7 +876,8 @@ types journal_entry_overwrites {
 							margin_left = 35
 							margin_right = 15
 						}
-
+						
+						## CMF - the variable com_hide_timeout will hide the timeout info
 						textbox = {
 							text = "[JournalEntry.GetOnTimeoutTooltip]"
 							visible = "[And(

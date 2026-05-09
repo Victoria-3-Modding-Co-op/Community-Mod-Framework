@@ -33,6 +33,7 @@ com_debug.1 = {
 		
 		# CMF Journal Entry Framework
 		fix_variable_error = { variable = com_hidden_journal_groups }
+		fix_variable_error = { variable = com_header_var }
 		fix_variable_error = { variable = com_hide_timeout }
 		fix_variable_error = { variable = com_hide_status_desc }
 		fix_variable_error = { variable = com_hide_scripted_buttons }
@@ -46,16 +47,22 @@ com_debug.1 = {
 		fix_variable_error = { variable = com_show_international_organizations }
 		fix_variable_error = { variable = com_international_organization_journal_groups }
 		fix_variable_error = { variable = com_international_situation_journal_groups }
-		fix_variable_error = { variable = je_group_com_hidden }
-		fix_variable_error = { variable = je_group_com_contextless_hidden }
-		fix_variable_error = { variable = je_group_com_supranational_organizations }
-		fix_variable_error = { variable = je_group_global_international_situations }
-		fix_variable_error = { variable = je_group_com_regional_organizations }
-		fix_variable_error = { variable = je_group_com_religious_organizations }
-		fix_variable_error = { variable = je_group_com_non_governmental_organizations }
 		fix_variable_error = { variable = com_organization_headquarters_var }
 		fix_variable_error = { variable = com_involved_countries_country_var }
 		fix_variable_error = { variable = com_involved_countries_display_list }
+		
+		fix_variable_error = { variable = je_group_com_hidden }
+		fix_variable_error = { variable = je_group_com_contextless_hidden }
+		fix_variable_error = { variable = je_group_com_supranational_organizations }
+		fix_variable_error = { variable = je_group_com_regional_organizations }
+		fix_variable_error = { variable = je_group_com_religious_organizations }
+		fix_variable_error = { variable = je_group_com_non_governmental_organizations }
+		fix_variable_error = { variable = je_group_com_sporting_organizations }
+		fix_variable_error = { variable = je_group_global_test }
+		fix_variable_error = { variable = je_group_global_international_situations }
+		fix_variable_error = { variable = je_group_british_india }
+		fix_variable_error = { variable = je_group_iberia }
+
 		
 		# CMF Sidebar Framework
 		fix_variable_error = { variable = custom_button_list }
@@ -141,6 +148,7 @@ com_debug.1 = {
 com_debug.2 = {
 	type = country_event
 	hidden = yes
+	orphan = yes
 	
 	trigger = {
 		# TEST EVENT. DO NOT CALL.

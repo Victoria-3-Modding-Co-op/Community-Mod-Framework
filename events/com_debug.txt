@@ -8,10 +8,8 @@
 
 namespace = com_debug
 
-####################
-
+# Variable Error Suppression
 com_debug.1 = {
-	# Variable Error Suppression
 	type = country_event
 	hidden = yes
 	orphan = yes
@@ -139,76 +137,23 @@ com_debug.1 = {
 	}
 }
 
+# Interorg Journal Testing
 com_debug.2 = {
-	# GUI window testing
 	type = country_event
-	placement = root
-	orphan = yes
-	
-	title = com_debug.t
-	desc = com_debug.d
-	flavor = com_debug.f
-	
-	minor_left_icon = scope:minor_left_icon
-	minor_right_icon = scope:minor_right_icon
-	
-	event_image = {
-		video = "unspecific_ruler_speaking_to_people"
-	}
-	
-	icon = "gfx/interface/icons/event_icons/event_default.dds"
-	
-	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
-	
-	duration = 3
+	hidden = yes
 	
 	trigger = {
-		# Testing only
+		# TEST EVENT. DO NOT CALL.
 	}
-	
 	immediate = {
-		ruler = {
-			save_scope_as = left_icon
-		}
-		ruler = {
-			save_scope_as = center_icon
-		}
-		ruler = {
-			save_scope_as = right_icon
-		}
-		save_scope_as = minor_left_icon
-		save_scope_as = minor_right_icon
-	}
-	
-	option = {
-		name = com_debug.a
-		default_option = yes
-		custom_tooltip = com_debug.tt
-	}
-	
-	option = {
-		name = com_debug.b
-		custom_tooltip = com_debug.tt
-	}
-	
-	option = {
-		name = com_debug.c
-		custom_tooltip = com_debug.tt
-	}
-	
-	option = {
-		name = com_debug.e
-		custom_tooltip = com_debug.tt
-	}
-	
-	option = {
-		name = com_debug.james
-		custom_tooltip = com_debug.james_tt
+		add_contextless_journal_entry = je_com_supranational_organization
+		add_contextless_journal_entry = je_com_regional_organization
+		add_contextless_journal_entry = je_com_religious_organization
 	}
 }
 
+# GUI window testing
 com_debug.3 = {
-	# GUI window testing
 	type = country_event
 	placement = root
 	orphan = yes

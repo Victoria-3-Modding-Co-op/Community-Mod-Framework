@@ -105,7 +105,7 @@ types com_international_organization_types {
 			size = { 340 340 }
 			max_update_rate = 24
 			
-			#visible = "[JournalEntry.MakeScope.Var('com_organization_leader_character_var').IsSet]"
+			visible = "[JournalEntry.MakeScope.Var('com_organization_leader_character_var').IsSet]"
 			datacontext = "[JournalEntry.MakeScope.Var('com_organization_leader_character_var').GetCharacter]"
 			
 			block "character_layout" {

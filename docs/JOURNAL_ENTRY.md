@@ -22,7 +22,7 @@ widget = {
 ## DLC Icon
 - **Injection Name:** `com_journal_entry_dlc_icon`
 - **Recommended Anchor:** `custom_widget_container_7`
-- **Screenshots:** [DLC icon](journal_entries/example_dlc_icon.png)
+- **Screenshots:** [DLC icon](images/journal_entries/example_dlc_icon.png)
 
 To add DLC/Mod information to a journal entry, CMF offers the scripted effect `add_com_dlc_icon`.
 
@@ -51,7 +51,7 @@ je_some_journal = {
 ## Characters with Opinions
 - **Injection Name:** `com_journal_entry_characters`
 - **Recommended Anchor:** `custom_widget_container_1`
-- **Screenshots:** [Single Character with Opinion](journal_entries/example_journal_entry_character_01.png), [Multiple Characters without Opinions](journal_entries/example_journal_entry_character_02.png)
+- **Screenshots:** [Single Character with Opinion](images/journal_entries/example_journal_entry_character_01.png), [Multiple Characters without Opinions](images/journal_entries/example_journal_entry_character_02.png)
 
 To add one or more characters to a journal entry you need
 to add them to a variable list called `com_journal_characters` in
@@ -103,9 +103,9 @@ This causes the journal modifiers to wrap in lines of 5. Now, up to 15 modifiers
 ## Progress Bar Styling
 - **Injection Name:** `com_journal_entry_progress_bars`
 - **Required Anchor:** `com_custom_widget_container_scripted_progress_bars` (This may change in the future)
-- **Screenshots:** [Example drifting progress bar](journal_entries/example_progress_bars.png)
+- **Screenshots:** [Example drifting progress bar](images/journal_entries/example_progress_bars.png)
 
-Scripted progress bars can be styled with a color, a drift effect, and a target marker, all dynamically settable and unsettable. For more details, see the [progress bar documentation](Progress_bars.md)
+Scripted progress bars can be styled with a color, a drift effect, and a target marker, all dynamically settable and unsettable. For more details, see the [progress bar documentation](PROGRESS_BARS.md)
 
 ## EU5 Style Situation Journal Entries
 - **Injection Names:**
@@ -115,7 +115,7 @@ Scripted progress bars can be styled with a color, a drift effect, and a target 
   - `com_situation_header_text`
   - `com_situation_victory_conditions`
   - `com_situation_faction_list`
-- **Screenshots:** [No sides](journal_entries/example_situations_no_sides.jpg), [One sides](journal_entries/example_situations_one_side.jpg)
+- **Screenshots:** [No sides](images/journal_entries/example_situations_no_sides.jpg), [One sides](images/journal_entries/example_situations_one_side.jpg)
 
 **NOTE: CMF Situations do not work with the new global journal entries. Help us fix this by contributing!**
 

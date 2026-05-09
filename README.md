@@ -1,5 +1,5 @@
 # Community Mod Framework
-![banner.png](docs/banner.png)
+![banner.png](docs/images/banner.png)
 
 The Community Mod Framework aims to support compatibility between different mods.
 Including GUI, Political Movements, Parties, Mod detection triggers and much more.
@@ -126,40 +126,40 @@ gui_window = <event_window_key>
 ### Available Event Windows
 
 Character Windows:
-- [event_window_1char_adventure](docs/event_windows/event_window_1char_adventure.png)
-- [event_window_2char_adventure](docs/event_windows/event_window_2char_adventure.png)
-- [event_window_2char_duel](docs/event_windows/event_window_2char_duel.png)
-- [event_window_highlander](docs/event_windows/event_window_highlander.png)
-- [event_window_3char_selection](docs/event_windows/event_window_3char_selection.png)
+- [event_window_1char_adventure](docs/images/event_windows/event_window_1char_adventure.png)
+- [event_window_2char_adventure](docs/images/event_windows/event_window_2char_adventure.png)
+- [event_window_2char_duel](docs/images/event_windows/event_window_2char_duel.png)
+- [event_window_highlander](docs/images/event_windows/event_window_highlander.png)
+- [event_window_3char_selection](docs/images/event_windows/event_window_3char_selection.png)
 
 Superevent Windows:
-- [event_window_superevent_newspaper](docs/event_windows/event_window_superevent_newspaper.png)
-- [event_window_superevent_newspaper_full](docs/event_windows/event_window_superevent_newspaper_full.png)
-- [event_window_superevent_classic](docs/event_windows/event_window_superevent_classic.png)
-- [event_window_superevent_classic_full](docs/event_windows/event_window_superevent_classic_full.png)
-- [event_window_superevent_modern](docs/event_windows/event_window_superevent_modern.png)
-- [event_window_superevent_modern_full](docs/event_windows/event_window_superevent_modern_full.png)
-- [event_window_superevent_crisis](docs/event_windows/event_window_superevent_crisis.png)
+- [event_window_superevent_newspaper](docs/images/event_windows/event_window_superevent_newspaper.png)
+- [event_window_superevent_newspaper_full](docs/images/event_windows/event_window_superevent_newspaper_full.png)
+- [event_window_superevent_classic](docs/images/event_windows/event_window_superevent_classic.png)
+- [event_window_superevent_classic_full](docs/images/event_windows/event_window_superevent_classic_full.png)
+- [event_window_superevent_modern](docs/images/event_windows/event_window_superevent_modern.png)
+- [event_window_superevent_modern_full](docs/images/event_windows/event_window_superevent_modern_full.png)
+- [event_window_superevent_crisis](docs/images/event_windows/event_window_superevent_crisis.png)
 
 Widescreen Windows:
-- [event_window_widescreen_classic](docs/event_windows/event_window_widescreen_classic.png)
-- [event_window_widescreen_newspaper](docs/event_windows/event_window_widescreen_newspaper.png)
+- [event_window_widescreen_classic](docs/images/event_windows/event_window_widescreen_classic.png)
+- [event_window_widescreen_newspaper](docs/images/event_windows/event_window_widescreen_newspaper.png)
 
 Ethics Style Window:
-- [event_window_ethics](docs/event_windows/event_window_ethics.png)
+- [event_window_ethics](docs/images/event_windows/event_window_ethics.png)
 
 Paper Style Window:
-- [com_event_window_letter_simple](docs/event_windows/com_event_window_letter_simple.png)
-- [com_event_window_letter_image](docs/event_windows/com_event_window_letter_image.png)
-- [com_event_window_letter_paper](docs/event_windows/com_event_window_letter_paper.png) (Default View)
-- [com_event_window_letter_paper](docs/event_windows/com_event_window_letter_paper_transcribed.png) (Transcribed View)
-- [com_event_window_telegram](docs/event_windows/com_event_window_telegram.png)
-- [com_event_window_newspaper](docs/event_windows/com_event_window_newspaper.png)
+- [com_event_window_letter_simple](docs/images/event_windows/com_event_window_letter_simple.png)
+- [com_event_window_letter_image](docs/images/event_windows/com_event_window_letter_image.png)
+- [com_event_window_letter_paper](docs/images/event_windows/com_event_window_letter_paper.png) (Default View)
+- [com_event_window_letter_paper](docs/images/event_windows/com_event_window_letter_paper_transcribed.png) (Transcribed View)
+- [com_event_window_telegram](docs/images/event_windows/com_event_window_telegram.png)
+- [com_event_window_newspaper](docs/images/event_windows/com_event_window_newspaper.png)
 
 Europa Universalis V Style Windows:
-- [event_window_europa_classic](docs/event_windows/event_window_europa_variants.png)
-- [event_window_europa_1_char](docs/event_windows/event_window_europa_variants.png)
-- [event_window_europa_2_char](docs/event_windows/event_window_europa_variants.png)
+- [event_window_europa_classic](docs/images/event_windows/event_window_europa_variants.png)
+- [event_window_europa_1_char](docs/images/event_windows/event_window_europa_variants.png)
+- [event_window_europa_2_char](docs/images/event_windows/event_window_europa_variants.png)
 
 ### Usage Notes
 - For ease of use, any modded windows with characters will expect a character scope for the arguments `left_icon = scope:some_character`, `right_icon = scope:some_character` and `center_icon = scope:some_character` if the event has three characters. Just like the vanilla events do.
@@ -218,7 +218,7 @@ set_variable = {
 
 ## Sidebar Button
 
-Screenshot: [Example](docs/example_sidebar_01.png)
+Screenshot: [Example](docs/images/example_sidebar_01.png)
 
 How to add a new button to the sidebar.
 
@@ -595,7 +595,7 @@ every_country = {
 # Float Arrays
 Float arrays are a custom data type implemented through scripted variables, enabling efficient indexed storage similar to float arrays in traditional programming languages. Credit to BigBruh and CaesarVincens.
 
-See [the documentation page for details](docs/floatarray.md) on effects and triggers.
+See [the documentation page for details](docs/FLOAT_ARRAY.md) on effects and triggers.
 
 # Parties
 
@@ -654,7 +654,7 @@ Note: It is possible to add additional keybinds if there are no keybinds left.
 # Additional Modifier Icons
 
 Over 100 new modifier icons for more variety. Credit to Caelreader. PSD template available in docs.
-Screenshot: [Modifier Icons](docs/timed_modifier_icons.png)
+Screenshot: [Modifier Icons](docs/images/timed_modifier_icons.png)
 
 # Heir Blocker
 

@@ -351,7 +351,7 @@ types com_international_organizations_types {
 				)]"
 				
 				flowcontainer = {
-					minimumsize = { -1 30 }
+					minimumsize = { 320 30 }
 					maximumsize = { 320 30 }
 					margin_top = 5
 					spacing = 5
@@ -400,7 +400,7 @@ types com_international_organizations_types {
 				)]"
 				
 				flowcontainer = {
-					minimumsize = { -1 30 }
+					minimumsize = { 480 30 }
 					maximumsize = { 480 30 }
 					margin_top = 5
 					spacing = 5

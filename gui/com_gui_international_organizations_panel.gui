@@ -209,7 +209,7 @@ types com_international_organizations_types {
 		
 		button = {
 			minimumsize = { @panel_width 40 }
-			
+			using = default_button_action
 			onclick = "[InformationPanelBar.OpenJournalEntryPanel(JournalEntry.AccessSelf)]"
 			enabled = "[JournalEntry.IsActive]"
 			
@@ -370,7 +370,6 @@ types com_international_organizations_types {
 							tiny_flag = {}
 						}
 					}
-					
 				}
 				
 				widget = {

@@ -54,7 +54,7 @@
  
  # GUI - Outliner Container
  com_gui_international_organizations_outliner: "$com_international_organizations$"
- com_gui_international_situations_outliner: "[Concept('concept_com_international_situation','$concept_com_international_situations$')]"
+ com_gui_international_situations_outliner: "$com_international_situations$"
  com_gui_goto_international_orgs_panel: "Go to the $com_international_organizations$ panel"
  
  # GUI - Journal Entry Widgets

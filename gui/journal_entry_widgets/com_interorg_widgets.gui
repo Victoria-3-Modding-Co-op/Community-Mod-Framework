@@ -11,9 +11,29 @@
 @panel_width_plus_30 = 570			# used to be 490
 @panel_width_plus_70 = 610			# used to be 530
 
-#### WIDGETS
+####---------- INJECTABLE JOURNAL ENTRY WIDGETS ----------####
+
+# Interorg Base Widget
 flowcontainer = {
-	name = "widget_com_supranational_organization_base"
+	name = "widget_com_international_organization_base"
+	ignoreinvisible = yes
+	
+	flowcontainer = {
+		direction = vertical
+		spacing = 10
+		
+		com_international_organization_header = {}
+		com_international_organization_panel = {}
+		com_international_organization_reason = {}
+		com_international_organization_buttons = {}
+		com_international_organization_modifiers = {}
+		com_international_organization_members = {}
+	}
+}
+
+# Supranational Interorg Widget
+flowcontainer = {
+	name = "widget_com_supranational_organization"
 	ignoreinvisible = yes
 	
 	flowcontainer = {
@@ -25,15 +45,6 @@ flowcontainer = {
 			blockoverride "interorg_icon_frame_texture" {
 				texture = "gfx/coat_of_arms/textured_emblems/pb_frame_00.dds"
 			}
-			blockoverride "interorg_detail_1_name" {
-				raw_text = "Organization Type"
-			}
-			blockoverride "interorg_detail_1_content" {
-				raw_text = "Scripting Test Platform"
-			}
-			blockoverride "interorg_detail_1_texture" {
-				texture = "gfx/interface/icons/alert_icons/formable_possible.dds"
-			}
 		}
 		com_international_organization_reason = {}
 		com_international_organization_buttons = {}
@@ -42,6 +53,7 @@ flowcontainer = {
 	}
 }
 
+####---------- INTERNATIONAL ORGANIZATION GUI TYPES ----------####
 types com_international_organization_types {
 	
 	type com_international_organization_header = widget {
@@ -256,12 +268,12 @@ types com_international_organization_types {
 			}
 		}
 		
-		### SUBJECT MATTER
+		### LEADER/HOST COUNTRY
 		widget = {
 			size = { 200 50 }
 			
 			block "interorg_detail_1_visibility" {
-				visible = "[JournalEntry.MakeScope.Var('com_organization_leader_character_var').IsSet]"
+				visible = "[JournalEntry.MakeScope.Var('com_organization_leader_country_var').IsSet]"
 			}
 			
 			divider_clean = {
@@ -282,7 +294,7 @@ types com_international_organization_types {
 						layoutpolicy_horizontal = expanding
 						size = { 0 16 }
 						block "interorg_detail_1_name" {
-							raw_text = "#todo interorg_detail_1_name#!"
+							text = "com_gui_interorg_leader_header"
 						}
 						align = right|nobaseline
 						elide = right
@@ -292,7 +304,7 @@ types com_international_organization_types {
 						layoutpolicy_horizontal = expanding
 						size = { 0 20 }
 						block "interorg_detail_1_content" {
-							raw_text = "#todo interorg_detail_1_content#!"
+							text = "com_gui_interorg_leader_name"
 						}
 						align = right|nobaseline
 						elide = right
@@ -304,13 +316,13 @@ types com_international_organization_types {
 				icon = {
 					size = { 35 35 }
 					block "interorg_detail_1_texture" {
-						texture = "gfx/interface/icons/generic_icons/maybe_icon.dds"
+						texture = "gfx/interface/icons/alert_icons/formable_possible.dds"
 					}
 				}
 			}
 		}
 		
-		## HOST COUNTRY
+		## HEADQUARTERS LOCATION
 		widget = {
 			size = { 200 50 }
 			
@@ -336,7 +348,7 @@ types com_international_organization_types {
 						layoutpolicy_horizontal = expanding
 						size = { 0 16 }
 						block "interorg_detail_2_name" {
-							raw_text = "#todo interorg_detail_2_name#!"
+							text = "com_gui_interorg_headquaters_header"
 						}
 						align = right|nobaseline
 						elide = right
@@ -346,7 +358,7 @@ types com_international_organization_types {
 						layoutpolicy_horizontal = expanding
 						size = { 0 20 }
 						block "interorg_detail_2_content" {
-							raw_text = "#todo interorg_detail_2_content#!"
+							text = "com_gui_interorg_headquaters_name"
 						}
 						align = right|nobaseline
 						elide = right
@@ -358,7 +370,7 @@ types com_international_organization_types {
 				icon = {
 					size = { 35 35 }
 					block "interorg_detail_2_texture" {
-						texture = "gfx/interface/icons/generic_icons/maybe_icon.dds"
+						texture = "gfx/interface/icons/generic_icons/most_senior_front_commander.dds"
 					}
 				}
 			}
@@ -390,7 +402,7 @@ types com_international_organization_types {
 						layoutpolicy_horizontal = expanding
 						size = { 0 16 }
 						block "interorg_detail_3_name" {
-							raw_text = "#todo interorg_detail_3_name#!"
+							text = "com_gui_interorg_participants_header"
 						}
 						align = right|nobaseline
 						elide = right
@@ -400,7 +412,7 @@ types com_international_organization_types {
 						layoutpolicy_horizontal = expanding
 						size = { 0 20 }
 						block "interorg_detail_3_content" {
-							raw_text = "#todo interorg_detail_3_content#!"
+							text = "com_gui_interorg_participants_name"
 						}
 						align = right|nobaseline
 						elide = right
@@ -412,7 +424,7 @@ types com_international_organization_types {
 				icon = {
 					size = { 35 35 }
 					block "interorg_detail_3_texture" {
-						texture = "gfx/interface/icons/generic_icons/maybe_icon.dds"
+						texture = "gfx/interface/icons/generic_icons/number_of_countries.dds"
 					}
 				}
 			}

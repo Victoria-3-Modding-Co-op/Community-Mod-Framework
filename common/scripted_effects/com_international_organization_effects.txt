@@ -22,7 +22,7 @@ com_add_international_organization_journal_entry = {
 }
 
 com_activate_international_organization_sidebar = {
-	set_global_variable = com_international_ogranization_var
+	set_global_variable = com_activate_interorg_widget_var
 }
 
 com_set_international_organization_headquaters_effect = {

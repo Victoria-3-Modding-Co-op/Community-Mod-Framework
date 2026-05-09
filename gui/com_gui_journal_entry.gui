@@ -157,7 +157,11 @@ types journal_entry_overwrites {
 				widget = {
 					size = { @panel_width_plus_20 60 }
 					parentanchor = hcenter
-					visible = "[And(JournalEntry.HasCustomWidget('custom_widget_container_je_icon'), Not(IsDataModelEmpty(JournalEntry.GetTimedModifiers)) )]"
+					visible = "[And3(
+						JournalEntry.HasCustomWidget('custom_widget_container_je_icon'),
+						Not(IsDataModelEmpty(JournalEntry.GetTimedModifiers)),
+						Not(JournalEntry.MakeScope.Var('com_hide_modifiers').IsSet)
+					)]"
 					
 					flowcontainer = {
 						background = {

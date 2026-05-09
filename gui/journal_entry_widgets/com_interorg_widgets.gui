@@ -37,6 +37,7 @@ flowcontainer = {
 		}
 		com_international_organization_reason = {}
 		com_international_organization_buttons = {}
+		com_international_organization_modifiers = {}
 		com_international_organization_members = {}
 	}
 }
@@ -102,8 +103,8 @@ types com_international_organization_types {
 				datacontext = "[JournalEntry.MakeScope.Var('com_organization_leader_character_var')]"
 				portrait_texture = "[Scope.GetCharacter.GetAnimatedPortrait(
 					'ruler_environment',
-					'camera_event_left',
-					'commander_vs_left',
+					'camera_body',
+					'idle',
 					GetPortraitRenderSize(PdxGuiWidget.Self))
 				]"
 			}
@@ -534,6 +535,67 @@ types com_international_organization_types {
 						size = { 60 30 }
 						
 						small_flag = {}
+					}
+				}
+			}
+		}
+	}
+	type com_international_organization_modifiers = flowcontainer {
+		visible = "[Not(IsDataModelEmpty(JournalEntry.GetTimedModifiers))]"
+		direction = vertical
+		parentanchor = top|hcenter
+		minimumsize = { 540 -1 }
+		using = entry_bg_fancy
+		spacing = 10
+		margin_bottom = 20
+
+		background = {
+			using = entry_bg
+			margin = { -3 -2 }
+		}
+
+		default_header_clean_faded = {
+			blockoverride "text" {
+				text = "MODIFIERS"
+			}
+			blockoverride "size" {
+				size = { 540 45 }
+			}
+		}
+
+		flowcontainer = {
+			datamodel = "[JournalEntry.GetTimedModifiers]"
+			spacing = 5
+			minimumsize = { 500 -1 }
+			parentanchor = hcenter
+			direction = vertical
+
+			item = {
+				container = {
+					minimumsize = { 500 -1 }
+					tooltip = "[TimedModifier.GetTooltip]"
+
+					flowcontainer = {
+						spacing = 10
+
+						icon = {
+							texture = "[TimedModifier.GetIcon]"
+							size = { 25 25 }
+						}
+
+						textbox = {
+							text = "[TimedModifier.GetName]"
+							autoresize = yes
+							align = nobaseline
+							parentanchor = vcenter
+						}
+					}
+
+					textbox = {
+						text = "[TimedModifier.GetRemainingDuration]"
+						autoresize = yes
+						align = nobaseline
+						parentanchor = right|vcenter
 					}
 				}
 			}

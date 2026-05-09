@@ -245,7 +245,7 @@ types journal_entry_overwrites {
 				## CMF - the variable com_hide_scripted_buttons will hide the scripted buttons
 				dynamicgridbox = {
 					parentanchor = hcenter
-					"[And(
+					visible = "[And(
 						Not(JournalEntry.MakeScope.Var('com_hide_scripted_buttons').IsSet),
 						Not( IsDataModelEmpty( JournalEntry.GetScriptedButtons ) )
 					)]"

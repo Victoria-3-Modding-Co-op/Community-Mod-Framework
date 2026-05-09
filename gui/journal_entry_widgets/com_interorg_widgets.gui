@@ -109,7 +109,9 @@ types com_international_organization_types {
 			textbox = {
 				layoutpolicy_horizontal = expanding
 				size = { 200 18 }
-				text = "MR_CONFERENCE_CHAIR_TITLE"
+				block "interorg_leader_title" {
+					raw_text = "#todo interorg_leader_title#!"
+				}
 				align = left|nobaseline
 				elide = right
 				fontsize_min = 12
@@ -117,7 +119,9 @@ types com_international_organization_types {
 			textbox = {
 				layoutpolicy_horizontal = expanding
 				size = { 200 20 }
-				text = "MR_CONFERENCE_CHAIR_NAME"
+				block "interorg_leader_name" {
+					raw_text = "#todo interorg_leader_name#!"
+				}
 				align = left|nobaseline
 				elide = right
 				fontsize_min = 12
@@ -244,7 +248,7 @@ types com_international_organization_types {
 						layoutpolicy_horizontal = expanding
 						size = { 0 16 }
 						block "interorg_detail_1_name" {
-							text = "#todo interorg_detail_1_name#!"
+							raw_text = "#todo interorg_detail_1_name#!"
 						}
 						align = right|nobaseline
 						elide = right
@@ -254,7 +258,7 @@ types com_international_organization_types {
 						layoutpolicy_horizontal = expanding
 						size = { 0 20 }
 						block "interorg_detail_1_content" {
-							text = "#todo interorg_detail_1_content#!"
+							raw_text = "#todo interorg_detail_1_content#!"
 						}
 						align = right|nobaseline
 						elide = right
@@ -294,7 +298,7 @@ types com_international_organization_types {
 						layoutpolicy_horizontal = expanding
 						size = { 0 16 }
 						block "interorg_detail_2_name" {
-							text = "#todo interorg_detail_2_name#!"
+							raw_text = "#todo interorg_detail_2_name#!"
 						}
 						align = right|nobaseline
 						elide = right
@@ -304,7 +308,7 @@ types com_international_organization_types {
 						layoutpolicy_horizontal = expanding
 						size = { 0 20 }
 						block "interorg_detail_2_content" {
-							text = "#todo interorg_detail_2_content#!"
+							raw_text = "#todo interorg_detail_2_content#!"
 						}
 						align = right|nobaseline
 						elide = right
@@ -344,7 +348,7 @@ types com_international_organization_types {
 						layoutpolicy_horizontal = expanding
 						size = { 0 16 }
 						block "interorg_detail_3_name" {
-							text = "#todo interorg_detail_3_name#!"
+							raw_text = "#todo interorg_detail_3_name#!"
 						}
 						align = right|nobaseline
 						elide = right
@@ -354,7 +358,7 @@ types com_international_organization_types {
 						layoutpolicy_horizontal = expanding
 						size = { 0 20 }
 						block "interorg_detail_3_content" {
-							text = "#todo interorg_detail_3_content#!"
+							raw_text = "#todo interorg_detail_3_content#!"
 						}
 						align = right|nobaseline
 						elide = right
@@ -479,7 +483,7 @@ types com_international_organization_types {
 			}
 		}
 		
-		flowcontainter = {
+		flowcontainer = {
 			direction = vertical
 			using = default_list_position
 			min_width = @panel_width_minus_30

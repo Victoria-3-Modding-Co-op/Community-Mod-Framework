@@ -29,21 +29,11 @@ on_com_save_structs = {
 				set_career_length = {
 					years = 10000
 				}
-				if = {
-					limit = {
-						NOT = {
-							has_role = com_struct_role
-						}
+				replace_character_roles = {
+					add = {
+						com_struct_role
 					}
-					remove_character_role = politician
-					remove_character_role = general
-					remove_character_role = admiral
-					remove_character_role = executive
-					remove_character_role = magnate
-					remove_character_role = heir
-					remove_character_role = ruler
-					remove_character_role = agitator
-					add_character_role = com_struct_role
+					remove_all = yes
 				}
 				if = {
 					limit = {

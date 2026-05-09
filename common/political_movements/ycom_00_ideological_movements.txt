@@ -380,6 +380,7 @@
 		
 		state_weight = {
 			value = 1
+			add = scope:clout
 			if = {
 				limit = {
 					is_slave_state = yes
@@ -479,6 +480,7 @@
 		
 		state_weight = {
 			value = 1
+			add = scope:clout
 			if = {
 				limit = {
 					is_slave_state = yes
@@ -831,6 +833,7 @@ REPLACE:movement_pro_slavery = {
 		
 		state_weight = {
 			value = 1
+			add = scope:clout
 			if = {
 				limit = {
 					is_slave_state = no
@@ -928,6 +931,7 @@ REPLACE:movement_pro_slavery = {
 		
 		state_weight = {
 			value = 1
+			add = scope:clout
 			if = {
 				limit = {
 					is_slave_state = no
@@ -1468,7 +1472,8 @@ REPLACE:movement_royalist_absolutist = {
 		
 		state_weight = {
 			value = 1
-			
+			add = scope:clout
+
 			subtract = state_urbanization_rate
 			
 			if = {
@@ -1871,7 +1876,8 @@ REPLACE:movement_royalist_constitutional = {
 		
 		state_weight = {
 			value = 1
-			
+			add = scope:clout
+
 			subtract = {
 				value = state_urbanization_rate
 				multiply = 0.5
@@ -2315,7 +2321,10 @@ REPLACE:movement_labor = { # Explicitly non-socialist labour movement
 		
 		state_weight = {
 			value = state_urbanization_rate
-			
+            add = scope:clout
+            add = { value = this.turmoil divide = 2 }
+            subtract = this.loyalists
+
 			# Grey_PLP - always put last
 			multiply = {
 				value = mog_plp_movement_all_general_state_weight_mult
@@ -2335,7 +2344,9 @@ REPLACE:movement_labor = { # Explicitly non-socialist labour movement
 		
 		state_weight = {
 			value = state_urbanization_rate
-			
+            add = { value = this.turmoil divide = 2 }
+            subtract = this.loyalists
+
 			# Grey_PLP - always put last
 			multiply = {
 				value = mog_plp_movement_all_general_state_weight_mult
@@ -2727,7 +2738,10 @@ REPLACE:movement_socialist = {
 		
 		state_weight = {
 			value = state_urbanization_rate
-			
+			add = scope:clout
+			add = { value = this.turmoil divide = 2 }
+			subtract = this.loyalists
+
 			if = {
 				limit = { is_capital = yes }
 				if = {
@@ -2757,7 +2771,9 @@ REPLACE:movement_socialist = {
 		
 		state_weight = {
 			value = state_urbanization_rate
-			
+			add = { value = this.turmoil divide = 2 }
+			subtract = this.loyalists
+
 			if = {
 				limit = { is_capital = yes }
 				if = {
@@ -4177,7 +4193,10 @@ REPLACE:movement_fascist = {
 		}
 		
 		state_weight = {
-			value = 1
+            value = 0.25
+            add = scope:clout
+            add = { value = this.turmoil divide = 2 }
+            subtract = this.loyalists
 			
 			# Grey_PLP - always put last
 			multiply = {
@@ -4605,7 +4624,10 @@ REPLACE:movement_corporatist = {
 		}
 		
 		state_weight = {
-			value = 1
+            value = 0.25
+            add = scope:clout
+            add = { value = this.turmoil divide = 2 }
+            subtract = this.loyalists
 			
 			# Grey_PLP - always put last
 			multiply = {
@@ -5030,7 +5052,10 @@ REPLACE:movement_liberal = {
 		
 		state_weight = {
 			value = state_urbanization_rate
-			
+            add = scope:clout
+            add = { value = this.turmoil divide = 2 }
+            subtract = this.loyalists
+
 			# Grey_PLP - always put last
 			multiply = {
 				value = mog_plp_movement_all_general_state_weight_mult
@@ -5050,6 +5075,8 @@ REPLACE:movement_liberal = {
 		
 		state_weight = {
 			value = state_urbanization_rate
+            add = { value = this.turmoil divide = 2 }
+            subtract = this.loyalists
 			
 			# Grey_PLP - always put last
 			multiply = {
@@ -5505,8 +5532,11 @@ REPLACE:movement_radical = {
 			value = 100
 		}
 		
-		state_weight = {
-			value = state_urbanization_rate
+		state_weight = { # State urbanisation rate + clout + 0.5*turmoil - loyalists
+            value = state_urbanization_rate
+            add = scope:clout
+            add = { value = this.turmoil divide = 2 }
+            subtract = this.loyalists
 			
 			# Grey_PLP - always put last
 			multiply = {
@@ -5527,7 +5557,9 @@ REPLACE:movement_radical = {
 		
 		state_weight = {
 			value = state_urbanization_rate
-			
+            add = { value = this.turmoil divide = 2 }
+            subtract = this.loyalists
+
 			# Grey_PLP - always put last
 			multiply = {
 				value = mog_plp_movement_all_general_state_weight_mult
@@ -5856,7 +5888,10 @@ REPLACE:movement_nihilist = {
 		
 		state_weight = {
 			value = state_urbanization_rate
-			
+            add = scope:clout
+            add = { value = this.turmoil divide = 2 }
+            subtract = this.loyalists
+
 			# Grey_PLP - always put last
 			multiply = {
 				value = mog_plp_movement_all_general_state_weight_mult
@@ -5876,6 +5911,8 @@ REPLACE:movement_nihilist = {
 		
 		state_weight = {
 			value = state_urbanization_rate
+            add = { value = this.turmoil divide = 2 }
+            subtract = this.loyalists
 			
 			# Grey_PLP - always put last
 			multiply = {
@@ -6265,7 +6302,10 @@ REPLACE:movement_positivist = {
 		}
 		
 		state_weight = {
-			value = 1
+            value = 0.25
+            add = scope:clout
+            add = { value = this.turmoil divide = 2 }
+            subtract = this.loyalists
 			
 			# Grey_PLP - always put last
 			multiply = {
@@ -6576,9 +6616,9 @@ REPLACE:movement_land_reform = {
 		}
 		
 		state_weight = {
-			value = 1.5
-			
-			subtract = state_urbanization_rate
+            value = 1
+            add = scope:clout
+            subtract = state_urbanization_rate
 			
 			# Grey_PLP - always put last
 			multiply = {
@@ -6877,7 +6917,8 @@ REPLACE:movement_feminist = {
 		}
 		
 		state_weight = {
-			value = 1
+            value = 0.5
+            add = scope:clout
 			
 			# Grey_PLP - always put last
 			multiply = {
@@ -7275,7 +7316,8 @@ REPLACE:movement_reactionary = {
 		}
 		
 		state_weight = {
-			value = 1
+            value = 0.5
+            add = scope:clout
 			
 			# Grey_PLP - always put last
 			multiply = {
@@ -7734,7 +7776,10 @@ REPLACE:movement_modernizer = { # This movement loves you and wants you to succe
 		}
 		
 		state_weight = {
-			value = 1
+            value = state_urbanization_rate
+            add = scope:clout
+            add = { value = this.turmoil divide = 2 }
+            subtract = this.loyalists
 			
 			# Grey_PLP - always put last
 			multiply = {
@@ -7754,7 +7799,9 @@ REPLACE:movement_modernizer = { # This movement loves you and wants you to succe
 		}
 
 		state_weight = {
-			value = 1
+            value = state_urbanization_rate
+            add = { value = this.turmoil divide = 2 }
+            subtract = this.loyalists
 			
 			# Grey_PLP
 			multiply = {

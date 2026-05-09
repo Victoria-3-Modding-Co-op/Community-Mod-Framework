@@ -20,7 +20,7 @@ flowcontainer = {
 		direction = vertical
 		spacing = 10
 		
-		com_international_organization_spacer = {}
+		com_international_organization_header = {}
 		com_international_organization_panel = {
 			blockoverride "interorg_icon_frame_texture" {
 				texture = "gfx/coat_of_arms/textured_emblems/pb_frame_00.dds"
@@ -44,7 +44,7 @@ flowcontainer = {
 
 types com_international_organization_types {
 	
-	type com_international_organization_spacer = widget {
+	type com_international_organization_header = widget {
 		block "spacer size" {
 			size = { 540 30 }
 		}
@@ -260,6 +260,10 @@ types com_international_organization_types {
 		widget = {
 			size = { 200 50 }
 			
+			block "interorg_detail_1_visibility" {
+				visible = "[JournalEntry.MakeScope.Var('com_organization_leader_character_var').IsSet]"
+			}
+			
 			divider_clean = {
 				parentanchor = bottom
 			}
@@ -309,6 +313,10 @@ types com_international_organization_types {
 		## HOST COUNTRY
 		widget = {
 			size = { 200 50 }
+			
+			block "interorg_detail_2_visibility" {
+				visible = "[JournalEntry.MakeScope.Var('com_organization_headquarters_var').IsSet]"
+			}
 			
 			divider_clean = {
 				parentanchor = bottom
@@ -360,6 +368,10 @@ types com_international_organization_types {
 		widget = {
 			size = { 200 50 }
 			
+			block "interorg_detail_3_visibility" {
+				visible = "[JournalEntry.MakeScope.Var('com_involved_countries_country_var').IsSet]"
+			}
+			
 			divider_clean = {
 				parentanchor = bottom
 			}
@@ -400,6 +412,114 @@ types com_international_organization_types {
 				icon = {
 					size = { 35 35 }
 					block "interorg_detail_3_texture" {
+						texture = "gfx/interface/icons/generic_icons/maybe_icon.dds"
+					}
+				}
+			}
+		}
+		
+		### DETAIL ENTRY 4
+		widget = {
+			size = { 200 50 }
+			
+			block "interorg_detail_4_visibility" {
+				visible = "no"
+			}
+			
+			divider_clean = {
+				parentanchor = bottom
+			}
+			
+			hbox = {
+				layoutpolicy_horizontal = expanding
+				layoutpolicy_vertical = expanding
+				spacing = 7
+				
+				vbox = {
+					layoutpolicy_horizontal = expanding
+					layoutpolicy_vertical = expanding
+					margin = { 0 5 }
+					
+					textbox = {
+						layoutpolicy_horizontal = expanding
+						size = { 0 16 }
+						block "interorg_detail_4_name" {
+							raw_text = "#todo interorg_detail_4_name#!"
+						}
+						align = right|nobaseline
+						elide = right
+						fontsize_min = 12
+					}
+					textbox = {
+						layoutpolicy_horizontal = expanding
+						size = { 0 20 }
+						block "interorg_detail_3_content" {
+							raw_text = "#todo interorg_detail_4_content#!"
+						}
+						align = right|nobaseline
+						elide = right
+						fontsize_min = 12
+						using = fontsize_large
+					}
+				}
+				
+				icon = {
+					size = { 35 35 }
+					block "interorg_detail_4_texture" {
+						texture = "gfx/interface/icons/generic_icons/maybe_icon.dds"
+					}
+				}
+			}
+		}
+		
+		### DETAIL ENTRY 5
+		widget = {
+			size = { 200 50 }
+			
+			block "interorg_detail_5_visibility" {
+				visible = "no"
+			}
+			
+			divider_clean = {
+				parentanchor = bottom
+			}
+			
+			hbox = {
+				layoutpolicy_horizontal = expanding
+				layoutpolicy_vertical = expanding
+				spacing = 7
+				
+				vbox = {
+					layoutpolicy_horizontal = expanding
+					layoutpolicy_vertical = expanding
+					margin = { 0 5 }
+					
+					textbox = {
+						layoutpolicy_horizontal = expanding
+						size = { 0 16 }
+						block "interorg_detail_5_name" {
+							raw_text = "#todo interorg_detail_5_name#!"
+						}
+						align = right|nobaseline
+						elide = right
+						fontsize_min = 12
+					}
+					textbox = {
+						layoutpolicy_horizontal = expanding
+						size = { 0 20 }
+						block "interorg_detail_5_content" {
+							raw_text = "#todo interorg_detail_5_content#!"
+						}
+						align = right|nobaseline
+						elide = right
+						fontsize_min = 12
+						using = fontsize_large
+					}
+				}
+				
+				icon = {
+					size = { 35 35 }
+					block "interorg_detail_5_texture" {
 						texture = "gfx/interface/icons/generic_icons/maybe_icon.dds"
 					}
 				}
@@ -540,6 +660,7 @@ types com_international_organization_types {
 			}
 		}
 	}
+	
 	type com_international_organization_modifiers = flowcontainer {
 		visible = "[Not(IsDataModelEmpty(JournalEntry.GetTimedModifiers))]"
 		direction = vertical

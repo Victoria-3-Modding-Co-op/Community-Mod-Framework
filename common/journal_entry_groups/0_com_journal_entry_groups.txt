@@ -18,3 +18,6 @@ je_group_com_religious_organizations = {
 je_group_com_non_governmental_organizations = {
 	context = none
 }
+je_group_com_sporting_organizations = {
+	context = none
+}

@@ -16,6 +16,7 @@
  je_group_com_regional_organizations: "Regional Organizations"
  je_group_com_religious_organizations: "Religious Organizations"
  je_group_com_non_governmental_organizations: "Non-governmental Organizations"
+ je_group_com_sporting_organizations: "Sporting Organizations"
  
  # Journal Entries
  je_com_supranational_organization: "Supranational Organization"

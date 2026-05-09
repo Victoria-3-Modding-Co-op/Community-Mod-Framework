@@ -22,6 +22,7 @@ The IO panel is a scripted widget that displays any journal entry groups that ha
 - The widget will always show the name of the journal and the list of involved countries
 - The number of involved countries will be shown if the variable `com_involved_countries_country_var` is set on the journal
 - The organization headquarters will be shown if the flag variable `com_organization_headquarters_var` is set on the journal
+
 *Note: The global variable `com_activate_interorg_widget_var` must be set for the sidebar button to appear!*
 
 ## Custom Journal Groups
@@ -31,6 +32,7 @@ This framework provides the following custom journal groups:
 - `je_group_com_religious_organizations`
 - `je_group_com_non_governmental_organizations`
 - `je_group_com_sporting_organizations`
+
 These are automatically added to the `com_international_organization_journal_groups` global list.
 
 ## Outliner Changes
@@ -42,7 +44,7 @@ This section displays any pinned journal entry groups that are in neither of the
 This section displays any pinned journal entry groups that are included in the `com_international_situation_journal_groups` global list. The group `je_group_global_international_situations` is automatically added to this list.
 
 ### Interorg Journals
-This section displays any pinned journal entry groups that are included in the `com_international_organization_journal_groups` global list. The four interorg journal groups are automatically added to this list.
+This section displays any pinned journal entry groups that are included in the `com_international_organization_journal_groups` global list. The five interorg journal groups are automatically added to this list.
 
 ## Hiding Journal Entry Elements
 This framework includes the addition of several variable checks to hide/modify certain elements of the journal entry panel by setting variables on the journal entry scope.

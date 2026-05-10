@@ -144,27 +144,46 @@ types com_international_organization_types {
 				}
 			}
 
-			textbox = {
-				layoutpolicy_horizontal = expanding
-				size = { 200 18 }
-				block "interorg_leader_title" {
-					text = "com_gui_interorg_character_header"
+			flowcontainer = {
+				direction = horizontal
+				spacing = 5
+
+				icon = {
+					size = { 35 35 }
+					parentanchor = vcenter
+					block "interorg_leader_icon" {
+						visible = no
+						texture = "gfx/interface/icons/alert_icons/formable_possible.dds"
+					}
 				}
-				align = left|nobaseline
-				elide = right
-				fontsize_min = 12
-			}
-			textbox = {
-				layoutpolicy_horizontal = expanding
-				size = { 200 20 }
-				block "interorg_leader_name" {
-					text = "com_gui_interorg_character_name"
+
+				flowcontainer = {
+					direction = vertical
+
+					textbox = {
+						layoutpolicy_horizontal = expanding
+						size = { 200 18 }
+						block "interorg_leader_title" {
+							text = "com_gui_interorg_character_header"
+						}
+						align = left|nobaseline
+						elide = right
+						fontsize_min = 12
+					}
+					textbox = {
+						layoutpolicy_horizontal = expanding
+						size = { 200 20 }
+						block "interorg_leader_name" {
+							text = "com_gui_interorg_character_name"
+						}
+						align = left|nobaseline
+						elide = right
+						fontsize_min = 12
+						using = fontsize_large
+					}
 				}
-				align = left|nobaseline
-				elide = right
-				fontsize_min = 12
-				using = fontsize_large
 			}
+
 		}
 
 		# TOP/BOTTOM FADE

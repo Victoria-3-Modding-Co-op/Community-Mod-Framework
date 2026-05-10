@@ -62,23 +62,6 @@ types com_international_organization_types {
 		}
 	}
 
-	type com_organizations_panel_button = button_icon_round {
-		size = { 50 50 }
-		using = tooltip_above
-
-		block "com_interorg_button_visible" {
-		}
-		blockoverride "icon" {
-			texture = "gfx/interface/icons/notification_icons/journal.dds"
-		}
-		blockoverride "icon_size" {
-			size = { 60% 60% }
-		}
-
-		onclick = "[GetVariableSystem.Set('com_open_window', 'com_international_organizations_sgui')]"
-		tooltip = "com_gui_goto_international_orgs_panel"
-	}
-
 	type com_international_organization_panel = widget {
 		# FRAME SIZE
 		size = { 530 300 }
@@ -561,7 +544,24 @@ types com_international_organization_types {
 			}
 		}
 	}
-
+	
+	type com_organizations_panel_button = button_icon_round {
+		size = { 50 50 }
+		using = tooltip_above
+		
+		block "com_interorg_button_visible" {
+		}
+		blockoverride "icon" {
+			texture = "gfx/interface/icons/notification_icons/journal.dds"
+		}
+		blockoverride "icon_size" {
+			size = { 60% 60% }
+		}
+		
+		onclick = "[GetVariableSystem.Set('com_open_window', 'com_international_organizations_sgui')]"
+		tooltip = "com_gui_goto_international_orgs_panel"
+	}
+	
 	type com_international_organization_reason = textbox {
 		autoresize = yes
 		block "interorg_reason_text" {

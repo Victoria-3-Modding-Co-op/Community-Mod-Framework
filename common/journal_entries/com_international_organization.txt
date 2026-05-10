@@ -4,7 +4,7 @@
 	weight = 100
 	
 	widget = {
-		gui = "gui/journal_entry_widgets/com_interorg_widgets.gui"
+		gui = "gui/com_journal_injects/interorg_widgets.gui"
 		name = "widget_com_international_organization_base"
 		container = "custom_widget_container_je_icon"
 	}
@@ -79,7 +79,7 @@ je_com_regional_organization = {
 	weight = 100
 
 	widget = {
-		gui = "gui/journal_entry_widgets/com_interorg_widgets.gui"
+		gui = "gui/com_journal_injects/interorg_widgets.gui"
 		name = "widget_com_international_organization_base"
 		container = "custom_widget_container_je_icon"
 	}
@@ -147,7 +147,7 @@ je_com_religious_organization = {
 	weight = 100
 
 	widget = {
-		gui = "gui/journal_entry_widgets/com_interorg_widgets.gui"
+		gui = "gui/com_journal_injects/interorg_widgets.gui"
 		name = "widget_com_international_organization_base"
 		container = "custom_widget_container_je_icon"
 	}

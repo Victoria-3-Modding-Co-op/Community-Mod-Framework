@@ -228,6 +228,7 @@ types com_international_organization_types {
 			icon = {
 				parentanchor = center
 				size = { 150 150 }
+				position = { 2 2 }
 				texture = "gfx/interface/backgrounds/bg_pb_frame.dds"
 			}
 			icon = {

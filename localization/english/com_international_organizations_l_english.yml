@@ -62,6 +62,8 @@
  com_gui_members: "Members"
  com_gui_interorg_leader_header: "$com_organization$ Leader"
  com_gui_interorg_leader_name: "[JournalEntry.MakeScope.Var('com_interorg_leader_country_var').GetCountry.GetName]"
+ com_gui_interorg_character_header: "$com_organization$ Leader"
+ com_gui_interorg_character_name: "[Character.GetFullName]"
  com_gui_interorg_headquaters_header: "$com_organization$ Headquarters"
  com_gui_interorg_headquaters_name: "[JournalEntry.MakeScope.Var('com_interorg_headquarters_var').GetStateRegion.GetName]"
  com_gui_interorg_participants_header: "$com_organization$ Participants"

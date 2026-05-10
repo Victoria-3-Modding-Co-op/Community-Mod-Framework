@@ -1,6 +1,6 @@
 ﻿je_com_supranational_organization = {
 	group = je_group_com_supranational_organizations
-	icon = "gfx/interface/icons/invention_icons/multilateral_alliances.dds"
+	icon = "gfx/interface/icons/invention_icons/pan_nationalism.dds"
 	weight = 100
 	
 	widget = {
@@ -23,6 +23,20 @@
 	
 	immediate = {
 		scope:journal_entry = {
+			c:GBR = {
+				save_scope_as = interorg_country_scope
+				ruler = {
+					save_scope_as = interorg_character_scope
+				}
+			}
+			set_variable = {
+				name = com_interorg_leader_country_var
+				value = scope:interorg_country_scope
+			}
+			set_variable = {
+				name = com_interorg_leader_character_var
+				value = scope:interorg_character_scope
+			}
 			com_build_international_organization_list_effect = {
 				type = je_com_supranational_organization
 			}
@@ -68,7 +82,13 @@ je_com_regional_organization = {
 	group = je_group_com_regional_organizations
 	icon = "gfx/interface/icons/event_icons/event_map.dds"
 	weight = 100
-	
+
+	widget = {
+		gui = "gui/journal_entry_widgets/com_interorg_widgets.gui"
+		name = "widget_com_international_organization_base"
+		container = "custom_widget_container_je_icon"
+	}
+
 	should_be_involved = {
 		country_rank >= rank_value:great_power
 	}
@@ -79,6 +99,20 @@ je_com_regional_organization = {
 	
 	immediate = {
 		scope:journal_entry = {
+			c:FRA = {
+				save_scope_as = interorg_country_scope
+				ruler = {
+					save_scope_as = interorg_character_scope
+				}
+			}
+			set_variable = {
+				name = com_interorg_leader_country_var
+				value = scope:interorg_country_scope
+			}
+			set_variable = {
+				name = com_interorg_leader_character_var
+				value = scope:interorg_character_scope
+			}
 			com_build_international_organization_list_effect = {
 				type = je_com_regional_organization
 			}
@@ -121,6 +155,12 @@ je_com_religious_organization = {
 	group = je_group_com_religious_organizations
 	icon = "gfx/interface/icons/religion_icons/catholic.dds"
 	weight = 100
+
+	widget = {
+		gui = "gui/journal_entry_widgets/com_interorg_widgets.gui"
+		name = "widget_com_international_organization_base"
+		container = "custom_widget_container_je_icon"
+	}
 	
 	should_be_involved = {
 		country_rank >= rank_value:great_power
@@ -132,6 +172,20 @@ je_com_religious_organization = {
 	
 	immediate = {
 		scope:journal_entry = {
+			c:PRU = {
+				save_scope_as = interorg_country_scope
+				ruler = {
+					save_scope_as = interorg_character_scope
+				}
+			}
+			set_variable = {
+				name = com_interorg_leader_country_var
+				value = scope:interorg_country_scope
+			}
+			set_variable = {
+				name = com_interorg_leader_character_var
+				value = scope:interorg_character_scope
+			}
 			com_build_international_organization_list_effect = {
 				type = je_com_religious_organization
 			}

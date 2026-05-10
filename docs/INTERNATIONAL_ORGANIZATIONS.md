@@ -20,8 +20,8 @@ This framework consists of the following features:
 ## Scripted Widget
 The IO panel is a scripted widget that displays any journal entry groups that have been added to the `com_international_organization_journal_groups` global list. This widget can display some basic information about the IO journal:
 - The widget will always show the name of the journal and the list of involved countries
-- The number of involved countries will be shown if the variable `com_involved_countries_country_var` is set on the journal
-- The organization headquarters will be shown if the flag variable `com_organization_headquarters_var` is set on the journal
+- The number of involved countries will be shown if the variable `com_interorg_involved_countries_var` is set on the journal
+- The organization headquarters will be shown if the flag variable `com_interorg_headquarters_var` is set on the journal
 
 *Note: The global variable `com_activate_interorg_widget_var` must be set for the sidebar button to appear!*
 
@@ -65,5 +65,5 @@ Note: *It is recommended to inject this widget into the `custom_widget_container
 
 The parent widget `widget_com_international_organization_base` can also be invoked with the following features:
 - The texture for the header frame can be changed by overriding the block `interorg_icon_frame_texture`
-- Setting the variable `com_organization_leader_character_var` will activate the character portrait to the left of the panel
+- Setting the variable `com_interorg_leader_character_var` will activate the character portrait to the left of the panel
 - The details elements to the right of the panel each have their own blocks to override visibility, text, and icons

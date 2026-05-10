@@ -21,11 +21,11 @@
  je_group_com_sporting_organizations: "Sporting Organizations"
  
  # Journal Entries
- je_com_supranational_organization: "Supranational Organization"
+ je_com_supranational_organization: "Congress of Test Powers"
  je_com_supranational_organization_reason: "$je_com_supranational_organization$"
- je_com_regional_organization: "Regional Organization"
+ je_com_regional_organization: "Global Local Conference"
  je_com_regional_organization_reason: "$je_com_regional_organization$"
- je_com_religious_organization: "Religious Organization"
+ je_com_religious_organization: "Church of WOLOLO"
  je_com_religious_organization_reason: "$je_com_religious_organization$"
  
  # Localization Trick
@@ -48,8 +48,8 @@
  # GUI - International Orgs Panel
  com_gui_international_organizations_header: "International Organizations"
  com_gui_power_blocs_header: "Power Blocs"
- com_gui_organization_members: "@com_offer_embassy! [JournalEntry.MakeScope.Var('com_involved_countries_country_var').GetValue]"
- com_gui_organization_headquarters: "@com_formable_possible! [JournalEntry.MakeScope.Var('com_organization_headquarters_var').GetStateRegion.GetName]"
+ com_gui_organization_members: "@com_offer_embassy! [JournalEntry.MakeScope.Var('com_interorg_involved_countries_var').GetValue]"
+ com_gui_organization_headquarters: "@com_formable_possible! [JournalEntry.MakeScope.Var('com_interorg_headquarters_var').GetStateRegion.GetName]"
  com_gui_additional_members: "There are additional members not displayed. Check the Organization to see all members."
  
  # GUI - Outliner Container
@@ -61,8 +61,8 @@
  com_gui_main_actions: "Main Actions"
  com_gui_members: "Members"
  com_gui_interorg_leader_header: "$com_organization$ Leader"
- com_gui_interorg_leader_name: "[JournalEntry.MakeScope.Var('com_organization_leader_country_var').GetCountry.GetName]"
+ com_gui_interorg_leader_name: "[JournalEntry.MakeScope.Var('com_interorg_leader_country_var').GetCountry.GetName]"
  com_gui_interorg_headquaters_header: "$com_organization$ Headquarters"
- com_gui_interorg_headquaters_name: "[JournalEntry.MakeScope.Var('com_organization_headquarters_var').GetStateRegion.GetName]"
+ com_gui_interorg_headquaters_name: "[JournalEntry.MakeScope.Var('com_interorg_headquarters_var').GetStateRegion.GetName]"
  com_gui_interorg_participants_header: "$com_organization$ Participants"
- com_gui_interorg_participants_name: "[JournalEntry.MakeScope.Var('com_involved_countries_country_var').GetValue]"
+ com_gui_interorg_participants_name: "[JournalEntry.MakeScope.Var('com_interorg_involved_countries_var').GetValue]"

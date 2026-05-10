@@ -27,14 +27,14 @@ com_activate_international_organization_sidebar = {
 
 com_set_international_organization_headquaters_effect = {
 	set_variable = {
-		name = com_organization_headquarters_var
+		name = com_interorg_headquarters_var
 		value = $state_region$
 	}
 }
 
 com_update_international_ogranization_members_value_effect = {
 	set_variable = {
-		name = com_involved_countries_country_var
+		name = com_interorg_involved_countries_var
 		value = {
 			every_country = {
 				limit = {
@@ -48,7 +48,7 @@ com_update_international_ogranization_members_value_effect = {
 }
 
 com_build_international_organization_list_effect = {
-	clear_variable_list = com_involved_countries_display_list
+	clear_variable_list = com_interorg_involved_countries_list
 	save_scope_as = com_journal_entry_scope
 	ordered_country = {
 		limit = {
@@ -60,7 +60,7 @@ com_build_international_organization_list_effect = {
 		check_range_bounds = no # If you don't want an error logged if the list is smaller than the min/max
 		scope:com_journal_entry_scope = {
 			add_to_variable_list = {
-				name = com_involved_countries_display_list
+				name = com_interorg_involved_countries_list
 				target = prev
 			}
 		}

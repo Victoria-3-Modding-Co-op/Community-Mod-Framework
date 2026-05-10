@@ -304,7 +304,7 @@ types com_international_organizations_types {
 					textbox = {
 						parentanchor = left|vcenter
 						position = { 3 0 }
-						visible = "[JournalEntry.MakeScope.Var('com_involved_countries_country_var').IsSet]"
+						visible = "[JournalEntry.MakeScope.Var('com_interorg_involved_countries_var').IsSet]"
 						text = "com_gui_organization_members"
 						autoresize = yes
 						align = left|nobaseline
@@ -324,7 +324,7 @@ types com_international_organizations_types {
 			minimumsize = { @panel_width 40 }
 
 			widget = {
-				visible = "[JournalEntry.MakeScope.Var('com_organization_headquarters_var').IsSet]"
+				visible = "[JournalEntry.MakeScope.Var('com_interorg_headquarters_var').IsSet]"
 				size = { 140 30 }
 
 				background = {
@@ -346,8 +346,8 @@ types com_international_organizations_types {
 			widget = {
 				size = { 320 30 }
 				visible = "[And(
-					Not(IsDataModelEmpty(JournalEntry.MakeScope.GetList('com_involved_countries_display_list'))),
-					JournalEntry.MakeScope.Var('com_organization_headquarters_var').IsSet
+					Not(IsDataModelEmpty(JournalEntry.MakeScope.GetList('com_interorg_involved_countries_list'))),
+					JournalEntry.MakeScope.Var('com_interorg_headquarters_var').IsSet
 				)]"
 
 				flowcontainer = {
@@ -395,8 +395,8 @@ types com_international_organizations_types {
 			widget = {
 				size = { 480 30 }
 				visible = "[And(
-					Not(IsDataModelEmpty(JournalEntry.MakeScope.GetList('com_involved_countries_display_list'))),
-					Not(JournalEntry.MakeScope.Var('com_organization_headquarters_var').IsSet)
+					Not(IsDataModelEmpty(JournalEntry.MakeScope.GetList('com_interorg_involved_countries_list'))),
+					Not(JournalEntry.MakeScope.Var('com_interorg_headquarters_var').IsSet)
 				)]"
 
 				flowcontainer = {

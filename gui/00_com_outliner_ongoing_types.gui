@@ -229,34 +229,20 @@ types com_ongoing_outliner_items {
 	type com_outliner_international_situations_container = flowcontainer {
 		direction = vertical
 		parentanchor = hcenter
-		visible = "[Not(IsDataModelEmpty(AccessPlayer.AccessActivePinnedNonPlayerObjectiveJournalEntries))]"
 		
 		flowcontainer = {
 			max_height = 0
 			datamodel = "[AccessPlayer.GetGroupsForActiveJournalEntries]"
 			item = {
 				widget = {
-					size = { 0 0 }
-					datamodel = "[AccessPlayer.AccessActivePinnedNonPlayerObjectiveJournalEntries]"
-					
-					item = {
-						widget = {
-							size = { 0 0 }
-							visible = "[And4(
-								JournalEntry.IsValid,
-								JournalEntry.IsPinnedInOutliner,
-								Not(GetScriptedGui('com_international_organization_journal_entry_group_sgui').IsShown(GuiScope.SetRoot(AccessPlayer.MakeScope).AddScope('group_name', MakeScopeFlag(JournalEntry.GetType.GetGroup.GetKey)).End)),
-								GetScriptedGui('com_international_situation_journal_entry_group_sgui').IsShown(GuiScope.SetRoot(AccessPlayer.MakeScope).AddScope('group_name', MakeScopeFlag(JournalEntry.GetType.GetGroup.GetKey)).End)
-							)]"
-							state = {
-								name = _show
-								on_start = "[GetVariableSystem.Set('com_show_situations_container', '0')]"
-							}
-							state = {
-								name = _hide
-								on_finish = "[GetVariableSystem.Clear('com_show_situations_container')]"
-							}
-						}
+					visible = "[GetScriptedGui('com_international_situation_journal_entry_group_sgui').IsShown(GuiScope.SetRoot(AccessPlayer.MakeScope).AddScope('group_name', MakeScopeFlag(JournalEntryGroup.GetKey)).End)]"
+					state = {
+						name = _show
+						on_start = "[GetVariableSystem.Set('com_show_situations_container', '0')]"
+					}
+					state = {
+						name = _hide
+						on_finish = "[GetVariableSystem.Clear('com_show_situations_container')]"
 					}
 				}
 			}

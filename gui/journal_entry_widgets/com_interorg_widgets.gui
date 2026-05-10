@@ -127,9 +127,10 @@ types com_international_organization_types {
 		flowcontainer = {
 			direction = vertical
 			parentanchor = bottom|left
-			position = { 10 -20 }
+			position = { 5 -20 }
 			spacing = 5
 			margin = { 5 5 }
+			margin_left = 10
 
 			visible = "[JournalEntry.MakeScope.Var('com_interorg_leader_character_var').IsSet]"
 
@@ -258,6 +259,7 @@ types com_international_organization_types {
 		position = { -8 5 }
 		direction = vertical
 		spacing = 5
+		margin_right = 5
 
 		background = {
 			using = dark_area

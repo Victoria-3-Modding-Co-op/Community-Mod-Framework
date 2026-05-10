@@ -1,4 +1,4 @@
-﻿com_hide_international_organization_journal_entry_group = {
+﻿com_hide_interorg_journal_entry_group = {
 	add_to_global_variable_list = {
 		name = com_international_organization_journal_groups
 		target = flag:$name$
@@ -9,20 +9,37 @@
 	}
 }
 
-com_add_international_organization_journal_entry = {
+com_add_interorg_journal_entry = {
 	custom_tooltip = {
-		text = com_add_international_organization_journal_entry
+		text = com_add_interorg_journal_entry
 		set_local_variable = {
 			name = com_flag_loc
 			flag:$type$
 		}
 		add_contextless_journal_entry = $type$
 	}
-	com_activate_international_organization_sidebar = yes
+	com_activate_interorg_sidebar = yes
 }
 
-com_activate_international_organization_sidebar = {
+com_activate_interorg_sidebar = {
 	set_global_variable = com_activate_interorg_widget_var
+}
+
+com_hide_all_journal_elements_for_interorg_effect = {
+	set_variable = com_hide_scripted_buttons
+	set_variable = com_hide_journal_reason
+	set_variable = com_hide_involved_countries
+	set_variable = com_hide_complete_triggers
+	set_variable = com_hide_fail_triggers
+	set_variable = com_hide_modifiers
+}
+
+com_hide_non_button_journal_elements_for_interorg_effect = {
+	set_variable = com_hide_journal_reason
+	set_variable = com_hide_involved_countries
+	set_variable = com_hide_complete_triggers
+	set_variable = com_hide_fail_triggers
+	set_variable = com_hide_modifiers
 }
 
 com_set_international_organization_headquaters_effect = {
@@ -32,7 +49,7 @@ com_set_international_organization_headquaters_effect = {
 	}
 }
 
-com_update_international_ogranization_members_value_effect = {
+com_update_interorg_members_value_effect = {
 	set_variable = {
 		name = com_interorg_involved_countries_var
 		value = {
@@ -47,7 +64,7 @@ com_update_international_ogranization_members_value_effect = {
 	}
 }
 
-com_build_international_organization_list_effect = {
+com_build_interorg_list_effect = {
 	clear_variable_list = com_interorg_involved_countries_list
 	save_scope_as = com_journal_entry_scope
 	ordered_country = {

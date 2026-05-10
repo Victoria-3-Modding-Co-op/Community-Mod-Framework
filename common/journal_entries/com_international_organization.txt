@@ -37,23 +37,18 @@
 				name = com_interorg_leader_character_var
 				value = scope:interorg_character_scope
 			}
-			com_build_international_organization_list_effect = {
+			com_build_interorg_list_effect = {
 				type = je_com_supranational_organization
 			}
-			com_update_international_ogranization_members_value_effect = {
+			com_update_interorg_members_value_effect = {
 				type = je_com_supranational_organization
 			}
 			com_set_international_organization_headquaters_effect = {
 				state_region = s:STATE_FLANDERS
 			}
-			set_variable = com_hide_scripted_buttons
-			set_variable = com_hide_journal_reason
-			set_variable = com_hide_involved_countries
-			set_variable = com_hide_complete_triggers
-			set_variable = com_hide_fail_triggers
-			set_variable = com_hide_modifiers
+			com_hide_all_journal_elements_for_interorg_effect = yes
 		}
-		com_activate_international_organization_sidebar = yes
+		com_activate_interorg_sidebar = yes
 	}
 	
 	complete = {
@@ -67,10 +62,10 @@
 	on_weekly_pulse = {
 		effect = {
 			scope:journal_entry = {
-				com_build_international_organization_list_effect = {
+				com_build_interorg_list_effect = {
 					type = je_com_supranational_organization
 				}
-				com_update_international_ogranization_members_value_effect = {
+				com_update_interorg_members_value_effect = {
 					type = je_com_supranational_organization
 				}
 			}
@@ -113,20 +108,15 @@ je_com_regional_organization = {
 				name = com_interorg_leader_character_var
 				value = scope:interorg_character_scope
 			}
-			com_build_international_organization_list_effect = {
+			com_build_interorg_list_effect = {
 				type = je_com_regional_organization
 			}
-			com_update_international_ogranization_members_value_effect = {
+			com_update_interorg_members_value_effect = {
 				type = je_com_regional_organization
 			}
-			set_variable = com_hide_scripted_buttons
-			set_variable = com_hide_journal_reason
-			set_variable = com_hide_involved_countries
-			set_variable = com_hide_complete_triggers
-			set_variable = com_hide_fail_triggers
-			set_variable = com_hide_modifiers
+			com_hide_all_journal_elements_for_interorg_effect = yes
 		}
-		com_activate_international_organization_sidebar = yes
+		com_activate_interorg_sidebar = yes
 	}
 	
 	complete = {
@@ -140,10 +130,10 @@ je_com_regional_organization = {
 	on_weekly_pulse = {
 		effect = {
 			scope:journal_entry = {
-				com_build_international_organization_list_effect = {
+				com_build_interorg_list_effect = {
 					type = je_com_regional_organization
 				}
-				com_update_international_ogranization_members_value_effect = {
+				com_update_interorg_members_value_effect = {
 					type = je_com_regional_organization
 				}
 			}
@@ -186,23 +176,18 @@ je_com_religious_organization = {
 				name = com_interorg_leader_character_var
 				value = scope:interorg_character_scope
 			}
-			com_build_international_organization_list_effect = {
+			com_build_interorg_list_effect = {
 				type = je_com_religious_organization
 			}
-			com_update_international_ogranization_members_value_effect = {
+			com_update_interorg_members_value_effect = {
 				type = je_com_religious_organization
 			}
 			com_set_international_organization_headquaters_effect = {
 				state_region = s:STATE_LAZIO
 			}
-			set_variable = com_hide_scripted_buttons
-			set_variable = com_hide_journal_reason
-			set_variable = com_hide_involved_countries
-			set_variable = com_hide_complete_triggers
-			set_variable = com_hide_fail_triggers
-			set_variable = com_hide_modifiers
+			com_hide_all_journal_elements_for_interorg_effect = yes
 		}
-		com_activate_international_organization_sidebar = yes
+		com_activate_interorg_sidebar = yes
 	}
 	
 	complete = {
@@ -216,10 +201,10 @@ je_com_religious_organization = {
 	on_weekly_pulse = {
 		effect = {
 			scope:journal_entry = {
-				com_build_international_organization_list_effect = {
+				com_build_interorg_list_effect = {
 					type = je_com_religious_organization
 				}
-				com_update_international_ogranization_members_value_effect = {
+				com_update_interorg_members_value_effect = {
 					type = je_com_religious_organization
 				}
 			}

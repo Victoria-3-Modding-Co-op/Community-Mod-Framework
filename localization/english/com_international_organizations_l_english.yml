@@ -40,7 +40,7 @@
  com_international_organizations_sgui_desc: "Organizations"
  
  # Tooltips
- com_add_international_organization_journal_entry: "The #bold [TopScope.GetLocalVariable('com_flag_loc').GetFlagName]#! [concept_com_international_organization] will be created"
+ com_add_interorg_journal_entry: "The #bold [TopScope.GetLocalVariable('com_flag_loc').GetFlagName]#! [concept_com_international_organization] will be created"
  
  # GUI - Journal Entry Panel
  com_gui_journal_header: "[JournalEntry.MakeScope.Var('com_header_var').GetFlagName] $com_organization$"

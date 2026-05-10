@@ -14,19 +14,19 @@
 	}
 	
 	## Create International Organization List
-	com_hide_international_organization_journal_entry_group = {
+	com_hide_interorg_journal_entry_group = {
 		name = je_group_com_supranational_organizations
 	}
-	com_hide_international_organization_journal_entry_group = {
+	com_hide_interorg_journal_entry_group = {
 		name = je_group_com_regional_organizations
 	}
-	com_hide_international_organization_journal_entry_group = {
+	com_hide_interorg_journal_entry_group = {
 		name = je_group_com_religious_organizations
 	}
-	com_hide_international_organization_journal_entry_group = {
+	com_hide_interorg_journal_entry_group = {
 		name = je_group_com_non_governmental_organizations
 	}
-	com_hide_international_organization_journal_entry_group = {
+	com_hide_interorg_journal_entry_group = {
 		name = je_group_com_sporting_organizations
 	}
 	

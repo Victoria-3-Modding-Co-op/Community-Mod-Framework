@@ -644,6 +644,7 @@ event_window_com_2char = {}
 event_window_com_2char_halloween = {}
 event_window_com_1char_tabloid_halloween = {}
 event_window_com_big_icon_center = {}
+event_window_com_fixed_image_size = {}
 
 #### CMF Character Window Variants
 event_window_1char_adventure = {}

@@ -42,6 +42,9 @@ flowcontainer = {
 
 		com_international_organization_header = { }
 		com_international_organization_panel = {
+			blockoverride "interorg_backdrop_texture" {
+				texture = "gfx/interface/power_blocs/backgrounds/char_role_politician.dds"
+			}
 			blockoverride "interorg_icon_frame_texture" {
 				texture = "gfx/coat_of_arms/textured_emblems/pb_frame_00.dds"
 			}
@@ -52,6 +55,107 @@ flowcontainer = {
 		com_international_organization_members = { }
 	}
 }
+
+# Regional Interorg Widget
+flowcontainer = {
+	name = "widget_com_regional_organization"
+	ignoreinvisible = yes
+
+	flowcontainer = {
+		direction = vertical
+		spacing = 10
+
+		com_international_organization_header = { }
+		com_international_organization_panel = {
+			blockoverride "interorg_backdrop_texture" {
+				texture = "gfx/interface/character_panel/backgrounds/char_role_rulergeneral.dds"
+			}
+			blockoverride "interorg_icon_frame_texture" {
+				texture = "gfx/coat_of_arms/textured_emblems/pb_frame_02.dds"
+			}
+		}
+		com_international_organization_reason = { }
+		com_international_organization_buttons = { }
+		com_international_organization_modifiers = { }
+		com_international_organization_members = { }
+	}
+}
+
+# Religious Interorg Widget
+flowcontainer = {
+	name = "widget_com_religious_organization"
+	ignoreinvisible = yes
+
+	flowcontainer = {
+		direction = vertical
+		spacing = 10
+
+		com_international_organization_header = { }
+		com_international_organization_panel = {
+			blockoverride "interorg_backdrop_texture" {
+				texture = "gfx/interface/character_panel/backgrounds/char_role_politician.dds"
+			}
+			blockoverride "interorg_icon_frame_texture" {
+				texture = "gfx/coat_of_arms/textured_emblems/pb_frame_01.dds"
+			}
+		}
+		com_international_organization_reason = { }
+		com_international_organization_buttons = { }
+		com_international_organization_modifiers = { }
+		com_international_organization_members = { }
+	}
+}
+
+# Non-governmental Interorg Widget
+flowcontainer = {
+	name = "widget_com_non_governmental_organization"
+	ignoreinvisible = yes
+
+	flowcontainer = {
+		direction = vertical
+		spacing = 10
+
+		com_international_organization_header = { }
+		com_international_organization_panel = {
+			blockoverride "interorg_backdrop_texture" {
+				texture = "gfx/interface/character_panel/backgrounds/char_role_magnate.dds"
+			}
+			blockoverride "interorg_icon_frame_texture" {
+				texture = "gfx/coat_of_arms/textured_emblems/pb_frame_03.dds"
+			}
+		}
+		com_international_organization_reason = { }
+		com_international_organization_buttons = { }
+		com_international_organization_modifiers = { }
+		com_international_organization_members = { }
+	}
+}
+
+# Sporting Interorg Widget
+flowcontainer = {
+	name = "widget_com_sporting_organization"
+	ignoreinvisible = yes
+
+	flowcontainer = {
+		direction = vertical
+		spacing = 10
+
+		com_international_organization_header = { }
+		com_international_organization_panel = {
+			blockoverride "interorg_backdrop_texture" {
+				texture = "gfx/interface/character_panel/backgrounds/char_role_general.dds"
+			}
+			blockoverride "interorg_icon_frame_texture" {
+				texture = "gfx/coat_of_arms/textured_emblems/pb_frame_03.dds"
+			}
+		}
+		com_international_organization_reason = { }
+		com_international_organization_buttons = { }
+		com_international_organization_modifiers = { }
+		com_international_organization_members = { }
+	}
+}
+
 
 ####---------- INTERNATIONAL ORGANIZATION GUI TYPES ----------####
 types com_international_organization_types {
@@ -73,9 +177,9 @@ types com_international_organization_types {
 			background = {
 				block "interorg_backdrop_texture" {
 					texture = "gfx/interface/character_panel/backgrounds/char_role_politician.dds"
-					fittype = centercrop
-					using = frame_small_mask
 				}
+				fittype = centercrop
+				using = frame_small_mask
 			}
 		}
 		

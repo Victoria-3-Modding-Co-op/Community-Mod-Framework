@@ -48,7 +48,6 @@
  # GUI - International Orgs Panel
  com_gui_international_organizations_header: "International Organizations"
  com_gui_power_blocs_header: "Power Blocs"
- com_gui_organization_members: "@com_offer_embassy! [JournalEntry.MakeScope.Var('com_interorg_involved_countries_var').GetValue]"
  com_gui_organization_headquarters: "@com_formable_possible! [JournalEntry.MakeScope.Var('com_interorg_headquarters_var').GetStateRegion.GetName]"
  com_gui_additional_members: "There are additional members not displayed. Check the Organization to see all members."
  
@@ -67,4 +66,3 @@
  com_gui_interorg_headquaters_header: "$com_organization$ Headquarters"
  com_gui_interorg_headquaters_name: "[JournalEntry.MakeScope.Var('com_interorg_headquarters_var').GetStateRegion.GetName]"
  com_gui_interorg_participants_header: "$com_organization$ Participants"
- com_gui_interorg_participants_name: "[JournalEntry.MakeScope.Var('com_interorg_involved_countries_var').GetValue]"

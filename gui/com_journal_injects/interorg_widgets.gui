@@ -390,7 +390,7 @@ types com_international_organization_types {
 			size = { 200 50 }
 
 			block "interorg_detail_3_visibility" {
-				visible = "[JournalEntry.MakeScope.Var('com_interorg_involved_countries_var').IsSet]"
+				visible = "[DataModelHasItems(JournalEntry.GetInvolvedCountries)]"
 			}
 
 			divider_clean = {
@@ -421,7 +421,7 @@ types com_international_organization_types {
 						layoutpolicy_horizontal = expanding
 						size = { 0 20 }
 						block "interorg_detail_3_content" {
-							text = "com_gui_interorg_participants_name"
+							text = "[GetDataModelSize(JournalEntry.GetInvolvedCountries)]"
 						}
 						align = right|nobaseline
 						elide = right

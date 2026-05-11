@@ -304,8 +304,7 @@ types com_international_organizations_types {
 					textbox = {
 						parentanchor = left|vcenter
 						position = { 3 0 }
-						visible = "[JournalEntry.MakeScope.Var('com_interorg_involved_countries_var').IsSet]"
-						text = "com_gui_organization_members"
+						raw_text = "@com_offer_embassy! [GetDataModelSize(JournalEntry.GetInvolvedCountries)]"
 						autoresize = yes
 						align = left|nobaseline
 						multiline = yes
@@ -346,7 +345,7 @@ types com_international_organizations_types {
 			widget = {
 				size = { 320 30 }
 				visible = "[And(
-					Not(IsDataModelEmpty(JournalEntry.MakeScope.GetList('com_interorg_involved_countries_list'))),
+					Not(IsDataModelEmpty(JournalEntry.GetInvolvedCountries)),
 					JournalEntry.MakeScope.Var('com_interorg_headquarters_var').IsSet
 				)]"
 
@@ -395,7 +394,7 @@ types com_international_organizations_types {
 			widget = {
 				size = { 480 30 }
 				visible = "[And(
-					Not(IsDataModelEmpty(JournalEntry.MakeScope.GetList('com_interorg_involved_countries_list'))),
+					Not(IsDataModelEmpty(JournalEntry.GetInvolvedCountries)),
 					Not(JournalEntry.MakeScope.Var('com_interorg_headquarters_var').IsSet)
 				)]"
 

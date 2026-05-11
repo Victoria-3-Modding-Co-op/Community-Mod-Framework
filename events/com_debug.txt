@@ -51,8 +51,6 @@ com_debug.1 = {
 		fix_variable_error = { variable = com_interorg_leader_country_var }
 		fix_variable_error = { variable = com_interorg_leader_character_var }
 		fix_variable_error = { variable = com_interorg_headquarters_var }
-		fix_variable_error = { variable = com_interorg_involved_countries_var }
-		fix_variable_error = { variable = com_interorg_involved_countries_list }
 
 		fix_variable_error = { variable = je_group_com_hidden }
 		fix_variable_error = { variable = je_group_com_contextless_hidden }

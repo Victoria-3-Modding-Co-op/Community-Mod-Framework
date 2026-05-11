@@ -65,38 +65,3 @@ com_set_international_organization_headquaters_effect = {
 		value = $state_region$
 	}
 }
-
-com_update_interorg_members_value_effect = {
-	set_variable = {
-		name = com_interorg_involved_countries_var
-		value = {
-			every_country = {
-				limit = {
-					is_involved_in_journal_entry = $type$
-				}
-				add = 1
-			}
-			min = 1
-		}
-	}
-}
-
-com_build_interorg_list_effect = {
-	clear_variable_list = com_interorg_involved_countries_list
-	save_scope_as = com_journal_entry_scope
-	ordered_country = {
-		limit = {
-			is_involved_in_journal_entry = $type$
-		}
-		order_by = prestige
-		min = 1
-		max = 10
-		check_range_bounds = no # If you don't want an error logged if the list is smaller than the min/max
-		scope:com_journal_entry_scope = {
-			add_to_variable_list = {
-				name = com_interorg_involved_countries_list
-				target = prev
-			}
-		}
-	}
-}

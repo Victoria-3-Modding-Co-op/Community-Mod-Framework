@@ -2,13 +2,10 @@
 	scope = country
 	
 	is_shown = {
-		has_global_variable = com_activate_interorg_widget_var
+		has_global_variable_list = com_international_organization_journal_groups
 	}
 	is_valid = {
-		has_global_variable = com_activate_interorg_widget_var
-	}
-	effect = {
-		remove_variable = com_show_international_organizations
+		has_global_variable_list = com_international_organization_journal_groups
 	}
 }
 

@@ -43,7 +43,7 @@ flowcontainer = {
 		com_international_organization_header = { }
 		com_international_organization_panel = {
 			blockoverride "interorg_backdrop_texture" {
-				texture = "gfx/interface/power_blocs/backgrounds/char_role_politician.dds"
+				texture = "gfx/interface/character_panel/backgrounds/char_role_politician.dds"
 			}
 			blockoverride "interorg_icon_frame_texture" {
 				texture = "gfx/coat_of_arms/textured_emblems/pb_frame_00.dds"
@@ -176,7 +176,7 @@ flowcontainer = {
 					parentanchor = top|hcenter
 					position = { 0 -140 }
 					size = { 520 141 }
-					texture = "gfx/interface/backgrounds/scientific_conference_frame_top.dds"
+					texture = "gfx/interface/backgrounds/com_conference_frame_top.dds"
 					icon = {
 						parentanchor = center
 						texture = "[JournalEntry.GetIcon]"
@@ -397,7 +397,7 @@ types com_international_organization_types {
 					parentanchor = center
 					size = { 150 150 }
 					position = { 2 2 }
-					texture = "gfx/interface/backgrounds/bg_pb_frame.dds"
+					texture = "gfx/interface/backgrounds/com_bg_pb_frame.dds"
 				}
 				icon = {
 					parentanchor = center

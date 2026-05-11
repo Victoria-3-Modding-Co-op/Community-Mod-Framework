@@ -119,6 +119,7 @@ types com_international_organization_types {
 			margin_left = 10
 
 			visible = "[JournalEntry.MakeScope.Var('com_interorg_leader_character_var').IsSet]"
+			datacontext = "[JournalEntry.MakeScope.Var('com_interorg_leader_character_var').GetCharacter]"
 
 			background = {
 				using = dark_area

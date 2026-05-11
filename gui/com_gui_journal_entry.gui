@@ -31,6 +31,22 @@ types journal_entry_overwrites {
 			text = "[LabelingHelper.CapitalizeOnlyFirst(JournalEntry.GetName)]"
 		}
 
+		blockoverride "entire_back_button" {
+			back_button_large = {
+				position = { 8 30 }
+				onclick = "[InformationPanelBar.OpenPreviousPanel]"
+				input_action = "back"
+				visible = "[Not(ComJournalEntryGroupSGui('com_international_organization_journal_entry_group_sgui'))]"
+			}
+
+			back_button_large = {
+				position = { 8 30 }
+				onclick = "[GetVariableSystem.Set('com_open_window', 'com_international_organizations_sgui')]"
+				input_action = "back"
+				visible = "[ComJournalEntryGroupSGui('com_international_organization_journal_entry_group_sgui')]"
+			}
+		}
+
 		## CMF overridden to allow for insertion of flag variables
 		blockoverride "window_header_container_line_two" {
 			textbox = {

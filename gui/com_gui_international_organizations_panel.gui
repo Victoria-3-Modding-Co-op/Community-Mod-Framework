@@ -131,7 +131,7 @@ types com_international_organizations_types {
 
 				item = {
 					flowcontainer = {
-						visible = "[GetScriptedGui('com_international_organization_journal_entry_group_sgui').IsShown(GuiScope.SetRoot(AccessPlayer.MakeScope).AddScope('group_name', MakeScopeFlag(JournalEntryGroup.GetKey)).End)]"
+						visible = "[ComJournalGroupSGui('com_international_organization_journal_entry_group_sgui')]"
 						direction = vertical
 						spacing = 5
 						textbox = {

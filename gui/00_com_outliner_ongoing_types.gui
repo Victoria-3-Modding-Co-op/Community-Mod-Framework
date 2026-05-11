@@ -197,8 +197,8 @@ types com_ongoing_outliner_items {
 		visible = "[And4(
 			JournalEntry.IsValid,
 			JournalEntry.IsPinnedInOutliner,
-			Not(GetScriptedGui('com_international_organization_journal_entry_group_sgui').IsShown(GuiScope.SetRoot(AccessPlayer.MakeScope).AddScope('group_name', MakeScopeFlag(JournalEntry.GetType.GetGroup.GetKey)).End)),
-			Not(GetScriptedGui('com_international_situation_journal_entry_group_sgui').IsShown(GuiScope.SetRoot(AccessPlayer.MakeScope).AddScope('group_name', MakeScopeFlag(JournalEntry.GetType.GetGroup.GetKey)).End))
+			Not(ComJournalEntryGroupSGui('com_international_organization_journal_entry_group_sgui')),
+			Not(ComJournalEntryGroupSGui('com_international_situation_journal_entry_group_sgui'))
 		)]"
 		
 		blockoverride "flowcontainer_properties" {
@@ -232,16 +232,18 @@ types com_ongoing_outliner_items {
 		
 		flowcontainer = {
 			max_height = 0
-			datamodel = "[AccessPlayer.GetGroupsForActiveJournalEntries]"
+			datamodel = "[AccessPlayer.AccessActivePinnedNonPlayerObjectiveJournalEntries]"
 			item = {
 				widget = {
-					visible = "[GetScriptedGui('com_international_situation_journal_entry_group_sgui').IsShown(GuiScope.SetRoot(AccessPlayer.MakeScope).AddScope('group_name', MakeScopeFlag(JournalEntryGroup.GetKey)).End)]"
+					visible = "[ComJournalEntryGroupSGui('com_international_situation_journal_entry_group_sgui')]"
 					state = {
 						name = _show
+						trigger_on_create = yes
 						on_start = "[GetVariableSystem.Set('com_show_situations_container', '0')]"
 					}
 					state = {
 						name = _hide
+						trigger_on_create = yes
 						on_finish = "[GetVariableSystem.Clear('com_show_situations_container')]"
 					}
 				}
@@ -285,8 +287,8 @@ types com_ongoing_outliner_items {
 		visible = "[And4(
 			JournalEntry.IsValid,
 			JournalEntry.IsPinnedInOutliner,
-			Not(GetScriptedGui('com_international_organization_journal_entry_group_sgui').IsShown(GuiScope.SetRoot(AccessPlayer.MakeScope).AddScope('group_name', MakeScopeFlag(JournalEntry.GetType.GetGroup.GetKey)).End)),
-			GetScriptedGui('com_international_situation_journal_entry_group_sgui').IsShown(GuiScope.SetRoot(AccessPlayer.MakeScope).AddScope('group_name', MakeScopeFlag(JournalEntry.GetType.GetGroup.GetKey)).End)
+			Not(ComJournalEntryGroupSGui('com_international_organization_journal_entry_group_sgui')),
+			ComJournalEntryGroupSGui('com_international_situation_journal_entry_group_sgui')
 		)]"
 		
 		using = default_list_position
@@ -342,16 +344,18 @@ types com_ongoing_outliner_items {
 		
 		flowcontainer = {
 			max_height = 0
-			datamodel = "[AccessPlayer.GetGroupsForActiveJournalEntries]"
+			datamodel = "[AccessPlayer.AccessActivePinnedNonPlayerObjectiveJournalEntries]"
 			item = {
 				widget = {
-					visible = "no"
+					visible = "[ComJournalEntryGroupSGui('com_international_organization_journal_entry_group_sgui')]"
 					state = {
 						name = _show
-						on_finish = "[GetVariableSystem.Set('com_show_interorgs_container', '0')]"
+						trigger_on_create = yes
+						on_start = "[GetVariableSystem.Set('com_show_interorgs_container', '0')]"
 					}
 					state = {
 						name = _hide
+						trigger_on_create = yes
 						on_finish = "[GetVariableSystem.Clear('com_show_interorgs_container')]"
 					}
 				}
@@ -408,8 +412,8 @@ types com_ongoing_outliner_items {
 		visible = "[And4(
 			JournalEntry.IsValid,
 			JournalEntry.IsPinnedInOutliner,
-			GetScriptedGui('com_international_organization_journal_entry_group_sgui').IsShown(GuiScope.SetRoot(AccessPlayer.MakeScope).AddScope('group_name', MakeScopeFlag(JournalEntry.GetType.GetGroup.GetKey)).End),
-			Not(GetScriptedGui('com_international_situation_journal_entry_group_sgui').IsShown(GuiScope.SetRoot(AccessPlayer.MakeScope).AddScope('group_name', MakeScopeFlag(JournalEntry.GetType.GetGroup.GetKey)).End))
+			ComJournalEntryGroupSGui('com_international_organization_journal_entry_group_sgui'),
+			Not(ComJournalEntryGroupSGui('com_international_situation_journal_entry_group_sgui'))
 		)]"
 		
 		using = default_list_position

@@ -36,10 +36,7 @@ types journal_entry_overwrites {
 				position = { 8 30 }
 				onclick = "[InformationPanelBar.OpenPreviousPanel]"
 				input_action = "back"
-				visible = "[Nor(
-					ComJournalEntryGroupSGui('com_international_organization_journal_entry_group_sgui'),
-					DataModelHasItems(GetGlobalList('com_international_organization_journal_groups'))
-				)]"
+				visible = "[Not(ComJournalEntryGroupSGui('com_international_organization_journal_entry_group_sgui'))]"
 			}
 
 			back_button_large = {

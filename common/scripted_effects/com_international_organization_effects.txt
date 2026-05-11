@@ -7,6 +7,9 @@
 		name = com_hidden_journal_groups
 		target = flag:$name$
 	}
+	hidden_effect = {
+		com_activate_interorg_sidebar = yes
+	}
 }
 
 com_add_interorg_journal_entry = {
@@ -18,11 +21,28 @@ com_add_interorg_journal_entry = {
 		}
 		add_contextless_journal_entry = $type$
 	}
-	com_activate_interorg_sidebar = yes
+	hidden_effect = {
+		com_activate_interorg_sidebar = yes
+	}
 }
 
 com_activate_interorg_sidebar = {
-	set_global_variable = com_activate_interorg_widget_var
+	## Create International Organization List
+	com_hide_interorg_journal_entry_group = {
+		name = je_group_com_supranational_organizations
+	}
+	com_hide_interorg_journal_entry_group = {
+		name = je_group_com_regional_organizations
+	}
+	com_hide_interorg_journal_entry_group = {
+		name = je_group_com_religious_organizations
+	}
+	com_hide_interorg_journal_entry_group = {
+		name = je_group_com_non_governmental_organizations
+	}
+	com_hide_interorg_journal_entry_group = {
+		name = je_group_com_sporting_organizations
+	}
 }
 
 com_hide_all_journal_elements_for_interorg_effect = {

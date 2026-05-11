@@ -44,4 +44,31 @@ types com_default_journal_elements_types {
 			using = entry_bg
 		}
 	}
+
+	type com_default_journal_timeout = flowcontainer {
+		parentanchor = hcenter
+		spacing = 5
+		margin = { 20 10 }
+
+		visible = "[JournalEntry.CanTimeOut]"
+
+		background = {
+			using = entry_bg
+		}
+
+
+
+		icon = {
+			size = { 30 30 }
+			texture = "gfx/interface/icons/generic_icons/clock.dds"
+		}
+		textbox = {
+			text = "[JournalEntry.GetTimeoutTooltip]"
+			autoresize = yes
+			align = nobaseline
+			using = fontsize_large
+			parentanchor = vcenter
+		}
+		tooltip = "JOURNAL_ENTRY_ON_TIMEOUT_LONG"
+	}
 }

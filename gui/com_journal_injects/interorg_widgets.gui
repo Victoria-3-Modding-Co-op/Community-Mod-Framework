@@ -57,7 +57,7 @@ flowcontainer = {
 types com_international_organization_types {
 
 	type com_international_organization_header = widget {
-		block "spacer size" {
+		block "spacer_size" {
 			size = { 540 30 }
 		}
 	}
@@ -69,14 +69,16 @@ types com_international_organization_types {
 		using = Animation_Character_Panel_Refresh
 
 		# BACKGROUND
-		background = {
-			block "interorg_backdrop_texture" {
-				texture = "gfx/interface/character_panel/backgrounds/char_role_politician.dds"
-				fittype = centercrop
-				using = frame_small_mask
+		block "interorg_background" {
+			background = {
+				block "interorg_backdrop_texture" {
+					texture = "gfx/interface/character_panel/backgrounds/char_role_politician.dds"
+					fittype = centercrop
+					using = frame_small_mask
+				}
 			}
 		}
-
+		
 		### ORGANIZATION LEADER
 		character_portrait_base_no_mask = {
 			parentanchor = left|vcenter

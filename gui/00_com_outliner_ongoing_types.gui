@@ -62,7 +62,7 @@ types com_ongoing_outliner_items {
 			# CMF Hide objective
 			visible = "[And(
                 Not(GetGlobalVariable('community_gui_objective_var').IsSet),
-                GetPlayer.HasObjective
+				AccessPlayer.IsObjectiveIdle
             )]"
 			text = "[AccessPlayer.GetObjective.GetObjectiveType.GetIdleHeader]"
 			autoresize = yes
@@ -79,7 +79,7 @@ types com_ongoing_outliner_items {
 			# CMF Hide objective
 			visible = "[And(
                 Not(GetGlobalVariable('community_gui_objective_var').IsSet),
-                GetPlayer.HasObjective
+				AccessPlayer.IsObjectiveIdle
             )]"
 			text = "[AccessPlayer.GetObjective.GetObjectiveType.GetIdleHint]"
 			autoresize = yes

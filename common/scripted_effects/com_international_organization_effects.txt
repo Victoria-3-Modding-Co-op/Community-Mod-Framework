@@ -7,9 +7,6 @@
 		name = com_hidden_journal_groups
 		target = flag:$name$
 	}
-	hidden_effect = {
-		com_activate_interorg_sidebar = yes
-	}
 }
 
 com_add_interorg_journal_entry = {

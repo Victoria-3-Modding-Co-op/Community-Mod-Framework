@@ -5,7 +5,7 @@
 	
 	widget = {
 		gui = "gui/com_journal_injects/interorg_widgets.gui"
-		name = "widget_com_international_organization_base"
+		name = "widget_com_supranational_organization"
 		container = "custom_widget_container_je_icon"
 	}
 	
@@ -54,55 +54,6 @@
 	}
 }
 
-je_com_regional_organization = {
-	group = je_group_com_regional_organizations
-	icon = "gfx/interface/icons/event_icons/event_map.dds"
-	weight = 100
-
-	widget = {
-		gui = "gui/com_journal_injects/interorg_widgets.gui"
-		name = "widget_com_international_organization_base"
-		container = "custom_widget_container_je_icon"
-	}
-
-	should_be_involved = {
-		country_rank >= rank_value:great_power
-	}
-	
-	should_show_when_not_involved = {
-		country_rank < rank_value:great_power
-	}
-	
-	immediate = {
-		scope:journal_entry = {
-			c:FRA = {
-				save_scope_as = interorg_country_scope
-				ruler = {
-					save_scope_as = interorg_character_scope
-				}
-			}
-			set_variable = {
-				name = com_interorg_leader_country_var
-				value = scope:interorg_country_scope
-			}
-			set_variable = {
-				name = com_interorg_leader_character_var
-				value = scope:interorg_character_scope
-			}
-			com_hide_all_journal_elements_for_interorg_effect = yes
-		}
-		com_activate_interorg_sidebar = yes
-	}
-	
-	complete = {
-		always = no
-	}
-	
-	on_complete = {
-		custom_tooltip = com_debug.a
-	}
-}
-
 je_com_religious_organization = {
 	group = je_group_com_religious_organizations
 	icon = "gfx/interface/icons/religion_icons/catholic.dds"
@@ -110,7 +61,7 @@ je_com_religious_organization = {
 
 	widget = {
 		gui = "gui/com_journal_injects/interorg_widgets.gui"
-		name = "widget_com_international_organization_base"
+		name = "widget_com_religious_organization"
 		container = "custom_widget_container_je_icon"
 	}
 	
@@ -150,6 +101,55 @@ je_com_religious_organization = {
 		always = no
 	}
 	
+	on_complete = {
+		custom_tooltip = com_debug.a
+	}
+}
+
+je_com_regional_organization = {
+	group = je_group_com_regional_organizations
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	weight = 100
+
+	widget = {
+		gui = "gui/com_journal_injects/interorg_widgets.gui"
+		name = "widget_com_international_conference"
+		container = "custom_widget_container_je_icon"
+	}
+
+	should_be_involved = {
+		country_rank >= rank_value:great_power
+	}
+
+	should_show_when_not_involved = {
+		country_rank < rank_value:great_power
+	}
+
+	immediate = {
+		scope:journal_entry = {
+			c:FRA = {
+				save_scope_as = interorg_country_scope
+				ruler = {
+					save_scope_as = interorg_character_scope
+				}
+			}
+			set_variable = {
+				name = com_interorg_leader_country_var
+				value = scope:interorg_country_scope
+			}
+			set_variable = {
+				name = com_interorg_leader_character_var
+				value = scope:interorg_character_scope
+			}
+			com_hide_all_journal_elements_for_interorg_effect = yes
+		}
+		com_activate_interorg_sidebar = yes
+	}
+
+	complete = {
+		always = no
+	}
+
 	on_complete = {
 		custom_tooltip = com_debug.a
 	}

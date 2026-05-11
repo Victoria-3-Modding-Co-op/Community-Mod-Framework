@@ -553,6 +553,7 @@ types com_international_organization_types {
 		using = tooltip_above
 		
 		block "com_interorg_button_visible" {
+			visible = "no"
 		}
 		blockoverride "icon" {
 			texture = "gfx/interface/icons/notification_icons/journal.dds"

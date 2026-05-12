@@ -1,16 +1,25 @@
-﻿com_hide_interorg_journal_entry_group = {
-	com_add_interorg_journal_entry_group = {
+﻿com_add_journal_group_to_interorg_list = {
+	# This only adds the journal group to the interorg list for the scripted widget, they also need to be hidden using com_hide_journal_entry or else they will appear in the journal
+	add_to_global_variable_list = {
+		name = com_international_organization_journal_groups
+		target = flag:$name$
+	}
+}
+
+com_add_journal_group_to_situations_list = {
+	# This adds the journal group to the situations list; this is for outliner functionality
+	add_to_global_variable_list = {
+		name = com_international_situation_journal_groups
+		target = flag:$name$
+	}
+}
+
+com_add_journal_group_to_interorg_list_and_hide_from_journal = {
+	com_add_journal_group_to_interorg_list = {
 		name = $name$
 	}
 	com_hide_journal_entry_group = {
 		name = $name$
-	}
-}
-
-com_add_interorg_journal_entry_group = {
-	add_to_global_variable_list = {
-		name = com_international_organization_journal_groups
-		target = flag:$name$
 	}
 }
 

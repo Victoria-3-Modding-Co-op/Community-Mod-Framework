@@ -385,7 +385,7 @@ military_party = {
 					leader ?= { has_ideology = ideology:ideology_authoritarian }
 				}
 				owner = {
-					NOR = {
+					OR = {
 						has_law_or_variant = law_type:law_no_home_affairs
 						has_law_or_variant = law_type:law_guaranteed_liberties
 					}

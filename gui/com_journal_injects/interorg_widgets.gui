@@ -265,16 +265,20 @@ types com_international_organization_types {
 				]"
 			}
 			blockoverride "portrait_icons" { }
-			blockoverride "tooltip" { }
+			blockoverride "tooltip" {
+				block "interorg_leader_tooltip" {
+
+				}
+			}
 		}
 
 		flowcontainer = {
 			direction = vertical
 			parentanchor = bottom|left
-			position = { 5 -20 }
+			position = { 0 -20 }
 			spacing = 5
 			margin = { 5 5 }
-			margin_left = 10
+			margin_left = 15
 
 			visible = "[ComJournalVar('com_interorg_chair_var').IsSet]"
 			datacontext = "[ComJournalVar('com_interorg_chair_var').GetCharacter]"
@@ -330,6 +334,8 @@ types com_international_organization_types {
 			}
 
 		}
+
+		com_international_organization_details = { }
 
 		# TOP/BOTTOM FADE
 		icon = {
@@ -416,16 +422,14 @@ types com_international_organization_types {
 				}
 			}
 		}
-
-		com_international_organization_details = { }
 	}
 
 	type com_international_organization_details = flowcontainer {
 		parentanchor = right|vcenter
-		position = { -8 5 }
+		position = { 0 5 }
 		direction = vertical
 		spacing = 5
-		margin_right = 5
+		margin_right = 13
 
 		background = {
 			using = dark_area

@@ -6,6 +6,8 @@
 # The alternative trigger should always evaluate to FALSE within CMF; these are meant to be overridden by other mods for more flexibility
 # Both triggers should check for a true state within the law definition itself
 
+
+############### POWER STRUCTURE LAWS ####################
 ####----------- Governance Principles Laws ----------####
 # Monarchy
 com_law_monarchy_trigger = {
@@ -17,6 +19,75 @@ com_law_monarchy_alternative_trigger = {
 	always = no
 }
 
+# Colonial Administration
+com_law_colonial_administration_trigger = {
+	NOT = {
+		has_variable = com_hide_law_colonial_administration
+	}
+}
+com_law_colonial_administration_alternative_trigger = {
+	always = no
+}
+
+# Presidential Republic
+com_law_presidential_republic_trigger = {
+	NOT = {
+		has_variable = com_hide_law_presidential_republic
+	}
+}
+com_law_presidential_republic_alternative_trigger = {
+	always = no
+}
+
+# Parliamentary Republic
+com_law_colonial_administration_trigger = {
+	NOT = {
+		has_variable = com_hide_law_parliamentary_republic
+	}
+}
+com_law_parliamentary_republic_alternative_trigger = {
+	always = no
+}
+
+# Theocracy
+com_law_theocracy_trigger = {
+	NOT = {
+		has_variable = com_hide_law_theocracy
+	}
+}
+com_law_theocracy_alternative_trigger = {
+	always = no
+}
+
+# Council Republic
+com_law_council_republic_trigger = {
+	NOT = {
+		has_variable = com_hide_law_council_republic
+	}
+}
+com_law_council_republic_alternative_trigger = {
+	always = no
+}
+
+# Corporate State
+com_law_corporate_state_trigger = {
+	NOT = {
+		has_variable = com_hide_law_corporate_state
+	}
+}
+com_law_corporate_state_alternative_trigger = {
+	always = no
+}
+
+# Social Monarchy
+com_law_social_monarchy_trigger = {
+	NOT = {
+		has_variable = com_hide_law_social_monarchy
+	}
+}
+com_law_social_monarchy_alternative_trigger = {
+	always = no
+}
 
 ####----------- Distribution of Power Laws ----------####
 # Autocracy
@@ -39,6 +110,177 @@ com_law_oligarchy_alternative_trigger = {
 	always = no
 }
 
+# Technocracy
+com_law_technocracy_trigger = {
+	NOT = {
+		has_variable = com_hide_law_technocracy
+	}
+}
+com_law_technocracy_alternative_trigger = {
+	always = no
+}
+
+# Landed Voting
+com_law_landed_voting_trigger = {
+	NOT = {
+		has_variable = com_hide_law_landed_voting
+	}
+}
+com_law_landed_voting_alternative_trigger = {
+	always = no
+}
+
+# Wealth Voting
+com_law_wealth_voting_trigger = {
+	NOT = {
+		has_variable = com_hide_law_wealth_voting
+	}
+}
+com_law_wealth_voting_alternative_trigger = {
+	always = no
+}
+
+# Census Voting
+com_law_census_voting_trigger = {
+	NOT = {
+		has_variable = com_hide_law_census_voting
+	}
+}
+com_law_census_voting_alternative_trigger = {
+	always = no
+}
+
+# Universal Suffrage
+com_law_universal_suffrage_trigger = {
+	NOT = {
+		has_variable = com_hide_law_universal_suffrage
+	}
+}
+com_law_universal_suffrage_alternative_trigger = {
+	always = no
+}
+
+# Anarchy
+com_law_anarchy_trigger = {
+	NOT = {
+		has_variable = com_hide_law_anarchy
+	}
+}
+com_law_anarchy_alternative_trigger = {
+	always = no
+}
+
+# Single Party State
+com_law_single_party_state_trigger = {
+	NOT = {
+		has_variable = com_hide_law_single_party_state
+	}
+}
+com_law_single_party_state_alternative_trigger = {
+	always = no
+}
+
+####----------- Citizenship Laws ----------####
+# Subjecthood
+com_law_subjecthood_trigger = {
+	NOT = {
+		has_variable = com_hide_law_subjecthood
+	}
+}
+com_law_subjecthood_alternative_trigger = {
+	always = no
+}
+
+# Ethnostate
+com_law_ethnostate_trigger = {
+	NOT = {
+		has_variable = com_hide_law_ethnostate
+	}
+}
+com_law_ethnostate_alternative_trigger = {
+	always = no
+}
+
+# National Supremacy
+com_law_national_supremacy_trigger = {
+	NOT = {
+		has_variable = com_hide_law_national_supremacy
+	}
+}
+com_law_national_supremacy_alternative_trigger = {
+	always = no
+}
+
+# Racial Segregation
+com_law_racial_segregation_trigger = {
+	NOT = {
+		has_variable = com_hide_law_racial_segregation
+	}
+}
+com_law_racial_segregation_alternative_trigger = {
+	always = no
+}
+
+# Cultural Exclusion
+com_law_cultural_exclusion_trigger = {
+	NOT = {
+		has_variable = com_hide_law_cultural_exclusion
+	}
+}
+com_law_cultural_exclusion_alternative_trigger = {
+	always = no
+}
+
+# Multiculturalism
+com_law_multicultural_trigger = {
+	NOT = {
+		has_variable = com_hide_law_multicultural
+	}
+}
+com_law_multicultural_alternative_trigger = {
+	always = no
+}
+
+####----------- Church and State ----------####
+# State Religion
+com_law_state_religion_trigger = {
+	NOT = {
+		has_variable = com_hide_law_state_religion
+	}
+}
+com_law_state_religion_alternative_trigger = {
+	always = no
+}
+
+# Freedom of Conscience
+com_law_freedom_of_conscience_trigger = {
+	NOT = {
+		has_variable = com_hide_law_freedom_of_conscience
+	}
+}
+com_law_freedom_of_conscience_alternative_trigger = {
+	always = no
+}
+
+# Total Seperation
+com_law_total_seperation_trigger = {
+	NOT = {
+		has_variable = com_hide_law_total_seperation
+	}
+}
+com_law_total_seperation_alternative_trigger = {
+	always = no
+}
+
+# State Atheism
+com_law_state_atheism_trigger = {
+	NOT = {
+		has_variable = com_hide_law_state_atheism
+	}
+}
+com_law_state_atheism_alternative_trigger = {
+	always = no
+}
 
 ####----------- Bureaucracy Laws ----------####
 # Hereditary Bureaucrats
@@ -48,5 +290,866 @@ com_law_hereditary_bureaucrats_trigger = {
 	}
 }
 com_law_hereditary_bureaucrats_alternative_trigger = {
+	always = no
+}
+
+# Appointed Bureaucrats
+com_law_appointed_bureaucrats_trigger = {
+	NOT = {
+		has_variable = com_hide_law_appointed_bureaucrats
+	}
+}
+com_law_appointed_bureaucrats_alternative_trigger = {
+	always = no
+}
+
+# Elected Bureaucrats
+com_law_elected_bureaucrats_trigger = {
+	NOT = {
+		has_variable = com_hide_law_elected_bureaucrats
+	}
+}
+com_law_elected_bureaucrats_alternative_trigger = {
+	always = no
+}
+
+####----------- Army Models ----------####
+# Peasant Levies
+com_law_peasant_levies_trigger = {
+	NOT = {
+		has_variable = com_hide_law_peasant_levies
+	}
+}
+com_law_peasant_levies_alternative_trigger = {
+	always = no
+}
+
+# Professional Army
+com_law_professional_army_trigger = {
+	NOT = {
+		has_variable = com_hide_law_professional_army
+	}
+}
+com_law_professional_army_alternative_trigger = {
+	always = no
+}
+
+# National Militia
+com_law_national_militia_trigger = {
+	NOT = {
+		has_variable = com_hide_law_national_militia
+	}
+}
+com_law_national_militia_alternative_trigger = {
+	always = no
+}
+
+# Mass Conscription
+com_law_mass_conscription_trigger = {
+	NOT = {
+		has_variable = com_hide_law_mass_conscription
+	}
+}
+com_law_mass_conscription_alternative_trigger = {
+	always = no
+}
+
+####----------- Navy Models ----------####
+# Merchant Navy
+com_law_merchant_navy_trigger = {
+	NOT = {
+		has_variable = com_hide_law_merchant_navy
+	}
+}
+com_law_merchant_navy_alternative_trigger = {
+	always = no
+}
+
+# Jeune Ecole
+com_law_jeune_ecole_trigger = {
+	NOT = {
+		has_variable = com_hide_law_jeune_ecole
+	}
+}
+com_law_jeune_ecole_alternative_trigger = {
+	always = no
+}
+
+# Capital Fleet
+com_law_professional_navy_trigger = {
+	NOT = {
+		has_variable = com_hide_law_professional_navy
+	}
+}
+com_law_professional_navy_alternative_trigger = {
+	always = no
+}
+
+# Diplomatic Navy
+com_law_diplomatic_navy_trigger = {
+	NOT = {
+		has_variable = com_hide_law_diplomatic_navy
+	}
+}
+com_law_diplomatic_navy_alternative_trigger = {
+	always = no
+}
+
+####----------- Internal Securities ----------####
+# No Home Affairs
+com_law_no_home_affairs_trigger = {
+	NOT = {
+		has_variable = com_hide_law_no_home_affairs
+	}
+}
+com_law_no_home_affairs_alternative_trigger = {
+	always = no
+}
+
+# National Guard
+com_law_national_guard_trigger = {
+	NOT = {
+		has_variable = com_hide_law_national_guard
+	}
+}
+com_law_national_guard_alternative_trigger = {
+	always = no
+}
+
+# Secret Police
+com_law_secret_police_trigger = {
+	NOT = {
+		has_variable = com_hide_law_secret_police
+	}
+}
+com_law_secret_police_alternative_trigger = {
+	always = no
+}
+
+# Guaranteed Liberties
+com_law_guaranteed_liberties_trigger = {
+	NOT = {
+		has_variable = com_hide_law_guaranteed_liberties
+	}
+}
+com_law_guaranteed_liberties_alternative_trigger = {
+	always = no
+}
+
+############### ECONOMY LAWS ##################
+####----------- Economic Systems ----------####
+# Traditionalism
+com_law_traditionalism_trigger = {
+	NOT = {
+		has_variable = com_hide_law_traditionalism
+	}
+}
+com_law_traditionalism_alternative_trigger = {
+	always = no
+}
+
+# Interventionism
+com_law_interventionism_trigger = {
+	NOT = {
+		has_variable = com_hide_law_interventionism
+	}
+}
+com_law_interventionism_alternative_trigger = {
+	always = no
+}
+
+# Agrarianism
+com_law_agrarianism_trigger = {
+	NOT = {
+		has_variable = com_hide_law_agrarianism
+	}
+}
+com_law_agrarianism_alternative_trigger = {
+	always = no
+}
+
+# Industry Banned
+com_law_industry_banned_trigger = {
+	NOT = {
+		has_variable = com_hide_law_industry_banned
+	}
+}
+com_law_industry_banned_alternative_trigger = {
+	always = no
+}
+
+# Extraction Economy
+com_law_extraction_economy_trigger = {
+	NOT = {
+		has_variable = com_hide_law_extraction_economy
+	}
+}
+com_law_extraction_economy_alternative_trigger = {
+	always = no
+}
+
+# Laissez Faire
+com_law_laissez_faire_trigger = {
+	NOT = {
+		has_variable = com_hide_law_laissez_faire
+	}
+}
+com_law_laissez_faire_alternative_trigger = {
+	always = no
+}
+
+# Cooperative Ownership
+com_law_cooperative_ownership_trigger = {
+	NOT = {
+		has_variable = com_hide_law_cooperative_ownership
+	}
+}
+com_law_cooperative_ownership_alternative_trigger = {
+	always = no
+}
+
+# Command Economy
+com_law_command_economy_trigger = {
+	NOT = {
+		has_variable = com_hide_law_command_economy
+	}
+}
+com_law_command_economy_alternative_trigger = {
+	always = no
+}
+
+####----------- Land Reforms ----------####
+# Serfdom
+com_law_serfdom_trigger = {
+	NOT = {
+		has_variable = com_hide_law_serfdom
+	}
+}
+com_law_serfdom_alternative_trigger = {
+	always = no
+}
+
+# Tenant Farmers
+com_law_tenant_farmers_trigger = {
+	NOT = {
+		has_variable = com_hide_law_tenant_farmers
+	}
+}
+com_law_tenant_farmers_alternative_trigger = {
+	always = no
+}
+
+# Commercialized Agriculture
+com_law_commericalized_agriculture_trigger = {
+	NOT = {
+		has_variable = com_hide_law_commericalized_agriculture
+	}
+}
+com_law_commericalized_agriculture_alternative_trigger = {
+	always = no
+}
+
+# Homesteading
+com_law_homesteading_trigger = {
+	NOT = {
+		has_variable = com_hide_law_homesteading
+	}
+}
+com_law_homesteading_alternative_trigger = {
+	always = no
+}
+
+# Collectivized Agriculture
+com_law_collectivized_agriculture_trigger = {
+	NOT = {
+		has_variable = com_hide_law_collectivized_agriculture
+	}
+}
+com_law_collectivized_agriculture_alternative_trigger = {
+	always = no
+}
+
+####----------- Trade Policy ----------####
+# Mercantilism
+com_law_mercantilism_trigger = {
+	NOT = {
+		has_variable = com_hide_law_mercantilism
+	}
+}
+com_law_mercantilism_alternative_trigger = {
+	always = no
+}
+
+# Protectionism
+com_law_protectionism_trigger = {
+	NOT = {
+		has_variable = com_hide_law_protectionism
+	}
+}
+com_law_protectionism_alternative_trigger = {
+	always = no
+}
+
+# Free Trade
+com_law_free_trade_trigger = {
+	NOT = {
+		has_variable = com_hide_law_free_trade
+	}
+}
+com_law_free_trade_alternative_trigger = {
+	always = no
+}
+
+# Isolationism
+com_law_isolationism_trigger = {
+	NOT = {
+		has_variable = com_hide_law_isolationism
+	}
+}
+com_law_isolationism_alternative_trigger = {
+	always = no
+}
+
+####----------- Taxation Laws ----------####
+# Consumption Based Taxation 
+com_law_consumption_based_taxation_trigger = {
+	NOT = {
+		has_variable = com_hide_law_consumption_based_taxation
+	}
+}
+com_law_consumption_based_taxation_alternative_trigger = {
+	always = no
+}
+
+# Land Based Taxation
+com_law_land_based_taxation_trigger = {
+	NOT = {
+		has_variable = com_hide_law_land_based_taxation
+	}
+}
+com_law_land_based_taxation_alternative_trigger = {
+	always = no
+}
+
+# Per-capita Based Taxation
+com_law_per_capita_based_taxation_trigger = {
+	NOT = {
+		has_variable = com_hide_law_per_capita_based_taxation
+	}
+}
+com_law_per_capita_based_taxation_alternative_trigger = {
+	always = no
+}
+
+# Proportional Taxation
+com_law_proportional_taxation_trigger = {
+	NOT = {
+		has_variable = com_hide_law_proportional_taxation
+	}
+}
+com_law_proportional_taxation_alternative_trigger = {
+	always = no
+}
+
+# Graduated
+com_law_graduated_taxation_trigger = {
+	NOT = {
+		has_variable = com_hide_law_graduated_taxation
+	}
+}
+com_law_graduated_taxation_alternative_trigger = {
+	always = no
+}
+
+####----------- Colonial Affairs ----------####
+# No Colonial Affairs
+com_law_no_colonial_affairs_trigger = {
+	NOT = {
+		has_variable = com_hide_law_no_colonial_affairs
+	}
+}
+com_law_no_colonial_affairs_alternative_trigger = {
+	always = no
+}
+
+# Frontier Colonization
+com_law_frontier_colonization_trigger = {
+	NOT = {
+		has_variable = com_hide_law_frontier_colonization
+	}
+}
+com_law_frontier_colonization_alternative_trigger = {
+	always = no
+}
+
+# Colonial Resettlement
+com_law_colonial_resettlement_trigger = {
+	NOT = {
+		has_variable = com_hide_law_colonial_resettlement
+	}
+}
+com_law_colonial_resettlement_alternative_trigger = {
+	always = no
+}
+
+# Colonial Exploitation
+com_law_colonial_exploitation_trigger = {
+	NOT = {
+		has_variable = com_hide_law_colonial_exploitation
+	}
+}
+com_law_colonial_exploitation_alternative_trigger = {
+	always = no
+}
+
+####----------- Policing ----------####
+# No Police
+com_law_no_police_trigger = {
+	NOT = {
+		has_variable = com_hide_law_no_police
+	}
+}
+com_law_no_police_alternative_trigger = {
+	always = no
+}
+
+# Local Police
+com_law_local_police_trigger = {
+	NOT = {
+		has_variable = com_hide_law_local_police
+	}
+}
+com_law_local_police_alternative_trigger = {
+	always = no
+}
+
+# Dedicated Police
+com_law_dedicated_police_trigger = {
+	NOT = {
+		has_variable = com_hide_law_dedicated_police
+	}
+}
+com_law_dedicated_police_alternative_trigger = {
+	always = no
+}
+
+# Militarized Police
+com_law_militarized_police_trigger = {
+	NOT = {
+		has_variable = com_hide_law_militarized_police
+	}
+}
+com_law_militarized_police_alternative_trigger = {
+	always = no
+}
+
+####----------- Education Systems ----------####
+# No Schools
+com_law_no_schools_trigger = {
+	NOT = {
+		has_variable = com_hide_law_no_schools
+	}
+}
+com_law_no_schools_alternative_trigger = {
+	always = no
+}
+
+# Religious Schools
+com_law_religious_school_trigger = {
+	NOT = {
+		has_variable = com_hide_law_religious_school
+	}
+}
+com_law_religious_school_alternative_trigger = {
+	always = no
+}
+
+# Private Schools
+com_law_private_school_trigger = {
+	NOT = {
+		has_variable = com_hide_law_private_school
+	}
+}
+com_law_private_school_alternative_trigger = {
+	always = no
+}
+
+# Public Schools
+com_law_public_school_trigger = {
+	NOT = {
+		has_variable = com_hide_law_public_school
+	}
+}
+com_law_public_school_alternative_trigger = {
+	always = no
+}
+
+####----------- Health Systems ----------####
+# No Health System
+com_law_no_health_system_trigger = {
+	NOT = {
+		has_variable = com_hide_law_no_health_system
+	}
+}
+com_law_no_health_system_alternative_trigger = {
+	always = no
+}
+
+# Charitable Health System
+com_law_charitable_health_system_trigger = {
+	NOT = {
+		has_variable = com_hide_law_charitable_health_system
+	}
+}
+com_law_charitable_health_system_alternative_trigger = {
+	always = no
+}
+
+# Private Health Insurance
+com_law_private_health_insurance_trigger = {
+	NOT = {
+		has_variable = com_hide_law_private_health_insurance
+	}
+}
+com_law_private_health_insurance_alternative_trigger = {
+	always = no
+}
+
+# Public Health Insurance
+com_law_public_health_insurance_trigger = {
+	NOT = {
+		has_variable = com_hide_law_public_health_insurance
+	}
+}
+com_law_public_health_insurance_alternative_trigger = {
+	always = no
+}
+
+############ HUMAN RIGHTS LAWS ###########
+####----------- Free Speech ----------####
+# Outlawed Dissent
+com_law_outlawed_dissent_trigger = {
+	NOT = {
+		has_variable = com_hide_law_outlawed_dissent
+	}
+}
+com_law_outlawed_dissent_alternative_trigger = {
+	always = no
+}
+
+# Censorship
+com_law_censorship_trigger = {
+	NOT = {
+		has_variable = com_hide_law_censorship
+	}
+}
+com_law_censorship_alternative_trigger = {
+	always = no
+}
+
+# Right of Assembly
+com_law_right_of_assembly_trigger = {
+	NOT = {
+		has_variable = com_hide_law_right_of_assembly
+	}
+}
+com_law_right_of_assembly_alternative_trigger = {
+	always = no
+}
+
+# Protected Speech
+com_law_protected_speech_trigger = {
+	NOT = {
+		has_variable = com_hide_law_protected_speech
+	}
+}
+com_law_protected_speech_alternative_trigger = {
+	always = no
+}
+
+####----------- Labor Rights ----------####
+# No Workers Rights
+com_law_no_workers_rights_trigger = {
+	NOT = {
+		has_variable = com_hide_law_no_workers_rights
+	}
+}
+com_law_no_workers_rights_alternative_trigger = {
+	always = no
+}
+
+# Regulatory Bodies
+com_law_regulatory_bodies_trigger = {
+	NOT = {
+		has_variable = com_hide_law_regulatory_bodies
+	}
+}
+com_law_regulatory_bodies_alternative_trigger = {
+	always = no
+}
+
+# Worker Protections
+com_law_worker_protections_trigger = {
+	NOT = {
+		has_variable = com_hide_law_worker_protections
+	}
+}
+com_law_worker_protections_alternative_trigger = {
+	always = no
+}
+
+####----------- Children's Rights ----------####
+# Child Labor Allowed
+com_law_child_labor_allowed_trigger = {
+	NOT = {
+		has_variable = com_hide_law_child_labor_allowed
+	}
+}
+com_law_child_labor_allowed_alternative_trigger = {
+	always = no
+}
+
+# Restricted Child Labor
+com_law_restricted_child_labor_trigger = {
+	NOT = {
+		has_variable = com_hide_law_restricted_child_labor
+	}
+}
+com_law_restricted_child_labor_alternative_trigger = {
+	always = no
+}
+
+# Compulsory Primary Schools
+com_law_compulsory_primary_school_trigger = {
+	NOT = {
+		has_variable = com_hide_law_compulsory_primary_school
+	}
+}
+com_law_compulsory_primary_school_alternative_trigger = {
+	always = no
+}
+
+####----------- Rights of Women ----------####
+# No Women's Rights
+com_law_no_womens_rights_trigger = {
+	NOT = {
+		has_variable = com_hide_law_no_womens_rights
+	}
+}
+com_law_no_womens_rights_alternative_trigger = {
+	always = no
+}
+
+# Propertied Women
+com_law_women_own_property_trigger = {
+	NOT = {
+		has_variable = com_hide_law_women_own_property
+	}
+}
+com_law_women_own_property_alternative_trigger = {
+	always = no
+}
+
+# Women in Workplace
+com_law_women_in_the_workplace_trigger = {
+	NOT = {
+		has_variable = com_hide_law_women_in_the_workplace
+	}
+}
+com_law_women_in_the_workplace_alternative_trigger = {
+	always = no
+}
+
+# Womens Suffrage
+com_law_womens_suffrage_trigger = {
+	NOT = {
+		has_variable = com_hide_law_womens_suffrage
+	}
+}
+com_law_womens_suffrage_alternative_trigger = {
+	always = no
+}
+
+####----------- Welfare ----------####
+# No Social Security
+com_law_no_social_security_trigger = {
+	NOT = {
+		has_variable = com_hide_law_no_social_security
+	}
+}
+com_law_no_social_security_alternative_trigger = {
+	always = no
+}
+
+# Poor Laws
+com_law_poor_laws_trigger = {
+	NOT = {
+		has_variable = com_hide_law_poor_laws
+	}
+}
+com_law_poor_laws_alternative_trigger = {
+	always = no
+}
+
+# Wage Subsidies
+com_law_wage_subsidies_trigger = {
+	NOT = {
+		has_variable = com_hide_law_wage_subsidies
+	}
+}
+com_law_wage_subsidies_alternative_trigger = {
+	always = no
+}
+
+# Old Age Pension
+com_law_old_age_pension_trigger = {
+	NOT = {
+		has_variable = com_hide_law_old_age_pension
+	}
+}
+com_law_old_age_pension_alternative_trigger = {
+	always = no
+}
+
+####----------- Migration ----------####
+# No Migration Controls
+com_law_no_migration_controls_trigger = {
+	NOT = {
+		has_variable = com_hide_law_no_migration_controls
+	}
+}
+com_law_no_migration_controls_alternative_trigger = {
+	always = no
+}
+
+# Migration Controls
+com_law_migration_controls_trigger = {
+	NOT = {
+		has_variable = com_hide_law_migration_controls
+	}
+}
+com_law_migration_controls_alternative_trigger = {
+	always = no
+}
+
+# Closed Borders
+com_law_closed_borders_trigger = {
+	NOT = {
+		has_variable = com_hide_law_closed_borders
+	}
+}
+com_law_closed_borders_alternative_trigger = {
+	always = no
+}
+
+####----------- Slavery ----------####
+# Slavery Banned
+com_law_slavery_banned_trigger = {
+	NOT = {
+		has_variable = com_hide_law_slavery_banned
+	}
+}
+com_law_slavery_banned_alternative_trigger = {
+	always = no
+}
+
+# Colonial Slavery
+com_law_colonial_slavery_trigger = {
+	NOT = {
+		has_variable = com_hide_law_colonial_slavery
+	}
+}
+com_law_colonial_slavery_alternative_trigger = {
+	always = no
+}
+
+# Debt Slavery
+com_law_debt_slavery_trigger = {
+	NOT = {
+		has_variable = com_hide_law_debt_slavery
+	}
+}
+com_law_debt_slavery_alternative_trigger = {
+	always = no
+}
+
+# Legacy Slavery
+com_law_legacy_slavery_trigger = {
+	NOT = {
+		has_variable = com_hide_law_legacy_slavery
+	}
+}
+com_law_legacy_slavery_alternative_trigger = {
+	always = no
+}
+
+# Slave Trade
+com_law_slave_trade_trigger = {
+	NOT = {
+		has_variable = com_hide_law_slave_trade
+	}
+}
+com_law_slave_trade_alternative_trigger = {
+	always = no
+}
+
+####----------- Labor Associations ----------####
+# Guild System
+com_law_guild_system_trigger = {
+	NOT = {
+		has_variable = com_hide_law_guild_system
+	}
+}
+com_law_guild_system_alternative_trigger = {
+	always = no
+}
+
+# Combination Acts
+com_law_combination_acts_trigger = {
+	NOT = {
+		has_variable = com_hide_law_combination_acts
+	}
+}
+com_law_combination_acts_alternative_trigger = {
+	always = no
+}
+
+# Anti-strike Laws
+com_law_anti_strike_laws_trigger = {
+	NOT = {
+		has_variable = com_hide_law_anti_strike_laws
+	}
+}
+com_law_anti_strike_laws_alternative_trigger = {
+	always = no
+}
+
+# Right to Associate
+com_law_right_to_associate_trigger = {
+	NOT = {
+		has_variable = com_hide_law_right_to_associate
+	}
+}
+com_law_right_to_associate_alternative_trigger = {
+	always = no
+}
+
+# Corporatized Unions
+com_law_corporatized_unions_trigger = {
+	NOT = {
+		has_variable = com_hide_law_corporatized_unions
+	}
+}
+com_law_corporatized_unions_alternative_trigger = {
+	always = no
+}
+
+# Factory Councils
+com_law_factory_councils_trigger = {
+	NOT = {
+		has_variable = com_hide_law_factory_councils
+	}
+}
+com_law_factory_councils_alternative_trigger = {
 	always = no
 }

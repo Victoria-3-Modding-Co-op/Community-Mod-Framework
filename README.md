@@ -161,6 +161,9 @@ Europa Universalis V Style Windows:
 - [event_window_europa_1_char](docs/images/event_windows/event_window_europa_variants.png)
 - [event_window_europa_2_char](docs/images/event_windows/event_window_europa_variants.png)
 
+Event Window Fix for Image Proportions Distortion
+- [event_window_com_fixed_image_size] (docs/event_windows/event_window_com_fixed_image_size.png)
+
 ### Usage Notes
 - For ease of use, any modded windows with characters will expect a character scope for the arguments `left_icon = scope:some_character`, `right_icon = scope:some_character` and `center_icon = scope:some_character` if the event has three characters. Just like the vanilla events do.
 - `event_window_duel` also has an optional progress bar that will display below the flavor text

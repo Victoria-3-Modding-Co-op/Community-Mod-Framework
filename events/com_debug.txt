@@ -110,11 +110,149 @@ com_debug.1 = {
 		fix_variable_error = { variable = com_reason_location }
 
 		# CMF Law Blocker Framework
+		## Power Laws
+		#Bureaucracy
 		fix_variable_error = { variable = com_hide_law_hereditary_bureaucrats }
+		fix_variable_error = { variable = com_hide_law_appointed_bureaucrats }
+		fix_variable_error = { variable = com_hide_law_elected_bureaucrats }
+		#Governance Principles
 		fix_variable_error = { variable = com_hide_law_monarchy }
+		fix_variable_error = { variable = com_hide_law_colonial_administration }
+		fix_variable_error = { variable = com_hide_law_presidential_republic }
+		fix_variable_error = { variable = com_hide_law_parliamentary_republic }
+		fix_variable_error = { variable = com_hide_law_theocracy }
+		fix_variable_error = { variable = com_hide_law_council_republic }
+		fix_variable_error = { variable = com_hide_law_corporate_state }
+		fix_variable_error = { variable = com_hide_law_social_monarchy }
+		#Distribution of Power
 		fix_variable_error = { variable = com_hide_law_autocracy }
-		fix_variable_error = { variable = com_hide_law_oligarchy }
+		fix_variable_error = { variable = com_hide_law_oligarchy}
+		fix_variable_error = { variable = com_hide_law_technocracy }
+		fix_variable_error = { variable = com_hide_law_landed_voting }
+		fix_variable_error = { variable = com_hide_law_wealth_voting }
+		fix_variable_error = { variable = com_hide_law_census_voting }
+		fix_variable_error = { variable = com_hide_law_universal_suffrage }
+		fix_variable_error = { variable = com_hide_law_anarchy }
+		fix_variable_error = { variable = com_hide_law_single_party_state }
+		#Citizenship
+		fix_variable_error = { variable = com_hide_law_subjecthood }
+		fix_variable_error = { variable = com_hide_law_ethnostate }
+		fix_variable_error = { variable = com_hide_law_national_supremacy }
+		fix_variable_error = { variable = com_hide_law_racial_segregation }
+		fix_variable_error = { variable = com_hide_law_cultural_exclusion }
+		fix_variable_error = { variable = com_hide_law_multicultural }
+		#Church and State
+		fix_variable_error = { variable = com_hide_law_state_religion }
+		fix_variable_error = { variable = com_hide_law_freedom_of_conscience }
+		fix_variable_error = { variable = com_hide_law_total_seperation }
+		fix_variable_error = { variable = com_hide_law_state_atheism }
+		#Army Models
+		fix_variable_error = { variable = com_hide_law_peasant_levies }
+		fix_variable_error = { variable = com_hide_law_professional_army }
+		fix_variable_error = { variable = com_hide_law_national_militia }
+		fix_variable_error = { variable = com_hide_law_mass_conscription }
+		#Navy Models
+		fix_variable_error = { variable = com_hide_law_merchant_navy }
+		fix_variable_error = { variable = com_hide_law_jeune_ecole }
+		fix_variable_error = { variable = com_hide_law_professional_navy }
+		fix_variable_error = { variable = com_hide_law_diplomatic_navy }
+		#Internal Securities
+		fix_variable_error = { variable = com_hide_law_no_home_affairs }
+		fix_variable_error = { variable = com_hide_law_national_guard }
+		fix_variable_error = { variable = com_hide_law_secret_police }
+		fix_variable_error = { variable = com_hide_law_guaranteed_liberties }
 
+		## Economy Laws
+		#Economic Systems
+		fix_variable_error = { variable = com_hide_law_traditionalism }
+		fix_variable_error = { variable = com_hide_law_interventionism }
+		fix_variable_error = { variable = com_hide_law_agrarianism }
+		fix_variable_error = { variable = com_hide_law_industry_banned }
+		fix_variable_error = { variable = com_hide_law_extraction_economy }
+		fix_variable_error = { variable = com_hide_law_laissez_faire }
+		fix_variable_error = { variable = com_hide_law_cooperative_ownership }
+		fix_variable_error = { variable = com_hide_law_command_economy }
+		#Land Reforms
+		fix_variable_error = { variable = com_hide_law_serfdom }
+		fix_variable_error = { variable = com_hide_law_tenant_farmers }
+		fix_variable_error = { variable = com_hide_law_commericalized_agriculture }
+		fix_variable_error = { variable = com_hide_law_homesteading }
+		fix_variable_error = { variable = com_hide_law_collectivized_agriculture }
+		#Trade Policy
+		fix_variable_error = { variable = com_hide_law_mercantilism }
+		fix_variable_error = { variable = com_hide_law_protectionism }
+		fix_variable_error = { variable = com_hide_law_free_trade }
+		fix_variable_error = { variable = com_hide_law_isolationism }
+		#Taxation Laws
+		fix_variable_error = { variable = com_hide_law_consumption_based_taxation }
+		fix_variable_error = { variable = com_hide_law_land_based_taxation }
+		fix_variable_error = { variable = com_hide_law_per_capita_based_taxation }
+		fix_variable_error = { variable = com_hide_law_proportional_taxation }
+		fix_variable_error = { variable = com_hide_law_graduated_taxation }
+		#Colonial Affairs
+		fix_variable_error = { variable = com_hide_law_no_colonial_affairs }
+		fix_variable_error = { variable = com_hide_law_frontier_colonization }
+		fix_variable_error = { variable = com_hide_law_colonial_resettlement }
+		fix_variable_error = { variable = com_hide_law_colonial_exploitation }
+		#Policing
+		fix_variable_error = { variable = com_hide_law_no_police }
+		fix_variable_error = { variable = com_hide_law_local_police }
+		fix_variable_error = { variable = com_hide_law_dedicated_police }
+		fix_variable_error = { variable = com_hide_law_militarized_police }
+		#Education Systems
+		fix_variable_error = { variable = com_hide_law_no_schools}
+		fix_variable_error = { variable = com_hide_law_religious_school }
+		fix_variable_error = { variable = com_hide_law_private_school }
+		fix_variable_error = { variable = com_hide_law_public_school }
+		#Health Systems
+		fix_variable_error = { variable = com_hide_law_no_health_system }
+		fix_variable_error = { variable = com_hide_law_charitable_health_system }
+		fix_variable_error = { variable = com_hide_law_private_health_insurance }
+		fix_variable_error = { variable = com_hide_law_public_health_insurance }
+
+		## Human Rights Laws
+		#Free Speech
+		fix_variable_error = { variable = com_hide_law_outlawed_dissent }
+		fix_variable_error = { variable = com_hide_law_censorship }
+		fix_variable_error = { variable = com_hide_law_right_of_assembly }
+		fix_variable_error = { variable = com_hide_law_protected_speech }
+		#Labor Rights
+		fix_variable_error = { variable = com_hide_law_no_workers_rights }
+		fix_variable_error = { variable = com_hide_law_regulatory_bodies }
+		fix_variable_error = { variable = com_hide_law_worker_protections }
+		#Children's Rights
+		fix_variable_error = { variable = com_hide_law_child_labor_allowed }
+		fix_variable_error = { variable = com_hide_law_restricted_child_labor }
+		fix_variable_error = { variable = com_hide_law_compulsory_primary_school }
+		#Women's Rights
+		fix_variable_error = { variable = com_hide_law_no_womens_rights }
+		fix_variable_error = { variable = com_hide_law_women_own_property}
+		fix_variable_error = { variable = com_hide_law_women_in_the_workplace }
+		fix_variable_error = { variable = com_hide_law_womens_suffrage }
+		#Welfare
+		fix_variable_error = { variable = com_hide_law_no_social_security }
+		fix_variable_error = { variable = com_hide_law_poor_laws }
+		fix_variable_error = { variable = com_hide_law_wage_subsidies }
+		fix_variable_error = { variable = com_hide_law_old_age_pension }
+		#Migration
+		fix_variable_error = { variable = com_hide_law_no_migration_controls }
+		fix_variable_error = { variable = com_hide_law_migration_controls }
+		fix_variable_error = { variable = com_hide_law_closed_borders}
+		#Slavery
+		fix_variable_error = { variable = com_hide_law_slavery_banned }
+		fix_variable_error = { variable = com_hide_law_colonial_slavery }
+		fix_variable_error = { variable = com_hide_law_debt_slavery }
+		fix_variable_error = { variable = com_hide_law_legacy_slavery }
+		fix_variable_error = { variable = com_hide_law_slave_trade }
+		#Labor Associations
+		fix_variable_error = { variable = com_hide_law_guild_system }
+		fix_variable_error = { variable = com_hide_law_combination_acts }
+		fix_variable_error = { variable = com_hide_law_anti_strike_laws }
+		fix_variable_error = { variable = com_hide_law_right_to_associate }
+		fix_variable_error = { variable = com_hide_law_corporatized_unions }
+		fix_variable_error = { variable = com_hide_law_factory_councils }
+
+		
 		# Float arrays
 		fix_variable_error = { variable = com_fa_index }
 		fix_variable_error = { variable = com_fa_return }

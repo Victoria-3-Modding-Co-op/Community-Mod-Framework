@@ -139,7 +139,7 @@ These are following effects and triggers available to use for styling progress b
 ## Details
 
 ### Effect: `com_activate_interorg_sidebar`
-Activates the sidebar for International Organizations and runs `com_hide_interorg_journal_entry_group` on the five [custom journal groups](#custom-journal-groups)
+Activates the sidebar for International Organizations and runs `com_hide_journal_entry_group` on the five [custom journal groups](#custom-journal-groups)
 
 **Parameters:**
 - None
@@ -156,8 +156,14 @@ Set a journal entry group as an international organization. This places its jour
 **Parameters:**
 - `name` script name of the journal entry group to be added
 
-### Effect: `com_hide_interorg_journal_entry_group`
-Set a journal entry group as an international organization. This places its journals in international organization panel and removes them from the journal entry panel.
+### Effect: `com_add_journal_group_to_situations_list`
+Set a journal entry group as an international situation. This places its journals in the International Situations container in the outliner, and will not remove them from the journal entry panel.
+
+**Parameters:**
+- `name` script name of the journal entry group to be added
+
+### Effect: `com_add_journal_group_to_interorg_list_and_hide_from_journal`
+Set a journal entry group as an international organization. This places its journals in international organization panel *and* removes them from the journal entry panel.
 
 **Parameters:**
 - `name` script name of the journal entry group to be added

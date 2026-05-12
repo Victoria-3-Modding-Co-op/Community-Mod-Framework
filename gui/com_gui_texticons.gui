@@ -1,0 +1,19 @@
+﻿texticon = {
+	icon = com_formable_possible
+	iconsize = {
+		texture = "gfx/interface/icons/generic_icons/most_senior_front_commander.dds"
+		size = { 25 25 }
+		offset = { 0 7 }
+		fontsize = 18
+	}
+}
+
+texticon = {
+	icon = com_offer_embassy
+	iconsize = {
+		texture = "gfx/interface/icons/generic_icons/number_of_countries.dds"
+		size = { 25 25 }
+		offset = { 0 7 }
+		fontsize = 18
+	}
+}

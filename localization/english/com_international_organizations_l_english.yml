@@ -1,5 +1,117 @@
 ﻿l_english:
+ # Game Concepts
  concept_com_international_organization: "International Organization"
- concept_com_international_organization_desc: "A group of [Concept('concept_country','$concept_countries$')] bound together by some type of supranational entity."
+ concept_com_international_organization_desc: "A supranational entity composed of [Concept('concept_country','$concept_countries$')] with a common goal"
  concept_com_international_organizations: "International Organizations"
- je_group_international_organizations: "[Concept('concept_com_international_organization','$concept_com_international_organizations$')]"
+ concept_com_international_organization_short: "Organization"
+ concept_com_international_organization_shorter: "Org"
+ concept_com_international_organizations_short: "Organizations"
+ concept_com_international_organization_leader: "International Organization Leader" 
+ concept_com_international_organization_leader_desc: "The leading country of an [concept_com_international_organization]"
+ concept_com_international_organization_leader_med: "Organization Leader" 
+ concept_com_international_organization_leader_short: "Leader" 
+ concept_com_international_organization_chair: "International Organization Chair"
+ concept_com_international_organization_chair_desc: "The [Concept('concept_character', '$concept_individual$')] tasked with guiding an [concept_com_international_organization]"
+ concept_com_international_organization_chair_med: "Organization Chair"
+ concept_com_international_organization_chair_short: "Chair"
+ concept_com_international_organization_member: "International Organization Member"
+ concept_com_international_organization_member_desc: "A [concept_country] that belongs to an [concept_com_international_organization]"
+ concept_com_international_organization_members: "International Organization Members"
+ concept_com_international_organization_member_med: "Organization Member"
+ concept_com_international_organization_members_med: "Organization Members"
+ concept_com_international_organization_member_short: "Member"
+ concept_com_international_organization_members_short: "Members"
+ concept_com_international_organization_headquarters: "International Organization Headquarters"
+ concept_com_international_organization_headquarters_desc: "The [concept_state_region] which houses an [concept_com_international_organization]'s primary meetingplace"
+ concept_com_international_organization_headquarters_med: "Organization Headquarters"
+ concept_com_international_organization_headquarters_med_short: "Organization HQ"
+ concept_com_international_organization_headquarters_short: "Headquarters"
+ concept_com_international_organization_headquarters_shorter: "HQ"
+
+ concept_com_international_situation: "International Situation"
+ concept_com_international_situation_desc: "An event which involves a number of [Concept('concept_country','$concept_countries$')] who must face or resolve it"
+ concept_com_international_situations: "International Situations"
+ concept_com_international_situation_short: "Situation"
+ concept_com_international_situations_short: "Situations"
+ 
+ # Journal Entry Groups
+ je_group_com_hidden: "Hidden"
+ je_group_com_contextless_hidden: "Hidden"
+ 
+ je_group_com_supranational_organizations: "Supranational Organizations"
+ je_group_com_regional_organizations: "Regional Organizations"
+ je_group_com_religious_organizations: "Religious Organizations"
+ je_group_com_non_governmental_organizations: "Non-governmental Organizations"
+ je_group_com_sporting_organizations: "Sporting Organizations"
+ 
+ # Journal Entries
+ je_com_supranational_organization: "Congress of Test Powers"
+ je_com_supranational_organization_reason: "$je_com_supranational_organization$"
+ je_com_regional_organization: "Global Local Conference"
+ je_com_regional_organization_reason: "$je_com_regional_organization$"
+ je_com_religious_organization: "Church of WOLOLO"
+ je_com_religious_organization_reason: "$je_com_religious_organization$"
+ 
+ # Localization Trick
+ com_international_organizations: "[Concept('concept_com_international_organization','$concept_com_international_organizations$')]"
+ com_organization: "[Concept('concept_com_international_organization','$concept_com_international_organization_short$')]"
+ com_org: "[Concept('concept_com_international_organization','$concept_com_international_organization_shorter$')]"
+ com_organizations: "[Concept('concept_com_international_organization','$concept_com_international_organizations_short$')]"
+ com_organization_leader: "[Concept('concept_com_international_organization_leader', '$concept_com_international_organization_leader_med$')]"
+ com_org_leader: "[Concept('concept_com_international_organization_leader','$concept_com_international_organization_leader_short$')]"
+ com_organization_chair: "[Concept('concept_com_international_organization_chair','$concept_com_international_organization_chair_med$')]"
+ com_org_chair: "[Concept('concept_com_international_organization_chair','$concept_com_international_organization_chair_short$')]"
+ com_international_organization_members: "[Concept('concept_com_international_organization_member','$concept_com_international_organization_members$')]"
+ com_organization_member: "[Concept('concept_com_international_organization_member','$concept_com_international_organization_member_med$')]"
+ com_organization_members: "[Concept('concept_com_international_organization_member','$concept_com_international_organization_members_med$')]"
+ com_org_member: "[Concept('concept_com_international_organization_member','$concept_com_international_organization_member_short$')]"
+ com_org_members: "[Concept('concept_com_international_organization_member','$concept_com_international_organization_members_short$')]"
+ com_organization_headquarters: "[Concept('concept_com_international_organization_headquarters','$concept_com_international_organization_headquarters_short$')]"
+ com_organization_hq: "[Concept('concept_com_international_organization_headquarters','$concept_com_international_organization_headquarters_med_short$')]"
+ com_org_headquarters: "[Concept('concept_com_international_organization_headquarters','$concept_com_international_organization_headquarters_short$')]"
+ com_org_hq: "[Concept('concept_com_international_organization_headquarters','$concept_com_international_organization_headquarters_shorter$')]"
+
+ com_international_situations: "[Concept('concept_com_international_situation','$concept_com_international_situations$')]"
+ com_situation: "[Concept('concept_com_international_situation','$concept_com_international_situation_short$')]"
+ com_situations: "[Concept('concept_com_international_situation','$concept_com_international_situations_short$')]"
+
+ com_flag_loc: "[TopScope.GetLocalVariable('com_flag_loc').GetFlagName]"
+
+ # Sidebar Ideology
+ com_international_organizations_sgui: "com_international_organizations_sgui"
+ com_international_organizations_sgui_desc: "Organizations"
+ 
+ # Tooltips
+ com_add_interorg_journal_entry: "The #bold $com_flag_loc$#! [concept_com_international_organization] will be created"
+ com_set_international_organization_headquaters_effect: "The $com_organization$'s $com_org_headquarters$ move to #bold $com_gui_interorg_headquaters_name$#!"
+
+ # GUI - Journal Entry Panel
+ com_gui_journal_header: "[ComJournalVar('com_header_var').GetFlagName] $com_organization$"
+ 
+ # GUI - International Orgs Panel
+ com_gui_international_organizations_header: "International Organizations"
+ com_gui_power_blocs_header: "Power Blocs"
+ com_gui_organization_headquarters: "@com_formable_possible! [ComJournalVar('com_interorg_headquarters_var').GetStateRegion.GetName]"
+ com_gui_additional_members: "There are additional members not displayed. Check the Organization to see all members."
+ 
+ # GUI - Outliner Container
+ com_gui_international_organizations_outliner: "$com_international_organizations$"
+ com_gui_international_situations_outliner: "$com_international_situations$"
+ com_gui_goto_international_orgs_panel: "Go to the $com_international_organizations$ panel"
+ 
+ # GUI - Journal Entry Widgets
+ com_gui_main_actions: "Main Actions"
+ com_gui_members: "Members"
+ com_gui_interorg_leader_header: "$com_organization_leader$"
+ com_gui_interorg_leader_name: "[ComJournalVar('com_interorg_leader_var').GetCountry.GetName]"
+ com_gui_interorg_character_header: "$com_interorg_leader_title$"
+ com_gui_interorg_character_name: "[Character.GetFullName]"
+ com_gui_interorg_headquaters_header: "$com_organization_hq$"
+ com_gui_interorg_headquaters_name: "[ComJournalVar('com_interorg_headquarters_var').GetStateRegion.GetName]"
+ com_gui_interorg_participants_header: "$com_organization_members$"
+ # Interorg leader titles
+ com_interorg_leader_title: "[Concept('concept_com_international_organization_chair', Concatenate3('$concept_com_international_organization_short$',' ',Select_CString(ComJournalVar('com_interorg_chair_title_var').IsSet,ComJournalVar('com_interorg_chair_title_var').GetFlagName,'$com_interorg_title_chair$')))]"
+ com_interorg_title_chair: "Chair"
+ com_interorg_title_leader: "Leader"
+ com_interorg_title_president: "President"
+ com_interorg_title_head: "Head"

@@ -17,6 +17,26 @@ concept_com_international_organization = {
 	texture = "gfx/interface/icons/generic_icons/international_organizations.dds"
 }
 
+concept_com_international_organization_leader = {
+	texture = "gfx/interface/icons/alert_icons/formable_possible.dds"
+}
+
+concept_com_international_organization_chair = {
+	texture = "gfx/interface/icons/notification_icons/character.dds"
+}
+
+concept_com_international_organization_member = {
+	texture = "gfx/interface/icons/generic_icons/number_of_countries.dds"
+}
+
+concept_com_international_organization_headquarters = {
+	texture = "gfx/interface/icons/generic_icons/most_senior_front_commander.dds"
+}
+
+concept_com_international_situation = {
+	texture = "gfx/interface/icons/alert_icons/unused/diplomatic_play.dds"
+}
+
 concept_com_situation_faction_neutral = {
     texture = "gfx/interface/icons/lens_toolbar_icons/unused/diplomatic_plays.dds"
     is_loading_tip = yes

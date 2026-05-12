@@ -1,0 +1,38 @@
+﻿com_international_organizations_sgui = {
+	scope = country
+	
+	is_shown = {
+		has_global_variable = com_international_organization_panel_active
+		has_global_variable_list = com_international_organization_journal_groups
+	}
+	is_valid = {
+		has_global_variable = com_international_organization_panel_active
+		has_global_variable_list = com_international_organization_journal_groups
+	}
+}
+
+com_international_organization_journal_entry_group_sgui = {
+	scope = country
+	saved_scopes = {
+		group_name
+	}
+	is_shown = {
+		is_target_in_global_variable_list = {
+			name = com_international_organization_journal_groups
+			target = scope:group_name
+		}
+	}
+}
+
+com_international_situation_journal_entry_group_sgui = {
+	scope = country
+	saved_scopes = {
+		group_name
+	}
+	is_shown = {
+		is_target_in_global_variable_list = {
+			name = com_international_situation_journal_groups
+			target = scope:group_name
+		}
+	}
+}

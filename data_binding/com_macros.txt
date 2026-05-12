@@ -57,3 +57,21 @@ macro = {
     definition = "Xor(A,B)"
     replace_with = "And(Or(A,B),Nand(A,B))"
 }
+
+macro = {
+    description = "Get the SGUI for the group of a journal entry"
+    definition = "ComJournalEntryGroupSGui(JEGroup)"
+    replace_with = "GetScriptedGui(JEGroup).IsShown(GuiScope.SetRoot(AccessPlayer.MakeScope).AddScope('group_name', MakeScopeFlag(JournalEntry.GetType.GetGroup.GetKey)).End)"
+}
+
+macro = {
+    description = "Get the SGUI for a journal group"
+    definition = "ComJournalGroupSGui(JEGroup)"
+    replace_with = "GetScriptedGui(JEGroup).IsShown(GuiScope.SetRoot(AccessPlayer.MakeScope).AddScope('group_name', MakeScopeFlag(JournalEntryGroup.GetKey)).End)"
+}
+
+macro = {
+    description = "Get variable in journal scope"
+    definition = "ComJournalVar(Variable)"
+    replace_with = "JournalEntry.MakeScope.Var(Variable)"
+}

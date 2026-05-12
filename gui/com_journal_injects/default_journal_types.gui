@@ -1,0 +1,74 @@
+types com_default_journal_elements_types {
+	type com_default_journal_buttons = flowcontainer {
+		direction = vertical
+		parentanchor = top|hcenter
+		minimumsize = { 540 -1 }
+		using = entry_bg_fancy
+		spacing = 10
+		margin_bottom = 20
+		
+		visible = "[Not( IsDataModelEmpty( JournalEntry.GetScriptedButtons ) )]"
+		
+		dynamicgridbox = {
+			parentanchor = hcenter
+			visible = "[Not( IsDataModelEmpty( JournalEntry.GetScriptedButtons ) )]"
+			datamodel = "[JournalEntry.GetScriptedButtons]"
+			datamodel_wrap = 2
+			flipdirection = yes
+			
+			item = {
+				widget = {
+					size = { 260 60 }
+					
+					scripted_journal_entry_button = {
+						parentanchor = center
+					}
+				}
+			}
+		}
+	}
+	
+	type com_default_journal_reason = textbox {
+		autoresize = yes
+		block "journal_reason_text" {
+			text = "[JournalEntry.GetReason]"
+		}
+		min_width = 535
+		max_width = 535
+		multiline = yes
+		using = default_list_position
+		align = nobaseline
+		margin = { 15 15 }
+		
+		background = {
+			using = entry_bg
+		}
+	}
+
+	type com_default_journal_timeout = flowcontainer {
+		parentanchor = hcenter
+		spacing = 5
+		margin = { 20 10 }
+
+		visible = "[JournalEntry.CanTimeOut]"
+
+		background = {
+			using = entry_bg
+		}
+
+
+
+		icon = {
+			size = { 30 30 }
+			texture = "gfx/interface/icons/generic_icons/clock.dds"
+		}
+		textbox = {
+			text = "[JournalEntry.GetTimeoutTooltip]"
+			autoresize = yes
+			align = nobaseline
+			using = fontsize_large
+			parentanchor = vcenter
+		}
+		tooltip = "JOURNAL_ENTRY_ON_TIMEOUT_LONG"
+	}
+}

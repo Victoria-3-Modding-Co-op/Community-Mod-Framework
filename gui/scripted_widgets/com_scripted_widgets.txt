@@ -1,1 +1,2 @@
 ﻿gui/com_hidden_trigger.gui = com_hidden_trigger
+gui/com_gui_international_organizations_panel.gui = com_international_organizations_widget

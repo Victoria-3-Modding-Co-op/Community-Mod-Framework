@@ -1,0 +1,20 @@
+﻿com_international_organizations_sgui = {
+	icon = "gfx/interface/icons/generic_icons/international_organizations.dds"
+	show_in_list = no
+	character_ideology = yes
+	country_trigger = {
+		always = no
+	}
+	interest_group_leader_trigger = {
+		always = no
+	}
+	non_interest_group_leader_trigger = {
+		always = no
+	}
+	interest_group_leader_weight = {
+		value = 0 #dummy ideology
+	}
+	non_interest_group_leader_weight = {
+		value = 0 #dummy ideology
+	}
+}

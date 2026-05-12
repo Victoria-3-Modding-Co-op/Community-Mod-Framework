@@ -1,0 +1,50 @@
+﻿GLOBAL = {
+	# Add button to sidebar
+	add_to_global_variable_list = {
+		name = custom_button_list_flag
+		target = flag:com_international_organizations_sgui
+	}
+	
+	## Set up hidden groups
+	com_hide_journal_entry_group = {
+		name = je_group_com_hidden
+	}
+	com_hide_journal_entry_group = {
+		name = je_group_com_contextless_hidden
+	}
+
+	## Create International Situations List
+	add_to_global_variable_list = {
+		name = com_international_situation_journal_groups
+		target = flag:je_group_global_test # Just some Lippe Service
+	}
+	add_to_global_variable_list = {
+		name = com_international_situation_journal_groups
+		target = flag:je_group_global_international_situations
+	}
+	add_to_global_variable_list = {
+		name = com_international_situation_journal_groups
+		target = flag:je_group_iberia
+	}
+	add_to_global_variable_list = {
+		name = com_international_situation_journal_groups
+		target = flag:je_group_british_india
+	}
+
+	## Create International Organization List
+	com_add_interorg_journal_entry_group = {
+		name = je_group_com_supranational_organizations
+	}
+	com_add_interorg_journal_entry_group = {
+		name = je_group_com_regional_organizations
+	}
+	com_add_interorg_journal_entry_group = {
+		name = je_group_com_religious_organizations
+	}
+	com_add_interorg_journal_entry_group = {
+		name = je_group_com_non_governmental_organizations
+	}
+	com_add_interorg_journal_entry_group = {
+		name = je_group_com_sporting_organizations
+	}
+}

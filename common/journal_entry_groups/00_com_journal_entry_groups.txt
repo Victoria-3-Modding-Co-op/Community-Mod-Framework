@@ -1,3 +1,0 @@
-﻿je_group_international_organizations = {
-	context = none
-}

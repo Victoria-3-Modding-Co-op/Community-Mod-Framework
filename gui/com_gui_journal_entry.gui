@@ -1,15 +1,15 @@
 # COPY-PASTED FOR NOW
 @panel_width_minus_30 = 510
 @panel_width_minus_20 = 520
-@panel_width_minus_10 = 530			# used to be 450
-@panel_width = 540  				# used to be 460
-@panel_width_half = 270				# used to be 230
-@panel_width_plus_10 = 550  		# used to be 470
-@panel_width_plus_14 = 554			# used to be 474
-@panel_width_plus_14_half = 277		# used to be 237
-@panel_width_plus_20 = 560			# used to be 480
-@panel_width_plus_30 = 570			# used to be 490
-@panel_width_plus_70 = 610			# used to be 530
+@panel_width_minus_10 = 530 # used to be 450
+@panel_width = 540 # used to be 460
+@panel_width_half = 270 # used to be 230
+@panel_width_plus_10 = 550 # used to be 470
+@panel_width_plus_14 = 554 # used to be 474
+@panel_width_plus_14_half = 277 # used to be 237
+@panel_width_plus_20 = 560 # used to be 480
+@panel_width_plus_30 = 570 # used to be 490
+@panel_width_plus_70 = 610 # used to be 530
 
 types journal_entry_overwrites {
 
@@ -31,8 +31,53 @@ types journal_entry_overwrites {
 			text = "[LabelingHelper.CapitalizeOnlyFirst(JournalEntry.GetName)]"
 		}
 
-		blockoverride "window_header_name_line_two" {
-			text = "JOURNAL_ENTRY_HEADING"
+		blockoverride "entire_back_button" {
+			back_button_large = {
+				position = { 8 30 }
+				onclick = "[InformationPanelBar.OpenPreviousPanel]"
+				input_action = "back"
+				visible = "[Or(
+					Not(ComJournalEntryGroupSGui('com_international_organization_journal_entry_group_sgui')),
+					Not(GetGlobalVariable('com_international_organization_panel_active').IsSet)
+				)]"
+			}
+
+			back_button_large = {
+				position = { 8 30 }
+				onclick = "[GetVariableSystem.Set('com_open_window', 'com_international_organizations_sgui')]"
+				input_action = "back"
+				visible = "[And3(
+					ComJournalEntryGroupSGui('com_international_organization_journal_entry_group_sgui'),
+					DataModelHasItems(GetGlobalList('com_international_organization_journal_groups')),
+					GetGlobalVariable('com_international_organization_panel_active').IsSet
+				)]"
+			}
+		}
+
+		## CMF overridden to allow for insertion of flag variables
+		blockoverride "window_header_container_line_two" {
+			textbox = {
+				visible = "[Not(ComJournalVar('com_header_var').IsSet)]"
+				parentanchor = vcenter
+				using = fontsize_large
+				autoresize = yes
+				text = "JOURNAL_ENTRY_HEADING"
+				max_width = 350
+				fontsize_min = 14
+				elide = right
+				align = hcenter|nobaseline
+			}
+			textbox = {
+				visible = "[ComJournalVar('com_header_var').IsSet]"
+				parentanchor = vcenter
+				using = fontsize_large
+				autoresize = yes
+				text = "[ComJournalVar('com_header_var').GetFlagName]"
+				max_width = 350
+				fontsize_min = 14
+				elide = right
+				align = hcenter|nobaseline
+			}
 		}
 
 		blockoverride "scrollarea_content" {
@@ -41,7 +86,7 @@ types journal_entry_overwrites {
 				direction = vertical
 				using = default_list_position
 				spacing = 10
-				
+
 				## CMF - custom_widget_container_je_icon
 				# Using this anchor will disable the default journal icon and time modifiers container
 				flowcontainer = {
@@ -51,14 +96,14 @@ types journal_entry_overwrites {
 					direction = vertical
 				}
 
-				widget  = {
+				widget = {
 					size = { @panel_width_plus_20 120 }
 					visible = "[Not(JournalEntry.HasCustomWidget('custom_widget_container_je_icon') )]"
 
 					parentanchor = hcenter
 
 					background = {
-						texture =  "gfx/interface/illustrations/journal/top_illu_journal_entries.dds"
+						texture = "gfx/interface/illustrations/journal/top_illu_journal_entries.dds"
 						using = top_illu_properties
 					}
 
@@ -135,7 +180,11 @@ types journal_entry_overwrites {
 				widget = {
 					size = { @panel_width_plus_20 60 }
 					parentanchor = hcenter
-					visible = "[And(JournalEntry.HasCustomWidget('custom_widget_container_je_icon'), Not(IsDataModelEmpty(JournalEntry.GetTimedModifiers)) )]"
+					visible = "[And3(
+						JournalEntry.HasCustomWidget('custom_widget_container_je_icon'),
+						Not(IsDataModelEmpty(JournalEntry.GetTimedModifiers)),
+						Not(ComJournalVar('com_hide_modifiers').IsSet)
+					)]"
 
 					flowcontainer = {
 						background = {
@@ -167,10 +216,11 @@ types journal_entry_overwrites {
 				}
 
 				# time out info
+				## CMF - the variable com_hide_timeout will hide the timeout info
 				flowcontainer = {
 					visible = "[And(
 						JournalEntry.CanTimeOut,
-						Not(JournalEntry.MakeScope.Var('com_hide_timeout').IsSet)
+						Not(ComJournalVar('com_hide_timeout').IsSet)
 					)]"
 					spacing = 5
 					parentanchor = hcenter
@@ -190,9 +240,9 @@ types journal_entry_overwrites {
 				}
 
 				textbox = {
-					## CMF - the variable "com_hide_status_desc will hide the status_desc
+					## CMF - the variable com_hide_status_desc will hide the status_desc
 					visible = "[And(
-						Not(JournalEntry.MakeScope.Var('com_hide_status_desc').IsSet),
+						Not(ComJournalVar('com_hide_status_desc').IsSet),
 						Not(StringIsEmpty(JournalEntry.GetStatusDesc))
 					)]"
 					text = "[JournalEntry.GetStatusDesc]"
@@ -219,9 +269,13 @@ types journal_entry_overwrites {
 					direction = vertical
 				}
 
+				## CMF - the variable com_hide_scripted_buttons will hide the scripted buttons
 				dynamicgridbox = {
 					parentanchor = hcenter
-					visible = "[Not( IsDataModelEmpty( JournalEntry.GetScriptedButtons ) )]"
+					visible = "[And(
+						Not(ComJournalVar('com_hide_scripted_buttons').IsSet),
+						Not( IsDataModelEmpty( JournalEntry.GetScriptedButtons ) )
+					)]"
 					datamodel = "[JournalEntry.GetScriptedButtons]"
 					datamodel_wrap = 2
 					flipdirection = yes
@@ -247,7 +301,7 @@ types journal_entry_overwrites {
 					parentanchor = hcenter
 					direction = vertical
 				}
-				
+
 				## CMF - com_custom_widget_container_scripted_progress_bars
 				# Using this will disable the default scripted progress bars container
 				flowcontainer = {
@@ -349,7 +403,7 @@ types journal_entry_overwrites {
 								parentanchor = center
 								visible = "[ScriptedProgressBar.IsDoubleSidedBad]"
 
-								bad_progressbar_horizontal  = {
+								bad_progressbar_horizontal = {
 									parentanchor = center
 									block "progressbar_size" {
 										size = { 504 30 }
@@ -391,7 +445,7 @@ types journal_entry_overwrites {
 											texture_density = 2
 											skip_initial_animation = yes
 
-											block "values" {}
+											block "values" { }
 											block "direction" {
 												direction = horizontal
 											}
@@ -464,7 +518,7 @@ types journal_entry_overwrites {
 											texture_density = 2
 											skip_initial_animation = yes
 
-											block "values" {}
+											block "values" { }
 											block "direction" {
 												direction = horizontal
 											}
@@ -511,7 +565,7 @@ types journal_entry_overwrites {
 								parentanchor = center
 								visible = "[ScriptedProgressBar.IsDoubleSidedGold]"
 
-								default_progressbar_horizontal  = {
+								default_progressbar_horizontal = {
 									parentanchor = center
 									block "progressbar_size" {
 										size = { 430 30 }
@@ -553,7 +607,7 @@ types journal_entry_overwrites {
 											texture_density = 2
 											skip_initial_animation = yes
 
-											block "values" {}
+											block "values" { }
 											block "direction" {
 												direction = horizontal
 											}
@@ -671,7 +725,7 @@ types journal_entry_overwrites {
 
 					textbox = {
 						## CMF - the variable "com_hide_journal_reason will hide the journal _reason
-						visible = "[Not(JournalEntry.MakeScope.Var('com_hide_journal_reason').IsSet)]"
+						visible = "[Not(ComJournalVar('com_hide_journal_reason').IsSet)]"
 						autoresize = yes
 						text = "[JournalEntry.GetReason]"
 						min_width = @panel_width_minus_30
@@ -697,7 +751,7 @@ types journal_entry_overwrites {
 						## CMF - the variable "com_hide_involved_countries" will hide the involved countries container
 						visible = "[And(
 							Not( IsDataModelEmpty( JournalEntry.GetInvolvedCountries ) ),
-							Not(JournalEntry.MakeScope.Var('com_hide_involved_countries').IsSet)
+							Not(ComJournalVar('com_hide_involved_countries').IsSet)
 						)]"
 						direction = vertical
 						using = default_list_position
@@ -723,7 +777,7 @@ types journal_entry_overwrites {
 								widget = {
 									size = { 60 60 }
 
-									small_flag = {}
+									small_flag = { }
 								}
 							}
 						}
@@ -742,7 +796,7 @@ types journal_entry_overwrites {
 
 					flowcontainer = {
 						## CMF - the variable "com_hide_complete_triggers" will hide the completion triggers/effects
-						visible = "[Not(JournalEntry.MakeScope.Var('com_hide_complete_triggers').IsSet)]"
+						visible = "[Not(ComJournalVar('com_hide_complete_triggers').IsSet)]"
 						direction = vertical
 						max_update_rate = 8
 						using = default_list_position
@@ -806,7 +860,7 @@ types journal_entry_overwrites {
 
 					flowcontainer = {
 						## CMF - the variable "com_hide_fail_triggers" will hide the failure triggers/effects
-						visible = "[Not(JournalEntry.MakeScope.Var('com_hide_fail_triggers').IsSet)]"
+						visible = "[Not(ComJournalVar('com_hide_fail_triggers').IsSet)]"
 						name = "fail_text"
 						direction = vertical
 						using = default_list_position
@@ -850,11 +904,12 @@ types journal_entry_overwrites {
 							margin_right = 15
 						}
 
+						## CMF - the variable com_hide_timeout will hide the timeout info
 						textbox = {
 							text = "[JournalEntry.GetOnTimeoutTooltip]"
 							visible = "[And(
 								Not(StringIsEmpty(JournalEntry.GetOnTimeoutTooltip)),
-								Not(JournalEntry.MakeScope.Var('com_hide_timeout').IsSet)
+								Not(ComJournalVar('com_hide_timeout').IsSet)
 							)]"
 							autoresize = yes
 							multiline = yes
@@ -891,7 +946,7 @@ types journal_entry_overwrites {
 						using = default_button
 						parentanchor = hcenter
 						size = { @panel_width_minus_30 60 }
-						text = "TELL_ME_HOW"
+						text = "TELL_ME_HOW" # TO FEEL ABOUT YOU NOW
 						using = fontsize_large
 						tooltip = "[JournalEntry.CanStartTutorialLessonDesc]"
 						visible = "[JournalEntry.HasHowTutorialLesson]"
@@ -903,7 +958,7 @@ types journal_entry_overwrites {
 						using = default_button
 						parentanchor = hcenter
 						size = { @panel_width_minus_30 60 }
-						text = "TELL_ME_WHY"
+						text = "TELL_ME_WHY" # AINT NOTHING BUT A HEARTACHE
 						using = fontsize_large
 						tooltip = "[JournalEntry.CanStartTutorialLessonDesc]"
 						visible = "[JournalEntry.HasWhyTutorialLesson]"
@@ -915,7 +970,7 @@ types journal_entry_overwrites {
 			}
 		}
 
-		blockoverride "pin_visibility" {}
+		blockoverride "pin_visibility" { }
 
 		blockoverride "pin_properties" {
 			visible = "[JournalEntry.IsPinnedInOutliner]"
@@ -929,5 +984,5 @@ types journal_entry_overwrites {
 			tooltip = "PIN_JOURNAL_ENTRY"
 		}
 	}
-	
+
 }

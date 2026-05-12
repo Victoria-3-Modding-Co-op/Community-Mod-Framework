@@ -1,0 +1,47 @@
+﻿sb_international_organizations_test_1 = {
+	name = "com_debug.a"
+	desc = "com_debug.a"
+	
+	visible = {
+		always = yes
+	}
+	possible = {
+		always = yes
+	}
+	effect = {
+		custom_tooltip = death_and_taxes_mod
+	}
+}
+
+sb_international_organizations_test_2 = {
+	name = "com_debug.b"
+	desc = "com_debug.b"
+	
+	visible = {
+		always = yes
+	}
+	selected = {
+		always = yes
+	}
+	possible = {
+		always = yes
+	}
+	effect = {
+		custom_tooltip = death_and_taxes_mod
+	}
+}
+
+sb_international_organizations_test_3 = {
+	name = "com_debug.c"
+	desc = "com_debug.c"
+	
+	visible = {
+		always = yes
+	}
+	possible = {
+		always = no
+	}
+	effect = {
+		custom_tooltip = death_and_taxes_mod
+	}
+}

@@ -180,10 +180,10 @@ types journal_entry_injects {
 							size = { @panel_width_plus_14 44 }
 						}
 						blockoverride "text1" {
-							raw_text = "[JournalEntry.MakeScope.Var('com_character_country_left_title').GetFlagName]"
+							raw_text = "[ComJournalVar('com_character_country_left_title').GetFlagName]"
 						}
 						blockoverride "text2" {
-							raw_text = "[JournalEntry.MakeScope.Var('com_character_country_right_title').GetFlagName]"
+							raw_text = "[ComJournalVar('com_character_country_right_title').GetFlagName]"
 						}
 					}
 					flowcontainer = {
@@ -196,7 +196,7 @@ types journal_entry_injects {
 						#left side country ruler
 						
 						character_portrait_base = {
-							datacontext = "[JournalEntry.MakeScope.Var('com_character_country_left').GetCountry.GetRuler]"
+							datacontext = "[ComJournalVar('com_character_country_left').GetCountry.GetRuler]"
 							
 							parentanchor = hcenter
 							size = { 250 265 }
@@ -242,7 +242,7 @@ types journal_entry_injects {
 						#right side country ruler
 						
 						character_portrait_base = {
-							datacontext = "[JournalEntry.MakeScope.Var('com_character_country_right').GetCountry.GetRuler]"
+							datacontext = "[ComJournalVar('com_character_country_right').GetCountry.GetRuler]"
 							
 							parentanchor = right
 							size = { 250 265 }

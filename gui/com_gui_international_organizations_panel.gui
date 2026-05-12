@@ -1,0 +1,711 @@
+# INHERITED FROM BASE GAME
+@panel_width_minus_10 = 530			# used to be 450
+@panel_width_minus_30 = 510
+@panel_width = 540  				# used to be 460
+@panel_width_half = 270				# used to be 230
+@panel_width_plus_10 = 550  		# used to be 470
+@panel_width_plus_14 = 554			# used to be 474
+@panel_width_plus_14_half = 277		# used to be 237
+@panel_width_plus_20 = 560			# used to be 480
+@panel_width_plus_30 = 570			# used to be 490
+@panel_width_plus_70 = 610			# used to be 530
+
+widget = {
+	name = "com_international_organizations_widget"
+	size { 100% 100% }
+	layer = layer_ingame_menu
+	visible = "[GetMetaPlayer.GetPlayedOrObservedCountry.IsValid]"
+
+	# This opens the GUI if an alert variable is set
+	com_international_organizations_alert_widget = {}
+
+	vbox = {
+		parentanchor = top|left
+		layoutpolicy_horizontal = expanding
+		layoutpolicy_vertical = expanding
+		margin_top = 85 #margin topbar
+
+		widget = {
+			layoutpolicy_horizontal = expanding
+			layoutpolicy_vertical = expanding
+
+			hbox = {
+				layoutpolicy_horizontal = expanding
+				layoutpolicy_vertical = expanding
+
+				com_international_organizations_panel = {}
+
+				expand = {}
+			}
+		}
+	}
+}
+
+types com_international_organizations_types {
+	type com_international_organizations_panel = default_block_window_two_lines {
+		name = "com_international_organizations_panel"
+		datacontext = "[AccessPlayer]"
+
+		visible = "[GetVariableSystem.HasValue('com_open_window', 'com_international_organizations_sgui')]"
+
+		blockoverride "animation_state_block" {
+			state = {
+				name = _show
+				# Close open panel before showing this one
+				on_start = "[InformationPanelBar.ClosePanel]"
+				on_start = "[MapListPanelManager.CloseCurrentPanel]"
+				start_sound = {
+					soundeffect = "event:/SFX/UI/SideBar/journal"
+				}
+			}
+			state = {
+				name = _hide
+				start_sound = {
+					soundeffect = "event:/SFX/UI/SideBar/journal_stop"
+				}
+				on_finish = "[GetVariableSystem.Clear('com_fullscreen')]"
+			}
+		}
+
+		blockoverride "window_header_name" {
+			text = "com_gui_international_organizations_header"
+		}
+
+		blockoverride "window_header_name_line_two" {}
+
+		blockoverride "header_back_button" {
+			onclick = "[GetVariableSystem.Clear('com_open_window')]"
+			onclick = "[GetVariableSystem.Clear('com_alert_action')]"
+		}
+
+		blockoverride "header_close_button" {
+			onclick = "[GetVariableSystem.Clear('com_open_window')]"
+			onclick = "[GetVariableSystem.Clear('com_alert_action')]"
+		}
+
+		blockoverride "fixed_top" {
+			tab_buttons = {
+				blockoverride "first_button" {
+					text = "com_gui_international_organizations_header"
+				}
+				blockoverride "first_button_click" {
+					onclick = "[GetVariableSystem.Set('com_orgs_tab', 'orgs')]"
+				}
+				blockoverride "first_button_visibility" {
+					visible = "[Or(GetVariableSystem.HasValue('com_orgs_tab', 'orgs'), Not(GetVariableSystem.Exists('com_orgs_tab')))]"
+				}
+				blockoverride "first_button_visibility_checked" {
+					visible = "[And(Not(GetVariableSystem.HasValue('com_orgs_tab', 'orgs')), GetVariableSystem.Exists('com_orgs_tab'))]"
+				}
+				blockoverride "first_button_selected" {
+					text = "com_gui_international_organizations_header"
+				}
+
+				blockoverride "second_button" {
+					text = "com_gui_power_blocs_header"
+				}
+				blockoverride "second_button_click" {
+					onclick = "[GetVariableSystem.Set('com_orgs_tab', 'blocs')]"
+				}
+				blockoverride "second_button_visibility" {
+					visible = "[GetVariableSystem.HasValue('com_orgs_tab', 'blocs')]"
+				}
+				blockoverride "second_button_visibility_checked" {
+					visible = "[Not(GetVariableSystem.HasValue('com_orgs_tab', 'blocs'))]"
+				}
+				blockoverride "second_button_selected" {
+					text = "com_gui_power_blocs_header"
+				}
+			}
+		}
+
+		blockoverride "scrollarea_content" {
+			# International Organization Journal Entries
+			flowcontainer = {
+				visible = "[Or(GetVariableSystem.HasValue('com_orgs_tab', 'orgs'), Not(GetVariableSystem.Exists('com_orgs_tab')))]"
+				direction = vertical
+				parentanchor = hcenter
+				datamodel = "[AccessPlayer.GetGroupsForActiveJournalEntries]"
+				spacing = 10
+				margin_bottom = 10
+
+				item = {
+					flowcontainer = {
+						visible = "[ComJournalGroupSGui('com_international_organization_journal_entry_group_sgui')]"
+						direction = vertical
+						spacing = 5
+						textbox = {
+							text = "[JournalEntryGroup.GetName]"
+							autoresize = yes
+							align = nobaseline
+							default_format = "#title"
+							margin_left = 3
+						}
+						flowcontainer = {
+							direction = vertical
+							datamodel = "[JournalEntryGroup.GetActiveJournalEntryTypes(GetPlayer.Self)]"
+							spacing = 2
+							item = {
+								com_international_organization_entry = {
+									datacontext = "[AccessPlayer.GetJournalEntry(JournalEntryType.Self)]"
+								}
+							}
+						}
+					}
+				}
+			}
+
+			# Striped Down Power Blocs Tab
+			flowcontainer = {
+				visible = "[GetVariableSystem.HasValue('com_orgs_tab', 'blocs')]"
+				direction = vertical
+				using = default_list_position
+				spacing = 5
+				margin_top = 10
+
+				widget = {
+					size = { 540 50 }
+					background = {
+						using = dark_area
+					}
+
+					button = {
+						parentanchor = center
+						size = { 240 44 }
+						using = default_button_primary
+
+						raw_text = "Open Power Blocs Panel"
+						using = fontsize_medium
+						onclick = "[InformationPanelBar.OpenPanel('power_bloc_panel')]"
+						onclick = "[GetVariableSystem.Clear('com_fullscreen')]"
+					}
+				}
+
+				flowcontainer = {
+					parentanchor = hcenter
+					direction = vertical
+					spacing = 5
+
+					datamodel = "[GetAllPowerBlocs]"
+
+					item = {
+						power_bloc_list_item = {}
+					}
+				}
+			}
+		}
+	}
+
+	type com_international_organization_entry = flowcontainer {
+		direction = vertical
+		minimumsize = { @panel_width -1 }
+		margin_bottom = 5
+
+		background = {
+			using = dark_area
+			alpha = 0.25
+			margin = { -5 -5 }
+		}
+
+		button = {
+			minimumsize = { @panel_width 40 }
+			using = com_international_organization_entry_properties
+			onclick = "[InformationPanelBar.OpenJournalEntryPanel(JournalEntry.AccessSelf)]"
+			enabled = "[JournalEntry.IsActive]"
+
+			background = {
+				using = default_header_bg
+				margin = { -5 0 }
+			}
+
+			widget = {
+				size = { 100% 100% }
+				using = entry_bg_fancy
+			}
+
+			tooltipwidget = {
+				FancyTooltip_JournalEntry = { }
+			}
+
+			onmousehierarchyenter = "[PdxGuiWidget.FindChild('journal_pin_button').InterruptThenTriggerAnimation('hide_journal_pin_button','show_journal_pin_button')]"
+			onmousehierarchyleave = "[PdxGuiWidget.FindChild('journal_pin_button').InterruptThenTriggerAnimation('show_journal_pin_button','hide_journal_pin_button')]"
+
+			## UPPER ROW
+			flowcontainer = {
+				resizeparent = yes
+				direction = horizontal
+				minimumsize = { @panel_width -1 }
+				spacing = 5
+
+				widget = {
+					size = { 50 40 }
+					icon = {
+						parentanchor = top|left
+						position = { -7 -7 }
+						size = { 60 60 }
+						texture = "gfx/interface/backgrounds/round_button_bg.dds"
+
+						icon = {
+							parentanchor = center
+							size = { 40 40 }
+							texture = "[JournalEntry.GetIcon]"
+						}
+					}
+				}
+
+				widget = {
+					size = { 23 23 }
+					parentanchor = center
+					visible = "[JournalEntry.IsActive]"
+
+					button = {
+						name = "journal_pin_button"
+						texture = "gfx/interface/outliner/unpinned_icon.dds"
+						using = check_button_sound
+						size = { 100% 100% }
+						visible = "[Not(JournalEntry.IsPinnedInOutliner)]"
+						onclick = "[JournalEntry.TogglePinInOutliner]"
+						tooltip = "PIN"
+						parentanchor = center
+					}
+					button = {
+						using = check_button_sound
+						texture = "gfx/interface/outliner/pinned_icon.dds"
+						size = { 100% 100% }
+						visible = "[JournalEntry.IsPinnedInOutliner]"
+						onclick = "[JournalEntry.TogglePinInOutliner]"
+						tooltip = "UNPIN"
+						parentanchor = center
+					}
+				}
+
+				widget = {
+					parentanchor = center
+					size = { 390 30 }
+					textbox = {
+						position = { 0 1 }
+						text = "[JournalEntry.GetName]"
+						autoresize = yes
+						align = left|nobaseline
+						multiline = yes
+						default_format = "#header"
+						using = fontsize_large
+					}
+				}
+
+				widget = {
+					parentanchor = center
+					size = { 50 20 }
+					background = {
+						using = dark_area
+						alpha = 0.25
+						margin = { 5 4 }
+					}
+					textbox = {
+						parentanchor = left|vcenter
+						position = { 3 0 }
+						raw_text = "@com_offer_embassy! [GetDataModelSize(JournalEntry.GetInvolvedCountries)]"
+						autoresize = yes
+						align = left|nobaseline
+						multiline = yes
+						using = fontsize_medium
+					}
+				}
+			}
+		}
+
+		## LOWER ROW
+		flowcontainer = {
+			direction = horizontal
+			spacing = 20
+			margin_top = 4
+			margin_left = 40
+			minimumsize = { @panel_width 40 }
+
+			widget = {
+				visible = "[ComJournalVar('com_interorg_headquarters_var').IsSet]"
+				size = { 140 30 }
+
+				background = {
+					using = dark_area
+					alpha = 0.25
+					margin = { 5 2 }
+				}
+
+				textbox = {
+					parentanchor = center
+					text = "com_gui_organization_headquarters"
+					autoresize = yes
+					align = left|nobaseline
+					multiline = yes
+					using = fontsize_medium
+				}
+			}
+
+			widget = {
+				size = { 320 30 }
+				visible = "[And(
+					Not(IsDataModelEmpty(JournalEntry.GetInvolvedCountries)),
+					ComJournalVar('com_interorg_headquarters_var').IsSet
+				)]"
+
+				flowcontainer = {
+					minimumsize = { 320 30 }
+					maximumsize = { 320 30 }
+					margin_top = 5
+					spacing = 5
+					datamodel = "[DataModelFirst(JournalEntry.GetInvolvedCountries, '(int32)9' )]"
+
+
+					background = {
+						using = dark_area
+						alpha = 0.25
+						margin = { 10 2 }
+					}
+
+					item = {
+						widget = {
+							size = { 30 30 }
+							tiny_flag = {}
+						}
+					}
+				}
+
+				widget = {
+					parentanchor = right|vcenter
+					size = { 30 30 }
+					visible = "[GreaterThan_int32( GetDataModelSize(JournalEntry.GetInvolvedCountries), '(int32)9' )]"
+					icon = {
+						parentanchor = center
+						position = { 15 0 }
+						size = { 25 25 }
+						texture = gfx/interface/buttons/round_button_big_bg.dds
+
+						icon = {
+							parentanchor = center
+							size = { 25 25 }
+							texture = "gfx/interface/buttons/button_icons/plus.dds"
+						}
+						tooltip = "com_gui_additional_members"
+					}
+				}
+			}
+
+			widget = {
+				size = { 480 30 }
+				visible = "[And(
+					Not(IsDataModelEmpty(JournalEntry.GetInvolvedCountries)),
+					Not(ComJournalVar('com_interorg_headquarters_var').IsSet)
+				)]"
+
+				flowcontainer = {
+					minimumsize = { 480 30 }
+					maximumsize = { 480 30 }
+					margin_top = 5
+					spacing = 5
+					datamodel = "[DataModelFirst(JournalEntry.GetInvolvedCountries, '(int32)13' )]"
+
+					background = {
+						using = dark_area
+						alpha = 0.25
+						margin = { 5 2 }
+					}
+
+					item = {
+						widget = {
+							size = { 30 30 }
+							tiny_flag = {}
+						}
+					}
+				}
+
+				widget = {
+					parentanchor = right|vcenter
+					size = { 30 30 }
+					visible = "[GreaterThan_int32( GetDataModelSize(JournalEntry.GetInvolvedCountries), '(int32)13' )]"
+					icon = {
+						parentanchor = center
+						size = { 25 25 }
+						texture = gfx/interface/buttons/round_button_big_bg.dds
+					}
+					icon = {
+						parentanchor = center
+						size = { 25 25 }
+						texture = "gfx/interface/buttons/button_icons/plus.dds"
+					}
+					tooltip = "com_gui_additional_members"
+				}
+			}
+		}
+	}
+
+	type com_international_organizations_alert_widget = widget {
+		datacontext = "[AccessPlayer]"
+		visible = "[GetPlayer.MakeScope.Var('com_show_international_organizations').IsSet]"
+		enabled = "[GetMetaPlayer.GetPlayedOrObservedCountry.IsValid]"
+		state = {
+			name = _show
+			on_finish = "[GetVariableSystem.Set('com_open_window', 'com_international_organizations_sgui')]"
+		}
+	}
+}
+
+template com_international_organization_entry_properties {
+	effectname = "NoHighlight"
+	spriteType = Corneredtiled
+	texture_density = 2
+
+	modify_texture = {
+		name = "bg_gradient"
+		texture = "gfx/interface/buttons/default_button_bg_gradient.dds"
+		spriteType = Corneredstretched
+		spriteborder = { 0 0 }
+		blend_mode = overlay
+		alpha = 0.5
+	}
+	modify_texture = {
+		name = "texture"
+		texture = "gfx/interface/buttons/default_button_texture.dds"
+		spriteType = Corneredtiled
+		texture_density = 2
+		spriteborder = { 0 0 }
+		blend_mode = overlay
+		translate_uv = { 0 0 }
+		using = default_button_texture_alpha
+	}
+	modify_texture = {
+		name = "wood_border"
+		texture = "gfx/interface/buttons/default_button_wood_border.dds"
+		spriteType = Corneredtiled
+		texture_density = 2
+		spriteborder = { 250 0 }
+		blend_mode = overlay
+		translate_uv = { 0 0 }
+		using = default_button_texture_alpha
+	}
+
+	### animation textures
+	modify_texture = {
+		name = "mouse_enter"
+		texture = "gfx/interface/buttons/default_button_mouseover.dds"
+		spriteType = Corneredstretched
+		spriteborder = { 0 0 }
+		blend_mode = colordodge
+		alpha = 0
+	}
+	modify_texture = {
+		name = "mouse_press"
+		texture = "gfx/interface/buttons/default_button_mousepress.dds"
+		spriteType = Corneredstretched
+		spriteborder = { 0 0 }
+		blend_mode = overlay
+		alpha = 0
+	}
+
+	### disabled stripes
+	using = disabled_stripes
+	using = select_button_sound
+
+	using = default_button_properties
+	texture = "gfx/interface/backgrounds/header_color.dds"
+
+	gfxtype = togglepushbuttongfx
+	upframe = 1
+	uphoverframe = 1
+	uppressedframe = 1
+	downframe = 2
+	downhoverframe = 2
+	downpressedframe = 2
+	disableframe = 3
+
+	spriteborder = { 7 7 }
+	framesize = { 19 19 }
+
+	### show
+	state = {
+		name = _show
+		using = Animation_Curve_Default
+		using = button_animation_duration
+		modify_texture = {
+			name = mouse_press
+			alpha = 0
+		}
+		modify_texture = {
+			name = mouse_enter
+			alpha = 0
+		}
+		modify_texture = {
+			name = "texture"
+			translate_uv = { 0 0 }
+			using = default_button_texture_alpha
+		}
+		modify_texture = {
+			name = "wood_border"
+			translate_uv = { 0 0 }
+			using = default_button_texture_alpha
+		}
+
+		on_start = "[PdxGuiWidget.AccessChild('frame').TriggerAnimation('show')]"
+		on_start = "[PdxGuiWidget.AccessChild('primary_dec').TriggerAnimation('show')]"
+		on_start = "[PdxGuiWidget.AccessChild('bevel').TriggerAnimation('show')]"
+		on_start = "[PdxGuiWidget.AccessChild('icon').TriggerAnimation('show')]"
+	}
+
+	### mouse enter
+	state = {
+		name = _mouse_enter
+		using = Animation_Curve_Default
+		using = button_animation_duration
+		modify_texture = {
+			name = mouse_press
+			alpha = 0
+		}
+		modify_texture = {
+			name = mouse_enter
+			alpha = 0.5
+		}
+		modify_texture = {
+			name = "texture"
+			translate_uv = { 0 0 }
+			using = default_button_texture_alpha
+		}
+		modify_texture = {
+			name = "wood_border"
+			translate_uv = { 0 0 }
+			using = default_button_texture_alpha
+		}
+	}
+
+	### mouse leave
+	state = {
+		name = _mouse_leave
+		using = Animation_Curve_Default
+		using = button_animation_duration_slow
+		modify_texture = {
+			name = mouse_press
+			alpha = 0
+		}
+		modify_texture = {
+			name = mouse_enter
+			alpha = 0
+		}
+		modify_texture = {
+			name = "texture"
+			translate_uv = { 0 0 }
+			using = default_button_texture_alpha
+		}
+		modify_texture = {
+			name = "wood_border"
+			translate_uv = { 0 0 }
+			using = default_button_texture_alpha
+		}
+	}
+
+	### mouse press
+	state = {
+		name = _mouse_press
+		using = Animation_Curve_Default
+		using = button_animation_duration
+		modify_texture = {
+			name = mouse_press
+			alpha = 1
+		}
+		modify_texture = {
+			name = mouse_enter
+			alpha = 0
+		}
+		modify_texture = {
+			name = "texture"
+			translate_uv = { -0.005 -0.02 }
+			using = default_button_texture_alpha
+		}
+		modify_texture = {
+			name = "wood_border"
+			translate_uv = { -0.005 -0.02 }
+			using = default_button_texture_alpha
+		}
+	}
+
+	### mouse release
+	state = {
+		name = _mouse_release
+		using = Animation_Curve_Default
+		using = button_animation_duration
+		modify_texture = {
+			name = mouse_press
+			alpha = 0
+		}
+		modify_texture = {
+			name = mouse_enter
+			alpha = 0.3
+		}
+		modify_texture = {
+			name = "texture"
+			translate_uv = { 0 0 }
+			using = default_button_texture_alpha
+		}
+		modify_texture = {
+			name = "wood_border"
+			translate_uv = { 0 0 }
+			using = default_button_texture_alpha
+		}
+	}
+
+	### bevel
+	margin_widget = {
+		name = "bevel"
+		size = { 100% 100% }
+		alpha = 0.7
+		position = { 0 0 }
+
+		block "bevel_margin" {
+			margin = { 2 2 }
+		}
+
+		state = {
+			name = show
+			using = Animation_Curve_Default
+			using = button_animation_duration
+			alpha = 0.7
+			position = { 0 0 }
+		}
+		state = {
+			name = mouse_enter
+			using = Animation_Curve_Default
+			using = button_animation_duration
+			alpha = 1
+			position = { 0 0 }
+		}
+		state = {
+			name = mouse_leave
+			using = Animation_Curve_Default
+			using = button_animation_duration
+			alpha = 0.7
+			position = { 0 0 }
+		}
+		state = {
+			name = mouse_press
+			using = Animation_Curve_Default
+			using = button_animation_duration
+			alpha = 0.2
+			position = { 1 1 }
+		}
+		state = {
+			name = mouse_release
+			using = Animation_Curve_Default
+			using = button_animation_duration
+			alpha = 0.7
+			position = { 0 0 }
+		}
+
+		icon = {
+			size = { 100% 100% }
+			block "bevel_texture" {
+				texture = "gfx/interface/buttons/default_button_bevel.dds"
+			}
+			spriteType = Corneredtiled
+			texture_density = 2
+			spriteborder = { 75 35 }
+		}
+	}
+}

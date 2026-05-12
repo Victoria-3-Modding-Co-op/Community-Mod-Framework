@@ -1,0 +1,23 @@
+﻿je_group_com_hidden = {
+	context = country
+}
+
+je_group_com_contextless_hidden = {
+	context = none
+}
+
+je_group_com_supranational_organizations = {
+	context = none
+}
+je_group_com_regional_organizations = {
+	context = none
+}
+je_group_com_religious_organizations = {
+	context = none
+}
+je_group_com_non_governmental_organizations = {
+	context = none
+}
+je_group_com_sporting_organizations = {
+	context = none
+}

@@ -38,7 +38,7 @@ This framework provides the following custom journal groups:
 
 These are automatically added to the `com_international_organization_journal_groups` global list
 
-Other groups can be added by using the effects `com_add_interorg_journal_entry_group` and `com_hide_interorg_journal_entry_group`
+Other groups can be added by using the effects `com_add_journal_group_to_interorg_list` and `com_hide_interorg_journal_entry_group`
 
 ## Outliner Changes
 The top element of the outliner which displays pinned journal entries has been divided into three sections:
@@ -81,7 +81,7 @@ The parent widget `widget_com_international_organization_base` can also be invok
 ## Usage
 To use these widgets, you must inject them using one of the journal anchor points available since V3 patch 1.13. It is recommended to inject these widget into the `custom_widget_container_je_icon` anchor point. This is a custom CMF anchor point that will remove the default journal icon. We also provide a scripted effect to hide all other journal elements.
 
-### Steps:
+### Widget Setup Steps:
 First, you will need to inject the widget by placing this into your journal entry script:
 ```
 widget = {
@@ -104,6 +104,25 @@ immediate = {
     com_activate_interorg_sidebar = yes
 }
 ```
+*Note: If you aren't sure if the sidebar will be activated for your journal, you can safely repeat this effect as needed.*
+
+### Adding a custom journal entry group:
+To add a custom International Organization journal, you will have to add it to the `com_international_organization_journal_groups` and `com_hidden_journal_groups` lists. The effect `com_add_journal_group_to_interorg_list_and_hide_from_journal` provides both of these operations in one effect. For example:
+```
+com_add_journal_group_to_interorg_list_and_hide_from_journal = {
+  name = je_group_new_journal_group
+}
+```
+*Note: Remember to activate the sidebar, or you won't be able to access the journal!*
+
+
+To add a journal to the Situations section of the outliner, you will have to add the journal to the `je_group_global_international_situations` list. The effect `com_add_journal_group_to_situations_list` is provided for this operation.
+```
+	com_add_journal_group_to_situations_list = {
+		name = je_group_global_international_situations
+	}
+```
+*Note: Do not hide your international situations from the journal! This list is solely for the outliner!*
 
 # Script docs
 These are following effects and triggers available to use for styling progress bars:
@@ -111,7 +130,7 @@ These are following effects and triggers available to use for styling progress b
 ## Effects
 * [com_activate_interorg_sidebar](#effect-com_activate_interorg_sidebar)
 * [com_add_interorg_journal_entry](#effect-com_add_interorg_journal_entry)
-* [com_add_interorg_journal_entry_group](#effect-com_add_interorg_journal_entry_group)
+* [com_add_journal_group_to_interorg_list](#effect-com_add_journal_group_to_interorg_list)
 * [com_hide_interorg_journal_entry_group](#effect-com_hide_interorg_journal_entry_group)
 * [com_set_international_organization_headquaters_effect](#effect-com_set_international_organization_headquaters_effect)
 * [com_hide_all_journal_elements_for_interorg_effect](#effect-com_hide_all_journal_elements_for_interorg_effect)
@@ -131,7 +150,7 @@ Activates a contextless journal entry with a custom tooltip: "The **name** Inter
 **Parameters:**
 - `name` script name of the contextless journal entry to be added
 
-### Effect: `com_add_interorg_journal_entry_group`
+### Effect: `com_add_journal_group_to_interorg_list`
 Set a journal entry group as an international organization. This places its journals in international organization panel, but does **not** remove them from the journal entry panel.
 
 **Parameters:**

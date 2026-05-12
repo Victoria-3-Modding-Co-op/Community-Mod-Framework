@@ -1,10 +1,15 @@
 ﻿com_hide_interorg_journal_entry_group = {
+	com_add_interorg_journal_entry_group = {
+		name = $name$
+	}
+	com_hide_journal_entry_group = {
+		name = $name$
+	}
+}
+
+com_add_interorg_journal_entry_group = {
 	add_to_global_variable_list = {
 		name = com_international_organization_journal_groups
-		target = flag:$name$
-	}
-	add_to_global_variable_list = {
-		name = com_hidden_journal_groups
 		target = flag:$name$
 	}
 }
@@ -17,9 +22,6 @@ com_add_interorg_journal_entry = {
 			flag:$type$
 		}
 		add_contextless_journal_entry = $type$
-	}
-	hidden_effect = {
-		com_activate_interorg_sidebar = yes
 	}
 }
 
@@ -60,8 +62,11 @@ com_hide_non_button_journal_elements_for_interorg_effect = {
 }
 
 com_set_international_organization_headquaters_effect = {
-	set_variable = {
-		name = com_interorg_headquarters_var
-		value = $state_region$
+	custom_tooltip = {
+		text = com_set_international_organization_headquaters_effect
+		set_variable = {
+			name = com_interorg_headquarters_var
+			value = $state_region$
+		}
 	}
 }

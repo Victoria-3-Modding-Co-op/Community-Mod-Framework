@@ -69,3 +69,9 @@ macro = {
     definition = "ComJournalGroupSGui(JEGroup)"
     replace_with = "GetScriptedGui(JEGroup).IsShown(GuiScope.SetRoot(AccessPlayer.MakeScope).AddScope('group_name', MakeScopeFlag(JournalEntryGroup.GetKey)).End)"
 }
+
+macro = {
+    description = "Get variable in journal scope"
+    definition = "ComJournalVar(Variable)"
+    replace_with = "JournalEntry.MakeScope.Var(Variable)"
+}

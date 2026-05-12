@@ -53,7 +53,7 @@ types journal_entry_overwrites {
 		## CMF overridden to allow for insertion of flag variables
 		blockoverride "window_header_container_line_two" {
 			textbox = {
-				visible = "[Not(JournalEntry.MakeScope.Var('com_header_var').IsSet)]"
+				visible = "[Not(ComJournalVar('com_header_var').IsSet)]"
 				parentanchor = vcenter
 				using = fontsize_large
 				autoresize = yes
@@ -64,11 +64,11 @@ types journal_entry_overwrites {
 				align = hcenter|nobaseline
 			}
 			textbox = {
-				visible = "[JournalEntry.MakeScope.Var('com_header_var').IsSet]"
+				visible = "[ComJournalVar('com_header_var').IsSet]"
 				parentanchor = vcenter
 				using = fontsize_large
 				autoresize = yes
-				text = "[JournalEntry.MakeScope.Var('com_header_var').GetFlagName]"
+				text = "[ComJournalVar('com_header_var').GetFlagName]"
 				max_width = 350
 				fontsize_min = 14
 				elide = right
@@ -179,7 +179,7 @@ types journal_entry_overwrites {
 					visible = "[And3(
 						JournalEntry.HasCustomWidget('custom_widget_container_je_icon'),
 						Not(IsDataModelEmpty(JournalEntry.GetTimedModifiers)),
-						Not(JournalEntry.MakeScope.Var('com_hide_modifiers').IsSet)
+						Not(ComJournalVar('com_hide_modifiers').IsSet)
 					)]"
 
 					flowcontainer = {
@@ -216,7 +216,7 @@ types journal_entry_overwrites {
 				flowcontainer = {
 					visible = "[And(
 						JournalEntry.CanTimeOut,
-						Not(JournalEntry.MakeScope.Var('com_hide_timeout').IsSet)
+						Not(ComJournalVar('com_hide_timeout').IsSet)
 					)]"
 					spacing = 5
 					parentanchor = hcenter
@@ -238,7 +238,7 @@ types journal_entry_overwrites {
 				textbox = {
 					## CMF - the variable com_hide_status_desc will hide the status_desc
 					visible = "[And(
-						Not(JournalEntry.MakeScope.Var('com_hide_status_desc').IsSet),
+						Not(ComJournalVar('com_hide_status_desc').IsSet),
 						Not(StringIsEmpty(JournalEntry.GetStatusDesc))
 					)]"
 					text = "[JournalEntry.GetStatusDesc]"
@@ -269,7 +269,7 @@ types journal_entry_overwrites {
 				dynamicgridbox = {
 					parentanchor = hcenter
 					visible = "[And(
-						Not(JournalEntry.MakeScope.Var('com_hide_scripted_buttons').IsSet),
+						Not(ComJournalVar('com_hide_scripted_buttons').IsSet),
 						Not( IsDataModelEmpty( JournalEntry.GetScriptedButtons ) )
 					)]"
 					datamodel = "[JournalEntry.GetScriptedButtons]"
@@ -721,7 +721,7 @@ types journal_entry_overwrites {
 
 					textbox = {
 						## CMF - the variable "com_hide_journal_reason will hide the journal _reason
-						visible = "[Not(JournalEntry.MakeScope.Var('com_hide_journal_reason').IsSet)]"
+						visible = "[Not(ComJournalVar('com_hide_journal_reason').IsSet)]"
 						autoresize = yes
 						text = "[JournalEntry.GetReason]"
 						min_width = @panel_width_minus_30
@@ -747,7 +747,7 @@ types journal_entry_overwrites {
 						## CMF - the variable "com_hide_involved_countries" will hide the involved countries container
 						visible = "[And(
 							Not( IsDataModelEmpty( JournalEntry.GetInvolvedCountries ) ),
-							Not(JournalEntry.MakeScope.Var('com_hide_involved_countries').IsSet)
+							Not(ComJournalVar('com_hide_involved_countries').IsSet)
 						)]"
 						direction = vertical
 						using = default_list_position
@@ -792,7 +792,7 @@ types journal_entry_overwrites {
 
 					flowcontainer = {
 						## CMF - the variable "com_hide_complete_triggers" will hide the completion triggers/effects
-						visible = "[Not(JournalEntry.MakeScope.Var('com_hide_complete_triggers').IsSet)]"
+						visible = "[Not(ComJournalVar('com_hide_complete_triggers').IsSet)]"
 						direction = vertical
 						max_update_rate = 8
 						using = default_list_position
@@ -856,7 +856,7 @@ types journal_entry_overwrites {
 
 					flowcontainer = {
 						## CMF - the variable "com_hide_fail_triggers" will hide the failure triggers/effects
-						visible = "[Not(JournalEntry.MakeScope.Var('com_hide_fail_triggers').IsSet)]"
+						visible = "[Not(ComJournalVar('com_hide_fail_triggers').IsSet)]"
 						name = "fail_text"
 						direction = vertical
 						using = default_list_position
@@ -905,7 +905,7 @@ types journal_entry_overwrites {
 							text = "[JournalEntry.GetOnTimeoutTooltip]"
 							visible = "[And(
 								Not(StringIsEmpty(JournalEntry.GetOnTimeoutTooltip)),
-								Not(JournalEntry.MakeScope.Var('com_hide_timeout').IsSet)
+								Not(ComJournalVar('com_hide_timeout').IsSet)
 							)]"
 							autoresize = yes
 							multiline = yes

@@ -323,7 +323,7 @@ types com_international_organizations_types {
 			minimumsize = { @panel_width 40 }
 
 			widget = {
-				visible = "[JournalEntry.MakeScope.Var('com_interorg_headquarters_var').IsSet]"
+				visible = "[ComJournalVar('com_interorg_headquarters_var').IsSet]"
 				size = { 140 30 }
 
 				background = {
@@ -346,7 +346,7 @@ types com_international_organizations_types {
 				size = { 320 30 }
 				visible = "[And(
 					Not(IsDataModelEmpty(JournalEntry.GetInvolvedCountries)),
-					JournalEntry.MakeScope.Var('com_interorg_headquarters_var').IsSet
+					ComJournalVar('com_interorg_headquarters_var').IsSet
 				)]"
 
 				flowcontainer = {
@@ -395,7 +395,7 @@ types com_international_organizations_types {
 				size = { 480 30 }
 				visible = "[And(
 					Not(IsDataModelEmpty(JournalEntry.GetInvolvedCountries)),
-					Not(JournalEntry.MakeScope.Var('com_interorg_headquarters_var').IsSet)
+					Not(ComJournalVar('com_interorg_headquarters_var').IsSet)
 				)]"
 
 				flowcontainer = {

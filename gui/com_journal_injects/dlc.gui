@@ -20,10 +20,10 @@ types journal_entry_injects {
 		using = default_list_position
 		margin_top = 10
 		margin_bottom = 10
-		visible = "[JournalEntry.MakeScope.Var('com_dlc').IsSet]"
+		visible = "[ComJournalVar('com_dlc').IsSet]"
 
 		divider_clean = {
-			visible = "[JournalEntry.MakeScope.Var('com_dlc').IsSet]"
+			visible = "[ComJournalVar('com_dlc').IsSet]"
 		}
 
 		flowcontainer = {
@@ -40,7 +40,7 @@ types journal_entry_injects {
 			item = {
 				flowcontainer = {
 					spacing = 10
-					visible = "[EqualTo_string(Dlc.GetName, JournalEntry.MakeScope.Var('com_dlc').GetFlagName)]"
+					visible = "[EqualTo_string(Dlc.GetName, ComJournalVar('com_dlc').GetFlagName)]"
 					tooltip = "[Dlc.GetName]"
 
 					flowcontainer = {

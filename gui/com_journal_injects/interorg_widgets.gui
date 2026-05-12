@@ -246,8 +246,8 @@ types com_international_organization_types {
 			size = { 340 340 }
 			max_update_rate = 24
 
-			visible = "[JournalEntry.MakeScope.Var('com_interorg_leader_character_var').IsSet]"
-			datacontext = "[JournalEntry.MakeScope.Var('com_interorg_leader_character_var').GetCharacter]"
+			visible = "[ComJournalVar('com_interorg_leader_character_var').IsSet]"
+			datacontext = "[ComJournalVar('com_interorg_leader_character_var').GetCharacter]"
 
 			block "character_layout" {
 				position = { -54 -16 }
@@ -258,7 +258,7 @@ types com_international_organization_types {
 				}
 			}
 			blockoverride "portrait_texture" {
-				datacontext = "[JournalEntry.MakeScope.Var('com_interorg_leader_character_var')]"
+				datacontext = "[ComJournalVar('com_interorg_leader_character_var')]"
 				portrait_texture = "[Scope.GetCharacter.GetAnimatedPortrait(
 					'ruler_environment',
 					'camera_body',
@@ -278,8 +278,8 @@ types com_international_organization_types {
 			margin = { 5 5 }
 			margin_left = 10
 
-			visible = "[JournalEntry.MakeScope.Var('com_interorg_leader_character_var').IsSet]"
-			datacontext = "[JournalEntry.MakeScope.Var('com_interorg_leader_character_var').GetCharacter]"
+			visible = "[ComJournalVar('com_interorg_leader_character_var').IsSet]"
+			datacontext = "[ComJournalVar('com_interorg_leader_character_var').GetCharacter]"
 
 			background = {
 				using = dark_area
@@ -444,7 +444,7 @@ types com_international_organization_types {
 			size = { 200 50 }
 
 			block "interorg_detail_1_visibility" {
-				visible = "[JournalEntry.MakeScope.Var('com_interorg_leader_country_var').IsSet]"
+				visible = "[ComJournalVar('com_interorg_leader_country_var').IsSet]"
 			}
 
 			divider_clean = {
@@ -498,7 +498,7 @@ types com_international_organization_types {
 			size = { 200 50 }
 
 			block "interorg_detail_2_visibility" {
-				visible = "[JournalEntry.MakeScope.Var('com_interorg_headquarters_var').IsSet]"
+				visible = "[ComJournalVar('com_interorg_headquarters_var').IsSet]"
 			}
 
 			divider_clean = {

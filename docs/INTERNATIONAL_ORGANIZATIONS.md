@@ -26,7 +26,7 @@ The IO panel is a scripted widget that displays any journal entry groups that ha
 - The widget will always show the name of the journal and the list of involved countries
 - The organization headquarters will be shown if the flag variable `com_interorg_headquarters_var` is set on the journal
 
-*Note: The global list `com_international_organization_journal_groups` must be present for the sidebar button to appear!*
+*Note: The global variable `com_international_organization_panel_active` and global list `com_international_organization_journal_groups` must be present for the sidebar button to appear!*
 
 ## Custom journal groups
 This framework provides the following custom journal groups:
@@ -36,7 +36,7 @@ This framework provides the following custom journal groups:
 - `je_group_com_non_governmental_organizations`
 - `je_group_com_sporting_organizations`
 
-These are automatically added to the `com_international_organization_journal_groups` global list when using the effect `com_activate_interorg_sidebar`
+These are automatically added to the `com_international_organization_journal_groups` global list
 
 Other groups can be added by using the effects `com_add_interorg_journal_entry_group` and `com_hide_interorg_journal_entry_group`
 
@@ -120,7 +120,7 @@ These are following effects and triggers available to use for styling progress b
 ## Details
 
 ### Effect: `com_activate_interorg_sidebar`
-Runs `com_hide_interorg_journal_entry_group` on the five [custom journal groups](#custom-journal-groups)
+Activates the sidebar for International Organizations and runs `com_hide_interorg_journal_entry_group` on the five [custom journal groups](#custom-journal-groups)
 
 **Parameters:**
 - None

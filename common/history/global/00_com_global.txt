@@ -30,4 +30,21 @@
 		name = com_international_situation_journal_groups
 		target = flag:je_group_british_india
 	}
+
+	## Create International Organization List
+	com_add_interorg_journal_entry_group = {
+		name = je_group_com_supranational_organizations
+	}
+	com_add_interorg_journal_entry_group = {
+		name = je_group_com_regional_organizations
+	}
+	com_add_interorg_journal_entry_group = {
+		name = je_group_com_religious_organizations
+	}
+	com_add_interorg_journal_entry_group = {
+		name = je_group_com_non_governmental_organizations
+	}
+	com_add_interorg_journal_entry_group = {
+		name = je_group_com_sporting_organizations
+	}
 }

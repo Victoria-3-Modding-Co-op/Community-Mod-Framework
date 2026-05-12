@@ -145,6 +145,7 @@ je_com_regional_organization = {
 				name = com_interorg_chair_title_var
 				value = flag:com_interorg_title_president
 			}
+			fix_variable = { variable = com_interorg_title_president }
 			com_hide_all_journal_elements_for_interorg_effect = yes
 		}
 		com_activate_interorg_sidebar = yes

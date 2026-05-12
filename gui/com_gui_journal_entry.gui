@@ -36,16 +36,20 @@ types journal_entry_overwrites {
 				position = { 8 30 }
 				onclick = "[InformationPanelBar.OpenPreviousPanel]"
 				input_action = "back"
-				visible = "[Not(ComJournalEntryGroupSGui('com_international_organization_journal_entry_group_sgui'))]"
+				visible = "[Or(
+					Not(ComJournalEntryGroupSGui('com_international_organization_journal_entry_group_sgui')),
+					Not(GetGlobalVariable('com_international_organization_panel_active').IsSet)
+				)]"
 			}
 
 			back_button_large = {
 				position = { 8 30 }
 				onclick = "[GetVariableSystem.Set('com_open_window', 'com_international_organizations_sgui')]"
 				input_action = "back"
-				visible = "[And(
+				visible = "[And3(
 					ComJournalEntryGroupSGui('com_international_organization_journal_entry_group_sgui'),
-					DataModelHasItems(GetGlobalList('com_international_organization_journal_groups'))
+					DataModelHasItems(GetGlobalList('com_international_organization_journal_groups')),
+					GetGlobalVariable('com_international_organization_panel_active').IsSet
 				)]"
 			}
 		}

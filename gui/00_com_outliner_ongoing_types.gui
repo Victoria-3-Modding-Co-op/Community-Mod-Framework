@@ -268,6 +268,17 @@ types com_ongoing_outliner_items {
 					using = default_header_bg
 					margin = { -2 0 }
 				}
+				flowcontainer = {
+					parentanchor = right|vcenter
+					position = { -3 0 }
+					spacing = 5
+					
+					button_icon_goto = {
+						size = { 25 25 }
+						onclick = "[InformationPanelBar.OpenPanelTab('journal', 'default')]"
+						tooltip = "GO_TO_BUTTON_JOURNAL"
+					}
+				}
 			}
 			
 			flowcontainer = {
@@ -390,9 +401,16 @@ types com_ongoing_outliner_items {
 					spacing = 5
 					
 					button_icon_goto = {
+						visible = "[GetGlobalVariable('com_international_organization_panel_active').IsSet]"
 						size = { 25 25 }
 						onclick = "[GetVariableSystem.Set('com_open_window', 'com_international_organizations_sgui')]"
 						tooltip = "com_gui_goto_international_orgs_panel"
+					}
+					button_icon_goto = {
+						visible = "[Not(GetGlobalVariable('com_international_organization_panel_active').IsSet)]"
+						size = { 25 25 }
+						onclick = "[InformationPanelBar.OpenPanelTab('journal', 'default')]"
+						tooltip = "GO_TO_BUTTON_JOURNAL"
 					}
 				}
 			}

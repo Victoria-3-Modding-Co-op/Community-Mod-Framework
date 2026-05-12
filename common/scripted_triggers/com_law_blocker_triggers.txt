@@ -40,7 +40,7 @@ com_law_presidential_republic_alternative_trigger = {
 }
 
 # Parliamentary Republic
-com_law_colonial_administration_trigger = {
+com_law_parliamentary_republic_trigger = {
 	NOT = {
 		has_variable = com_hide_law_parliamentary_republic
 	}

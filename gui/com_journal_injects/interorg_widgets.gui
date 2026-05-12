@@ -1,15 +1,15 @@
 # INHERITED FROM BASE GAME
 @panel_width_minus_30 = 510
 @panel_width_minus_20 = 520
-@panel_width_minus_10 = 530            # used to be 450
-@panel_width = 540                # used to be 460
-@panel_width_half = 270                # used to be 230
-@panel_width_plus_10 = 550        # used to be 470
-@panel_width_plus_14 = 554            # used to be 474
-@panel_width_plus_14_half = 277        # used to be 237
-@panel_width_plus_20 = 560            # used to be 480
-@panel_width_plus_30 = 570            # used to be 490
-@panel_width_plus_70 = 610            # used to be 530
+@panel_width_minus_10 = 530 # used to be 450
+@panel_width = 540 # used to be 460
+@panel_width_half = 270 # used to be 230
+@panel_width_plus_10 = 550 # used to be 470
+@panel_width_plus_14 = 554 # used to be 474
+@panel_width_plus_14_half = 277 # used to be 237
+@panel_width_plus_20 = 560 # used to be 480
+@panel_width_plus_30 = 570 # used to be 490
+@panel_width_plus_70 = 610 # used to be 530
 
 ####---------- INJECTABLE JOURNAL ENTRY WIDGETS ----------####
 
@@ -185,7 +185,6 @@ flowcontainer = {
 					}
 				}
 			}
-
 			blockoverride "interorg_backdrop_texture" {
 				texture = "gfx/interface/character_panel/backgrounds/char_role_politician.dds"
 			}
@@ -211,7 +210,6 @@ flowcontainer = {
 		}
 	}
 }
-
 
 ####---------- INTERNATIONAL ORGANIZATION GUI TYPES ----------####
 types com_international_organization_types {

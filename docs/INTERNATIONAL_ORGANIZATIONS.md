@@ -26,6 +26,9 @@ The IO panel is a scripted widget that displays any journal entry groups that ha
 - The widget will always show the name of the journal and the list of involved countries
 - The organization headquarters will be shown if the flag variable `com_interorg_headquarters_var` is set on the journal
 
+Example Screenshot:
+- [International Organization Example](images/journal_entries/example_interorg.png)
+
 *Note: The global variable `com_international_organization_panel_active` and global list `com_international_organization_journal_groups` must be present for the sidebar button to appear!*
 
 ## Custom journal groups
@@ -124,14 +127,15 @@ To add a journal to the Situations section of the outliner, you will have to add
 ```
 *Note: Do not hide your international situations from the journal! This list is solely for the outliner!*
 
-# Script docs
-These are following effects and triggers available to use for styling progress bars:
+# Script Docs
+These are following effects and triggers available to use for managing journals with the International Organization Framework:
 
 ## Effects
 * [com_activate_interorg_sidebar](#effect-com_activate_interorg_sidebar)
 * [com_add_interorg_journal_entry](#effect-com_add_interorg_journal_entry)
 * [com_add_journal_group_to_interorg_list](#effect-com_add_journal_group_to_interorg_list)
-* [com_hide_interorg_journal_entry_group](#effect-com_hide_interorg_journal_entry_group)
+* [com_add_journal_group_to_situations_list](#effect-com_add_journal_group_to_situations_list)
+* [com_add_journal_group_to_interorg_list_and_hide_from_journal](#effect-com_add_journal_group_to_interorg_list_and_hide_from_journal)
 * [com_set_international_organization_headquaters_effect](#effect-com_set_international_organization_headquaters_effect)
 * [com_hide_all_journal_elements_for_interorg_effect](#effect-com_hide_all_journal_elements_for_interorg_effect)
 * [com_hide_non_button_journal_elements_for_interorg_effect](#effect-com_hide_non_button_journal_elements_for_interorg_effect)

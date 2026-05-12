@@ -32,6 +32,7 @@
 * [remove_com_situation_button_group](#effect-remove_com_situation_button_group)
 * [add_com_situation_button_group_element](#effect-add_com_situation_button_group_element)
 * [remove_com_situation_button_group_element](#effect-remove_com_situation_button_group_element)
+* [com_add_journal_group_to_situations_list](#effect-com_add_journal_group_to_situations_list)
 
 ## Triggers
 * [is_com_situation_faction_member](#trigger-is_com_situation_faction_member)
@@ -308,6 +309,12 @@ Remove a scripted button from a button group.
 **Parameters:**
 - `name` localization key for the name of the scripted button
 - `group` localization key for the name of the button group
+
+### Effect: `com_add_journal_group_to_situations_list`
+Set a journal entry group as an international situation. This places its journals in the International Situations container in the outliner, and will not remove them from the journal entry panel.
+
+**Parameters:**
+- `name` script name of the journal entry group to be added
 
 ### Trigger: `is_com_situation_faction_member`
 Check whether the currently scoped country is part of the given faction.

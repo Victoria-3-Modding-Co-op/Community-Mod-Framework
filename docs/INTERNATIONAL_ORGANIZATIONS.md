@@ -3,12 +3,15 @@ The **International Organizations Framework** is a feature of the Community Mod 
 
 # Content
 * [Elements](#elements)
-* [Scripted Widget](#scripted-widget)
-* [Custom Journal Groups](#custom-journal-groups)
-* [Outliner Changes](#outliner-changes)
-* [Hiding Journal Entry Elements](#hiding-journal-entry-elements)
-* [Custom Interorg Widget](#custom-interorg-widget)
-* [Usage](#usage)
+  * [Scripted widget](#scripted-widget)
+  * [Custom journal groups](#custom-journal-groups)
+  * [Outliner Changes](#outliner-changes)
+  * [Hiding Journal Entry Elements](#hiding-journal-entry-elements)
+  * [Custom Interorg Widget](#custom-interorg-widget)
+  * [Usage](#usage)
+* [Script docs](#script-docs)
+  * [Effects](#effects)
+  * [Details](#details)
 
 # Elements
 This framework consists of the following features:
@@ -18,15 +21,14 @@ This framework consists of the following features:
 - Addition of variable checks to hide various elements from journal entries
 - A custom injectable widget to provide a content baseline
 
-## Scripted Widget
+## Scripted widget
 The IO panel is a scripted widget that displays any journal entry groups that have been added to the `com_international_organization_journal_groups` global list. This widget can display some basic information about the IO journal:
 - The widget will always show the name of the journal and the list of involved countries
-- The number of involved countries will be shown if the variable `com_interorg_involved_countries_var` is set on the journal
 - The organization headquarters will be shown if the flag variable `com_interorg_headquarters_var` is set on the journal
 
 *Note: The global list `com_international_organization_journal_groups` must be present for the sidebar button to appear!*
 
-## Custom Journal Groups
+## Custom journal groups
 This framework provides the following custom journal groups:
 - `je_group_com_supranational_organizations`
 - `je_group_com_regional_organizations`
@@ -34,7 +36,9 @@ This framework provides the following custom journal groups:
 - `je_group_com_non_governmental_organizations`
 - `je_group_com_sporting_organizations`
 
-These are automatically added to the `com_international_organization_journal_groups` global list.
+These are automatically added to the `com_international_organization_journal_groups` global list when using the effect `com_activate_interorg_sidebar`
+
+Other groups can be added by using the effects `com_add_interorg_journal_entry_group` and `com_hide_interorg_journal_entry_group`
 
 ## Outliner Changes
 The top element of the outliner which displays pinned journal entries has been divided into three sections:
@@ -58,14 +62,16 @@ This framework includes the addition of several variable checks to hide/modify c
 - `com_hide_involved_countries` to hide the involved countries
 - `com_hide_complete_triggers` to the hide the journal completion triggers/effects
 - `com_hide_fail_triggers` to the hide the journal failure triggers/effects
+- `com_hide_modifiers` to the hide the journal modifiers
 
 
 ## Custom Interorg Widget
 A series of custom interorg widgets are provided for users. These can be injected like any other journal widget. You should also hide all unwanted/redundant JE elements wth the above features. The following features are available in all widgets:
-- The organization leader element will be shown if the flag variable `com_interorg_leader_country_var` is set on the journal
+- The organization leader element will be shown if the flag variable `com_interorg_leader_var` is set on the journal
 - The organization headquarters element will be shown if the flag variable `com_interorg_headquarters_var` is set on the journal
-- Setting the variable `com_interorg_leader_character_var` will activate the character portrait to the left of the panel
-- Modifiers will appear in a custom element if added to the journa
+- Setting the variable `com_interorg_chair_var` will activate the character portrait to the left of the panel
+- The organization's chair can be given a custom title if the flag variable `com_interorg_chair_title_var` is set on the journal
+- Modifiers will appear in a custom element if added to the journal
 - Scripted buttons will appear in a custom button list similar to IOs from EU5
 
 The parent widget `widget_com_international_organization_base` can also be invoked with the following features:
@@ -98,3 +104,70 @@ immediate = {
     com_activate_interorg_sidebar = yes
 }
 ```
+
+# Script docs
+These are following effects and triggers available to use for styling progress bars:
+
+## Effects
+* [com_activate_interorg_sidebar](#effect-com_activate_interorg_sidebar)
+* [com_add_interorg_journal_entry](#effect-com_add_interorg_journal_entry)
+* [com_add_interorg_journal_entry_group](#effect-com_add_interorg_journal_entry_group)
+* [com_hide_interorg_journal_entry_group](#effect-com_hide_interorg_journal_entry_group)
+* [com_set_international_organization_headquaters_effect](#effect-com_set_international_organization_headquaters_effect)
+* [com_hide_all_journal_elements_for_interorg_effect](#effect-com_hide_all_journal_elements_for_interorg_effect)
+* [com_hide_non_button_journal_elements_for_interorg_effect](#effect-com_hide_non_button_journal_elements_for_interorg_effect)
+
+## Details
+
+### Effect: `com_activate_interorg_sidebar`
+Runs `com_hide_interorg_journal_entry_group` on the five [custom journal groups](#custom-journal-groups)
+
+**Parameters:**
+- None
+
+### Effect: `com_add_interorg_journal_entry`
+Activates a contextless journal entry with a custom tooltip: "The **name** International Organization will be created"
+
+**Parameters:**
+- `name` script name of the contextless journal entry to be added
+
+### Effect: `com_add_interorg_journal_entry_group`
+Set a journal entry group as an international organization. This places its journals in international organization panel, but does **not** remove them from the journal entry panel.
+
+**Parameters:**
+- `name` script name of the journal entry group to be added
+
+### Effect: `com_hide_interorg_journal_entry_group`
+Set a journal entry group as an international organization. This places its journals in international organization panel and removes them from the journal entry panel.
+
+**Parameters:**
+- `name` script name of the journal entry group to be added
+
+### Effect: `com_set_international_organization_headquaters_effect`
+Sets the variable `com_interorg_headquarters_var` with the tooltip: "The Organization's Headquarters move to **state_region**"
+
+**Parameters:**
+- `state_region` script name of the state region to be the HQ
+
+### Effect: `com_hide_all_journal_elements_for_interorg_effect`
+Sets the following [variables](#hiding-journal-entry-elements) on the journal:
+- `com_hide_scripted_buttons` to hide the scripted buttons
+- `com_hide_journal_reason`  to hide the journal _reason
+- `com_hide_involved_countries` to hide the involved countries
+- `com_hide_complete_triggers` to the hide the journal completion triggers/effects
+- `com_hide_fail_triggers` to the hide the journal failure triggers/effects
+- `com_hide_modifiers` to the hide the journal modifiers
+
+**Parameters:**
+- None
+
+### Effect: `com_hide_non_button_journal_elements_for_interorg_effect`
+Sets the following [variables](#hiding-journal-entry-elements) on the journal:
+- `com_hide_journal_reason`  to hide the journal _reason
+- `com_hide_involved_countries` to hide the involved countries
+- `com_hide_complete_triggers` to the hide the journal completion triggers/effects
+- `com_hide_fail_triggers` to the hide the journal failure triggers/effects
+- `com_hide_modifiers` to the hide the journal modifiers
+
+**Parameters:**
+- None

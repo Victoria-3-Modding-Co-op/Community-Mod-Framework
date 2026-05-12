@@ -71,7 +71,7 @@
  
  # Tooltips
  com_add_interorg_journal_entry: "The #bold $com_flag_loc$#! [concept_com_international_organization] will be created"
- com_set_international_organization_headquaters_effect: "The $com_organization$'s headquarters move to #bold $com_gui_interorg_headquaters_name$#!"
+ com_set_international_organization_headquaters_effect: "The $com_organization$'s $com_org_headquarters$ move to #bold $com_gui_interorg_headquaters_name$#!"
 
  # GUI - Journal Entry Panel
  com_gui_journal_header: "[ComJournalVar('com_header_var').GetFlagName] $com_organization$"
@@ -91,14 +91,14 @@
  com_gui_main_actions: "Main Actions"
  com_gui_members: "Members"
  com_gui_interorg_leader_header: "$com_organization$ $com_org_leader$"
- com_gui_interorg_leader_name: "[ComJournalVar('com_interorg_leader_country_var').GetCountry.GetName]"
+ com_gui_interorg_leader_name: "[ComJournalVar('com_interorg_leader_var').GetCountry.GetName]"
  com_gui_interorg_character_header: "$com_organization$ $com_interorg_leader_title$"
  com_gui_interorg_character_name: "[Character.GetFullName]"
  com_gui_interorg_headquaters_header: "$com_organization$ $com_org_hq$"
  com_gui_interorg_headquaters_name: "[ComJournalVar('com_interorg_headquarters_var').GetStateRegion.GetName]"
  com_gui_interorg_participants_header: "$com_organization$ $com_org_members$"
  # Interorg leader titles
- com_interorg_leader_title: "[Concept('concept_com_international_organization_chair', Select_CString(ComJournalVar('com_interorg_leader_title_var').IsSet,ComJournalVar('com_interorg_leader_title_var').GetFlagName,'$com_interorg_title_chair$'))]"
+ com_interorg_leader_title: "[Concept('concept_com_international_organization_chair', Select_CString(ComJournalVar('com_interorg_chair_title_var').IsSet,ComJournalVar('com_interorg_chair_title_var').GetFlagName,'$com_interorg_title_chair$'))]"
  com_interorg_title_chair: "Chair"
  com_interorg_title_leader: "Leader"
  com_interorg_title_president: "President"

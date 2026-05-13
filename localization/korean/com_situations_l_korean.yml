@@ -67,5 +67,4 @@
  trigger_any_com_situation_countries_COUNT: "$PARAMETERS$ $FILTER$[concept_country]가 [concept_com_situation]에 있음"
  trigger_any_com_situation_countries_COUNT_FIRST: "$PARAMETERS$ $FILTER$[concept_country]가 [concept_com_situation]에 있음"
  trigger_any_com_situation_countries_COUNT_THIRD: "$PARAMETERS$ $FILTER$[concept_country]가 [concept_com_situation]에 있음"
- com_victory_conditions: "승리 조건"
- je_group_com_situations: "국제 [Concept('concept_com_situation','$concept_com_situations$')]"
+ com_situation_victory_conditions: "승리 조건"

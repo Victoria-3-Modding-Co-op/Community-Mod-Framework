@@ -4,7 +4,7 @@
  trigger_is_com_progress_bar_hidden: "지정된 진행률 표시줄은 숨겨져 있음"
  trigger_is_com_progress_bar_hidden_not: "지정된 진행률 표시줄이 표시됨"
  error_no_progress_bar_scope: "CMF: com_$progress_bar$ 범위가 정의되지 않음"
- com_default_bar: "com_blue_bar"
+ com_default_bar: "com_default_bar"
  com_blue_bar: "com_blue_bar"
  com_green_bar: "com_green_bar"
  com_bad_bar: "com_red_bar"
@@ -21,3 +21,4 @@
  com_target_blue_line: "com_target_blue_line"
  com_target_default_line: "com_target_blue_line"
  com_target_green_line: "com_target_green_line"
+ com_transparent_bar: "com_transparent_bar"

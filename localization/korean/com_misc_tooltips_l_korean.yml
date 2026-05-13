@@ -1,2 +1,2 @@
 ﻿l_korean:
- com_tooltip.disband_bloc: "[SCOPE.sPowerBloc('power_bloc').GetName] is disbanded"
+ com_tooltip.disband_bloc: "[SCOPE.sPowerBloc('power_bloc').GetName](이)가 해체됨"

@@ -1,5 +1,5 @@
 ﻿l_korean:
  Blackjack: "변수"
  and_Hookers: "구조"
- com_struct_role: "Hidden"
- com_struct_role_desc: "If you see this there is an issue with the Community Mod Framework."
+ com_struct_role: "숨겨짐"
+ com_struct_role_desc: "이 메시지가 표시된다면 커뮤니티 모드 프레임워크에 문제가 있는 것입니다."

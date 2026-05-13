@@ -1,0 +1,4 @@
+﻿l_korean:
+ com_error_deer_tooltip: "#instruction 좌클릭#!으로 오류 로그 열기\n#instruction Shift + 좌클릭#!으로 탐색기 열기\n#instruction Alt + 좌클릭#!으로 느린 틱 작업 열기\n#instruction 우클릭#!으로 사라지게 하기 (다시 화나게 하기 전까지)\n#instruction Shift + 우클릭#!으로 트위커 열기\n#instruction Alt + 우클릭#!으로 3D 통계 열기"
+ com_error_counter: "#bold [ErrorDeer.NumberOrErrors|v] 오류#!"
+ com_error_counter_tooltip: "[ErrorDeer.GetTooltip]"

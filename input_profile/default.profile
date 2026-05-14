@@ -441,7 +441,7 @@ input_context={
 
 	input_action = {
     		name = "input_ctrl_alt_q"
-    		text = "SETTING_INPUT_ACTION_CTRL_ALT_q" # Execute the debug_mode console command
+    		text = "SETTING_INPUT_ACTION_CTRL_ALT_Q" # Execute the debug_mode console command
     		binding = { # ctrl + alt + q
     			scancode = 20	# Q
     			modifier = ctrl

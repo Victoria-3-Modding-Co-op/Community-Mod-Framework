@@ -1,0 +1,4 @@
+﻿l_russian:
+ com_error_deer_tooltip: "#instruction Left-Click#! to open Error Log\n#instruction Left-Click + Shift#! to open Explorer\n#instruction Left-Click + Alt#! to open Slow Tick Operations\n#instruction Right-Click#! to make it go away (until you upset it again)\n#instruction Right-Click + Shift#! to open Tweaker\n#instruction Right-Click + Alt#! to open 3D Stats"
+ com_error_counter: "#bold [ErrorDeer.NumberOrErrors|v] Errors#!"
+ com_error_counter_tooltip: "[ErrorDeer.GetTooltip]"

@@ -100,7 +100,7 @@ input_context={
 		scancode = 7	# D
 		scancode = 79	# Arrow Right
 	}
-	
+
 	input_action = {
 		name = "open_politics"
 		text = "SETTING_INPUT_ACTION_OPEN_POLITICS"
@@ -160,7 +160,6 @@ input_context={
 		name = "open_population"
 		text = "SETTING_INPUT_ACTION_OPEN_POPULATION"
 		scancode = 67	# F10
-		
 	}
 
 	input_action = {
@@ -176,7 +175,6 @@ input_context={
 			scancode = 58
 			modifier = shift
 		}
-		
 	}
 
 	input_action = {
@@ -281,7 +279,7 @@ input_context={
 		}
 	}
 
-	input_action = { 
+	input_action = {
 		name = "outliner_toggle_pinned"
 		text = "SETTING_INPUT_ACTION_OUTLINER_TOGGLE_PINNED"
 		binding = {
@@ -290,7 +288,7 @@ input_context={
 		}
 	}
 
-	input_action = { 
+	input_action = {
 		name = "outliner_toggle_economy"
 		text = "SETTING_INPUT_ACTION_OUTLINER_TOGGLE_ECONOMY"
 		binding = {
@@ -299,7 +297,7 @@ input_context={
 		}
 	}
 
-	input_action = { 
+	input_action = {
 		name = "outliner_toggle_politics"
 		text = "SETTING_INPUT_ACTION_OUTLINER_TOGGLE_POLITICS"
 		binding = {
@@ -308,7 +306,7 @@ input_context={
 		}
 	}
 
-	input_action = { 
+	input_action = {
 		name = "outliner_toggle_diplomacy"
 		text = "SETTING_INPUT_ACTION_OUTLINER_TOGGLE_DIPLOMACY"
 		binding = {
@@ -317,7 +315,7 @@ input_context={
 		}
 	}
 
-	input_action = { 
+	input_action = {
 		name = "outliner_toggle_military"
 		text = "SETTING_INPUT_ACTION_OUTLINER_TOGGLE_MILITARY"
 		binding = {
@@ -326,7 +324,7 @@ input_context={
 		}
 	}
 
-	input_action = { 
+	input_action = {
 		name = "outliner_toggle_all"
 		text = "SETTING_INPUT_ACTION_OUTLINER_TOGGLE_ALL"
 		binding = {
@@ -363,6 +361,12 @@ input_context={
 	}
 
 	input_action = {
+		name = "dismiss_toast"
+		text = "SETTING_INPUT_ACTION_DISMISS_TOAST"
+		scancode = 41			# Escape
+	}
+
+	input_action = {
 		name = "current_situation"
 		text = "SETTING_INPUT_ACTION_CURRENT_SITUATION"
 		scancode = 8 			# E
@@ -374,7 +378,19 @@ input_context={
 		scancode = 10 			# G
 	}
 
-	input_action = { 
+	input_action = {
+		name = "merge"
+		text = "SETTING_INPUT_ACTION_MERGE"
+		scancode = 16 			# M
+	}
+
+	input_action = {
+		name = "country_panel"
+		text = "SETTING_INPUT_ACTION_COUNTRY_PANEL"
+		scancode = 21 			# R
+	}
+
+	input_action = {
 		name = "toggle_pin"
 		text = "SETTING_INPUT_ACTION_TOGGLE_PIN"
 		binding = {
@@ -382,7 +398,7 @@ input_context={
 		}
 	}
 
-	input_action = { 
+	input_action = {
 		name = "zoom_to"
 		text = "SETTING_INPUT_ACTION_ZOOM_TO"
 		binding = {
@@ -407,7 +423,7 @@ input_context={
 		text = "SETTING_INPUT_ACTION_TOGGLE_GUI_DEBUG"
 		scancode = 18 			# O
 	}
-	
+
 	###MOD ADDED###
 
 	#Choose an unused keybind and add "input_action = "input_m" " or similar to your GUI.
@@ -458,12 +474,6 @@ input_context={
 	}
 
 	input_action = {
-		name = "input_m"
-		text = "SETTING_INPUT_ACTION_M" # Reserved for Morgenröte
-		scancode = 16			# M
-	}
-	
-	input_action = {
 		name = "input_n"
 		text = "SETTING_INPUT_ACTION_N"
 		scancode = 17			# N
@@ -473,12 +483,6 @@ input_context={
 		name = "input_p"
 		text = "SETTING_INPUT_ACTION_P"
 		scancode = 19			# P
-	}
-
-	input_action = {
-		name = "input_r"
-		text = "SETTING_INPUT_ACTION_R"
-		scancode = 21			# R
 	}
 
 	input_action = {
@@ -520,6 +524,15 @@ input_context={
 		binding = { # ctrl + k
 			scancode = 14
         	modifier = ctrl
+		}
+	}
+
+	input_action = {
+		name = "input_m"
+		text = "SETTING_INPUT_ACTION_CTRL_M" # Reserved for Morgenröte
+		binding = { # ctrl + m
+			scancode = 16
+			modifier = ctrl
 		}
 	}
 

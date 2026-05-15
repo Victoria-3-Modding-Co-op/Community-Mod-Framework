@@ -393,7 +393,7 @@ fascist_party = {
 			OR = {
 				py:fascist_party ?= {
 					any_member = {}
-				}			
+				}
 				any_interest_group = {
 					leader ?= {
 						OR = { # PB shouldn't instantly become fascist without fascism being relevant
@@ -405,6 +405,7 @@ fascist_party = {
 						}
 					}
 				}
+			NOT = { vic1877_country_uses_alternate_parties = yes }
 		}
 	}
 	

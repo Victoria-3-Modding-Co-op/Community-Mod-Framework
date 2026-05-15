@@ -540,6 +540,7 @@ conservative_party = {
 				}
 				usfp_has_constitutional_government = no
 			}
+			NOT = { vic1877_country_uses_alternate_parties = yes }
 		}
 		# unions can never be conservative
 		NOT = { is_interest_group_type = ig_trade_unions }

@@ -499,6 +499,22 @@ religious_party = {
 				desc = "from_traditionalist_monarchism"
 			}
 		}
+		# Vic1877: under the alternate party system, religious party draws traditionalist/theocrat leaders
+		if = {
+			limit = {
+				owner = { vic1877_country_uses_alternate_parties = yes }
+				leader = {
+					OR = {
+						has_ideology = ideology:ideology_traditionalist
+						has_ideology = ideology:ideology_theocrat
+					}
+				}
+			}
+			add = {
+				value = 15
+				desc = "traditionalist_or_theocrat"
+			}
+		}
 		if = {
 			limit = {
 				is_interest_group_type = ig_devout

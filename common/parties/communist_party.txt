@@ -366,7 +366,7 @@ communist_party = {
 			OR = {
 				py:communist_party ?= {
 					any_member = {}
-				}		
+				}
 			any_interest_group = {
 				leader ?= {
 					OR = {
@@ -377,6 +377,7 @@ communist_party = {
 					}
 				}
 			}
+			NOT = { vic1877_country_uses_alternate_parties = yes }
 		}
 		NOR = {
 			is_interest_group_type = ig_industrialists

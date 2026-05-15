@@ -1,0 +1,6 @@
+﻿### VICTORIA 1877 movement weight stubs ###
+# These default to no-op (1 for multiply, 0 for add).
+# Vic1877 overrides them in its own /common/script_values/00_vic1877_movement_values.txt with actual logic.
+# Pattern documented in CMF README §"Modifying Movement Weights".
+
+vic1877_movement_liberal_pop_support_weight_mult = { value = 1 }

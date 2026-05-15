@@ -288,6 +288,7 @@ social_democrat_party = {
 					ig_counts_as_marginal = no
 				}
 			}
+			NOT = { vic1877_country_uses_alternate_parties = yes }
 		}
 		NOT = { # these ig's are inherently anti-worker
 			is_interest_group_type = ig_landowners

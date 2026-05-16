@@ -123,7 +123,7 @@ anarchist_party = {
 			OR = {
 				py:anarchist_party ?= {
 					any_member = {}
-				}			
+				}
 				any_interest_group = {
 					ig_counts_as_marginal = no
 					leader ?= {
@@ -131,6 +131,7 @@ anarchist_party = {
 					}
 				}
 			}
+			vic1877_country_uses_alternate_parties = no
 		}
 		leader ?= {
 			has_ideology = ideology:ideology_anarchist

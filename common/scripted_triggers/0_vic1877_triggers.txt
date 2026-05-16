@@ -1,0 +1,15 @@
+﻿##########################
+# VICTORIA 1877 TRIGGERS #
+##########################
+
+vic1877_country_uses_alternate_parties = {
+	always = no
+}
+
+vic1877_leader_is_propertarian = {
+	always = no
+}
+
+vic1877_ig_is_defense_contractor = {
+	always = no
+}

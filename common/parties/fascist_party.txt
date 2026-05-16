@@ -405,7 +405,7 @@ fascist_party = {
 						}
 					}
 				}
-			NOT = { vic1877_country_uses_alternate_parties = yes }
+			vic1877_country_uses_alternate_parties = no
 		}
 	}
 	

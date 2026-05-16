@@ -377,7 +377,7 @@ communist_party = {
 					}
 				}
 			}
-			NOT = { vic1877_country_uses_alternate_parties = yes }
+			vic1877_country_uses_alternate_parties = no
 		}
 		NOR = {
 			is_interest_group_type = ig_industrialists

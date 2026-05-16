@@ -493,7 +493,7 @@ liberal_party = {
 				}
 				usfp_has_constitutional_government = no
 			}
-			NOT = { vic1877_country_uses_alternate_parties = yes }
+			vic1877_country_uses_alternate_parties = no
 		}
 		leader ?= { # far right and far left won't join liberal parties
 			NOR = {

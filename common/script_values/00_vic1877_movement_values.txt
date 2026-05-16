@@ -1,0 +1,1 @@
+﻿vic1877_movement_liberal_pop_support_weight_mult = 1

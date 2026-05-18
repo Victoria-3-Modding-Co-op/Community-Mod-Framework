@@ -6,10 +6,15 @@
 	progressiveness = -50
 
 	is_visible = {
-		com_law_state_religion_trigger = yes
-		NOR = {# Turkey should only unlock this as a possibility if it abolishes the Millet System, likewise other Muslim nations
-			has_law = law_type:law_millet_system
-			has_law = law_type:law_people_of_the_book
+		OR = {
+			AND = {
+				com_law_state_religion_trigger = yes
+				NOR = {# Turkey should only unlock this as a possibility if it abolishes the Millet System, likewise other Muslim nations
+					has_law = law_type:law_millet_system
+					has_law = law_type:law_people_of_the_book
+				}
+			}
+			com_law_state_religion_alternative_trigger = yes
 		}
 	}
 

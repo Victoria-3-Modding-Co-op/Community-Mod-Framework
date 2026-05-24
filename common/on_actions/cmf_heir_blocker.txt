@@ -1,4 +1,4 @@
-﻿# Up to date as of 1.12.4
+﻿# Up to date as of 1.13.6
 # Root = Character
 on_heir_born = {
     effect = {
@@ -13,7 +13,6 @@ on_heir_born = {
                 hidden = yes
             }
         }
-        # Last updated for patch 1.13.3 on 01 May 2026
         else = { # Vanilla logic sits in this else block
             if = {
                 limit = {

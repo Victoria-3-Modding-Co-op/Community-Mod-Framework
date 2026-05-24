@@ -73,7 +73,7 @@ types production_methods
 				parentanchor = top        # MPM Framework
 
 				fixedgridbox = {
-					datamodel = "[BuildingBrowserBuildingTypeItem.GetBuildingType.AccessProductionMethodGroups]"
+					datamodel = "[DataModelFirst(BuildingBrowserBuildingTypeItem.GetBuildingType.AccessProductionMethodGroups, '(int32)4')]" # MPM - Only first 4
 					flipdirection = yes
 					addcolumn = 52
 					addrow = 50
@@ -257,9 +257,9 @@ types production_methods
 
 				### auto expand
 				building_type_auto_expand_toggle = {
-					size = { 40 40 }
+					size = { 40 40 } 
 				}
-
+				
 				### expand
 				button_icon_round_map_interaction = {
 					size = { 40 40 }
@@ -394,7 +394,7 @@ types production_methods
 			section_header_button = {
 				position = { 50 0 }
 				size = { 440 38 }
-
+				
 				blockoverride "left_text" {
 					raw_text = "#v [BuildingType.GetNameNoFormatting]#!"
 				}
@@ -405,11 +405,11 @@ types production_methods
 						tooltip = "PRODUCTIVITY_SPAN_TOOLTIP"
 					}
 				}
-
+				
 				blockoverride "onclick" {
 					onclick = "[BuildingProductionMethodsEntry.ToggleExpand]"
 				}
-
+				
 				blockoverride "onclick_showmore" {
 					visible = "[Not(BuildingProductionMethodsEntry.IsExpanded)]"
 				}
@@ -428,8 +428,6 @@ types production_methods
 					layoutpolicy_horizontal = expanding
 					layoutpolicy_vertical = expanding
 					margin = { 0 0 }
-
-					spacing = 10
 
 					container = {
 						# MPM
@@ -459,7 +457,7 @@ types production_methods
 										size = { 100% 100% }
 										onclick = "[RightClickMenuManager.ToggleSwitchProductionMethodMenuForType(BuildingProductionMethodsEntry.GetBuildingType, ProductionMethodGroup.AccessSelf, PdxGuiWidget.AccessSelf)]"
 									}
-
+									
 									### pm icon
 									icon = {
 										visible = "[BuildingProductionMethodsEntry.HasAllSameProductionMethod( ProductionMethodGroup.Self )]"
@@ -467,7 +465,7 @@ types production_methods
 										parentanchor = center
 										texture = "[BuildingProductionMethodsEntry.GetAllSameProductionMethodTexture( ProductionMethodGroup.Self )]"
 									}
-
+									
 									### mixed pm icon
 									icon = {
 										visible = "[Not( BuildingProductionMethodsEntry.HasAllSameProductionMethod( ProductionMethodGroup.Self ) )]"
@@ -475,7 +473,7 @@ types production_methods
 										parentanchor = center
 										texture = "[ProductionMethodGroup.GetMixedIcon]"
 									}
-
+									
 									### new pm
 									has_new_pm_icon = {
 										position = { -2 2 }
@@ -484,7 +482,7 @@ types production_methods
 											visible = "[GetPlayer.HasNewProductionMethodInGroup( ProductionMethodGroup.Self )]"
 										}
 									}
-
+																		
 
 									### nr available
 									textbox = {
@@ -514,7 +512,7 @@ types production_methods
 							'(int32)2'
 						)]" # MPM
 
-						min_width = 150
+						min_width = 104
 						layoutpolicy_horizontal = preferred
 						layoutpolicy_vertical   = expanding
 
@@ -547,7 +545,7 @@ types production_methods
 												size = { 100% 100% }
 												onclick = "[RightClickMenuManager.ToggleSwitchProductionMethodMenuForType(BuildingProductionMethodsEntry.GetBuildingType, ProductionMethodGroup.AccessSelf, PdxGuiWidget.AccessSelf)]"
 											}
-
+											
 											### pm icon
 											icon = {
 												visible = "[BuildingProductionMethodsEntry.HasAllSameProductionMethod( ProductionMethodGroup.Self )]"
@@ -555,7 +553,7 @@ types production_methods
 												parentanchor = center
 												texture = "[BuildingProductionMethodsEntry.GetAllSameProductionMethodTexture( ProductionMethodGroup.Self )]"
 											}
-
+											
 											### mixed pm icon
 											icon = {
 												visible = "[Not( BuildingProductionMethodsEntry.HasAllSameProductionMethod( ProductionMethodGroup.Self ) )]"
@@ -563,7 +561,7 @@ types production_methods
 												parentanchor = center
 												texture = "[ProductionMethodGroup.GetMixedIcon]"
 											}
-
+											
 											### new pm
 											has_new_pm_icon = {
 												position = { -2 2 }
@@ -572,7 +570,7 @@ types production_methods
 													visible = "[GetPlayer.HasNewProductionMethodInGroup( ProductionMethodGroup.Self )]"
 												}
 											}
-
+																				
 
 											### nr available
 											textbox = {
@@ -600,17 +598,14 @@ types production_methods
 
 					block "construction_content" {
 						construction_queue_sector_actions = {
-							min_width = 280 # MPM
-							max_width = 378 # MPM
 							layoutpolicy_horizontal = expanding
 							layoutpolicy_vertical = expanding
 						}
 					}
-
 				}
 			}
 
-
+			
 
 			### PRODUCTIVITY SPAN ###
 			textbox = {

@@ -66,6 +66,28 @@ entity = {
 	}
 }
 
+### Leaves ###
+entity = {
+	name = "com_vfx_entity_ui_bg_com_env_leaves_jungle_bottom_left"
+	scale = 1
+	default_state = "idle"
+
+	state =
+	{
+		name = "idle"
+		state_time = 1
+		looping = no
+
+		start_event =
+		{
+			time = 0
+			particle = "ui/bg/environments/com_env_leaves_jungle_bottom_left"
+			trigger_once = yes
+			keep_particle = no
+		}
+	}
+}
+
 ### Smoke ###
 entity = {
 	name = "com_vfx_entity_ui_bg_com_env_smoke_bottom_black"
@@ -193,8 +215,9 @@ entity = {
 	}
 }
 
+### Sparks ###
 entity = {
-	name = "com_vfx_entity_ui_bg_com_env_leaves_jungle_bottom_left"
+	name = "com_vfx_entity_ui_bg_com_env_sparks_bottom_orange"
 	scale = 1
 	default_state = "idle"
 
@@ -207,7 +230,7 @@ entity = {
 		start_event =
 		{
 			time = 0
-			particle = "ui/bg/environments/com_env_leaves_jungle_bottom_left"
+			particle = "ui/bg/environments/com_env_sparks_bottom_orange"
 			trigger_once = yes
 			keep_particle = no
 		}

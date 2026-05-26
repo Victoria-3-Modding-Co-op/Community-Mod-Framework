@@ -12,7 +12,7 @@
 types map_list_panel_types {
 	type construction_interaction_item_full = flowcontainer {
 		margin_bottom = 10
-		
+
 		direction = vertical
 
 		background = {
@@ -64,7 +64,7 @@ types map_list_panel_types {
 			hbox = {
 				spacing = 5
 				margin_right = 5
-				
+
 				textbox = {
 					text = "[Building.GetState.GetName]"
 					autoresize = yes
@@ -139,7 +139,7 @@ types map_list_panel_types {
 						}
 					}
 				}
-				
+
 				icon = {
 					visible = "[And(State.IsUnincorporated, Not(State.IsIncorporating))]"
 					size = { 30 30 }
@@ -279,7 +279,7 @@ types map_list_panel_types {
 				hbox = {
 					size = { 140 25 }
 					visible = "[Not(MapListBuildingPanel.GetBuildingType.GeneratesCombatUnits)]"
-					
+
 					productivity_or_other_information = {
 						blockoverride "productivity_info_datacontext" {
 							datacontext = "[MapListOption.GetBuildingData.GetBuilding]"
@@ -331,7 +331,7 @@ types map_list_panel_types {
 				# Military units provided text
 				textbox = {
 					visible = "[And(MapListOption.GetBuildingData.GetBuilding.GetBuildingType.GeneratesCombatUnits, NotZero(Building.GetExpansionLevel))]"
-					
+
 					min_width = 85
 					align = right|nobaseline
 
@@ -691,10 +691,10 @@ types map_list_panel_types {
 
 				hbox = {
 					margin_right = 5
-					
+
 					visible = "[LessThan_int32(GetDataModelSize(Building.AccessProducedGoods), '(int32)4')]"
 					datamodel = "[Building.AccessProducedGoods]"
-					
+
 					spacing = 5
 
 					item = {

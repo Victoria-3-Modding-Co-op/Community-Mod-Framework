@@ -1,0 +1,59 @@
+﻿# List is pulled from dlc_metadata files
+# There are `Or` functions from 3 to 8.
+macro = {
+    description = "Returns true if the passed Dlc object is an official DLC according to this list"
+    definition = "MDF_is_real_dlc(Dlc)"
+    replace_with = "Or(
+        Or8(
+            EqualTo_string(Dlc.GetName,Localize('dlc018')),
+            EqualTo_string(Dlc.GetName,Localize('dlc013')),
+            EqualTo_string(Dlc.GetName,Localize('dlc010')),
+            EqualTo_string(Dlc.GetName,Localize('dlc016')),
+            EqualTo_string(Dlc.GetName,Localize('dlc014')),
+            EqualTo_string(Dlc.GetName,Localize('dlc011')),
+            EqualTo_string(Dlc.GetName,Localize('dlc004')),
+            EqualTo_string(Dlc.GetName,Localize('dlc003'))
+        ),
+        Or3(
+            EqualTo_string(Dlc.GetName,Localize('dlc007')),
+            EqualTo_string(Dlc.GetName,Localize('dlc008')),
+            EqualTo_string(Dlc.GetName,Localize('dlc015'))
+        )
+    )"
+}
+
+macro = {
+    description = "Returns true if the passed Dlc object is an official major DLC"
+    definition = "MDF_is_real_major_dlc(Dlc)"
+    replace_with = "And(
+        Dlc.IsMajor,
+        MDF_is_real_dlc(Dlc)
+    )"
+}
+
+macro = {
+    description = "Returns true if the passed Dlc object is an official minor DLC"
+    definition = "MDF_is_real_minor_dlc(Dlc)"
+    replace_with = "And(
+        Not(Dlc.IsMajor),
+        MDF_is_real_dlc(Dlc)
+    )"
+}
+
+macro = {
+    description = "Returns true if the passed Dlc object is a modded major DLC"
+    definition = "MDF_is_modded_major_dlc(Dlc)"
+    replace_with = "And(
+        Dlc.IsMajor,
+        Not(MDF_is_real_dlc(Dlc))
+    )"
+}
+
+macro = {
+    description = "Returns true if the passed Dlc object is a modded minor DLC"
+    definition = "MDF_is_modded_minor_dlc(Dlc)"
+    replace_with = "And(
+        Not(Dlc.IsMajor),
+        Not(MDF_is_real_dlc(Dlc))
+    )"
+}

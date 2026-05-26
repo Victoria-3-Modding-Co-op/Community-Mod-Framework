@@ -160,7 +160,7 @@ military_party = {
 			OR = {
 				py:military_party ?= {
 					any_member = {}
-				}			
+				}
 				ig:ig_armed_forces ?= {
 					ig_counts_as_marginal = no
 				}
@@ -449,6 +449,39 @@ military_party = {
 			add = {
 				value = -20
 				desc = "from_traditionalist_monarchism"
+			}
+		}
+		# Vic1877: under the alternate party system, the military party catches non-propertarian armed forces
+		if = {
+			limit = {
+				owner = { vic1877_country_uses_alternate_parties = yes }
+				is_interest_group_type = ig_armed_forces
+				OR = {
+					leader = {
+						NOR = {
+							has_ideology = ideology:ideology_market_liberal
+							vic1877_leader_is_propertarian = yes
+						}
+					}
+					vic1877_ig_is_defense_contractor = no
+				}
+			}
+			add = {
+				value = 10
+				desc = "non_propertarian_armed_forces"
+			}
+		}
+		# Vic1877: under the alternate party system, the military party draws ethno-nationalist leaders
+		if = {
+			limit = {
+				owner = { vic1877_country_uses_alternate_parties = yes }
+				leader ?= {
+					has_ideology = ideology:ideology_ethno_nationalist
+				}
+			}
+			add = {
+				value = 15
+				desc = "ideology_ethno_nationalist"
 			}
 		}
 		if = {

@@ -100,16 +100,6 @@ com_law_autocracy_alternative_trigger = {
 	always = no
 }
 
-# Oligarchy
-com_law_oligarchy_trigger = {
-	NOT = {
-		has_variable = com_hide_law_oligarchy
-	}
-}
-com_law_oligarchy_alternative_trigger = {
-	always = no
-}
-
 # Technocracy
 com_law_technocracy_trigger = {
 	NOT = {
@@ -117,6 +107,16 @@ com_law_technocracy_trigger = {
 	}
 }
 com_law_technocracy_alternative_trigger = {
+	always = no
+}
+
+# Oligarchy
+com_law_oligarchy_trigger = {
+	NOT = {
+		has_variable = com_hide_law_oligarchy
+	}
+}
+com_law_oligarchy_alternative_trigger = {
 	always = no
 }
 
@@ -607,6 +607,26 @@ com_law_isolationism_trigger = {
 	}
 }
 com_law_isolationism_alternative_trigger = {
+	always = no
+}
+
+# Canton System - normally variant law triggers aren't needed but these trade ones are needed
+REPLACE_OR_CREATE:com_law_canton_system_trigger = {
+	NOT = {
+		has_variable = com_hide_law_canton_system
+	}
+}
+REPLACE_OR_CREATE:com_law_canton_system_alternative_trigger = {
+	always = no
+}
+
+# Sakoku - normally variant law triggers aren't needed but these trade ones are needed
+REPLACE_OR_CREATE:com_law_sakoku_trigger = {
+	NOT = {
+		has_variable = com_hide_law_sakoku
+	}
+}
+REPLACE_OR_CREATE:com_law_sakoku_alternative_trigger = {
 	always = no
 }
 

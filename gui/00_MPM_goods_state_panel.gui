@@ -118,7 +118,7 @@ types goods_state_panel {
 			item = {
 				widget = {
 					size = { 26 35 }
-					
+
 					textbox = {
 						parentanchor = vcenter
 						text = "[GoodsPanelChildValue.GetName]"
@@ -236,76 +236,76 @@ types goods_state_panel {
 				}
 
 				scrollarea = { # MPM - encapsulate vanilla flowcontainer within scrollarea
-                    size = { 270 58 }
+					size = { 270 58 }
 
-                    scrollbarpolicy_vertical = always_off
+					scrollbarpolicy_vertical = always_off
 
-                    scrollbar_horizontal = {
-                        using = horizontal_scrollbar
-                    }
+					scrollbar_horizontal = {
+						using = horizontal_scrollbar
+					}
 
-                    scrollwidget = {
-                        flowcontainer = { # MPM - this flowcontainer is identical to vanilla
-                            datamodel = "[Building.AccessProductionMethodGroups]"
-                            spacing = 4
+					scrollwidget = {
+						flowcontainer = { # MPM - this flowcontainer is identical to vanilla
+							datamodel = "[Building.AccessProductionMethodGroups]"
+							spacing = 4
 
-                            item = {
-                                widget = {
-                                    size = { 50 50 }
-                                    datacontext = "[Building.AccessProductionMethod(ProductionMethodGroup.Self)]"
-                                    datacontext = "[ProductionMethod]"
-                                    datacontext = "[Building]"
-                                    datacontext = "[ProductionMethodGroup]"
-                                    using = tooltip_above
+							item = {
+								widget = {
+									size = { 50 50 }
+									datacontext = "[Building.AccessProductionMethod(ProductionMethodGroup.Self)]"
+									datacontext = "[ProductionMethod]"
+									datacontext = "[Building]"
+									datacontext = "[ProductionMethodGroup]"
+									using = tooltip_above
 
-                                    tooltip = "CHANGE_FROM_CURRENT_PRODUCTION_METHOD_TOOLTIP"
+									tooltip = "CHANGE_FROM_CURRENT_PRODUCTION_METHOD_TOOLTIP"
 
-                                    button = {
-                                        visible = "[NotEqualTo_int32( GetDataModelSize( ProductionMethodGroup.AccessBuildingProductionMethods( Building.Self ) ), '(int32)1' )]"
-                                        using = expand_button_bg_dropdown
-                                        size = { 50 50 }
-                                        enabled = "[Building.IsOwner( GetPlayer.Self )]"
-                                        onclick = "[RightClickMenuManager.ToggleSwitchProductionMethodMenu(Building.AccessSelf, ProductionMethodGroup.AccessSelf, PdxGuiWidget.AccessSelf)]"
-                                    }
+									button = {
+										visible = "[NotEqualTo_int32( GetDataModelSize( ProductionMethodGroup.AccessBuildingProductionMethods( Building.Self ) ), '(int32)1' )]"
+										using = expand_button_bg_dropdown
+										size = { 50 50 }
+										enabled = "[Building.IsOwner( GetPlayer.Self )]"
+										onclick = "[RightClickMenuManager.ToggleSwitchProductionMethodMenu(Building.AccessSelf, ProductionMethodGroup.AccessSelf, PdxGuiWidget.AccessSelf)]"
+									}
 
-                                    icon = {
-                                        size = { 35 35 }
-                                        parentanchor = center
-                                        texture = "[ProductionMethod.GetTexture]"
-                                    }
+									icon = {
+										size = { 35 35 }
+										parentanchor = center
+										texture = "[ProductionMethod.GetTexture]"
+									}
 
-                                    ### new pm
-                                    has_new_pm_icon	= {
-                                        blockoverride "visible" {
-                                            visible = "[And(Building.IsOwner( GetPlayer.Self ), GetPlayer.HasNewProductionMethodInSameGroup( Building.GetBuildingType.Self, ProductionMethod.Self ))]"
-                                        }
-                                        position = { 0 0 }
-                                        tooltip = "TOOLTIP_NEW_PRODUCTION_METHOD"
-                                        parentanchor = bottom
-                                    }
+									### new pm
+									has_new_pm_icon	= {
+										blockoverride "visible" {
+											visible = "[And(Building.IsOwner( GetPlayer.Self ), GetPlayer.HasNewProductionMethodInSameGroup( Building.GetBuildingType.Self, ProductionMethod.Self ))]"
+										}
+										position = { 0 0 }
+										tooltip = "TOOLTIP_NEW_PRODUCTION_METHOD"
+										parentanchor = bottom
+									}
 
-                                    textbox = {
-                                        raw_text = "#P #bold [ProductionMethodGroup.GetNumAvailableOptions(Building.AccessSelf)]#!#!"
-                                        parentanchor = top|right
-                                        position = { -2 0 }
-                                        autoresize = yes
-                                        align = right|nobaseline
-                                        visible = "[NotEqualTo_int32( ProductionMethodGroup.GetNumAvailableOptions(Building.AccessSelf), '(int32)1')]"
-                                        tooltip = "PRODUCTION_METHOD_OPTIONS"
-                                        using = tooltip_above
-                                        using = fontsize_small
+									textbox = {
+										raw_text = "#P #bold [ProductionMethodGroup.GetNumAvailableOptions(Building.AccessSelf)]#!#!"
+										parentanchor = top|right
+										position = { -2 0 }
+										autoresize = yes
+										align = right|nobaseline
+										visible = "[NotEqualTo_int32( ProductionMethodGroup.GetNumAvailableOptions(Building.AccessSelf), '(int32)1')]"
+										tooltip = "PRODUCTION_METHOD_OPTIONS"
+										using = tooltip_above
+										using = fontsize_small
 
-                                        background = {
-                                            using = default_background
-                                            margin = { 8 4 }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+										background = {
+											using = default_background
+											margin = { 8 4 }
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
 
 			container = {
 				datacontext = "[GoodsPanelValue.GetBuilding]"

@@ -9,13 +9,14 @@
 	disallowing_laws = {
 		law_parliamentary_republic
 	}
-	
+
 	is_visible = {
 		OR = {
 			AND = {
 				com_law_autocracy_trigger = yes
-				NOT = {
-					has_law = law_type:law_neo_absolutism # Replaced by Neo-Absolutism
+				NOR = { # Replaced by Neo-Absolutism and Bakufu
+					has_law = law_type:law_neo_absolutism
+					has_law = law_type:law_bakufu
 				}
 			}
 			com_law_autocracy_alternative_trigger = yes

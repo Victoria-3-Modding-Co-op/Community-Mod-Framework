@@ -1,0 +1,173 @@
+﻿node_editor_meta={
+	view={
+		position={ 339.381653 241.248199 }
+		zoom=0.315091
+	}
+	nodes={
+		4={
+			position={ 1465.762817 -19.213226 }
+		}
+		5={
+			position={ 1103.378052 430.544128 }
+		}
+		6={
+			position={ -73.774841 684.770691 }
+		}
+		8={
+			position={ 1892.145630 3.499504 }
+		}
+		10={
+			position={ 1165.703735 17.566330 }
+		}
+		12={
+			position={ -344.208527 -5.200018 }
+		}
+		13={
+			position={ 108.229080 -252.430756 }
+		}
+		17={
+			position={ -87.047577 496.885193 }
+		}
+		19={
+			position={ -358.336273 304.274414 }
+		}
+		21={
+			position={ 348.538422 103.046646 }
+		}
+		22={
+			position={ 766.229919 275.041229 }
+		}
+		24={
+			position={ -239.952484 -354.250061 }
+		}
+		25={
+			position={ -273.465393 -236.676682 }
+		}
+		29={
+			position={ 738.827759 415.840454 }
+		}
+		30={
+			position={ 827.109985 11.838867 }
+		}
+		31={
+			position={ 744.124390 521.194763 }
+		}
+		33={
+			position={ 425.841522 2.172157 }
+		}
+		34={
+			position={ 420.956787 -223.340515 }
+		}
+		36={
+			position={ 2131.389404 5.520645 }
+		}
+		38={
+			position={ 1443.733765 433.198669 }
+		}
+		1={
+			position={ 115.943504 303.919952 }
+		}
+		39={
+			position={ -50.497269 656.264282 }
+			inlined=yes
+		}
+		44={
+			position={ 206.447830 225.249451 }
+			inlined=yes
+		}
+		45={
+			position={ 206.447830 225.249451 }
+			inlined=yes
+		}
+		46={
+			position={ 2019.314697 6249.378906 }
+			inlined=yes
+		}
+		48={
+			position={ 185.772308 659.427917 }
+			inlined=yes
+		}
+		49={
+			position={ -50.497269 656.264282 }
+			inlined=yes
+		}
+		51={
+			position={ -50.497269 656.264282 }
+			inlined=yes
+		}
+		53={
+			position={ 437.000000 168.000000 }
+			inlined=yes
+		}
+		54={
+			position={ 437.000000 168.000000 }
+			inlined=yes
+		}
+		55={
+			position={ 437.000000 168.000000 }
+			inlined=yes
+		}
+		59={
+			position={ 206.447830 225.249451 }
+			inlined=yes
+		}
+		62={
+			position={ 1173.936523 17.616810 }
+			inlined=yes
+		}
+		63={
+			position={ 1363.349854 224.610809 }
+			inlined=yes
+		}
+		64={
+			position={ 342.668152 610.705811 }
+			inlined=yes
+		}
+		66={
+			position={ 185.772308 659.427917 }
+			inlined=yes
+		}
+		15={
+			position={ 185.772308 659.427917 }
+			inlined=yes
+		}
+		27={
+			position={ 185.772308 659.427917 }
+			inlined=yes
+		}
+		2={
+			position={ 185.772308 659.427917 }
+			inlined=yes
+		}
+		16={
+			position={ 437.000000 168.000000 }
+			inlined=yes
+		}
+		9={
+			position={ 437.000000 168.000000 }
+			inlined=yes
+		}
+		65={
+			position={ 437.000000 168.000000 }
+			inlined=yes
+		}
+		47={
+			position={ 508.907654 245.304733 }
+			inlined=yes
+		}
+		7={
+			position={ 342.668152 610.705811 }
+			inlined=yes
+		}
+		67={
+			position={ -2890.901123 2134.818115 }
+			inlined=yes
+		}
+		61={
+			position={ -50.497269 656.264282 }
+			inlined=yes
+		}
+	}
+	disabled_links={
+	}
+}

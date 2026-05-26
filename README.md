@@ -428,6 +428,14 @@ Variables:
 - `com_hide_fail_triggers` to the hide the failure triggers/effects
 - `com_hide_timeout` to the hide the timeout triggers/effects
 
+Usage:
+
+`scope:journal_entry = { set_variable = com_hide_involved_countries }`
+This will hide the Involved Countries gui element
+
+`scope:journal_entry = { remove_variable = com_hide_involved_countries }`
+This will show them again.
+
 ## Particle Effects/Shaders
 Particle effects allow to change graphics while the game is running by using math.
 
@@ -441,17 +449,9 @@ vfx = {
 }
 ```
 
-currently implemented:
+Currently implemented:
 - `vfx_entity_ui_bg_cmf_je_widget_char_glow` A glow effect for a character on the left side in the `com_international_organization_panel`
 - `vfx_entity_ui_bg_cmf_je_widget_char_glow_with_dust` A glow effect with dust for a character on the left side in the `com_international_organization_panel`
-
-Usage:
-
-`scope:journal_entry = { set_variable = com_hide_involved_countries }`
-This will hide the Involved Countries gui element
-
-`scope:journal_entry = { remove_variable = com_hide_involved_countries }`
-This will show them again.
 
 # Structs
 

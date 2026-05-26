@@ -175,6 +175,11 @@ tlim_is_active_trigger = {
 	always = no
 }
 
+# Victoria 1877
+vic1877_is_active = {
+	always = no
+}
+
 # Victoria Tweaks Mod
 vtm_is_active_trigger = {
 	always = no

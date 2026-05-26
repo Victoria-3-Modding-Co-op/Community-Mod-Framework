@@ -2,9 +2,7 @@ braz_por
 french
 german
 japanese
-korean
 polish
 russian
-simp_chinese
 spanish
 turkish

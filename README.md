@@ -668,6 +668,7 @@ YOURMODNAME_is_active_trigger = {
 * Newspapers Mod
 * Rally Round the King
 * States That Make Sense
+* Victoria 1877
 * Western Clothes: Redux
 
 # Keybinds

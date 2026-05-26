@@ -459,6 +459,7 @@ Currently implemented:
 - `com_vfx_entity_ui_bg_com_env_smoke_bottom_red` Red smoke at the bottom
 - `com_vfx_entity_ui_bg_com_env_smoke_bottom_green` Green smoke at the bottom
 - `com_vfx_entity_ui_bg_com_env_smoke_bottom_blue` Blue smoke at the bottom
+- `com_vfx_entity_ui_bg_com_env_leaves_jungle_bottom_left` Leveas on in the bottom left as used in `vfx_entity_ui_state_jungle`
 
 # Structs
 

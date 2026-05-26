@@ -450,8 +450,15 @@ vfx = {
 ```
 
 Currently implemented:
-- `vfx_entity_ui_bg_cmf_je_widget_char_glow` A glow effect for a character on the left side in the `com_international_organization_panel`
-- `vfx_entity_ui_bg_cmf_je_widget_char_glow_with_dust` A glow effect with dust for a character on the left side in the `com_international_organization_panel`
+- `com_vfx_entity_ui_bg_com_env_char_left_standard_glow` A glow effect for a character on the left side in the `com_international_organization_panel`
+- `com_vfx_entity_ui_bg_com_env_char_left_standard_glow_with_dust` A glow effect with dust for a character on the left side in the `com_international_organization_panel`
+- `com_vfx_entity_ui_bg_com_env_birds_right_to_left_red` Red and yellow birds flying from the center right to the left side
+- `com_vfx_entity_ui_bg_com_env_smoke_bottom_black` Black smoke at the bottom
+- `com_vfx_entity_ui_bg_com_env_smoke_bottom_white` White smoke at the bottom
+- `com_vfx_entity_ui_bg_com_env_smoke_bottom_white_big` A bigger white smoke cloud at the bottom
+- `com_vfx_entity_ui_bg_com_env_smoke_bottom_red` Red smoke at the bottom
+- `com_vfx_entity_ui_bg_com_env_smoke_bottom_green` Green smoke at the bottom
+- `com_vfx_entity_ui_bg_com_env_smoke_bottom_blue` Blue smoke at the bottom
 
 # Structs
 

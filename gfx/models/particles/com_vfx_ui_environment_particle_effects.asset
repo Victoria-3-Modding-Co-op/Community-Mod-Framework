@@ -1,0 +1,194 @@
+##### Environment Character specific #####
+
+entity = {
+	name = "com_vfx_entity_ui_bg_com_env_char_left_standard_glow"
+	scale = 1
+	default_state = "idle"
+
+	state =
+	{
+		name = "idle"
+		state_time = 1
+		looping = no
+
+		start_event =
+		{
+			time = 0
+			particle = "ui/bg/environments/com_env_char_left_standard_glow"
+			trigger_once = yes
+			keep_particle = no
+		}
+	}
+}
+
+entity = {
+	name = "com_vfx_entity_ui_bg_com_env_char_left_standard_glow_with_dust"
+	scale = 1
+	default_state = "idle"
+
+	state =
+	{
+		name = "idle"
+		state_time = 1
+		looping = no
+
+		start_event =
+		{
+			time = 0
+			particle = "ui/bg/environments/com_env_char_left_standard_glow_with_dust"
+			trigger_once = yes
+			keep_particle = no
+		}
+	}
+}
+
+##### General Environment #####
+
+### Birds ###
+entity = {
+	name = "com_vfx_entity_ui_bg_com_env_birds_right_to_left_red"
+	scale = 1
+	default_state = "idle"
+
+	state =
+	{
+		name = "idle"
+		state_time = 1
+		looping = no
+
+		start_event =
+		{
+			time = 0
+			particle = "ui/bg/environments/com_env_birds_right_to_left_red"
+			trigger_once = yes
+			keep_particle = no
+		}
+	}
+}
+
+### Smoke ###
+entity = {
+	name = "com_vfx_entity_ui_bg_com_env_smoke_bottom_black"
+	scale = 1
+	default_state = "idle"
+
+	state =
+	{
+		name = "idle"
+		state_time = 1
+		looping = no
+
+		start_event =
+		{
+			time = 0
+			particle = "ui/bg/environments/com_env_smoke_bottom_black"
+			trigger_once = yes
+			keep_particle = no
+		}
+	}
+}
+
+entity = {
+	name = "com_vfx_entity_ui_bg_com_env_smoke_bottom_white"
+	scale = 1
+	default_state = "idle"
+
+	state =
+	{
+		name = "idle"
+		state_time = 1
+		looping = no
+
+		start_event =
+		{
+			time = 0
+			particle = "ui/bg/environments/com_env_smoke_bottom_white"
+			trigger_once = yes
+			keep_particle = no
+		}
+	}
+}
+
+entity = {
+	name = "com_vfx_entity_ui_bg_com_env_smoke_bottom_white_big"
+	scale = 1
+	default_state = "idle"
+
+	state =
+	{
+		name = "idle"
+		state_time = 1
+		looping = no
+
+		start_event =
+		{
+			time = 0
+			particle = "ui/bg/environments/com_env_smoke_bottom_white_big"
+			trigger_once = yes
+			keep_particle = no
+		}
+	}
+}
+
+entity = {
+	name = "com_vfx_entity_ui_bg_com_env_smoke_bottom_red"
+	scale = 1
+	default_state = "idle"
+
+	state =
+	{
+		name = "idle"
+		state_time = 1
+		looping = no
+
+		start_event =
+		{
+			time = 0
+			particle = "ui/bg/environments/com_env_smoke_bottom_red"
+			trigger_once = yes
+			keep_particle = no
+		}
+	}
+}
+
+entity = {
+	name = "com_vfx_entity_ui_bg_com_env_smoke_bottom_green"
+	scale = 1
+	default_state = "idle"
+
+	state =
+	{
+		name = "idle"
+		state_time = 1
+		looping = no
+
+		start_event =
+		{
+			time = 0
+			particle = "ui/bg/environments/com_env_smoke_bottom_green"
+			trigger_once = yes
+			keep_particle = no
+		}
+	}
+}
+
+entity = {
+	name = "com_vfx_entity_ui_bg_com_env_smoke_bottom_blue"
+	scale = 1
+	default_state = "idle"
+
+	state =
+	{
+		name = "idle"
+		state_time = 1
+		looping = no
+
+		start_event =
+		{
+			time = 0
+			particle = "ui/bg/environments/com_env_smoke_bottom_blue"
+			trigger_once = yes
+			keep_particle = no
+		}
+	}
+}

@@ -183,6 +183,8 @@ com_debug.1 = {
 		fix_variable_error = { variable = com_hide_law_protectionism }
 		fix_variable_error = { variable = com_hide_law_free_trade }
 		fix_variable_error = { variable = com_hide_law_isolationism }
+		fix_variable_error = { variable = com_hide_law_canton_system }
+		fix_variable_error = { variable = com_hide_law_sakoku }
 		#Taxation Laws
 		fix_variable_error = { variable = com_hide_law_consumption_based_taxation }
 		fix_variable_error = { variable = com_hide_law_land_based_taxation }

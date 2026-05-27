@@ -181,35 +181,33 @@ types event_window_types {
 					### CONTENT DESIGNATION ICON
 					flowcontainer = {
 						visible = "[Event.IsDLCContent]"
-						spacing = 10
-						parentanchor = bottom|left
-						position = { 10 -10 }
+						spacing = 5
+						parentanchor = bottom
+						righttoleft = yes
+						position = { 10 0 }
 						tooltip = "EVENT_DLC_TOOLTIP"
-						
-						icon = {
-							size = { 40 40 }
-							parentanchor = bottom|left
-							#texture = "gfx/interface/backgrounds/round_frame_dec.dds"
-							
-							icon = {
-								size = { 40 40 }
-								position = { 3 -3 }
-								
-								texture = "[Event.GetDLCIcon]"
-								parentanchor = center
-								
-							}
-						}
-						
+
 						textbox = {
-							size = { 150 20 }
-							align = left|vcenter
-							parentanchor = left|vcenter
-							elide = right
+							autoresize = yes
+							align = vcenter
+							parentanchor = vcenter
 							using = fontsize_large
-							fontsize_min = 12
+							using = elide_fontsize_min
 							alpha = 0.7
 							text = "[Event.GetDLCName]"
+
+							background = {
+								using = dark_area
+								margin = { 10 5 }
+								margin_left = 20
+								alpha = 1
+							}
+						}
+
+						icon = {
+							parentanchor = vcenter
+							size = { 50 50 }
+							texture = "[Event.GetDLCIcon]"
 						}
 					}
 					

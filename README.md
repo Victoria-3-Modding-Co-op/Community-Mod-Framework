@@ -24,6 +24,7 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=3385002128
     * [Multi-line Production Methods](#multi-line-production-methods)
     * [Hide/Show Journal Entry Groups](#hideshow-journal-entry-groups)
     * [Hide/Show Journal Elements](#hideshow-journal-elements)
+    * [Particle Effects/Shaders](#particle-effectsshaders)
 * [Structs](#structs)
     * [Creating a new Struct](#creating-a-new-struct)
     * [Setting Variables on a Struct](#setting-variables-on-a-struct)
@@ -83,12 +84,12 @@ add/multiply = {
 	desc = "YOUR_LOCALIZATION"
 }
 ```
-> **For example:**  
-> `mog_plp_movement_minority_rights_pop_support_weight_mult`  
-> **Is made up of:**  
-> mod: mog_plp_  
-> type: movement_minority_rights_  
-> section: pop_support_weight_  
+> **For example:**
+> `mog_plp_movement_minority_rights_pop_support_weight_mult`
+> **Is made up of:**
+> mod: mog_plp_
+> type: movement_minority_rights_
+> section: pop_support_weight_
 > function: mult
 * Then; create a file in common\script_values called `00_<your_mod>_movement_values`.
 * Define all values you want added in this file, = 0 for `add` and = 1 for `mult` (as seen in `00_mog_plp_movement_values`)
@@ -288,7 +289,7 @@ The best solution is to use the GUI state system like this:
 state = {
     name = _show
     # Toggle doesn't work here as it is still toggled on reload, so I have to set it instead
-    on_finish = "[GetVariableSystem.Set('com_fullscreen', 'com_fullscreen')]" 
+    on_finish = "[GetVariableSystem.Set('com_fullscreen', 'com_fullscreen')]"
 }
 state = {
     name = _hide
@@ -315,7 +316,7 @@ If you have multiple alerts which should all open the same panel you can use ful
  alert_first_alert_name_action: "$mod_alert_send_to_example_panel$"
  alert_second_alert_name_action: "$mod_alert_send_to_example_panel$"
  alert_third_alert_name_action: "$mod_alert_send_to_example_panel$"
- 
+
  mod_alert_send_to_example_panel: "Example Panel"
 ```
 > **NOTE:** If using this in a widget; you will need a scripted widget definition in `gui\scripted_widgets\` to load your widget.
@@ -377,7 +378,7 @@ some_event.1 = {
             remove_com_character_portrait = yes
         }
     }
-    
+
 	# ... event stuff
 }
 ```
@@ -410,10 +411,10 @@ gui/map_list_panel.gui
 This allows for hiding and showing any Journal Entry Group.
 
 Usage:
-`com_hide_journal_entry_group = { name = je_group_historical_content }` 
+`com_hide_journal_entry_group = { name = je_group_historical_content }`
 This would hide all National Agenda (`je_group_historical_content`) Journal Entries.
 
-`com_show_journal_entry_group = { name = je_group_historical_content }` 
+`com_show_journal_entry_group = { name = je_group_historical_content }`
 This would show them again.
 
 ## Hide/Show Journal Elements
@@ -434,6 +435,31 @@ This will hide the Involved Countries gui element
 
 `scope:journal_entry = { remove_variable = com_hide_involved_countries }`
 This will show them again.
+
+## Particle Effects/Shaders
+Particle effects allow to change graphics while the game is running by using math.
+
+### Particle Effects for background images
+These particle effects can be used to manipulate a background image (e.g. in the `com_international_organization_panel` widget). Use this to add them:
+```
+vfx = {
+	blockoverride "entity_instance" {
+		entity_instance = vfx_entity_ui_bg_cmf_je_widget_char_glow_with_dust
+	}
+}
+```
+
+Currently implemented:
+- `com_vfx_entity_ui_bg_com_env_char_left_standard_glow` A glow effect for a character on the left side in the `com_international_organization_panel`
+- `com_vfx_entity_ui_bg_com_env_char_left_standard_glow_with_dust` A glow effect with dust for a character on the left side in the `com_international_organization_panel`
+- `com_vfx_entity_ui_bg_com_env_birds_right_to_left_red` Red and yellow birds flying from the center right to the left side
+- `com_vfx_entity_ui_bg_com_env_smoke_bottom_black` Black smoke at the bottom
+- `com_vfx_entity_ui_bg_com_env_smoke_bottom_white` White smoke at the bottom
+- `com_vfx_entity_ui_bg_com_env_smoke_bottom_white_big` A bigger white smoke cloud at the bottom
+- `com_vfx_entity_ui_bg_com_env_smoke_bottom_red` Red smoke at the bottom
+- `com_vfx_entity_ui_bg_com_env_smoke_bottom_green` Green smoke at the bottom
+- `com_vfx_entity_ui_bg_com_env_smoke_bottom_blue` Blue smoke at the bottom
+- `com_vfx_entity_ui_bg_com_env_leaves_jungle_bottom_left` Leveas on in the bottom left as used in `vfx_entity_ui_state_jungle`
 
 # Structs
 
@@ -506,8 +532,8 @@ Usage examples can be found [here](events/com_debug.txt).
 Dictionaries store numeric key value pairs.
 You can use `set_dict_id` to create unique IDs in other scopes which support variables which can then be safely used as dictionary keys.
 
-Keys can be any number from 0 to 2047  
-Values can be any number from -45035996273.70496 to 45035996273.70495  
+Keys can be any number from 0 to 2047
+Values can be any number from -45035996273.70496 to 45035996273.70495
 
 ⚠️ Dictionaries store both the key and value in a single number using bit shifts, you must be careful to ensure your keys and values do not overflow.
 For performance reasons there are no internal safety checks. Using numbers outside of these ranges will result in undefined behavior.
@@ -602,7 +628,7 @@ See [the documentation page for details](docs/FLOAT_ARRAY.md) on effects and tri
 
 # Parties
 
-For naming, you need to include loc keys to avoid load-up error. These can be blank and overwritten by your own mod. 
+For naming, you need to include loc keys to avoid load-up error. These can be blank and overwritten by your own mod.
 
 # Community Mod Triggers
 

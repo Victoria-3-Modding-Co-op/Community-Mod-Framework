@@ -2211,6 +2211,51 @@ REPLACE:movement_meiji_restorationist = {
 				value = 0.10
 			}
 		}
+
+		# Time pressure factor
+		if = {
+			limit = {
+				has_core_ideology = ideology:ideology_meiji_restorationist_movement_shojoi
+				owner = {
+					has_variable = years_since_opening_of_japan_var
+					var:years_since_opening_of_japan_var > 0
+				}
+			}
+			add = {
+				desc = "sonnojoi_opening_of_japan_tt"
+				value = owner.var:years_since_opening_of_japan_var
+				if = {
+					limit = {
+						owner ?= {
+							OR = {
+								is_enacting_law = law_type:law_closed_borders
+								is_enacting_law = law_type:law_sakoku
+							}
+						}
+					}
+					multiply = 0.01
+					max = 0.15
+				}
+				else = {
+					multiply = 0.035
+					max = 0.5
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				has_core_ideology = ideology:ideology_meiji_restorationist_movement_daijoi
+				owner ?= {
+					is_country_type = unrecognized
+				}
+			}
+			add = {
+				desc = "unrecognized"
+				value = 0.15
+			}
+		}
+
+		# Taikunate
 		if = {
 			limit = {
 				owner = {
@@ -2230,6 +2275,8 @@ REPLACE:movement_meiji_restorationist = {
 				value = 0.20
 			}
 		}
+
+		# Treaties
 		if = {
 			limit = {
 				has_core_ideology = ideology:ideology_meiji_restorationist_movement_shojoi

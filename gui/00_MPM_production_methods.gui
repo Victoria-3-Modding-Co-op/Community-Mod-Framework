@@ -270,7 +270,7 @@ types production_methods
 					onclick = "[BuildingType.ActivateExpansionLens]"
 					using = select_button_sound
 					visible = "[And(Or( BuildingType.IsBuildable, BuildingType.IsExpandable ), Not(BuildingType.GeneratesCombatUnits))]"
-					tooltip = "EXPAND"
+					tooltip = "EXPAND_TOOLTIP_BUILDING_TYPE"
 					using = tooltip_se
 				}
 			}

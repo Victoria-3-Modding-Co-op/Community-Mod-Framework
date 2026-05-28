@@ -315,6 +315,63 @@ radical_party = {
 				}
 			}
 			triggered_desc = {
+				desc = party_taikunate_radical
+				trigger = {
+					c:JAP ?= THIS
+					has_law_or_variant = law_type:law_landed_voting
+					country_is_taikunate = yes
+				}
+			}
+			triggered_desc = {
+				desc = party_ezo_radical
+				trigger = {
+					c:EZO ?= THIS
+					has_variable = ezo_republic_var
+					has_law_or_variant = law_type:law_landed_voting
+				}
+			}
+			triggered_desc = {
+				desc = party_toyo_jiyuto
+				trigger = {
+					country_has_primary_culture = cu:japanese
+					has_law_or_variant = law_type:law_landed_voting
+					country_is_taikunate = no
+				}
+			}
+			triggered_desc = {
+				desc = party_yushinkai
+				trigger = {
+					country_has_primary_culture = cu:japanese
+					NOT = { has_technology_researched = political_agitation }
+					OR = {
+						has_law_or_variant = law_type:law_wealth_voting
+						has_law_or_variant = law_type:law_census_voting
+					}
+
+				}
+			}
+			triggered_desc = {
+				desc = party_rikken_kokuminto
+				trigger = {
+					country_has_primary_culture = cu:japanese
+					has_technology_researched = political_agitation
+					OR = {
+						has_law_or_variant = law_type:law_wealth_voting
+						has_law_or_variant = law_type:law_census_voting
+					}
+				}
+			}
+			triggered_desc = {
+				desc = party_kakushinto
+				trigger = {
+					country_has_primary_culture = cu:japanese
+					OR = {
+						has_law_or_variant = law_type:law_universal_suffrage
+						has_law_or_variant = law_type:law_single_party_state
+					}
+				}
+			}
+			triggered_desc = {
 				desc = party_radicals
 				trigger = {
 					always = yes

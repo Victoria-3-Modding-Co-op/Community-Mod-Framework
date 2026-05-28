@@ -339,9 +339,23 @@ fascist_party = {
 				}
 			}
 			triggered_desc = {
-				desc = party_national_citizens_alliance
+				desc = party_taikunate_fascist
 				trigger = {
 					country_has_primary_culture = cu:japanese
+					OR = {
+						country_is_taikunate = yes
+						AND = {
+							has_variable = ezo_republic_var
+							has_law_or_variant = law_type:law_landed_voting
+						}
+					}
+				}
+			}
+			triggered_desc = {
+				desc = party_kokumin_domei
+				trigger = {
+					country_has_primary_culture = cu:japanese
+					country_is_taikunate = no
 				}
 			}
 			triggered_desc = {

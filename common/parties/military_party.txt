@@ -101,11 +101,39 @@ military_party = {
 				}
 			}
 			triggered_desc = {
-				desc = party_imperial_way_party
+				desc = party_taikunate_military
 				trigger = {
-					exists = c:JAP
+					c:JAP ?= THIS
+					has_law_or_variant = law_type:law_landed_voting
+					country_is_taikunate = yes
+				}
+			}
+			triggered_desc = {
+				desc = party_ezo_military
+				trigger = {
+					c:EZO ?= THIS
+					has_variable = ezo_republic_var
+					has_law_or_variant = law_type:law_landed_voting
+				}
+			}
+			triggered_desc = {
+				desc = party_dai_nippon_kyokai
+				trigger = {
+					c:JAP ?= THIS
+					has_law_or_variant = law_type:law_landed_voting
+					NOT = {
+						country_is_taikunate = yes
+					}
+				}
+			}
+			triggered_desc = {
+				desc = party_teikokuto
+				trigger = {
 					c:JAP ?= THIS
 					has_law = law_type:law_monarchy
+					NOT = {
+						has_law_or_variant = law_type:law_landed_voting
+					}
 				}
 			}
 			triggered_desc = {

@@ -186,6 +186,22 @@ religious_party = {
 				}
 			}
 			triggered_desc = {
+				desc = party_taikunate_religious
+				trigger = {
+					c:JAP ?= THIS
+					has_law_or_variant = law_type:law_landed_voting
+					country_is_taikunate = yes
+				}
+			}
+			triggered_desc = {
+				desc = party_ezo_religious
+				trigger = {
+					c:EZO ?= THIS
+					has_variable = ezo_republic_var
+					has_law_or_variant = law_type:law_landed_voting
+				}
+			}
+			triggered_desc = {
 				desc = party_moderate_venstre
 				trigger = {
 					country_has_primary_culture = cu:norwegian

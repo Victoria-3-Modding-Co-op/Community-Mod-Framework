@@ -125,10 +125,67 @@ social_democrat_party = {
 				}
 			}
 			triggered_desc = {
-				desc = party_common_peoples_party
+				desc = party_shakai_to
 				trigger = {
 					exists = c:JAP
 					c:JAP ?= THIS
+					has_law_or_variant = law_type:law_landed_voting # Also works for Taikunate
+				}
+			}
+			triggered_desc = {
+				desc = party_ezo_social_democrat
+				trigger = {
+					c:EZO ?= THIS
+					has_variable = ezo_republic_var
+					has_law_or_variant = law_type:law_landed_voting # Also works for Taikunate
+				}
+			}
+			triggered_desc = {
+				desc = party_common_peoples_party # Heiminsha
+				trigger = {
+					country_has_primary_culture = cu:japanese
+					OR = {
+						has_law_or_variant = law_type:law_wealth_voting
+						has_law_or_variant = law_type:law_census_voting
+					}
+				}
+			}
+			triggered_desc = {
+				desc = party_rodonominto # Rōdōnōmintō
+				trigger = {
+					country_has_primary_culture = cu:japanese
+					OR = {
+						has_law_or_variant = law_type:law_universal_suffrage
+						has_law_or_variant = law_type:law_single_party_state
+					}
+					any_interest_group = {
+						party ?= {
+							is_party_type = social_democrat_party
+						}
+						leader ?= {
+							has_socialist_ideology = yes
+						}
+					}
+				}
+			}
+			triggered_desc = {
+				desc = party_shakai_taishuto # Shakai Taishūtō
+				trigger = {
+					country_has_primary_culture = cu:japanese
+					OR = {
+						has_law_or_variant = law_type:law_universal_suffrage
+						has_law_or_variant = law_type:law_single_party_state
+					}
+					NOT = {
+						any_interest_group = {
+							party ?= {
+								is_party_type = social_democrat_party
+							}
+							leader ?= {
+								has_socialist_ideology = yes
+							}
+						}
+					}
 				}
 			}
 			triggered_desc = {

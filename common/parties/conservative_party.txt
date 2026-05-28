@@ -378,6 +378,58 @@ conservative_party = {
 					has_law = law_type:law_monarchy
 				}
 			}
+
+            triggered_desc = {
+                desc = party_taikunate_conservative
+                trigger = {
+                    c:JAP ?= THIS
+                    has_law_or_variant = law_type:law_landed_voting
+                    country_is_taikunate = yes
+                }
+            }
+            triggered_desc = {
+                desc = party_ezo_conservative
+                trigger = {
+                    c:EZO ?= THIS
+                    has_variable = ezo_republic_var
+                    has_law_or_variant = law_type:law_landed_voting
+                }
+            }
+            triggered_desc = {
+                desc = party_imperial_rule_party
+                trigger = {
+                    country_has_primary_culture = cu:japanese
+                    has_law_or_variant = law_type:law_landed_voting
+                    has_law = law_type:law_monarchy
+                    NOT = {
+                        country_is_taikunate = yes
+                    }
+                }
+            }
+            triggered_desc = {
+                desc = party_kokumin_kyokai
+                trigger = {
+                    country_has_primary_culture = cu:japanese
+                    NOR = {
+                        has_law_or_variant = law_type:law_universal_suffrage
+                        has_law_or_variant = law_type:law_single_party_state
+                    }
+                    ig:ig_landowners ?= { is_powerful = yes }
+                }
+            }
+            triggered_desc = {
+                desc = party_seiyukai
+                trigger = {
+                    country_has_primary_culture = cu:japanese
+                    NOT = { has_law_or_variant = law_type:law_landed_voting }
+                    OR = {
+                        ig:ig_landowners ?= { is_powerful = no }
+                        has_law_or_variant = law_type:law_universal_suffrage
+                        has_law_or_variant = law_type:law_single_party_state
+                    }
+                }
+            }
+
 			triggered_desc = {
 				desc = party_right_kmt
 				trigger = {

@@ -3202,44 +3202,45 @@ REPLACE:movement_anarchist = {
 			}
 		}
 	}
-	
-	secession = {
-		possible = {
-			political_movement_support >= 0.05
-			OR = {
-				scope:clout <= 0
-				trigger_if = {
-					limit = {
-						NOT = {
-							owner = {
-								has_journal_entry = je_spanish_anarchism # So the Spanish anarchists will always launch a revolution if possible
-							}
-						}
-					}
-					AND = {
-						scope:clout > 0
-						scope:clout <= 0.15
-						owner ?= {
-							NOR = {
-								has_law_or_variant = law_type:law_council_republic
-								is_enacting_law = law_type:law_council_republic
-								is_enacting_law = law_type:law_anarchy
-								any_interest_group = {
-									is_in_government = yes
-									leader ?= {
-										has_ideology = ideology:ideology_anarchist
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-		
-		weight = {
-			value = 1000
-		}
+
+    secession = {
+        possible = {
+            political_movement_support >= 0.05
+            political_movement_support <= 0.15
+            scope:clout <= 0.15
+            owner ?= {
+                num_states > 5
+                NOR = {
+                    has_law_or_variant = law_type:law_council_republic
+                    is_enacting_law = law_type:law_council_republic
+                    is_enacting_law = law_type:law_anarchy
+                    any_interest_group = {
+                        is_in_government = yes
+                        leader ?= {
+                            has_ideology = ideology:ideology_anarchist
+                        }
+                    }
+                }
+            }
+        }
+
+        weight = {
+            value = 150
+
+            multiply = {
+                value = 1
+                subtract = scope:clout
+            }
+
+            if = {
+                limit = {
+                    owner = {
+                        has_journal_entry = je_spanish_anarchism # So the Spanish anarchists will always launch a revolution if possible
+                    }
+                }
+                multiply = 0
+            }
+        }
 
 		state_weight = {
 			value = 1

@@ -15,6 +15,7 @@ types com_topfrontend_overwrites {
 			spacing = 5
 			margin_left = 15
 			filter_mouse = right
+			allow_outside = yes
 
 			### CURRENT SITUATION
 			widget = {

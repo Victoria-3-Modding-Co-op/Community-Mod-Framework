@@ -9,6 +9,7 @@ types com_important_actions_list_overwrites {
 			name = _mouse_hierarchy_leave
 			on_start = "[PdxGuiWidget.FindChild('button_hide_single_alert').TriggerAnimation('hover_leave')]"
 		}
+
 		blockoverride "properties" {
 
 			tooltip = "[ImportantAlert.GetToolTip]"

@@ -1,7 +1,7 @@
 ﻿l_simp_chinese:
  # Game Concepts
  concept_com_international_organization: "国际组织"
- concept_com_international_organization_desc: "A group of [Concept('concept_country','$concept_countries$')] bound together by some type of supranational entity."
+ concept_com_international_organization_desc: "一个由[Concept('concept_country','$concept_countries$')]组成的组织，有共同的目标。"
  concept_com_international_organizations: "国际组织"
  concept_com_international_organization_short: "组织"
  concept_com_international_organization_shorter: "组织"

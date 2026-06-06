@@ -1,5 +1,117 @@
 ﻿l_simp_chinese:
- concept_com_international_organization: "International Organization"
- concept_com_international_organization_desc: "A group of [Concept('concept_country','$concept_countries$')] bound together by some type of supranational entity."
- concept_com_international_organizations: "International Organizations"
+ # Game Concepts
+ concept_com_international_organization: "国际组织"
+ concept_com_international_organization_desc: "一个由[Concept('concept_country','$concept_countries$')]组成的组织，有共同的目标。"
+ concept_com_international_organizations: "国际组织"
+ concept_com_international_organization_short: "组织"
+ concept_com_international_organization_shorter: "组织"
+ concept_com_international_organizations_short: "组织"
+ concept_com_international_organization_leader: "国际组织领导者" 
+ concept_com_international_organization_leader_desc: "[concept_com_international_organization]的领导国"
+ concept_com_international_organization_leader_med: "组织领导者" 
+ concept_com_international_organization_leader_short: "领导者" 
+ concept_com_international_organization_chair: "国际组织主席"
+ concept_com_international_organization_chair_desc: "负责指导[concept_com_international_organization]的[Concept('concept_character', '$concept_individual$')]"
+ concept_com_international_organization_chair_med: "组织主席"
+ concept_com_international_organization_chair_short: "主席"
+ concept_com_international_organization_member: "国际组织成员"
+ concept_com_international_organization_member_desc: "属于[concept_com_international_organization]的[concept_country]"
+ concept_com_international_organization_members: "国际组织成员"
+ concept_com_international_organization_member_med: "组织成员"
+ concept_com_international_organization_members_med: "组织成员"
+ concept_com_international_organization_member_short: "成员"
+ concept_com_international_organization_members_short: "成员"
+ concept_com_international_organization_headquarters: "国际组织总部"
+ concept_com_international_organization_headquarters_desc: "容纳[concept_com_international_organization]主要会议地点的[concept_state_region]"
+ concept_com_international_organization_headquarters_med: "组织总部"
+ concept_com_international_organization_headquarters_med_short: "组织总部"
+ concept_com_international_organization_headquarters_short: "总部"
+ concept_com_international_organization_headquarters_shorter: "总部"
+
+ concept_com_international_situation: "国际形势"
+ concept_com_international_situation_desc: "一个涉及多个[Concept('concept_country','$concept_countries$')]并需要它们面对或解决的事件"
+ concept_com_international_situations: "国际形势"
+ concept_com_international_situation_short: "形势"
+ concept_com_international_situations_short: "形势"
+ 
+ # Journal Entry Groups
+ je_group_com_hidden: "隐藏"
+ je_group_com_contextless_hidden: "隐藏"
+ 
  je_group_com_supranational_organizations: "[Concept('concept_com_international_organization','$concept_com_international_organizations$')]"
+ je_group_com_regional_organizations: "区域组织"
+ je_group_com_religious_organizations: "宗教组织"
+ je_group_com_non_governmental_organizations: "非政府组织"
+ je_group_com_sporting_organizations: "体育组织"
+ 
+ # Journal Entries
+ je_com_supranational_organization: "测试列强会议"
+ je_com_supranational_organization_reason: "$je_com_supranational_organization$"
+ je_com_regional_organization: "全球地方会议"
+ je_com_regional_organization_reason: "$je_com_regional_organization$"
+ je_com_religious_organization: "WOLOLO 教会"
+ je_com_religious_organization_reason: "$je_com_religious_organization$"
+ 
+ # Localization Trick
+ com_international_organizations: "[Concept('concept_com_international_organization','$concept_com_international_organizations$')]"
+ com_organization: "[Concept('concept_com_international_organization','$concept_com_international_organization_short$')]"
+ com_org: "[Concept('concept_com_international_organization','$concept_com_international_organization_shorter$')]"
+ com_organizations: "[Concept('concept_com_international_organization','$concept_com_international_organizations_short$')]"
+ com_organization_leader: "[Concept('concept_com_international_organization_leader', '$concept_com_international_organization_leader_med$')]"
+ com_org_leader: "[Concept('concept_com_international_organization_leader','$concept_com_international_organization_leader_short$')]"
+ com_organization_chair: "[Concept('concept_com_international_organization_chair','$concept_com_international_organization_chair_med$')]"
+ com_org_chair: "[Concept('concept_com_international_organization_chair','$concept_com_international_organization_chair_short$')]"
+ com_international_organization_members: "[Concept('concept_com_international_organization_member','$concept_com_international_organization_members$')]"
+ com_organization_member: "[Concept('concept_com_international_organization_member','$concept_com_international_organization_member_med$')]"
+ com_organization_members: "[Concept('concept_com_international_organization_member','$concept_com_international_organization_members_med$')]"
+ com_org_member: "[Concept('concept_com_international_organization_member','$concept_com_international_organization_member_short$')]"
+ com_org_members: "[Concept('concept_com_international_organization_member','$concept_com_international_organization_members_short$')]"
+ com_organization_headquarters: "[Concept('concept_com_international_organization_headquarters','$concept_com_international_organization_headquarters_short$')]"
+ com_organization_hq: "[Concept('concept_com_international_organization_headquarters','$concept_com_international_organization_headquarters_med_short$')]"
+ com_org_headquarters: "[Concept('concept_com_international_organization_headquarters','$concept_com_international_organization_headquarters_short$')]"
+ com_org_hq: "[Concept('concept_com_international_organization_headquarters','$concept_com_international_organization_headquarters_shorter$')]"
+
+ com_international_situations: "[Concept('concept_com_international_situation','$concept_com_international_situations$')]"
+ com_situation: "[Concept('concept_com_international_situation','$concept_com_international_situation_short$')]"
+ com_situations: "[Concept('concept_com_international_situation','$concept_com_international_situations_short$')]"
+
+ com_flag_loc: "[TopScope.GetLocalVariable('com_flag_loc').GetFlagName]"
+
+ # Sidebar Ideology
+ com_international_organizations_sgui: "com_international_organizations_sgui"
+ com_international_organizations_sgui_desc: "组织"
+ 
+ # Tooltips
+ com_add_interorg_journal_entry: "将创建 #bold $com_flag_loc$#! [concept_com_international_organization]"
+ com_set_international_organization_headquaters_effect: "$com_organization$的$com_org_headquarters$转移到 #bold $com_gui_interorg_headquaters_name$#!"
+
+ # GUI - Journal Entry Panel
+ com_gui_journal_header: "[ComJournalVar('com_header_var').GetFlagName] $com_organization$"
+ 
+ # GUI - International Orgs Panel
+ com_gui_international_organizations_header: "国际组织"
+ com_gui_power_blocs_header: "权力集团"
+ com_gui_organization_headquarters: "@com_formable_possible! [ComJournalVar('com_interorg_headquarters_var').GetStateRegion.GetName]"
+ com_gui_additional_members: "还有未显示的其他成员。请查看组织以查看所有成员。"
+ 
+ # GUI - Outliner Container
+ com_gui_international_organizations_outliner: "$com_international_organizations$"
+ com_gui_international_situations_outliner: "$com_international_situations$"
+ com_gui_goto_international_orgs_panel: "前往$com_international_organizations$面板"
+ 
+ # GUI - Journal Entry Widgets
+ com_gui_main_actions: "主要行动"
+ com_gui_members: "成员"
+ com_gui_interorg_leader_header: "$com_organization_leader$"
+ com_gui_interorg_leader_name: "[ComJournalVar('com_interorg_leader_var').GetCountry.GetName]"
+ com_gui_interorg_character_header: "$com_interorg_leader_title$"
+ com_gui_interorg_character_name: "[Character.GetFullName]"
+ com_gui_interorg_headquaters_header: "$com_organization_hq$"
+ com_gui_interorg_headquaters_name: "[ComJournalVar('com_interorg_headquarters_var').GetStateRegion.GetName]"
+ com_gui_interorg_participants_header: "$com_organization_members$"
+ # Interorg leader titles
+ com_interorg_leader_title: "[Concept('concept_com_international_organization_chair', Concatenate3('$concept_com_international_organization_short$',' ',Select_CString(ComJournalVar('com_interorg_chair_title_var').IsSet,ComJournalVar('com_interorg_chair_title_var').GetFlagName,'$com_interorg_title_chair$')))]"
+ com_interorg_title_chair: "主席"
+ com_interorg_title_leader: "领导者"
+ com_interorg_title_president: "总裁"
+ com_interorg_title_head: "首脑"

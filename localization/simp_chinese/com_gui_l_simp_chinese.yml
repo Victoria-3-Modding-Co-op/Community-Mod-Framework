@@ -2,12 +2,28 @@
   # Scripted gui used by button
   gui_sidebar_example_button: "gui_sidebar_example_button"
   # Name of the button that is shown in the hover popout
-  gui_sidebar_example_button_desc: "Example"
+  gui_sidebar_example_button_desc: "示例"
   # Tooltip shown when hovering over the button
-  gui_sidebar_example_button_tooltip: "When clicking this button nothing happens"
+  gui_sidebar_example_button_tooltip: "点击此按钮不会发生任何事情"
   # Example Opinion Loc Key
-  gui_character_opinion_example: "Example Opinion"
+  gui_character_opinion_example: "示例好感度"
 
-  com_gui_total_building: "[Building.GetName] size:"
+  com_gui_total_building: "[Building.GetName]规模："
 
-  com_no_sandbox_warning: "@red_cross! $SANDBOX$ is not allowed when an Objective is selected"
+  com_no_sandbox_warning: "@red_cross! 选择了目标时不允许使用$SANDBOX$"
+  
+  # COM Event Window Localization
+  com_event_location: "发生于[GetPlayer.MakeScope.Var('com_event_window_location_var').GetFlagName]的事件"
+  com_debug_deer: "#header #todo 调试信息#!#!\n$TOOLTIP_DELIMITER$\n#bold 事件 ID: [Event.GetKey|v]\n$TOOLTIP_DELIMITER$\n#bold 触发器描述:\n[Event.GetTriggerDesc]\n@information! 单击以在文本编辑器中打开事件"
+  
+  # Test Event Localiztion
+  com_debug.t: "社区 GUI 测试事件"
+  com_debug.d: "“维多利亚3简直是个烂游戏，它平淡无奇，毫无特色，无论国家大小玩起来都极其简单。在维多利亚2里内容更多，你必须实际管理建筑、人口，并进行多样化的外交。”"
+  com_debug.f: "“是的，不幸的是除了 james 没人会做 mod” -rskhm"
+  com_debug.tt: "#italic 无事发生……#!"
+  com_debug.a: "测试选项 1"
+  com_debug.b: "测试选项 2"
+  com_debug.c: "第三个测试选项"
+  com_debug.e: "测试与第 4"
+  com_debug.james: "“只管研究[GetTechnology('line_infantry').GetName]就行了” -1230james"
+  com_debug.james_tt: "#italic James 对你微笑……#!"

@@ -39,6 +39,6 @@
  com_camera_main_menu_heir: "camera_main_menu_heir"
 # Character Portrait Animations
 # Created from: game/gfx/portraits/portrait_animations/animations.txt
- com_animation_idle: "待机"
+ com_animation_idle: "idle"
  com_animation_commander_vs_left: "commander_vs_left"
  com_animation_commander_vs_right: "commander_vs_right"

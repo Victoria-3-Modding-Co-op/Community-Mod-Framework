@@ -1,0 +1,127 @@
+##############################
+# COMMUNITY GUI MARKET PANEL #
+##############################
+
+# This modification is to hide invalid goods
+
+# COPY-PASTED FOR NOW
+@panel_width_minus_10 = 530			# used to be 450
+@panel_width = 540  				# used to be 460
+@panel_width_half = 270				# used to be 230
+@panel_width_plus_10 = 550  		# used to be 470
+@panel_width_plus_14 = 554			# used to be 474
+@panel_width_plus_14_half = 277		# used to be 237
+@panel_width_plus_20 = 560			# used to be 480
+@panel_width_plus_30 = 570			# used to be 490
+@panel_width_plus_70 = 610			# used to be 530
+
+types com_market_panel_overwrites
+{
+	type market_panel_details_content = container {
+		parentanchor = hcenter
+		
+		flowcontainer = {
+			direction = vertical
+			using = default_list_position
+			margin_bottom = 20
+
+			flowcontainer = {
+				using = default_list_position
+				direction = vertical
+				spacing = 20
+				
+				flowcontainer = {
+					name = "tutorial_highlight_market_details_panel_all_goods"
+					direction = vertical
+					datamodel = "[Market.AccessMarketGoods( MarketPanel.GetFilters )]"
+					spacing = 2
+					parentanchor = hcenter
+					
+					item = {
+						visible = "[Not(EqualTo_CFixedPoint(Goods.GetBasePrice, '(CFixedPoint)0'))]"
+						goods_entry_button = {}
+					}
+				}
+				
+				flowcontainer = {
+					direction = vertical
+					visible = "[Not(IsDataModelEmpty(Market.AccessLocalGoods( MarketPanel.GetFilters )))]"
+					
+					default_header_2texts = {
+						parentanchor = hcenter
+						blockoverride "text1" {
+							text = "LOCAL_GOODS"
+						}
+					}	
+
+					widget = { size = { 5 5 } }		
+					
+					flowcontainer = {
+						wrap_count = 10
+						datamodel = "[Market.AccessLocalGoods( MarketPanel.GetFilters )]"
+						margin_left = 10
+						spacing = 5
+						
+						item = {
+							container = {
+								visible = "[Not(EqualTo_string(Goods.GetCategoryName, ''))]"
+
+								tooltipwidget = {
+									FancyTooltip_Goods = {}
+								}	
+					
+								button_icon_round = {
+									size = { 50 50 }
+									using = select_button_sound
+									onclick = "[InformationPanelBar.OpenGoodsLocalPricesPanel(Goods.Self)]"
+									onrightclick = "[RightClickMenuManager.ShowForGoods(Goods.AccessSelf)]"
+								}
+								
+								icon = {
+									size = { 50 50 }
+									texture = "[Goods.GetTexture]"
+								}								
+							}
+						}
+					}							
+				}					
+				
+				textbox = {
+					text = "[Market.GetModifier.GetFullEntryDescFor('market_land_trade_capacity_add')]"
+					visible = "[InDebugMode]"
+					
+					parentanchor = hcenter
+					minimumsize = { 450 -1 }
+					autoresize = yes
+					multiline = yes
+					margin = { 0 10 }
+					align = center|nobaseline
+					
+					background = {
+						using = entry_bg
+					}
+				}
+
+				textbox = {
+					text = "[Market.GetModifierDesc]"
+					visible = "[And(InDebugMode, Not(StringIsEmpty(Market.GetModifierDesc)))]"
+					
+					parentanchor = hcenter
+					minimumsize = { 450 -1 }
+					autoresize = yes
+					multiline = yes
+					margin = { 0 10 }
+					align = center|nobaseline
+					
+					background = {
+						using = entry_bg
+					}
+				}
+			}
+		}
+
+		not_yet_initialized = {
+			visible = "[EqualTo_CFixedPoint(Market.GetBalance, '(CFixedPoint)0')]"
+		}
+	}
+}

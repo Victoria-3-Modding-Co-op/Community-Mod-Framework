@@ -131,3 +131,38 @@ Situations were inspired by [EU5](https://forum.paradoxplaza.com/forum/developer
 [The usage documentation can be found here.](SITUATIONS.md)
 
 [While the script documentation can be found here.](SITUATIONS_SCRIPT_DOCS.md)
+
+## Building
+- **Injection Name:** `com_journal_entry_building`
+- **Recommended Anchor:** `custom_widget_container_1`
+- **Screenshots:** [Example](images/journal_entries/example_building.png)
+
+To add a building you will need to set the building scope to a journal entry variable called `com_journal_entry_building` in the immediate block of a journal entry.
+
+Here is an example where a railway is added to a journal entry, but theoretically you can add whatever building you want:
+```
+je_example_entry = {
+	...
+    widget = {
+        gui = "gui/com_journal_injects/injects.gui"
+        name = "com_journal_entry_building"
+        container = "custom_widget_container_1"
+    }
+    
+	immediate = {
+	    # Adding railway building to the variable
+		random_scope_building = {
+			limit = {
+				is_building_type = building_railway
+			}
+			scope:journal_entry = {
+				set_variable = {
+					name = com_journal_entry_building
+					value = prev
+				}
+			}
+		}
+	}
+	...
+}
+```

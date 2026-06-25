@@ -38,6 +38,14 @@ types production_methods
 
 			### DROPDOWN / EXPAND
 			section_header_button = {
+				block "section_header_interactable" {}
+
+				blockoverride "background" {
+					block "section_header_background" {
+						using = expand_button_bg
+					}
+				}
+
 				blockoverride "layout" {
 					position = { 110 0 }
 					size = { 440 38 }
@@ -55,15 +63,21 @@ types production_methods
 				}
 
 				blockoverride "onclick" {
-					onclick = "[BuildingBrowserPanel.ToggleExpandBuildingType(BuildingBrowserBuildingTypeItem.GetBuildingType)]"
+					block "expand_onclick" {
+						onclick = "[BuildingBrowserPanel.ToggleExpandBuildingType(BuildingBrowserBuildingTypeItem.GetBuildingType)]"
+					}
 				}
 
 				blockoverride "onclick_showmore" {
-					visible = "[Not(BuildingBrowserPanel.IsBuildingTypeExpanded(BuildingBrowserBuildingTypeItem.GetBuildingType))]"
+					block "expand_showmore_visible" {
+						visible = "[Not(BuildingBrowserPanel.IsBuildingTypeExpanded(BuildingBrowserBuildingTypeItem.GetBuildingType))]"
+					}
 				}
 
 				blockoverride "onclick_showless" {
-					visible = "[BuildingBrowserPanel.IsBuildingTypeExpanded(BuildingBrowserBuildingTypeItem.GetBuildingType)]"
+					block "expand_showless_visible" {
+						visible = "[BuildingBrowserPanel.IsBuildingTypeExpanded(BuildingBrowserBuildingTypeItem.GetBuildingType)]"
+					}
 				}
 			}
 
@@ -269,7 +283,9 @@ types production_methods
 
 					onclick = "[BuildingType.ActivateExpansionLens]"
 					using = select_button_sound
-					visible = "[And(Or( BuildingType.IsBuildable, BuildingType.IsExpandable ), Not(BuildingType.GeneratesCombatUnits))]"
+					block "expand_button_visible" {
+						visible = "[And(Or( BuildingType.IsBuildable, BuildingType.IsExpandable ), Not(BuildingType.GeneratesCombatUnits))]"
+					}
 					tooltip = "EXPAND_TOOLTIP_BUILDING_TYPE"
 					using = tooltip_se
 				}
@@ -289,7 +305,9 @@ types production_methods
 
 		### EXPANDED LIST OF BUILDINGS
 		expanded_list = {
-			visible = "[BuildingBrowserPanel.IsBuildingTypeExpanded(BuildingBrowserBuildingTypeItem.GetBuildingType)]"
+			block "expanded_list_visible" {
+				visible = "[BuildingBrowserPanel.IsBuildingTypeExpanded(BuildingBrowserBuildingTypeItem.GetBuildingType)]"
+			}
 			using = expanded_list_bg
 
 			blockoverride "dark_area_alpha" {

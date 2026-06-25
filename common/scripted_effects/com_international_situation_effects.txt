@@ -1,4 +1,15 @@
-﻿# Add journal entry to the scoped country
+﻿com_hide_all_journal_elements_for_situation_effect = {
+    set_variable = com_hide_scripted_buttons
+    set_variable = com_hide_journal_reason
+    set_variable = com_hide_involved_countries
+    set_variable = com_hide_complete_triggers
+    set_variable = com_hide_fail_triggers
+    set_variable = com_hide_modifiers
+    set_variable = com_hide_status_desc
+}
+
+####---------- Outdated Situation Effects ----------####
+# Add journal entry to the scoped country
 # and add a newly created situation to that journal
 # Parameters:
 # - journal = journal entry key

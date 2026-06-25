@@ -21,6 +21,8 @@ flowcontainer = {
 		spacing = 10
 		
 		com_international_situation_header = {}
+		com_international_situation_involved_countries = {}
+		com_international_situation_phase_information = {}
 	}
 }
 
@@ -46,14 +48,6 @@ flowcontainer = {
 
 ####---------- INTERNATIONAL SITUATION GUI TYPES ----------####
 types gbbf_journal_widget_types {
-	type com_international_situation_header = flowcontainer {
-		direction = vertical
-		spacing = 10
-		
-		com_international_situation_header = {}
-		com_international_situation_phase_information = {}
-	}
-	
 	type com_international_situation_header = widget {
 		direction = vertical
 		parentanchor = center
@@ -76,17 +70,6 @@ types gbbf_journal_widget_types {
 			using = default_list_position
 			using = fontsize_large
 		}
-		
-		button = {
-			parentanchor = center
-			using = default_button_primary_action
-			using = confirm_button_sound
-			size = { 220 30 }
-			text = "com_situation_toggle_involved"
-			onclick = "[GetVariableSystem.Toggle('com_show_involved_countries')]"
-		}
-		
-		com_international_situation_involved_countries = {}
 	}
 	
 	type com_international_situation_involved_countries = flowcontainer {
@@ -97,7 +80,14 @@ types gbbf_journal_widget_types {
 		spacing = 10
 		margin_bottom = 15
 		
-		visible = "[GetVariableSystem.Exists('com_show_involved_countries')]"
+		button = {
+			parentanchor = center
+			using = default_button_primary_action
+			using = confirm_button_sound
+			size = { 220 30 }
+			text = "com_situation_toggle_involved"
+			onclick = "[GetVariableSystem.Toggle('com_show_involved_countries')]"
+		}
 		
 		flowcontainer = {
 			parentanchor = top|hcenter
@@ -107,6 +97,8 @@ types gbbf_journal_widget_types {
 			max_width = @panel_width_minus_30
 			margin = { 5 10 }
 			spacing = 10
+			
+			visible = "[GetVariableSystem.Exists('com_show_involved_countries')]"
 			
 			background = {
 				using = entry_bg_simple
@@ -149,6 +141,8 @@ types gbbf_journal_widget_types {
 			margin = { 5 10 }
 			spacing = 10
 			
+			visible = "[Not(IsDataModelEmpty(JournalEntry.MakeScope.GetList('com_situation_interloper_list')))]"
+			
 			background = {
 				using = entry_bg_simple
 			}
@@ -166,19 +160,8 @@ types gbbf_journal_widget_types {
 				parentanchor = top|hcenter
 			}
 			
-			textbox = {
-				parentanchor = top|hcenter
-				visible = "[IsDataModelEmpty(JournalEntry.MakeScope.GetList('com_situation_interloper_list'))]"
-				autoresize = yes
-				text = "eqfm_interloper_list_empty"
-				align = center|nobaseline
-				elide = right
-				using = fontsize_large
-			}
-			
 			dynamicgridbox = {
 				parentanchor = top|hcenter
-				visible = "[Not(IsDataModelEmpty(JournalEntry.MakeScope.GetList('com_situation_interloper_list')))]"
 				datamodel = "[JournalEntry.MakeScope.GetList('com_situation_interloper_list')]"
 				datamodel_wrap = 8
 				flipdirection = yes
@@ -258,5 +241,29 @@ types gbbf_journal_widget_types {
 				using = fontsize_xl
 			}
 		}
+	}
+	
+	type com_international_situation_outcomes = flowcontainer {
+		direction = vertical
+		parentanchor = center
+		size = { 540 100 }
+		
+		button = {
+			parentanchor = center
+			using = default_button_primary_action
+			using = confirm_button_sound
+			size = { 220 30 }
+			text = "com_view_situation_endings"
+			onclick = "[GetVariableSystem.Toggle('com_show_situation_outomes')]"
+		}
+		
+		
+	}
+	
+	type com_international_situation_factors = flowcontainer {
+		direction = vertical
+		parentanchor = center
+		size = { 540 100 }
+		
 	}
 }

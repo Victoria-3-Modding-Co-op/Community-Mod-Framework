@@ -1,5 +1,14 @@
 ﻿l_english:
  ####---------- International Situations Base Localization ----------####
+ je_com_international_situation: "International Situation"
+ je_com_international_situation_reason: "There is no reason. We have no reason. We are a people of baseless claims and divine insanity. Now go put some wood in Eastern Mali before anyone finds out."
+ je_com_international_situation_status: "Status: Screaming in the mines."
+ 
+ com_situation_header_placeholder: "#todo com_situation_header_var#!"
+ com_situation_phase_icon_placeholder: "#todo com_situation_phase_icon_var#!"
+ com_situation_phase_name_placeholder: "#todo com_situation_phase_name_var#!"
+ 
+ 
  com_situation_country_involved: "[GetPlayer.GetNameNoFlag] is #bold Involved#! in [JournalEntry.GetName]"
  com_situation_country_interloper: "[GetPlayer.GetNameNoFlag] is an #bold Interloper#! in [JournalEntry.GetName]"
  com_situation_country_not_involved: "[GetPlayer.GetNameNoFlag] is #bold Not Involved#! in [JournalEntry.GetName]"

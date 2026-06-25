@@ -17,63 +17,60 @@ je_com_international_situation = {
 	}
 	
 	immediate = {
-	
+		scope:journal_entry = {
+			com_hide_all_journal_elements_for_situation_effect = yes
+			set_variable = {
+				name = com_situation_header_var
+				flag:com_situation_header_placeholder
+			}
+			set_variable = {
+				name = com_situation_phase_icon_var
+				flag:com_situation_phase_icon_var
+			}
+			set_variable = {
+				name = com_situation_phase_name_var
+				flag:com_situation_phase_name_var
+			}
+		}
 	}
 	
 	modifiers_while_active = {
-	
+		modifier_com_debug_1
+		modifier_com_debug_2
+		modifier_com_debug_3
 	}
 	
 	complete = {
+		always = no
 	}
 	
 	on_complete = {
+		custom_tooltip = com_nothing_happens
 	}
 	
 	fail = {
+		always = no
 	}
 	
 	on_fail = {
+		custom_tooltip = com_nothing_happens
 	}
 	
-	timeout =
+	timeout = very_long_modifier_time
 	
 	on_timeout = {
+		custom_tooltip = com_nothing_happens
 	}
 	
 	invalid = {
+		always = no
 	}
 	
 	on_invalid = {
-	}
-	
-	on_weekly_pulse = {
-		events = {
-		}
-		random_events = {
-		}
-		effect = {
-		}
-	}
-	
-	on_monthly_pulse = {
-		events = {
-		}
-		random_events = {
-		}
-		effect = {
-		}
-	}
-	
-	on_yearly_pulse = {
-		events = {
-		}
-		random_events = {
-		}
-		effect = {
-		}
+		custom_tooltip = com_nothing_happens
 	}
 	
 	status_desc = {
+		desc = je_com_international_situation_status
 	}
 }

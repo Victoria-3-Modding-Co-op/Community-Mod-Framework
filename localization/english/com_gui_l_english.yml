@@ -12,9 +12,16 @@
 
   com_no_sandbox_warning: "@red_cross! $SANDBOX$ is not allowed when an Objective is selected"
   
+  com_nothing_happens: "#italic Nothing happens...#!"
+  
   # COM Event Window Localization
   com_event_location: "Event in [GetPlayer.MakeScope.Var('com_event_window_location_var').GetFlagName]"
   com_debug_deer: "#header #todo Debug Information#!#!\n$TOOLTIP_DELIMITER$\n#bold Event ID: [Event.GetKey|v]\n$TOOLTIP_DELIMITER$\n#bold Trigger Description:\n[Event.GetTriggerDesc]\n@information! Click to open Event in text editor"
+  
+  # Debug Modifiers
+  modifier_com_debug_1: "Debug Modifier"
+  modifier_com_debug_2: "Debug Modifier"
+  modifier_com_debug_3: "Debug Modifier"
   
   # Test Event Localiztion
   com_debug.t: "Community GUI Test Event"

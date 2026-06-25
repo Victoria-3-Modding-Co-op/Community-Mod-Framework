@@ -3,6 +3,14 @@ concept_com_international_situation = {
 	texture = "gfx/interface/icons/alert_icons/unused/diplomatic_play.dds"
 }
 
+concept_com_situation_involvement = {
+	texture = "gfx/interface/icons/alert_icons/unused/diplomatic_play.dds"
+}
+
+concept_com_situation_interloper = {
+	texture = "gfx/interface/icons/alert_icons/unused/diplomatic_play.dds"
+}
+
 
 ####---------- International Organization Concepts ----------####
 concept_com_international_organization = {

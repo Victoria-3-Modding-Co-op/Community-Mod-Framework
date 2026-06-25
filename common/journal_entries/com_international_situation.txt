@@ -1,0 +1,79 @@
+je_com_international_situation = {
+	group = je_group_global_international_situations
+	icon = "gfx/interface/icons/generic_icons/international_organizations.dds"
+	weight = 100
+	should_be_pinned_by_default_involved = yes
+	
+	scripted_button = sb_international_organizations_test_1
+	scripted_button = sb_international_organizations_test_2
+	scripted_button = sb_international_organizations_test_3
+	
+	should_be_involved = {
+		country_rank >= rank_value:great_power
+	}
+	
+	should_show_when_not_involved = {
+		country_rank < rank_value:great_power
+	}
+	
+	immediate = {
+	
+	}
+	
+	modifiers_while_active = {
+	
+	}
+	
+	complete = {
+	}
+	
+	on_complete = {
+	}
+	
+	fail = {
+	}
+	
+	on_fail = {
+	}
+	
+	timeout =
+	
+	on_timeout = {
+	}
+	
+	invalid = {
+	}
+	
+	on_invalid = {
+	}
+	
+	on_weekly_pulse = {
+		events = {
+		}
+		random_events = {
+		}
+		effect = {
+		}
+	}
+	
+	on_monthly_pulse = {
+		events = {
+		}
+		random_events = {
+		}
+		effect = {
+		}
+	}
+	
+	on_yearly_pulse = {
+		events = {
+		}
+		random_events = {
+		}
+		effect = {
+		}
+	}
+	
+	status_desc = {
+	}
+}

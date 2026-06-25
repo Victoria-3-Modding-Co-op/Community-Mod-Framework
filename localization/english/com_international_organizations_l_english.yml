@@ -27,12 +27,6 @@
  concept_com_international_organization_headquarters_med_short: "Organization HQ"
  concept_com_international_organization_headquarters_short: "Headquarters"
  concept_com_international_organization_headquarters_shorter: "HQ"
-
- concept_com_international_situation: "International Situation"
- concept_com_international_situation_desc: "An event which involves a number of [Concept('concept_country','$concept_countries$')] who must face or resolve it"
- concept_com_international_situations: "International Situations"
- concept_com_international_situation_short: "Situation"
- concept_com_international_situations_short: "Situations"
  
  # Journal Entry Groups
  je_group_com_hidden: "Hidden"

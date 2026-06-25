@@ -1,0 +1,262 @@
+# INHERITED FROM BASE GAME
+@panel_width_minus_30 = 510
+@panel_width_minus_20 = 520
+@panel_width_minus_10 = 530 # used to be 450
+@panel_width = 540 # used to be 460
+@panel_width_half = 270 # used to be 230
+@panel_width_plus_10 = 550 # used to be 470
+@panel_width_plus_14 = 554 # used to be 474
+@panel_width_plus_14_half = 277 # used to be 237
+@panel_width_plus_20 = 560 # used to be 480
+@panel_width_plus_30 = 570 # used to be 490
+@panel_width_plus_70 = 610 # used to be 530
+
+####---------- INJECTABLE JOURNAL ENTRY WIDGETS ----------####
+flowcontainer = {
+	name = "widget_com_international_situation_factionless"
+	ignoreinvisible = yes
+	
+	flowcontainer = {
+		direction = vertical
+		spacing = 10
+		
+		com_international_situation_header = {}
+	}
+}
+
+flowcontainer = {
+	name = "widget_com_international_situation_two_faction"
+	ignoreinvisible = yes
+	
+	flowcontainer = {
+		direction = vertical
+		spacing = 10
+	}
+}
+
+flowcontainer = {
+	name = "widget_com_international_situation_multi_faction"
+	ignoreinvisible = yes
+	
+	flowcontainer = {
+		direction = vertical
+		spacing = 10
+	}
+}
+
+####---------- INTERNATIONAL SITUATION GUI TYPES ----------####
+types gbbf_journal_widget_types {
+	type com_international_situation_header = flowcontainer {
+		direction = vertical
+		spacing = 10
+		
+		com_international_situation_header = {}
+		com_international_situation_phase_information = {}
+	}
+	
+	type com_international_situation_header = widget {
+		direction = vertical
+		parentanchor = center
+		size = { 540 100 }
+		ignoreinvisible = yes
+		
+		background = {
+			alpha = 0.5
+			using = entry_bg_fancy_dark
+		}
+		
+		textbox = {
+			parentanchor = top|hcenter
+			size = { 100 40 }
+			visible = "[JournalEntry.MakeScope.Var('com_situation_header_var').IsSet]"
+			
+			text = "[JournalEntry.MakeScope.Var('com_situation_header_var').GetFlagName]"
+			align = hcenter|nobaseline
+			margin = { 20 20 }
+			using = default_list_position
+			using = fontsize_large
+		}
+		
+		button = {
+			parentanchor = center
+			using = default_button_primary_action
+			using = confirm_button_sound
+			size = { 220 30 }
+			text = "com_situation_toggle_involved"
+			onclick = "[GetVariableSystem.Toggle('com_show_involved_countries')]"
+		}
+		
+		com_international_situation_involved_countries = {}
+	}
+	
+	type com_international_situation_involved_countries = flowcontainer {
+		direction = vertical
+		parentanchor = top|hcenter
+		minimumsize = { 540 -1 }
+		using = entry_bg_fancy
+		spacing = 10
+		margin_bottom = 15
+		
+		visible = "[GetVariableSystem.Exists('com_show_involved_countries')]"
+		
+		flowcontainer = {
+			parentanchor = top|hcenter
+			direction = vertical
+			using = default_list_position
+			min_width = @panel_width_minus_30
+			max_width = @panel_width_minus_30
+			margin = { 5 10 }
+			spacing = 10
+			
+			background = {
+				using = entry_bg_simple
+			}
+			
+			textbox = {
+				parentanchor = top|hcenter
+				autoresize = yes
+				text = "com_situation_involved_countries"
+				align = center|nobaseline
+				elide = right
+				using = fontsize_large
+			}
+			
+			divider_decorative = {
+				parentanchor = top|hcenter
+			}
+			
+			dynamicgridbox = {
+				parentanchor = top|hcenter
+				datamodel = "[JournalEntry.GetInvolvedCountries]"
+				datamodel_wrap = 8
+				flipdirection = yes
+				
+				item = {
+					widget = {
+						size = { 60 40 }
+						small_flag = { }
+					}
+				}
+			}
+		}
+		
+		flowcontainer = {
+			parentanchor = top|hcenter
+			direction = vertical
+			using = default_list_position
+			min_width = @panel_width_minus_30
+			max_width = @panel_width_minus_30
+			margin = { 5 10 }
+			spacing = 10
+			
+			background = {
+				using = entry_bg_simple
+			}
+			
+			textbox = {
+				parentanchor = top|hcenter
+				autoresize = yes
+				text = "com_situation_interloper_countries"
+				align = center|nobaseline
+				elide = right
+				using = fontsize_large
+			}
+			
+			divider_decorative = {
+				parentanchor = top|hcenter
+			}
+			
+			textbox = {
+				parentanchor = top|hcenter
+				visible = "[IsDataModelEmpty(JournalEntry.MakeScope.GetList('com_situation_interloper_list'))]"
+				autoresize = yes
+				text = "eqfm_interloper_list_empty"
+				align = center|nobaseline
+				elide = right
+				using = fontsize_large
+			}
+			
+			dynamicgridbox = {
+				parentanchor = top|hcenter
+				visible = "[Not(IsDataModelEmpty(JournalEntry.MakeScope.GetList('com_situation_interloper_list')))]"
+				datamodel = "[JournalEntry.MakeScope.GetList('com_situation_interloper_list')]"
+				datamodel_wrap = 8
+				flipdirection = yes
+				
+				item = {
+					widget = {
+						datacontext = "[Scope.GetCountry]"
+						size = { 60 40 }
+						small_flag = { }
+					}
+				}
+			}
+		}
+	}
+	
+	type com_international_situation_phase_information = flowcontainer {
+		direction = vertical
+		parentanchor = center
+		minimumsize = { 540 -1 }
+		
+		visible = "[And(
+			JournalEntry.MakeScope.Var('com_situation_phase_icon_var').IsSet,
+			JournalEntry.MakeScope.Var('com_situation_phase_name_var').IsSet
+		)]"
+		
+		widget = {
+			parentanchor = center
+			size = { 540 240 }
+			
+			background = {
+				using = default_header_bg_faded
+			}
+			
+			icon = {
+				parentanchor = left|vcenter
+				size = { 270 100 }
+				texture = "gfx/interface/politics_view/bg_bronze_with_frame_horizontal_right.dds"
+			}
+			
+			icon = {
+				parentanchor = left|vcenter
+				size = { 180 210 }
+				texture = "gfx/interface/politics_view/institution_current_level.dds"
+				
+				textbox = {
+					parentanchor = center
+					size = { 100 100 }
+					fontsize = 18
+					align = vcenter|hcenter
+					text = "com_situation_phase_icon"
+				}
+			}
+			
+			textbox = {
+				parentanchor = center
+				size = { 100 100 }
+				position = { 0 0 }
+				align = hcenter|nobaseline
+				text = "com_situation_current_phase"
+				using = fontsize_large
+			}
+			textbox = {
+				parentanchor = center
+				size = { 100 100 }
+				position = { 0 0 }
+				align = vcenter|hcenter
+				text = "com_situation_current_phase_name"
+				using = fontsize_xl
+			}
+			
+			textbox = {
+				parentanchor = right|vcenter
+				size = { 100 100 }
+				position = { 0 0 }
+				align = vcenter|hcenter
+				text = "com_situation_phase_effects"
+				using = fontsize_xl
+			}
+		}
+	}
+}

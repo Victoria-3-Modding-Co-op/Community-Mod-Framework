@@ -25,7 +25,6 @@ fascist_party = {
 			triggered_desc = {
 				desc = party_austrian_nazi_party
 				trigger = {
-					exists = c:AUS
 					c:AUS ?= THIS
 					any_interest_group = {
 						party ?= {
@@ -53,7 +52,6 @@ fascist_party = {
 			triggered_desc = {
 				desc = party_greater_german_peoples_party
 				trigger = {
-					exists = c:AUS
 					c:AUS ?= THIS
 					NOT = {
 						any_interest_group = {
@@ -83,7 +81,6 @@ fascist_party = {
 			triggered_desc = {
 				desc = party_fatherland_front
 				trigger = {
-					exists = c:AUS
 					c:AUS ?= THIS
 					any_interest_group = {
 						is_in_government = yes
@@ -98,112 +95,96 @@ fascist_party = {
 			triggered_desc = {
 				desc = party_british_union_of_fascists
 				trigger = {
-					exists = c:GBR
 					c:GBR ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_mouvement_franciste
 				trigger = {
-					exists = c:FRA
 					c:FRA ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_national_front
 				trigger = {
-					exists = c:SWI
 					c:SWI ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_nasjonal_samling
 				trigger = {
-					exists = c:NOR
 					c:NOR ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_dnsap
 				trigger = {
-					exists = c:DEN
 					c:DEN ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_lapua_movement
 				trigger = {
-					exists = c:FIN
 					c:FIN ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_national_league_of_sweden
 				trigger = {
-					exists = c:SWE
 					c:SWE ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_national_union
 				trigger = {
-					exists = c:NET
 					c:NET ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_rexist_party
 				trigger = {
-					exists = c:BEL
 					c:BEL ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_volksdeutsche_bewegung
 				trigger = {
-					exists = c:LUX
 					c:LUX ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_national_socialist_movement
 				trigger = {
-					exists = c:CHL
 					c:CHL ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_ratnik_party
 				trigger = {
-					exists = c:BUL
 					c:BUL ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_ustasha
 				trigger = {
-					exists = c:CRO
 					c:CRO ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_zbor
 				trigger = {
-					exists = c:SER
 					c:SER ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_all_russian_fascist_party
 				trigger = {
-					exists = c:RUS
 					c:RUS ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_argentine_patriotic_league
 				trigger = {
-					exists = c:ARG
 					c:ARG ?= THIS
 				}
 			}
@@ -227,14 +208,12 @@ fascist_party = {
 			triggered_desc = {
 				desc = party_freedom_party
 				trigger = {
-					exists = c:CSA
 					c:CSA ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_national_union_of_greece
 				trigger = {
-					exists = c:GRE
 					c:GRE ?= THIS
 				}
 			}
@@ -770,20 +749,11 @@ fascist_party = {
 		}
 		else_if = {
 			limit = {
-				scope:number = 3
-			}
-			multiply = {
-				value = 0.05
-				desc = "from_three_prior_members"
-			}
-		}
-		else_if = {
-			limit = {
-				scope:number > 3
+				scope:number >= 3
 			}
 			multiply = {
 				value = 0.0
-				desc = "from_more_than_three_prior_members"
+				desc = "from_three_or_more_prior_members"
 			}
 		}
 		if = { # anti-orleanist

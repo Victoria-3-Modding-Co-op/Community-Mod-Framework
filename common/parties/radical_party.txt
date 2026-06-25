@@ -22,77 +22,66 @@ radical_party = {
 			triggered_desc = {
 				desc = party_radical_civic_union
 				trigger = {
-					exists = c:ARG
 					c:ARG ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_democratic_progressive_party
 				trigger = {
-					exists = c:SPA
 					c:SPA ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_free_democratic_party
 				trigger = {
-					exists = c:SWI
 					c:SWI ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_national_progressive_party
 				trigger = {
-					exists = c:FIN
 					c:FIN ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_free_thinking_democratic_league
 				trigger = {
-					exists = c:NET
 					c:NET ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_radical_liberal_party
 				trigger = {
-					exists = c:LUX
 					c:LUX ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_progressive_club
 				trigger = {
-					exists = c:AUS
 					c:AUS ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_radical_peoples_party
 				trigger = {
-					exists = c:SER
 					c:SER ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_revival_party
 				trigger = {
-					exists = c:PER
 					c:PER ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_mexican_liberal_party
 				trigger = {
-					exists = c:MEX
 					c:MEX ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_democratic_progressive_party
 				trigger = {
-					exists = c:GBR
 					c:GBR ?= THIS
 					has_law_or_variant = law_type:law_universal_suffrage
 				}
@@ -100,7 +89,6 @@ radical_party = {
 			triggered_desc = {
 				desc = party_committee_of_union_and_progress
 				trigger = {
-					exists = c:TUR
 					c:TUR ?= THIS
 					has_law = law_type:law_monarchy
 				}
@@ -108,7 +96,6 @@ radical_party = {
 			triggered_desc = {
 				desc = party_freedom_and_accord_party
 				trigger = {
-					exists = c:TUR
 					c:TUR ?= THIS
 					NOT = { has_law = law_type:law_monarchy }
 				}
@@ -116,14 +103,12 @@ radical_party = {
 			triggered_desc = {
 				desc = party_trudovik_group
 				trigger = {
-					exists = c:RUS
 					c:RUS ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_revive_china_society
 				trigger = {
-					exists = c:CHI
 					c:CHI ?= THIS
 					has_law = law_type:law_monarchy
 				}
@@ -131,7 +116,6 @@ radical_party = {
 			triggered_desc = {
 				desc = party_republican_union
 				trigger = {
-					exists = c:FRA
 					c:FRA ?= THIS
 				}
 			}
@@ -202,33 +186,22 @@ radical_party = {
 			triggered_desc = {
 				desc = party_progressive_party
 				trigger = {
-					OR = {
-						AND = {
-							exists = c:JAP
-							c:JAP ?= THIS
-						}
-						AND = {
-							exists = c:USA
-							c:USA ?= THIS
-							OR = {
-								is_usfp_active = no
-								has_global_variable = had_progressive_era #USFP
-							}
-						}
-					}
+                    c:USA ?= THIS
+                    OR = {
+                        is_usfp_active = no
+                        has_global_variable = had_progressive_era #USFP
+                    }
 				}
 			}
 			triggered_desc = {
 				desc = party_radical_liberal_party
 				trigger = {
-					exists = c:ECU
 					c:ECU ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_national_union
 				trigger = {
-					exists = c:PEU
 					c:PEU ?= THIS
 				}
 			}
@@ -297,7 +270,6 @@ radical_party = {
 			triggered_desc = {
 				desc = party_chartists
 				trigger = {
-					exists = c:GBR
 					c:GBR ?= THIS
 					NOT = { has_law_or_variant = law_type:law_universal_suffrage }
 				}
@@ -879,20 +851,11 @@ radical_party = {
 		}
 		else_if = {
 			limit = {
-				scope:number = 3
-			}
-			multiply = {
-				value = 0.05
-				desc = "from_three_prior_members"
-			}
-		}
-		else_if = {
-			limit = {
-				scope:number > 3
+				scope:number >= 3
 			}
 			multiply = {
 				value = 0.0
-				desc = "from_more_than_three_prior_members"
+				desc = "from_three_or_more_prior_members"
 			}
 		}
 	}

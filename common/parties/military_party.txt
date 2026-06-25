@@ -35,30 +35,26 @@ military_party = {
 			triggered_desc = {
 				desc = party_true_peoples_party
 				trigger = {
-					exists = c:MON
 					c:MON ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_national_party
 				trigger = {
-					exists = c:SER
 					c:SER ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_union_of_rights
 				trigger = {
-					exists = c:FRA
 					c:FRA ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_imperial_clan_party
 				trigger = {
-					exists = c:CHI
 					c:CHI ?= THIS
-					has_law_or_variant = law_type:law_monarchy
+					has_law = law_type:law_monarchy
 				}
 			}
 			# MoH
@@ -87,7 +83,6 @@ military_party = {
 			triggered_desc = {
 				desc = party_russian_assembly
 				trigger = {
-					exists = c:RUS
 					c:RUS ?= THIS
 					has_law = law_type:law_monarchy
 				}
@@ -95,7 +90,6 @@ military_party = {
 			triggered_desc = {
 				desc = party_russian_all_military_union
 				trigger = {
-					exists = c:RUS
 					c:RUS ?= THIS
 					NOT = { has_law = law_type:law_monarchy }
 				}
@@ -544,20 +538,11 @@ military_party = {
 		}
 		else_if = {
 			limit = {
-				scope:number = 3
-			}
-			multiply = {
-				value = 0.05
-				desc = "from_three_prior_members"
-			}
-		}
-		else_if = {
-			limit = {
-				scope:number > 3
+				scope:number >= 3
 			}
 			multiply = {
 				value = 0.0
-				desc = "from_more_than_three_prior_members"
+				desc = "from_three_or_more_prior_members"
 			}
 		}
 		if = { # anti-orleanist

@@ -44,21 +44,18 @@ social_democrat_party = {
 			triggered_desc = {
 				desc = party_labour_party
 				trigger = {
-					exists = c:GBR
 					c:GBR ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_psoe
 				trigger = {
-					exists = c:SPA
 					c:SPA ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_labour_party
 				trigger = {
-					exists = c:IRE
 					c:IRE ?= THIS
 				}
 			}
@@ -71,63 +68,54 @@ social_democrat_party = {
 			triggered_desc = {
 				desc = party_ftsf
 				trigger = {
-					exists = c:FRA
 					c:FRA ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_menshevik_party
 				trigger = {
-					exists = c:RUS
 					c:RUS ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_finnish_labor_party
 				trigger = {
-					exists = c:FIN
 					c:FIN ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_belgian_workers_party
 				trigger = {
-					exists = c:BEL
 					c:BEL ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_sdapo
 				trigger = {
-					exists = c:AUS
 					c:AUS ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_brsdp
 				trigger = {
-					exists = c:BUL
 					c:BUL ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_mszdp
 				trigger = {
-					exists = c:HUN
 					c:HUN ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_social_democratic_workers_party
 				trigger = {
-					exists = c:NET
 					c:NET ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_shakai_to
 				trigger = {
-					exists = c:JAP
 					c:JAP ?= THIS
 					has_law_or_variant = law_type:law_landed_voting # Also works for Taikunate
 				}
@@ -191,35 +179,30 @@ social_democrat_party = {
 			triggered_desc = {
 				desc = party_democrat_party
 				trigger = {
-					exists = c:PER
 					c:PER ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_socialist_workers_federation
 				trigger = {
-					exists = c:TUR
 					c:TUR ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_laborist_party
 				trigger = {
-					exists = c:MEX
 					c:MEX ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_confederate_socialist_party
 				trigger = {
-					exists = c:CSA
 					c:CSA ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_seke
 				trigger = {
-					exists = c:GRE
 					c:GRE ?= THIS
 				}
 			}
@@ -900,20 +883,11 @@ social_democrat_party = {
 		}
 		else_if = {
 			limit = {
-				scope:number = 3
-			}
-			multiply = {
-				value = 0.05
-				desc = "from_three_prior_members"
-			}
-		}
-		else_if = {
-			limit = {
-				scope:number > 3
+				scope:number >= 3
 			}
 			multiply = {
 				value = 0.0
-				desc = "from_more_than_three_prior_members"
+				desc = "from_three_or_more_prior_members"
 			}
 		}
 	}

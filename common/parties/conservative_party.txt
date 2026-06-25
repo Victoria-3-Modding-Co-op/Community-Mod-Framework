@@ -39,7 +39,6 @@ conservative_party = {
 			triggered_desc = {
 				desc = party_fatherland_front
 				trigger = {
-					exists = c:AUS
 					c:AUS ?= THIS
 					any_interest_group = {
 						is_in_government = yes
@@ -54,7 +53,6 @@ conservative_party = {
 			triggered_desc = {
 				desc = party_christian_social_party
 				trigger = {
-					exists = c:AUS
 					c:AUS ?= THIS
 					NAND = {
 						any_interest_group = {
@@ -71,35 +69,30 @@ conservative_party = {
 			triggered_desc = {
 				desc = party_constitutional_party
 				trigger = {
-					exists = c:PEU
 					c:PEU ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_national_autonomist
 				trigger = {
-					exists = c:ARG
 					c:ARG ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_tories
 				trigger = {
-					exists = c:GBR
 					c:GBR ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_us_democrats
 				trigger = {
-					exists = c:USA
 					c:USA ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_moderate_party
 				trigger = {
-					exists = c:SPA
 					c:SPA ?= THIS
 				}
 			}
@@ -185,42 +178,36 @@ conservative_party = {
 			triggered_desc = {
 				desc = party_lantmanna_party
 				trigger = {
-					exists = c:SWE
 					c:SWE ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_finnish_party
 				trigger = {
-					exists = c:FIN
 					c:FIN ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_catholic_party
 				trigger = {
-					exists = c:BEL
 					c:BEL ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_party_of_the_right
 				trigger = {
-					exists = c:LUX
 					c:LUX ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_peoples_party
 				trigger = {
-					exists = c:MON
 					c:MON ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_resistance_party
 				trigger = {
-					exists = c:FRA
 					c:FRA ?= THIS
 					has_variable = orleanist_restoration_var
 				}
@@ -228,7 +215,6 @@ conservative_party = {
 			triggered_desc = {
 				desc = party_party_of_order
 				trigger = {
-					exists = c:FRA
 					c:FRA ?= THIS
 					NOT = { has_variable = orleanist_restoration_var }
 				}
@@ -365,7 +351,6 @@ conservative_party = {
 			triggered_desc = {
 				desc = party_octobrist_party
 				trigger = {
-					exists = c:RUS
 					c:RUS ?= THIS
 					has_law = law_type:law_monarchy
 				}
@@ -373,7 +358,6 @@ conservative_party = {
 			triggered_desc = {
 				desc = party_constitutional_association
 				trigger = {
-					exists = c:CHI
 					c:CHI ?= THIS
 					has_law = law_type:law_monarchy
 				}
@@ -466,14 +450,12 @@ conservative_party = {
 			triggered_desc = {
 				desc = party_moderate_socialists_party
 				trigger = {
-					exists = c:PER
 					c:PER ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_napist_party
 				trigger = {
-					exists = c:GRE
 					c:GRE ?= THIS
 					has_law = law_type:law_monarchy
 					ruler = {
@@ -486,21 +468,18 @@ conservative_party = {
 			triggered_desc = {
 				desc = party_ethnikon_komma
 				trigger = {
-					exists = c:GRE
 					c:GRE ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_blanco_party
 				trigger = {
-					exists = c:URU
 					c:URU ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_colorado_party
 				trigger = {
-					exists = c:PRG
 					c:PRG ?= THIS
 				}
 			}
@@ -1257,20 +1236,11 @@ conservative_party = {
 		}
 		else_if = {
 			limit = {
-				scope:number = 3
-			}
-			multiply = {
-				value = 0.05
-				desc = "from_three_prior_members"
-			}
-		}
-		else_if = {
-			limit = {
-				scope:number > 3
+				scope:number >= 3
 			}
 			multiply = {
 				value = 0.0
-				desc = "from_more_than_three_prior_members"
+				desc = "from_three_or_more_prior_members"
 			}
 		}
 		if = { # anti-orleanist

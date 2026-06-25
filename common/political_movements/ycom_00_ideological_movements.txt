@@ -602,6 +602,21 @@
 				value = 0.15
 			}
 		}
+
+        if = {
+            limit = {
+                this.days_since_movement_defeated <= very_long_modifier_time
+            }
+            add = { # (x-y)/y - ([1, 7300]-7300)/7300
+                desc = "movement_suppressed_after_civil_war"
+                value = this.days_since_movement_defeated
+                subtract = very_long_modifier_time
+                divide = {
+                    value = very_long_modifier_time
+                }
+            }
+        }
+
 		# USFP
 		add = {
 			value = usfp_movement_anti_slavery_additional_radicalism_add                    # Desc only shows when value =/= 0
@@ -974,6 +989,7 @@ REPLACE:movement_pro_slavery = {
 							state_region = s:STATE_MARYLAND
 							state_region = s:STATE_DELAWARE
 							state_region = s:STATE_DISTRICT_OF_COLUMBIA
+							state_region = s:STATE_WEST_VIRGINIA
 						}
 					}
 					
@@ -1119,6 +1135,21 @@ REPLACE:movement_pro_slavery = {
 				value = 0.15
 			}
 		}
+
+        if = {
+            limit = {
+                this.days_since_movement_defeated <= very_long_modifier_time
+            }
+            add = { # (x-y)/y - ([1, 7300]-7300)/7300
+                desc = "movement_suppressed_after_civil_war"
+                value = this.days_since_movement_defeated
+                subtract = very_long_modifier_time
+                divide = {
+                    value = very_long_modifier_time
+                }
+            }
+        }
+
 		# USFP
 		add = {
 			value = usfp_movement_pro_slavery_additional_radicalism_add
@@ -1587,6 +1618,19 @@ REPLACE:movement_royalist_absolutist = {
 				value = 0.15
 			}
 		}
+        if = {
+            limit = {
+                this.days_since_movement_defeated <= very_long_modifier_time
+            }
+            add = { # (x-y)/y - ([1, 7300]-7300)/7300
+                desc = "movement_suppressed_after_civil_war"
+                value = this.days_since_movement_defeated
+                subtract = very_long_modifier_time
+                divide = {
+                    value = very_long_modifier_time
+                }
+            }
+        }
 	}
 }
 
@@ -1997,6 +2041,19 @@ REPLACE:movement_royalist_constitutional = {
 				value = 0.15
 			}
 		}
+        if = {
+            limit = {
+                this.days_since_movement_defeated <= very_long_modifier_time
+            }
+            add = { # (x-y)/y - ([1, 7300]-7300)/7300
+                desc = "movement_suppressed_after_civil_war"
+                value = this.days_since_movement_defeated
+                subtract = very_long_modifier_time
+                divide = {
+                    value = very_long_modifier_time
+                }
+            }
+        }
 	}
 }
 
@@ -2410,6 +2467,19 @@ REPLACE:movement_labor = { # Explicitly non-socialist labour movement
 				value = 0.15
 			}
 		}
+        if = {
+            limit = {
+                this.days_since_movement_defeated <= very_long_modifier_time
+            }
+            add = { # (x-y)/y - ([1, 7300]-7300)/7300
+                desc = "movement_suppressed_after_civil_war"
+                value = this.days_since_movement_defeated
+                subtract = very_long_modifier_time
+                divide = {
+                    value = very_long_modifier_time
+                }
+            }
+        }
 	}
 }
 
@@ -2872,6 +2942,19 @@ REPLACE:movement_socialist = {
 				value = 0.15
 			}
 		}
+        if = {
+            limit = {
+                this.days_since_movement_defeated <= very_long_modifier_time
+            }
+            add = { # (x-y)/y - ([1, 7300]-7300)/7300
+                desc = "movement_suppressed_after_civil_war"
+                value = this.days_since_movement_defeated
+                subtract = very_long_modifier_time
+                divide = {
+                    value = very_long_modifier_time
+                }
+            }
+        }
 	}
 }
 
@@ -3319,6 +3402,19 @@ REPLACE:movement_anarchist = {
 				max = 0.25
 			}
 		}
+        if = {
+            limit = {
+                this.days_since_movement_defeated <= very_long_modifier_time
+            }
+            add = { # (x-y)/y - ([1, 7300]-7300)/7300
+                desc = "movement_suppressed_after_civil_war"
+                value = this.days_since_movement_defeated
+                subtract = very_long_modifier_time
+                divide = {
+                    value = very_long_modifier_time
+                }
+            }
+        }
 	}
 }
 
@@ -3730,6 +3826,19 @@ REPLACE:movement_communist = {
 				max = 0.25
 			}
 		}
+        if = {
+            limit = {
+                this.days_since_movement_defeated <= very_long_modifier_time
+            }
+            add = { # (x-y)/y - ([1, 7300]-7300)/7300
+                desc = "movement_suppressed_after_civil_war"
+                value = this.days_since_movement_defeated
+                subtract = very_long_modifier_time
+                divide = {
+                    value = very_long_modifier_time
+                }
+            }
+        }
 	}
 }
 
@@ -4280,6 +4389,19 @@ REPLACE:movement_fascist = {
 				max = 0.5
 			}
 		}
+        if = {
+            limit = {
+                this.days_since_movement_defeated <= very_long_modifier_time
+            }
+            add = { # (x-y)/y - ([1, 7300]-7300)/7300
+                desc = "movement_suppressed_after_civil_war"
+                value = this.days_since_movement_defeated
+                subtract = very_long_modifier_time
+                divide = {
+                    value = very_long_modifier_time
+                }
+            }
+        }
 	}
 }
 
@@ -4696,6 +4818,19 @@ REPLACE:movement_corporatist = {
 				value = 0.15
 			}
 		}
+        if = {
+            limit = {
+                this.days_since_movement_defeated <= very_long_modifier_time
+            }
+            add = { # (x-y)/y - ([1, 7300]-7300)/7300
+                desc = "movement_suppressed_after_civil_war"
+                value = this.days_since_movement_defeated
+                subtract = very_long_modifier_time
+                divide = {
+                    value = very_long_modifier_time
+                }
+            }
+        }
 	}
 }
 
@@ -5158,6 +5293,19 @@ REPLACE:movement_liberal = {
 				value = 0.15
 			}
 		}
+        if = {
+            limit = {
+                this.days_since_movement_defeated <= very_long_modifier_time
+            }
+            add = { # (x-y)/y - ([1, 7300]-7300)/7300
+                desc = "movement_suppressed_after_civil_war"
+                value = this.days_since_movement_defeated
+                subtract = very_long_modifier_time
+                divide = {
+                    value = very_long_modifier_time
+                }
+            }
+        }
 	}
 }
 
@@ -5655,6 +5803,19 @@ REPLACE:movement_radical = {
 				value = 0.15
 			}
 		}
+        if = {
+            limit = {
+                this.days_since_movement_defeated <= very_long_modifier_time
+            }
+            add = { # (x-y)/y - ([1, 7300]-7300)/7300
+                desc = "movement_suppressed_after_civil_war"
+                value = this.days_since_movement_defeated
+                subtract = very_long_modifier_time
+                divide = {
+                    value = very_long_modifier_time
+                }
+            }
+        }
 	}
 }
 
@@ -5926,6 +6087,40 @@ REPLACE:movement_nihilist = {
 			}
 		}
 	}
+    additional_radicalism_factors = {
+        if = {
+            limit = {
+                owner = {
+                    any_neighbouring_state = {
+                        owner = {
+                            NOT = { THIS = ROOT.owner }
+                            any_political_movement = {
+                                is_political_movement_type = movement_nihilist
+                                is_insurrectionary = yes
+                            }
+                        }
+                    }
+                }
+            }
+            add = {
+                desc = "NEIGHBOURING_COUNTRY_WITH_REVOLUTION"
+                value = 0.15
+            }
+        }
+        if = {
+            limit = {
+                this.days_since_movement_defeated <= very_long_modifier_time
+            }
+            add = { # (x-y)/y - ([1, 7300]-7300)/7300
+                desc = "movement_suppressed_after_civil_war"
+                value = this.days_since_movement_defeated
+                subtract = very_long_modifier_time
+                divide = {
+                    value = very_long_modifier_time
+                }
+            }
+        }
+    }
 }
 
 REPLACE:movement_positivist = {
@@ -6348,7 +6543,7 @@ REPLACE:movement_positivist = {
 						owner = {
 							NOT = { THIS = ROOT.owner }
 							any_political_movement = {
-								is_political_movement_type = movement_nihilist
+								is_political_movement_type = movement_positivist
 								is_insurrectionary = yes
 							}
 						}
@@ -6360,6 +6555,19 @@ REPLACE:movement_positivist = {
 				value = 0.15
 			}
 		}
+        if = {
+            limit = {
+                this.days_since_movement_defeated <= very_long_modifier_time
+            }
+            add = { # (x-y)/y - ([1, 7300]-7300)/7300
+                desc = "movement_suppressed_after_civil_war"
+                value = this.days_since_movement_defeated
+                subtract = very_long_modifier_time
+                divide = {
+                    value = very_long_modifier_time
+                }
+            }
+        }
 	}
 }
 
@@ -6693,6 +6901,19 @@ REPLACE:movement_land_reform = {
 				value = 0.15
 			}
 		}
+        if = {
+            limit = {
+                this.days_since_movement_defeated <= very_long_modifier_time
+            }
+            add = { # (x-y)/y - ([1, 7300]-7300)/7300
+                desc = "movement_suppressed_after_civil_war"
+                value = this.days_since_movement_defeated
+                subtract = very_long_modifier_time
+                divide = {
+                    value = very_long_modifier_time
+                }
+            }
+        }
 	}
 }
 
@@ -6973,6 +7194,19 @@ REPLACE:movement_feminist = {
 				value = 0.15
 			}
 		}
+        if = {
+            limit = {
+                this.days_since_movement_defeated <= very_long_modifier_time
+            }
+            add = { # (x-y)/y - ([1, 7300]-7300)/7300
+                desc = "movement_suppressed_after_civil_war"
+                value = this.days_since_movement_defeated
+                subtract = very_long_modifier_time
+                divide = {
+                    value = very_long_modifier_time
+                }
+            }
+        }
 	}
 }
 
@@ -7380,6 +7614,19 @@ REPLACE:movement_reactionary = {
 				value = 0.15
 			}
 		}
+        if = {
+            limit = {
+                this.days_since_movement_defeated <= very_long_modifier_time
+            }
+            add = { # (x-y)/y - ([1, 7300]-7300)/7300
+                desc = "movement_suppressed_after_civil_war"
+                value = this.days_since_movement_defeated
+                subtract = very_long_modifier_time
+                divide = {
+                    value = very_long_modifier_time
+                }
+            }
+        }
 	}
 }
 
@@ -7859,5 +8106,18 @@ REPLACE:movement_modernizer = { # This movement loves you and wants you to succe
 				value = 0.15
 			}
 		}
+        if = {
+            limit = {
+                this.days_since_movement_defeated <= very_long_modifier_time
+            }
+            add = { # (x-y)/y - ([1, 7300]-7300)/7300
+                desc = "movement_suppressed_after_civil_war"
+                value = this.days_since_movement_defeated
+                subtract = very_long_modifier_time
+                divide = {
+                    value = very_long_modifier_time
+                }
+            }
+        }
 	}
 }

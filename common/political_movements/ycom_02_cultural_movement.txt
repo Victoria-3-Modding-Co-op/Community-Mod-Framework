@@ -447,6 +447,37 @@ REPLACE:movement_cultural_majority = {
 		
 		if = {
 			limit = {
+				owner ?= {
+					has_technology_researched = nationalism
+					any_scope_homeland_state = {
+						NOT = {
+							owner = {
+								country_has_primary_culture = root.culture
+							}
+						}
+					}
+				}
+			}
+			add = {
+				owner ?= {
+					every_scope_homeland_state = {
+						limit = {
+							NOT = {
+								owner = {
+									country_has_primary_culture = root.culture
+								}
+							}
+						}
+						add = 0.025
+					}
+				}
+				max = 0.25
+				desc = "MOVEMENT_RADICALISM_UNOWNED_HOMELAND_STATES_FACTOR"
+			}
+		}
+
+		if = {
+			limit = {
 				owner = {
 					any_neighbouring_state = {
 						owner = {
@@ -462,6 +493,20 @@ REPLACE:movement_cultural_majority = {
 			add = {
 				desc = "NEIGHBOURING_COUNTRY_WITH_CULTURE_REVOLUTION"
 				value = 0.15
+			}
+		}
+
+		if = {
+			limit = {
+				this.days_since_movement_defeated <= very_long_modifier_time
+			}
+			add = { # (x-y)/y - ([1, 7300]-7300)/7300
+				desc = "movement_suppressed_after_civil_war"
+				value = this.days_since_movement_defeated
+				subtract = very_long_modifier_time
+				divide = {
+					value = very_long_modifier_time
+				}
 			}
 		}
 	}
@@ -617,22 +662,6 @@ REPLACE:movement_cultural_minority = {
 		}
 		else = {
 			set_core_ideology = ideology_pluralist_movement_4
-		}
-		if = {
-			limit = {
-				owner = {
-					has_variable_list = failed_uprisings_culture_list
-					is_target_in_variable_list = { name = failed_uprisings_culture_list target = root.culture }
-				}
-			}
-			owner = {
-				remove_list_variable = { name = failed_uprisings_culture_list target = root.culture }
-			}
-			add_modifier = {
-				name = movement_suppressed_after_civil_war_copy
-				days = very_long_modifier_time
-				is_decaying = yes
-			}
 		}
 	}
 	
@@ -1458,6 +1487,20 @@ REPLACE:movement_cultural_minority = {
 				max = 0.25
 			}
 		}
+
+        if = {
+            limit = {
+                this.days_since_movement_defeated <= very_long_modifier_time
+            }
+            add = { # (x-y)/y - ([1, 7300]-7300)/7300
+                desc = "movement_suppressed_after_civil_war"
+                value = this.days_since_movement_defeated
+                subtract = very_long_modifier_time
+                divide = {
+                    value = very_long_modifier_time
+                }
+            }
+        }
 		
 		# Grey_PLP
 		add = {
@@ -1855,6 +1898,19 @@ REPLACE:movement_minority_rights = {
 			add = {
 				value = 0.15
 				desc = "law_racial_segregation"
+			}
+		}
+		if = {
+			limit = {
+				this.days_since_movement_defeated <= very_long_modifier_time
+			}
+			add = { # (x-y)/y - ([1, 7300]-7300)/7300
+				desc = "movement_suppressed_after_civil_war"
+				value = this.days_since_movement_defeated
+				subtract = very_long_modifier_time
+				divide = {
+					value = very_long_modifier_time
+				}
 			}
 		}
 	}

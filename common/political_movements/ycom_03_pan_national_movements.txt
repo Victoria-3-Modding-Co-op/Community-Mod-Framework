@@ -391,6 +391,19 @@
 				value = 0.15
 			}
 		}
+		if = {
+			limit = {
+				this.days_since_movement_defeated <= very_long_modifier_time
+			}
+			add = { # (x-y)/y - ([1, 7300]-7300)/7300
+				desc = "movement_suppressed_after_civil_war"
+				value = this.days_since_movement_defeated
+				subtract = very_long_modifier_time
+				divide = {
+					value = very_long_modifier_time
+				}
+			}
+		}
 	}
 }
 
@@ -409,6 +422,7 @@ REPLACE:movement_german_national = {
 	can_cause_obstinance = yes
 	
 	creation_trigger = {
+		is_in_geographic_region = geographic_region_german_confederation
 		OR = {
 			country_has_primary_culture = cu:north_german
 			country_has_primary_culture = cu:south_german
@@ -920,6 +934,19 @@ REPLACE:movement_german_national = {
 			value = owner.average_german_fervor
 			divide = 400
 		}
+		if = {
+			limit = {
+				this.days_since_movement_defeated <= very_long_modifier_time
+			}
+			add = { # (x-y)/y - ([1, 7300]-7300)/7300
+				desc = "movement_suppressed_after_civil_war"
+				value = this.days_since_movement_defeated
+				subtract = very_long_modifier_time
+				divide = {
+					value = very_long_modifier_time
+				}
+			}
+		}
 	}
 }
 
@@ -938,6 +965,7 @@ REPLACE:movement_italian_national = {
 	can_cause_obstinance = yes
 	
 	creation_trigger = {
+		is_in_geographic_region = geographic_region_italy_old
 		OR = {
 			country_has_primary_culture = cu:north_italian
 			country_has_primary_culture = cu:south_italian
@@ -1429,6 +1457,19 @@ REPLACE:movement_italian_national = {
 			value = owner.average_italian_fervor
 			divide = 400
 		}
+		if = {
+			limit = {
+				this.days_since_movement_defeated <= very_long_modifier_time
+			}
+			add = { # (x-y)/y - ([1, 7300]-7300)/7300
+				desc = "movement_suppressed_after_civil_war"
+				value = this.days_since_movement_defeated
+				subtract = very_long_modifier_time
+				divide = {
+					value = very_long_modifier_time
+				}
+			}
+		}
 	}
 }
 
@@ -1447,6 +1488,7 @@ REPLACE:movement_yugoslav_national = {
 	can_cause_obstinance = yes
 	
 	creation_trigger = {
+		is_in_geographic_region = geographic_region_balkans
 		OR = {
 			country_has_primary_culture = cu:croat
 			country_has_primary_culture = cu:serb
@@ -1955,6 +1997,19 @@ REPLACE:movement_yugoslav_national = {
 			value = owner.average_south_slavic_fervor
 			divide = 400
 		}
+		if = {
+			limit = {
+				this.days_since_movement_defeated <= very_long_modifier_time
+			}
+			add = { # (x-y)/y - ([1, 7300]-7300)/7300
+				desc = "movement_suppressed_after_civil_war"
+				value = this.days_since_movement_defeated
+				subtract = very_long_modifier_time
+				divide = {
+					value = very_long_modifier_time
+				}
+			}
+		}
 	}
 }
 
@@ -2334,5 +2389,18 @@ REPLACE:movement_dominican_national = {
 	}
 	
 	additional_radicalism_factors = {
+		if = {
+			limit = {
+				this.days_since_movement_defeated <= very_long_modifier_time
+			}
+			add = { # (x-y)/y - ([1, 7300]-7300)/7300
+				desc = "movement_suppressed_after_civil_war"
+				value = this.days_since_movement_defeated
+				subtract = very_long_modifier_time
+				divide = {
+					value = very_long_modifier_time
+				}
+			}
+		}
 	}
 }

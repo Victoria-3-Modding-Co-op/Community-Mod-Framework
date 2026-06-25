@@ -8,21 +8,18 @@ liberal_party = {
 			triggered_desc = {
 				desc = party_civilista_party
 				trigger = {
-					exists = c:PEU
 					c:PEU ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_national_civic_union
 				trigger = {
-					exists = c:ARG
 					c:ARG ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_whigs
 				trigger = {
-					exists = c:GBR
 					c:GBR ?= THIS
 					NOT = { has_law_or_variant = law_type:law_free_trade }
 				}
@@ -39,7 +36,6 @@ liberal_party = {
 				desc = party_republicans
 				trigger = {
 					is_usfp_active = no
-					exists = c:USA
 					c:USA ?= THIS
 					has_global_variable = american_civil_war
 				}
@@ -67,14 +63,12 @@ liberal_party = {
 			triggered_desc = {
 				desc = party_liberal_democrats
 				trigger = {
-					exists = c:SWI
 					c:SWI ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_movement_party
 				trigger = {
-					exists = c:FRA
 					c:FRA ?= THIS
 					has_law = law_type:law_monarchy
 					ruler = {
@@ -85,7 +79,6 @@ liberal_party = {
 			triggered_desc = {
 				desc = party_republican_party
 				trigger = {
-					exists = c:FRA
 					c:FRA ?= THIS
 				}
 			}
@@ -125,93 +118,80 @@ liberal_party = {
 			triggered_desc = {
 				desc = party_kadets_party
 				trigger = {
-					exists = c:RUS
 					c:RUS ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_opposition_party
 				trigger = {
-					exists = c:HUN
 					c:HUN ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_peoples_party
 				trigger = {
-					exists = c:SWE
 					c:SWE ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_liberal_union
 				trigger = {
-					exists = c:NET
 					c:NET ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_liberal_league
 				trigger = {
-					exists = c:LUX
 					c:LUX ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_young_finnish_party
 				trigger = {
-					exists = c:FIN
 					c:FIN ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_constitutional_party
 				trigger = {
-					exists = c:AUS
 					c:AUS ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_peoples_party
 				trigger = {
-					exists = c:CRO
 					c:CRO ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_society_for_progress
 				trigger = {
-					exists = c:PER
 					c:PER ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_blue_party
 				trigger = {
-					exists = c:PRG
 					c:PRG ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_great_liberal_party
 				trigger = {
-					exists = c:VNZ
 					c:VNZ ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_colorado_party
 				trigger = {
-					exists = c:URU
 					c:URU ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_empire_reform_association
 				trigger = {
-					exists = c:CHI
 					c:CHI ?= THIS
-					has_law_or_variant = law_type:law_monarchy
+					has_law = law_type:law_monarchy
 				}
 			}
 			triggered_desc = {
@@ -255,7 +235,6 @@ liberal_party = {
 			triggered_desc = {
 				desc = party_freedom_and_accord_party
 				trigger = {
-					exists = c:TUR
 					c:TUR ?= THIS
 					has_law = law_type:law_monarchy
 				}
@@ -263,22 +242,13 @@ liberal_party = {
 			triggered_desc = {
 				desc = party_progressive_republican_party
 				trigger = {
-					exists = c:TUR
 					c:TUR ?= THIS
 					NOT = { has_law = law_type:law_monarchy }
 				}
 			}
 			triggered_desc = {
-				desc = party_constitutional_reform_party
-				trigger = {
-					exists = c:JAP
-					c:JAP ?= THIS
-				}
-			}
-			triggered_desc = {
 				desc = party_constitutional_party
 				trigger = {
-					exists = c:GRE
 					c:GRE ?= THIS
 					has_law = law_type:law_monarchy
 					ruler = {
@@ -291,7 +261,6 @@ liberal_party = {
 			triggered_desc = {
 				desc = party_neoteristikon_komma
 				trigger = {
-					exists = c:GRE
 					c:GRE ?= THIS
 				}
 			}
@@ -1426,20 +1395,11 @@ liberal_party = {
 		}
 		else_if = {
 			limit = {
-				scope:number = 3
-			}
-			multiply = {
-				value = 0.05
-				desc = "from_three_prior_members"
-			}
-		}
-		else_if = {
-			limit = {
-				scope:number > 3
+				scope:number >= 3
 			}
 			multiply = {
 				value = 0.0
-				desc = "from_more_than_three_prior_members"
+				desc = "from_three_or_more_prior_members"
 			}
 		}
 

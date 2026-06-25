@@ -29,7 +29,6 @@ religious_party = {
 			triggered_desc = {
 				desc = party_fatherland_front
 				trigger = {
-					exists = c:AUS
 					c:AUS ?= THIS
 					any_interest_group = {
 						is_in_government = yes
@@ -44,7 +43,6 @@ religious_party = {
 			triggered_desc = {
 				desc = party_catholic_peoples_party
 				trigger = {
-					exists = c:AUS
 					c:AUS ?= THIS
 					NAND = {
 						any_interest_group = {
@@ -81,35 +79,30 @@ religious_party = {
 			triggered_desc = {
 				desc = party_catholic_right
 				trigger = {
-					exists = c:SWI
 					c:SWI ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_anti_revolutionary_party
 				trigger = {
-					exists = c:NET
 					c:NET ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_learned_council
 				trigger = {
-					exists = c:PER
 					c:PER ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_traditionalist_communion
 				trigger = {
-					exists = c:SPA
 					c:SPA ?= THIS
 				}
 			}
 			triggered_desc = {
 				desc = party_christian_peoples_party
 				trigger = {
-					exists = c:BEL
 					c:BEL ?= THIS
 				}
 			}
@@ -146,7 +139,6 @@ religious_party = {
 			triggered_desc = {
 				desc = party_union_of_the_russian_people
 				trigger = {
-					exists = c:RUS
 					c:RUS ?= THIS
 				}
 			}
@@ -566,20 +558,11 @@ religious_party = {
 		}
 		else_if = {
 			limit = {
-				scope:number = 3
-			}
-			multiply = {
-				value = 0.05
-				desc = "from_three_prior_members"
-			}
-		}
-		else_if = {
-			limit = {
-				scope:number > 3
+				scope:number >= 3
 			}
 			multiply = {
 				value = 0.0
-				desc = "from_more_than_three_prior_members"
+				desc = "from_three_or_more_prior_members"
 			}
 		}
 		if = { # anti-orleanist

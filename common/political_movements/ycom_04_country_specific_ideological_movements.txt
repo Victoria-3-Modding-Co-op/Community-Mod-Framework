@@ -1,6 +1,8 @@
 ﻿REPLACE:movement_utilitarian = {
 	category = movement_category_ideological
 	
+	active_law_radicalism_multiplier = 0.5
+
 	ideology = ideology_utilitarian_movement
 	character_ideologies = {
 		ideology_utilitarian_leader
@@ -320,7 +322,7 @@
 			}
 			else = {
 				add = {
-					value = 0.1
+					value = 0.05
 					desc = "NO_INSTITUTION_schools"
 				}
 			}
@@ -342,6 +344,19 @@
 			add = {
 				desc = "NEIGHBOURING_COUNTRY_WITH_REVOLUTION"
 				value = 0.15
+			}
+		}
+		if = {
+			limit = {
+				this.days_since_movement_defeated <= very_long_modifier_time
+			}
+			add = { # (x-y)/y - ([1, 7300]-7300)/7300
+				desc = "movement_suppressed_after_civil_war"
+				value = this.days_since_movement_defeated
+				subtract = very_long_modifier_time
+				divide = {
+					value = very_long_modifier_time
+				}
 			}
 		}
 	}
@@ -666,6 +681,19 @@ REPLACE:movement_orleanist = {
 			add = {
 				desc = "NEIGHBOURING_COUNTRY_WITH_REVOLUTION"
 				value = 0.15
+			}
+		}
+		if = {
+			limit = {
+				this.days_since_movement_defeated <= very_long_modifier_time
+			}
+			add = { # (x-y)/y - ([1, 7300]-7300)/7300
+				desc = "movement_suppressed_after_civil_war"
+				value = this.days_since_movement_defeated
+				subtract = very_long_modifier_time
+				divide = {
+					value = very_long_modifier_time
+				}
 			}
 		}
 	}
@@ -1006,6 +1034,19 @@ REPLACE:movement_bonapartist = {
 				value = 0.15
 			}
 		}
+		if = {
+			limit = {
+				this.days_since_movement_defeated <= very_long_modifier_time
+			}
+			add = { # (x-y)/y - ([1, 7300]-7300)/7300
+				desc = "movement_suppressed_after_civil_war"
+				value = this.days_since_movement_defeated
+				subtract = very_long_modifier_time
+				divide = {
+					value = very_long_modifier_time
+				}
+			}
+		}
 	}
 }
 
@@ -1268,8 +1309,9 @@ REPLACE:movement_legitimist = {
 				owner ?= {
 					has_law = law_type:law_monarchy
 					ruler ?= {
-						NOT = {
+						NOR = {
 							has_ideology = ideology:ideology_legitimist
+							has_ideology = ideology:ideology_carlist
 						}
 					}
 				}
@@ -1314,6 +1356,19 @@ REPLACE:movement_legitimist = {
 				value = 0.15
 			}
 		}
+		if = {
+			limit = {
+				this.days_since_movement_defeated <= very_long_modifier_time
+			}
+			add = { # (x-y)/y - ([1, 7300]-7300)/7300
+				desc = "movement_suppressed_after_civil_war"
+				value = this.days_since_movement_defeated
+				subtract = very_long_modifier_time
+				divide = {
+					value = very_long_modifier_time
+				}
+			}
+		}
 	}
 }
 
@@ -1326,6 +1381,7 @@ REPLACE:movement_carlist = {
 	}
 	
 	creation_trigger = {
+		is_in_geographic_region = geographic_region_iberia_old
 		OR = {
 			country_has_primary_culture = cu:spanish
 			country_has_primary_culture = cu:catalan
@@ -1333,9 +1389,6 @@ REPLACE:movement_carlist = {
 		}
 		NOT = {
 			has_variable = monarchy_stamped_out_var
-		}
-		capital = {
-			is_in_geographic_region = geographic_region_iberia_old
 		}
 	}
 	creation_weight = {
@@ -1614,6 +1667,19 @@ REPLACE:movement_carlist = {
 				desc = "INSURRECTIONARY_CARLISTS"
 			}
 		}
+		if = {
+			limit = {
+				this.days_since_movement_defeated <= very_long_modifier_time
+			}
+			add = { # (x-y)/y - ([1, 7300]-7300)/7300
+				desc = "movement_suppressed_after_civil_war"
+				value = this.days_since_movement_defeated
+				subtract = very_long_modifier_time
+				divide = {
+					value = very_long_modifier_time
+				}
+			}
+		}
 	}
 }
 
@@ -1845,6 +1911,19 @@ REPLACE:movement_miguelist = {
 				value = "owner.relations(c:PAP)"
 				divide = 100
 				multiply = -0.25
+			}
+		}
+		if = {
+			limit = {
+				this.days_since_movement_defeated <= very_long_modifier_time
+			}
+			add = { # (x-y)/y - ([1, 7300]-7300)/7300
+				desc = "movement_suppressed_after_civil_war"
+				value = this.days_since_movement_defeated
+				subtract = very_long_modifier_time
+				divide = {
+					value = very_long_modifier_time
+				}
 			}
 		}
 	}
@@ -2378,6 +2457,19 @@ REPLACE:movement_meiji_restorationist = {
 				}
 			}
 		}
+		if = {
+			limit = {
+				this.days_since_movement_defeated <= very_long_modifier_time
+			}
+			add = { # (x-y)/y - ([1, 7300]-7300)/7300
+				desc = "movement_suppressed_after_civil_war"
+				value = this.days_since_movement_defeated
+				subtract = very_long_modifier_time
+				divide = {
+					value = very_long_modifier_time
+				}
+			}
+		}
 	}
 }
 
@@ -2708,6 +2800,19 @@ REPLACE:movement_tokugawa_loyalist = {
 				add = {
 					desc = "tokugawa_not_in_government_tt"
 					value = 0.25
+				}
+			}
+		}
+		if = {
+			limit = {
+				this.days_since_movement_defeated <= very_long_modifier_time
+			}
+			add = { # (x-y)/y - ([1, 7300]-7300)/7300
+				desc = "movement_suppressed_after_civil_war"
+				value = this.days_since_movement_defeated
+				subtract = very_long_modifier_time
+				divide = {
+					value = very_long_modifier_time
 				}
 			}
 		}

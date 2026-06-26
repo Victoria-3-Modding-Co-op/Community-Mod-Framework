@@ -75,3 +75,9 @@ macro = {
     definition = "ComJournalVar(Variable)"
     replace_with = "JournalEntry.MakeScope.Var(Variable)"
 }
+
+macro = {
+    description = "Get enactment value in journal scope"
+    definition = "ComEnactmentValue(Variable)"
+    replace_with = "JournalEntry.MakeScope.GetVariableFromVariableMap('com_enactment_widget', MakeScopeFlag(Variable))"
+}

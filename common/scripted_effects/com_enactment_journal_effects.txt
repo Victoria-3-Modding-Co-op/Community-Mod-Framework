@@ -1,0 +1,112 @@
+﻿com_setup_enactment_journal = {
+	com_set_enactment_journal_title = {
+		title = $title$
+	}
+	com_set_enactment_journal_stall_chance = {
+		value = $stall_chance$
+	}
+	com_set_enactment_journal_success_chance = {
+		value = $success_chance$
+	}
+	com_set_enactment_journal_phase_progress = {
+		value = $phase_progress$
+	}
+	com_set_enactment_journal_current_phase = {
+		phase = $current_phase$
+	}
+	com_set_enactment_journal_element = {
+		element = phase_one
+		value = flag:$phase_one$
+	}
+	com_set_enactment_journal_element = {
+		element = phase_two
+		value = flag:$phase_two$
+	}
+	com_set_enactment_journal_element = {
+		element = phase_three
+		value = flag:$phase_three$
+	}
+	fix_variable_error = { variable = $phase_one$ }
+	fix_variable_error = { variable = $phase_two$ }
+	fix_variable_error = { variable = $phase_three$ }
+}
+
+com_set_enactment_journal_current_phase = {
+	com_set_enactment_journal_element = {
+		element = current_phase
+		value = flag:$phase$
+	}
+	fix_variable_error = { variable = $phase$ }
+}
+
+com_set_enactment_journal_title = {
+	com_set_enactment_journal_element = {
+		element = title
+		value = flag:$title$
+	}
+	fix_variable_error = { variable = $title$ }
+}
+
+com_set_enactment_journal_icon = {
+	com_set_enactment_journal_element = {
+		element = icon
+		value = flag:$icon$
+	}
+	fix_variable_error = { variable = $icon$ }
+}
+
+com_set_enactment_journal_progress_tooltip = {
+	com_set_enactment_journal_element = {
+		element = progress_tooltip
+		value = flag:$tooltip$
+	}
+	fix_variable_error = { variable = $tooltip$ }
+}
+
+com_set_enactment_journal_success_chance = {
+	com_set_enactment_journal_element = {
+		element = success_chance
+		value = $value$
+	}
+}
+
+com_set_enactment_journal_stall_chance = {
+	com_set_enactment_journal_element = {
+		element = stall_chance
+		value = $value$
+	}
+}
+
+com_set_enactment_journal_phase_progress = {
+	com_set_enactment_journal_element = {
+		element = phase_progress
+		value = $value$
+	}
+}
+
+com_set_enactment_journal_progressing = {
+	com_set_enactment_journal_element = {
+		element = progressing
+		value = yes
+	}
+}
+
+com_set_enactment_journal_stalled = {
+	remove_from_variable_map = {
+		name = com_enactment_widget
+		key = flag:progressing
+	}
+}
+
+com_set_enactment_journal_element = {
+	remove_from_variable_map = {
+		name = com_enactment_widget
+		key = flag:$element$
+	}
+	add_to_variable_map = {
+		name = com_enactment_widget
+		key = flag:$element$
+		value = $value$
+	}
+	fix_variable_error = { variable = $element$ }
+}

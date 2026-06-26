@@ -43,6 +43,7 @@ com_debug.1 = {
 		fix_variable_error = { variable = com_hide_involved_countries }
 		fix_variable_error = { variable = com_hide_complete_triggers }
 		fix_variable_error = { variable = com_hide_fail_triggers }
+		fix_variable_error = { variable = com_enactment_widget }
 
 		# CMF International Organizations Framework
 		fix_variable_error = { variable = com_international_organizations_sgui }

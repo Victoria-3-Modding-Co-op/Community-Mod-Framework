@@ -3,6 +3,7 @@ com_journal_entry_dlc_icon = {}
 com_journal_entry_header = {} # custom_widget_container_je_icon
 com_journal_entry_progress_bars = {} # com_custom_widget_container_scripted_progress_bars
 com_journal_entry_building = {}
+com_journal_entry_enactment = {}
 
 # Characters
 com_journal_entry_characters = {}

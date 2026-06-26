@@ -1,0 +1,332 @@
+# INHERITED FROM BASE GAME
+@panel_width_minus_30 = 510
+@panel_width_minus_20 = 520
+@panel_width_minus_10 = 530			# used to be 450
+@panel_width = 540  				# used to be 460
+@panel_width_half = 270				# used to be 230
+@panel_width_plus_10 = 550  		# used to be 470
+@panel_width_plus_14 = 554			# used to be 474
+@panel_width_plus_14_half = 277		# used to be 237
+@panel_width_plus_20 = 560			# used to be 480
+@panel_width_plus_30 = 570			# used to be 490
+@panel_width_plus_70 = 610			# used to be 530
+
+#### WIDGETS
+types com_inject_enactment {
+	type com_journal_entry_enactment = flowcontainer {
+		name = "com_journal_entry_enactment"
+		parentanchor = hcenter
+		direction = vertical
+		visible = "[ComEnactmentValue('title').IsSet]"
+
+		flowcontainer = {
+			margin = { 0 15 }
+			min_width = @panel_width_minus_30
+			max_width = @panel_width_minus_30
+			parentanchor = hcenter
+
+			background = {
+				alpha = 0.5
+				using = paper_bg
+			}
+
+			widget = {
+				size = { @[panel_width_minus_30 - 30] 100 }
+				parentanchor = hcenter
+
+				vbox = {
+					layoutpolicy_horizontal = expanding
+
+					hbox = {
+						minimumsize = { 0 60 }
+						layoutpolicy_horizontal = expanding
+
+						icon = {
+							size = { 54 54 }
+							texture = "gfx/interface/backgrounds/round_button_bg.dds"
+
+							round_progress_default = {
+								visible = "[ComEnactmentValue('progressing').IsSet]"
+								size = { 80% 80% }
+								parentanchor = center
+								value = "[FixedPointToFloat(ComEnactmentValue('phase_progress').GetValue)]"
+							}
+
+							round_progress_bad = {
+								visible = "[Not(ComEnactmentValue('progressing').IsSet)]"
+								size = { 80% 80% }
+								parentanchor = center
+								value = "[FixedPointToFloat(ComEnactmentValue('phase_progress').GetValue)]"
+							}
+
+							widget = {
+								visible = "[ComEnactmentValue('icon').IsSet]"
+								datacontext = "[GetIdeology(ComEnactmentValue('icon').GetFlagName)]"
+								size = { 38 38 }
+								parentanchor = center
+
+								icon = {
+									size = { 90% 90% }
+									parentanchor = center
+									texture = "[Ideology.GetTexture]"
+								}
+							}
+
+							paused_icon_bad = {
+								visible = "[Not(ComEnactmentValue('progressing').IsSet)]"
+								parentanchor = center
+							}
+
+							widget = {
+								visible = "[ComEnactmentValue('progress_tooltip').IsSet]"
+								parentanchor = center
+								size = { 100% 100% }
+								tooltip = "[ComEnactmentValue('progress_tooltip').GetFlagName]"
+							}
+						}
+
+						vbox = {
+							spacing = 4
+							layoutpolicy_horizontal = expanding
+							min_width = 200
+
+							textbox = {
+								layoutpolicy_horizontal = expanding
+								size = { 0 20 }
+								align = center
+								elide = right
+								fontsize_min = 14
+								text = "[ComEnactmentValue('title').GetFlagName]"
+
+								background = {
+									using = default_header_bg
+									alpha = 1
+									margin_bottom = 5
+									margin_top = 5
+
+									modify_texture = {
+										texture = "gfx/interface/masks/fade_horizontal_center.dds"
+										blend_mode = alphamultiply
+									}
+								}
+							}
+
+							expand = {}
+
+							hbox = {
+								layoutpolicy_horizontal = expanding
+								spacing = 30
+
+								textbox = {
+									layoutpolicy_horizontal = expanding
+									size = { 0 20 }
+									align = right|nobaseline
+									elide = right
+									fontsize_min = 14
+									raw_text = "Success: [ComEnactmentValue('success_chance').GetValue|%0v]"
+								}
+
+								textbox = {
+									layoutpolicy_horizontal = expanding
+									size = { 0 20 }
+									align = left|nobaseline
+									elide = right
+									fontsize_min = 14
+									raw_text = "Stall: [ComEnactmentValue('stall_chance').GetValue|%0v]"
+								}
+							}
+						}
+					}
+
+					hbox = {
+						minimumsize = { 0 40 }
+						layoutpolicy_horizontal = preferred
+						spacing = 1
+						margin_bottom = 5
+
+						com_journal_entry_enactment_phase = {
+							visible = "[ComEnactmentValue('phase_one').IsSet]"
+							blockoverride "current_phase_visibility" {
+								visible = "[EqualTo_string(ComEnactmentValue('phase_one').GetFlagName, ComEnactmentValue('current_phase').GetFlagName)]"
+							}
+							blockoverride "past_phase_visibility" {
+								visible = no
+							}
+							blockoverride "not_reached_phase_visibility" {
+								visible = "[Not(EqualTo_string(ComEnactmentValue('phase_one').GetFlagName, ComEnactmentValue('current_phase').GetFlagName))]"
+							}
+							blockoverride "phase_name" {
+								text = "[ComEnactmentValue('phase_one').GetFlagName]"
+							}
+						}
+
+						com_journal_entry_enactment_phase = {
+							visible = "[ComEnactmentValue('phase_two').IsSet]"
+							blockoverride "current_phase_visibility" {
+								visible = "[EqualTo_string(ComEnactmentValue('phase_two').GetFlagName, ComEnactmentValue('current_phase').GetFlagName)]"
+							}
+							blockoverride "past_phase_visibility" {
+								visible = no
+							}
+							blockoverride "not_reached_phase_visibility" {
+								visible = "[Not(EqualTo_string(ComEnactmentValue('phase_two').GetFlagName, ComEnactmentValue('current_phase').GetFlagName))]"
+							}
+							blockoverride "phase_name" {
+								text = "[ComEnactmentValue('phase_two').GetFlagName]"
+							}
+						}
+
+						com_journal_entry_enactment_phase = {
+							visible = "[ComEnactmentValue('phase_three').IsSet]"
+							blockoverride "current_phase_visibility" {
+								visible = "[EqualTo_string(ComEnactmentValue('phase_three').GetFlagName, ComEnactmentValue('current_phase').GetFlagName)]"
+							}
+							blockoverride "past_phase_visibility" {
+								visible = no
+							}
+							blockoverride "not_reached_phase_visibility" {
+								visible = "[Not(EqualTo_string(ComEnactmentValue('phase_three').GetFlagName, ComEnactmentValue('current_phase').GetFlagName))]"
+							}
+							blockoverride "phase_name" {
+								text = "[ComEnactmentValue('phase_three').GetFlagName]"
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	type com_journal_entry_enactment_phase = hbox {
+		layoutpolicy_horizontal = preferred
+		layoutpolicy_vertical = preferred
+
+		block "max_width" {
+			max_width = 420
+		}
+
+		# Is Current phase
+		widget = {
+			block "active_size" {
+				size = { 150 30 }
+			}
+
+			block "current_phase_visibility" {
+				visible = no
+			}
+
+			background = {
+				using = fade_center_colored_grey
+			}
+
+			icon = {
+				using = highlighted_active_square_selection
+			}
+
+			textbox = {
+				parentanchor = vcenter|hcenter
+				align = nobaseline
+				default_format = "#v"
+				autoresize = yes
+				using = elide_fontsize_min
+
+				block "text_max_width" {
+					max_width = 110
+				}
+
+				block "phase_name" {
+					text = "[Scope.GetFlagName]"
+				}
+			}
+		}
+
+		# Past phase
+		widget = {
+			block "past_size" {
+				size = { 150 24 }
+			}
+
+			alpha = 0.8
+
+			block "past_phase_visibility" {
+				visible = yes
+			}
+
+			background = {
+				using = entry_bg_simple
+			}
+
+			icon = {
+				name = icon
+
+				block "checkmark_position" {
+					position = { 5 0 }
+				}
+
+				size = { 18 18 }
+				parentanchor = vcenter
+
+				block "past_phase_icon_texture" {
+					texture = "gfx/interface/icons/generic_icons/checkmark.dds"
+				}
+			}
+
+			textbox = {
+				block "past_phase_parentanchor" {
+					parentanchor = vcenter|hcenter
+				}
+
+				block "past_phase_align" {
+					align = nobaseline
+				}
+
+				autoresize = yes
+				using = elide_fontsize_min
+
+				block "past_phase_position" {
+					position = { -4 0 }
+				}
+
+				block "past_phase_text_max_width" {
+					max_width = 110
+				}
+
+				block "phase_name" {
+					text = "[Scope.GetFlagName]"
+				}
+			}
+		}
+
+		# Not reached phase
+		widget = {
+			block "not_reached_size" {
+				size = { 150 24 }
+			}
+
+			alpha = 0.3
+
+			block "not_reached_phase_visibility" {
+				visible = no
+			}
+
+			background = {
+				using = entry_bg_simple
+			}
+
+			textbox = {
+				parentanchor = vcenter|hcenter
+				align = nobaseline
+				autoresize = yes
+				using = elide_fontsize_min
+
+				block "text_max_width" {
+					max_width = 110
+				}
+
+				block "phase_name" {
+					text = "[Scope.GetFlagName]"
+				}
+			}
+		}
+	}
+}

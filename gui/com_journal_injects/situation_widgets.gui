@@ -18,7 +18,6 @@ flowcontainer = {
 	
 	flowcontainer = {
 		direction = vertical
-		spacing = 10
 		
 		com_international_situation_header = {}
 		com_international_situation_involved_countries = {}
@@ -48,54 +47,58 @@ flowcontainer = {
 
 ####---------- INTERNATIONAL SITUATION GUI TYPES ----------####
 types gbbf_journal_widget_types {
-	type com_international_situation_header = widget {
+	type com_international_situation_header = flowcontainer {
+		parentanchor = hcenter
 		direction = vertical
-		parentanchor = center
-		size = { 540 100 }
-		ignoreinvisible = yes
+		minimumsize = { 540 -1 }
+		visible = "[JournalEntry.MakeScope.Var('com_situation_header_var').IsSet]"
 		
 		background = {
-			alpha = 0.5
-			using = entry_bg_fancy_dark
+			using = dark_area
+			alpha = 0.4
+			margin = { 8 0 }
 		}
 		
 		textbox = {
-			parentanchor = top|hcenter
+			parentanchor = hcenter
 			size = { 100 40 }
-			visible = "[JournalEntry.MakeScope.Var('com_situation_header_var').IsSet]"
-			
-			text = "[JournalEntry.MakeScope.Var('com_situation_header_var').GetFlagName]"
+			raw_text = "#bold [JournalEntry.MakeScope.Var('com_situation_header_var').GetFlagName]#!"
 			align = hcenter|nobaseline
-			margin = { 20 20 }
-			using = default_list_position
-			using = fontsize_large
+			using = fontsize_medium
+			autoresize = yes
 		}
 	}
 	
 	type com_international_situation_involved_countries = flowcontainer {
+		parentanchor = hcenter
 		direction = vertical
-		parentanchor = top|hcenter
 		minimumsize = { 540 -1 }
-		using = entry_bg_fancy
-		spacing = 10
-		margin_bottom = 15
+		spacing = 20
+		margin_bottom = 20
 		
-		button = {
-			parentanchor = center
-			using = default_button_primary_action
-			using = confirm_button_sound
+		#using = entry_bg_fancy
+		
+		widget = {
+			parentanchor = hcenter
 			size = { 220 30 }
-			text = "com_situation_toggle_involved"
-			onclick = "[GetVariableSystem.Toggle('com_show_involved_countries')]"
+			
+			button = {
+				parentanchor = center
+				size = { 220 30 }
+				position = { 0 10 }
+				
+				using = default_button_primary_action
+				using = confirm_button_sound
+				text = "com_situation_toggle_involved"
+				onclick = "[GetVariableSystem.Toggle('com_show_involved_countries')]"
+			}
 		}
 		
 		flowcontainer = {
-			parentanchor = top|hcenter
+			parentanchor = hcenter
 			direction = vertical
-			using = default_list_position
 			min_width = @panel_width_minus_30
 			max_width = @panel_width_minus_30
-			margin = { 5 10 }
 			spacing = 10
 			
 			visible = "[GetVariableSystem.Exists('com_show_involved_countries')]"
@@ -105,7 +108,7 @@ types gbbf_journal_widget_types {
 			}
 			
 			textbox = {
-				parentanchor = top|hcenter
+				parentanchor = hcenter
 				autoresize = yes
 				text = "com_situation_involved_countries"
 				align = center|nobaseline
@@ -114,11 +117,11 @@ types gbbf_journal_widget_types {
 			}
 			
 			divider_decorative = {
-				parentanchor = top|hcenter
+				parentanchor = hcenter
 			}
 			
 			dynamicgridbox = {
-				parentanchor = top|hcenter
+				parentanchor = hcenter
 				datamodel = "[JournalEntry.GetInvolvedCountries]"
 				datamodel_wrap = 8
 				flipdirection = yes
@@ -133,7 +136,7 @@ types gbbf_journal_widget_types {
 		}
 		
 		flowcontainer = {
-			parentanchor = top|hcenter
+			parentanchor = hcenter
 			direction = vertical
 			using = default_list_position
 			min_width = @panel_width_minus_30
@@ -148,7 +151,7 @@ types gbbf_journal_widget_types {
 			}
 			
 			textbox = {
-				parentanchor = top|hcenter
+				parentanchor = hcenter
 				autoresize = yes
 				text = "com_situation_interloper_countries"
 				align = center|nobaseline
@@ -157,11 +160,11 @@ types gbbf_journal_widget_types {
 			}
 			
 			divider_decorative = {
-				parentanchor = top|hcenter
+				parentanchor = hcenter
 			}
 			
 			dynamicgridbox = {
-				parentanchor = top|hcenter
+				parentanchor = hcenter
 				datamodel = "[JournalEntry.MakeScope.GetList('com_situation_interloper_list')]"
 				datamodel_wrap = 8
 				flipdirection = yes
@@ -179,7 +182,7 @@ types gbbf_journal_widget_types {
 	
 	type com_international_situation_phase_information = flowcontainer {
 		direction = vertical
-		parentanchor = center
+		parentanchor = hcenter
 		minimumsize = { 540 -1 }
 		
 		visible = "[And(
@@ -189,27 +192,32 @@ types gbbf_journal_widget_types {
 		
 		widget = {
 			parentanchor = center
-			size = { 540 240 }
+			size = { 540 100 }
 			
 			background = {
-				using = default_header_bg_faded
+				using = default_header_bg
+				margin = { 8 0 }
 			}
 			
 			icon = {
-				parentanchor = left|vcenter
-				size = { 270 100 }
-				texture = "gfx/interface/politics_view/bg_bronze_with_frame_horizontal_right.dds"
+				parentanchor = center
+				position = { -138 0 }
+				size = { 290 100 }
+				texture = "gfx/interface/backgrounds/bg_bronze_with_frame_horizontal_right.dds"
+				framesize = { 20 200 }
+				frame = 2
 			}
 			
 			icon = {
 				parentanchor = left|vcenter
 				size = { 180 210 }
+				scale = 0.75
 				texture = "gfx/interface/politics_view/institution_current_level.dds"
 				
 				textbox = {
 					parentanchor = center
 					size = { 100 100 }
-					fontsize = 18
+					fontsize = 80
 					align = vcenter|hcenter
 					text = "com_situation_phase_icon"
 				}

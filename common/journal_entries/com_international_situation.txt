@@ -4,6 +4,12 @@ je_com_international_situation = {
 	weight = 100
 	should_be_pinned_by_default_involved = yes
 	
+	widget = {
+		gui = "gui/com_journal_injects/situation_widgets.gui"
+		name = "widget_com_international_situation_factionless"
+		container = "custom_widget_container_je_icon"
+	}
+	
 	scripted_button = sb_international_organizations_test_1
 	scripted_button = sb_international_organizations_test_2
 	scripted_button = sb_international_organizations_test_3
@@ -21,15 +27,15 @@ je_com_international_situation = {
 			com_hide_all_journal_elements_for_situation_effect = yes
 			set_variable = {
 				name = com_situation_header_var
-				flag:com_situation_header_placeholder
+				value = flag:com_situation_header_placeholder
 			}
 			set_variable = {
 				name = com_situation_phase_icon_var
-				flag:com_situation_phase_icon_var
+				value = flag:com_situation_phase_icon_placeholder
 			}
 			set_variable = {
 				name = com_situation_phase_name_var
-				flag:com_situation_phase_name_var
+				value = flag:com_situation_phase_name_placeholder
 			}
 		}
 	}

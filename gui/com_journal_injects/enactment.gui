@@ -123,7 +123,7 @@ types com_inject_enactment {
 									align = right|nobaseline
 									elide = right
 									fontsize_min = 14
-									raw_text = "Success: [ComEnactmentValue('success_chance').GetValue|%0v]"
+									text = com_journal_entry_enactment_success
 								}
 
 								textbox = {
@@ -132,7 +132,7 @@ types com_inject_enactment {
 									align = left|nobaseline
 									elide = right
 									fontsize_min = 14
-									raw_text = "Stall: [ComEnactmentValue('stall_chance').GetValue|%0v]"
+									text = com_journal_entry_enactment_stall
 								}
 							}
 						}

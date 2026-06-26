@@ -8,8 +8,8 @@
 	com_set_enactment_journal_success_chance = {
 		value = $success_chance$
 	}
-	com_set_enactment_journal_phase_progress = {
-		value = $phase_progress$
+	com_set_enactment_journal_step_progress = {
+		value = $step_progress$
 	}
 	com_set_enactment_journal_current_phase = {
 		phase = $current_phase$
@@ -77,25 +77,32 @@ com_set_enactment_journal_stall_chance = {
 	}
 }
 
-com_set_enactment_journal_phase_progress = {
+com_set_enactment_journal_step_progress = {
 	com_set_enactment_journal_element = {
-		element = phase_progress
+		element = step_progress
 		value = $value$
 	}
 }
 
 com_set_enactment_journal_progressing = {
-	com_set_enactment_journal_element = {
-		element = progressing
-		value = yes
+	remove_from_variable_map = {
+		name = com_enactment_widget
+		key = flag:$element$
 	}
 }
 
 com_set_enactment_journal_stalled = {
 	remove_from_variable_map = {
 		name = com_enactment_widget
-		key = flag:progressing
+		key = flag:stalled
 	}
+	add_to_variable_map = {
+		name = com_enactment_widget
+		key = flag:stalled
+		value = yes
+		$duration$ = $duration_amount$
+	}
+	fix_variable_error = { variable = stalled }
 }
 
 com_set_enactment_journal_element = {

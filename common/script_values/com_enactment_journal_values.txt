@@ -1,0 +1,11 @@
+﻿com_enactment_journal_step_progress = {
+	value = "variable_map(com_enactment_widget|flag:step_progress)"
+}
+
+com_enactment_journal_stall_chance = {
+	value = "variable_map(com_enactment_widget|flag:stall_chance)"
+}
+
+com_enactment_journal_success_chance = {
+	value = "variable_map(com_enactment_widget|flag:success_chance)"
+}

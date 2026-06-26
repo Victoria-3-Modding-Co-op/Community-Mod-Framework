@@ -46,17 +46,17 @@ types com_inject_enactment {
 							texture = "gfx/interface/backgrounds/round_button_bg.dds"
 
 							round_progress_default = {
-								visible = "[ComEnactmentValue('progressing').IsSet]"
+								visible = "[Not(ComEnactmentValue('stalled').IsSet)]"
 								size = { 80% 80% }
 								parentanchor = center
-								value = "[FixedPointToFloat(ComEnactmentValue('phase_progress').GetValue)]"
+								value = "[FixedPointToFloat(ComEnactmentValue('step_progress').GetValue)]"
 							}
 
 							round_progress_bad = {
-								visible = "[Not(ComEnactmentValue('progressing').IsSet)]"
+								visible = "[ComEnactmentValue('stalled').IsSet]"
 								size = { 80% 80% }
 								parentanchor = center
-								value = "[FixedPointToFloat(ComEnactmentValue('phase_progress').GetValue)]"
+								value = "[FixedPointToFloat(ComEnactmentValue('step_progress').GetValue)]"
 							}
 
 							widget = {
@@ -73,7 +73,7 @@ types com_inject_enactment {
 							}
 
 							paused_icon_bad = {
-								visible = "[Not(ComEnactmentValue('progressing').IsSet)]"
+								visible = "[ComEnactmentValue('stalled').IsSet]"
 								parentanchor = center
 							}
 

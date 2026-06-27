@@ -22,10 +22,10 @@ flowcontainer = {
 		com_international_situation_header = {}
 		com_international_situation_involved_countries = {}
 		com_international_situation_phase_information = {}
-		# com_international_situation_timeout = {}
+		com_international_situation_timeout = {}
 		# com_international_situation_faction_leaders = {}
 		# com_international_situation_faction_members = {}
-		# com_situation_main_actions = {}
+		com_situation_main_actions = {}
 		com_international_situation_outcomes = {}
 		com_international_situation_phase_progress = {}
 		# com_international_situation_factors = {}
@@ -33,7 +33,7 @@ flowcontainer = {
 }
 
 ####---------- INTERNATIONAL SITUATION GUI TYPES ----------####
-types gbbf_journal_widget_types {
+types com_journal_widget_types {
 	type com_international_situation_header = flowcontainer {
 		parentanchor = hcenter
 		direction = vertical
@@ -278,6 +278,25 @@ types gbbf_journal_widget_types {
 					
 				}
 			}
+		}
+	}
+	
+	type com_international_situation_timeout = flowcontainer {
+		visible = "[JournalEntry.CanTimeOut]"
+		spacing = 5
+		parentanchor = hcenter
+		tooltip = "JOURNAL_ENTRY_ON_TIMEOUT_LONG"
+		
+		icon = {
+			size = { 30 30 }
+			texture = "gfx/interface/icons/generic_icons/clock.dds"
+		}
+		textbox = {
+			text = "[JournalEntry.GetTimeoutTooltip]"
+			autoresize = yes
+			align = nobaseline
+			using = fontsize_large
+			parentanchor = vcenter
 		}
 	}
 	

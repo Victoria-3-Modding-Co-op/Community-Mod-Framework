@@ -13,7 +13,7 @@
 
 ####---------- INJECTABLE JOURNAL ENTRY WIDGETS ----------####
 flowcontainer = {
-	name = "widget_com_international_situation_factionless"
+	name = "widget_com_international_situation"
 	ignoreinvisible = yes
 	
 	flowcontainer = {
@@ -22,26 +22,13 @@ flowcontainer = {
 		com_international_situation_header = {}
 		com_international_situation_involved_countries = {}
 		com_international_situation_phase_information = {}
-	}
-}
-
-flowcontainer = {
-	name = "widget_com_international_situation_two_faction"
-	ignoreinvisible = yes
-	
-	flowcontainer = {
-		direction = vertical
-		spacing = 10
-	}
-}
-
-flowcontainer = {
-	name = "widget_com_international_situation_multi_faction"
-	ignoreinvisible = yes
-	
-	flowcontainer = {
-		direction = vertical
-		spacing = 10
+		# com_international_situation_timeout = {}
+		# com_international_situation_faction_leaders = {}
+		# com_international_situation_faction_members = {}
+		# com_situation_main_actions = {}
+		com_international_situation_outcomes = {}
+		com_international_situation_phase_progress = {}
+		# com_international_situation_factors = {}
 	}
 }
 
@@ -202,10 +189,19 @@ types gbbf_journal_widget_types {
 			icon = {
 				parentanchor = center
 				position = { -138 0 }
-				size = { 290 100 }
+				size = { 280 100 }
 				texture = "gfx/interface/backgrounds/bg_bronze_with_frame_horizontal_right.dds"
 				framesize = { 20 200 }
 				frame = 2
+			}
+			
+			icon = {
+				parentanchor = center
+				position = { 10 0 }
+				size = { 20 100 }
+				texture = "gfx/interface/backgrounds/bg_bronze_with_frame_horizontal_right.dds"
+				framesize = { 20 200 }
+				frame = 10
 			}
 			
 			icon = {
@@ -225,39 +221,73 @@ types gbbf_journal_widget_types {
 			
 			textbox = {
 				parentanchor = center
-				size = { 100 100 }
-				position = { 0 0 }
+				autoresize = yes
+				position = { -70 -20 }
 				align = hcenter|nobaseline
 				text = "com_situation_current_phase"
 				using = fontsize_large
 			}
+			
 			textbox = {
 				parentanchor = center
-				size = { 100 100 }
-				position = { 0 0 }
+				autoresize = yes
+				position = { -70 10 }
 				align = vcenter|hcenter
-				text = "com_situation_current_phase_name"
+				raw_text = "#todo com_phase_name"
 				using = fontsize_xl
 			}
 			
 			textbox = {
 				parentanchor = right|vcenter
 				size = { 100 100 }
-				position = { 0 0 }
+				position = { -70 -30 }
 				align = vcenter|hcenter
 				text = "com_situation_phase_effects"
 				using = fontsize_xl
 			}
+			
+			widget = {
+				parentanchor = right|vcenter
+				size = { 240 50 }
+				position = { -4 12 }
+				
+				background = {
+					using = entry_bg_simple
+				}
+				
+				flowcontainer = {
+					datamodel = "[JournalEntry.GetTimedModifiers]"
+					spacing = 10
+					visible = "[Not(IsDataModelEmpty(JournalEntry.GetTimedModifiers))]"
+					parentanchor = center
+					datamodel_wrap = 2
+					
+					item = {
+						icon = {
+							texture = "gfx/interface/backgrounds/circle_bg_simple_dark.dds"
+							size = { 40 40 }
+							
+							icon = {
+								parentanchor = center
+								tooltip = "[TimedModifier.GetTooltip]"
+								texture = "[TimedModifier.GetIcon]"
+								size = { 35 35 }
+							}
+						}
+					}
+					
+				}
+			}
 		}
 	}
 	
-	type com_international_situation_outcomes = flowcontainer {
+	type com_international_situation_outcome_container = flowcontainer {
 		direction = vertical
-		parentanchor = center
-		size = { 540 100 }
+		parentanchor = hcenter
+		minimumsize = { 540 -1 }
 		
 		button = {
-			parentanchor = center
+			parentanchor = hcenter
 			using = default_button_primary_action
 			using = confirm_button_sound
 			size = { 220 30 }
@@ -265,13 +295,97 @@ types gbbf_journal_widget_types {
 			onclick = "[GetVariableSystem.Toggle('com_show_situation_outomes')]"
 		}
 		
+		flowcontainer = {
+			direction = horizontal
+			parentanchor = hcenter
+			spacing = 10
+			
+			visible = "[GetVariableSystem.Exists('com_show_situation_outomes')]"
+			
+			block "com_situation_completion_outcome" {
+				com_international_situation_outcome_item = {
+					visible = "[JournalEntry.CanComplete]"
+				}
+			}
+			
+			block "com_situation_timeout_outcome" {
+				com_international_situation_outcome_item = {
+					visible = "[JournalEntry.CanTimeOut]"
+				}
+			}
+			
+			block "com_situation_failure_outcome" {
+				com_international_situation_outcome_item = {
+					visible = "[Not(StringIsEmpty(JournalEntry.GetFailureTooltip))]"
+				}
+			}
+		}
+	}
+	
+	type com_international_situation_outcome_item = widget {
+		size = { 160 160 }
 		
+		icon = {
+			parentanchor = center
+			size = { 100% 100% }
+			texture = "gfx/interface/backgrounds/bg_bronze_with_frame.dds"
+		}
+	}
+	
+	type com_international_situation_phase_progress = flowcontainer {
+		direction = vertical
+		parentanchor = hcenter
+		minimumsize = { 540 -1 }
+		
+		visible = "[Or(
+			JournalEntry.MakeScope.Var(com_situation_escalation_var).IsSet,
+			JournalEntry.MakeScope.Var(com_situation_deescalation_var).IsSet
+		)]"
+		
+		flowcontainer = {
+			direction = horizontal
+			parentanchor = hcenter
+			minimumsize = { 540 -1 }
+			
+			widget = {
+				size = { 200 200 }
+				visible = "[JournalEntry.MakeScope.Var(com_situation_escalation_var).IsSet]"
+				background = {
+					texture = "gfx/interface/backgrounds/bg_bronze_with_frame.dds"
+					modify_texture = {
+						using = texture_velvet
+					}
+				}
+				button = {
+					size = { 200 200 }
+				}
+			}
+			
+			widget = {
+				size = { 200 200 }
+				visible = "[JournalEntry.MakeScope.Var(com_situation_deescalation_var).IsSet]"
+				background = {
+					texture = "gfx/interface/backgrounds/bg_bronze_with_frame.dds"
+					modify_texture = {
+						using = texture_velvet
+					}
+				}
+			}
+		}
 	}
 	
 	type com_international_situation_factors = flowcontainer {
 		direction = vertical
-		parentanchor = center
-		size = { 540 100 }
+		parentanchor = hcenter
+		minimumsize = { 540 -1 }
 		
+		button = {
+			parentanchor = hcenter
+			using = default_button_primary_action
+			using = confirm_button_sound
+			size = { 220 30 }
+			text = "com_view_situation_factors"
+			onclick = "[GetVariableSystem.Toggle('com_show_situation_factors')]"
+		}
 	}
 }

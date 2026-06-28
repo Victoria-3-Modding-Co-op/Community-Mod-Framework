@@ -255,7 +255,17 @@ types com_journal_widget_types {
 		parentanchor = hcenter
 		direction = vertical
 		minimumsize = { 540 -1 }
-		spacing = 20
+		spacing = 5
+		margin_bottom = 5
+		
+		background = {
+			visible = "[GetVariableSystem.Exists('com_show_involved_countries')]"
+			using = dark_area
+			alpha = 0.25
+			margin_top = -35
+			margin_left = -5
+			margin_right = -5
+		}
 		
 		section_header_button = {
 			blockoverride "layout" {
@@ -279,8 +289,8 @@ types com_journal_widget_types {
 			parentanchor = hcenter
 			direction = vertical
 			minimumsize = { 520 -1 }
+			margin = { 5 5 }
 			spacing = 10
-			margin_bottom = 5
 			
 			visible = "[GetVariableSystem.Exists('com_show_involved_countries')]"
 			
@@ -319,12 +329,14 @@ types com_journal_widget_types {
 		flowcontainer = {
 			parentanchor = hcenter
 			direction = vertical
-			min_width = @panel_width_minus_30
-			max_width = @panel_width_minus_30
-			margin = { 5 10 }
+			minimumsize = { 520 -1 }
+			margin = { 5 5 }
 			spacing = 10
 			
-			visible = "[Not(IsDataModelEmpty(JournalEntry.MakeScope.GetList('com_situation_interloper_list')))]"
+			visible = "[And(
+				GetVariableSystem.Exists('com_show_involved_countries'),
+				Not(IsDataModelEmpty(JournalEntry.MakeScope.GetList('com_situation_interloper_list')))
+			)]"
 			
 			background = {
 				using = entry_bg_simple
@@ -345,7 +357,7 @@ types com_journal_widget_types {
 			
 			dynamicgridbox = {
 				parentanchor = hcenter
-				datamodel = "[JournalEntry.MakeScope.GetList('com_situation_interloper_list')]"
+				datamodel = "[JournalEntry.GetInvolvedCountries]"
 				datamodel_wrap = 8
 				flipdirection = yes
 				
@@ -364,7 +376,6 @@ types com_journal_widget_types {
 		direction = vertical
 		parentanchor = hcenter
 		minimumsize = { 540 -1 }
-		spacing = 5
 		
 		section_header_button = {
 			blockoverride "layout" {
@@ -403,22 +414,52 @@ types com_journal_widget_types {
 			
 			block "com_situation_completion_outcome" {
 				com_international_situation_outcome_item = {
-					visible = "[JournalEntry.CanComplete]"
-					tooltip = "[JournalEntry.GetOnCompleteTooltip]"
+					blockoverride "situation_outcome_visibility" {
+						visible = "[JournalEntry.CanComplete]"
+					}
+					blockoverride "situation_outcome_name" {
+						raw_text = "#todo Success"
+					}
+					blockoverride "situation_outcome_tooltip" {
+						tooltip = "[JournalEntry.GetOnCompleteTooltip]"
+					}
+					blockoverride "situation_outcome_texture" {
+						texture = "gfx/interface/illustrations/situation_backgrounds/situation_complete_illus.dds"
+					}
 				}
 			}
 			
 			block "com_situation_timeout_outcome" {
 				com_international_situation_outcome_item = {
-					visible = "[JournalEntry.CanTimeOut]"
-					tooltip = "[JournalEntry.GetOnTimeoutTooltip]"
+					blockoverride "situation_outcome_visibility" {
+						visible = "[JournalEntry.CanTimeOut]"
+					}
+					blockoverride "situation_outcome_name" {
+						raw_text = "#todo Timeout"
+					}
+					blockoverride "situation_outcome_tooltip" {
+						tooltip = "[JournalEntry.GetOnTimeoutTooltip]"
+					}
+					blockoverride "situation_outcome_texture" {
+						texture = "gfx/interface/illustrations/situation_backgrounds/situation_timeout_illus.dds"
+					}
 				}
 			}
 			
 			block "com_situation_failure_outcome" {
 				com_international_situation_outcome_item = {
-					visible = "[Not(StringIsEmpty(JournalEntry.GetFailureTooltip))]"
-					tooltip = "[JournalEntry.GetOnFailTooltip]"
+					blockoverride "situation_outcome_visibility" {
+						visible = "[Not(StringIsEmpty(JournalEntry.GetFailureTooltip))]" # We do not have a CanFail function
+					}
+					blockoverride "situation_outcome_name" {
+						raw_text = "#todo Failure"
+					}
+					blockoverride "situation_outcome_tooltip" {
+						tooltip = "[JournalEntry.GetOnFailTooltip]"
+					}
+					blockoverride "situation_outcome_texture" {
+						texture = "gfx/interface/illustrations/situation_backgrounds/situation_failure_illus.dds"
+					}
 				}
 			}
 		}
@@ -426,11 +467,58 @@ types com_journal_widget_types {
 	
 	type com_international_situation_outcome_item = widget {
 		size = { 160 200 }
-		
+		block "situation_outcome_visibility" {}
+		block "situation_outcome_tooltip" {}
 		icon = {
 			parentanchor = center
 			size = { 100% 100% }
 			texture = "gfx/interface/backgrounds/bg_bronze_with_frame.dds"
+			
+			icon = {
+				parentanchor = center
+				size = { 100% 100% }
+				block "situation_outcome_texture" {
+					texture = "gfx/interface/illustrations/situation_backgrounds/situation_invalid_illus.dds"
+				}
+				modify_texture = {
+					texture = "gfx/interface/backgrounds/default_bg_shading.dds"
+					spriteType = Corneredstretched
+					spriteborder = { 0 0 }
+					blend_mode = overlay
+					alpha = 0.8
+				}
+				modify_texture = {
+					using = texture_velvet
+				}
+				modify_texture = {
+					using = texture_cloth
+					alpha = 0.25
+				}
+				modify_texture = {
+					texture = "gfx/interface/masks/fade_top_illus.dds"
+					translate_uv = { 0 0 }
+					blend_mode = alphamultiply
+				}
+			}
+		}
+		
+		default_header_clean_faded = {
+			parentanchor = top|hcenter
+			position = { 0 0 }
+			blockoverride "size" {
+				size = { 150 34 }
+			}
+			blockoverride "text" {}
+			textbox = {
+				block "situation_outcome_name" {
+					raw_text = "#todo outcome_name"
+				}
+				parentanchor = center
+				autoresize = yes
+				max_width = 500
+				elide = right
+				using = fontsize_medium
+			}
 		}
 	}
 	
@@ -439,11 +527,12 @@ types com_journal_widget_types {
 		parentanchor = hcenter
 		minimumsize = { 540 -1 }
 		margin_bottom = 10
+		spacing = 5
 		
-		#		visible = "[Or(
-		#			JournalEntry.MakeScope.Var('com_situation_escalation_var').IsSet,
-		#			JournalEntry.MakeScope.Var('com_situation_deescalation_var').IsSet
-		#		)]"
+		visible = "[Or(
+			JournalEntry.MakeScope.Var('com_situation_escalation_var').IsSet,
+			JournalEntry.MakeScope.Var('com_situation_deescalation_var').IsSet
+		)]"
 		
 		using = entry_bg_fancy
 		
@@ -462,31 +551,23 @@ types com_journal_widget_types {
 			parentanchor = hcenter
 			spacing = 20
 			
-			widget = {
-				size = { 120 120 }
-				visible = "[JournalEntry.MakeScope.Var('com_situation_escalation_var').IsSet]"
-				background = {
-					texture = "gfx/interface/backgrounds/bg_bronze_with_frame.dds"
-					modify_texture = {
-						using = texture_velvet
-					}
+			com_international_situation_phase_progress_item = {
+				blockoverride "phase_progress_visibility" {
+					visible = "[JournalEntry.MakeScope.Var('com_situation_escalation_var').IsSet]"
 				}
-				button = {
-					size = { 100% 100% }
+				blockoverride "phase_progress_button_onclick" {
+					onclick = "[GetVariableSystem.Toggle('com_show_escalation_factors')]"
+					onclick = "[GetVariableSystem.Clear('com_show_deescalation_factors')]"
 				}
 			}
 			
-			widget = {
-				size = { 120 120 }
-				visible = "[JournalEntry.MakeScope.Var('com_situation_deescalation_var').IsSet]"
-				background = {
-					texture = "gfx/interface/backgrounds/bg_bronze_with_frame.dds"
-					modify_texture = {
-						using = texture_velvet
-					}
+			com_international_situation_phase_progress_item = {
+				blockoverride "phase_progress_visibility" {
+					visible = "[JournalEntry.MakeScope.Var('com_situation_deescalation_var').IsSet]"
 				}
-				button = {
-					size = { 100% 100% }
+				blockoverride "phase_progress_button_onclick" {
+					onclick = "[GetVariableSystem.Toggle('com_show_deescalation_factors')]"
+					onclick = "[GetVariableSystem.Clear('com_show_escalation_factors')]"
 				}
 			}
 		}
@@ -526,7 +607,6 @@ types com_journal_widget_types {
 				textbox = {
 					parentanchor = center
 					position = { 0 -10 }
-					#visible = "[GetVariableSystem.Exists('com_show_escalation_factors')]"
 					
 					raw_text = "#bold #italic Catalysts Towards #todo com_situation_escalation_name_var#!"
 					autoresize = yes
@@ -536,7 +616,6 @@ types com_journal_widget_types {
 				textbox = {
 					parentanchor = center
 					position = { 0 10 }
-					#visible = "[GetVariableSystem.Exists('com_show_deescalation_factors')]"
 					raw_text = "#blue #italic Complete Catalysts to increase phase progress#!"
 					autoresize = yes
 					align = nobaseline
@@ -544,9 +623,73 @@ types com_journal_widget_types {
 				}
 			}
 			
-			widget = {
-				parentanchor = hcenter
-				size = { 520 200 }
+			textbox = {
+				visible = "[And(
+					GetVariableSystem.Exists('com_show_escalation_factors'),
+					JournalEntry.MakeScope.Var('com_escalation_factors_var').IsSet
+				)]"
+				autoresize = yes
+				raw_text = "#todo com_escalation_factors_var"
+				min_width = @panel_width_minus_30
+				max_width = @panel_width_minus_30
+				multiline = yes
+				using = default_list_position
+				align = nobaseline
+				margin = { 15 15 }
+			}
+			textbox = {
+				visible = "[And(
+					GetVariableSystem.Exists('com_show_deescalation_factors'),
+					JournalEntry.MakeScope.Var('com_deescalation_factors_var').IsSet
+				)]"
+				autoresize = yes
+				raw_text = "#todo com_escalation_factors_var"
+				min_width = @panel_width_minus_30
+				max_width = @panel_width_minus_30
+				multiline = yes
+				using = default_list_position
+				align = nobaseline
+				margin = { 15 15 }
+			}
+		}
+	}
+	
+	type com_international_situation_phase_progress_item = widget {
+		size = { 120 120 }
+		block "phase_progress_visibility" {}
+		background = {
+			texture = "gfx/interface/backgrounds/bg_bronze_with_frame.dds"
+			modify_texture = {
+				using = texture_velvet
+			}
+		}
+		icon = {
+			parentanchor = center
+			size = { 80 80 }
+			texture = "gfx/interface/map_markers/strategic_region_map_marker.dds"
+			mirror = vertical
+			
+			button = {
+				size = { 100% 100% }
+				block "phase_progress_button_onclick" {}
+			}
+		}
+		textbox = {
+			parentanchor = top|hcenter
+			position = { 0 5 }
+			raw_text = "#todo Next Phase"
+			autoresize = yes
+			align = nobaseline
+			fontsize = 16
+		}
+		white_progressbar_horizontal = {
+			parentanchor = bottom|hcenter
+			position = { 0 -10 }
+			size = { 80 10 }
+			blockoverride "values" {
+				value = 5
+				max = 10
+				min = 0
 			}
 		}
 	}

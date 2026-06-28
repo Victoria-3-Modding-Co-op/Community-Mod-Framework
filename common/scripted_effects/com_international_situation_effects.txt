@@ -1,4 +1,5 @@
 ﻿com_hide_all_journal_elements_for_situation_effect = {
+    set_variable = com_hide_timeout
     set_variable = com_hide_scripted_buttons
     set_variable = com_hide_journal_reason
     set_variable = com_hide_involved_countries

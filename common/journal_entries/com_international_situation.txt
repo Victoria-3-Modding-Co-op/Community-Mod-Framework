@@ -6,7 +6,7 @@ je_com_international_situation = {
 	
 	widget = {
 		gui = "gui/com_journal_injects/situation_widgets.gui"
-		name = "widget_com_international_situation_factionless"
+		name = "widget_com_international_situation"
 		container = "custom_widget_container_je_icon"
 	}
 	

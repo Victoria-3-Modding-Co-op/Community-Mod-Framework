@@ -18,22 +18,22 @@ flowcontainer = {
 	
 	flowcontainer = {
 		direction = vertical
+		spacing = 5
 		
 		com_international_situation_header = {}
 		com_international_situation_involved_countries = {}
 		com_international_situation_phase_information = {}
-		# com_international_situation_timeout = {}
+		com_international_situation_timeout = {}
 		# com_international_situation_faction_leaders = {}
 		# com_international_situation_faction_members = {}
-		# com_situation_main_actions = {}
-		com_international_situation_outcomes = {}
+		com_international_situation_outcome_container = {}
+		com_international_organization_buttons = {}
 		com_international_situation_phase_progress = {}
-		# com_international_situation_factors = {}
 	}
 }
 
 ####---------- INTERNATIONAL SITUATION GUI TYPES ----------####
-types gbbf_journal_widget_types {
+types com_journal_widget_types {
 	type com_international_situation_header = flowcontainer {
 		parentanchor = hcenter
 		direction = vertical
@@ -63,8 +63,6 @@ types gbbf_journal_widget_types {
 		spacing = 20
 		margin_bottom = 20
 		
-		#using = entry_bg_fancy
-		
 		widget = {
 			parentanchor = hcenter
 			size = { 220 30 }
@@ -75,7 +73,7 @@ types gbbf_journal_widget_types {
 				position = { 0 10 }
 				
 				using = default_button_primary_action
-				using = confirm_button_sound
+				using = select_button_sound
 				text = "com_situation_toggle_involved"
 				onclick = "[GetVariableSystem.Toggle('com_show_involved_countries')]"
 			}
@@ -84,9 +82,9 @@ types gbbf_journal_widget_types {
 		flowcontainer = {
 			parentanchor = hcenter
 			direction = vertical
-			min_width = @panel_width_minus_30
-			max_width = @panel_width_minus_30
+			minimumsize = { 520 -1 }
 			spacing = 10
+			margin_bottom = 5
 			
 			visible = "[GetVariableSystem.Exists('com_show_involved_countries')]"
 			
@@ -125,7 +123,6 @@ types gbbf_journal_widget_types {
 		flowcontainer = {
 			parentanchor = hcenter
 			direction = vertical
-			using = default_list_position
 			min_width = @panel_width_minus_30
 			max_width = @panel_width_minus_30
 			margin = { 5 10 }
@@ -281,26 +278,75 @@ types gbbf_journal_widget_types {
 		}
 	}
 	
+	type com_international_situation_timeout = flowcontainer {
+		visible = "[JournalEntry.CanTimeOut]"
+		spacing = 5
+		parentanchor = hcenter
+		tooltip = "JOURNAL_ENTRY_ON_TIMEOUT_LONG"
+		
+		icon = {
+			size = { 30 30 }
+			texture = "gfx/interface/icons/generic_icons/clock.dds"
+		}
+		textbox = {
+			text = "[JournalEntry.GetTimeoutTooltip]"
+			autoresize = yes
+			align = nobaseline
+			using = fontsize_large
+			parentanchor = vcenter
+		}
+	}
+	
 	type com_international_situation_outcome_container = flowcontainer {
 		direction = vertical
 		parentanchor = hcenter
 		minimumsize = { 540 -1 }
+		spacing = 5
+		
 		
 		button = {
 			parentanchor = hcenter
 			using = default_button_primary_action
-			using = confirm_button_sound
+			using = select_button_sound
 			size = { 220 30 }
-			text = "com_view_situation_endings"
+			#text = "com_view_situation_endings"
 			onclick = "[GetVariableSystem.Toggle('com_show_situation_outomes')]"
+			
+			textbox = {
+				visible = "[Not(GetVariableSystem.Exists('com_show_situation_outomes'))]"
+				parentanchor = center
+				size = { 220 30 }
+				text = "com_view_situation_endings"
+				autoresize = yes
+				align = nobaseline
+				fontsize = 16
+			}
+			textbox = {
+				visible = "[GetVariableSystem.Exists('com_show_situation_outomes')]"
+				parentanchor = center
+				raw_text = "Hide Situation Outcomes"
+				autoresize = yes
+				align = nobaseline
+				fontsize = 16
+			}
 		}
 		
 		flowcontainer = {
 			direction = horizontal
 			parentanchor = hcenter
 			spacing = 10
+			margin = { 5 5 }
 			
 			visible = "[GetVariableSystem.Exists('com_show_situation_outomes')]"
+			
+			background = {
+				using = dark_area
+				alpha = 0.25
+				
+				modify_texture = {
+					using = texture_velvet
+				}
+			}
 			
 			block "com_situation_completion_outcome" {
 				com_international_situation_outcome_item = {
@@ -323,7 +369,7 @@ types gbbf_journal_widget_types {
 	}
 	
 	type com_international_situation_outcome_item = widget {
-		size = { 160 160 }
+		size = { 160 200 }
 		
 		icon = {
 			parentanchor = center
@@ -336,20 +382,34 @@ types gbbf_journal_widget_types {
 		direction = vertical
 		parentanchor = hcenter
 		minimumsize = { 540 -1 }
+		margin_bottom = 10
+		spacing = 10
 		
 		visible = "[Or(
-			JournalEntry.MakeScope.Var(com_situation_escalation_var).IsSet,
-			JournalEntry.MakeScope.Var(com_situation_deescalation_var).IsSet
+			JournalEntry.MakeScope.Var('com_situation_escalation_var').IsSet,
+			JournalEntry.MakeScope.Var('com_situation_deescalation_var').IsSet
 		)]"
+		
+		using = entry_bg_fancy
+		
+		default_header_clean_faded = {
+			parentanchor = hcenter
+			blockoverride "text" {
+				raw_text = "Next Phase Progress"
+			}
+			blockoverride "size" {
+				size = { 532 45 }
+			}
+		}
 		
 		flowcontainer = {
 			direction = horizontal
 			parentanchor = hcenter
-			minimumsize = { 540 -1 }
+			spacing = 20
 			
 			widget = {
-				size = { 200 200 }
-				visible = "[JournalEntry.MakeScope.Var(com_situation_escalation_var).IsSet]"
+				size = { 120 120 }
+				visible = "[JournalEntry.MakeScope.Var('com_situation_escalation_var').IsSet]"
 				background = {
 					texture = "gfx/interface/backgrounds/bg_bronze_with_frame.dds"
 					modify_texture = {
@@ -357,35 +417,82 @@ types gbbf_journal_widget_types {
 					}
 				}
 				button = {
-					size = { 200 200 }
+					size = { 100% 100% }
 				}
 			}
 			
 			widget = {
-				size = { 200 200 }
-				visible = "[JournalEntry.MakeScope.Var(com_situation_deescalation_var).IsSet]"
+				size = { 120 120 }
+				visible = "[JournalEntry.MakeScope.Var('com_situation_deescalation_var').IsSet]"
 				background = {
 					texture = "gfx/interface/backgrounds/bg_bronze_with_frame.dds"
 					modify_texture = {
 						using = texture_velvet
 					}
 				}
+				button = {
+					size = { 100% 100% }
+				}
 			}
 		}
-	}
-	
-	type com_international_situation_factors = flowcontainer {
-		direction = vertical
-		parentanchor = hcenter
-		minimumsize = { 540 -1 }
 		
-		button = {
+		flowcontainer = {
 			parentanchor = hcenter
-			using = default_button_primary_action
-			using = confirm_button_sound
-			size = { 220 30 }
-			text = "com_view_situation_factors"
-			onclick = "[GetVariableSystem.Toggle('com_show_situation_factors')]"
+			direction = vertical
+			minimumsize = { 520 -1 }
+			
+			background = {
+				using = entry_bg
+			}
+			
+			widget = {
+				parentanchor = hcenter
+				size = { 520 50 }
+				background = {
+					using = dark_area
+					alpha = 0.5
+					margin = { 10 10 }
+					
+					modify_texture = {
+						texture = "gfx/interface/masks/fade_horizontal_center.dds"
+						spriteType = Corneredstretched
+						spriteborder = { 0 0 }
+						blend_mode = alphamultiply
+					}
+					
+					modify_texture = {
+						texture = "gfx/interface/masks/fade_vertical_center.dds"
+						spriteType = Corneredstretched
+						spriteborder = { 0 0 }
+						blend_mode = alphamultiply
+					}
+				}
+				
+				textbox = {
+					parentanchor = center
+					position = { 0 -10 }
+					#visible = "[GetVariableSystem.Exists('com_show_escalation_factors')]"
+					
+					raw_text = "#bold #italic Catalysts Towards #todo com_situation_escalation_name_var#!"
+					autoresize = yes
+					align = nobaseline
+					fontsize = 18
+				}
+				textbox = {
+					parentanchor = center
+					position = { 0 10 }
+					#visible = "[GetVariableSystem.Exists('com_show_deescalation_factors')]"
+					raw_text = "#blue #italic Complete Catalysts to increase phase progress#!"
+					autoresize = yes
+					align = nobaseline
+					fontsize = 16
+				}
+			}
+			
+			widget = {
+				parentanchor = hcenter
+				size = { 520 200 }
+			}
 		}
 	}
 }

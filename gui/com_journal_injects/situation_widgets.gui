@@ -404,18 +404,21 @@ types com_journal_widget_types {
 			block "com_situation_completion_outcome" {
 				com_international_situation_outcome_item = {
 					visible = "[JournalEntry.CanComplete]"
+					tooltip = "[JournalEntry.GetOnCompleteTooltip]"
 				}
 			}
 			
 			block "com_situation_timeout_outcome" {
 				com_international_situation_outcome_item = {
 					visible = "[JournalEntry.CanTimeOut]"
+					tooltip = "[JournalEntry.GetOnTimeoutTooltip]"
 				}
 			}
 			
 			block "com_situation_failure_outcome" {
 				com_international_situation_outcome_item = {
 					visible = "[Not(StringIsEmpty(JournalEntry.GetFailureTooltip))]"
+					tooltip = "[JournalEntry.GetOnFailTooltip]"
 				}
 			}
 		}

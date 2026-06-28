@@ -1,0 +1,232 @@
+# INHERITED FROM BASE GAME
+@panel_width_minus_30 = 510
+@panel_width_minus_20 = 520
+@panel_width_minus_10 = 530			# used to be 450
+@panel_width = 540  				# used to be 460
+@panel_width_half = 270				# used to be 230
+@panel_width_plus_10 = 550  		# used to be 470
+@panel_width_plus_14 = 554			# used to be 474
+@panel_width_plus_14_half = 277		# used to be 237
+@panel_width_plus_20 = 560			# used to be 480
+@panel_width_plus_30 = 570			# used to be 490
+@panel_width_plus_70 = 610			# used to be 530
+
+#### WIDGETS
+types com_inject_buildings {
+	type com_journal_entry_building = flowcontainer {
+		name = "com_journal_entry_building"
+		parentanchor = hcenter
+		direction = vertical
+
+		flowcontainer = {
+			visible = "[JournalEntry.MakeScope.Var('com_journal_entry_building').IsSet]"
+			datacontext = "[JournalEntry.MakeScope.Var('com_journal_entry_building').GetBuilding]"
+			direction = vertical
+			using = default_list_position
+			margin_bottom = 10
+			spacing = 10
+
+			widget = {
+				background = {
+					texture = "[Building.GetBuildingType.GetBackground]"
+					fittype = centercrop
+					alpha = 0.5
+				}
+				minimumsize = { 500 -1 }
+				maximumsize = { 500 -1 }
+
+				flowcontainer = {
+					parentanchor = right
+					position = { 0 50 }
+					direction = vertical
+					spacing = 5
+
+					com_journal_entry_frame_text = {
+						blockoverride "text_top" {
+							raw_text = "[concept_building]"
+						}
+						blockoverride "text" {
+							text = "[Building.GetName]"
+						}
+						blockoverride "icon" {
+							texture = "gfx/interface/icons/notification_icons/buildings.dds"
+						}
+					}
+
+					com_journal_entry_frame_text = {
+						blockoverride "text_top" {
+							raw_text = "[concept_state]"
+						}
+						blockoverride "text" {
+							text = "[Building.GetState.GetName]"
+						}
+						blockoverride "icon" {
+							texture = "gfx/interface/icons/alert_icons/formable_possible.dds"
+						}
+					}
+				}
+
+				flowcontainer = {
+					resizeparent = yes
+					parentanchor = hcenter
+					margin_top = 30
+					margin_bottom = 15
+					margin_left = 30
+					minimumsize = { 500 147 }
+					maximumsize = { 500 -1 }
+					spacing = 15
+					direction = vertical
+
+					### BUILDING ICON
+					widget = {
+						tooltipwidget = {
+							FancyTooltip_Building = {}
+						}
+						onrightclick = "[RightClickMenuManager.ShowForBuilding(Building.AccessSelf)]"
+						size = { 150 150 }
+
+						icon = {
+							alpha = "[TransparentIfFalse(Building.IsActive)]"
+							texture = "[Building.GetIcon]"
+							size = { 100% 100% }
+
+							icon = {
+								visible = "[Building.IsAutoDownsizing]"
+								tooltip = "[Building.GetAutoDownsizeTooltip]"
+								position = { 5 5 }
+								size = { 30 30 }
+								texture = "gfx/interface/production_methods/auto_downsize.dds"
+							}
+						}
+
+						icon = {
+							visible = "[And( GreaterThan_int32( Building.GetExpansionLevel, '(int32)0'), Not( Building.IsActive ))]"
+							size = { 100% 100% }
+							texture = "gfx/interface/icons/generic_icons/inactive_building.dds"
+						}
+					}
+
+					divider_decorative = {
+						parentanchor = hcenter
+					}
+
+					flowcontainer = {
+						parentanchor = hcenter
+
+						condensed_building_information_pms = {
+							blockoverride "pms_slot_sizes" {
+								addcolumn = 72
+								addrow = 70
+							}
+							blockoverride "pms_minimumsize" {
+								minimumsize = { 74 -1 }
+							}
+							blockoverride "pms_item_size" {
+								size = { 70 70 }
+							}
+						}
+					}
+				}
+
+				# FRAME
+				widget = {
+					size = { 100% 100% }
+					background = {
+						texture = "gfx/interface/character_panel/char_bg_frame.dds"
+						margin_left = 18
+						margin_right = 12
+						margin_bottom = 10
+						spriteType = Corneredtiled
+
+						spriteborder_left = 200
+						spriteborder_right = 60
+						spriteborder_top = 170
+						spriteborder_bottom = 180
+
+						texture_density = 2
+					}
+				}
+
+				widget = {
+					parentanchor = right|top
+					size = { 35 35 }
+					position = { 10 -10 }
+
+					button_icon_round = {
+						size = { 100% 100% }
+						tooltip = "GO_TO_BUTTON_BUILDING"
+						onclick = "[InformationPanelBar.OpenBuildingDetailsPanel(Building.AccessSelf)]"
+						blockoverride "icon" {
+							texture = "gfx/interface/buttons/button_icons/goto.dds"
+						}
+					}
+				}
+			}
+		}
+	}
+
+	type com_journal_entry_frame_text = widget {
+		background = {
+			using = dark_area
+			alpha = 0.75
+
+			modify_texture = {
+				texture = "gfx/interface/masks/fade_horizontal_left_full.dds"
+				blend_mode = alphamultiply
+			}
+		}
+
+		size = { 250 50 }
+
+		divider_clean = {
+			parentanchor = top
+		}
+		divider_clean = {
+			parentanchor = bottom
+		}
+
+		hbox = {
+			margin_right = 13
+			margin_left = 10
+			layoutpolicy_horizontal = expanding
+			layoutpolicy_vertical = expanding
+			spacing = 7
+
+			vbox = {
+				layoutpolicy_horizontal = expanding
+				layoutpolicy_vertical = expanding
+				margin = { 0 7 }
+
+				textbox = {
+					layoutpolicy_horizontal = expanding
+					size = { 0 16 }
+					block "text_top" {
+						raw_text = "#r frame_text text_top#!"
+					}
+					align = right|vcenter
+					elide = right
+					fontsize_min = 12
+				}
+
+				textbox = {
+					layoutpolicy_horizontal = expanding
+					size = { 0 20 }
+					block "text" {
+						raw_text = "#r frame_text text#!"
+					}
+					align = right|vcenter
+					elide = right
+					fontsize_min = 12
+					using = fontsize_large
+				}
+			}
+
+			icon = {
+				size = { 35 35 }
+				block "icon" {
+					texture = gfx/interface/icons/alert_icons/placeholder.dds
+				}
+			}
+		}
+	}
+}

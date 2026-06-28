@@ -1,0 +1,9 @@
+﻿com_is_stalled_enactment_journal = {
+	exists = "variable_map(com_enactment_widget|flag:stalled)"
+}
+
+com_is_phase_enactment_journal = {
+	"variable_map(com_enactment_widget|flag:current_phase)" ?= {
+		this = flag:$phase$
+	}
+}

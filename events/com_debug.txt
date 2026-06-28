@@ -30,6 +30,7 @@ com_debug.1 = {
 		fix_variable_error = { variable = com_custom_owner_buildings }
 		fix_variable_error = { variable = com_gui_progressbar_var }
 		fix_variable_error = { variable = com_event_window_location_var }
+		fix_variable_error = { variable = com_journal_entry_building }
 
 		# CMF Journal Entry Framework
 		fix_variable_error = { variable = com_hidden_journal_groups }
@@ -61,6 +62,8 @@ com_debug.1 = {
 		fix_variable_error = { variable = com_victory_condition }
 		fix_variable_error = { variable = com_victory_effect }
 		fix_variable_error = { variable = com_reason_location }
+		fix_variable_error = { variable = com_enactment_widget }
+
 		# CMF International Organizations Framework
 		fix_variable_error = { variable = com_international_organizations_sgui }
 		fix_variable_error = { variable = com_show_international_organizations }

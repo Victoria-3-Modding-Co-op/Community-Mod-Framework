@@ -21,13 +21,14 @@ flowcontainer = {
 		spacing = 5
 		
 		com_international_situation_header = {}
-		com_international_situation_involved_countries = {}
 		com_international_situation_phase_information = {}
 		com_international_situation_timeout = {}
+		com_international_situation_flavor_text = {}
 		# com_international_situation_faction_leaders = {}
 		# com_international_situation_faction_members = {}
-		com_international_situation_outcome_container = {}
 		com_international_organization_buttons = {}
+		com_international_situation_involved_countries = {}
+		com_international_situation_outcome_container = {}
 		com_international_situation_phase_progress = {}
 	}
 }
@@ -38,128 +39,26 @@ types com_journal_widget_types {
 		parentanchor = hcenter
 		direction = vertical
 		minimumsize = { 540 -1 }
-		visible = "[JournalEntry.MakeScope.Var('com_situation_header_var').IsSet]"
 		
-		background = {
-			using = dark_area
-			alpha = 0.4
-			margin = { 8 0 }
+		widget = {
+			parentanchor = hcenter
+			minimumsize = { 540 20 }
+			visible = "[Not(JournalEntry.MakeScope.Var('com_situation_header_var').IsSet)]"
 		}
 		
 		textbox = {
 			parentanchor = hcenter
-			size = { 100 40 }
+			minimumsize = { 540 20 }
 			raw_text = "#bold [JournalEntry.MakeScope.Var('com_situation_header_var').GetFlagName]#!"
 			align = hcenter|nobaseline
 			using = fontsize_medium
-			autoresize = yes
-		}
-	}
-	
-	type com_international_situation_involved_countries = flowcontainer {
-		parentanchor = hcenter
-		direction = vertical
-		minimumsize = { 540 -1 }
-		spacing = 20
-		margin_bottom = 20
-		
-		widget = {
-			parentanchor = hcenter
-			size = { 220 30 }
 			
-			button = {
-				parentanchor = center
-				size = { 220 30 }
-				position = { 0 10 }
-				
-				using = default_button_primary_action
-				using = select_button_sound
-				text = "com_situation_toggle_involved"
-				onclick = "[GetVariableSystem.Toggle('com_show_involved_countries')]"
-			}
-		}
-		
-		flowcontainer = {
-			parentanchor = hcenter
-			direction = vertical
-			minimumsize = { 520 -1 }
-			spacing = 10
-			margin_bottom = 5
-			
-			visible = "[GetVariableSystem.Exists('com_show_involved_countries')]"
+			visible = "[JournalEntry.MakeScope.Var('com_situation_header_var').IsSet]"
 			
 			background = {
-				using = entry_bg_simple
-			}
-			
-			textbox = {
-				parentanchor = hcenter
-				autoresize = yes
-				text = "com_situation_involved_countries"
-				align = center|nobaseline
-				elide = right
-				using = fontsize_large
-			}
-			
-			divider_decorative = {
-				parentanchor = hcenter
-			}
-			
-			dynamicgridbox = {
-				parentanchor = hcenter
-				datamodel = "[JournalEntry.GetInvolvedCountries]"
-				datamodel_wrap = 8
-				flipdirection = yes
-				
-				item = {
-					widget = {
-						size = { 60 40 }
-						small_flag = { }
-					}
-				}
-			}
-		}
-		
-		flowcontainer = {
-			parentanchor = hcenter
-			direction = vertical
-			min_width = @panel_width_minus_30
-			max_width = @panel_width_minus_30
-			margin = { 5 10 }
-			spacing = 10
-			
-			visible = "[Not(IsDataModelEmpty(JournalEntry.MakeScope.GetList('com_situation_interloper_list')))]"
-			
-			background = {
-				using = entry_bg_simple
-			}
-			
-			textbox = {
-				parentanchor = hcenter
-				autoresize = yes
-				text = "com_situation_interloper_countries"
-				align = center|nobaseline
-				elide = right
-				using = fontsize_large
-			}
-			
-			divider_decorative = {
-				parentanchor = hcenter
-			}
-			
-			dynamicgridbox = {
-				parentanchor = hcenter
-				datamodel = "[JournalEntry.MakeScope.GetList('com_situation_interloper_list')]"
-				datamodel_wrap = 8
-				flipdirection = yes
-				
-				item = {
-					widget = {
-						datacontext = "[Scope.GetCountry]"
-						size = { 60 40 }
-						small_flag = { }
-					}
-				}
+				using = dark_area
+				alpha = 0.4
+				margin = { 8 0 }
 			}
 		}
 	}
@@ -279,21 +178,185 @@ types com_journal_widget_types {
 	}
 	
 	type com_international_situation_timeout = flowcontainer {
-		visible = "[JournalEntry.CanTimeOut]"
-		spacing = 5
 		parentanchor = hcenter
-		tooltip = "JOURNAL_ENTRY_ON_TIMEOUT_LONG"
+		direction = vertical
+		minimumsize = { 540 -1 }
 		
-		icon = {
-			size = { 30 30 }
-			texture = "gfx/interface/icons/generic_icons/clock.dds"
+		widget = {
+			size = { 20 20 }
+			#			visible = "[And(
+			#				JournalEntry.CanTimeOut,
+			#				JournalEntry.MakeScope.Var('com_involvement_status_var').IsSet
+			#			)]"
 		}
+		
+		flowcontainer = {
+			parentanchor = hcenter
+			direction = horizontal
+			
+			flowcontainer = {
+				parentanchor = hcenter
+				direction = horizontal
+				spacing = 5
+				minimumsize = { 220 -1 }
+				
+				visible = "[JournalEntry.CanTimeOut]"
+				tooltip = "JOURNAL_ENTRY_ON_TIMEOUT_LONG"
+				
+				icon = {
+					size = { 30 30 }
+					texture = "gfx/interface/icons/generic_icons/clock.dds"
+				}
+				textbox = {
+					text = "[JournalEntry.GetTimeoutTooltip]"
+					autoresize = yes
+					align = left|nobaseline
+					using = fontsize_large
+					parentanchor = vcenter
+				}
+			}
+			
+			textbox = {
+				parentanchor = hcenter
+				minimumsize = { 220 30 }
+				autoresize = yes
+				raw_text = "#todo com_involvement_status_var#!"
+				align = right|nobaseline
+				elide = right
+				using = fontsize_medium
+			}
+		}
+	}
+	
+	type com_international_situation_flavor_text = flowcontainer {
+		direction = vertical
+		using = default_list_position
+		
+		spacing = 20
+		
 		textbox = {
-			text = "[JournalEntry.GetTimeoutTooltip]"
+			#		visible = "[JournalEntry.MakeScope.Var('com_situation_reason_var').IsSet]"
 			autoresize = yes
+			raw_text = "#todo com_situation_reason_var"
+			min_width = @panel_width_minus_30
+			max_width = @panel_width_minus_30
+			multiline = yes
+			using = default_list_position
 			align = nobaseline
-			using = fontsize_large
-			parentanchor = vcenter
+			margin = { 15 15 }
+			
+			background = {
+				using = entry_bg
+			}
+		}
+	}
+	
+	type com_international_situation_involved_countries = flowcontainer {
+		parentanchor = hcenter
+		direction = vertical
+		minimumsize = { 540 -1 }
+		spacing = 20
+		
+		section_header_button = {
+			blockoverride "layout" {
+				size = { 520 38 }
+			}
+			blockoverride "left_text" {
+				text = "com_situation_toggle_involved"
+			}
+			blockoverride "onclick" {
+				onclick = "[GetVariableSystem.Toggle('com_show_involved_countries')]"
+			}
+			blockoverride "onclick_showmore" {
+				visible = "[Not(GetVariableSystem.Exists('com_show_involved_countries'))]"
+			}
+			blockoverride "onclick_showless" {
+				visible = "[GetVariableSystem.Exists('com_show_involved_countries')]"
+			}
+		}
+		
+		flowcontainer = {
+			parentanchor = hcenter
+			direction = vertical
+			minimumsize = { 520 -1 }
+			spacing = 10
+			margin_bottom = 5
+			
+			visible = "[GetVariableSystem.Exists('com_show_involved_countries')]"
+			
+			background = {
+				using = entry_bg_simple
+			}
+			
+			textbox = {
+				parentanchor = hcenter
+				autoresize = yes
+				text = "com_situation_involved_countries"
+				align = center|nobaseline
+				elide = right
+				using = fontsize_large
+			}
+			
+			divider_decorative = {
+				parentanchor = hcenter
+			}
+			
+			dynamicgridbox = {
+				parentanchor = hcenter
+				datamodel = "[JournalEntry.GetInvolvedCountries]"
+				datamodel_wrap = 8
+				flipdirection = yes
+				
+				item = {
+					widget = {
+						size = { 60 40 }
+						small_flag = { }
+					}
+				}
+			}
+		}
+		
+		flowcontainer = {
+			parentanchor = hcenter
+			direction = vertical
+			min_width = @panel_width_minus_30
+			max_width = @panel_width_minus_30
+			margin = { 5 10 }
+			spacing = 10
+			
+			visible = "[Not(IsDataModelEmpty(JournalEntry.MakeScope.GetList('com_situation_interloper_list')))]"
+			
+			background = {
+				using = entry_bg_simple
+			}
+			
+			textbox = {
+				parentanchor = hcenter
+				autoresize = yes
+				text = "com_situation_interloper_countries"
+				align = center|nobaseline
+				elide = right
+				using = fontsize_large
+			}
+			
+			divider_decorative = {
+				parentanchor = hcenter
+			}
+			
+			dynamicgridbox = {
+				parentanchor = hcenter
+				datamodel = "[JournalEntry.MakeScope.GetList('com_situation_interloper_list')]"
+				datamodel_wrap = 8
+				flipdirection = yes
+				
+				item = {
+					widget = {
+						datacontext = "[Scope.GetCountry]"
+						size = { 60 40 }
+						small_flag = { }
+					}
+				}
+			}
 		}
 	}
 	
@@ -303,31 +366,21 @@ types com_journal_widget_types {
 		minimumsize = { 540 -1 }
 		spacing = 5
 		
-		
-		button = {
-			parentanchor = hcenter
-			using = default_button_primary_action
-			using = select_button_sound
-			size = { 220 30 }
-			#text = "com_view_situation_endings"
-			onclick = "[GetVariableSystem.Toggle('com_show_situation_outomes')]"
-			
-			textbox = {
-				visible = "[Not(GetVariableSystem.Exists('com_show_situation_outomes'))]"
-				parentanchor = center
-				size = { 220 30 }
-				text = "com_view_situation_endings"
-				autoresize = yes
-				align = nobaseline
-				fontsize = 16
+		section_header_button = {
+			blockoverride "layout" {
+				size = { 520 38 }
 			}
-			textbox = {
+			blockoverride "left_text" {
+				text = "com_view_situation_endings"
+			}
+			blockoverride "onclick" {
+				onclick = "[GetVariableSystem.Toggle('com_show_situation_outomes')]"
+			}
+			blockoverride "onclick_showmore" {
+				visible = "[Not(GetVariableSystem.Exists('com_show_situation_outomes'))]"
+			}
+			blockoverride "onclick_showless" {
 				visible = "[GetVariableSystem.Exists('com_show_situation_outomes')]"
-				parentanchor = center
-				raw_text = "Hide Situation Outcomes"
-				autoresize = yes
-				align = nobaseline
-				fontsize = 16
 			}
 		}
 		
@@ -383,12 +436,11 @@ types com_journal_widget_types {
 		parentanchor = hcenter
 		minimumsize = { 540 -1 }
 		margin_bottom = 10
-		spacing = 10
 		
-		visible = "[Or(
-			JournalEntry.MakeScope.Var('com_situation_escalation_var').IsSet,
-			JournalEntry.MakeScope.Var('com_situation_deescalation_var').IsSet
-		)]"
+		#		visible = "[Or(
+		#			JournalEntry.MakeScope.Var('com_situation_escalation_var').IsSet,
+		#			JournalEntry.MakeScope.Var('com_situation_deescalation_var').IsSet
+		#		)]"
 		
 		using = entry_bg_fancy
 		

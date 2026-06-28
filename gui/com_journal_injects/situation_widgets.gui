@@ -111,7 +111,7 @@ types com_journal_widget_types {
 					size = { 100 100 }
 					fontsize = 80
 					align = vcenter|hcenter
-					text = "com_situation_phase_icon"
+					raw_text = "[JournalEntry.MakeScope.Var('com_situation_phase_icon_var').GetFlagName]"
 				}
 			}
 			
@@ -129,7 +129,7 @@ types com_journal_widget_types {
 				autoresize = yes
 				position = { -70 10 }
 				align = vcenter|hcenter
-				raw_text = "#todo com_phase_name"
+				raw_text = "[JournalEntry.MakeScope.Var('com_situation_phase_name_var').GetFlagName]"
 				using = fontsize_xl
 			}
 			
@@ -184,10 +184,10 @@ types com_journal_widget_types {
 		
 		widget = {
 			size = { 20 20 }
-			#			visible = "[And(
-			#				JournalEntry.CanTimeOut,
-			#				JournalEntry.MakeScope.Var('com_involvement_status_var').IsSet
-			#			)]"
+			visible = "[And(
+				JournalEntry.CanTimeOut,
+				JournalEntry.MakeScope.Var('com_involvement_status_var').IsSet
+			)]"
 		}
 		
 		flowcontainer = {
@@ -220,7 +220,7 @@ types com_journal_widget_types {
 				parentanchor = hcenter
 				minimumsize = { 220 30 }
 				autoresize = yes
-				raw_text = "#todo com_involvement_status_var#!"
+				raw_text = "[JournalEntry.MakeScope.Var('com_involvement_status_var').GetFlagName]"
 				align = right|nobaseline
 				elide = right
 				using = fontsize_medium
@@ -235,9 +235,9 @@ types com_journal_widget_types {
 		spacing = 20
 		
 		textbox = {
-			#		visible = "[JournalEntry.MakeScope.Var('com_situation_reason_var').IsSet]"
+			visible = "[JournalEntry.MakeScope.Var('com_situation_reason_var').IsSet]"
 			autoresize = yes
-			raw_text = "#todo com_situation_reason_var"
+			raw_text = "[JournalEntry.Makescope.Var('com_situation_reason_var').GetFlagName]"
 			min_width = @panel_width_minus_30
 			max_width = @panel_width_minus_30
 			multiline = yes
@@ -418,7 +418,7 @@ types com_journal_widget_types {
 						visible = "[JournalEntry.CanComplete]"
 					}
 					blockoverride "situation_outcome_name" {
-						raw_text = "#todo Success"
+						raw_text = "[JournalEntry.MakeScope.Var('com_situation_success_name_var').GetNameFlag]"
 					}
 					blockoverride "situation_outcome_tooltip" {
 						tooltip = "[JournalEntry.GetOnCompleteTooltip]"
@@ -435,7 +435,7 @@ types com_journal_widget_types {
 						visible = "[JournalEntry.CanTimeOut]"
 					}
 					blockoverride "situation_outcome_name" {
-						raw_text = "#todo Timeout"
+						raw_text = "[JournalEntry.MakeScope.Var('com_situation_timeout_name_var').GetNameFlag]"
 					}
 					blockoverride "situation_outcome_tooltip" {
 						tooltip = "[JournalEntry.GetOnTimeoutTooltip]"
@@ -452,7 +452,7 @@ types com_journal_widget_types {
 						visible = "[Not(StringIsEmpty(JournalEntry.GetFailureTooltip))]" # We do not have a CanFail function
 					}
 					blockoverride "situation_outcome_name" {
-						raw_text = "#todo Failure"
+						raw_text = "[JournalEntry.MakeScope.Var('com_situation_failure_name_var').GetNameFlag]"
 					}
 					blockoverride "situation_outcome_tooltip" {
 						tooltip = "[JournalEntry.GetOnFailTooltip]"
@@ -510,9 +510,7 @@ types com_journal_widget_types {
 			}
 			blockoverride "text" {}
 			textbox = {
-				block "situation_outcome_name" {
-					raw_text = "#todo outcome_name"
-				}
+				block "situation_outcome_name" {}
 				parentanchor = center
 				autoresize = yes
 				max_width = 500
@@ -539,7 +537,7 @@ types com_journal_widget_types {
 		default_header_clean_faded = {
 			parentanchor = hcenter
 			blockoverride "text" {
-				raw_text = "Next Phase Progress"
+				text = "com_next_phase_progress"
 			}
 			blockoverride "size" {
 				size = { 532 45 }
@@ -559,6 +557,9 @@ types com_journal_widget_types {
 					onclick = "[GetVariableSystem.Toggle('com_show_escalation_factors')]"
 					onclick = "[GetVariableSystem.Clear('com_show_deescalation_factors')]"
 				}
+				blockoverride "phase_progress_button_next_phase" {
+					text = "com_next_phase_escalation"
+				}
 			}
 			
 			com_international_situation_phase_progress_item = {
@@ -568,6 +569,9 @@ types com_journal_widget_types {
 				blockoverride "phase_progress_button_onclick" {
 					onclick = "[GetVariableSystem.Toggle('com_show_deescalation_factors')]"
 					onclick = "[GetVariableSystem.Clear('com_show_escalation_factors')]"
+				}
+				blockoverride "phase_progress_button_next_phase" {
+					text = "com_next_phase_deescalation"
 				}
 			}
 		}
@@ -608,7 +612,7 @@ types com_journal_widget_types {
 					parentanchor = center
 					position = { 0 -10 }
 					
-					raw_text = "#bold #italic Catalysts Towards #todo com_situation_escalation_name_var#!"
+					text = "com_catalysts_header"
 					autoresize = yes
 					align = nobaseline
 					fontsize = 18
@@ -616,7 +620,7 @@ types com_journal_widget_types {
 				textbox = {
 					parentanchor = center
 					position = { 0 10 }
-					raw_text = "#blue #italic Complete Catalysts to increase phase progress#!"
+					text = "com_catalysts_info"
 					autoresize = yes
 					align = nobaseline
 					fontsize = 16
@@ -629,7 +633,7 @@ types com_journal_widget_types {
 					JournalEntry.MakeScope.Var('com_escalation_factors_var').IsSet
 				)]"
 				autoresize = yes
-				raw_text = "#todo com_escalation_factors_var"
+				text = "com_escalation_factors"
 				min_width = @panel_width_minus_30
 				max_width = @panel_width_minus_30
 				multiline = yes
@@ -643,7 +647,7 @@ types com_journal_widget_types {
 					JournalEntry.MakeScope.Var('com_deescalation_factors_var').IsSet
 				)]"
 				autoresize = yes
-				raw_text = "#todo com_escalation_factors_var"
+				text = "com_deescalation_factors"
 				min_width = @panel_width_minus_30
 				max_width = @panel_width_minus_30
 				multiline = yes
@@ -677,7 +681,7 @@ types com_journal_widget_types {
 		textbox = {
 			parentanchor = top|hcenter
 			position = { 0 5 }
-			raw_text = "#todo Next Phase"
+			block "phase_progress_button_next_phase" {}
 			autoresize = yes
 			align = nobaseline
 			fontsize = 16

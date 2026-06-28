@@ -16,12 +16,16 @@
  com_situation_involved_countries: "$com_involved$  [Concept('concept_country', '$concept_countries$')]"
  com_situation_interloper_countries: "$com_interloper$  [Concept('concept_country', '$concept_countries$')]"
  
- com_situation_phase_icon: "[JournalEntry.MakeScope.Var('com_situation_phase_icon_var').GetFlagName]"
  com_situation_current_phase: "Current Phase:"
- com_situation_current_phase_name: "[JournalEntry.MakeScope.Var('com_situation_phase_name_var').GetFlagName]"
  com_situation_phase_effects: "Phase Effects:"
- 
  com_view_situation_endings: "View Situation Outcomes"
+ com_next_phase_progress: "Next Phase Progress"
+ com_catalysts_header: "#bold #italic Catalysts Towards #todo com_situation_escalation_name_var#!#!"
+ com_catalysts_info: "#blue #italic Complete Catalysts to increase phase progress#!#!"
+ com_escalation_factors: "[JournalEntry.MakeScope.Var(com_escalation_factors_var).GetFlagName]"
+ com_deescalation_factors: "[JournalEntry.MakeScope.Var(com_descalation_factors_var).GetFlagName]"
+ com_next_phase_escalation: "[JournalEntry.MakeScope.Var(com_escalation_name_var).GetFlagName]"
+ com_next_phase_deescalation: "[JournalEntry.MakeScope.Var(com_deescalation_name_var).GetFlagName]"
 
 ####---------- Factional Situations Localization ----------####
  # GUI

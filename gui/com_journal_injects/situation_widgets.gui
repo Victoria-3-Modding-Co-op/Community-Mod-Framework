@@ -21,7 +21,7 @@ flowcontainer = {
 		spacing = 5
 		
 		com_international_situation_header = {}
-		# com_international_situation_illustration = {}
+		com_international_situation_illustration = {}
 		com_international_situation_phase_information = {}
 		com_international_situation_timeout = {}
 		com_international_situation_flavor_text = {}
@@ -41,11 +41,7 @@ types com_journal_widget_types {
 		direction = vertical
 		minimumsize = { 540 -1 }
 		
-		widget = {
-			parentanchor = hcenter
-			minimumsize = { 540 20 }
-			visible = "[Not(JournalEntry.MakeScope.Var('com_situation_header_var').IsSet)]"
-		}
+		visible = "[JournalEntry.MakeScope.Var('com_situation_header_var').IsSet]"
 		
 		textbox = {
 			parentanchor = hcenter
@@ -53,8 +49,6 @@ types com_journal_widget_types {
 			raw_text = "#bold [JournalEntry.MakeScope.Var('com_situation_header_var').GetFlagName]#!"
 			align = hcenter|nobaseline
 			using = fontsize_medium
-			
-			visible = "[JournalEntry.MakeScope.Var('com_situation_header_var').IsSet]"
 			
 			background = {
 				using = dark_area
@@ -68,8 +62,103 @@ types com_journal_widget_types {
 		parentanchor = hcenter
 		direction = vertical
 		minimumsize = { 540 -1 }
+		margin_top = 50
 		
+		background = {
+			texture = "gfx/interface/illustrations/diplomatic_plays/phase_diplomatic_maneuvers_big.dds"
+			fittype = centercrop
+			margin_top = -50
+		}
 		
+		widget = {
+			parentanchor = hcenter
+			size = { 520 200 }
+			background = {
+				texture = "gfx/interface/character_panel/char_bg_frame.dds"
+				margin_left = 18
+				margin_right = 12
+				margin_bottom = 10
+				spriteType = Corneredtiled
+				
+				spriteborder_left = 200
+				spriteborder_right = 60
+				spriteborder_top = 170
+				spriteborder_bottom = 180
+				
+				texture_density = 2
+			}
+			
+			widget = {
+				parentanchor = top|hcenter
+				size = { 150 150 }
+				position = { 0 -50 }
+				icon = {
+					parentanchor = center
+					size = { 150 150 }
+					position = { 2 2 }
+					texture = "gfx/interface/backgrounds/com_bg_pb_frame.dds"
+				}
+				icon = {
+					parentanchor = center
+					size = { 150 150 }
+					texture = "gfx/coat_of_arms/textured_emblems/pb_frame_03.dds"
+				}
+				icon = {
+					parentanchor = center
+					texture = "[JournalEntry.GetIcon]"
+					position = { 0 -10 }
+					size = { 75 75 }
+				}
+			}
+			
+			widget = {
+				parentanchor = top|right
+				size = { 220 80 }
+				position = { 0 -10 }
+				
+				background = {
+					using = dark_area
+					alpha = 0.50
+					margin = { 0 0 }
+					
+					visible = "[GetVariableSystem.Exists('com_show_situation_outomes')]"
+					
+					modify_texture = {
+						using = texture_velvet
+					}
+					modify_texture = {
+						texture = "gfx/interface/masks/fade_horizontal_center.dds"
+						spriteType = Corneredstretched
+						spriteborder = { 0 0 }
+						blend_mode = alphamultiply
+					}
+					modify_texture = {
+						texture = "gfx/interface/masks/fade_vertical_center.dds"
+						spriteType = Corneredstretched
+						spriteborder = { 0 0 }
+						blend_mode = alphamultiply
+					}
+				}
+				
+				textbox = {
+					parentanchor = center
+					position = { 0 -10 }
+					autoresize = yes
+					text = "com_situation_start_date_header"
+					align = hcenter|nobaseline
+					using = fontsize_medium
+				}
+				
+				textbox = {
+					parentanchor = center
+					position = { 0 10 }
+					autoresize = yes
+					text = "com_situation_start_date"
+					align = hcenter|nobaseline
+					using = fontsize_medium
+				}
+			}
+		}
 	}
 	
 	type com_international_situation_phase_information = flowcontainer {

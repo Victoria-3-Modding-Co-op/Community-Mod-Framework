@@ -9,6 +9,124 @@
     set_variable = com_hide_status_desc
 }
 
+com_set_international_situation_start_date_efect = {
+    if = {
+       limit = {
+           month =
+       }
+       set_variable = {
+           name = com_situation_start_month_var
+           value = flag:JANUARY
+       }
+    }
+    else_if = {
+        limit = {
+            month = 1
+        }
+        set_variable = {
+            name = com_situation_start_month_var
+            value = flag:FEBRUARY
+        }
+    }
+    else_if = {
+        limit = {
+            month = 2
+        }
+        set_variable = {
+            name = com_situation_start_month_var
+            value = flag:MARCH
+        }
+    }
+    else_if = {
+        limit = {
+            month = 3
+        }
+        set_variable = {
+            name = com_situation_start_month_var
+            value = flag:APRIL
+        }
+    }
+    else_if = {
+        limit = {
+            month = 4
+        }
+        set_variable = {
+            name = com_situation_start_month_var
+            value = flag:MAY
+        }
+    }
+    else_if = {
+        limit = {
+            month = 5
+        }
+        set_variable = {
+            name = com_situation_start_month_var
+            value = flag:JUNE
+        }
+    }
+    else_if = {
+        limit = {
+            month = 6
+        }
+        set_variable = {
+            name = com_situation_start_month_var
+            value = flag:JULY
+        }
+    }
+    else_if = {
+        limit = {
+            month = 7
+        }
+        set_variable = {
+            name = com_situation_start_month_var
+            value = flag:AUGUST
+        }
+    }
+    else_if = {
+        limit = {
+            month = 8
+        }
+        set_variable = {
+            name = com_situation_start_month_var
+            value = flag:SEPTEMBER
+        }
+    }
+    else_if = {
+        limit = {
+            month = 9
+        }
+        set_variable = {
+            name = com_situation_start_month_var
+            value = flag:OCTOBER
+        }
+    }
+    else_if = {
+        limit = {
+            month = 10
+        }
+        set_variable = {
+            name = com_situation_start_month_var
+            value = flag:NOVEMBER
+        }
+    }
+    else_if = {
+        limit = {
+            month = 11
+        }
+        set_variable = {
+            name = com_situation_start_month_var
+            value = flag:DECEMBER
+        }
+    }
+    else = {
+        error_log = "Effect com_set_international_situation_start_date_efect was called but the month value was out of range. How did this happen?"
+    }
+    set_variable = {
+        name = com_situation_start_year_var
+        value = year
+    }
+}
+
 ####---------- Outdated Situation Effects ----------####
 # Add journal entry to the scoped country
 # and add a newly created situation to that journal

@@ -24,6 +24,12 @@
  
  com_situation_start_date_header: "#blue #bold Started In:#!#!"
  com_situation_start_date: "[JournalEntry.MakeScope.Var('com_situation_start_month_var').GetFlagName] [JournalEntry.MakeScope.Var('com_situation_start_year_var').GetValue]"
+ 
+ com_situation_background_africa_construction_colony: "com_situation_background_africa_construction_colony"
+ com_situation_background_asia_westerners_arriving: "com_situation_background_asia_westerners_arriving"
+ com_situation_background_europenorthamerica_london_center: "com_situation_background_europenorthamerica_london_center"
+ com_situation_background_europenorthamerica_political_extremism: "com_situation_background_europenorthamerica_political_extremism"
+ com_situation_background_southamerica_aristocrats: "com_situation_background_southamerica_aristocrats"
 
 ####---------- Factional Situations Localization ----------####
  # GUI

@@ -46,6 +46,7 @@ com_debug.1 = {
 		
 		# CMF International Situations Framework
 		fix_variable_error = { variable = com_situation_header_var }
+		fix_variable_error = { variable = com_situation_illustration_var }
 		fix_variable_error = { variable = com_situation_start_month_var }
 		fix_variable_error = { variable = com_situation_start_year_var }
 		

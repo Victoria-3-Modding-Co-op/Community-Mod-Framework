@@ -64,8 +64,10 @@ types com_journal_widget_types {
 		minimumsize = { 540 -1 }
 		margin_top = 50
 		
+		visible = "[JournalEntry.MakeScope.Var('com_situation_illustration_var').IsSet]"
+		
 		background = {
-			texture = "gfx/interface/illustrations/diplomatic_plays/phase_diplomatic_maneuvers_big.dds"
+			texture = "[JournalEntry.MakeScope.Var('com_situation_illustration_var').GetInterestGroupTrait.GetTexture]"
 			fittype = centercrop
 			margin_top = -50
 		}
@@ -121,8 +123,6 @@ types com_journal_widget_types {
 					alpha = 0.50
 					margin = { 0 0 }
 					
-					visible = "[GetVariableSystem.Exists('com_show_situation_outomes')]"
-					
 					modify_texture = {
 						using = texture_velvet
 					}
@@ -165,6 +165,7 @@ types com_journal_widget_types {
 		direction = vertical
 		parentanchor = hcenter
 		minimumsize = { 540 -1 }
+		margin_top = 15
 		
 		visible = "[And(
 			JournalEntry.MakeScope.Var('com_situation_phase_icon_var').IsSet,
@@ -279,6 +280,7 @@ types com_journal_widget_types {
 		parentanchor = hcenter
 		direction = vertical
 		minimumsize = { 540 -1 }
+		margin_top = 5
 		
 		widget = {
 			size = { 20 20 }
@@ -572,7 +574,7 @@ types com_journal_widget_types {
 						tooltip = "[JournalEntry.GetOnCompleteTooltip]"
 					}
 					blockoverride "situation_outcome_texture" {
-						texture = "gfx/interface/illustrations/situation_backgrounds/situation_complete_illus.dds"
+						texture = "gfx/interface/illustrations/situation_outcomes/situation_complete_illus.dds"
 					}
 				}
 			}
@@ -589,7 +591,7 @@ types com_journal_widget_types {
 						tooltip = "[JournalEntry.GetOnTimeoutTooltip]"
 					}
 					blockoverride "situation_outcome_texture" {
-						texture = "gfx/interface/illustrations/situation_backgrounds/situation_timeout_illus.dds"
+						texture = "gfx/interface/illustrations/situation_outcomes/situation_timeout_illus.dds"
 					}
 				}
 			}
@@ -606,7 +608,7 @@ types com_journal_widget_types {
 						tooltip = "[JournalEntry.GetOnFailTooltip]"
 					}
 					blockoverride "situation_outcome_texture" {
-						texture = "gfx/interface/illustrations/situation_backgrounds/situation_failure_illus.dds"
+						texture = "gfx/interface/illustrations/situation_outcomes/situation_failure_illus.dds"
 					}
 				}
 			}

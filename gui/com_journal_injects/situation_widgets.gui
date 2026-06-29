@@ -260,7 +260,7 @@ types com_journal_widget_types {
 	type com_international_situation_flavor_text = flowcontainer {
 		direction = vertical
 		using = default_list_position
-		
+		margin_bottom = 5
 		spacing = 20
 		
 		textbox = {
@@ -285,15 +285,30 @@ types com_journal_widget_types {
 		direction = vertical
 		minimumsize = { 540 -1 }
 		spacing = 5
-		margin_bottom = 5
+		margin_bottom = 10
 		
 		background = {
-			visible = "[GetVariableSystem.Exists('com_show_involved_countries')]"
 			using = dark_area
-			alpha = 0.25
-			margin_top = -35
-			margin_left = -5
-			margin_right = -5
+			alpha = 0.50
+			margin = { 0 -5 }
+			
+			visible = "[GetVariableSystem.Exists('com_show_involved_countries')]"
+			
+			modify_texture = {
+				using = texture_velvet
+			}
+			modify_texture = {
+				texture = "gfx/interface/masks/fade_horizontal_center.dds"
+				spriteType = Corneredstretched
+				spriteborder = { -80 0 }
+				blend_mode = alphamultiply
+			}
+			modify_texture = {
+				texture = "gfx/interface/masks/fade_vertical_center.dds"
+				spriteType = Corneredstretched
+				spriteborder = { 0 -20 }
+				blend_mode = alphamultiply
+			}
 		}
 		
 		section_header_button = {
@@ -405,6 +420,31 @@ types com_journal_widget_types {
 		direction = vertical
 		parentanchor = hcenter
 		minimumsize = { 540 -1 }
+		margin_bottom = 10
+		
+		background = {
+			using = dark_area
+			alpha = 0.50
+			margin = { 0 -5 }
+			
+			visible = "[GetVariableSystem.Exists('com_show_situation_outomes')]"
+			
+			modify_texture = {
+				using = texture_velvet
+			}
+			modify_texture = {
+				texture = "gfx/interface/masks/fade_horizontal_center.dds"
+				spriteType = Corneredstretched
+				spriteborder = { -80 0 }
+				blend_mode = alphamultiply
+			}
+			modify_texture = {
+				texture = "gfx/interface/masks/fade_vertical_center.dds"
+				spriteType = Corneredstretched
+				spriteborder = { 0 -20 }
+				blend_mode = alphamultiply
+			}
+		}
 		
 		section_header_button = {
 			blockoverride "layout" {
@@ -429,17 +469,7 @@ types com_journal_widget_types {
 			parentanchor = hcenter
 			spacing = 10
 			margin = { 5 5 }
-			
 			visible = "[GetVariableSystem.Exists('com_show_situation_outomes')]"
-			
-			background = {
-				using = dark_area
-				alpha = 0.25
-				
-				modify_texture = {
-					using = texture_velvet
-				}
-			}
 			
 			block "com_situation_completion_outcome" {
 				com_international_situation_outcome_item = {
@@ -496,6 +526,7 @@ types com_journal_widget_types {
 	
 	type com_international_situation_outcome_item = widget {
 		size = { 160 200 }
+		
 		block "situation_outcome_visibility" {}
 		block "situation_outcome_tooltip" {}
 		icon = {
@@ -577,6 +608,7 @@ types com_journal_widget_types {
 			direction = horizontal
 			parentanchor = hcenter
 			spacing = 20
+			margin_bottom = 5
 			
 			com_international_situation_phase_progress_item = {
 				blockoverride "phase_progress_visibility" {
@@ -751,7 +783,8 @@ types com_journal_widget_types {
 					visible = "no"
 				}
 				parentanchor = center
-				size = { 48 48 }
+				size = { 50 50 }
+				position = { 0 2 }
 				texture = "gfx/interface/map_markers/revolutionary_movement_frame.dds"
 				
 				icon = {
@@ -764,16 +797,17 @@ types com_journal_widget_types {
 			
 			icon = {
 				parentanchor = center
+				position = { 0 1 }
 				size = { 40 40 }
 				texture = "gfx/interface/icons/state_status_icons/unused/state_status_bg.dds"
-			}
-			
-			textbox = {
-				parentanchor = center
-				size = { 100 100 }
-				fontsize = 30
-				align = vcenter|hcenter
-				block "phase_progress_button_icon" {}
+				
+				textbox = {
+					parentanchor = center
+					size = { 100 100 }
+					fontsize = 30
+					align = vcenter|hcenter
+					block "phase_progress_button_icon" {}
+				}
 			}
 			
 			button = {

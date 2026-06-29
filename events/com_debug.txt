@@ -48,6 +48,25 @@ com_debug.1 = {
 		fix_variable_error = { variable = com_situation_header_var }
 		fix_variable_error = { variable = com_situation_phase_icon_var }
 		fix_variable_error = { variable = com_situation_phase_name_var }
+		fix_variable_error = { variable = com_involvement_status_var }
+		fix_variable_error = { variable = com_situation_reason_var }
+		fix_variable_error = { variable = com_situation_success_name_var }
+		fix_variable_error = { variable = com_situation_timeout_name_var }
+		fix_variable_error = { variable = com_situation_failure_name_var }
+		
+		fix_variable_error = { variable = com_situation_escalation_var }
+		fix_variable_error = { variable = com_situation_escalation_next_phase_name_var }
+		fix_variable_error = { variable = com_situation_escalation_next_phase_icon_var }
+		fix_variable_error = { variable = com_situation_escalation_max_var }
+		fix_variable_error = { variable = com_situation_escalation_min_var }
+		fix_variable_error = { variable = com_situation_escalation_factors_var }
+		
+		fix_variable_error = { variable = com_situation_deescalation_var }
+		fix_variable_error = { variable = com_situation_deescalation_next_phase_name_var }
+		fix_variable_error = { variable = com_situation_deescalation_next_phase_icon_var }
+		fix_variable_error = { variable = com_situation_deescalation_max_var }
+		fix_variable_error = { variable = com_situation_deescalation_min_var }
+		fix_variable_error = { variable = com_situation_deescalation_factors_var }
 		
 		fix_variable_error = { variable = com_situation }
 		fix_variable_error = { variable = com_side_left }

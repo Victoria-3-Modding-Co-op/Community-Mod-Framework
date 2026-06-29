@@ -46,7 +46,7 @@
  je_com_religious_organization: "Church of WOLOLO"
  je_com_religious_organization_reason: "$je_com_religious_organization$"
  
- # Localization Trick
+ # Localization Tricks
  com_international_organizations: "[Concept('concept_com_international_organization','$concept_com_international_organizations$')]"
  com_organization: "[Concept('concept_com_international_organization','$concept_com_international_organization_short$')]"
  com_org: "[Concept('concept_com_international_organization','$concept_com_international_organization_shorter$')]"
@@ -64,10 +64,6 @@
  com_organization_hq: "[Concept('concept_com_international_organization_headquarters','$concept_com_international_organization_headquarters_med_short$')]"
  com_org_headquarters: "[Concept('concept_com_international_organization_headquarters','$concept_com_international_organization_headquarters_short$')]"
  com_org_hq: "[Concept('concept_com_international_organization_headquarters','$concept_com_international_organization_headquarters_shorter$')]"
-
- com_international_situations: "[Concept('concept_com_international_situation','$concept_com_international_situations$')]"
- com_situation: "[Concept('concept_com_international_situation','$concept_com_international_situation_short$')]"
- com_situations: "[Concept('concept_com_international_situation','$concept_com_international_situations_short$')]"
 
  com_flag_loc: "[TopScope.GetLocalVariable('com_flag_loc').GetFlagName]"
 

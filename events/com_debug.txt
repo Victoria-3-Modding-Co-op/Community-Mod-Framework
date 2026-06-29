@@ -312,6 +312,20 @@ com_debug.1 = {
 		fix_variable_error = { variable = com_name_first_no_formatting }
 		fix_variable_error = { variable = com_name_last }
 		fix_variable_error = { variable = com_name_last_no_formatting }
+		
+		# LITERALLY THE MONTHS OF THE YEAR
+		fix_variable_error = { variable = JANUARY }
+		fix_variable_error = { variable = FEBRUARY }
+		fix_variable_error = { variable = MARCH }
+		fix_variable_error = { variable = APRIL }
+		fix_variable_error = { variable = MAY }
+		fix_variable_error = { variable = JUNE }
+		fix_variable_error = { variable = JULY }
+		fix_variable_error = { variable = AUGUST }
+		fix_variable_error = { variable = SEPTEMBER }
+		fix_variable_error = { variable = OCTOBER }
+		fix_variable_error = { variable = NOVEMBER }
+		fix_variable_error = { variable = DECEMBER }
 	}
 }
 

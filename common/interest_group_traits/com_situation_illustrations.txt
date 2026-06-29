@@ -1,0 +1,19 @@
+﻿com_situation_background_africa_construction_colony = {
+	icon = gfx/interface/illustrations/situation_backgrounds/situation_background_africa_construction_colony.dds
+}
+
+com_situation_background_asia_westerners_arriving = {
+	icon = gfx/interface/illustrations/situation_backgrounds/situation_background_asia_westerners_arriving.dds
+}
+
+com_situation_background_europenorthamerica_london_center = {
+	icon = gfx/interface/illustrations/situation_backgrounds/situation_background_europenorthamerica_london_center.dds
+}
+
+com_situation_background_europenorthamerica_political_extremism = {
+	icon = gfx/interface/illustrations/situation_backgrounds/situation_background_europenorthamerica_political_extremism.dds
+}
+
+com_situation_background_southamerica_aristocrats = {
+	icon = gfx/interface/illustrations/situation_backgrounds/situation_background_southamerica_aristocrats.dds
+}

@@ -12,7 +12,7 @@
 com_set_international_situation_start_date_efect = {
     if = {
        limit = {
-           month =
+           month = 0
        }
        set_variable = {
            name = com_situation_start_month_var

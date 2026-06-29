@@ -70,6 +70,8 @@ types com_journal_widget_types {
 			texture = "[JournalEntry.MakeScope.Var('com_situation_illustration_var').GetInterestGroupTrait.GetTexture]"
 			fittype = centercrop
 			margin_top = -50
+			margin_left = -10
+			margin_right = -10
 		}
 		
 		widget = {
@@ -492,7 +494,7 @@ types com_journal_widget_types {
 			
 			dynamicgridbox = {
 				parentanchor = hcenter
-				datamodel = "[JournalEntry.GetInvolvedCountries]"
+				datamodel = "[JournalEntry.MakeScope.GetList('com_situation_interloper_list')]"
 				datamodel_wrap = 8
 				flipdirection = yes
 				
@@ -629,7 +631,7 @@ types com_journal_widget_types {
 				parentanchor = center
 				size = { 100% 100% }
 				block "situation_outcome_texture" {
-					texture = "gfx/interface/illustrations/situation_backgrounds/situation_invalid_illus.dds"
+					texture = "gfx/interface/illustrations/situation_outcomes/situation_invalid_illus.dds"
 				}
 				modify_texture = {
 					texture = "gfx/interface/backgrounds/default_bg_shading.dds"

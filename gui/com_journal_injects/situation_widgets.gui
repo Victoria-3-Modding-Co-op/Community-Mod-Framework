@@ -576,6 +576,9 @@ types com_journal_widget_types {
 				blockoverride "phase_progress_button_icon" {
 					raw_text = "[JournalEntry.MakeScope.Var('com_escalation_next_phase_icon_var').GetFlagName]"
 				}
+				blockoverride "phase_progress_button_icon_glow_visibility" {
+					visible = "[GetVariableSystem.Exists('com_show_escalation_factors')]"
+				}
 				blockoverride "phase_progress_button_onclick" {
 					onclick = "[GetVariableSystem.Toggle('com_show_escalation_factors')]"
 					onclick = "[GetVariableSystem.Clear('com_show_deescalation_factors')]"
@@ -588,6 +591,9 @@ types com_journal_widget_types {
 					max = "[JournalEntry.MakeScope.Var('com_situation_escalation_max_var').GetValue]"
 					min = "[JournalEntry.MakeScope.Var('com_situation_escalation_min_var').GetValue]"
 				}
+				blockoverride "phase_progress_bar_tooltip" {
+					tooltip = "com_escalation_progress_bar_tooltip"
+				}
 			}
 			
 			com_international_situation_phase_progress_item = {
@@ -596,6 +602,9 @@ types com_journal_widget_types {
 				}
 				blockoverride "phase_progress_button_icon" {
 					raw_text = "[JournalEntry.MakeScope.Var('com_deescalation_next_phase_icon_var').GetFlagName]"
+				}
+				blockoverride "phase_progress_button_icon_glow_visibility" {
+					visible = "[GetVariableSystem.Exists('com_show_deescalation_factors')]"
 				}
 				blockoverride "phase_progress_button_onclick" {
 					onclick = "[GetVariableSystem.Toggle('com_show_deescalation_factors')]"
@@ -608,6 +617,9 @@ types com_journal_widget_types {
 					value = "[JournalEntry.MakeScope.Var('com_situation_descalation_var').GetValue]"
 					max = "[JournalEntry.MakeScope.Var('com_situation_descalation_max_var').GetValue]"
 					min = "[JournalEntry.MakeScope.Var('com_situation_deescalation_min_var').GetValue]"
+				}
+				blockoverride "phase_progress_bar_tooltip" {
+					tooltip = "com_deescalation_progress_bar_tooltip"
 				}
 			}
 		}
@@ -726,6 +738,22 @@ types com_journal_widget_types {
 			mirror = vertical
 			
 			icon = {
+				block "phase_progress_button_icon_glow_visibility" {
+					visible = "no"
+				}
+				parentanchor = center
+				size = { 48 48 }
+				texture = "gfx/interface/map_markers/revolutionary_movement_frame.dds"
+				
+				icon = {
+					parentanchor = center
+					using = rotate_glow_animation_02
+					size = { 300% 300% }
+					alpha = 0.5
+				}
+			}
+			
+			icon = {
 				parentanchor = center
 				size = { 40 40 }
 				texture = "gfx/interface/icons/state_status_icons/unused/state_status_bg.dds"
@@ -757,7 +785,7 @@ types com_journal_widget_types {
 			parentanchor = bottom|hcenter
 			position = { 0 -10 }
 			size = { 80 10 }
-			
+			block "phase_progress_bar_tooltip" {}
 		}
 	}
 }

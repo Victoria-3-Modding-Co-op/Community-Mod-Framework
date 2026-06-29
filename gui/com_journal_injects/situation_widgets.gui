@@ -220,10 +220,30 @@ types com_journal_widget_types {
 				parentanchor = hcenter
 				minimumsize = { 220 30 }
 				autoresize = yes
-				raw_text = "[JournalEntry.MakeScope.Var('com_involvement_status_var').GetFlagName]"
+				raw_text = "#bold [JournalEntry.MakeScope.Var('com_involvement_status_var').GetFlagName]#!"
 				align = right|nobaseline
 				elide = right
 				using = fontsize_medium
+				
+				background = {
+					using = dark_area
+					alpha = 0.5
+					margin = { 20 10 }
+					
+					modify_texture = {
+						texture = "gfx/interface/masks/fade_horizontal_center.dds"
+						spriteType = Corneredstretched
+						spriteborder = { 0 0 }
+						blend_mode = alphamultiply
+					}
+					
+					modify_texture = {
+						texture = "gfx/interface/masks/fade_vertical_center.dds"
+						spriteType = Corneredstretched
+						spriteborder = { 0 0 }
+						blend_mode = alphamultiply
+					}
+				}
 			}
 		}
 	}
@@ -237,7 +257,7 @@ types com_journal_widget_types {
 		textbox = {
 			visible = "[JournalEntry.MakeScope.Var('com_situation_reason_var').IsSet]"
 			autoresize = yes
-			raw_text = "[JournalEntry.Makescope.Var('com_situation_reason_var').GetFlagName]"
+			raw_text = "[JournalEntry.MakeScope.Var('com_situation_reason_var').GetFlagName]"
 			min_width = @panel_width_minus_30
 			max_width = @panel_width_minus_30
 			multiline = yes
@@ -418,7 +438,7 @@ types com_journal_widget_types {
 						visible = "[JournalEntry.CanComplete]"
 					}
 					blockoverride "situation_outcome_name" {
-						raw_text = "[JournalEntry.MakeScope.Var('com_situation_success_name_var').GetFlagName]"
+						raw_text = "#bold [JournalEntry.MakeScope.Var('com_situation_success_name_var').GetFlagName]#!"
 					}
 					blockoverride "situation_outcome_tooltip" {
 						tooltip = "[JournalEntry.GetOnCompleteTooltip]"
@@ -435,7 +455,7 @@ types com_journal_widget_types {
 						visible = "[JournalEntry.CanTimeOut]"
 					}
 					blockoverride "situation_outcome_name" {
-						raw_text = "[JournalEntry.MakeScope.Var('com_situation_timeout_name_var').GetFlagName]"
+						raw_text = "#bold [JournalEntry.MakeScope.Var('com_situation_timeout_name_var').GetFlagName]#!"
 					}
 					blockoverride "situation_outcome_tooltip" {
 						tooltip = "[JournalEntry.GetOnTimeoutTooltip]"
@@ -452,7 +472,7 @@ types com_journal_widget_types {
 						visible = "[Not(StringIsEmpty(JournalEntry.GetFailureTooltip))]" # We do not have a CanFail function
 					}
 					blockoverride "situation_outcome_name" {
-						raw_text = "[JournalEntry.MakeScope.Var('com_situation_failure_name_var').GetFlagName]"
+						raw_text = "#bold [JournalEntry.MakeScope.Var('com_situation_failure_name_var').GetFlagName]#!"
 					}
 					blockoverride "situation_outcome_tooltip" {
 						tooltip = "[JournalEntry.GetOnFailTooltip]"
@@ -553,12 +573,15 @@ types com_journal_widget_types {
 				blockoverride "phase_progress_visibility" {
 					visible = "[JournalEntry.MakeScope.Var('com_situation_escalation_var').IsSet]"
 				}
+				blockoverride "phase_progress_button_icon" {
+					raw_text = "[JournalEntry.MakeScope.Var('com_escalation_next_phase_icon_var').GetFlagName]"
+				}
 				blockoverride "phase_progress_button_onclick" {
 					onclick = "[GetVariableSystem.Toggle('com_show_escalation_factors')]"
 					onclick = "[GetVariableSystem.Clear('com_show_deescalation_factors')]"
 				}
 				blockoverride "phase_progress_button_next_phase" {
-					raw_text = "[JournalEntry.MakeScope.Var(com_escalation_phase_name_var).GetFlagName]"
+					raw_text = "[JournalEntry.MakeScope.Var('com_escalation_next_phase_name_var').GetFlagName]"
 				}
 				blockoverride "values" {
 					value = "[JournalEntry.MakeScope.Var('com_situation_escalation_var').GetValue]"
@@ -571,12 +594,15 @@ types com_journal_widget_types {
 				blockoverride "phase_progress_visibility" {
 					visible = "[JournalEntry.MakeScope.Var('com_situation_deescalation_var').IsSet]"
 				}
+				blockoverride "phase_progress_button_icon" {
+					raw_text = "[JournalEntry.MakeScope.Var('com_deescalation_next_phase_icon_var').GetFlagName]"
+				}
 				blockoverride "phase_progress_button_onclick" {
 					onclick = "[GetVariableSystem.Toggle('com_show_deescalation_factors')]"
 					onclick = "[GetVariableSystem.Clear('com_show_escalation_factors')]"
 				}
 				blockoverride "phase_progress_button_next_phase" {
-					raw_text = "[JournalEntry.MakeScope.Var(com_deescalation_phase_name_var).GetFlagName]"
+					raw_text = "[JournalEntry.MakeScope.Var('com_deescalation_next_phase_name_var').GetFlagName]"
 				}
 				blockoverride "values" {
 					value = "[JournalEntry.MakeScope.Var('com_situation_descalation_var').GetValue]"
@@ -590,6 +616,11 @@ types com_journal_widget_types {
 			parentanchor = hcenter
 			direction = vertical
 			minimumsize = { 520 -1 }
+			
+			visible = "[Or(
+				GetVariableSystem.Exists('com_show_escalation_factors'),
+				GetVariableSystem.Exists('com_show_deescalation_factors')
+			)]"
 			
 			background = {
 				using = entry_bg
@@ -621,12 +652,23 @@ types com_journal_widget_types {
 				textbox = {
 					parentanchor = center
 					position = { 0 -10 }
-					
-					text = "com_catalysts_header"
+					visible = "[GetVariableSystem.Exists('com_show_escalation_factors')]"
+					text = "com_catalysts_header_escalation"
 					autoresize = yes
 					align = nobaseline
 					fontsize = 18
 				}
+				
+				textbox = {
+					parentanchor = center
+					position = { 0 -10 }
+					visible = "[GetVariableSystem.Exists('com_show_deescalation_factors')]"
+					text = "com_catalysts_header_deescalation"
+					autoresize = yes
+					align = nobaseline
+					fontsize = 18
+				}
+				
 				textbox = {
 					parentanchor = center
 					position = { 0 10 }
@@ -643,7 +685,7 @@ types com_journal_widget_types {
 					JournalEntry.MakeScope.Var('com_escalation_factors_var').IsSet
 				)]"
 				autoresize = yes
-				raw_text = "[JournalEntry.MakeScope.Var(com_escalation_factors_var).GetFlagName]"
+				raw_text = "[JournalEntry.MakeScope.Var('com_escalation_factors_var').GetFlagName]"
 				min_width = @panel_width_minus_30
 				max_width = @panel_width_minus_30
 				multiline = yes
@@ -657,7 +699,7 @@ types com_journal_widget_types {
 					JournalEntry.MakeScope.Var('com_deescalation_factors_var').IsSet
 				)]"
 				autoresize = yes
-				raw_text = "[JournalEntry.MakeScope.Var(com_descalation_factors_var).GetFlagName]"
+				raw_text = "[JournalEntry.MakeScope.Var('com_deescalation_factors_var').GetFlagName]"
 				min_width = @panel_width_minus_30
 				max_width = @panel_width_minus_30
 				multiline = yes
@@ -683,7 +725,22 @@ types com_journal_widget_types {
 			texture = "gfx/interface/map_markers/strategic_region_map_marker.dds"
 			mirror = vertical
 			
+			icon = {
+				parentanchor = center
+				size = { 40 40 }
+				texture = "gfx/interface/icons/state_status_icons/unused/state_status_bg.dds"
+			}
+			
+			textbox = {
+				parentanchor = center
+				size = { 100 100 }
+				fontsize = 30
+				align = vcenter|hcenter
+				block "phase_progress_button_icon" {}
+			}
+			
 			button = {
+				parentanchor = center
 				size = { 100% 100% }
 				block "phase_progress_button_onclick" {}
 			}

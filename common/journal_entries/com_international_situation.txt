@@ -25,18 +25,6 @@ je_com_international_situation = {
 	immediate = {
 		scope:journal_entry = {
 			com_hide_all_journal_elements_for_situation_effect = yes
-			set_variable = {
-				name = com_situation_header_var
-				value = flag:com_situation_header_placeholder
-			}
-			set_variable = {
-				name = com_situation_phase_icon_var
-				value = flag:com_situation_phase_icon_placeholder
-			}
-			set_variable = {
-				name = com_situation_phase_name_var
-				value = flag:com_situation_phase_name_placeholder
-			}
 		}
 	}
 	

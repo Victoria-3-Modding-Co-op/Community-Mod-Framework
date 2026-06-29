@@ -4,10 +4,6 @@
  je_com_international_situation_reason: "There is no reason. We have no reason. We are a people of baseless claims and divine insanity. Now go put some wood in Eastern Mali before anyone finds out."
  je_com_international_situation_status: "Status: Screaming in the mines."
  
- com_situation_header_placeholder: "#todo com_situation_header_var#!"
- com_situation_phase_icon_placeholder: "@com_error_frog!"
- com_situation_phase_name_placeholder: "#todo com_situation_phase_name_var#!"
- 
  com_situation_country_involved: "[GetPlayer.GetNameNoFlag] is #bold Involved#! in [JournalEntry.GetName]"
  com_situation_country_interloper: "[GetPlayer.GetNameNoFlag] is an #bold Interloper#! in [JournalEntry.GetName]"
  com_situation_country_not_involved: "[GetPlayer.GetNameNoFlag] is #bold Not Involved#! in [JournalEntry.GetName]"
@@ -20,7 +16,8 @@
  com_situation_phase_effects: "Phase Effects:"
  com_view_situation_endings: "View Situation Outcomes"
  com_next_phase_progress: "Next Phase Progress"
- com_catalysts_header: "#bold #italic Catalysts Towards #todo com_situation_escalation_name_var#!#!"
+ com_catalysts_header_escalation: "#bold #italic Catalysts Towards#!#! [JournalEntry.MakeScope.Var('com_escalation_next_phase_name_var').GetFlagName]"
+ com_catalysts_header_deescalation: "#bold #italic Catalysts Towards#!#! [JournalEntry.MakeScope.Var('com_deescalation_next_phase_name_var').GetFlagName]"
  com_catalysts_info: "#blue #italic Complete Catalysts to increase phase progress#!#!"
 
 ####---------- Factional Situations Localization ----------####

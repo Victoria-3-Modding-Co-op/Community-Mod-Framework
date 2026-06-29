@@ -22,10 +22,6 @@
  com_next_phase_progress: "Next Phase Progress"
  com_catalysts_header: "#bold #italic Catalysts Towards #todo com_situation_escalation_name_var#!#!"
  com_catalysts_info: "#blue #italic Complete Catalysts to increase phase progress#!#!"
- com_escalation_factors: "[JournalEntry.MakeScope.Var(com_escalation_factors_var).GetFlagName]"
- com_deescalation_factors: "[JournalEntry.MakeScope.Var(com_descalation_factors_var).GetFlagName]"
- com_next_phase_escalation: "[JournalEntry.MakeScope.Var(com_escalation_name_var).GetFlagName]"
- com_next_phase_deescalation: "[JournalEntry.MakeScope.Var(com_deescalation_name_var).GetFlagName]"
 
 ####---------- Factional Situations Localization ----------####
  # GUI

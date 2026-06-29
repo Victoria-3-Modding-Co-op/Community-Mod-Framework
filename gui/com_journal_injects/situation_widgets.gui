@@ -418,7 +418,7 @@ types com_journal_widget_types {
 						visible = "[JournalEntry.CanComplete]"
 					}
 					blockoverride "situation_outcome_name" {
-						raw_text = "[JournalEntry.MakeScope.Var('com_situation_success_name_var').GetNameFlag]"
+						raw_text = "[JournalEntry.MakeScope.Var('com_situation_success_name_var').GetFlagName]"
 					}
 					blockoverride "situation_outcome_tooltip" {
 						tooltip = "[JournalEntry.GetOnCompleteTooltip]"
@@ -435,7 +435,7 @@ types com_journal_widget_types {
 						visible = "[JournalEntry.CanTimeOut]"
 					}
 					blockoverride "situation_outcome_name" {
-						raw_text = "[JournalEntry.MakeScope.Var('com_situation_timeout_name_var').GetNameFlag]"
+						raw_text = "[JournalEntry.MakeScope.Var('com_situation_timeout_name_var').GetFlagName]"
 					}
 					blockoverride "situation_outcome_tooltip" {
 						tooltip = "[JournalEntry.GetOnTimeoutTooltip]"
@@ -452,7 +452,7 @@ types com_journal_widget_types {
 						visible = "[Not(StringIsEmpty(JournalEntry.GetFailureTooltip))]" # We do not have a CanFail function
 					}
 					blockoverride "situation_outcome_name" {
-						raw_text = "[JournalEntry.MakeScope.Var('com_situation_failure_name_var').GetNameFlag]"
+						raw_text = "[JournalEntry.MakeScope.Var('com_situation_failure_name_var').GetFlagName]"
 					}
 					blockoverride "situation_outcome_tooltip" {
 						tooltip = "[JournalEntry.GetOnFailTooltip]"
@@ -558,7 +558,12 @@ types com_journal_widget_types {
 					onclick = "[GetVariableSystem.Clear('com_show_deescalation_factors')]"
 				}
 				blockoverride "phase_progress_button_next_phase" {
-					text = "com_next_phase_escalation"
+					raw_text = "[JournalEntry.MakeScope.Var(com_escalation_phase_name_var).GetFlagName]"
+				}
+				blockoverride "values" {
+					value = "[JournalEntry.MakeScope.Var('com_situation_escalation_var').GetValue]"
+					max = "[JournalEntry.MakeScope.Var('com_situation_escalation_max_var').GetValue]"
+					min = "[JournalEntry.MakeScope.Var('com_situation_escalation_min_var').GetValue]"
 				}
 			}
 			
@@ -571,7 +576,12 @@ types com_journal_widget_types {
 					onclick = "[GetVariableSystem.Clear('com_show_escalation_factors')]"
 				}
 				blockoverride "phase_progress_button_next_phase" {
-					text = "com_next_phase_deescalation"
+					raw_text = "[JournalEntry.MakeScope.Var(com_deescalation_phase_name_var).GetFlagName]"
+				}
+				blockoverride "values" {
+					value = "[JournalEntry.MakeScope.Var('com_situation_descalation_var').GetValue]"
+					max = "[JournalEntry.MakeScope.Var('com_situation_descalation_max_var').GetValue]"
+					min = "[JournalEntry.MakeScope.Var('com_situation_deescalation_min_var').GetValue]"
 				}
 			}
 		}
@@ -633,7 +643,7 @@ types com_journal_widget_types {
 					JournalEntry.MakeScope.Var('com_escalation_factors_var').IsSet
 				)]"
 				autoresize = yes
-				text = "com_escalation_factors"
+				raw_text = "[JournalEntry.MakeScope.Var(com_escalation_factors_var).GetFlagName]"
 				min_width = @panel_width_minus_30
 				max_width = @panel_width_minus_30
 				multiline = yes
@@ -647,7 +657,7 @@ types com_journal_widget_types {
 					JournalEntry.MakeScope.Var('com_deescalation_factors_var').IsSet
 				)]"
 				autoresize = yes
-				text = "com_deescalation_factors"
+				raw_text = "[JournalEntry.MakeScope.Var(com_descalation_factors_var).GetFlagName]"
 				min_width = @panel_width_minus_30
 				max_width = @panel_width_minus_30
 				multiline = yes
@@ -690,11 +700,7 @@ types com_journal_widget_types {
 			parentanchor = bottom|hcenter
 			position = { 0 -10 }
 			size = { 80 10 }
-			blockoverride "values" {
-				value = 5
-				max = 10
-				min = 0
-			}
+			
 		}
 	}
 }

@@ -42,7 +42,7 @@ types com_journal_widget_types {
 		direction = vertical
 		minimumsize = { 540 -1 }
 		
-		visible = "[JournalEntry.MakeScope.Var('com_situation_header_var').IsSet]"
+		visible = "[InDebugMode]"
 		
 		textbox = {
 			parentanchor = hcenter
@@ -144,9 +144,10 @@ types com_journal_widget_types {
 				parentanchor = top|right
 				size = { 220 80 }
 				position = { 0 -10 }
-				visible = "[And(
+				visible = "[And3(
 					JournalEntry.MakeScope.Var('com_situation_start_month_var').IsSet,
-					JournalEntry.MakeScope.Var('com_situation_start_year_var').IsSet
+					JournalEntry.MakeScope.Var('com_situation_start_year_var').IsSet,
+					Not(JournalEntry.MakeScope.Var('com_situation_character_right').IsSet)
 				)]"
 				
 				background = {
@@ -188,6 +189,117 @@ types com_journal_widget_types {
 					align = hcenter|nobaseline
 					using = fontsize_medium
 				}
+			}
+			
+			widget = {
+				parentanchor = center
+				size = { 220 80 }
+				position = { 0 10 }
+				visible = "[And3(
+					JournalEntry.MakeScope.Var('com_situation_start_month_var').IsSet,
+					JournalEntry.MakeScope.Var('com_situation_start_year_var').IsSet,
+					JournalEntry.MakeScope.Var('com_situation_character_right').IsSet
+				)]"
+				
+				background = {
+					using = dark_area
+					alpha = 0.50
+					margin = { 0 0 }
+					
+					modify_texture = {
+						using = texture_velvet
+					}
+					modify_texture = {
+						texture = "gfx/interface/masks/fade_horizontal_center.dds"
+						spriteType = Corneredstretched
+						spriteborder = { 0 0 }
+						blend_mode = alphamultiply
+					}
+					modify_texture = {
+						texture = "gfx/interface/masks/fade_vertical_center.dds"
+						spriteType = Corneredstretched
+						spriteborder = { 0 0 }
+						blend_mode = alphamultiply
+					}
+				}
+				
+				textbox = {
+					parentanchor = center
+					position = { 0 -10 }
+					autoresize = yes
+					text = "com_situation_start_date_header"
+					align = hcenter|nobaseline
+					using = fontsize_medium
+				}
+				
+				textbox = {
+					parentanchor = center
+					position = { 0 10 }
+					autoresize = yes
+					text = "com_situation_start_date"
+					align = hcenter|nobaseline
+					using = fontsize_medium
+				}
+			}
+			
+			character_portrait_base_no_mask = {
+				parentanchor = left|vcenter
+				ignore_in_debug_draw = yes
+				size = { 220 220 }
+				max_update_rate = 8
+				
+				visible = "[JournalEntry.MakeScope.Var('com_situation_character_left').IsSet]"
+				datacontext = "[JournalEntry.MakeScope.Var('com_situation_character_left').GetCharacter]"
+				
+				block "character_layout" {
+					position = { -20 -7 }
+				}
+				blockoverride "portrait_size" {
+					block "character_portrait_size" {
+						size = { 220 220 }
+					}
+				}
+				blockoverride "portrait_texture" {
+					datacontext = "[JournalEntry.MakeScope.Var('com_situation_character_left')]"
+					portrait_texture = "[Scope.GetCharacter.GetAnimatedPortrait(
+						'environment_standard',
+						'camera_body',
+						'commander_vs_left',
+						GetPortraitRenderSize(PdxGuiWidget.Self))
+					]"
+				}
+				blockoverride "portrait_icons" { }
+				blockoverride "tooltip" {}
+			}
+			
+			character_portrait_base_no_mask = {
+				parentanchor = right|vcenter
+				ignore_in_debug_draw = yes
+				size = { 220 220 }
+				max_update_rate = 8
+				
+				visible = "[JournalEntry.MakeScope.Var('com_situation_character_right').IsSet]"
+				datacontext = "[JournalEntry.MakeScope.Var('com_situation_character_right').GetCharacter]"
+				
+				block "character_layout" {
+					position = { 20 -7 }
+				}
+				blockoverride "portrait_size" {
+					block "character_portrait_size" {
+						size = { 220 220 }
+					}
+				}
+				blockoverride "portrait_texture" {
+					datacontext = "[JournalEntry.MakeScope.Var('com_situation_character_right')]"
+					portrait_texture = "[Scope.GetCharacter.GetAnimatedPortrait(
+						'environment_standard',
+						'camera_body',
+						'commander_vs_right',
+						GetPortraitRenderSize(PdxGuiWidget.Self))
+					]"
+				}
+				blockoverride "portrait_icons" { }
+				blockoverride "tooltip" {}
 			}
 		}
 	}
@@ -311,15 +423,13 @@ types com_journal_widget_types {
 		parentanchor = hcenter
 		direction = vertical
 		minimumsize = { 540 -1 }
-		margin_top = 5
+		margin_top = 20
+		margin_bottom = 5
 		
-		widget = {
-			size = { 20 20 }
-			visible = "[Or(
-				JournalEntry.CanTimeOut,
-				JournalEntry.MakeScope.Var('com_involvement_status_var').IsSet
-			)]"
-		}
+		visible = "[Or(
+			JournalEntry.CanTimeOut,
+			JournalEntry.MakeScope.Var('com_involvement_status_var').IsSet
+		)]"
 		
 		flowcontainer = {
 			parentanchor = hcenter
@@ -352,7 +462,7 @@ types com_journal_widget_types {
 				minimumsize = { 220 30 }
 				autoresize = yes
 				raw_text = "#bold [JournalEntry.MakeScope.Var('com_involvement_status_var').GetFlagName]#!"
-				align = right|nobaseline
+				align = hcenter|nobaseline
 				elide = right
 				using = fontsize_medium
 				
@@ -360,6 +470,8 @@ types com_journal_widget_types {
 					using = dark_area
 					alpha = 0.5
 					margin = { 20 10 }
+					
+					visible = "[JournalEntry.CanTimeOut]"
 					
 					modify_texture = {
 						texture = "gfx/interface/masks/fade_horizontal_center.dds"
@@ -374,6 +486,11 @@ types com_journal_widget_types {
 						spriteborder = { 0 0 }
 						blend_mode = alphamultiply
 					}
+				}
+				
+				background = {
+					using = entry_bg_simple
+					visible = "[Not(JournalEntry.CanTimeOut)]"
 				}
 			}
 		}

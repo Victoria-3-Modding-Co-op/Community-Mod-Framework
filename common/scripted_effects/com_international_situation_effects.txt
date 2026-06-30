@@ -145,6 +145,20 @@ com_set_situation_illustration_background_effect = {
 	}
 }
 
+com_set_situation_left_character = {
+	set_variable = {
+		name = com_situation_character_left
+		value = $character$
+	}
+}
+
+com_set_situation_right_character = {
+	set_variable = {
+		name = com_situation_character_right
+		value = $character$
+	}
+}
+
 com_set_situation_phase_effect = {
 	set_variable = {
 		name = com_situation_phase_icon_var

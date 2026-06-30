@@ -574,13 +574,22 @@ types com_journal_widget_types {
 						visible = "[JournalEntry.CanComplete]"
 					}
 					blockoverride "situation_outcome_name" {
-						raw_text = "#bold [JournalEntry.MakeScope.Var('com_situation_success_name_var').GetFlagName]#!"
+						raw_text = "#bold [JournalEntry.MakeScope.Var('com_situation_complete_name_var').GetFlagName]#!"
 					}
-					blockoverride "situation_outcome_tooltip" {
-						tooltip = "[JournalEntry.GetOnCompleteTooltip]"
+					blockoverride "situation_outcome_default_texture_visibity" {
+						visible = "Not(JournalEntry.MakeScope.Var('com_situation_complete_illus_var').IsSet)"
 					}
-					blockoverride "situation_outcome_texture" {
+					blockoverride "situation_outcome_default_texture_path" {
 						texture = "gfx/interface/illustrations/situation_outcomes/situation_complete_illus.dds"
+					}
+					blockoverride "situation_outcome_custom_texture_visibity" {
+						visible = "JournalEntry.MakeScope.Var('com_situation_complete_illus_var').IsSet"
+					}
+					blockoverride "situation_outcome_custom_texture_path" {
+						texture = "[JournalEntry.MakeScope.Var('com_situation_complete_illus_var').GetInterestGroupTrait.GetTexture]"
+					}
+					blockoverride "com_situation_complete_tooltip" {
+						tooltip = "com_situation_complete_tooltip"
 					}
 				}
 			}
@@ -593,11 +602,20 @@ types com_journal_widget_types {
 					blockoverride "situation_outcome_name" {
 						raw_text = "#bold [JournalEntry.MakeScope.Var('com_situation_timeout_name_var').GetFlagName]#!"
 					}
-					blockoverride "situation_outcome_tooltip" {
-						tooltip = "[JournalEntry.GetOnTimeoutTooltip]"
+					blockoverride "situation_outcome_default_texture_visibity" {
+						visible = "Not(JournalEntry.MakeScope.Var('com_situation_timeout_illus_var').IsSet)"
 					}
-					blockoverride "situation_outcome_texture" {
+					blockoverride "situation_outcome_default_texture_path" {
 						texture = "gfx/interface/illustrations/situation_outcomes/situation_timeout_illus.dds"
+					}
+					blockoverride "situation_outcome_custom_texture_visibity" {
+						visible = "JournalEntry.MakeScope.Var('com_situation_timeout_illus_var').IsSet"
+					}
+					blockoverride "situation_outcome_custom_texture_path" {
+						texture = "[JournalEntry.MakeScope.Var('com_situation_timeout_illus_var').GetInterestGroupTrait.GetTexture]"
+					}
+					blockoverride "com_situation_timeout_tooltip" {
+						tooltip = "com_situation_timeout_tooltip"
 					}
 				}
 			}
@@ -610,11 +628,20 @@ types com_journal_widget_types {
 					blockoverride "situation_outcome_name" {
 						raw_text = "#bold [JournalEntry.MakeScope.Var('com_situation_failure_name_var').GetFlagName]#!"
 					}
-					blockoverride "situation_outcome_tooltip" {
-						tooltip = "[JournalEntry.GetOnFailTooltip]"
+					blockoverride "situation_outcome_default_texture_visibity" {
+						visible = "Not(JournalEntry.MakeScope.Var('com_situation_failure_illus_var').IsSet)"
 					}
-					blockoverride "situation_outcome_texture" {
+					blockoverride "situation_outcome_default_texture_path" {
 						texture = "gfx/interface/illustrations/situation_outcomes/situation_failure_illus.dds"
+					}
+					blockoverride "situation_outcome_custom_texture_visibity" {
+						visible = "JournalEntry.MakeScope.Var('com_situation_failure_illus_var').IsSet"
+					}
+					blockoverride "situation_outcome_custom_texture_path" {
+						texture = "[JournalEntry.MakeScope.Var('com_situation_failure_illus_var').GetInterestGroupTrait.GetTexture]"
+					}
+					blockoverride "com_situation_failure_tooltip" {
+						tooltip = "com_situation_failure_tooltip"
 					}
 				}
 			}
@@ -634,9 +661,38 @@ types com_journal_widget_types {
 			icon = {
 				parentanchor = center
 				size = { 100% 100% }
-				block "situation_outcome_texture" {
+				block "situation_outcome_default_texture_visibity" {}
+				block "situation_outcome_default_texture_path" {
 					texture = "gfx/interface/illustrations/situation_outcomes/situation_invalid_illus.dds"
 				}
+				modify_texture = {
+					texture = "gfx/interface/backgrounds/default_bg_shading.dds"
+					spriteType = Corneredstretched
+					spriteborder = { 0 0 }
+					blend_mode = overlay
+					alpha = 0.8
+				}
+				modify_texture = {
+					using = texture_velvet
+				}
+				modify_texture = {
+					using = texture_cloth
+					alpha = 0.25
+				}
+				modify_texture = {
+					texture = "gfx/interface/masks/fade_top_illus.dds"
+					translate_uv = { 0 0 }
+					blend_mode = alphamultiply
+				}
+			}
+			
+			icon = {
+				parentanchor = center
+				size = { 100% 100% }
+				block "situation_outcome_custom_texture_visibity" {
+					visible = "no"
+				}
+				block "situation_outcome_custom_texture_path" {}
 				modify_texture = {
 					texture = "gfx/interface/backgrounds/default_bg_shading.dds"
 					spriteType = Corneredstretched
@@ -684,9 +740,11 @@ types com_journal_widget_types {
 		margin_bottom = 10
 		spacing = 5
 		
-		visible = "[Or(
-			JournalEntry.MakeScope.Var('com_situation_escalation_var').IsSet,
-			JournalEntry.MakeScope.Var('com_situation_deescalation_var').IsSet
+		visible = "[Or4(
+			JournalEntry.MakeScope.Var('com_situation_group_1_next_phase_progress_var').IsSet,
+			JournalEntry.MakeScope.Var('com_situation_group_2_next_phase_progress_var').IsSet,
+			JournalEntry.MakeScope.Var('com_situation_group_3_next_phase_progress_var').IsSet,
+			JournalEntry.MakeScope.Var('com_situation_group_4_next_phase_progress_var').IsSet
 		)]"
 		
 		using = entry_bg_fancy
@@ -709,55 +767,117 @@ types com_journal_widget_types {
 			
 			com_international_situation_phase_progress_item = {
 				blockoverride "phase_progress_visibility" {
-					visible = "[JournalEntry.MakeScope.Var('com_situation_escalation_var').IsSet]"
+					visible = "[JournalEntry.MakeScope.Var('com_situation_group_1_next_phase_progress_var').IsSet]"
 				}
 				blockoverride "phase_progress_button_icon" {
-					raw_text = "[JournalEntry.MakeScope.Var('com_situation_escalation_next_phase_icon_var').GetFlagName]"
+					raw_text = "[JournalEntry.MakeScope.Var('com_situation_group_1_next_phase_icon_var').GetFlagName]"
 				}
 				blockoverride "phase_progress_button_icon_glow_visibility" {
-					visible = "[GetVariableSystem.Exists('com_show_escalation_factors')]"
+					visible = "[GetVariableSystem.Exists('com_show_group_1_factors')]"
 				}
 				blockoverride "phase_progress_button_onclick" {
-					onclick = "[GetVariableSystem.Toggle('com_show_escalation_factors')]"
-					onclick = "[GetVariableSystem.Clear('com_show_deescalation_factors')]"
+					onclick = "[GetVariableSystem.Toggle('com_show_group_1_factors')]"
+					onclick = "[GetVariableSystem.Clear('com_show_group_2_factors')]"
+					onclick = "[GetVariableSystem.Clear('com_show_group_3_factors')]"
+					onclick = "[GetVariableSystem.Clear('com_show_group_4_factors')]"
 				}
 				blockoverride "phase_progress_button_next_phase" {
-					raw_text = "[JournalEntry.MakeScope.Var('com_situation_escalation_next_phase_name_var').GetFlagName]"
+					raw_text = "[JournalEntry.MakeScope.Var('com_situation_group_1_next_phase_name_var').GetFlagName]"
 				}
 				blockoverride "values" {
-					value = "[JournalEntry.MakeScope.Var('com_situation_escalation_var').GetValue]"
-					max = "[JournalEntry.MakeScope.Var('com_situation_escalation_max_var').GetValue]"
-					min = "[JournalEntry.MakeScope.Var('com_situation_escalation_min_var').GetValue]"
+					value = "[JournalEntry.MakeScope.Var('com_situation_group_1_next_phase_progress_var').GetValue]"
+					max = "[JournalEntry.MakeScope.Var('com_situation_group_1_next_phase_max_progress_var').GetValue]"
+					min = "[JournalEntry.MakeScope.Var('com_situation_group_1_next_phase_min_progress_var').GetValue]"
 				}
 				blockoverride "phase_progress_bar_tooltip" {
-					tooltip = "com_escalation_progress_bar_tooltip"
+					tooltip = "com_situation_group_1_progress_bar_tooltip"
 				}
 			}
 			
 			com_international_situation_phase_progress_item = {
 				blockoverride "phase_progress_visibility" {
-					visible = "[JournalEntry.MakeScope.Var('com_situation_deescalation_var').IsSet]"
+					visible = "[JournalEntry.MakeScope.Var('com_situation_group_2_next_phase_progress_var').IsSet]"
 				}
 				blockoverride "phase_progress_button_icon" {
-					raw_text = "[JournalEntry.MakeScope.Var('com_situation_deescalation_next_phase_icon_var').GetFlagName]"
+					raw_text = "[JournalEntry.MakeScope.Var('com_situation_group_2_next_phase_icon_var').GetFlagName]"
 				}
 				blockoverride "phase_progress_button_icon_glow_visibility" {
-					visible = "[GetVariableSystem.Exists('com_show_deescalation_factors')]"
+					visible = "[GetVariableSystem.Exists('com_show_group_2_factors')]"
 				}
 				blockoverride "phase_progress_button_onclick" {
-					onclick = "[GetVariableSystem.Toggle('com_show_deescalation_factors')]"
-					onclick = "[GetVariableSystem.Clear('com_show_escalation_factors')]"
+					onclick = "[GetVariableSystem.Toggle('com_show_group_2_factors')]"
+					onclick = "[GetVariableSystem.Clear('com_show_group_1_factors')]"
+					onclick = "[GetVariableSystem.Clear('com_show_group_3_factors')]"
+					onclick = "[GetVariableSystem.Clear('com_show_group_4_factors')]"
 				}
 				blockoverride "phase_progress_button_next_phase" {
-					raw_text = "[JournalEntry.MakeScope.Var('com_situation_deescalation_next_phase_name_var').GetFlagName]"
+					raw_text = "[JournalEntry.MakeScope.Var('com_situation_group_2_next_phase_name_var').GetFlagName]"
 				}
 				blockoverride "values" {
-					value = "[JournalEntry.MakeScope.Var('com_situation_descalation_var').GetValue]"
-					max = "[JournalEntry.MakeScope.Var('com_situation_descalation_max_var').GetValue]"
-					min = "[JournalEntry.MakeScope.Var('com_situation_deescalation_min_var').GetValue]"
+					value = "[JournalEntry.MakeScope.Var('com_situation_group_2_next_phase_progress_var').GetValue]"
+					max = "[JournalEntry.MakeScope.Var('com_situation_group_2_next_phase_max_progress_var').GetValue]"
+					min = "[JournalEntry.MakeScope.Var('com_situation_group_2_next_phase_min_progress_var').GetValue]"
 				}
 				blockoverride "phase_progress_bar_tooltip" {
-					tooltip = "com_deescalation_progress_bar_tooltip"
+					tooltip = "com_situation_group_2_progress_bar_tooltip"
+				}
+			}
+			
+			com_international_situation_phase_progress_item = {
+				blockoverride "phase_progress_visibility" {
+					visible = "[JournalEntry.MakeScope.Var('com_situation_group_3_next_phase_progress_var').IsSet]"
+				}
+				blockoverride "phase_progress_button_icon" {
+					raw_text = "[JournalEntry.MakeScope.Var('com_situation_group_3_next_phase_icon_var').GetFlagName]"
+				}
+				blockoverride "phase_progress_button_icon_glow_visibility" {
+					visible = "[GetVariableSystem.Exists('com_show_group_3_factors')]"
+				}
+				blockoverride "phase_progress_button_onclick" {
+					onclick = "[GetVariableSystem.Toggle('com_show_group_3_factors')]"
+					onclick = "[GetVariableSystem.Clear('com_show_group_1_factors')]"
+					onclick = "[GetVariableSystem.Clear('com_show_group_2_factors')]"
+					onclick = "[GetVariableSystem.Clear('com_show_group_4_factors')]"
+				}
+				blockoverride "phase_progress_button_next_phase" {
+					raw_text = "[JournalEntry.MakeScope.Var('com_situation_group_3_next_phase_name_var').GetFlagName]"
+				}
+				blockoverride "values" {
+					value = "[JournalEntry.MakeScope.Var('com_situation_group_3_next_phase_progress_var').GetValue]"
+					max = "[JournalEntry.MakeScope.Var('com_situation_group_3_next_phase_max_progress_var').GetValue]"
+					min = "[JournalEntry.MakeScope.Var('com_situation_group_3_next_phase_min_progress_var').GetValue]"
+				}
+				blockoverride "phase_progress_bar_tooltip" {
+					tooltip = "com_situation_group_3_progress_bar_tooltip"
+				}
+			}
+			
+			com_international_situation_phase_progress_item = {
+				blockoverride "phase_progress_visibility" {
+					visible = "[JournalEntry.MakeScope.Var('com_situation_group_4_next_phase_progress_var').IsSet]"
+				}
+				blockoverride "phase_progress_button_icon" {
+					raw_text = "[JournalEntry.MakeScope.Var('com_situation_group_4_next_phase_icon_var').GetFlagName]"
+				}
+				blockoverride "phase_progress_button_icon_glow_visibility" {
+					visible = "[GetVariableSystem.Exists('com_show_group_4_factors')]"
+				}
+				blockoverride "phase_progress_button_onclick" {
+					onclick = "[GetVariableSystem.Toggle('com_show_group_4_factors')]"
+					onclick = "[GetVariableSystem.Clear('com_show_group_1_factors')]"
+					onclick = "[GetVariableSystem.Clear('com_show_group_2_factors')]"
+					onclick = "[GetVariableSystem.Clear('com_show_group_3_factors')]"
+				}
+				blockoverride "phase_progress_button_next_phase" {
+					raw_text = "[JournalEntry.MakeScope.Var('com_situation_group_4_next_phase_name_var').GetFlagName]"
+				}
+				blockoverride "values" {
+					value = "[JournalEntry.MakeScope.Var('com_situation_group_4_next_phase_progress_var').GetValue]"
+					max = "[JournalEntry.MakeScope.Var('com_situation_group_4_next_phase_max_progress_var').GetValue]"
+					min = "[JournalEntry.MakeScope.Var('com_situation_group_4_next_phase_min_progress_var').GetValue]"
+				}
+				blockoverride "phase_progress_bar_tooltip" {
+					tooltip = "com_situation_group_4_progress_bar_tooltip"
 				}
 			}
 		}

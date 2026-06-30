@@ -9,7 +9,7 @@
 	set_variable = com_hide_status_desc
 }
 
-com_set_international_situation_start_date_today_effect = {
+com_situation_start_date_today_effect = {
 	if = {
 		limit = {
 			month = 0
@@ -119,7 +119,7 @@ com_set_international_situation_start_date_today_effect = {
 		}
 	}
 	else = {
-		error_log = "Effect com_set_international_situation_start_date_today_effect was called but the month value was out of range. How did this happen?"
+		error_log = "Effect com_situation_start_date_today_effect was called but the month value was out of range. How did this happen?"
 	}
 	set_variable = {
 		name = com_situation_start_year_var
@@ -127,7 +127,7 @@ com_set_international_situation_start_date_today_effect = {
 	}
 }
 
-com_set_international_situation_start_date_effect = {
+com_set_situation_start_date_effect = {
 	set_variable = {
 		name = com_situation_start_month_var
 		value = flag:$month$
@@ -138,35 +138,120 @@ com_set_international_situation_start_date_effect = {
 	}
 }
 
-com_set_situation_phase_progress_details_effect = {
+com_set_situation_outcome_name = {
 	set_variable = {
-		name = com_situation_group_$index$_next_phase_progress_var
-		value = $progress_value$
-	}
-	set_variable = {
-		name = com_situation_group_$index$_next_phase_icon_var
-		value = flag:$next_phase_icon$
-	}
-	set_variable = {
-		name = com_situation_group_$index$_next_phase_name_var
-		value = flag:$next_phase_name$
-	}
-	set_variable = {
-		name = com_situation_group_$index$_next_phase_max_progress_var
-		value = $max_value$
-	}
-	set_variable = {
-		name = com_situation_group_$index$_next_phase_min_progress_var
-		value = $min_value$
+		name = com_situation_$type$_name_var
+		value = flag:$name$
 	}
 }
 
-com_update_situation_phase_progress_effect = {
+com_set_situation_outcome_texture = {
 	set_variable = {
-		name = com_situation_group_$index$_next_phase_progress_var
-		value = $progress_value$
+		name = com_situation_$type$_illus_var
+		value = ig_trait:$texture$
 	}
 }
+
+com_set_situation_outcome_details = {
+	set_variable = {
+		name = com_situation_$type$_name_var
+		value = flag:$name$
+	}
+	set_variable = {
+		name = com_situation_$type$_illus_var
+		value = ig_trait:$texture$
+	}
+}
+
+com_set_indexed_stiuation_phase_progress_details_effect = {
+	save_scope_value_as = {
+		name = com_index
+		value = $index$
+	}
+	if = {
+		limit = {
+			OR = {
+				scope:com_index = 1
+				scope:com_index = 2
+				scope:com_index = 3
+				scope:com_index = 4
+			}
+		}
+		set_variable = {
+			name = com_situation_group_$index$_next_phase_name_var
+			value = flag:$next_phase_name$
+		}
+		set_variable = {
+			name = com_situation_group_$index$_next_phase_icon_var
+			value = flag:$next_phase_icon$
+		}
+		set_variable = {
+			name = com_situation_group_$index$_next_phase_progress_var
+			value = $progress_value$
+		}
+		set_variable = {
+			name = com_situation_group_$index$_next_phase_max_progress_var
+			value = $max_value$
+		}
+		set_variable = {
+			name = com_situation_group_$index$_next_phase_min_progress_var
+			value = $min_value$
+		}
+	}
+	else = {
+		error_log = "Effect com_set_indexed_stiuation_phase_progress_details_effect requires an index value of 1, 2, 3, or 4."
+	}
+}
+
+com_update_indexed_situation_phase_progress_effect = {
+	save_scope_value_as = {
+		name = com_index
+		value = $index$
+	}
+	if = {
+		limit = {
+			OR = {
+				scope:com_index = 1
+				scope:com_index = 2
+				scope:com_index = 3
+				scope:com_index = 4
+			}
+		}
+		set_variable = {
+			name = com_situation_group_$index$_next_phase_progress_var
+			value = $progress_value$
+		}
+	}
+	else = {
+		error_log = "Effect com_update_indexed_situation_phase_progress_effect requires an index value of 1, 2, 3, or 4."
+	}
+}
+
+com_remove_indexed_stiuation_phase_progress_details_effect = {
+	save_scope_value_as = {
+		name = com_index
+		value = $index$
+	}
+	if = {
+		limit = {
+			OR = {
+				scope:com_index = 1
+				scope:com_index = 2
+				scope:com_index = 3
+				scope:com_index = 4
+			}
+		}
+		remove_variable = com_situation_group_$index$_next_phase_name_var
+		remove_variable = com_situation_group_$index$_next_phase_icon_var
+		remove_variable = com_situation_group_$index$_next_phase_progress_var
+		remove_variable = com_situation_group_$index$_next_phase_max_progress_var
+		remove_variable = com_situation_group_$index$_next_phase_min_progress_var
+	}
+	else = {
+		error_log = "Effect com_remove_indexed_stiuation_phase_progress_details_effect requires an index value of 1, 2, 3, or 4."
+	}
+}
+
 
 ####---------- Outdated Situation Effects ----------####
 # Add journal entry to the scoped country

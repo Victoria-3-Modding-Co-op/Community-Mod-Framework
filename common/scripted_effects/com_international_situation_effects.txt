@@ -147,14 +147,14 @@ com_set_situation_illustration_background_effect = {
 
 com_set_situation_left_character = {
 	set_variable = {
-		name = com_situation_character_left
+		name = com_situation_character_left_var
 		value = $character$
 	}
 }
 
 com_set_situation_right_character = {
 	set_variable = {
-		name = com_situation_character_right
+		name = com_situation_character_right_var
 		value = $character$
 	}
 }

@@ -102,6 +102,8 @@ types com_journal_widget_types {
 		widget = {
 			parentanchor = hcenter
 			size = { 520 200 }
+			
+			# Background Frame
 			background = {
 				texture = "gfx/interface/character_panel/char_bg_frame.dds"
 				margin_left = 18
@@ -117,6 +119,7 @@ types com_journal_widget_types {
 				texture_density = 2
 			}
 			
+			# Journal Entry Icon Shield
 			widget = {
 				parentanchor = top|hcenter
 				size = { 150 150 }
@@ -140,6 +143,7 @@ types com_journal_widget_types {
 				}
 			}
 			
+			# Start Date Placement in Top Right
 			widget = {
 				parentanchor = top|right
 				size = { 220 80 }
@@ -147,7 +151,7 @@ types com_journal_widget_types {
 				visible = "[And3(
 					JournalEntry.MakeScope.Var('com_situation_start_month_var').IsSet,
 					JournalEntry.MakeScope.Var('com_situation_start_year_var').IsSet,
-					Not(JournalEntry.MakeScope.Var('com_situation_character_right').IsSet)
+					Not(JournalEntry.MakeScope.Var('com_situation_character_right_var').IsSet)
 				)]"
 				
 				background = {
@@ -191,6 +195,7 @@ types com_journal_widget_types {
 				}
 			}
 			
+			# Start Date Placement in Center
 			widget = {
 				parentanchor = center
 				size = { 220 80 }
@@ -198,7 +203,7 @@ types com_journal_widget_types {
 				visible = "[And3(
 					JournalEntry.MakeScope.Var('com_situation_start_month_var').IsSet,
 					JournalEntry.MakeScope.Var('com_situation_start_year_var').IsSet,
-					JournalEntry.MakeScope.Var('com_situation_character_right').IsSet
+					JournalEntry.MakeScope.Var('com_situation_character_right_var').IsSet
 				)]"
 				
 				background = {
@@ -242,14 +247,15 @@ types com_journal_widget_types {
 				}
 			}
 			
+			# Left Character Portrait
 			character_portrait_base_no_mask = {
 				parentanchor = left|vcenter
 				ignore_in_debug_draw = yes
 				size = { 220 220 }
 				max_update_rate = 8
 				
-				visible = "[JournalEntry.MakeScope.Var('com_situation_character_left').IsSet]"
-				datacontext = "[JournalEntry.MakeScope.Var('com_situation_character_left').GetCharacter]"
+				visible = "[JournalEntry.MakeScope.Var('com_situation_character_left_var').IsSet]"
+				datacontext = "[JournalEntry.MakeScope.Var('com_situation_character_left_var').GetCharacter]"
 				
 				block "character_layout" {
 					position = { -20 -7 }
@@ -260,7 +266,7 @@ types com_journal_widget_types {
 					}
 				}
 				blockoverride "portrait_texture" {
-					datacontext = "[JournalEntry.MakeScope.Var('com_situation_character_left')]"
+					datacontext = "[JournalEntry.MakeScope.Var('com_situation_character_left_var')]"
 					portrait_texture = "[Scope.GetCharacter.GetAnimatedPortrait(
 						'environment_standard',
 						'camera_body',
@@ -272,14 +278,15 @@ types com_journal_widget_types {
 				blockoverride "tooltip" {}
 			}
 			
+			# Right Character Portrait
 			character_portrait_base_no_mask = {
 				parentanchor = right|vcenter
 				ignore_in_debug_draw = yes
 				size = { 220 220 }
 				max_update_rate = 8
 				
-				visible = "[JournalEntry.MakeScope.Var('com_situation_character_right').IsSet]"
-				datacontext = "[JournalEntry.MakeScope.Var('com_situation_character_right').GetCharacter]"
+				visible = "[JournalEntry.MakeScope.Var('com_situation_character_right_var').IsSet]"
+				datacontext = "[JournalEntry.MakeScope.Var('com_situation_character_right_var').GetCharacter]"
 				
 				block "character_layout" {
 					position = { 20 -7 }
@@ -290,7 +297,7 @@ types com_journal_widget_types {
 					}
 				}
 				blockoverride "portrait_texture" {
-					datacontext = "[JournalEntry.MakeScope.Var('com_situation_character_right')]"
+					datacontext = "[JournalEntry.MakeScope.Var('com_situation_character_right_var')]"
 					portrait_texture = "[Scope.GetCharacter.GetAnimatedPortrait(
 						'environment_standard',
 						'camera_body',
@@ -568,6 +575,8 @@ types com_journal_widget_types {
 			}
 		}
 		
+		## CONTEXTLESS INVOLVED COUNTRIES CONTAINER
+		# This uses the GetInvolvedCountries datamodel; it will not be shown if com_situation_involved_list is populated
 		flowcontainer = {
 			parentanchor = hcenter
 			direction = vertical
@@ -575,7 +584,11 @@ types com_journal_widget_types {
 			margin = { 5 5 }
 			spacing = 10
 			
-			visible = "[GetVariableSystem.Exists('com_show_involved_countries')]"
+			visible = "[And3(
+				GetVariableSystem.Exists('com_show_involved_countries'),
+				Not(IsDataModelEmpty(JournalEntry.GetInvolvedCountries),
+				IsDataModelEmpty(JournalEntry.MakeScope.GetList('com_situation_involved_list'))
+			)]"
 			
 			background = {
 				using = entry_bg_simple
@@ -609,6 +622,54 @@ types com_journal_widget_types {
 			}
 		}
 		
+		## LIST-BASED INVOLVED COUNTRIES CONTAINER
+		# This uses the com_situation_involved_list variable list; this list will hide the above container if populated
+		flowcontainer = {
+			parentanchor = hcenter
+			direction = vertical
+			minimumsize = { 520 -1 }
+			margin = { 5 5 }
+			spacing = 10
+			
+			visible = "[And(
+				GetVariableSystem.Exists('com_show_involved_countries'),
+				DataModelHasItems(JournalEntry.MakeScope.GetList('com_situation_involved_list'))
+			)]"
+			
+			background = {
+				using = entry_bg_simple
+			}
+			
+			textbox = {
+				parentanchor = hcenter
+				autoresize = yes
+				text = "com_situation_involved_countries"
+				align = center|nobaseline
+				elide = right
+				using = fontsize_large
+			}
+			
+			divider_decorative = {
+				parentanchor = hcenter
+			}
+			
+			dynamicgridbox = {
+				parentanchor = hcenter
+				datamodel = "[JournalEntry.GetInvolvedCountries]"
+				datamodel_wrap = 8
+				flipdirection = yes
+				
+				item = {
+					widget = {
+						size = { 60 40 }
+						small_flag = { }
+					}
+				}
+			}
+		}
+		
+		## INTERLOPER COUNTRIES CONTAINER
+		# This uses the com_situation_interloper_list variable list and will appear if the list is populated
 		flowcontainer = {
 			parentanchor = hcenter
 			direction = vertical

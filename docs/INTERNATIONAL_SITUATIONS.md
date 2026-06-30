@@ -2,6 +2,7 @@
 Situations are meant to model clashes between factions on an international scale. They can have multiple journal entries associated with it and provide a tool to model complex power struggles.
 
 These are implemented as contextless journals in the `je_group_global_international_situations` journal group. CMF's **International Situation Framework** seeks to aid this by providing a custom journal entry widget and some supporting effects. This takes advantage of the ability to inject widgets into journal entries as of V3 patch 1.13.
+
 # Content
 * [Elements](#elements)
   * [Outliner Changes](#outliner-changes)
@@ -11,7 +12,7 @@ These are implemented as contextless journals in the `je_group_global_internatio
 * [Script docs](#script-docs)
     * [Effects](#effects)
     * [Details](#details)
-    * 
+  
 # Elements
 This framework consists of the following features:
 - Modification to the outliner to add support for pinning IO and Situation journals
@@ -79,7 +80,7 @@ This is a rectangular element inspired by the situations UI from EU5. This is ac
 Usage is as follows:
 - `com_situation_illustration_var` expects a saved `ig_trait:` scope from which it will pull it's background. See `/common/interest_group_traits/com_situation_illustrations.txt` for some pre-made traits with working backgrounds.
 - The start date of the struggle can be displayed on the upper right of the illustration box. This is activated by setting both `com_situation_start_month_var` and `com_situation_start_year_var` on the journal scope. `com_situation_start_month_var` expects a flag variable while `com_situation_start_year_var` expects an integer value. Both must be set for this element to appear. The effects `com_situation_start_date_today_effect` and `com_set_situation_start_date_effect` are provided to streamline this process.
-*Note: We recommend that your custom illustration be at 520x200 resolution*
+**Note: We recommend that your custom illustration be at 520x200 resolution**
 
 #### Situation Phase Information
 This element is inspired by the CK3 phase information element. This is activated by setting both `com_situation_phase_icon_var` and `com_situation_phase_name_var` on the journal scope.
@@ -97,14 +98,22 @@ This small container displays the journal timeout timer and also provides a smal
 This container implements the base game journal entry flavor text contianer. This is activated by setting `com_situation_reason_var` on the journal scope. `com_situation_reason_var` expects a flag variable.
 
 #### Situation Involved & Interloper Countries Container
-This container contains two `dynamicgridbox` elements that display participating countries. Usage is as follows:
-- The first is always active and uses the `[JournalEntry.GetInvolvedCountries]` datamodel.
-- The second can be activated by setting the variable list `com_situation_interloper_list` on the journal scope.
+This container contains three `dynamicgridbox` elements that display participating countries. Usage is as follows:
+- The first is always active and uses the `[JournalEntry.GetInvolvedCountries]` datamodel
+- The second can be activated by populating the variable list `com_situation_involved_list` on the journal scope; this will hide the first container and serves to mimic the involvement list for country-scope journals
+- The third can be activated by populating the variable list `com_situation_interloper_list` on the journal scope.
 
 #### Situation Outcomes
-This element contains three (3) widgets for displaying the potential outcomes of the situation. Each one of these corresponds the `complete`, `fail`, and `timeout` blocks of the journal entry. 
-
-*Note: We recommend that your custom texture be at 160x200 resolution*
+This element contains three (3) widgets for displaying the potential outcomes of the situation. Each one of these corresponds the `complete`, `fail`, and `timeout` blocks of the journal entry and will display the corresponding autogen trigger and effect text as a tooltip. Both the names and textures of each outcome element are customizable.
+Usage is as follows:
+- `com_situation_complete_name_var` expects a flag variable with the localization of the `complete` outcome
+- `com_situation_complete_illus_var` expects a saved IG trait scope from which it will pull it's background.
+- `com_situation_timeout_name_var` expects a flag variable with the localization of the `timeout` outcome
+- `com_situation_timeout_illus_var` expects a saved IG trait scope from which it will pull it's background.
+- `com_situation_fail_name_var` expects a flag variable with the localization of the `fail` outcome
+- `com_situation_fail_illus_var` expects a saved IG trait scope from which it will pull it's background.
+*See `/common/interest_group_traits/com_situation_illustrations.txt` for some pre-made traits with working backgrounds.*
+**Note: We recommend that your custom texture be at 160x200 resolution**
 
 #### Situation Phase Progress
 This element contains four (4) sub-elements for displaying progress towards situation phases. These are activated by setting `com_situation_group_$index$_next_phase_name_var` on the journal scope where `$index$` is the number of a given group. Note that multiple variables are required for these elements to function. Each one is numbered 1 thru 4.
@@ -156,6 +165,49 @@ Allows for manually setting `com_situation_start_month_var` and `com_situation_s
 **Parameters:**
 - `month` the localization key of the desired month
 - `year` the integer value of the desired year
+
+### Effect `com_set_situation_illustration_background_effect`
+Sets the variable `com_situation_illustration_var` with an IG scope
+
+**Parameters:**
+- `texture` the key of an IG trait
+
+### Effect `com_set_situation_left_character`
+Sets the variable `com_situation_character_left_var`
+
+**Parameters:**
+- `character` some type of character scope
+
+### Effect `com_set_situation_right_character`
+Sets the variable `com_situation_character_right_var`
+
+**Parameters:**
+- `character` some type of character scope
+
+### Effect `com_set_situation_phase_effect`
+Sets the variables required to display the current phase information
+**Parameters:**
+- `phase_icon` a flag variable containing the text icon of the current phase
+- `phase_name` a flag variable containing the localization name of the current phase
+
+### Effect `com_set_situation_outcome_name_effect`
+Sets the header name for a situation outcome
+**Parameters:**
+- `type` the desired outcome (this can be `complete`, `timeout`, or `fail`)
+- `name` a flag containing the header name
+
+### Effect `com_set_situation_outcome_texture_effect`
+Sets a custom texture for a situation outcome
+**Parameters:**
+- `type` the desired outcome (this can be `complete`, `timeout`, or `fail`)
+- `texture` the key of an IG trait
+
+### Effect `com_set_situation_outcome_details_effect`
+Sets both the header and texture for a situation outcome
+**Parameters:**
+- `type` the desired outcome (this can be `complete`, `timeout`, or `fail`)
+- `name` a flag containing the header name
+- `texture` the key of an IG trait
 
 ### Effect: `com_set_indexed_stiuation_phase_progress_details_effect`
 Sets the variables for a specific phase progress group.

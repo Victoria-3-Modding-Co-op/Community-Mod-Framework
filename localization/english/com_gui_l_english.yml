@@ -40,6 +40,11 @@
 
  # Special Localization
  com_nothing_happens: "#italic Nothing happens...#!"
+ 
+ complete: "complete"
+ timeout: "timeout"
+ failure: "failure"
+ 
  _nl: "\n"
  _bp: "•"
  _nlpb: "\n • "

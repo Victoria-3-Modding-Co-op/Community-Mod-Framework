@@ -52,6 +52,7 @@ This framework is centered on a custom journal widget that combines features fro
 To use these widgets, you must inject them using one of the journal anchor points available since V3 patch 1.13. It is recommended to inject these widget into the `custom_widget_container_je_icon` anchor point. This anchor point removes the default journal icon. We also provide a scripted effect to hide all other journal elements.
 
 ### Widget Setup Steps:
+#### Using the Full Situations Widget
 First, you will need to inject the widget by placing this into your journal entry script:
 ```
 	widget = {
@@ -68,6 +69,14 @@ immediate = {
 	}
 }
 ```
+
+#### Using a Situation Sub-Widget
+The elements of the situation widget are also packaged as standalone widgets for injection in various journal anchors. The widget names are:
+- `widget_com_international_situation_illustration` [Situation Illustration](#situation-illustration)
+- `widget_com_international_situation_phase_information` [Situation Phase Information](#situation-phase-information)
+- `widget_com_international_situation_involved_countries` [Situation Involved Countries](#situation-involved--interloper-countries-container)
+- `widget_com_international_situation_outcome_container` [Situation Outcomes](#situation-outcomes)
+- `widget_com_international_situation_phase_progress` [Situation Phase Process](#situation-phase-progress)
 
 ### Individual Widget Elements
 All elements of `widget_com_international_situation` are completely optional. The core journal entry mechanics are unchanged by this framework so the underlying journal logic such as `complete`/`fail` trigger and any pulses will work as expected. The activation of the widget's elements are driven by a system of variables set on the journal scope.

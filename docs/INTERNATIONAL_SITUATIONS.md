@@ -75,12 +75,14 @@ All elements of `widget_com_international_situation` are completely optional. Th
 This is a small header that appears at the very top of the widget. This is activated by setting `com_situation_header_var` on the journal. This variable expects a flag and will display the localization entry at the top of the widget.
 
 #### Situation Illustration
-This is a rectangular element inspired by the situations UI from EU5. This is activated by setting `com_situation_illustration_var` on the journal scope. Usage is as follows:
+This is a rectangular element inspired by the situations UI from EU5. This is activated by setting `com_situation_illustration_var` on the journal scope.
+Usage is as follows:
 - `com_situation_illustration_var` expects a saved `ig_trait:` scope from which it will pull it's background. See `/common/interest_group_traits/com_situation_illustrations.txt` for some pre-made traits with working backgrounds.
-- The start date of the struggle can be displayed on the upper right of the illustration box. This is activated by setting both `com_situation_start_month_var` and `com_situation_start_year_var` on the journal scope. `com_situation_start_month_var` expects a flag variable while `com_situation_start_year_var` expects an integer value. Both must be set for this element to appear. The effects `com_set_international_situation_start_date_today_effect` and `com_set_international_situation_start_date_effect` are provided to streamline this process.
+- The start date of the struggle can be displayed on the upper right of the illustration box. This is activated by setting both `com_situation_start_month_var` and `com_situation_start_year_var` on the journal scope. `com_situation_start_month_var` expects a flag variable while `com_situation_start_year_var` expects an integer value. Both must be set for this element to appear. The effects `com_situation_start_date_today_effect` and `com_set_situation_start_date_effect` are provided to streamline this process.
 
 #### Situation Phase Information
-This element is inspired by the CK3 phase information element. This is activated by setting both `com_situation_phase_icon_var` and `com_situation_phase_name_var` on the journal scope. Usage is as follows:
+This element is inspired by the CK3 phase information element. This is activated by setting both `com_situation_phase_icon_var` and `com_situation_phase_name_var` on the journal scope.
+Usage is as follows:
 - `com_situation_phase_icon_var` expects a text icon that is scaled to fit the UI element
 - `com_situation_phase_name_var` expects a flag variable
 - The "Phase Effects" container use the `[JournalEntry.GetTimedModifiers]` datamodel; remember that contextless journal modifiers flow down to all involved countries
@@ -99,18 +101,29 @@ This container contains two `dynamicgridbox` elements that display participating
 - The second can be activated by setting the variable list `com_situation_interloper_list` on the journal scope.
 
 #### Situation Outcomes
-*WIP*
+This element contains three (3) widgets for displaying the potential outcomes of the situation. Each one of these corresponds the `complete`, `fail`, and `timeout` blocks of the journal entry. 
+
+*Note: We recommend that your custom texture be at 160x200 resolution*
 
 #### Situation Phase Progress
-*WIP*
+This element contains four (4) sub-elements for displaying progress towards situation phases. These are activated by setting `com_situation_group_$index$_next_phase_name_var` on the journal scope where `$index$` is the number of a given group. Note that multiple variables are required for these elements to function. Each one is numbered 1 thru 4.
+Usage is as follows:
+- `com_situation_group_$index$_next_phase_name_var` expects a flag variable with the localization of the next phase
+- `com_situation_group_$index$_next_phase_icon_var` expects a flag variable with the text icon of the next phase
+- `com_situation_group_$index$_next_phase_progress_var` expects a numerical value for the progress bar value
+- `com_situation_group_$index$_next_phase_max_progress_var` expects a numerical value for the maximum range of the progress bar
+- `com_situation_group_$index$_next_phase_min_progress_var` expects a numerical value for the minimum range of the progress bar
 
 # Script Docs
 These are following effects and triggers available to use for managing journals with the International Organization Framework:
 
 ## Effects
 * [com_hide_all_journal_elements_for_situation_effect](#effect-com_hide_all_journal_elements_for_situation_effect)
-* [com_set_international_situation_start_date_today_effect](#effect-com_set_international_situation_start_date_today_effect)
-* [com_set_international_situation_start_date_effect](#effect-com_set_international_situation_start_date_effect)
+* [com_situation_start_date_today_effect](#effect-com_situation_start_date_today_effect)
+* [com_set_situation_start_date_effect](#effect-com_set_situation_start_date_effect)
+* [com_set_indexed_stiuation_phase_progress_details_effect](#effect-com_set_indexed_stiuation_phase_progress_details_effect)
+* [com_update_indexed_situation_phase_progress_effect](#effect-com_update_indexed_situation_phase_progress_effect)
+* [com_remove_indexed_stiuation_phase_progress_details_effect](#effect-com_remove_indexed_stiuation_phase_progress_details_effect)
 
 ## Details
 
@@ -128,17 +141,45 @@ Sets the following [variables](#hiding-journal-entry-elements) on the journal:
 **Parameters:**
 - None
 
-### Effect: `com_set_international_situation_start_date_today_effect`
+### Effect: `com_situation_start_date_today_effect`
 Sets the following variables on the journal:
 - `com_situation_start_month_var` with the flag of the current in-game month
 - `com_situation_start_year_var` with the value of the current in-game year
- 
+
 **Parameters:**
 - None
 
-### Effect: `com_set_international_situation_start_date_effect`
+### Effect: `com_set_situation_start_date_effect`
 Allows for manually setting `com_situation_start_month_var` and `com_situation_start_year_var`
 
 **Parameters:**
 - `month` the localization key of the desired month
 - `year` the integer value of the desired year
+
+### Effect: `com_set_indexed_stiuation_phase_progress_details_effect`
+Sets the variables for a specific phase progress group.
+> Note: This effect will fail with an error if a non-int or out of range index value is provided
+
+**Parameters:**
+- `index` the number of the group; expects an integer from 1 thru 4
+- `next_phase_name` a localization flag for this group's next phase name; expects a string
+- `next_phase_icon` a localization flag for this group's next phase icon; expects a text icons
+- `progress_value` the current value of the progress bar; expects a numerical value
+- `max_value` the maximum displayed value of the progress bar; expects a numerical value
+- `min_value` the minimum displayed value of the progress bar; expects a numerical value
+
+### Effect: `com_update_indexed_situation_phase_progress_effect`
+Updates the progress bar value for a specific phase progress group.
+> Note: This effect will fail with an error if a non-int or out of range index value is provided
+
+**Parameters:**
+- `index` the number of the group; expects an integer from 1 thru 4
+- `progress_value` the current value of the progress bar; expects a numerical value
+
+
+### Effect: `com_remove_indexed_stiuation_phase_progress_details_effect`
+Removes all variables for a specific phase progress group.
+> Note: This effect will fail with an error if a non-int or out of range index value is provided
+
+**Parameters:**
+- `index` the number of the group; expects an integer from 1 thru 4

@@ -139,87 +139,38 @@ com_set_situation_start_date_effect = {
 }
 
 com_set_situation_phase_effect = {
-	if = {
-		limit = {
-			exists = flag:$phase_icon$
-			exists = flag:$phase_name$
-		}
-		set_variable = {
-			name = com_situation_phase_icon_var
-			value = flag:$phase_icon$
-		}
-		set_variable = {
-			name = com_situation_phase_name_var
-			value = flag:$phase_name$
-		}
+	set_variable = {
+		name = com_situation_phase_icon_var
+		value = flag:$phase_icon$
 	}
-	else = {
-		error_log = "Invalid parameter passed for com_set_situation_phase_effect. One of the localization keys does not exist."
+	set_variable = {
+		name = com_situation_phase_name_var
+		value = flag:$phase_name$
 	}
 }
 
 com_set_situation_outcome_name_effect = {
-	if = {
-		limit = {
-			exists = flag:$name$
-			NOR = {
-				flag:$type$ = flag:complete
-				flag:$type$ = flag:timeout
-				flag:$type$ = flag:failure
-			}
-		}
-		set_variable = {
-			name = com_situation_$type$_name_var
-			value = flag:$name$
-		}
-	}
-	else = {
-		error_log = "Invalid parameter passed for com_set_situation_outcome_name_effect. Either the localization key does not exist or the type parameter is incorrect."
+	set_variable = {
+		name = com_situation_$type$_name_var
+		value = flag:$name$
 	}
 }
 
 com_set_situation_outcome_texture_effect = {
-	if = {
-		limit = {
-			exists = ig_trait:$texture$
-			NOR = {
-				flag:$type$ = flag:complete
-				flag:$type$ = flag:timeout
-				flag:$type$ = flag:failure
-			}
-		}
-		set_variable = {
-			name = com_situation_$type$_illus_var
-			value = ig_trait:$texture$
-		}
-	}
-	else = {
-		error_log = "Invalid parameter passed for com_set_situation_outcome_texture_effect. Either the IG trait does not exist or the type parameter is incorrect."
+	set_variable = {
+		name = com_situation_$type$_illus_var
+		value = ig_trait:$texture$
 	}
 }
 
 com_set_situation_outcome_details_effect = {
-	if = {
-		limit = {
-			exists = flag:$name$
-			exists = ig_trait:$texture$
-			NOR = {
-				flag:$type$ = flag:complete
-				flag:$type$ = flag:timeout
-				flag:$type$ = flag:failure
-			}
-		}
-		set_variable = {
-			name = com_situation_$type$_name_var
-			value = flag:$name$
-		}
-		set_variable = {
-			name = com_situation_$type$_illus_var
-			value = ig_trait:$texture$
-		}
+	set_variable = {
+		name = com_situation_$type$_name_var
+		value = flag:$name$
 	}
-	else = {
-		error_log = "Invalid parameter passed for com_set_situation_outcome_details_effect. Either the localization entry does not exist, the IG trait does not exist or the type parameter is incorrect."
+	set_variable = {
+		name = com_situation_$type$_illus_var
+		value = ig_trait:$texture$
 	}
 }
 

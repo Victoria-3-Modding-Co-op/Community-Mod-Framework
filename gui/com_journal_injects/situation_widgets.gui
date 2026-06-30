@@ -35,6 +35,61 @@ flowcontainer = {
 	}
 }
 
+flowcontainer = {
+	name = "widget_com_international_situation_illustration"
+	ignoreinvisible = yes
+	
+	flowcontainer = {
+		direction = vertical
+		spacing = 5
+		com_international_situation_illustration = {}
+	}
+}
+
+flowcontainer = {
+	name = "widget_com_international_situation_phase_information"
+	ignoreinvisible = yes
+	
+	flowcontainer = {
+		direction = vertical
+		spacing = 5
+		com_international_situation_phase_information = {}
+	}
+}
+
+flowcontainer = {
+	name = "widget_com_international_situation_involved_countries"
+	ignoreinvisible = yes
+	
+	flowcontainer = {
+		direction = vertical
+		spacing = 5
+		com_international_situation_involved_countries = {}
+	}
+}
+
+flowcontainer = {
+	name = "widget_com_international_situation_outcome_container"
+	ignoreinvisible = yes
+	
+	flowcontainer = {
+		direction = vertical
+		spacing = 5
+		com_international_situation_outcome_container = {}
+	}
+}
+
+flowcontainer = {
+	name = "widget_com_international_situation_phase_progress"
+	ignoreinvisible = yes
+	
+	flowcontainer = {
+		direction = vertical
+		spacing = 5
+		com_international_situation_phase_progress = {}
+	}
+}
+
 ####---------- INTERNATIONAL SITUATION GUI TYPES ----------####
 types com_journal_widget_types {
 	type com_international_situation_debug_info = flowcontainer {

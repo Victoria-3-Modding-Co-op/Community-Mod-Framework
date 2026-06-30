@@ -138,6 +138,13 @@ com_set_situation_start_date_effect = {
 	}
 }
 
+com_set_situation_illustration_background_effect = {
+	set_variable = {
+		name = com_situation_illustration_var
+		value = ig_trait:$texture$
+	}
+}
+
 com_set_situation_phase_effect = {
 	set_variable = {
 		name = com_situation_phase_icon_var

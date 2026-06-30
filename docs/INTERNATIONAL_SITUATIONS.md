@@ -79,6 +79,7 @@ This is a rectangular element inspired by the situations UI from EU5. This is ac
 Usage is as follows:
 - `com_situation_illustration_var` expects a saved `ig_trait:` scope from which it will pull it's background. See `/common/interest_group_traits/com_situation_illustrations.txt` for some pre-made traits with working backgrounds.
 - The start date of the struggle can be displayed on the upper right of the illustration box. This is activated by setting both `com_situation_start_month_var` and `com_situation_start_year_var` on the journal scope. `com_situation_start_month_var` expects a flag variable while `com_situation_start_year_var` expects an integer value. Both must be set for this element to appear. The effects `com_situation_start_date_today_effect` and `com_set_situation_start_date_effect` are provided to streamline this process.
+*Note: We recommend that your custom illustration be at 520x200 resolution*
 
 #### Situation Phase Information
 This element is inspired by the CK3 phase information element. This is activated by setting both `com_situation_phase_icon_var` and `com_situation_phase_name_var` on the journal scope.

@@ -20,6 +20,7 @@ flowcontainer = {
 		direction = vertical
 		spacing = 5
 		
+		com_international_situation_debug_info = {}
 		com_international_situation_header = {}
 		com_international_situation_illustration = {}
 		com_international_situation_phase_information = {}
@@ -36,6 +37,30 @@ flowcontainer = {
 
 ####---------- INTERNATIONAL SITUATION GUI TYPES ----------####
 types com_journal_widget_types {
+	type com_international_situation_debug_info = flowcontainer {
+		parentanchor = hcenter
+		direction = vertical
+		minimumsize = { 540 -1 }
+		
+		visible = "[JournalEntry.MakeScope.Var('com_situation_header_var').IsSet]"
+		
+		textbox = {
+			parentanchor = hcenter
+			minimumsize = { 540 20 }
+			visible = "[InDebugMode]"
+			text = "DEBUG_JOURNAL_ENTRY_ID"
+			autoresize = yes
+			align = hcenter|nobaseline
+			using = fontsize_medium
+			
+			background = {
+				using = dark_area
+				alpha = 0.4
+				margin = { 8 0 }
+			}
+		}
+	}
+	
 	type com_international_situation_header = flowcontainer {
 		parentanchor = hcenter
 		direction = vertical

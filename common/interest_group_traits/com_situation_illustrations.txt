@@ -17,3 +17,7 @@ com_situation_background_europenorthamerica_political_extremism = {
 com_situation_background_southamerica_aristocrats = {
 	icon = gfx/interface/illustrations/situation_backgrounds/situation_background_southamerica_aristocrats.dds
 }
+
+com_outcome_background_generic = {
+	icon = gfx/interface/illustrations/situation_outcomes/situation_generic_illus.dds
+}

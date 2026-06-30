@@ -588,7 +588,7 @@ types com_journal_widget_types {
 					blockoverride "situation_outcome_custom_texture_path" {
 						texture = "[JournalEntry.MakeScope.Var('com_situation_complete_illus_var').GetInterestGroupTrait.GetTexture]"
 					}
-					blockoverride "com_situation_complete_tooltip" {
+					blockoverride "situation_outcome_tooltip" {
 						tooltip = "com_situation_complete_tooltip"
 					}
 				}
@@ -614,7 +614,7 @@ types com_journal_widget_types {
 					blockoverride "situation_outcome_custom_texture_path" {
 						texture = "[JournalEntry.MakeScope.Var('com_situation_timeout_illus_var').GetInterestGroupTrait.GetTexture]"
 					}
-					blockoverride "com_situation_timeout_tooltip" {
+					blockoverride "situation_outcome_tooltip" {
 						tooltip = "com_situation_timeout_tooltip"
 					}
 				}
@@ -640,7 +640,7 @@ types com_journal_widget_types {
 					blockoverride "situation_outcome_custom_texture_path" {
 						texture = "[JournalEntry.MakeScope.Var('com_situation_failure_illus_var').GetInterestGroupTrait.GetTexture]"
 					}
-					blockoverride "com_situation_failure_tooltip" {
+					blockoverride "situation_outcome_tooltip" {
 						tooltip = "com_situation_failure_tooltip"
 					}
 				}
@@ -893,9 +893,11 @@ types com_journal_widget_types {
 			direction = vertical
 			minimumsize = { 520 -1 }
 			
-			visible = "[Or(
-				GetVariableSystem.Exists('com_show_escalation_factors'),
-				GetVariableSystem.Exists('com_show_deescalation_factors')
+			visible = "[Or4(
+				GetVariableSystem.Exists('com_show_group_1_factors'),
+				GetVariableSystem.Exists('com_show_group_2_factors'),
+				GetVariableSystem.Exists('com_show_group_3_factors'),
+				GetVariableSystem.Exists('com_show_group_4_factors')
 			)]"
 			
 			background = {
@@ -928,8 +930,8 @@ types com_journal_widget_types {
 				textbox = {
 					parentanchor = center
 					position = { 0 -10 }
-					visible = "[GetVariableSystem.Exists('com_show_escalation_factors')]"
-					text = "com_catalysts_header_escalation"
+					visible = "[GetVariableSystem.Exists('com_show_group_1_factors')]"
+					text = "com_situation_catalysts_header_1"
 					autoresize = yes
 					align = nobaseline
 					fontsize = 18
@@ -938,8 +940,28 @@ types com_journal_widget_types {
 				textbox = {
 					parentanchor = center
 					position = { 0 -10 }
-					visible = "[GetVariableSystem.Exists('com_show_deescalation_factors')]"
-					text = "com_catalysts_header_deescalation"
+					visible = "[GetVariableSystem.Exists('com_show_group_2_factors')]"
+					text = "com_situation_catalysts_header_2"
+					autoresize = yes
+					align = nobaseline
+					fontsize = 18
+				}
+				
+				textbox = {
+					parentanchor = center
+					position = { 0 -10 }
+					visible = "[GetVariableSystem.Exists('com_show_group_3_factors')]"
+					text = "com_situation_catalysts_header_3"
+					autoresize = yes
+					align = nobaseline
+					fontsize = 18
+				}
+				
+				textbox = {
+					parentanchor = center
+					position = { 0 -10 }
+					visible = "[GetVariableSystem.Exists('com_show_group_4_factors')]"
+					text = "com_situation_catalysts_header_4"
 					autoresize = yes
 					align = nobaseline
 					fontsize = 18
@@ -956,12 +978,9 @@ types com_journal_widget_types {
 			}
 			
 			textbox = {
-				visible = "[And(
-					GetVariableSystem.Exists('com_show_escalation_factors'),
-					JournalEntry.MakeScope.Var('com_situation_escalation_factors_var').IsSet
-				)]"
+				visible = "[GetVariableSystem.Exists('com_show_group_1_factors')]"
 				autoresize = yes
-				raw_text = "[JournalEntry.MakeScope.Var('com_situation_escalation_factors_var').GetFlagName]"
+				raw_text = "[JournalEntry.MakeScope.Var('com_situation_group_1_next_phase_factors_var').GetFlagName]"
 				min_width = @panel_width_minus_30
 				max_width = @panel_width_minus_30
 				multiline = yes
@@ -969,13 +988,35 @@ types com_journal_widget_types {
 				align = nobaseline
 				margin = { 15 15 }
 			}
+			
 			textbox = {
-				visible = "[And(
-					GetVariableSystem.Exists('com_show_deescalation_factors'),
-					JournalEntry.MakeScope.Var('com_situation_deescalation_factors_var').IsSet
-				)]"
+				visible = "[GetVariableSystem.Exists('com_show_group_2_factors')]"
 				autoresize = yes
-				raw_text = "[JournalEntry.MakeScope.Var('com_situation_deescalation_factors_var').GetFlagName]"
+				raw_text = "[JournalEntry.MakeScope.Var('com_situation_group_2_next_phase_factors_var').GetFlagName]"
+				min_width = @panel_width_minus_30
+				max_width = @panel_width_minus_30
+				multiline = yes
+				using = default_list_position
+				align = nobaseline
+				margin = { 15 15 }
+			}
+			
+			textbox = {
+				visible = "[GetVariableSystem.Exists('com_show_group_3_factors')]"
+				autoresize = yes
+				raw_text = "[JournalEntry.MakeScope.Var('com_situation_group_3_next_phase_factors_var').GetFlagName]"
+				min_width = @panel_width_minus_30
+				max_width = @panel_width_minus_30
+				multiline = yes
+				using = default_list_position
+				align = nobaseline
+				margin = { 15 15 }
+			}
+			
+			textbox = {
+				visible = "[GetVariableSystem.Exists('com_show_group_4_factors')]"
+				autoresize = yes
+				raw_text = "[JournalEntry.MakeScope.Var('com_situation_group_4_next_phase_factors_var').GetFlagName]"
 				min_width = @panel_width_minus_30
 				max_width = @panel_width_minus_30
 				multiline = yes

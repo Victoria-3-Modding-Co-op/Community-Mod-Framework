@@ -19,17 +19,21 @@
  com_situation_current_phase: "Current Phase:"
  com_situation_phase_effects: "Phase Effects:"
  com_view_situation_endings: "View Situation Outcomes"
+ 
  com_next_phase_progress: "Next Phase Progress"
- com_catalysts_header_escalation: "#bold #italic Catalysts Towards#!#! [JournalEntry.MakeScope.Var('com_situation_escalation_next_phase_name_var').GetFlagName]"
- com_catalysts_header_deescalation: "#bold #italic Catalysts Towards#!#! [JournalEntry.MakeScope.Var('com_situation_deescalation_next_phase_name_var').GetFlagName]"
+ com_situation_catalysts_header_1: "#bold #italic Catalysts Towards#!#! [JournalEntry.MakeScope.Var('com_situation_group_1_next_phase_name_var').GetFlagName]"
+ com_situation_catalysts_header_2: "#bold #italic Catalysts Towards#!#! [JournalEntry.MakeScope.Var('com_situation_group_2_next_phase_name_var').GetFlagName]"
+ com_situation_catalysts_header_3: "#bold #italic Catalysts Towards#!#! [JournalEntry.MakeScope.Var('com_situation_group_3_next_phase_name_var').GetFlagName]"
+ com_situation_catalysts_header_4: "#bold #italic Catalysts Towards#!#! [JournalEntry.MakeScope.Var('com_situation_group_4_next_phase_name_var').GetFlagName]"
  com_catalysts_info: "#blue #italic Complete Catalysts to increase phase progress#!#!"
+ 
  com_situation_group_1_progress_bar_tooltip: "Current Progress: #v [JournalEntry.MakeScope.Var('com_situation_group_1_next_phase_progress_var').GetValue]/[JournalEntry.MakeScope.Var('com_situation_group_1_next_phase_max_progress_var').GetValue]#!"
  com_situation_group_2_progress_bar_tooltip: "Current Progress: #v [JournalEntry.MakeScope.Var('com_situation_group_2_next_phase_progress_var').GetValue]/[JournalEntry.MakeScope.Var('com_situation_group_2_next_phase_max_progress_var').GetValue]#!"
  com_situation_group_3_progress_bar_tooltip: "Current Progress: #v [JournalEntry.MakeScope.Var('com_situation_group_3_next_phase_progress_var').GetValue]/[JournalEntry.MakeScope.Var('com_situation_group_3_next_phase_max_progress_var').GetValue]#!"
  com_situation_group_4_progress_bar_tooltip: "Current Progress: #v [JournalEntry.MakeScope.Var('com_situation_group_4_next_phase_progress_var').GetValue]/[JournalEntry.MakeScope.Var('com_situation_group_4_next_phase_max_progress_var').GetValue]#!"
  
  com_situation_start_date_header: "#blue #bold Started In:#!#!"
- com_situation_start_date: "[JournalEntry.MakeScope.Var('com_situation_start_month_var').GetFlagName] [JournalEntry.MakeScope.Var('com_situation_start_year_var').GetValue]"
+ com_situation_start_date: "#bold [JournalEntry.MakeScope.Var('com_situation_start_month_var').GetFlagName] [JournalEntry.MakeScope.Var('com_situation_start_year_var').GetValue]#!"
  
  com_situation_background_africa_construction_colony: "com_situation_background_africa_construction_colony"
  com_situation_background_asia_westerners_arriving: "com_situation_background_asia_westerners_arriving"

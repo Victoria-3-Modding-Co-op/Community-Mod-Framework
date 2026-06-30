@@ -119,6 +119,10 @@ types com_journal_widget_types {
 				parentanchor = top|right
 				size = { 220 80 }
 				position = { 0 -10 }
+				visible = "[(And
+					JournalEntry.MakeScope.Var('com_situation_start_month_var').IsSet,
+					JournalEntry.MakeScope.Var('com_situation_start_year_var').IsSet
+				)]"
 				
 				background = {
 					using = dark_area
@@ -286,7 +290,7 @@ types com_journal_widget_types {
 		
 		widget = {
 			size = { 20 20 }
-			visible = "[And(
+			visible = "[Or(
 				JournalEntry.CanTimeOut,
 				JournalEntry.MakeScope.Var('com_involvement_status_var').IsSet
 			)]"

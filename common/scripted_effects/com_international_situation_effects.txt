@@ -9,7 +9,7 @@
     set_variable = com_hide_status_desc
 }
 
-com_set_international_situation_start_date_efect = {
+com_set_international_situation_start_date_today_effect = {
     if = {
        limit = {
            month = 0
@@ -119,11 +119,22 @@ com_set_international_situation_start_date_efect = {
         }
     }
     else = {
-        error_log = "Effect com_set_international_situation_start_date_efect was called but the month value was out of range. How did this happen?"
+        error_log = "Effect com_set_international_situation_start_date_today_effect was called but the month value was out of range. How did this happen?"
     }
     set_variable = {
         name = com_situation_start_year_var
         value = year
+    }
+}
+
+com_set_international_situation_start_date_effect = {
+    set_variable = {
+        name = com_situation_start_month_var
+        value = flag:$month$
+    }
+    set_variable = {
+        name = com_situation_start_year_var
+        value = $year$
     }
 }
 

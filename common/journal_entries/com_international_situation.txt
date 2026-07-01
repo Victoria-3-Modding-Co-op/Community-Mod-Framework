@@ -29,9 +29,9 @@
 	}
 	
 	modifiers_while_active = {
-		modifier_com_debug_1
-		modifier_com_debug_2
-		modifier_com_debug_3
+		debug_bureaucracy
+		debug_authority
+		debug_influence
 	}
 	
 	complete = {

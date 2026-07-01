@@ -21,11 +21,6 @@
  com_error_counter: "#bold [ErrorDeer.NumberOrErrors|v] Errors#!"
  com_error_counter_tooltip: "[ErrorDeer.GetTooltip]"
  
- # Debug Modifiers
- modifier_com_debug_1: "Debug Modifier"
- modifier_com_debug_2: "Debug Modifier"
- modifier_com_debug_3: "Debug Modifier"
- 
  # Test Event Localiztion
  com_debug.t: "Community GUI Test Event"
  com_debug.d: ""VIC 3 is just a terrible game, it is a lackluster game that has no uniqueness to it, every nation no matter the size is piss easy to play. In VIC 2 it was more, you had to actually manage buildings, populace, and conduct varied diplomacy.""

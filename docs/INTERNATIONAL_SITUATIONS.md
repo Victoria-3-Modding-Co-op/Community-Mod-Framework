@@ -15,10 +15,10 @@ These are implemented as contextless journals in the `je_group_global_internatio
   
 # Elements
 This framework consists of the following features:
-- Modification to the outliner to add support for pinning IO and Situation journals
+- Modification to the outliner to add support for Situation journals
 - Addition of variable checks to hide various elements from journal entries
-- Custom injectable journal widget that combines the design of V3 journals, CK3 struggles, and EU5 situations
-- 
+- Custom injectable journal widgets that combine the design of V3 journals, CK3 struggles, and EU5 situations
+
 ## Outliner Changes
 This framework takes advantage of the partitioning of the outliner journal pins provided by the *International Organizations Framework*.
 
@@ -140,6 +140,13 @@ These are following effects and triggers available to use for managing journals 
 * [com_hide_all_journal_elements_for_situation_effect](#effect-com_hide_all_journal_elements_for_situation_effect)
 * [com_situation_start_date_today_effect](#effect-com_situation_start_date_today_effect)
 * [com_set_situation_start_date_effect](#effect-com_set_situation_start_date_effect)
+* [com_set_situation_illustration_background_effect](#effect-com_set_situation_illustration_background_effect)
+* [com_set_situation_left_character](#effect-com_set_situation_left_character)
+* [com_set_situation_right_character](#effect-com_set_situation_right_character)
+* [com_set_situation_phase_effect](#effect-com_set_situation_phase_effect)
+* [com_set_situation_outcome_name_effect](#effect-com_set_situation_outcome_name_effect)
+* [com_set_situation_outcome_texture_effect](#effect-com_set_situation_outcome_texture_effect)
+* [com_set_situation_outcome_details_effect](#effect-com_set_situation_outcome_details_effect)
 * [com_set_indexed_stiuation_phase_progress_details_effect](#effect-com_set_indexed_stiuation_phase_progress_details_effect)
 * [com_update_indexed_situation_phase_progress_effect](#effect-com_update_indexed_situation_phase_progress_effect)
 * [com_remove_indexed_stiuation_phase_progress_details_effect](#effect-com_remove_indexed_stiuation_phase_progress_details_effect)

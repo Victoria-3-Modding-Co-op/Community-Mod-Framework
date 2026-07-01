@@ -212,7 +212,7 @@ flowcontainer = {
 }
 
 ####---------- INTERNATIONAL ORGANIZATION GUI TYPES ----------####
-types com_international_organization_types {
+types com_journal_widget_types {
 
 	type com_international_organization_header = widget {
 		block "spacer_size" {

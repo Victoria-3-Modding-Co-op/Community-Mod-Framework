@@ -11,6 +11,9 @@
 @panel_width_plus_30 = 570			# used to be 490
 @panel_width_plus_70 = 610			# used to be 530
 
+
+### I WILL BE REVIEWING AND REFACTORING THESE - Alexedishi 30 JUN 2026
+
 # CMF Situation specific
 @com_character_width = 200
 

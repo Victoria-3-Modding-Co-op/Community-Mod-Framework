@@ -32,11 +32,10 @@
  com_debug.e: "Test & 4ious"
  com_debug.james: ""just research [GetTechnology('line_infantry').GetName]" -1230james"
  com_debug.james_tt: "#italic James smiles upon you...#!"
-
- # Special Localization
  com_nothing_happens: "#italic Nothing happens...#!"
  
- _nl: "\n"
- _bp: "•"
- _nlpb: "\n • "
- _ttdl: "\n$TOOLTIP_DELIMITER$\n"
+ # Localization Shorthands
+ com_nl: "\n"
+ com_bp: "•"
+ com_nlpb: "\n • "
+ com_ttdl: "\n$TOOLTIP_DELIMITER$\n"

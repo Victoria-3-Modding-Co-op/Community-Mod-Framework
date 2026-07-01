@@ -290,6 +290,8 @@ com_remove_indexed_stiuation_phase_progress_details_effect = {
 
 
 ####---------- Outdated Situation Effects ----------####
+# I will be reviewing this soon -Alexedishi JUN-30-2026
+
 # Add journal entry to the scoped country
 # and add a newly created situation to that journal
 # Parameters:

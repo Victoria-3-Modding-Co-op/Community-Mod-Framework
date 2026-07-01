@@ -642,7 +642,7 @@ types com_journal_widget_types {
 			
 			visible = "[And3(
 				GetVariableSystem.Exists('com_show_involved_countries'),
-				Not(IsDataModelEmpty(JournalEntry.GetInvolvedCountries),
+				Not(IsDataModelEmpty(JournalEntry.GetInvolvedCountries)),
 				IsDataModelEmpty(JournalEntry.MakeScope.GetList('com_situation_involved_list'))
 			)]"
 			

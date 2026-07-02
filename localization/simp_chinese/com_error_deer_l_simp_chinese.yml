@@ -1,4 +1,0 @@
-﻿l_simp_chinese:
- com_error_deer_tooltip: "#instruction 左键单击#! 打开错误日志\n#instruction Shift + 左键单击#! 打开资源管理器 (Explorer)\n#instruction Alt + 左键单击#! 打开慢速 Tick 操作 (Slow Tick Operations)\n#instruction 右键单击#! 使其消失 (直到你再次惹恼它)\n#instruction Shift + 右键单击#! 打开微调器 (Tweaker)\n#instruction Alt + 右键单击#! 打开 3D 统计信息 (3D Stats)"
- com_error_counter: "#bold [ErrorDeer.NumberOrErrors|v] 个错误#!"
- com_error_counter_tooltip: "[ErrorDeer.GetTooltip]"

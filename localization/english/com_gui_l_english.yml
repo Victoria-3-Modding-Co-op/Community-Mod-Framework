@@ -21,7 +21,7 @@
  com_error_counter: "#bold [ErrorDeer.NumberOrErrors|v] Errors#!"
  com_error_counter_tooltip: "[ErrorDeer.GetTooltip]"
  
- # Test Event Localiztion
+ # Test Event Localization
  com_debug.t: "Community GUI Test Event"
  com_debug.d: ""VIC 3 is just a terrible game, it is a lackluster game that has no uniqueness to it, every nation no matter the size is piss easy to play. In VIC 2 it was more, you had to actually manage buildings, populace, and conduct varied diplomacy.""
  com_debug.f: ""yeah unfortunately nobody but james can mod" -rskhm"
@@ -32,7 +32,6 @@
  com_debug.e: "Test & 4ious"
  com_debug.james: ""just research [GetTechnology('line_infantry').GetName]" -1230james"
  com_debug.james_tt: "#italic James smiles upon you...#!"
- com_nothing_happens: "#italic Nothing happens...#!"
  
  # Localization Shorthands
  com_nl: "\n"

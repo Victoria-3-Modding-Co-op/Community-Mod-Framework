@@ -39,7 +39,7 @@
 	}
 	
 	on_complete = {
-		custom_tooltip = com_nothing_happens
+		custom_tooltip = com_debug.tt
 	}
 	
 	fail = {
@@ -47,13 +47,13 @@
 	}
 	
 	on_fail = {
-		custom_tooltip = com_nothing_happens
+		custom_tooltip = com_debug.tt
 	}
 	
 	timeout = very_long_modifier_time
 	
 	on_timeout = {
-		custom_tooltip = com_nothing_happens
+		custom_tooltip = com_debug.tt
 	}
 	
 	invalid = {
@@ -61,7 +61,7 @@
 	}
 	
 	on_invalid = {
-		custom_tooltip = com_nothing_happens
+		custom_tooltip = com_debug.tt
 	}
 	
 	status_desc = {

@@ -1,4 +1,39 @@
-types com_default_journal_elements_types {
+####---------- Base Journal Element Widgets ----------####
+flowcontainer = {
+	name = "com_default_journal_buttons"
+	ignoreinvisible = yes
+	
+	flowcontainer = {
+		direction = vertical
+		spacing = 5
+		com_default_journal_buttons = {}
+	}
+}
+
+flowcontainer = {
+	name = "com_default_journal_reason"
+	ignoreinvisible = yes
+	
+	flowcontainer = {
+		direction = vertical
+		spacing = 5
+		com_default_journal_reason = {}
+	}
+}
+
+flowcontainer = {
+	name = "com_default_journal_timeout"
+	ignoreinvisible = yes
+	
+	flowcontainer = {
+		direction = vertical
+		spacing = 5
+		com_default_journal_timeout = {}
+	}
+}
+
+####---------- Base Journal Element Types ----------####
+types com_journal_widget_types {
 	type com_default_journal_buttons = flowcontainer {
 		direction = vertical
 		parentanchor = top|hcenter
@@ -55,9 +90,7 @@ types com_default_journal_elements_types {
 		background = {
 			using = entry_bg
 		}
-
-
-
+		
 		icon = {
 			size = { 30 30 }
 			texture = "gfx/interface/icons/generic_icons/clock.dds"

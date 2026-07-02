@@ -805,7 +805,7 @@ types com_base_event_window_types {
 				alwaystransparent = yes
 				
 				block "deer_texture" { # I figure this is a fun little option to include -Alexedishi
-					texture = "gfx/interface/event_window/error_deer.dds"
+					texture = "gfx/interface/error_deer.dds"
 				}
 			}
 			tooltip = com_debug_deer

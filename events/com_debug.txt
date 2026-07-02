@@ -43,6 +43,67 @@ com_debug.1 = {
 		fix_variable_error = { variable = com_hide_involved_countries }
 		fix_variable_error = { variable = com_hide_complete_triggers }
 		fix_variable_error = { variable = com_hide_fail_triggers }
+		
+		# CMF International Situations Framework
+		fix_variable_error = { variable = com_situation_header_var }
+		fix_variable_error = { variable = com_situation_illustration_var }
+		fix_variable_error = { variable = com_situation_character_left_var }
+		fix_variable_error = { variable = com_situation_character_right_var }
+		fix_variable_error = { variable = com_situation_start_month_var }
+		fix_variable_error = { variable = com_situation_start_year_var }
+		
+		fix_variable_error = { variable = com_situation_phase_icon_var }
+		fix_variable_error = { variable = com_situation_phase_name_var }
+		fix_variable_error = { variable = com_involvement_status_var }
+		fix_variable_error = { variable = com_situation_reason_var }
+		fix_variable_error = { variable = com_situation_complete_name_var }
+		fix_variable_error = { variable = com_situation_complete_illus_var }
+		fix_variable_error = { variable = com_situation_timeout_name_var }
+		fix_variable_error = { variable = com_situation_timeout_illus_var }
+		fix_variable_error = { variable = com_situation_failure_name_var }
+		fix_variable_error = { variable = com_situation_failure_illus_var }
+		
+		fix_variable_error = { variable = com_situation_group_1_next_phase_progress_var }
+		fix_variable_error = { variable = com_situation_group_1_next_phase_name_var }
+		fix_variable_error = { variable = com_situation_group_1_next_phase_icon_var }
+		fix_variable_error = { variable = com_situation_group_1_next_phase_max_progress_var }
+		fix_variable_error = { variable = com_situation_group_1_next_phase_min_progress_var }
+		fix_variable_error = { variable = com_situation_group_1_next_phase_factors_var }
+		
+		fix_variable_error = { variable = com_situation_group_2_next_phase_progress_var }
+		fix_variable_error = { variable = com_situation_group_2_next_phase_name_var }
+		fix_variable_error = { variable = com_situation_group_2_next_phase_icon_var }
+		fix_variable_error = { variable = com_situation_group_2_next_phase_max_progress_var }
+		fix_variable_error = { variable = com_situation_group_2_next_phase_min_progress_var }
+		fix_variable_error = { variable = com_situation_group_2_next_phase_factors_var }
+		
+		fix_variable_error = { variable = com_situation_group_3_next_phase_progress_var }
+		fix_variable_error = { variable = com_situation_group_3_next_phase_name_var }
+		fix_variable_error = { variable = com_situation_group_3_next_phase_icon_var }
+		fix_variable_error = { variable = com_situation_group_3_next_phase_max_progress_var }
+		fix_variable_error = { variable = com_situation_group_3_next_phase_min_progress_var }
+		fix_variable_error = { variable = com_situation_group_3_next_phase_factors_var }
+		
+		fix_variable_error = { variable = com_situation_group_4_next_phase_progress_var }
+		fix_variable_error = { variable = com_situation_group_4_next_phase_name_var }
+		fix_variable_error = { variable = com_situation_group_4_next_phase_icon_var }
+		fix_variable_error = { variable = com_situation_group_4_next_phase_max_progress_var }
+		fix_variable_error = { variable = com_situation_group_4_next_phase_min_progress_var }
+		fix_variable_error = { variable = com_situation_group_4_next_phase_factors_var }
+		
+		fix_variable_error = { variable = com_situation }
+		fix_variable_error = { variable = com_side_left }
+		fix_variable_error = { variable = com_side_right }
+		fix_variable_error = { variable = com_name }
+		fix_variable_error = { variable = com_desc }
+		fix_variable_error = { variable = com_leader }
+		fix_variable_error = { variable = com_countries }
+		fix_variable_error = { variable = com_factions }
+		fix_variable_error = { variable = com_button_groups }
+		fix_variable_error = { variable = com_buttons }
+		fix_variable_error = { variable = com_victory_condition }
+		fix_variable_error = { variable = com_victory_effect }
+		fix_variable_error = { variable = com_reason_location }
 		fix_variable_error = { variable = com_enactment_widget }
 
 		# CMF International Organizations Framework
@@ -95,21 +156,6 @@ com_debug.1 = {
 		fix_variable_error = { variable = com_character_animation }
 		fix_variable_error = { variable = com_character_camera }
 		fix_variable_error = { variable = com_character_environment }
-
-		# CMF Situation Framework
-		fix_variable_error = { variable = com_situation }
-		fix_variable_error = { variable = com_side_left }
-		fix_variable_error = { variable = com_side_right }
-		fix_variable_error = { variable = com_name }
-		fix_variable_error = { variable = com_desc }
-		fix_variable_error = { variable = com_leader }
-		fix_variable_error = { variable = com_countries }
-		fix_variable_error = { variable = com_factions }
-		fix_variable_error = { variable = com_button_groups }
-		fix_variable_error = { variable = com_buttons }
-		fix_variable_error = { variable = com_victory_condition }
-		fix_variable_error = { variable = com_victory_effect }
-		fix_variable_error = { variable = com_reason_location }
 
 		# CMF Law Blocker Framework
 		## Power Laws
@@ -285,6 +331,20 @@ com_debug.1 = {
 		fix_variable_error = { variable = com_name_first_no_formatting }
 		fix_variable_error = { variable = com_name_last }
 		fix_variable_error = { variable = com_name_last_no_formatting }
+		
+		# LITERALLY THE MONTHS OF THE YEAR
+		fix_variable_error = { variable = JANUARY }
+		fix_variable_error = { variable = FEBRUARY }
+		fix_variable_error = { variable = MARCH }
+		fix_variable_error = { variable = APRIL }
+		fix_variable_error = { variable = MAY }
+		fix_variable_error = { variable = JUNE }
+		fix_variable_error = { variable = JULY }
+		fix_variable_error = { variable = AUGUST }
+		fix_variable_error = { variable = SEPTEMBER }
+		fix_variable_error = { variable = OCTOBER }
+		fix_variable_error = { variable = NOVEMBER }
+		fix_variable_error = { variable = DECEMBER }
 	}
 }
 
@@ -301,6 +361,7 @@ com_debug.2 = {
 		add_contextless_journal_entry = je_com_supranational_organization
 		add_contextless_journal_entry = je_com_regional_organization
 		add_contextless_journal_entry = je_com_religious_organization
+		add_contextless_journal_entry = je_com_international_situation
 	}
 }
 

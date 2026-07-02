@@ -82,7 +82,7 @@ The parent widget `widget_com_international_organization_base` can also be invok
 - The details elements to the right of the panel each have their own blocks to override visibility, text, and icons. There are a total of 5 detail entries, with the last two blank and hidden by default. All have gui blocks to override their content.
 
 ## Usage
-To use these widgets, you must inject them using one of the journal anchor points available since V3 patch 1.13. It is recommended to inject these widget into the `custom_widget_container_je_icon` anchor point. This is a custom CMF anchor point that will remove the default journal icon. We also provide a scripted effect to hide all other journal elements.
+To use these widgets, you must inject them using one of the journal anchor points available since V3 patch 1.13. It is recommended to inject these widget into the `custom_widget_container_je_icon` anchor point. This anchor point removes the default journal icon. We also provide a scripted effect to hide all other journal elements.
 
 ### Widget Setup Steps:
 First, you will need to inject the widget by placing this into your journal entry script:

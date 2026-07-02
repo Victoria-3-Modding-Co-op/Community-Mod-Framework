@@ -1,0 +1,1369 @@
+# INHERITED FROM BASE GAME
+@panel_width_minus_30 = 510
+@panel_width_minus_20 = 520
+@panel_width_minus_10 = 530 # used to be 450
+@panel_width = 540 # used to be 460
+@panel_width_half = 270 # used to be 230
+@panel_width_plus_10 = 550 # used to be 470
+@panel_width_plus_14 = 554 # used to be 474
+@panel_width_plus_14_half = 277 # used to be 237
+@panel_width_plus_20 = 560 # used to be 480
+@panel_width_plus_30 = 570 # used to be 490
+@panel_width_plus_70 = 610 # used to be 530
+
+####---------- INJECTABLE JOURNAL ENTRY WIDGETS ----------####
+flowcontainer = {
+	name = "widget_com_international_situation"
+	ignoreinvisible = yes
+	
+	flowcontainer = {
+		direction = vertical
+		spacing = 5
+		
+		com_international_situation_debug_info = {}
+		com_international_situation_header = {}
+		com_international_situation_illustration = {}
+		com_international_situation_phase_information = {}
+		com_international_situation_timeout = {}
+		com_international_situation_flavor_text = {}
+		# com_international_situation_faction_leaders = {}
+		# com_international_situation_faction_members = {}
+		com_journal_scripted_buttons = {}
+		com_international_situation_involved_countries = {}
+		com_international_situation_outcome_container = {}
+		com_international_situation_phase_progress = {}
+	}
+}
+
+flowcontainer = {
+	name = "widget_com_international_situation_illustration"
+	ignoreinvisible = yes
+	
+	flowcontainer = {
+		direction = vertical
+		spacing = 5
+		com_international_situation_illustration = {}
+	}
+}
+
+flowcontainer = {
+	name = "widget_com_international_situation_phase_information"
+	ignoreinvisible = yes
+	
+	flowcontainer = {
+		direction = vertical
+		spacing = 5
+		com_international_situation_phase_information = {}
+	}
+}
+
+
+flowcontainer = {
+	name = "com_international_situation_timeout"
+	ignoreinvisible = yes
+	
+	flowcontainer = {
+		direction = vertical
+		spacing = 5
+		com_international_situation_timeout = {}
+	}
+}
+
+flowcontainer = {
+	name = "widget_com_international_situation_involved_countries"
+	ignoreinvisible = yes
+	
+	flowcontainer = {
+		direction = vertical
+		spacing = 5
+		com_international_situation_involved_countries = {}
+	}
+}
+
+flowcontainer = {
+	name = "widget_com_international_situation_outcome_container"
+	ignoreinvisible = yes
+	
+	flowcontainer = {
+		direction = vertical
+		spacing = 5
+		com_international_situation_outcome_container = {}
+	}
+}
+
+flowcontainer = {
+	name = "widget_com_international_situation_phase_progress"
+	ignoreinvisible = yes
+	
+	flowcontainer = {
+		direction = vertical
+		spacing = 5
+		com_international_situation_phase_progress = {}
+	}
+}
+
+####---------- INTERNATIONAL SITUATION GUI TYPES ----------####
+types com_journal_widget_types {
+	type com_international_situation_debug_info = flowcontainer {
+		parentanchor = hcenter
+		direction = vertical
+		minimumsize = { 540 -1 }
+		
+		visible = "[InDebugMode]"
+		
+		textbox = {
+			parentanchor = hcenter
+			minimumsize = { 540 20 }
+			visible = "[InDebugMode]"
+			text = "DEBUG_JOURNAL_ENTRY_ID"
+			autoresize = yes
+			align = hcenter|nobaseline
+			using = fontsize_medium
+			
+			background = {
+				using = dark_area
+				alpha = 0.4
+				margin = { 8 0 }
+			}
+		}
+	}
+	
+	type com_international_situation_header = flowcontainer {
+		parentanchor = hcenter
+		direction = vertical
+		minimumsize = { 540 -1 }
+		
+		visible = "[JournalEntry.MakeScope.Var('com_situation_header_var').IsSet]"
+		
+		textbox = {
+			parentanchor = hcenter
+			minimumsize = { 540 20 }
+			raw_text = "#bold [JournalEntry.MakeScope.Var('com_situation_header_var').GetFlagName]#!"
+			align = hcenter|nobaseline
+			using = fontsize_medium
+			
+			background = {
+				using = dark_area
+				alpha = 0.4
+				margin = { 8 0 }
+			}
+		}
+	}
+	
+	type com_international_situation_illustration = flowcontainer {
+		parentanchor = hcenter
+		direction = vertical
+		minimumsize = { 540 -1 }
+		margin_top = 50
+		
+		visible = "[JournalEntry.MakeScope.Var('com_situation_illustration_var').IsSet]"
+		
+		background = {
+			texture = "[JournalEntry.MakeScope.Var('com_situation_illustration_var').GetInterestGroupTrait.GetTexture]"
+			fittype = centercrop
+			margin_top = -50
+			margin_left = -10
+			margin_right = -10
+		}
+		
+		widget = {
+			parentanchor = hcenter
+			size = { 520 200 }
+			
+			# Background Frame
+			background = {
+				texture = "gfx/interface/character_panel/char_bg_frame.dds"
+				margin_left = 18
+				margin_right = 12
+				margin_bottom = 10
+				spriteType = Corneredtiled
+				
+				spriteborder_left = 200
+				spriteborder_right = 60
+				spriteborder_top = 170
+				spriteborder_bottom = 180
+				
+				texture_density = 2
+			}
+			
+			# Journal Entry Icon Shield
+			widget = {
+				parentanchor = top|hcenter
+				size = { 150 150 }
+				position = { 0 -50 }
+				icon = {
+					parentanchor = center
+					size = { 150 150 }
+					position = { 2 2 }
+					texture = "gfx/interface/backgrounds/com_bg_pb_frame.dds"
+				}
+				icon = {
+					parentanchor = center
+					size = { 150 150 }
+					texture = "gfx/coat_of_arms/textured_emblems/pb_frame_03.dds"
+				}
+				icon = {
+					parentanchor = center
+					texture = "[JournalEntry.GetIcon]"
+					position = { 0 -10 }
+					size = { 75 75 }
+				}
+			}
+			
+			# Start Date Placement in Top Right
+			widget = {
+				parentanchor = top|right
+				size = { 220 80 }
+				position = { 0 -10 }
+				visible = "[And3(
+					JournalEntry.MakeScope.Var('com_situation_start_month_var').IsSet,
+					JournalEntry.MakeScope.Var('com_situation_start_year_var').IsSet,
+					Not(JournalEntry.MakeScope.Var('com_situation_character_right_var').IsSet)
+				)]"
+				
+				background = {
+					using = dark_area
+					alpha = 0.50
+					margin = { 0 0 }
+					
+					modify_texture = {
+						using = texture_velvet
+					}
+					modify_texture = {
+						texture = "gfx/interface/masks/fade_horizontal_center.dds"
+						spriteType = Corneredstretched
+						spriteborder = { 0 0 }
+						blend_mode = alphamultiply
+					}
+					modify_texture = {
+						texture = "gfx/interface/masks/fade_vertical_center.dds"
+						spriteType = Corneredstretched
+						spriteborder = { 0 0 }
+						blend_mode = alphamultiply
+					}
+				}
+				
+				textbox = {
+					parentanchor = center
+					position = { 0 -10 }
+					autoresize = yes
+					text = "com_situation_start_date_header"
+					align = hcenter|nobaseline
+					using = fontsize_medium
+				}
+				
+				textbox = {
+					parentanchor = center
+					position = { 0 10 }
+					autoresize = yes
+					text = "com_situation_start_date"
+					align = hcenter|nobaseline
+					using = fontsize_medium
+				}
+			}
+			
+			# Start Date Placement in Center
+			widget = {
+				parentanchor = center
+				size = { 220 80 }
+				position = { 0 10 }
+				visible = "[And3(
+					JournalEntry.MakeScope.Var('com_situation_start_month_var').IsSet,
+					JournalEntry.MakeScope.Var('com_situation_start_year_var').IsSet,
+					JournalEntry.MakeScope.Var('com_situation_character_right_var').IsSet
+				)]"
+				
+				background = {
+					using = dark_area
+					alpha = 0.50
+					margin = { 0 0 }
+					
+					modify_texture = {
+						using = texture_velvet
+					}
+					modify_texture = {
+						texture = "gfx/interface/masks/fade_horizontal_center.dds"
+						spriteType = Corneredstretched
+						spriteborder = { 0 0 }
+						blend_mode = alphamultiply
+					}
+					modify_texture = {
+						texture = "gfx/interface/masks/fade_vertical_center.dds"
+						spriteType = Corneredstretched
+						spriteborder = { 0 0 }
+						blend_mode = alphamultiply
+					}
+				}
+				
+				textbox = {
+					parentanchor = center
+					position = { 0 -10 }
+					autoresize = yes
+					text = "com_situation_start_date_header"
+					align = hcenter|nobaseline
+					using = fontsize_medium
+				}
+				
+				textbox = {
+					parentanchor = center
+					position = { 0 10 }
+					autoresize = yes
+					text = "com_situation_start_date"
+					align = hcenter|nobaseline
+					using = fontsize_medium
+				}
+			}
+			
+			# Left Character Portrait
+			character_portrait_base_no_mask = {
+				parentanchor = left|vcenter
+				ignore_in_debug_draw = yes
+				size = { 220 220 }
+				max_update_rate = 8
+				
+				visible = "[JournalEntry.MakeScope.Var('com_situation_character_left_var').IsSet]"
+				datacontext = "[JournalEntry.MakeScope.Var('com_situation_character_left_var').GetCharacter]"
+				
+				block "character_layout" {
+					position = { -20 -7 }
+				}
+				blockoverride "portrait_size" {
+					block "character_portrait_size" {
+						size = { 220 220 }
+					}
+				}
+				blockoverride "portrait_texture" {
+					datacontext = "[JournalEntry.MakeScope.Var('com_situation_character_left_var')]"
+					portrait_texture = "[Scope.GetCharacter.GetAnimatedPortrait(
+						'environment_standard',
+						'camera_body',
+						'commander_vs_left',
+						GetPortraitRenderSize(PdxGuiWidget.Self))
+					]"
+				}
+				blockoverride "portrait_icons" { }
+				blockoverride "tooltip" {}
+			}
+			
+			# Right Character Portrait
+			character_portrait_base_no_mask = {
+				parentanchor = right|vcenter
+				ignore_in_debug_draw = yes
+				size = { 220 220 }
+				max_update_rate = 8
+				
+				visible = "[JournalEntry.MakeScope.Var('com_situation_character_right_var').IsSet]"
+				datacontext = "[JournalEntry.MakeScope.Var('com_situation_character_right_var').GetCharacter]"
+				
+				block "character_layout" {
+					position = { 20 -7 }
+				}
+				blockoverride "portrait_size" {
+					block "character_portrait_size" {
+						size = { 220 220 }
+					}
+				}
+				blockoverride "portrait_texture" {
+					datacontext = "[JournalEntry.MakeScope.Var('com_situation_character_right_var')]"
+					portrait_texture = "[Scope.GetCharacter.GetAnimatedPortrait(
+						'environment_standard',
+						'camera_body',
+						'commander_vs_right',
+						GetPortraitRenderSize(PdxGuiWidget.Self))
+					]"
+				}
+				blockoverride "portrait_icons" { }
+				blockoverride "tooltip" {}
+			}
+		}
+	}
+	
+	type com_international_situation_phase_information = flowcontainer {
+		direction = vertical
+		parentanchor = hcenter
+		minimumsize = { 540 -1 }
+		margin_top = 15
+		margin_bottom = 15
+		
+		visible = "[And(
+			JournalEntry.MakeScope.Var('com_situation_phase_icon_var').IsSet,
+			JournalEntry.MakeScope.Var('com_situation_phase_name_var').IsSet
+		)]"
+		
+		widget = {
+			parentanchor = center
+			size = { 540 100 }
+			
+			background = {
+				using = default_header_bg
+				margin = { 8 0 }
+			}
+			
+			icon = {
+				parentanchor = center
+				position = { -138 0 }
+				size = { 280 100 }
+				texture = "gfx/interface/backgrounds/bg_bronze_with_frame_horizontal_right.dds"
+				framesize = { 20 200 }
+				frame = 2
+			}
+			
+			icon = {
+				parentanchor = center
+				position = { 10 0 }
+				size = { 20 100 }
+				texture = "gfx/interface/backgrounds/bg_bronze_with_frame_horizontal_right.dds"
+				framesize = { 20 200 }
+				frame = 10
+			}
+			
+			icon = {
+				parentanchor = left|vcenter
+				size = { 180 210 }
+				scale = 0.75
+				texture = "gfx/interface/politics_view/institution_current_level.dds"
+				
+				textbox = {
+					parentanchor = center
+					size = { 100 100 }
+					fontsize = 80
+					align = vcenter|hcenter
+					raw_text = "[JournalEntry.MakeScope.Var('com_situation_phase_icon_var').GetFlagName]"
+				}
+			}
+			
+			textbox = {
+				parentanchor = center
+				autoresize = yes
+				position = { -70 -20 }
+				align = hcenter|nobaseline
+				text = "com_situation_current_phase"
+				using = fontsize_large
+			}
+			
+			textbox = {
+				parentanchor = center
+				autoresize = yes
+				position = { -70 10 }
+				align = vcenter|hcenter
+				raw_text = "[JournalEntry.MakeScope.Var('com_situation_phase_name_var').GetFlagName]"
+				using = fontsize_xl
+			}
+			
+			textbox = {
+				parentanchor = right|vcenter
+				size = { 100 100 }
+				position = { -70 -30 }
+				align = vcenter|hcenter
+				text = "com_situation_phase_effects"
+				using = fontsize_xl
+			}
+			
+			widget = {
+				parentanchor = right|vcenter
+				size = { 240 50 }
+				position = { -4 12 }
+				
+				background = {
+					using = entry_bg_simple
+				}
+				
+				flowcontainer = {
+					datamodel = "[JournalEntry.GetTimedModifiers]"
+					spacing = 10
+					visible = "[Not(IsDataModelEmpty(JournalEntry.GetTimedModifiers))]"
+					parentanchor = center
+					datamodel_wrap = 2
+					
+					item = {
+						icon = {
+							texture = "gfx/interface/backgrounds/circle_bg_simple_dark.dds"
+							size = { 40 40 }
+							
+							icon = {
+								parentanchor = center
+								tooltip = "[TimedModifier.GetTooltip]"
+								texture = "[TimedModifier.GetIcon]"
+								size = { 35 35 }
+							}
+						}
+					}
+					
+				}
+			}
+		}
+	}
+	
+	type com_international_situation_timeout = flowcontainer {
+		parentanchor = hcenter
+		direction = vertical
+		minimumsize = { 540 -1 }
+		margin_top = 10
+		margin_bottom = 5
+		
+		visible = "[Or(
+			JournalEntry.CanTimeOut,
+			JournalEntry.MakeScope.Var('com_involvement_status_var').IsSet
+		)]"
+		
+		flowcontainer = {
+			parentanchor = hcenter
+			direction = horizontal
+			
+			flowcontainer = {
+				parentanchor = hcenter
+				direction = horizontal
+				spacing = 5
+				minimumsize = { 220 -1 }
+				
+				visible = "[JournalEntry.CanTimeOut]"
+				tooltip = "JOURNAL_ENTRY_ON_TIMEOUT_LONG"
+				
+				icon = {
+					size = { 30 30 }
+					texture = "gfx/interface/icons/generic_icons/clock.dds"
+				}
+				textbox = {
+					text = "[JournalEntry.GetTimeoutTooltip]"
+					autoresize = yes
+					align = left|nobaseline
+					using = fontsize_large
+					parentanchor = vcenter
+				}
+			}
+			
+			textbox = {
+				parentanchor = hcenter
+				minimumsize = { 220 30 }
+				autoresize = yes
+				raw_text = "#bold [JournalEntry.MakeScope.Var('com_involvement_status_var').GetFlagName]#!"
+				align = hcenter|nobaseline
+				elide = right
+				using = fontsize_medium
+				
+				background = {
+					using = dark_area
+					alpha = 0.5
+					margin = { 20 10 }
+					
+					visible = "[JournalEntry.CanTimeOut]"
+					
+					modify_texture = {
+						texture = "gfx/interface/masks/fade_horizontal_center.dds"
+						spriteType = Corneredstretched
+						spriteborder = { 0 0 }
+						blend_mode = alphamultiply
+					}
+					
+					modify_texture = {
+						texture = "gfx/interface/masks/fade_vertical_center.dds"
+						spriteType = Corneredstretched
+						spriteborder = { 0 0 }
+						blend_mode = alphamultiply
+					}
+				}
+				
+				background = {
+					using = entry_bg_simple
+					visible = "[Not(JournalEntry.CanTimeOut)]"
+				}
+			}
+		}
+	}
+	
+	type com_international_situation_flavor_text = flowcontainer {
+		direction = vertical
+		using = default_list_position
+		margin_bottom = 5
+		spacing = 20
+		
+		textbox = {
+			visible = "[JournalEntry.MakeScope.Var('com_situation_reason_var').IsSet]"
+			autoresize = yes
+			raw_text = "[JournalEntry.MakeScope.Var('com_situation_reason_var').GetFlagName]"
+			min_width = @panel_width_minus_30
+			max_width = @panel_width_minus_30
+			multiline = yes
+			using = default_list_position
+			align = nobaseline
+			margin = { 15 15 }
+			
+			background = {
+				using = entry_bg
+			}
+		}
+	}
+	
+	type com_international_situation_involved_countries = flowcontainer {
+		parentanchor = hcenter
+		direction = vertical
+		minimumsize = { 540 -1 }
+		spacing = 5
+		margin_bottom = 10
+		
+		background = {
+			using = dark_area
+			alpha = 0.50
+			margin = { 0 -5 }
+			
+			visible = "[GetVariableSystem.Exists('com_show_involved_countries')]"
+			
+			modify_texture = {
+				using = texture_velvet
+			}
+			modify_texture = {
+				texture = "gfx/interface/masks/fade_horizontal_center.dds"
+				spriteType = Corneredstretched
+				spriteborder = { -80 0 }
+				blend_mode = alphamultiply
+			}
+			modify_texture = {
+				texture = "gfx/interface/masks/fade_vertical_center.dds"
+				spriteType = Corneredstretched
+				spriteborder = { 0 -20 }
+				blend_mode = alphamultiply
+			}
+		}
+		
+		section_header_button = {
+			blockoverride "layout" {
+				size = { 520 38 }
+			}
+			blockoverride "left_text" {
+				text = "com_situation_toggle_involved"
+			}
+			blockoverride "onclick" {
+				onclick = "[GetVariableSystem.Toggle('com_show_involved_countries')]"
+			}
+			blockoverride "onclick_showmore" {
+				visible = "[Not(GetVariableSystem.Exists('com_show_involved_countries'))]"
+			}
+			blockoverride "onclick_showless" {
+				visible = "[GetVariableSystem.Exists('com_show_involved_countries')]"
+			}
+		}
+		
+		## CONTEXTLESS INVOLVED COUNTRIES CONTAINER
+		# This uses the GetInvolvedCountries datamodel; it will not be shown if com_situation_involved_list is populated
+		flowcontainer = {
+			parentanchor = hcenter
+			direction = vertical
+			minimumsize = { 520 -1 }
+			margin = { 5 5 }
+			spacing = 10
+			
+			visible = "[And3(
+				GetVariableSystem.Exists('com_show_involved_countries'),
+				Not(IsDataModelEmpty(JournalEntry.GetInvolvedCountries)),
+				IsDataModelEmpty(JournalEntry.MakeScope.GetList('com_situation_involved_list'))
+			)]"
+			
+			background = {
+				using = entry_bg_simple
+			}
+			
+			textbox = {
+				parentanchor = hcenter
+				autoresize = yes
+				text = "com_situation_involved_countries"
+				align = center|nobaseline
+				elide = right
+				using = fontsize_large
+			}
+			
+			divider_decorative = {
+				parentanchor = hcenter
+			}
+			
+			dynamicgridbox = {
+				parentanchor = hcenter
+				datamodel = "[JournalEntry.GetInvolvedCountries]"
+				datamodel_wrap = 8
+				flipdirection = yes
+				
+				item = {
+					widget = {
+						size = { 60 40 }
+						small_flag = { }
+					}
+				}
+			}
+		}
+		
+		## LIST-BASED INVOLVED COUNTRIES CONTAINER
+		# This uses the com_situation_involved_list variable list; this list will hide the above container if populated
+		flowcontainer = {
+			parentanchor = hcenter
+			direction = vertical
+			minimumsize = { 520 -1 }
+			margin = { 5 5 }
+			spacing = 10
+			
+			visible = "[And(
+				GetVariableSystem.Exists('com_show_involved_countries'),
+				DataModelHasItems(JournalEntry.MakeScope.GetList('com_situation_involved_list'))
+			)]"
+			
+			background = {
+				using = entry_bg_simple
+			}
+			
+			textbox = {
+				parentanchor = hcenter
+				autoresize = yes
+				text = "com_situation_involved_countries"
+				align = center|nobaseline
+				elide = right
+				using = fontsize_large
+			}
+			
+			divider_decorative = {
+				parentanchor = hcenter
+			}
+			
+			dynamicgridbox = {
+				parentanchor = hcenter
+				datamodel = "[JournalEntry.GetInvolvedCountries]"
+				datamodel_wrap = 8
+				flipdirection = yes
+				
+				item = {
+					widget = {
+						size = { 60 40 }
+						small_flag = { }
+					}
+				}
+			}
+		}
+		
+		## INTERLOPER COUNTRIES CONTAINER
+		# This uses the com_situation_interloper_list variable list and will appear if the list is populated
+		flowcontainer = {
+			parentanchor = hcenter
+			direction = vertical
+			minimumsize = { 520 -1 }
+			margin = { 5 5 }
+			spacing = 10
+			
+			visible = "[And(
+				GetVariableSystem.Exists('com_show_involved_countries'),
+				Not(IsDataModelEmpty(JournalEntry.MakeScope.GetList('com_situation_interloper_list')))
+			)]"
+			
+			background = {
+				using = entry_bg_simple
+			}
+			
+			textbox = {
+				parentanchor = hcenter
+				autoresize = yes
+				text = "com_situation_interloper_countries"
+				align = center|nobaseline
+				elide = right
+				using = fontsize_large
+			}
+			
+			divider_decorative = {
+				parentanchor = hcenter
+			}
+			
+			dynamicgridbox = {
+				parentanchor = hcenter
+				datamodel = "[JournalEntry.MakeScope.GetList('com_situation_interloper_list')]"
+				datamodel_wrap = 8
+				flipdirection = yes
+				
+				item = {
+					widget = {
+						datacontext = "[Scope.GetCountry]"
+						size = { 60 40 }
+						small_flag = { }
+					}
+				}
+			}
+		}
+	}
+	
+	type com_international_situation_outcome_container = flowcontainer {
+		direction = vertical
+		parentanchor = hcenter
+		minimumsize = { 540 -1 }
+		margin_bottom = 10
+		
+		background = {
+			using = dark_area
+			alpha = 0.50
+			margin = { 0 -5 }
+			
+			visible = "[GetVariableSystem.Exists('com_show_situation_outomes')]"
+			
+			modify_texture = {
+				using = texture_velvet
+			}
+			modify_texture = {
+				texture = "gfx/interface/masks/fade_horizontal_center.dds"
+				spriteType = Corneredstretched
+				spriteborder = { -80 0 }
+				blend_mode = alphamultiply
+			}
+			modify_texture = {
+				texture = "gfx/interface/masks/fade_vertical_center.dds"
+				spriteType = Corneredstretched
+				spriteborder = { 0 -20 }
+				blend_mode = alphamultiply
+			}
+		}
+		
+		section_header_button = {
+			blockoverride "layout" {
+				size = { 520 38 }
+			}
+			blockoverride "left_text" {
+				text = "com_view_situation_endings"
+			}
+			blockoverride "onclick" {
+				onclick = "[GetVariableSystem.Toggle('com_show_situation_outomes')]"
+			}
+			blockoverride "onclick_showmore" {
+				visible = "[Not(GetVariableSystem.Exists('com_show_situation_outomes'))]"
+			}
+			blockoverride "onclick_showless" {
+				visible = "[GetVariableSystem.Exists('com_show_situation_outomes')]"
+			}
+		}
+		
+		flowcontainer = {
+			direction = horizontal
+			parentanchor = hcenter
+			spacing = 10
+			margin = { 5 5 }
+			visible = "[GetVariableSystem.Exists('com_show_situation_outomes')]"
+			
+			block "com_situation_completion_outcome" {
+				com_international_situation_outcome_item = {
+					blockoverride "situation_outcome_visibility" {
+						visible = "[JournalEntry.CanComplete]"
+					}
+					blockoverride "situation_outcome_name" {
+						raw_text = "#bold [JournalEntry.MakeScope.Var('com_situation_complete_name_var').GetFlagName]#!"
+					}
+					blockoverride "situation_outcome_default_texture_visibity" {
+						visible = "[Not(JournalEntry.MakeScope.Var('com_situation_complete_illus_var').IsSet)]"
+					}
+					blockoverride "situation_outcome_default_texture_path" {
+						texture = "gfx/interface/illustrations/situation_outcomes/situation_complete_illus.dds"
+					}
+					blockoverride "situation_outcome_custom_texture_visibity" {
+						visible = "[JournalEntry.MakeScope.Var('com_situation_complete_illus_var').IsSet]"
+					}
+					blockoverride "situation_outcome_custom_texture_path" {
+						texture = "[JournalEntry.MakeScope.Var('com_situation_complete_illus_var').GetInterestGroupTrait.GetTexture]"
+					}
+					blockoverride "situation_outcome_tooltip" {
+						tooltip = "com_situation_complete_tooltip"
+					}
+				}
+			}
+			
+			block "com_situation_timeout_outcome" {
+				com_international_situation_outcome_item = {
+					blockoverride "situation_outcome_visibility" {
+						visible = "[JournalEntry.CanTimeOut]"
+					}
+					blockoverride "situation_outcome_name" {
+						raw_text = "#bold [JournalEntry.MakeScope.Var('com_situation_timeout_name_var').GetFlagName]#!"
+					}
+					blockoverride "situation_outcome_default_texture_visibity" {
+						visible = "[Not(JournalEntry.MakeScope.Var('com_situation_timeout_illus_var').IsSet)]"
+					}
+					blockoverride "situation_outcome_default_texture_path" {
+						texture = "gfx/interface/illustrations/situation_outcomes/situation_timeout_illus.dds"
+					}
+					blockoverride "situation_outcome_custom_texture_visibity" {
+						visible = "[JournalEntry.MakeScope.Var('com_situation_timeout_illus_var').IsSet]"
+					}
+					blockoverride "situation_outcome_custom_texture_path" {
+						texture = "[JournalEntry.MakeScope.Var('com_situation_timeout_illus_var').GetInterestGroupTrait.GetTexture]"
+					}
+					blockoverride "situation_outcome_tooltip" {
+						tooltip = "com_situation_timeout_tooltip"
+					}
+				}
+			}
+			
+			block "com_situation_failure_outcome" {
+				com_international_situation_outcome_item = {
+					blockoverride "situation_outcome_visibility" {
+						visible = "[Not(StringIsEmpty(JournalEntry.GetFailureTooltip))]" # We do not have a CanFail function
+					}
+					blockoverride "situation_outcome_name" {
+						raw_text = "#bold [JournalEntry.MakeScope.Var('com_situation_failure_name_var').GetFlagName]#!"
+					}
+					blockoverride "situation_outcome_default_texture_visibity" {
+						visible = "[Not(JournalEntry.MakeScope.Var('com_situation_failure_illus_var').IsSet)]"
+					}
+					blockoverride "situation_outcome_default_texture_path" {
+						texture = "gfx/interface/illustrations/situation_outcomes/situation_failure_illus.dds"
+					}
+					blockoverride "situation_outcome_custom_texture_visibity" {
+						visible = "[JournalEntry.MakeScope.Var('com_situation_failure_illus_var').IsSet]"
+					}
+					blockoverride "situation_outcome_custom_texture_path" {
+						texture = "[JournalEntry.MakeScope.Var('com_situation_failure_illus_var').GetInterestGroupTrait.GetTexture]"
+					}
+					blockoverride "situation_outcome_tooltip" {
+						tooltip = "com_situation_failure_tooltip"
+					}
+				}
+			}
+		}
+	}
+	
+	type com_international_situation_outcome_item = widget {
+		size = { 160 200 }
+		
+		block "situation_outcome_visibility" {}
+		block "situation_outcome_tooltip" {}
+		icon = {
+			parentanchor = center
+			size = { 100% 100% }
+			texture = "gfx/interface/backgrounds/bg_bronze_with_frame.dds"
+			
+			icon = {
+				parentanchor = center
+				size = { 100% 100% }
+				block "situation_outcome_default_texture_visibity" {}
+				block "situation_outcome_default_texture_path" {
+					texture = "gfx/interface/illustrations/situation_outcomes/situation_invalid_illus.dds"
+				}
+				modify_texture = {
+					texture = "gfx/interface/backgrounds/default_bg_shading.dds"
+					spriteType = Corneredstretched
+					spriteborder = { 0 0 }
+					blend_mode = overlay
+					alpha = 0.8
+				}
+				modify_texture = {
+					using = texture_velvet
+				}
+				modify_texture = {
+					using = texture_cloth
+					alpha = 0.25
+				}
+				modify_texture = {
+					texture = "gfx/interface/masks/fade_top_illus.dds"
+					translate_uv = { 0 0 }
+					blend_mode = alphamultiply
+				}
+			}
+			
+			icon = {
+				parentanchor = center
+				size = { 100% 100% }
+				block "situation_outcome_custom_texture_visibity" {
+					visible = "no"
+				}
+				block "situation_outcome_custom_texture_path" {}
+				modify_texture = {
+					texture = "gfx/interface/backgrounds/default_bg_shading.dds"
+					spriteType = Corneredstretched
+					spriteborder = { 0 0 }
+					blend_mode = overlay
+					alpha = 0.8
+				}
+				modify_texture = {
+					using = texture_velvet
+				}
+				modify_texture = {
+					using = texture_cloth
+					alpha = 0.25
+				}
+				modify_texture = {
+					texture = "gfx/interface/masks/fade_top_illus.dds"
+					translate_uv = { 0 0 }
+					blend_mode = alphamultiply
+				}
+				modify_texture = {
+					texture = "gfx/interface/illustrations/situation_outcomes/situation_outcome_mask.dds"
+					blend_mode = alphamultiply
+					rotate_uv = 0
+					alpha = 1
+				}
+			}
+		}
+		
+		default_header_clean_faded = {
+			parentanchor = top|hcenter
+			position = { 0 0 }
+			blockoverride "size" {
+				size = { 150 34 }
+			}
+			blockoverride "text" {}
+			textbox = {
+				block "situation_outcome_name" {}
+				parentanchor = center
+				autoresize = yes
+				max_width = 500
+				elide = right
+				using = fontsize_medium
+			}
+		}
+	}
+	
+	type com_international_situation_phase_progress = flowcontainer {
+		direction = vertical
+		parentanchor = hcenter
+		minimumsize = { 540 -1 }
+		margin_bottom = 10
+		spacing = 5
+		
+		visible = "[Or4(
+			JournalEntry.MakeScope.Var('com_situation_group_1_next_phase_progress_var').IsSet,
+			JournalEntry.MakeScope.Var('com_situation_group_2_next_phase_progress_var').IsSet,
+			JournalEntry.MakeScope.Var('com_situation_group_3_next_phase_progress_var').IsSet,
+			JournalEntry.MakeScope.Var('com_situation_group_4_next_phase_progress_var').IsSet
+		)]"
+		
+		using = entry_bg_fancy
+		
+		default_header_clean_faded = {
+			parentanchor = hcenter
+			blockoverride "text" {
+				text = "com_next_phase_progress"
+			}
+			blockoverride "size" {
+				size = { 532 45 }
+			}
+		}
+		
+		flowcontainer = {
+			direction = horizontal
+			parentanchor = hcenter
+			spacing = 20
+			margin_bottom = 5
+			
+			com_international_situation_phase_progress_item = {
+				blockoverride "phase_progress_visibility" {
+					visible = "[JournalEntry.MakeScope.Var('com_situation_group_1_next_phase_progress_var').IsSet]"
+				}
+				blockoverride "phase_progress_button_icon" {
+					raw_text = "[JournalEntry.MakeScope.Var('com_situation_group_1_next_phase_icon_var').GetFlagName]"
+				}
+				blockoverride "phase_progress_button_icon_glow_visibility" {
+					visible = "[GetVariableSystem.Exists('com_show_group_1_factors')]"
+				}
+				blockoverride "phase_progress_button_onclick" {
+					onclick = "[GetVariableSystem.Toggle('com_show_group_1_factors')]"
+					onclick = "[GetVariableSystem.Clear('com_show_group_2_factors')]"
+					onclick = "[GetVariableSystem.Clear('com_show_group_3_factors')]"
+					onclick = "[GetVariableSystem.Clear('com_show_group_4_factors')]"
+				}
+				blockoverride "phase_progress_button_next_phase" {
+					raw_text = "[JournalEntry.MakeScope.Var('com_situation_group_1_next_phase_name_var').GetFlagName]"
+				}
+				blockoverride "values" {
+					value = "[JournalEntry.MakeScope.Var('com_situation_group_1_next_phase_progress_var').GetValue]"
+					max = "[JournalEntry.MakeScope.Var('com_situation_group_1_next_phase_max_progress_var').GetValue]"
+					min = "[JournalEntry.MakeScope.Var('com_situation_group_1_next_phase_min_progress_var').GetValue]"
+				}
+				blockoverride "phase_progress_bar_tooltip" {
+					tooltip = "com_situation_group_1_progress_bar_tooltip"
+				}
+			}
+			
+			com_international_situation_phase_progress_item = {
+				blockoverride "phase_progress_visibility" {
+					visible = "[JournalEntry.MakeScope.Var('com_situation_group_2_next_phase_progress_var').IsSet]"
+				}
+				blockoverride "phase_progress_button_icon" {
+					raw_text = "[JournalEntry.MakeScope.Var('com_situation_group_2_next_phase_icon_var').GetFlagName]"
+				}
+				blockoverride "phase_progress_button_icon_glow_visibility" {
+					visible = "[GetVariableSystem.Exists('com_show_group_2_factors')]"
+				}
+				blockoverride "phase_progress_button_onclick" {
+					onclick = "[GetVariableSystem.Toggle('com_show_group_2_factors')]"
+					onclick = "[GetVariableSystem.Clear('com_show_group_1_factors')]"
+					onclick = "[GetVariableSystem.Clear('com_show_group_3_factors')]"
+					onclick = "[GetVariableSystem.Clear('com_show_group_4_factors')]"
+				}
+				blockoverride "phase_progress_button_next_phase" {
+					raw_text = "[JournalEntry.MakeScope.Var('com_situation_group_2_next_phase_name_var').GetFlagName]"
+				}
+				blockoverride "values" {
+					value = "[JournalEntry.MakeScope.Var('com_situation_group_2_next_phase_progress_var').GetValue]"
+					max = "[JournalEntry.MakeScope.Var('com_situation_group_2_next_phase_max_progress_var').GetValue]"
+					min = "[JournalEntry.MakeScope.Var('com_situation_group_2_next_phase_min_progress_var').GetValue]"
+				}
+				blockoverride "phase_progress_bar_tooltip" {
+					tooltip = "com_situation_group_2_progress_bar_tooltip"
+				}
+			}
+			
+			com_international_situation_phase_progress_item = {
+				blockoverride "phase_progress_visibility" {
+					visible = "[JournalEntry.MakeScope.Var('com_situation_group_3_next_phase_progress_var').IsSet]"
+				}
+				blockoverride "phase_progress_button_icon" {
+					raw_text = "[JournalEntry.MakeScope.Var('com_situation_group_3_next_phase_icon_var').GetFlagName]"
+				}
+				blockoverride "phase_progress_button_icon_glow_visibility" {
+					visible = "[GetVariableSystem.Exists('com_show_group_3_factors')]"
+				}
+				blockoverride "phase_progress_button_onclick" {
+					onclick = "[GetVariableSystem.Toggle('com_show_group_3_factors')]"
+					onclick = "[GetVariableSystem.Clear('com_show_group_1_factors')]"
+					onclick = "[GetVariableSystem.Clear('com_show_group_2_factors')]"
+					onclick = "[GetVariableSystem.Clear('com_show_group_4_factors')]"
+				}
+				blockoverride "phase_progress_button_next_phase" {
+					raw_text = "[JournalEntry.MakeScope.Var('com_situation_group_3_next_phase_name_var').GetFlagName]"
+				}
+				blockoverride "values" {
+					value = "[JournalEntry.MakeScope.Var('com_situation_group_3_next_phase_progress_var').GetValue]"
+					max = "[JournalEntry.MakeScope.Var('com_situation_group_3_next_phase_max_progress_var').GetValue]"
+					min = "[JournalEntry.MakeScope.Var('com_situation_group_3_next_phase_min_progress_var').GetValue]"
+				}
+				blockoverride "phase_progress_bar_tooltip" {
+					tooltip = "com_situation_group_3_progress_bar_tooltip"
+				}
+			}
+			
+			com_international_situation_phase_progress_item = {
+				blockoverride "phase_progress_visibility" {
+					visible = "[JournalEntry.MakeScope.Var('com_situation_group_4_next_phase_progress_var').IsSet]"
+				}
+				blockoverride "phase_progress_button_icon" {
+					raw_text = "[JournalEntry.MakeScope.Var('com_situation_group_4_next_phase_icon_var').GetFlagName]"
+				}
+				blockoverride "phase_progress_button_icon_glow_visibility" {
+					visible = "[GetVariableSystem.Exists('com_show_group_4_factors')]"
+				}
+				blockoverride "phase_progress_button_onclick" {
+					onclick = "[GetVariableSystem.Toggle('com_show_group_4_factors')]"
+					onclick = "[GetVariableSystem.Clear('com_show_group_1_factors')]"
+					onclick = "[GetVariableSystem.Clear('com_show_group_2_factors')]"
+					onclick = "[GetVariableSystem.Clear('com_show_group_3_factors')]"
+				}
+				blockoverride "phase_progress_button_next_phase" {
+					raw_text = "[JournalEntry.MakeScope.Var('com_situation_group_4_next_phase_name_var').GetFlagName]"
+				}
+				blockoverride "values" {
+					value = "[JournalEntry.MakeScope.Var('com_situation_group_4_next_phase_progress_var').GetValue]"
+					max = "[JournalEntry.MakeScope.Var('com_situation_group_4_next_phase_max_progress_var').GetValue]"
+					min = "[JournalEntry.MakeScope.Var('com_situation_group_4_next_phase_min_progress_var').GetValue]"
+				}
+				blockoverride "phase_progress_bar_tooltip" {
+					tooltip = "com_situation_group_4_progress_bar_tooltip"
+				}
+			}
+		}
+		
+		flowcontainer = {
+			parentanchor = hcenter
+			direction = vertical
+			minimumsize = { 520 -1 }
+			
+			visible = "[Or4(
+				GetVariableSystem.Exists('com_show_group_1_factors'),
+				GetVariableSystem.Exists('com_show_group_2_factors'),
+				GetVariableSystem.Exists('com_show_group_3_factors'),
+				GetVariableSystem.Exists('com_show_group_4_factors')
+			)]"
+			
+			background = {
+				using = entry_bg
+			}
+			
+			widget = {
+				parentanchor = hcenter
+				size = { 520 50 }
+				background = {
+					using = dark_area
+					alpha = 0.5
+					margin = { 10 10 }
+					
+					modify_texture = {
+						texture = "gfx/interface/masks/fade_horizontal_center.dds"
+						spriteType = Corneredstretched
+						spriteborder = { 0 0 }
+						blend_mode = alphamultiply
+					}
+					
+					modify_texture = {
+						texture = "gfx/interface/masks/fade_vertical_center.dds"
+						spriteType = Corneredstretched
+						spriteborder = { 0 0 }
+						blend_mode = alphamultiply
+					}
+				}
+				
+				textbox = {
+					parentanchor = center
+					position = { 0 -10 }
+					visible = "[GetVariableSystem.Exists('com_show_group_1_factors')]"
+					text = "com_situation_catalysts_header_1"
+					autoresize = yes
+					align = nobaseline
+					fontsize = 18
+				}
+				
+				textbox = {
+					parentanchor = center
+					position = { 0 -10 }
+					visible = "[GetVariableSystem.Exists('com_show_group_2_factors')]"
+					text = "com_situation_catalysts_header_2"
+					autoresize = yes
+					align = nobaseline
+					fontsize = 18
+				}
+				
+				textbox = {
+					parentanchor = center
+					position = { 0 -10 }
+					visible = "[GetVariableSystem.Exists('com_show_group_3_factors')]"
+					text = "com_situation_catalysts_header_3"
+					autoresize = yes
+					align = nobaseline
+					fontsize = 18
+				}
+				
+				textbox = {
+					parentanchor = center
+					position = { 0 -10 }
+					visible = "[GetVariableSystem.Exists('com_show_group_4_factors')]"
+					text = "com_situation_catalysts_header_4"
+					autoresize = yes
+					align = nobaseline
+					fontsize = 18
+				}
+				
+				textbox = {
+					parentanchor = center
+					position = { 0 10 }
+					text = "com_catalysts_info"
+					autoresize = yes
+					align = nobaseline
+					fontsize = 16
+				}
+			}
+			
+			textbox = {
+				visible = "[GetVariableSystem.Exists('com_show_group_1_factors')]"
+				autoresize = yes
+				raw_text = "[JournalEntry.MakeScope.Var('com_situation_group_1_next_phase_factors_var').GetFlagName]"
+				min_width = @panel_width_minus_30
+				max_width = @panel_width_minus_30
+				multiline = yes
+				using = default_list_position
+				align = nobaseline
+				margin = { 15 15 }
+			}
+			
+			textbox = {
+				visible = "[GetVariableSystem.Exists('com_show_group_2_factors')]"
+				autoresize = yes
+				raw_text = "[JournalEntry.MakeScope.Var('com_situation_group_2_next_phase_factors_var').GetFlagName]"
+				min_width = @panel_width_minus_30
+				max_width = @panel_width_minus_30
+				multiline = yes
+				using = default_list_position
+				align = nobaseline
+				margin = { 15 15 }
+			}
+			
+			textbox = {
+				visible = "[GetVariableSystem.Exists('com_show_group_3_factors')]"
+				autoresize = yes
+				raw_text = "[JournalEntry.MakeScope.Var('com_situation_group_3_next_phase_factors_var').GetFlagName]"
+				min_width = @panel_width_minus_30
+				max_width = @panel_width_minus_30
+				multiline = yes
+				using = default_list_position
+				align = nobaseline
+				margin = { 15 15 }
+			}
+			
+			textbox = {
+				visible = "[GetVariableSystem.Exists('com_show_group_4_factors')]"
+				autoresize = yes
+				raw_text = "[JournalEntry.MakeScope.Var('com_situation_group_4_next_phase_factors_var').GetFlagName]"
+				min_width = @panel_width_minus_30
+				max_width = @panel_width_minus_30
+				multiline = yes
+				using = default_list_position
+				align = nobaseline
+				margin = { 15 15 }
+			}
+		}
+	}
+	
+	type com_international_situation_phase_progress_item = widget {
+		size = { 120 120 }
+		block "phase_progress_visibility" {}
+		background = {
+			texture = "gfx/interface/backgrounds/bg_bronze_with_frame.dds"
+			modify_texture = {
+				using = texture_velvet
+			}
+		}
+		icon = {
+			parentanchor = center
+			size = { 80 80 }
+			texture = "gfx/interface/map_markers/strategic_region_map_marker.dds"
+			mirror = vertical
+			
+			icon = {
+				block "phase_progress_button_icon_glow_visibility" {
+					visible = "no"
+				}
+				parentanchor = center
+				size = { 50 50 }
+				position = { 0 2 }
+				texture = "gfx/interface/map_markers/revolutionary_movement_frame.dds"
+				
+				icon = {
+					parentanchor = center
+					using = rotate_glow_animation_02
+					size = { 300% 300% }
+					alpha = 0.5
+				}
+			}
+			
+			icon = {
+				parentanchor = center
+				position = { 0 1 }
+				size = { 40 40 }
+				texture = "gfx/interface/icons/state_status_icons/unused/state_status_bg.dds"
+				
+				textbox = {
+					parentanchor = center
+					size = { 100 100 }
+					fontsize = 30
+					align = vcenter|hcenter
+					block "phase_progress_button_icon" {}
+				}
+			}
+			
+			button = {
+				parentanchor = center
+				size = { 100% 100% }
+				block "phase_progress_button_onclick" {}
+			}
+		}
+		textbox = {
+			parentanchor = top|hcenter
+			position = { 0 5 }
+			block "phase_progress_button_next_phase" {}
+			autoresize = yes
+			align = nobaseline
+			fontsize = 16
+		}
+		white_progressbar_horizontal = {
+			parentanchor = bottom|hcenter
+			position = { 0 -10 }
+			size = { 80 10 }
+			block "phase_progress_bar_tooltip" {}
+		}
+	}
+}

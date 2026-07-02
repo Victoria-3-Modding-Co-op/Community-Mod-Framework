@@ -1,0 +1,70 @@
+﻿je_com_international_situation = {
+	group = je_group_global_international_situations
+	icon = "gfx/interface/icons/generic_icons/international_organizations.dds"
+	weight = 100
+	should_be_pinned_by_default_involved = yes
+	
+	widget = {
+		gui = "gui/com_journal_injects/situation_widgets.gui"
+		name = "widget_com_international_situation"
+		container = "custom_widget_container_je_icon"
+	}
+	
+	scripted_button = sb_international_organizations_test_1
+	scripted_button = sb_international_organizations_test_2
+	scripted_button = sb_international_organizations_test_3
+	
+	should_be_involved = {
+		country_rank >= rank_value:great_power
+	}
+	
+	should_show_when_not_involved = {
+		country_rank < rank_value:great_power
+	}
+	
+	immediate = {
+		scope:journal_entry = {
+			com_hide_all_journal_elements_for_situation_effect = yes
+		}
+	}
+	
+	modifiers_while_active = {
+		debug_bureaucracy
+		debug_authority
+		debug_influence
+	}
+	
+	complete = {
+		always = no
+	}
+	
+	on_complete = {
+		custom_tooltip = com_nothing_happens
+	}
+	
+	fail = {
+		always = no
+	}
+	
+	on_fail = {
+		custom_tooltip = com_nothing_happens
+	}
+	
+	timeout = very_long_modifier_time
+	
+	on_timeout = {
+		custom_tooltip = com_nothing_happens
+	}
+	
+	invalid = {
+		always = no
+	}
+	
+	on_invalid = {
+		custom_tooltip = com_nothing_happens
+	}
+	
+	status_desc = {
+		desc = je_com_international_situation_status
+	}
+}

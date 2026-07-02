@@ -17,3 +17,33 @@ texticon = {
 		fontsize = 18
 	}
 }
+
+texticon = {
+	icon = com_error_deer
+	iconsize = {
+		texture = gfx/interface/error_deer.dds
+		size = { 25 25 }
+		offset = { 0 7 }
+		fontsize = 18
+	}
+}
+
+texticon = {
+	icon = com_error_manul
+	iconsize = {
+		texture = gfx/interface/error_manul.dds
+		size = { 25 25 }
+		offset = { 0 7 }
+		fontsize = 18
+	}
+}
+
+texticon = {
+	icon = com_error_frog
+	iconsize = {
+		texture = gfx/interface/error_frog.dds
+		size = { 25 25 }
+		offset = { 0 7 }
+		fontsize = 18
+	}
+}

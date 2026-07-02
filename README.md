@@ -196,7 +196,6 @@ or a multiple of that to keep the aspect ratio correct.
 - The Buttons do not support classical text but are optimized for texticons (i.e. `@innovation!`)
 
 ## Custom Journal Entry Elements
-
 Since 1.13 Journal Entries can have custom GUI elements injected into them.
 
 The Community Mod Framework provides a set of custom elements for modders to use in their mods. Below you can find a list and how to use them.

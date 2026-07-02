@@ -25,7 +25,6 @@ flowcontainer = {
 		com_international_situation_illustration = {}
 		com_international_situation_phase_information = {}
 		com_international_situation_timeout = {}
-		com_journal_entry_progress_bars = {}
 		com_international_situation_flavor_text = {}
 		# com_international_situation_faction_leaders = {}
 		# com_international_situation_faction_members = {}

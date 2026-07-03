@@ -1,4 +1,77 @@
 ﻿l_korean:
+ ####---------- International Situations Base Localization ----------####
+ je_com_international_situation: "REPLACE_ME"
+ je_com_international_situation_reason: "REPLACE_ME"
+ je_com_international_situation_status: "REPLACE_ME"
+ 
+ com_situation_toggle_involved: "REPLACE_ME"
+ com_situation_involved_countries: "REPLACE_ME"
+ com_situation_interloper_countries: "REPLACE_ME"
+ 
+ com_situation_complete_tooltip: "REPLACE_ME"
+ com_situation_timeout_tooltip: "REPLACE_ME"
+ com_situation_failure_tooltip: "REPLACE_ME"
+ 
+ com_situation_current_phase: "REPLACE_ME"
+ com_situation_phase_effects: "REPLACE_ME"
+ com_view_situation_endings: "REPLACE_ME"
+ 
+ com_next_phase_progress: "REPLACE_ME"
+ com_situation_catalysts_header_1: "REPLACE_ME"
+ com_situation_catalysts_header_2: "REPLACE_ME"
+ com_situation_catalysts_header_3: "REPLACE_ME"
+ com_situation_catalysts_header_4: "REPLACE_ME"
+ com_catalysts_info: "REPLACE_ME"
+ 
+ com_situation_group_1_progress_bar_tooltip: "REPLACE_ME"
+ com_situation_group_2_progress_bar_tooltip: "REPLACE_ME"
+ com_situation_group_3_progress_bar_tooltip: "REPLACE_ME"
+ com_situation_group_4_progress_bar_tooltip: "REPLACE_ME"
+ 
+ com_situation_start_date_header: "REPLACE_ME"
+ com_situation_start_date: "REPLACE_ME"
+ 
+ com_situation_background_africa_construction_colony: "REPLACE_ME"
+ com_situation_background_asia_westerners_arriving: "REPLACE_ME"
+ com_situation_background_europenorthamerica_london_center: "REPLACE_ME"
+ com_situation_background_europenorthamerica_political_extremism: "REPLACE_ME"
+ com_situation_background_southamerica_aristocrats: "REPLACE_ME"
+ com_outcome_background_generic: "REPLACE_ME"
+ 
+ ####---------- International Situation Game Concepts ----------####
+ concept_com_international_situation: "REPLACE_ME"
+ concept_com_international_situation_desc: "REPLACE_ME"
+ concept_com_international_situations: "REPLACE_ME"
+ concept_com_international_situation_short: "REPLACE_ME"
+ concept_com_international_situations_short: "REPLACE_ME"
+ com_international_situation: "REPLACE_ME"
+ com_international_situations: "REPLACE_ME"
+ com_situation: "REPLACE_ME"
+ com_situations: "REPLACE_ME"
+ 
+ concept_com_situation_involvement: "REPLACE_ME"
+ concept_com_situation_involvement_desc: "REPLACE_ME"
+ concept_com_situation_involvement_short: "REPLACE_ME"
+ concept_com_situation_involved: "REPLACE_ME"
+ concept_com_situation_uninvolved: "REPLACE_ME"
+ com_situation_involvement: "REPLACE_ME"
+ com_involvement: "REPLACE_ME"
+ com_involved: "REPLACE_ME"
+ com_uninvolved: "REPLACE_ME"
+ 
+ concept_com_situation_interloper: "REPLACE_ME"
+ concept_com_situation_interloper_desc: "REPLACE_ME"
+ concept_com_situation_interlopers: "REPLACE_ME"
+ concept_com_situation_interloper_short: "REPLACE_ME"
+ concept_com_situation_interlopers_short: "REPLACE_ME"
+ com_situation_interloper: "REPLACE_ME"
+ com_situation_interlopers: "REPLACE_ME"
+ com_interloper: "REPLACE_ME"
+ com_interlopers: "REPLACE_ME"
+
+####---------- Factional Situations Localization ----------####
+ # I will review this soon -Alexedishi JUN-30-2026
+ # GUI
  com_situation_vs: "vs"
  com_situation_leader: "지도자"
  com_situation_interactions: "상호작용"

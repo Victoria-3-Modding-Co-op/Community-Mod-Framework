@@ -1,0 +1,29 @@
+﻿####---------- International Situation Concepts ----------####
+concept_com_international_situation = {
+	texture = "gfx/interface/icons/alert_icons/unused/diplomatic_play.dds"
+}
+
+concept_com_situation_involvement = {
+	texture = "gfx/interface/icons/alert_icons/unused/diplomatic_play.dds"
+}
+
+concept_com_situation_interloper = {
+	texture = "gfx/interface/icons/alert_icons/unused/diplomatic_play.dds"
+}
+
+#### OLD
+# I will review these in the near future -- Alexedishi JUN-30-26
+concept_com_situation_leader = {
+	texture = "gfx/interface/icons/lens_toolbar_icons/unused/diplomatic_plays.dds"
+	is_loading_tip = yes
+}
+
+concept_com_situation_faction = {
+    texture = "gfx/interface/icons/lens_toolbar_icons/unused/diplomatic_plays.dds"
+    is_loading_tip = yes
+}
+
+concept_com_situation_faction_neutral = {
+    texture = "gfx/interface/icons/lens_toolbar_icons/unused/diplomatic_plays.dds"
+    is_loading_tip = yes
+}

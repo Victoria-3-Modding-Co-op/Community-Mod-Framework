@@ -16,6 +16,7 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=3385002128
 * [GUI Framework](#gui-framework)
     * [Alternative Event Windows](#alternative-event-windows)
     * [Custom Journal Entry Elements](#custom-journal-entry-elements)
+    * [International Organization & International Situation Frameworks](#international-organization--international-situation-frameworks)
     * [Hiding Objective Header](#hiding-objective-header)
     * [Custom Social Hierarchies](#custom-social-hierarchies)
     * [Sidebar Button](#sidebar-button)
@@ -195,12 +196,20 @@ or a multiple of that to keep the aspect ratio correct.
 - The Buttons do not support classical text but are optimized for texticons (i.e. `@innovation!`)
 
 ## Custom Journal Entry Elements
-
 Since 1.13 Journal Entries can have custom GUI elements injected into them.
 
 The Community Mod Framework provides a set of custom elements for modders to use in their mods. Below you can find a list and how to use them.
 
 The [full list can be found here](docs/JOURNAL_ENTRY.md)
+
+## International Organization & International Situation Frameworks
+These frameworks take advantage of the injectable journal entry widgets to provide expanded support for InterOrg and Situation journal entries. This includes custom grouping in the outliner and a scripted widget + sidebar button for Interorgs.
+[InterOrg Example](docs/images/journal_entries/example_interorg.png)
+[Situation Example](docs/images/journal_entries/example_situation_no_factions.png)
+
+Documentation can be found here:
+[International Organizations](docs/INTERNATIONAL_ORGANIZATIONS.md)
+[International Situations](docs/INTERNATIONAL_SITUATIONS.md)
 
 ## Hiding Objective Header
 

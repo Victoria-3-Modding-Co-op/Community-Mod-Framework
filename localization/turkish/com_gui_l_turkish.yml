@@ -16,7 +16,12 @@
   com_event_location: "Event in [GetPlayer.MakeScope.Var('com_event_window_location_var').GetFlagName]"
   com_debug_deer: "#header #todo Debug Information#!#!\n$TOOLTIP_DELIMITER$\n#bold Event ID: [Event.GetKey|v]\n$TOOLTIP_DELIMITER$\n#bold Trigger Description:\n[Event.GetTriggerDesc]\n@information! Click to open Event in text editor"
   
-  # Test Event Localiztion
+  # Error Deer Localization
+  com_error_deer_tooltip: "#instruction Left-Click#! to open Error Log\n#instruction Left-Click + Shift#! to open Explorer\n#instruction Left-Click + Alt#! to open Slow Tick Operations\n#instruction Right-Click#! to make it go away (until you upset it again)\n#instruction Right-Click + Shift#! to open Tweaker\n#instruction Right-Click + Alt#! to open 3D Stats"
+  com_error_counter: "#bold [ErrorDeer.NumberOrErrors|v] Errors#!"
+  com_error_counter_tooltip: "[ErrorDeer.GetTooltip]"
+  
+  # Test Event Localization
   com_debug.t: "Community GUI Test Event"
   com_debug.d: ""VIC 3 is just a terrible game, it is a lackluster game that has no uniqueness to it, every nation no matter the size is piss easy to play. In VIC 2 it was more, you had to actually manage buildings, populace, and conduct varied diplomacy.""
   com_debug.f: ""yeah unfortunately nobody but james can mod" -rskhm"
@@ -27,3 +32,9 @@
   com_debug.e: "Test & 4ious"
   com_debug.james: ""just research [GetTechnology('line_infantry').GetName]" -1230james"
   com_debug.james_tt: "#italic James smiles upon you...#!"
+  
+  # Localization Shorthands
+  com_nl: "\n"
+  com_bp: "•"
+  com_nlpb: "\n • "
+  com_ttdl: "\n$TOOLTIP_DELIMITER$\n"

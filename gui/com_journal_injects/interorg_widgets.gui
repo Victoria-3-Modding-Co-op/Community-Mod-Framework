@@ -24,10 +24,10 @@ flowcontainer = {
 
 		com_international_organization_header = { }
 		com_international_organization_panel = { }
-		com_international_organization_reason = { }
-		com_international_organization_buttons = { }
-		com_international_organization_modifiers = { }
-		com_international_organization_members = { }
+		com_journal_reason_text = { }
+		com_journal_scripted_buttons = { }
+		com_journal_modifiers_container = { }
+		com_journal_involved_countries = { }
 	}
 }
 
@@ -49,10 +49,10 @@ flowcontainer = {
 				texture = "gfx/coat_of_arms/textured_emblems/pb_frame_00.dds"
 			}
 		}
-		com_international_organization_reason = { }
-		com_international_organization_buttons = { }
-		com_international_organization_modifiers = { }
-		com_international_organization_members = { }
+		com_journal_reason_text = { }
+		com_journal_scripted_buttons = { }
+		com_journal_modifiers_container = { }
+		com_journal_involved_countries = { }
 	}
 }
 
@@ -74,10 +74,10 @@ flowcontainer = {
 				texture = "gfx/coat_of_arms/textured_emblems/pb_frame_02.dds"
 			}
 		}
-		com_international_organization_reason = { }
-		com_international_organization_buttons = { }
-		com_international_organization_modifiers = { }
-		com_international_organization_members = { }
+		com_journal_reason_text = { }
+		com_journal_scripted_buttons = { }
+		com_journal_modifiers_container = { }
+		com_journal_involved_countries = { }
 	}
 }
 
@@ -99,10 +99,10 @@ flowcontainer = {
 				texture = "gfx/coat_of_arms/textured_emblems/pb_frame_01.dds"
 			}
 		}
-		com_international_organization_reason = { }
-		com_international_organization_buttons = { }
-		com_international_organization_modifiers = { }
-		com_international_organization_members = { }
+		com_journal_reason_text = { }
+		com_journal_scripted_buttons = { }
+		com_journal_modifiers_container = { }
+		com_journal_involved_countries = { }
 	}
 }
 
@@ -124,10 +124,10 @@ flowcontainer = {
 				texture = "gfx/coat_of_arms/textured_emblems/pb_frame_03.dds"
 			}
 		}
-		com_international_organization_reason = { }
-		com_international_organization_buttons = { }
-		com_international_organization_modifiers = { }
-		com_international_organization_members = { }
+		com_journal_reason_text = { }
+		com_journal_scripted_buttons = { }
+		com_journal_modifiers_container = { }
+		com_journal_involved_countries = { }
 	}
 }
 
@@ -149,10 +149,10 @@ flowcontainer = {
 				texture = "gfx/coat_of_arms/textured_emblems/pb_frame_03.dds"
 			}
 		}
-		com_international_organization_reason = { }
-		com_international_organization_buttons = { }
-		com_international_organization_modifiers = { }
-		com_international_organization_members = { }
+		com_journal_reason_text = { }
+		com_journal_scripted_buttons = { }
+		com_journal_modifiers_container = { }
+		com_journal_involved_countries = { }
 	}
 }
 
@@ -192,11 +192,11 @@ flowcontainer = {
 				texture = "gfx/coat_of_arms/textured_emblems/pb_frame_03.dds"
 			}
 		}
-		com_international_organization_reason = { }
-		com_international_organization_buttons = { }
-		com_international_organization_modifiers = { }
-		com_international_organization_members = {
-			blockoverride "com_members_header" {
+		com_journal_reason_text = { }
+		com_journal_scripted_buttons = { }
+		com_journal_modifiers_container = { }
+		com_journal_involved_countries = {
+			blockoverride "com_involved_countries_header" {
 				default_header_clean_faded = {
 					parentanchor = hcenter
 					blockoverride "text" {
@@ -212,7 +212,7 @@ flowcontainer = {
 }
 
 ####---------- INTERNATIONAL ORGANIZATION GUI TYPES ----------####
-types com_international_organization_types {
+types com_journal_widget_types {
 
 	type com_international_organization_header = widget {
 		block "spacer_size" {
@@ -728,193 +728,5 @@ types com_international_organization_types {
 
 		onclick = "[GetVariableSystem.Set('com_open_window', 'com_international_organizations_sgui')]"
 		tooltip = "com_gui_goto_international_orgs_panel"
-	}
-
-	type com_international_organization_reason = textbox {
-		autoresize = yes
-		block "interorg_reason_text" {
-			text = "[JournalEntry.GetReason]"
-		}
-		min_width = 535
-		max_width = 535
-		multiline = yes
-		using = default_list_position
-		align = nobaseline
-		margin = { 15 15 }
-
-		background = {
-			using = entry_bg
-		}
-	}
-
-	type com_international_organization_buttons = flowcontainer {
-		direction = vertical
-		parentanchor = top|hcenter
-		minimumsize = { 540 -1 }
-		using = entry_bg_fancy
-		spacing = 10
-		margin_bottom = 20
-
-		visible = "[Not( IsDataModelEmpty( JournalEntry.GetScriptedButtons ) )]"
-
-		default_header_clean_faded = {
-			parentanchor = hcenter
-			blockoverride "text" {
-				text = "com_gui_main_actions"
-			}
-			blockoverride "size" {
-				size = { 532 45 }
-			}
-		}
-
-		flowcontainer = {
-			parentanchor = top|hcenter
-			direction = vertical
-			spacing = 5
-
-			datamodel = "[JournalEntry.GetScriptedButtons]"
-
-			item = {
-				widget = {
-					size = { 400 40 }
-					com_international_organization_scripted_button = { }
-				}
-			}
-		}
-	}
-
-	type com_international_organization_scripted_button = button {
-		parentanchor = center
-		using = default_button_action
-		tooltip = "SCRIPTED_ACTION_TOOLTIP"
-		enabled = "[IsValid( ScriptedButton.ExecuteEffect )]"
-		onclick = "[Execute( ScriptedButton.ExecuteEffect )]"
-		size = { 460 38 }
-		margin = { 20 20 }
-
-		widget = {
-			visible = "[ScriptedButton.IsSelected]"
-			size = { 100% 100% }
-
-			background = {
-				using = paper_bg
-			}
-		}
-
-		textbox = {
-			parentanchor = center
-			align = nobaseline
-			autoresize = yes
-			max_width = 300
-			elide = right
-			fontsize_min = 14
-			text = "[ScriptedButton.GetName]"
-		}
-
-		icon = {
-			visible = "[ScriptedButton.IsSelected]"
-			using = highlighted_square_selection
-		}
-	}
-
-	type com_international_organization_members = flowcontainer {
-		direction = vertical
-		parentanchor = top|hcenter
-		minimumsize = { 540 -1 }
-		using = entry_bg_fancy
-		spacing = 10
-		margin_bottom = 20
-
-		block "com_members_header" {
-			default_header_clean_faded = {
-				parentanchor = hcenter
-				blockoverride "text" {
-					text = "com_gui_members"
-				}
-				blockoverride "size" {
-					size = { 532 45 }
-				}
-			}
-		}
-
-		flowcontainer = {
-			direction = vertical
-			using = default_list_position
-			min_width = @panel_width_minus_30
-			max_width = @panel_width_minus_30
-
-			dynamicgridbox = {
-				parentanchor = hcenter
-				datamodel = "[JournalEntry.GetInvolvedCountries]"
-				datamodel_wrap = 8
-				flipdirection = yes
-
-				item = {
-					widget = {
-						size = { 60 30 }
-
-						small_flag = { }
-					}
-				}
-			}
-		}
-	}
-
-	type com_international_organization_modifiers = flowcontainer {
-		visible = "[Not(IsDataModelEmpty(JournalEntry.GetTimedModifiers))]"
-		direction = vertical
-		parentanchor = top|hcenter
-		minimumsize = { 540 -1 }
-		using = entry_bg_fancy
-		spacing = 10
-		margin_bottom = 20
-
-		default_header_clean_faded = {
-			parentanchor = hcenter
-			blockoverride "text" {
-				text = "MODIFIERS"
-			}
-			blockoverride "size" {
-				size = { 532 45 }
-			}
-		}
-
-		flowcontainer = {
-			datamodel = "[JournalEntry.GetTimedModifiers]"
-			spacing = 5
-			minimumsize = { 500 -1 }
-			parentanchor = hcenter
-			direction = vertical
-
-			item = {
-				container = {
-					minimumsize = { 500 -1 }
-					tooltip = "[TimedModifier.GetTooltip]"
-
-					flowcontainer = {
-						spacing = 10
-
-						icon = {
-							texture = "[TimedModifier.GetIcon]"
-							size = { 25 25 }
-						}
-
-						textbox = {
-							text = "[TimedModifier.GetName]"
-							autoresize = yes
-							align = nobaseline
-							parentanchor = vcenter
-						}
-					}
-
-					textbox = {
-						text = "[TimedModifier.GetRemainingDuration]"
-						autoresize = yes
-						align = nobaseline
-						parentanchor = right|vcenter
-					}
-				}
-			}
-		}
 	}
 }

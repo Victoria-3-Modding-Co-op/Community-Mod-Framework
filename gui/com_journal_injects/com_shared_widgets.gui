@@ -255,7 +255,7 @@ types com_legacy_journal_widget_types {
 	# These exist to provide links for renamed gui types
 	type com_international_organization_reason = com_journal_reason_text {}
 	type com_international_organization_buttons = com_journal_scripted_buttons {}
-	type com_international_organization_button = com_journal_scripted_button {}
+	type com_international_organization_button = com_journal_scripted_button_item {}
 	type com_international_organization_modifiers = com_journal_modifiers_container {}
 	type com_international_organization_members = com_journal_involved_countries {}
 }

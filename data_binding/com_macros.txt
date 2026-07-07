@@ -81,3 +81,9 @@ macro = {
     definition = "ComEnactmentValue(Variable)"
     replace_with = "JournalEntry.MakeScope.GetVariableFromVariableMap('com_enactment_widget', MakeScopeFlag(Variable))"
 }
+
+macro = {
+    description = "Get container name or anonymous"
+    definition = "GetContainerName(Container)"
+    replace_with = "Select_CString(StringIsEmpty(Container.GetName), 'anonymous', Container.GetName)"
+}

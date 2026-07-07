@@ -1,0 +1,365 @@
+com_container_manager = {
+    name = "com_container_manager"
+}
+
+
+types character_types {
+
+	type com_container_manager = vbox {
+        using = dockable_background
+        layoutpolicy_horizontal = expanding
+        layoutpolicy_vertical = expanding
+        layer = popups
+        using = clickthrough_blocker
+        filter_mouse = all
+        parentanchor = hcenter|vcenter
+
+        state = {
+            trigger_on_create = yes
+            name = _show
+            on_finish = "[GetScriptedGui('com_container_manager_collect').Execute(GuiScope.End)]"
+        }
+
+        vbox = {
+            layoutpolicy_horizontal = expanding
+            layoutpolicy_vertical = expanding
+            margin = { 4 0 }
+
+            vbox = {
+                margin = { 5 10 }
+                spacing = 10
+                layoutpolicy_horizontal = expanding
+                layoutpolicy_vertical = expanding
+
+                hbox = {
+                    layoutpolicy_horizontal = expanding
+                    spacing = 10
+
+                    editor_button = {
+                        size = { 0 30 }
+                        layoutpolicy_horizontal = expanding
+                        using = editor_font
+                        fontweight = bold
+                        raw_text = "Refresh Containers"
+                        align = center|nobaseline
+                        raw_tooltip = "Refresh container list"
+
+                        onclick = "[GetScriptedGui('com_container_manager_collect').Execute(GuiScope.End)]"
+                    }
+
+                    expand = {}
+
+                    editor_button = {
+                        size = { 0 30 }
+                        layoutpolicy_horizontal = expanding
+                        using = editor_font
+                        fontweight = bold
+                        raw_text = "Expand All"
+                        align = center|nobaseline
+                        raw_tooltip = "Expand all container data"
+
+                        onclick = "[GetVariableSystem.Toggle('com_container_manager_expand_all')]"
+                    }
+                }
+
+                inspector_scrollarea = {
+                    layoutpolicy_vertical = expanding
+                    layoutpolicy_horizontal = preferred
+                    scrollbarpolicy_vertical = always_on
+
+                    blockoverride "area_widget" {
+                        vbox = {
+                            layoutpolicy_vertical = expanding
+                            layoutpolicy_horizontal = expanding
+                            margin_right = 2
+
+                            vbox = {
+                                datamodel = "[GetGlobalList('com_containers')]"
+                                layoutpolicy_horizontal = expanding
+                                spacing = 4
+
+                                item = {
+                                    com_container_entry = {
+                                        oncreate = "[BindFoldOutContext]"
+                                        datacontext = "[Scope.GetScriptContainer]"
+                                    }
+                                }
+                            }
+
+                            expand = {}
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    type com_container_entry = vbox {
+        layoutpolicy_vertical = preferred
+        layoutpolicy_horizontal = expanding
+        spacing = 2
+
+        # Foldout
+        hbox = {
+            layoutpolicy_horizontal = expanding
+            spacing = 4
+            com_container_entry_header = {
+                blockoverride "textbox" {
+                    fontcolor = { 1 1 1 1 }
+                    raw_text = "Container: [GetContainerName(ScriptContainer)]"
+                }
+            }
+            editor_button = {
+                size = { 20 20 }
+                using = editor_font
+                using = GruvboxLightRedFont
+                fontweight = bold
+                raw_text = "X"
+                align = center|nobaseline
+                raw_tooltip = "Delete container"
+
+                onclick = "[GetScriptedGui('com_container_manager_delete_container').Execute(GuiScope.SetRoot(ScriptContainer.MakeScope).End)]"
+                onclick = "[GetScriptedGui('com_container_manager_collect').Execute(GuiScope.End)]"
+            }
+        }
+
+        vbox = {
+            using = InspectorSubIndentBig
+            layoutpolicy_horizontal = expanding
+            visible = "[Or(PdxGuiFoldOut.IsUnfolded, GetVariableSystem.Exists('com_container_manager_expand_all'))]"
+            background = { using = EditorFoldoutBackground }
+
+            # Name
+            com_container_entry_element = {
+                blockoverride "name" {
+                    raw_text = "Name"
+                }
+                blockoverride "value" {
+                    text = "[ScriptContainer.GetName]"
+                }
+            }
+
+            # Tags
+            com_container_entry_element = {
+                blockoverride "name" {
+                    raw_text = "Tags"
+                }
+                blockoverride "value" {
+                    text = "[ScriptContainer.GetTagsString]"
+                }
+                blockoverride "right" {
+                    raw_text = "([ScriptContainer.GetTagCount])"
+                }
+            }
+
+            # Parent
+            com_container_entry_element = {
+                visible = "[ScriptContainer.HasParent]"
+                datacontext = "[ScriptContainer.GetParent]"
+                blockoverride "name" {
+                    raw_text = "Parent"
+                }
+                blockoverride "multi_value" {
+                    com_container_entry_scope_type = {
+                        visible = "[Scope.GetCountry.IsValid]"
+                        raw_text = "Country ([Scope.GetCountry.GetName])"
+                    }
+                    com_container_entry_scope_type = {
+                        visible = "[Scope.GetCharacter.IsValid]"
+                        raw_text = "Character ([Scope.GetCharacter.GetFullName])"
+                    }
+                    com_container_entry_scope_type = {
+                        visible = "[Scope.GetScriptContainer.IsValid]"
+                        raw_text = "ScriptContainer ([GetContainerName(Scope.GetScriptContainer)])"
+                    }
+                    com_container_entry_scope_type = {
+                        visible = "[Scope.GetLaw.IsValid]"
+                        raw_text = "Law ([Scope.GetLaw.GetName])"
+                    }
+                    com_container_entry_scope_type = {
+                        visible = "[Scope.GetPop.IsValid]"
+                        raw_text = "Pop ([Scope.GetPop.GetName])"
+                    }
+                    com_container_entry_scope_type = {
+                        visible = "[Scope.GetState.IsValid]"
+                        raw_text = "State ([Scope.GetState.GetName])"
+                    }
+                    com_container_entry_scope_type = {
+                        visible = "[Scope.GetInterestGroup.IsValid]"
+                        raw_text = "Interest Group ([Scope.GetInterestGroup.GetName])"
+                    }
+                    com_container_entry_scope_type = {
+                        visible = "[Scope.GetJournalEntry.IsValid]"
+                        raw_text = "Journal Entry ([Scope.GetJournalEntry.GetName])"
+                    }
+                    com_container_entry_scope_type = {
+                        visible = "[Scope.GetTreaty.IsValid]"
+                        raw_text = "Treaty ([Scope.GetTreaty.GetName])"
+                    }
+                    com_container_entry_scope_type = {
+                        visible = "[Scope.GetPoliticalMovement.IsValid]"
+                        raw_text = "Political Movement ([Scope.GetPoliticalMovement.GetName])"
+                    }
+                    com_container_entry_scope_type = {
+                        visible = "[Scope.GetPoliticalLobby.IsValid]"
+                        raw_text = "Political Lobby ([Scope.GetPoliticalLobby.GetName])"
+                    }
+                    com_container_entry_scope_type = {
+                        visible = "[Scope.GetWar.IsValid]"
+                        raw_text = "War ([Scope.GetWar.GetName])"
+                    }
+                    com_container_entry_scope_type = {
+                        visible = "[Scope.GetPowerBloc.IsValid]"
+                        raw_text = "Power Bloc ([Scope.GetPowerBloc.GetName])"
+                    }
+                    com_container_entry_scope_type = {
+                        visible = "[Scope.GetBattle.IsValid]"
+                        raw_text = "Battle ([Scope.GetBattle.GetName])"
+                    }
+                    com_container_entry_scope_type = {
+                        visible = "[Scope.GetMilitaryFormation.IsValid]"
+                        raw_text = "Military Formation ([Scope.GetMilitaryFormation.GetName])"
+                    }
+                    com_container_entry_scope_type = {
+                        visible = "[Scope.GetShip.IsValid]"
+                        raw_text = "Ship ([Scope.GetShip.GetName])"
+                    }
+                    com_container_entry_scope_type = {
+                        visible = "[Scope.GetBuilding.IsValid]"
+                        raw_text = "Building ([Scope.GetBuilding.GetName])"
+                    }
+                    com_container_entry_scope_type = {
+                        visible = "[Scope.GetCompany.IsValid]"
+                        raw_text = "Company ([Scope.GetCompany.GetName])"
+                    }
+                    com_container_entry_scope_type = {
+                        visible = "[Scope.GetMarket.IsValid]"
+                        raw_text = "Market ([Scope.GetMarket.GetName])"
+                    }
+                    editor_textinput = {
+                        visible = "[And3(
+                            And8(
+                                Not(Scope.GetCountry.IsValid),
+                                Not(Scope.GetCharacter.IsValid),
+                                Not(Scope.GetScriptContainer.IsValid),
+                                Not(Scope.GetLaw.IsValid),
+                                Not(Scope.GetPop.IsValid),
+                                Not(Scope.GetState.IsValid),
+                                Not(Scope.GetInterestGroup.IsValid),
+                                Not(Scope.GetJournalEntry.IsValid)
+                            ),
+                            And8(
+                                Not(Scope.GetTreaty.IsValid),
+                                Not(Scope.GetPoliticalMovement.IsValid),
+                                Not(Scope.GetPoliticalLobby.IsValid),
+                                Not(Scope.GetWar.IsValid),
+                                Not(Scope.GetPowerBloc.IsValid),
+                                Not(Scope.GetBattle.IsValid),
+                                Not(Scope.GetMilitaryFormation.IsValid),
+                                Not(Scope.GetShip.IsValid)
+                            ),
+                            And3(
+                                Not(Scope.GetBuilding.IsValid),
+                                Not(Scope.GetCompany.IsValid),
+                                Not(Scope.GetMarket.IsValid)
+                            )
+                        )]"
+                        raw_text = "Unknown Scope Type"
+                    }
+                }
+            }
+
+            # Variable Count
+            com_container_entry_element = {
+                blockoverride "name" {
+                    raw_text = "Variables"
+                }
+                blockoverride "value" {
+                    text = "[ScriptContainer.GetVariableCount]"
+                }
+            }
+        }
+
+    }
+
+    type com_container_entry_header = checkbutton {
+        shaderfile = "gfx/FX/pdxgui_pushbutton.shader"
+        texture = "gfx/tools/foldout_button.dds"
+        framesize = { 16 16 }
+        spriteType = CorneredStretched
+        spriteborder = { 4 4 }
+        gfxtype = checkbuttongfx
+
+        onclick = "[PdxGuiFoldOut.Toggle]"
+        checked = "[Or(PdxGuiFoldOut.IsUnfolded, GetVariableSystem.Exists('com_container_manager_expand_all'))]"
+
+        icon = {
+            texture = "gfx/editor_gui/editor_expand_checkbox.dds"
+            size = { 10 10 }
+            shaderfile = "gfx/FX/pdxgui_default.shader"
+            framesize = { 16 16 }
+            position = { 4 0 }
+            parentanchor = left|vcenter
+            frame = "[Select_int32(Or(PdxGuiFoldOut.IsUnfolded, GetVariableSystem.Exists('com_container_manager_expand_all')), '(int32)2', '(int32)1')]"
+        }
+        layoutpolicy_horizontal = preferred
+        layoutpolicy_vertical = fixed
+        size = { 0 20 }
+
+        color = { 1 1 1 1 }
+        tintcolor = { 1 1 1 1 }
+
+        editor_textbox = {
+            size = { 0 100% }
+            position = { 19 0 }
+            align = left|nobaseline
+            fontweight = light
+            block "textbox" {}
+        }
+    }
+
+    type com_container_entry_element = hbox {
+        layoutpolicy_horizontal = expanding
+
+        textbox = {
+            fontsize = 12
+            size = { 70 20 }
+            block "name" {
+                raw_text = "#debug com_container_entry_element - name#!"
+            }
+            using = editor_font
+            fontweight = bold
+        }
+
+        block "multi_value" {
+            editor_textinput = {
+                layoutpolicy_vertical = preferred
+                layoutpolicy_horizontal = expanding
+                fontsize = 12
+                block "value" {
+                    raw_text = "#debug com_container_entry_element - name#!"
+                }
+                enabled = no
+            }
+        }
+
+        textbox = {
+            fontsize = 12
+            size = { 20 20 }
+            align = center
+            block "right" {
+                visible = no
+            }
+            using = editor_font
+            fontweight = bold
+        }
+    }
+
+    type com_container_entry_scope_type = editor_textinput {
+        layoutpolicy_vertical = preferred
+        layoutpolicy_horizontal = expanding
+        fontsize = 12
+        enabled = no
+    }
+
+}

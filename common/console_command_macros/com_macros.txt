@@ -5,3 +5,11 @@
     }
     description = "toggle flag viewer"
 }
+
+com_container = {
+    args = 0
+    commands = {
+        "GUI.CreateDockable gui/com_debug/com_container_manager.gui com_container_manager Container_Manager 500 400"
+    }
+    description = "toggle container viewer"
+}

@@ -1,0 +1,21 @@
+﻿com_container_manager_collect = {
+    scope = none
+
+    effect = {
+        clear_global_variable_list = com_containers
+        every_container = {
+            add_to_global_variable_list = {
+                name = com_containers
+                target = this
+            }
+        }
+    }
+}
+
+com_container_manager_delete_container = {
+    scope = container
+
+    effect = {
+        destroy_container = yes
+    }
+}

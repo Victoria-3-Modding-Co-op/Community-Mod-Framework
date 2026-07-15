@@ -15,7 +15,7 @@
 flowcontainer = {
 	name = "com_journal_modifiers_container"
 	ignoreinvisible = yes
-	
+
 	flowcontainer = {
 		direction = vertical
 		spacing = 5
@@ -26,7 +26,7 @@ flowcontainer = {
 flowcontainer = {
 	name = "com_journal_scripted_buttons"
 	ignoreinvisible = yes
-	
+
 	flowcontainer = {
 		direction = vertical
 		spacing = 5
@@ -37,7 +37,7 @@ flowcontainer = {
 flowcontainer = {
 	name = "com_journal_reason_text"
 	ignoreinvisible = yes
-	
+
 	flowcontainer = {
 		direction = vertical
 		spacing = 5
@@ -48,7 +48,7 @@ flowcontainer = {
 flowcontainer = {
 	name = "com_journal_involved_countries"
 	ignoreinvisible = yes
-	
+
 	flowcontainer = {
 		direction = vertical
 		spacing = 5
@@ -67,7 +67,7 @@ types com_journal_widget_types {
 		using = entry_bg_fancy
 		spacing = 10
 		margin_bottom = 20
-		
+
 		default_header_clean_faded = {
 			parentanchor = hcenter
 			blockoverride "text" {
@@ -77,27 +77,27 @@ types com_journal_widget_types {
 				size = { 532 45 }
 			}
 		}
-		
+
 		flowcontainer = {
 			datamodel = "[JournalEntry.GetTimedModifiers]"
 			spacing = 5
 			minimumsize = { 500 -1 }
 			parentanchor = hcenter
 			direction = vertical
-			
+
 			item = {
 				container = {
 					minimumsize = { 500 -1 }
 					tooltip = "[TimedModifier.GetTooltip]"
-					
+
 					flowcontainer = {
 						spacing = 10
-						
+
 						icon = {
 							texture = "[TimedModifier.GetIcon]"
 							size = { 25 25 }
 						}
-						
+
 						textbox = {
 							text = "[TimedModifier.GetName]"
 							autoresize = yes
@@ -105,7 +105,7 @@ types com_journal_widget_types {
 							parentanchor = vcenter
 						}
 					}
-					
+
 					textbox = {
 						text = "[TimedModifier.GetRemainingDuration]"
 						autoresize = yes
@@ -116,7 +116,7 @@ types com_journal_widget_types {
 			}
 		}
 	}
-	
+
 	type com_journal_scripted_buttons = flowcontainer {
 		direction = vertical
 		parentanchor = top|hcenter
@@ -124,9 +124,9 @@ types com_journal_widget_types {
 		using = entry_bg_fancy
 		spacing = 10
 		margin_bottom = 20
-		
+
 		visible = "[Not( IsDataModelEmpty( JournalEntry.GetScriptedButtons ) )]"
-		
+
 		default_header_clean_faded = {
 			parentanchor = hcenter
 			blockoverride "text" {
@@ -136,14 +136,14 @@ types com_journal_widget_types {
 				size = { 532 45 }
 			}
 		}
-		
+
 		flowcontainer = {
 			parentanchor = top|hcenter
 			direction = vertical
 			spacing = 5
-			
+
 			datamodel = "[JournalEntry.GetScriptedButtons]"
-			
+
 			item = {
 				widget = {
 					size = { 400 40 }
@@ -152,7 +152,7 @@ types com_journal_widget_types {
 			}
 		}
 	}
-	
+
 	type com_journal_scripted_button_item = button {
 		parentanchor = center
 		using = default_button_action
@@ -161,16 +161,16 @@ types com_journal_widget_types {
 		onclick = "[Execute( ScriptedButton.ExecuteEffect )]"
 		size = { 460 38 }
 		margin = { 20 20 }
-		
+
 		widget = {
 			visible = "[ScriptedButton.IsSelected]"
 			size = { 100% 100% }
-			
+
 			background = {
 				using = paper_bg
 			}
 		}
-		
+
 		textbox = {
 			parentanchor = center
 			align = nobaseline
@@ -180,13 +180,13 @@ types com_journal_widget_types {
 			fontsize_min = 14
 			text = "[ScriptedButton.GetName]"
 		}
-		
+
 		icon = {
 			visible = "[ScriptedButton.IsSelected]"
 			using = highlighted_square_selection
 		}
 	}
-	
+
 	type com_journal_reason_text = textbox {
 		autoresize = yes
 		block "journal_reason_visibility" {}
@@ -199,14 +199,14 @@ types com_journal_widget_types {
 		using = default_list_position
 		align = nobaseline
 		margin = { 15 15 }
-		
+
 		block "journal_reason_background" {
 			background = {
 				using = entry_bg
 			}
 		}
 	}
-	
+
 	type com_journal_involved_countries = flowcontainer {
 		direction = vertical
 		parentanchor = top|hcenter
@@ -214,7 +214,7 @@ types com_journal_widget_types {
 		using = entry_bg_fancy
 		spacing = 10
 		margin_bottom = 20
-		
+
 		block "com_involved_countries_header" {
 			default_header_clean_faded = {
 				parentanchor = hcenter
@@ -226,24 +226,129 @@ types com_journal_widget_types {
 				}
 			}
 		}
-		
+
 		flowcontainer = {
 			direction = vertical
 			using = default_list_position
 			min_width = @panel_width_minus_30
 			max_width = @panel_width_minus_30
-			
+
 			dynamicgridbox = {
 				parentanchor = hcenter
 				datamodel = "[JournalEntry.GetInvolvedCountries]"
 				datamodel_wrap = 8
 				flipdirection = yes
-				
+
 				item = {
 					widget = {
 						size = { 60 30 }
-						
+
 						small_flag = { }
+					}
+				}
+			}
+		}
+	}
+
+	type com_journal_involved_countries_tiny_flags = flowcontainer {
+		direction = vertical
+		parentanchor = top|hcenter
+		minimumsize = { 500 -1 }
+		width = 515
+		using = entry_bg_fancy
+		spacing = 10
+		margin_bottom = 20
+
+		block "com_involved_countries_header" {
+			default_header_clean_faded = {
+				parentanchor = hcenter
+				blockoverride "text" {
+					text = "com_gui_members"
+				}
+				blockoverride "size" {
+					size = { 512 45 }
+				}
+			}
+		}
+
+		flowcontainer = {
+			direction = vertical
+			using = default_list_position
+			min_width = @panel_width_minus_30
+			max_width = @panel_width_minus_30
+
+			dynamicgridbox = {
+				parentanchor = hcenter
+				datamodel = "[JournalEntry.GetInvolvedCountries]"
+				datamodel_wrap = 14
+				flipdirection = yes
+
+				item = {
+					widget = {
+						size = { 34 24 }
+
+						tiny_flag = { }
+					}
+				}
+			}
+		}
+	}
+
+	type com_journal_involved_countries_tiny_flags_with_scrollbar = flowcontainer {
+		direction = vertical
+		parentanchor = top|hcenter
+		minimumsize = { 500 -1 }
+		width = 515
+		using = entry_bg_fancy
+		spacing = 10
+		margin_bottom = 20
+
+		block "com_involved_countries_header" {
+			default_header_clean_faded = {
+				parentanchor = hcenter
+				blockoverride "text" {
+					text = "com_gui_members"
+				}
+				blockoverride "size" {
+					size = { 512 45 }
+				}
+			}
+		}
+
+		scrollbox = {
+			size = { 98% 45 }
+
+			scrollbarpolicy_horizontal = always_off
+			scrollbarpolicy_vertical = as_needed
+
+			scrollbar_vertical = {
+				using = vertical_scrollbar
+			}
+
+			blockoverride "scrollbox_background" {}
+
+			blockoverride "scrollbox_content" {
+				margin_top = 2
+				margin_left = 5
+
+				flowcontainer = {
+					direction = vertical
+					using = default_list_position
+					min_width = @panel_width_minus_30
+					max_width = @panel_width_minus_30
+
+					dynamicgridbox = {
+						datamodel = "[JournalEntry.GetInvolvedCountries]"
+						datamodel_wrap = 14
+						flipdirection = yes
+
+						item = {
+							widget = {
+								size = { 34 24 }
+
+								tiny_flag = { }
+							}
+						}
 					}
 				}
 			}

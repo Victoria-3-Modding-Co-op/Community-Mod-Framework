@@ -242,7 +242,6 @@ types com_journal_widget_types {
 			parentanchor = left|vcenter
 			ignore_in_debug_draw = yes
 			size = { 340 340 }
-			max_update_rate = 24
 
 			visible = "[ComJournalVar('com_interorg_chair_var').IsSet]"
 			datacontext = "[ComJournalVar('com_interorg_chair_var').GetCharacter]"

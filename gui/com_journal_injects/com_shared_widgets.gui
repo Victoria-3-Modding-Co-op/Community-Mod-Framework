@@ -56,6 +56,28 @@ flowcontainer = {
 	}
 }
 
+flowcontainer = {
+	name = "com_journal_involved_countries_tiny_flags"
+	ignoreinvisible = yes
+
+	flowcontainer = {
+		direction = vertical
+		spacing = 5
+		com_journal_involved_countries_tiny_flags = {}
+	}
+}
+
+flowcontainer = {
+	name = "com_journal_involved_countries_tiny_flags_with_scrollbar"
+	ignoreinvisible = yes
+
+	flowcontainer = {
+		direction = vertical
+		spacing = 5
+		com_journal_involved_countries_tiny_flags_with_scrollbar = {}
+	}
+}
+
 
 ####---------- CMF Framework Shared Types ----------####
 types com_journal_widget_types {

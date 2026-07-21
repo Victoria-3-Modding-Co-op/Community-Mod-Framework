@@ -30,13 +30,13 @@ It needs to be run in the journal entry scope.
 The best place for that is the `immediate` block of a journal entry:
 ```
 je_some_journal = {
-    # journal definition  
+    # journal definition
     widget = {
         gui = "gui/com_journal_injects/injects.gui"
         name = "com_journal_entry_dlc_icon"
         container = "custom_widget_container_7"
     }
-    
+
     immediate = {
         scope:journal_entry = {
             add_com_dlc_icon = {
@@ -66,7 +66,7 @@ je_example_entry = {
         name = "com_journal_entry_characters"
         container = "custom_widget_container_1"
     }
-    
+
 	immediate = {
 	    # Adding the ruler to the journal
         scope:journal_entry = {
@@ -148,7 +148,7 @@ je_example_entry = {
         name = "com_journal_entry_building"
         container = "custom_widget_container_1"
     }
-    
+
 	immediate = {
 	    # Adding railway building to the variable
 		random_scope_building = {
@@ -175,6 +175,8 @@ je_example_entry = {
 - `com_journal_scripted_buttons` - [Screenshot](/docs/images/journal_entries/type_com_journal_scripted_buttons.png)
 - `com_journal_reason_text` - Contains blocks for visibility, text, and background
 - `com_journal_involved_countries`- Contains block for element header
+- `com_journal_involved_countries_tiny_flags`- Contains block for element header with tiny flags
+- `com_journal_involved_countries_tiny_flags_with_scrollbar`- Contains block for element header with tiny flags and a scrollbar so the element doesn't use too much space
 ### Available as Types:
 - `com_journal_scripted_button_item` - Resized to 460x38
 

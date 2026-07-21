@@ -1,0 +1,58 @@
+﻿com_flag_viewer_increment_rank = {
+    scope = country
+
+    is_valid = {
+        has_variable = com_flag_viewer_rank
+    }
+
+    effect = {
+        change_variable = {
+            name = com_flag_viewer_rank
+            add = 1
+        }
+        clamp_variable = {
+            name = com_flag_viewer_rank
+            min = 1
+            max = 4
+        }
+    }
+}
+
+com_flag_viewer_decrement_rank = {
+    scope = country
+
+    is_valid = {
+        has_variable = com_flag_viewer_rank
+    }
+
+    effect = {
+        change_variable = {
+            name = com_flag_viewer_rank
+            subtract = 1
+        }
+        clamp_variable = {
+            name = com_flag_viewer_rank
+            min = 1
+            max = 4
+        }
+    }
+}
+
+com_flag_viewer_toggle_rank = {
+    scope = country
+
+    effect = {
+        if = {
+            limit = {
+                has_variable = com_flag_viewer_rank
+            }
+            remove_variable = com_flag_viewer_rank
+        }
+        else = {
+            set_variable = {
+                name = com_flag_viewer_rank
+                value = 1
+            }
+        }
+    }
+}

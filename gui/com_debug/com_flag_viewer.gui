@@ -1,0 +1,637 @@
+﻿com_flag_viewer = {
+    name = "com_flag_viewer"
+}
+
+
+types com_debug_types {
+
+    type com_flag_viewer = vbox {
+        using = dockable_background
+        layoutpolicy_horizontal = expanding
+        layoutpolicy_vertical = expanding
+        layer = popups
+        using = clickthrough_blocker
+        filter_mouse = all
+        parentanchor = hcenter|vcenter
+        datacontext = "[GetMetaPlayer.GetPlayedOrObservedCountry]"
+        minimumsize = { 600 400 }
+
+        state = {
+            trigger_on_create = yes
+            name = _show
+            #on_finish = "[GetScriptedGui('com_container_manager_collect').Execute(GuiScope.End)]"
+        }
+
+        vbox = {
+            layoutpolicy_horizontal = expanding
+            layoutpolicy_vertical = expanding
+            margin = { 4 0 }
+
+            vbox = {
+                margin = { 5 10 }
+                spacing = 10
+                layoutpolicy_horizontal = expanding
+                layoutpolicy_vertical = expanding
+
+                editor_textbox = {
+                    minimumsize = { 150 20 }
+                    layoutpolicy_horizontal = expanding
+                    align = center
+                    raw_text = "[Country.GetNameNoFormatting]"
+                    fontweight = "bold"
+                }
+
+                vbox = {
+                    oncreate = "[BindFoldOutContext]"
+                    layoutpolicy_horizontal = expanding
+                    inspector_header = {
+                        blockoverride "textbox" {
+                            fontcolor = { 1 1 1 1 }
+                            raw_text = "Customize Flag"
+                        }
+                    }
+
+                    vbox = {
+                        using = InspectorSubIndentBig
+                        visible = "[PdxGuiFoldOut.IsUnfolded]"
+                        background = { using = EditorFoldoutBackground }
+                        layoutpolicy_horizontal = expanding
+                        margin_top = 5
+                        margin_bottom = 5
+                        spacing = 5
+
+                        hbox = {
+                            layoutpolicy_horizontal = expanding
+                            spacing = 10
+
+                            editor_textbox = {
+                                size = { 150 20 }
+                                align = left
+                                raw_text = "Enable Glow:"
+                            }
+
+                            expand = {}
+
+                            editor_checkbutton = {
+                                blockoverride "checkbutton" {
+                                    checked = "[GetVariableSystem.Exists('com_flag_viewer_player_glow')]"
+                                    onclick = "[GetVariableSystem.Toggle('com_flag_viewer_player_glow')]"
+                                }
+                                blockoverride "label" {
+                                    raw_text = ""
+                                }
+                            }
+                        }
+
+                        hbox = {
+                            layoutpolicy_horizontal = expanding
+                            spacing = 10
+
+                            editor_textbox = {
+                                size = { 150 20 }
+                                align = left
+                                raw_text = "Enable Flag Overlay:"
+                            }
+
+                            expand = {}
+
+                            editor_checkbutton = {
+                                blockoverride "checkbutton" {
+                                    checked = "[GetVariableSystem.Exists('com_flag_viewer_flat_overlay')]"
+                                    onclick = "[GetVariableSystem.Toggle('com_flag_viewer_flat_overlay')]"
+                                }
+                                blockoverride "label" {
+                                    raw_text = ""
+                                }
+                            }
+                        }
+
+                        hbox = {
+                            layoutpolicy_horizontal = expanding
+                            spacing = 10
+
+                            editor_textbox = {
+                                size = { 150 20 }
+                                align = left
+                                raw_text = "Overwrite Rank Border:"
+                            }
+
+                            expand = {}
+
+                            editor_button = {
+                                size = { 20 20 }
+                                raw_text = "-"
+                                using = editor_font
+                                fontcolor = { 0.2608 0.59216 0.10196 1 }
+                                fontweight = bold
+                                align = center|nobaseline
+                                fontsize = 15
+                                onclick = "[GetScriptedGui('com_flag_viewer_decrement_rank').Execute(GuiScope.SetRoot(Country.MakeScope).End)]"
+                                enabled = "[Country.MakeScope.Var('com_flag_viewer_rank').IsSet]"
+                            }
+
+                            editor_textbox = {
+                                size = { 20 20 }
+                                align = center
+                                visible = "[Country.MakeScope.Var('com_flag_viewer_rank').IsSet]"
+                                raw_text = "[Country.MakeScope.Var('com_flag_viewer_rank').GetValue|0]"
+                                fontweight = bold
+                                enabled = "[Country.MakeScope.Var('com_flag_viewer_rank').IsSet]"
+                            }
+
+                            editor_textbox = {
+                                size = { 20 20 }
+                                align = center
+                                visible = "[Not(Country.MakeScope.Var('com_flag_viewer_rank').IsSet)]"
+                                raw_text = "1"
+                                fontweight = bold
+                                enabled = "[Country.MakeScope.Var('com_flag_viewer_rank').IsSet]"
+                            }
+
+                            editor_button = {
+                                size = { 20 20 }
+                                raw_text = "+"
+                                using = editor_font
+                                using = GruvboxDarkRedFont
+                                fontweight = bold
+                                align = center|nobaseline
+                                fontsize = 15
+                                onclick = "[GetScriptedGui('com_flag_viewer_increment_rank').Execute(GuiScope.SetRoot(Country.MakeScope).End)]"
+                                enabled = "[Country.MakeScope.Var('com_flag_viewer_rank').IsSet]"
+                            }
+
+                            expand = {}
+
+                            editor_checkbutton = {
+                                blockoverride "checkbutton" {
+                                    checked = "[Country.MakeScope.Var('com_flag_viewer_rank').IsSet]"
+                                    onclick = "[GetScriptedGui('com_flag_viewer_toggle_rank').Execute(GuiScope.SetRoot(Country.MakeScope).End)]"
+                                }
+                                blockoverride "label" {
+                                    raw_text = ""
+                                }
+                            }
+
+
+                        }
+                    }
+                }
+
+
+                inspector_scrollarea = {
+                    layoutpolicy_vertical = expanding
+                    layoutpolicy_horizontal = preferred
+                    scrollbarpolicy_vertical = always_on
+
+                    blockoverride "area_widget" {
+                        vbox = {
+                            layoutpolicy_vertical = expanding
+                            layoutpolicy_horizontal = expanding
+                            margin = { 20 20 }
+                            spacing = 20
+
+                            hbox = {
+                                layoutpolicy_horizontal = expanding
+                                spacing = 50
+
+                                editor_textbox = {
+                                    layoutpolicy_horizontal = expanding
+                                    align = left
+                                    raw_text = "Fancy Flag"
+                                    fontweight = bold
+                                }
+
+                                com_fancy_flag_no_interact = {
+                                    blockoverride "is_player_glow" {
+                                        visible = "[GetVariableSystem.Exists('com_flag_viewer_player_glow')]"
+                                    }
+                                }
+
+                                com_large_flat_flag = {
+                                    blockoverride "flag_size" {
+                                        # Fancy Flag
+                                        size = { 120 90 }
+                                    }
+                                    blockoverride "flag_overlay" {
+                                        visible = "[GetVariableSystem.Exists('com_flag_viewer_flat_overlay')]"
+                                    }
+                                }
+                            }
+
+                            hbox = {
+                                layoutpolicy_horizontal = expanding
+                                spacing = 50
+
+                                editor_textbox = {
+                                    layoutpolicy_horizontal = expanding
+                                    align = left
+                                    raw_text = "Large Flag"
+                                    fontweight = bold
+                                }
+
+                                com_large_flag_no_interact = {
+                                    blockoverride "is_player_glow" {
+                                        visible = "[GetVariableSystem.Exists('com_flag_viewer_player_glow')]"
+                                    }
+                                }
+
+                                com_medium_flat_flag = {
+                                    blockoverride "flag_size" {
+                                        # Large Flag
+                                        size = { 96 64 }
+                                    }
+                                    blockoverride "flag_overlay" {
+                                        visible = "[GetVariableSystem.Exists('com_flag_viewer_flat_overlay')]"
+                                    }
+                                }
+                            }
+
+                            hbox = {
+                                layoutpolicy_horizontal = expanding
+                                spacing = 50
+
+                                editor_textbox = {
+                                    layoutpolicy_horizontal = expanding
+                                    align = left
+                                    raw_text = "Normal Flag"
+                                    fontweight = bold
+                                }
+
+                                com_normal_flag_no_interact = {
+                                    blockoverride "is_player_glow" {
+                                        visible = "[GetVariableSystem.Exists('com_flag_viewer_player_glow')]"
+                                    }
+                                }
+
+                                com_medium_flat_flag = {
+                                    blockoverride "flag_size" {
+                                        # Normal Flag
+                                        size = { 66 44 }
+                                    }
+                                    blockoverride "flag_overlay" {
+                                        visible = "[GetVariableSystem.Exists('com_flag_viewer_flat_overlay')]"
+                                    }
+                                }
+                            }
+
+                            hbox = {
+                                layoutpolicy_horizontal = expanding
+                                spacing = 50
+
+                                editor_textbox = {
+                                    layoutpolicy_horizontal = expanding
+                                    align = left
+                                    raw_text = "Small Flag"
+                                    fontweight = bold
+                                }
+
+                                com_small_flag_no_interact = {
+                                    blockoverride "is_player_glow" {
+                                        visible = "[GetVariableSystem.Exists('com_flag_viewer_player_glow')]"
+                                    }
+                                }
+
+                                com_medium_flat_flag = {
+                                    blockoverride "flag_size" {
+                                        # Small Flag
+                                        size = { 48 32 }
+                                    }
+                                    blockoverride "flag_overlay" {
+                                        visible = "[GetVariableSystem.Exists('com_flag_viewer_flat_overlay')]"
+                                    }
+                                }
+                            }
+
+                            hbox = {
+                                layoutpolicy_horizontal = expanding
+                                spacing = 50
+
+                                editor_textbox = {
+                                    layoutpolicy_horizontal = expanding
+                                    align = left
+                                    raw_text = "Tiny Flag"
+                                    fontweight = bold
+                                }
+
+                                com_tiny_flag_no_interact = {
+                                    blockoverride "is_player_glow" {
+                                        visible = "[GetVariableSystem.Exists('com_flag_viewer_player_glow')]"
+                                    }
+                                }
+
+                                com_small_flat_flag = {
+                                    blockoverride "flag_size" {
+                                        # Tiny Flag
+                                        size = { 27 18 }
+                                    }
+                                    blockoverride "flag_overlay" {
+                                        visible = "[GetVariableSystem.Exists('com_flag_viewer_flat_overlay')]"
+                                    }
+                                }
+                            }
+
+                            expand = {}
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    type com_large_flat_flag = widget {
+        block "flag_size" {
+            size = { 120 90 }
+        }
+
+        icon =  {
+            block "flag_size" {
+                size = { 120 90 }
+            }
+            texture = "[Country.GetFlag.GetLargeFlagTexture]"
+            frame = "[Country.GetFlag.GetLargeFlagSlot]"
+            framesize = "[GetLargeFlagFrameSize]"
+
+            modify_texture = {
+                texture = "gfx/interface/flag/flag_overlay.dds"
+                spriteType = Corneredstretched
+                spriteborder = { 0 0 }
+                blend_mode = multiply
+                block "flag_overlay" {
+                    visible = no
+                }
+            }
+        }
+    }
+
+    type com_medium_flat_flag = widget {
+        block "flag_size" {
+            size = { 66 44 }
+        }
+
+        icon =  {
+            block "flag_size" {
+                size = { 66 44 }
+            }
+            texture = "[Country.GetFlag.GetMediumFlagTexture]"
+            frame = "[Country.GetFlag.GetMediumFlagFrame]"
+            framesize = "[GetMediumFlagFrameSize]"
+
+            modify_texture = {
+                texture = "gfx/interface/flag/flag_overlay.dds"
+                spriteType = Corneredstretched
+                spriteborder = { 0 0 }
+                blend_mode = multiply
+                block "flag_overlay" {
+                    visible = no
+                }
+            }
+        }
+    }
+
+    type com_small_flat_flag = widget {
+        block "flag_size" {
+            size = { 48 32 }
+        }
+
+        icon =  {
+            block "flag_size" {
+                size = { 48 32 }
+            }
+            texture = "[Country.GetFlag.GetSmallFlagTexture]"
+            frame = "[Country.GetFlag.GetSmallFlagFrame]"
+            framesize = "[GetSmallFlagFrameSize]"
+
+            modify_texture = {
+                texture = "gfx/interface/flag/flag_overlay.dds"
+                spriteType = Corneredstretched
+                spriteborder = { 0 0 }
+                blend_mode = multiply
+                block "flag_overlay" {
+                    visible = no
+                }
+            }
+        }
+    }
+
+    type com_tiny_flag_no_interact = widget {
+        size = { 27 18 }
+
+        is_player_glow = {}
+
+        icon = {
+            size = { 27 18 }
+
+            texture = "[Country.GetFlag.GetSmallFlagTexture]"
+            frame = "[Country.GetFlag.GetSmallFlagFrame]"
+            framesize = "[GetSmallFlagFrameSize]"
+
+            using = flag_overlay
+
+            icon = {
+                name = frame
+                texture = "gfx/interface/flag/flag_power_tiny.dds"
+                size = { 33 24 }
+                framesize = { 66 48 }
+                frame = "[Select_int32(Country.MakeScope.Var('com_flag_viewer_rank').IsSet, FixedPointToInt(Country.MakeScope.Var('com_flag_viewer_rank').GetValue), Country.GetRankIconIndex)]"
+                alwaystransparent = yes
+                parentanchor = center
+                block "rank_visibility" {}
+            }
+        }
+    }
+
+    type com_small_flag_no_interact = widget {
+        size = { 48 32 }
+
+        is_player_glow = {}
+
+        icon = {
+            size = { 48 32 }
+
+            # Using medium size textures in small flag for better downscaling of flag details
+            texture = "[Country.GetFlag.GetMediumFlagTexture]"
+            frame = "[Country.GetFlag.GetMediumFlagFrame]"
+            framesize = "[GetMediumFlagFrameSize]"
+
+            using = flag_overlay
+
+            icon = {
+                name = frame
+                texture = "gfx/interface/flag/flag_power_small.dds"
+                size = { 62 46 }
+                framesize = { 124 92 }
+                frame = "[Select_int32(Country.MakeScope.Var('com_flag_viewer_rank').IsSet, FixedPointToInt(Country.MakeScope.Var('com_flag_viewer_rank').GetValue), Country.GetRankIconIndex)]"
+                alwaystransparent = yes
+                parentanchor = center
+                block "rank_visibility" {}
+            }
+        }
+    }
+
+    type com_normal_flag_no_interact = widget {
+        size = { 66 44 }
+
+        is_player_glow = {}
+
+        icon = {
+            size = { 66 44 }
+
+            # Using medium size textures in small flag for better downscaling of flag details
+            texture = "[Country.GetFlag.GetMediumFlagTexture]"
+            frame = "[Country.GetFlag.GetMediumFlagFrame]"
+            framesize = "[GetMediumFlagFrameSize]"
+
+            using = flag_overlay
+
+            icon = {
+                name = frame
+                texture = "gfx/interface/flag/flag_power_normal.dds"
+                size = { 80 58 }
+                framesize = { 160 116 }
+                frame = "[Select_int32(Country.MakeScope.Var('com_flag_viewer_rank').IsSet, FixedPointToInt(Country.MakeScope.Var('com_flag_viewer_rank').GetValue), Country.GetRankIconIndex)]"
+                alwaystransparent = yes
+                parentanchor = center
+                block "rank_visibility" {}
+            }
+        }
+    }
+
+    type com_large_flag_no_interact = widget {
+        size = { 96 64 }
+
+        is_player_glow = {}
+
+        icon = {
+            size = { 96 64 }
+
+            # Using medium size textures in small flag for better downscaling of flag details
+            texture = "[Country.GetFlag.GetMediumFlagTexture]"
+            frame = "[Country.GetFlag.GetMediumFlagFrame]"
+            framesize = "[GetMediumFlagFrameSize]"
+
+            using = flag_overlay
+
+            icon = {
+                name = frame
+                texture = "gfx/interface/flag/flag_power_large.dds"
+                size = { 114 82 }
+                framesize = { 228 164 }
+                frame = "[Select_int32(Country.MakeScope.Var('com_flag_viewer_rank').IsSet, FixedPointToInt(Country.MakeScope.Var('com_flag_viewer_rank').GetValue), Country.GetRankIconIndex)]"
+                alwaystransparent = yes
+                parentanchor = center
+                block "rank_visibility" {}
+            }
+        }
+    }
+
+    type com_fancy_flag_no_interact = widget {
+        size = { 120 90 }
+
+        icon = {
+            block "is_player_glow" {
+                visible = no
+            }
+            texture = "gfx/interface/flag/flag_button_glow.dds"
+            spriteType = CorneredStretched
+            spriteborder = { 0 0 }
+            framesize = { 250 250 }
+            size = { 150 110 }
+            position = { -14 -8 }
+            alpha = 0.5
+            frame = 2
+        }
+
+        # 3D flag, we want to render at a high resolution and downscale
+        # This increases the quality of the rendered gui flag
+        # Size can be modified but needs to be 16:9 due to how its rendered (converted 3d object)
+        flag_3d_animated = {
+            scale = 0.5			# Downscale
+            alwaystransparent = yes
+
+            block "flag_size" {
+                size = { 250% 200% }	# Render resolution
+            }
+        }
+    }
+
+    type com_container_entry_header = checkbutton {
+        shaderfile = "gfx/FX/pdxgui_pushbutton.shader"
+        texture = "gfx/tools/foldout_button.dds"
+        framesize = { 16 16 }
+        spriteType = CorneredStretched
+        spriteborder = { 4 4 }
+        gfxtype = checkbuttongfx
+
+        onclick = "[PdxGuiFoldOut.Toggle]"
+        checked = "[Or(PdxGuiFoldOut.IsUnfolded, GetVariableSystem.Exists('com_container_manager_expand_all'))]"
+
+        icon = {
+            texture = "gfx/editor_gui/editor_expand_checkbox.dds"
+            size = { 10 10 }
+            shaderfile = "gfx/FX/pdxgui_default.shader"
+            framesize = { 16 16 }
+            position = { 4 0 }
+            parentanchor = left|vcenter
+            frame = "[Select_int32(Or(PdxGuiFoldOut.IsUnfolded, GetVariableSystem.Exists('com_container_manager_expand_all')), '(int32)2', '(int32)1')]"
+        }
+        layoutpolicy_horizontal = preferred
+        layoutpolicy_vertical = fixed
+        size = { 0 20 }
+
+        color = { 1 1 1 1 }
+        tintcolor = { 1 1 1 1 }
+
+        editor_textbox = {
+            size = { 0 100% }
+            position = { 19 0 }
+            align = left|nobaseline
+            fontweight = light
+            block "textbox" {}
+        }
+    }
+
+    type com_container_entry_element = hbox {
+        layoutpolicy_horizontal = expanding
+
+        textbox = {
+            fontsize = 12
+            size = { 70 20 }
+            block "name" {
+                raw_text = "#debug com_container_entry_element - name#!"
+            }
+            using = editor_font
+            fontweight = bold
+        }
+
+        block "multi_value" {
+            editor_textinput = {
+                layoutpolicy_vertical = preferred
+                layoutpolicy_horizontal = expanding
+                fontsize = 12
+                block "value" {
+                    raw_text = "#debug com_container_entry_element - name#!"
+                }
+                enabled = no
+            }
+        }
+
+        textbox = {
+            fontsize = 12
+            size = { 20 20 }
+            align = center
+            block "right" {
+                visible = no
+            }
+            using = editor_font
+            fontweight = bold
+        }
+    }
+
+    type com_container_entry_scope_type = editor_textinput {
+        layoutpolicy_vertical = preferred
+        layoutpolicy_horizontal = expanding
+        fontsize = 12
+        enabled = no
+    }
+
+}

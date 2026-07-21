@@ -1,0 +1,7 @@
+﻿com_flag = {
+    args = 0
+    commands = {
+        "GUI.CreateDockable gui/com_debug/com_flag_viewer.gui com_flag_viewer Flag_Viewer 900 600"
+    }
+    description = "toggle flag viewer"
+}

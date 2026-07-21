@@ -1,0 +1,147 @@
+# INHERITED FROM BASE GAME
+@panel_width_minus_30 = 510
+@panel_width_minus_20 = 520
+@panel_width_minus_10 = 530			# used to be 450
+@panel_width = 540  				# used to be 460
+@panel_width_half = 270				# used to be 230
+@panel_width_plus_10 = 550  		# used to be 470
+@panel_width_plus_14 = 554			# used to be 474
+@panel_width_plus_14_half = 277		# used to be 237
+@panel_width_plus_20 = 560			# used to be 480
+@panel_width_plus_30 = 570			# used to be 490
+@panel_width_plus_70 = 610			# used to be 530
+
+#### WIDGETS
+types com_inject_companies {
+	type com_journal_entry_company = flowcontainer {
+		name = "com_journal_entry_company"
+		parentanchor = hcenter
+		direction = vertical
+
+		flowcontainer = {
+			visible = "[JournalEntry.MakeScope.Var('com_journal_entry_company').IsSet]"
+			datacontext = "[JournalEntry.MakeScope.Var('com_journal_entry_company').GetCompany]"
+			direction = vertical
+			using = default_list_position
+			margin_bottom = 10
+			spacing = 10
+
+			widget = {
+				background = {
+					texture = "[Company.GetCompanyType.GetBackground]"
+					fittype = centercrop
+					#alpha = 0.5
+				}
+				minimumsize = { 500 300 }
+				maximumsize = { 500 300 }
+
+				flowcontainer = {
+					parentanchor = right|vcenter
+					direction = vertical
+					spacing = 5
+
+					com_journal_entry_frame_text = {
+						blockoverride "text_top" {
+							raw_text = "[concept_company]"
+						}
+						blockoverride "text" {
+							text = "[Company.GetNameNoIcon]"
+						}
+						blockoverride "icon" {
+							texture = "gfx/interface/icons/notification_icons/buildings.dds"
+						}
+					}
+
+					com_journal_entry_frame_text = {
+						blockoverride "text_top" {
+							raw_text = "[concept_company_hq]"
+						}
+						blockoverride "text" {
+							text = "[Company.GetState.GetName]"
+						}
+						blockoverride "icon" {
+							texture = "gfx/interface/icons/alert_icons/formable_possible.dds"
+						}
+					}
+
+					com_journal_entry_frame_text = {
+						blockoverride "text_top" {
+							raw_text = "[concept_executive]"
+						}
+						blockoverride "text" {
+							text = "[Company.GetExecutive.GetFullName]"
+						}
+						blockoverride "icon" {
+							texture = "gfx/interface/icons/character_role_icons/executive.dds"
+						}
+					}
+				}
+
+				character_portrait_base_no_mask = {
+					parentanchor = left|bottom
+					ignore_in_debug_draw = yes
+					size = { 300 300 }
+
+					datacontext = "[Company.GetExecutive]"
+
+					block "character_layout" {
+						position = { -30 2 }
+					}
+					blockoverride "portrait_size" {
+						block "character_portrait_size" {
+							size = { 300 300 }
+						}
+					}
+					blockoverride "portrait_texture" {
+						portrait_texture = "[Character.GetAnimatedPortrait(
+							'ruler_environment',
+							'camera_body',
+							'idle',
+							GetPortraitRenderSize(PdxGuiWidget.Self))
+						]"
+					}
+					blockoverride "portrait_icons" {}
+					blockoverride "tooltip" {
+						tooltipwidget = {
+							FancyTooltip_Company = {}
+						}
+					}
+				}
+
+				# FRAME
+				widget = {
+					size = { 100% 100% }
+					background = {
+						texture = "gfx/interface/character_panel/char_bg_frame.dds"
+						margin_left = 18
+						margin_right = 12
+						margin_bottom = 10
+						spriteType = Corneredtiled
+
+						spriteborder_left = 200
+						spriteborder_right = 60
+						spriteborder_top = 170
+						spriteborder_bottom = 180
+
+						texture_density = 2
+					}
+				}
+
+				widget = {
+					parentanchor = right|top
+					size = { 35 35 }
+					position = { 10 -10 }
+
+					button_icon_round = {
+						size = { 100% 100% }
+						tooltip = "GO_TO_BUTTON_COMPANY"
+						onclick = "[InformationPanelBar.OpenCompanyPanel(Company.Self)]"
+						blockoverride "icon" {
+							texture = "gfx/interface/buttons/button_icons/goto.dds"
+						}
+					}
+				}
+			}
+		}
+	}
+}

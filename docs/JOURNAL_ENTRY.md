@@ -17,6 +17,9 @@ widget = {
 * [Characters with Opinions](#characters-with-opinions)
 * [Wrap Modifiers](#wrap-modifiers)
 * [Progress Bar Styling](#progress-bar-styling)
+* [EU5 Style Situation](#eu5-style-situation-journal-entries)
+* [Building](#building)
+* [Company](#company)
 
 # Elements
 ## DLC Icon
@@ -158,6 +161,47 @@ je_example_entry = {
 			scope:journal_entry = {
 				set_variable = {
 					name = com_journal_entry_building
+					value = prev
+				}
+			}
+		}
+	}
+	...
+}
+```
+
+## Company
+- **Injection Name:** `com_journal_entry_company`
+- **Recommended Anchor:** `custom_widget_container_2`
+- **Screenshots:** [Example](images/journal_entries/example_company.png)
+
+To add a company you will need to set the company scope to a journal entry variable called `com_journal_entry_company` in the immediate block of a journal entry.
+
+Here is an example where a company is added to a standard prestige good journal entry, but theoretically you can add whatever company you want:
+```
+je_example_entry = {
+	...
+    widget = {
+        gui = "gui/com_journal_injects/injects.gui"
+        name = "com_journal_entry_company"
+        container = "custom_widget_container_2"
+    }
+    
+	immediate = {
+	    # Adding a potential prestige good company
+		random_company = {
+			limit = {
+				can_potentially_produce_prestige_goods = prestige_good_gate_dwarven_iron
+				is_producing_prestige_goods = no
+				company_is_prosperous = yes
+				NOT = {
+					has_variable = gate_prestige_good_dwarven_iron
+				}
+			}
+			save_scope_as = relevant_company
+			scope:journal_entry = {
+				set_variable = {
+					name = com_journal_entry_company
 					value = prev
 				}
 			}

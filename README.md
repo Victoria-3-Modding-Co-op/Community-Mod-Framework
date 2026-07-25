@@ -9,27 +9,29 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=3385002128
 
 ## Contents
 * [Setting Dependency](#setting-dependency)
-* [Debug Features](#debug-mode)
+* [Debug Features](#debug-features)
+  * [Debug Mode](#debug-mode)
+  * [Flag Viewer](#flag-viewer)
 * [Political Movements](#political-movements)
-    * [Adding New Ideologies](#adding-new-ideologies)
-    * [Modifying Movement Weights](#modifying-movement-weights)
+  * [Adding New Ideologies](#adding-new-ideologies)
+  * [Modifying Movement Weights](#modifying-movement-weights)
 * [GUI Framework](#gui-framework)
-    * [Alternative Event Windows](#alternative-event-windows)
-    * [Custom Journal Entry Elements](#custom-journal-entry-elements)
-    * [International Organization & International Situation Frameworks](#international-organization--international-situation-frameworks)
-    * [Hiding Objective Header](#hiding-objective-header)
-    * [Custom Social Hierarchies](#custom-social-hierarchies)
-    * [Sidebar Button](#sidebar-button)
-    * [Character Animation, Camera and Environment](#character-animation-camera-and-environment)
-    * [Custom Owner Buildings](#custom-owner-buildings)
-    * [Multi-line Production Methods](#multi-line-production-methods)
-    * [Hide/Show Journal Entry Groups](#hideshow-journal-entry-groups)
-    * [Hide/Show Journal Elements](#hideshow-journal-elements)
-    * [Particle Effects/Shaders](#particle-effectsshaders)
+  * [Alternative Event Windows](#alternative-event-windows)
+  * [Custom Journal Entry Elements](#custom-journal-entry-elements)
+  * [International Organization & International Situation Frameworks](#international-organization--international-situation-frameworks)
+  * [Hiding Objective Header](#hiding-objective-header)
+  * [Custom Social Hierarchies](#custom-social-hierarchies)
+  * [Sidebar Button](#sidebar-button)
+  * [Character Animation, Camera and Environment](#character-animation-camera-and-environment)
+  * [Custom Owner Buildings](#custom-owner-buildings)
+  * [Multi-line Production Methods](#multi-line-production-methods)
+  * [Hide/Show Journal Entry Groups](#hideshow-journal-entry-groups)
+  * [Hide/Show Journal Elements](#hideshow-journal-elements)
+  * [Particle Effects/Shaders](#particle-effectsshaders)
 * [Structs](#structs)
-    * [Creating a new Struct](#creating-a-new-struct)
-    * [Setting Variables on a Struct](#setting-variables-on-a-struct)
-    * [Destroying a Struct](#destroying-a-struct)
+  * [Creating a new Struct](#creating-a-new-struct)
+  * [Setting Variables on a Struct](#setting-variables-on-a-struct)
+  * [Destroying a Struct](#destroying-a-struct)
 * [Fixing Variable Errors](#fixing-variable-errors)
 * [Dictionaries](#dictionaries)
 * [Float Arrays](#float-arrays)
@@ -58,10 +60,18 @@ To set this mod as a dependency to your own mod, you will need to add this to yo
 ```
 **Also remember to add the mod to your required items on your own mods steam page.**
 
-# Debug Mode
+# Debug Features
+
+## Debug Mode
 
 - The keybinding `CTRL + ALT + D` toggles the global variable `com_debug`. This can be used to enable or disable debug content like debug Decisions or Events.
 - The global variable `com_debug` will enable a decision that will add a debug button to the CMF sidebar. This button will toggle the game in and out of debug mode.
+
+## Flag Viewer
+Just use the console command listed below to open the flag viewer.
+
+- [Example Screenshot](docs/images/example_com_flag_viewer.png)
+- Console command: `com_flag`
 
 # Political Movements
 

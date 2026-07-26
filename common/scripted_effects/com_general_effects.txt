@@ -1,10 +1,52 @@
-﻿REPLACE_OR_CREATE:fix_variable_error = {
+﻿####---------- Quality of Life Effects ----------####
+REPLACE_OR_CREATE:fix_variable_error = {
     if = {
         limit = {has_variable = $variable$ var:$variable$ = flag:$variable$ exists = scope:$variable$ scope:$variable$ = flag:$variable$}
         set_variable = {name = $variable$ value = flag:$variable$} flag:$variable$ = {save_scope_as = $variable$}
     }
 }
 
+REPLACE_OR_CREATE:com_update_value_in_variable_map = {
+    if = {
+        limit = {
+            is_key_in_variable_map = {
+                name = $name$
+                target = $key$
+            }
+        }
+        remove_from_variable_map = {
+            name = $name$
+            key = $key$
+        }
+    }
+    add_to_variable_map = {
+        name = $name$
+        key = $key$
+        value = $value$
+    }
+}
+
+REPLACE_OR_CREATE:com_update_value_in_global_variable_map = {
+    if = {
+        limit = {
+            is_key_in_global_variable_map = {
+                name = $name$
+                target = $key$
+            }
+        }
+        remove_from_global_variable_map = {
+            name = $name$
+            key = $key$
+        }
+    }
+    add_to_global_variable_map = {
+        name = $name$
+        key = $key$
+        value = $value$
+    }
+}
+
+####---------- CMF Feature Management Effects ----------####
 add_com_dlc_icon = {
     set_variable = {
         name = com_dlc

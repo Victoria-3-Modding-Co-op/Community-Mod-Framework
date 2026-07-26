@@ -134,7 +134,7 @@ Usage is as follows:
 - `com_situation_group_$index$_next_phase_min_progress_var` expects a numerical value for the minimum range of the progress bar
 
 # Script Docs
-These are following effects and triggers available to use for managing journals with the International Organization Framework:
+The following effects and triggers are available to use for managing journals with the International Organization Framework:
 
 ## Effects
 * [com_hide_all_journal_elements_for_situation_effect](#effect-com_hide_all_journal_elements_for_situation_effect)

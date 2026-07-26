@@ -128,7 +128,7 @@ To add a journal to the Situations section of the outliner, you will have to add
 *Note: Do not hide your international situations from the journal! This list is solely for the outliner!*
 
 # Script Docs
-These are following effects and triggers available to use for managing journals with the International Organization Framework:
+The following effects and triggers are available to use for managing journals with the International Organization Framework:
 
 ## Effects
 * [com_activate_interorg_sidebar](#effect-com_activate_interorg_sidebar)

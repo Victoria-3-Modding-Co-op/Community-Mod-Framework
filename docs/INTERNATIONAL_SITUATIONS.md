@@ -226,7 +226,7 @@ Sets both the header and texture for a situation outcome
 - `texture` the key of an IG trait
 
 ### Effect: `com_set_indexed_stiuation_phase_progress_details_effect`
-Sets the variables for a specific phase progress group.
+Sets **all variables** for a specific phase progress group.
 > Note: This effect will fail with an error if a non-int or out of range index value is provided
 
 **Parameters:**
@@ -237,6 +237,15 @@ Sets the variables for a specific phase progress group.
 - `max_value` the maximum displayed value of the progress bar; expects a numerical value
 - `min_value` the minimum displayed value of the progress bar; expects a numerical value
 
+### Effect: `com_update_indexed_stiuation_phase_flags_effect`
+Sets the **flag variables** for a specific phase progress group. This effect *does not* set any of the other required variables.
+> Note: This effect will fail with an error if a non-int or out of range index value is provided
+
+**Parameters:**
+- `index` the number of the group; expects an integer from 1 thru 4
+- `next_phase_name` a localization flag for this group's next phase name; expects a string
+- `next_phase_icon` a localization flag for this group's next phase icon; expects a text icons
+
 ### Effect: `com_update_indexed_situation_phase_progress_effect`
 Updates the progress bar value for a specific phase progress group.
 > Note: This effect will fail with an error if a non-int or out of range index value is provided
@@ -244,7 +253,6 @@ Updates the progress bar value for a specific phase progress group.
 **Parameters:**
 - `index` the number of the group; expects an integer from 1 thru 4
 - `progress_value` the current value of the progress bar; expects a numerical value
-
 
 ### Effect: `com_remove_indexed_stiuation_phase_progress_details_effect`
 Removes all variables for a specific phase progress group.

@@ -62,10 +62,3 @@ REPLACE_OR_CREATE:fix_variable_error = {
 }
 
 ####---------- CMF Feature Management Effects ----------####
-add_com_dlc_icon = {
-    set_variable = {
-        name = com_dlc
-        value = flag:$dlc$
-    }
-    fix_variable_error = { variable = $dlc$ }
-}

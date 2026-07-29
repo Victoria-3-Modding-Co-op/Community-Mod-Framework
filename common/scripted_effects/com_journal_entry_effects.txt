@@ -1,0 +1,23 @@
+﻿####---------- CMF Journal Group Hide/Show Effects ----------####
+com_hide_journal_entry_group = {
+	add_to_global_variable_list = {
+		name = com_hidden_journal_groups
+		target = flag:$name$
+	}
+}
+
+com_show_journal_entry_group = {
+	remove_list_global_variable = {
+		name = com_hidden_journal_groups
+		target = flag:$name$
+	}
+}
+
+####---------- CMF Journal Widget Effects ----------####
+add_com_dlc_icon = {
+	set_variable = {
+		name = com_dlc
+		value = flag:$dlc$
+	}
+	fix_variable_error = { variable = $dlc$ }
+}

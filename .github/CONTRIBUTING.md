@@ -54,6 +54,7 @@ Ensure that you know whether your files need to overwrite, or be overwritten, by
 If you add a variable, list, effect, trigger, etc. for use in CMF, please prefix it using `com_`:
 - This is to prevent conflicts with both base game keys and those of other mods.
 - Note that some older keys may predate this convention. *This is not a license to forgo prefixing*.
+- The [Mod Detection Triggers](https://github.com/Victoria-3-Modding-Co-op/Community-Mod-Framework/wiki/Mod-Detection-Triggers) specifically ignore this convention. These triggers use the conventions of their parent mods.
 
 ## New Feature Modularity
 It should be noted that, for functions which effectively add new features, we vastly prefer generalized solutions which can be used by many different mods for consistent outcomes. See how the [Additional Journal Widgets](https://github.com/Victoria-3-Modding-Co-op/Community-Mod-Framework/wiki/Additional-Journal-Widgets), [International Situations Framework](https://github.com/Victoria-3-Modding-Co-op/Community-Mod-Framework/wiki/International-Situations), and [International Organizations Framework](https://github.com/Victoria-3-Modding-Co-op/Community-Mod-Framework/wiki/International-Organizations) are designed with *any* potential mod in mind rather than for a single mod-maker's use case.

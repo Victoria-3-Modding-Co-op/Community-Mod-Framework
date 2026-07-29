@@ -1,4 +1,5 @@
-﻿com_add_journal_group_to_interorg_list = {
+﻿####---------- CMF International Organization Framework ----------####
+com_add_journal_group_to_interorg_list = {
 	# This only adds the journal group to the interorg list for the scripted widget, they also need to be hidden using com_hide_journal_entry or else they will appear in the journal
 	add_to_global_variable_list = {
 		name = com_international_organization_journal_groups

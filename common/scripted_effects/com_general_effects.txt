@@ -60,5 +60,3 @@ REPLACE_OR_CREATE:fix_variable_error = {
         set_variable = {name = $variable$ value = flag:$variable$} flag:$variable$ = {save_scope_as = $variable$}
     }
 }
-
-####---------- CMF Feature Management Effects ----------####

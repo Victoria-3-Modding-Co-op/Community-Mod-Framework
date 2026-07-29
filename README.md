@@ -1,8 +1,7 @@
 # Community Mod Framework
 ![banner.png](docs/images/banner.png)
 
-The Community Mod Framework aims to support compatibility between different mods.
-Including GUI, Political Movements, Parties, Mod detection triggers and much more.
+The Community Mod Framework is a utility mod that aims to improve mod inter-operability while giving mod-makers tools for GUI, Political Movements, Parties and mod detection. This framework makes several changes to GUI files, political movements, and parties.
 
 
 ## Content
@@ -65,7 +64,7 @@ To set this mod as a dependency to your own mod, you will need to add this to yo
 
 ##  Philosophy
 - This framework aims to preserve base game behavior and balance by default. If no other mods are in use, this framework should be *invisible* to the player.
-- CMF is open to Pull Requests from the modding community. These are approved or rejected by consensus on the modding co-op. PRs will be rejected if they alter base game behavior. 
+- CMF is open to Pull Requests from the modding community. These are approved or rejected by consensus on the modding co-op. PRs will be rejected if they alter base game behavior. See [Our Contribution Rules](https://github.com/Victoria-3-Modding-Co-op/Community-Mod-Framework?tab=contributing-ov-file) for further details.
 
 
 ## Contributors

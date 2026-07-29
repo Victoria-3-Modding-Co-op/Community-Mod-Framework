@@ -1,4 +1,7 @@
-﻿# Check whether the given progress bar id exists
+﻿####---------- Progress Bar Styling Effects ----------####
+# Documentation: https://github.com/Victoria-3-Modding-Co-op/Community-Mod-Framework/wiki/Stylized-Journal-Progress-Bars
+
+# Check whether the given progress bar id exists
 # Parameters:
 # - progress_bar = progress bar localization key
 REPLACE_OR_CREATE:exists_com_progress_bar = {

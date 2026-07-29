@@ -1,4 +1,7 @@
-﻿com_is_stalled_enactment_journal = {
+﻿####---------- Enactment Journal Entry Triggers ----------####
+# Documentation: https://github.com/Victoria-3-Modding-Co-op/Community-Mod-Framework/wiki/Enactment-Journal-Entry-Framework
+
+com_is_stalled_enactment_journal = {
 	exists = "variable_map(com_enactment_widget|flag:stalled)"
 }
 

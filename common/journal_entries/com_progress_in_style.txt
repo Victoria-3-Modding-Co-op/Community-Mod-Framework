@@ -1,4 +1,7 @@
-﻿je_com_progress_in_style = {
+﻿####---------- Progress Bar Styling Test Journal ----------####
+# Documentation: https://github.com/Victoria-3-Modding-Co-op/Community-Mod-Framework/wiki/Stylized-Journal-Progress-Bars
+
+je_com_progress_in_style = {
 	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
 
 	group = je_group_tutorial

@@ -1,4 +1,6 @@
-﻿####---------- CMF Character Animation Framework Effects ----------####
+﻿####---------- Character Animation Framework Effects ----------####
+# Documentation: https://github.com/Victoria-3-Modding-Co-op/Community-Mod-Framework/wiki/Character-Animations-and-Environment
+
 set_com_character_animation = {
 	set_variable = {
 		name = com_character_animation

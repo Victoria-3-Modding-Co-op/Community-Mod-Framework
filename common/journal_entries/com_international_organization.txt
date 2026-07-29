@@ -1,4 +1,7 @@
-﻿je_com_supranational_organization = {
+﻿####---------- International Organization Test Journals  ----------####
+# Documentation: https://github.com/Victoria-3-Modding-Co-op/Community-Mod-Framework/wiki/International-Organizations
+
+je_com_supranational_organization = {
 	group = je_group_com_supranational_organizations
 	icon = "gfx/interface/icons/invention_icons/pan_nationalism.dds"
 	weight = 100

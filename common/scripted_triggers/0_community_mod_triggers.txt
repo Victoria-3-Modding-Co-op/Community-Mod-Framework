@@ -1,6 +1,6 @@
-﻿##########################
-# COMMUNITY MOD TRIGGERS #
-##########################
+﻿####---------- Community Mod Framework Mod Detection Triggers ----------####
+# Documentation: https://github.com/Victoria-3-Modding-Co-op/Community-Mod-Framework/wiki/Mod-Detection-Triggers
+
 # FILE USAGE:
 # DO NOT copy this file into your mod.
 #
@@ -19,6 +19,8 @@
 # Make sure your scripted trigger file is loaded AFTER this one. You can do this by adding zz_ to the filename.
 #
 # Your scripted trigger files goes in the /common/scripted_triggers folder of YOUR mod.
+#
+# Any changes to already existing triggers will be REJECTED. Once a trigger is added to this file it will not be changed or removed.
 #
 
 ####---------- Community Mod Triggers ----------####

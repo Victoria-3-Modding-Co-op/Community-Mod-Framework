@@ -1,4 +1,7 @@
-﻿# Basic setup for progress bar styling on the current journal
+﻿####---------- Progress Bar Styling Effects ----------####
+# Documentation: https://github.com/Victoria-3-Modding-Co-op/Community-Mod-Framework/wiki/Stylized-Journal-Progress-Bars
+
+# Basic setup for progress bar styling on the current journal
 # This effect has to be run inside a scope where 'scope:journal_entry' is available!
 # Parameters:
 # - progress_bar = name localization key of progress bar

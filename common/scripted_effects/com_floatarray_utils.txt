@@ -1,4 +1,7 @@
-﻿# Core functionality for float arrays; these are not likely to be changed much
+﻿####---------- Float Array Utility Effects ----------####
+# Documentation: https://github.com/Victoria-3-Modding-Co-op/Community-Mod-Framework/wiki/Float-Arrays
+
+# Core functionality for float arrays; these are not likely to be changed much
 # Array name macro: $NAME$
 # Variable prefix: com_fa_
 # Variable naming: com_fa_$NAME$_INDEX (e.g., com_fa_mydata_0, com_fa_mydata_1, ...)

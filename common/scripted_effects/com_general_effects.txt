@@ -1,4 +1,6 @@
 ﻿####---------- Quality of Life Effects ----------####
+# Documentation: https://github.com/Victoria-3-Modding-Co-op/Community-Mod-Framework/wiki/Modding-Effects
+
 REPLACE_OR_CREATE:com_change_variable = {
     set_variable = {
         name = $name$

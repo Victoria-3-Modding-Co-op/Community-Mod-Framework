@@ -1,4 +1,7 @@
-﻿com_setup_enactment_journal = {
+﻿####---------- Enactment Journal Entry Effects ----------####
+# Documentation: https://github.com/Victoria-3-Modding-Co-op/Community-Mod-Framework/wiki/Enactment-Journal-Entry-Framework
+
+com_setup_enactment_journal = {
 	com_set_enactment_journal_title = {
 		title = $title$
 	}

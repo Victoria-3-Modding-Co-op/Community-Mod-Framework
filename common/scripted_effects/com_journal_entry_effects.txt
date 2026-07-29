@@ -1,4 +1,6 @@
-﻿####---------- CMF Journal Group Hide/Show Effects ----------####
+﻿####---------- Journal Group Hide/Show Effects ----------####
+# Documentation: https://github.com/Victoria-3-Modding-Co-op/Community-Mod-Framework/wiki/UI-Extensions
+
 com_hide_journal_entry_group = {
 	add_to_global_variable_list = {
 		name = com_hidden_journal_groups

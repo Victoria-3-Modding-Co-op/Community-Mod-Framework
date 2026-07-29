@@ -1,4 +1,7 @@
-﻿# Auto-generated floatarray utilities (Binary Tree System)
+﻿####---------- Float Array Effects ----------####
+# Documentation: https://github.com/Victoria-3-Modding-Co-op/Community-Mod-Framework/wiki/Float-Arrays
+
+# Auto-generated floatarray utilities (Binary Tree System)
 # Shared core functions allow multiple array sizes without conflicts
 # Array name macro: $NAME$
 # Variable prefix: com_fa_

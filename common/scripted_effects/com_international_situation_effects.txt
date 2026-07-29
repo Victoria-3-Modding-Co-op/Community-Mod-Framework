@@ -1,4 +1,6 @@
-﻿####---------- CMF International Situation Framework ----------####
+﻿####---------- International Situation Framework ----------####
+# Documentation: https://github.com/Victoria-3-Modding-Co-op/Community-Mod-Framework/wiki/International-Situations
+
 com_hide_all_journal_elements_for_situation_effect = {
 	set_variable = com_hide_timeout
 	set_variable = com_hide_scripted_buttons

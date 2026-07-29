@@ -1,6 +1,5 @@
-﻿#########################################
-# COMMUNITY FRAMEWORK DETECTION TRIGGER #
-#########################################
+﻿####---------- Community Mod Framework Detection Trigger ----------####
+# Documentation: https://github.com/Victoria-3-Modding-Co-op/Community-Mod-Framework/wiki/Mod-Detection-Triggers
 
 REPLACE_OR_CREATE:community_framework_is_active = {
 	always = yes

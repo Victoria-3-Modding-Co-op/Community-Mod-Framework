@@ -1,4 +1,7 @@
-﻿je_com_international_situation = {
+﻿####---------- International Situation Test Journal ----------####
+# Documentation: https://github.com/Victoria-3-Modding-Co-op/Community-Mod-Framework/wiki/International-Situations
+
+je_com_international_situation = {
 	group = je_group_global_international_situations
 	icon = "gfx/interface/icons/generic_icons/international_organizations.dds"
 	weight = 100

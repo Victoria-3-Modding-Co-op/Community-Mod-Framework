@@ -320,7 +320,6 @@ types com_journal_widget_types {
 		direction = vertical
 		parentanchor = top|hcenter
 		minimumsize = { 500 -1 }
-		width = 515
 		using = entry_bg_fancy
 		spacing = 10
 		margin_bottom = 20
@@ -353,22 +352,24 @@ types com_journal_widget_types {
 				margin_top = 2
 				margin_left = 5
 
-				flowcontainer = {
-					direction = vertical
-					using = default_list_position
-					min_width = @panel_width_minus_30
-					max_width = @panel_width_minus_30
+				vbox = {
+					layoutpolicy_horizontal = expanding
+					vbox = {
+						using = default_list_position
+						min_width = 485
+						max_width = 485
 
-					dynamicgridbox = {
-						datamodel = "[JournalEntry.GetInvolvedCountries]"
-						datamodel_wrap = 14
-						flipdirection = yes
+						dynamicgridbox = {
+							datamodel = "[JournalEntry.GetInvolvedCountries]"
+							datamodel_wrap = 14
+							flipdirection = yes
 
-						item = {
-							widget = {
-								size = { 34 24 }
+							item = {
+								widget = {
+									size = { 34 24 }
 
-								tiny_flag = { }
+									tiny_flag = { }
+								}
 							}
 						}
 					}

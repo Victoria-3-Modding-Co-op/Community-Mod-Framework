@@ -602,15 +602,9 @@ liberal_party = {
 		}
 		if = { # liberals love liberalism - Vanilla removed this block but ANZFP is leftover
 			limit = {
-					# ANZFP
-					trigger_if = {
-						limit = {
-							anzfp_is_active = yes
-						}
 						anz_laissez_faire_ideologies = yes
-					}
 				}
-							add = {
+            add = {
 				value = 5
 				desc = "from_liberalism"
 			}

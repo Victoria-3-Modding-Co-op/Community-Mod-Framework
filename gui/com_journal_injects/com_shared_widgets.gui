@@ -349,28 +349,25 @@ types com_journal_widget_types {
 			blockoverride "scrollbox_background" {}
 
 			blockoverride "scrollbox_content" {
+				layoutpolicy_horizontal = expanding
 				margin_top = 2
-				margin_left = 5
+				margin_left = 20
+				margin_bottom = 0
 
-				vbox = {
-					layoutpolicy_horizontal = expanding
-					vbox = {
-						using = default_list_position
-						min_width = 485
-						max_width = 485
+				using = default_list_position
+					min_width = 485
+					max_width = 485
 
-						dynamicgridbox = {
-							datamodel = "[JournalEntry.GetInvolvedCountries]"
-							datamodel_wrap = 14
-							flipdirection = yes
+				dynamicgridbox = {
+					datamodel = "[JournalEntry.GetInvolvedCountries]"
+					datamodel_wrap = 14
+					flipdirection = yes
 
-							item = {
-								widget = {
-									size = { 34 24 }
+					item = {
+						widget = {
+							size = { 34 24 }
 
-									tiny_flag = { }
-								}
-							}
+							tiny_flag = { }
 						}
 					}
 				}

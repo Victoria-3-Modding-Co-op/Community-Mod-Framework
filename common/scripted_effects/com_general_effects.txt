@@ -108,8 +108,19 @@ REPLACE_OR_CREATE:com_update_value_in_variable_map = {
 
 REPLACE_OR_CREATE:fix_variable_error = {
     if = {
-        limit = {has_variable = $variable$ var:$variable$ = flag:$variable$ exists = scope:$variable$ scope:$variable$ = flag:$variable$}
-        set_variable = {name = $variable$ value = flag:$variable$} flag:$variable$ = {save_scope_as = $variable$}
+        limit = {
+            has_variable = $variable$
+            var:$variable$ = flag:$variable$
+            exists = scope:$variable$
+            scope:$variable$ = flag:$variable$
+        }
+        set_variable = {
+            name = $variable$
+            value = flag:$variable$
+        }
+        flag:$variable$ = {
+            save_scope_as = $variable$
+        }
     }
 }
 
@@ -127,13 +138,13 @@ com_block_exile_interaction = {
 com_block_exile_interaction_with_reason = {
     set_local_variable = { 
         name = com_block_exile_interaction_with_reason_loc
-        value = flag:$effect_loc$
+        value = flag:$text$
     }
     custom_tooltip = {
         text = com_block_exile_interaction_effect_with_reason
         set_variable = {
             name = com_block_exile_var
-            value = flag:$flag$
+            value = flag:$reason$
         }
     }
 }
@@ -151,13 +162,13 @@ com_block_retire_interaction = {
 com_block_retire_interaction_with_reason = {
     set_local_variable = {
         name = com_block_retire_interaction_with_reason_loc
-        value = flag:$effect_loc$
+        value = flag:$text$
     }
     custom_tooltip = {
         text = com_block_retire_interaction_effect_with_reason
         set_variable = {
             name = com_block_retire_var
-            value = flag:$flag$
+            value = flag:$reason$
         }
     }
 }

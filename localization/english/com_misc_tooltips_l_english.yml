@@ -1,2 +1,12 @@
 ﻿l_english:
  com_tooltip.disband_bloc: "[SCOPE.sPowerBloc('power_bloc').GetName] is disbanded"
+ 
+ com_block_exile_interaction: "[Character.GetFullName] will be blocked from being exiled"
+ com_block_exile_interaction_effect_with_reason: "[TopScope.GetLocalVariable('com_block_exile_interaction_with_reason_loc').GetFlagName]"
+ com_block_exile_interaction_trigger: "[Character.MakeScope.Var('com_block_exile_var').GetFlagName]"
+ com_block_exile_interaction_default: "[Character.GetFullName] has been blocked from being exiled"
+ 
+ com_block_retire_interaction: "[Character.GetFullName] will be blocked from being retired"
+ com_block_retire_interaction_effect_with_reason: "[TopScope.GetLocalVariable('com_block_retire_interaction_with_reason_loc').GetFlagName]"
+ com_block_retire_interaction_trigger: "[Character.MakeScope.Var('com_block_retire_var').GetFlagName]"
+ com_block_retire_interaction_default: "[Character.GetFullName] has bebe blocked from being retired"

@@ -62,3 +62,52 @@ REPLACE_OR_CREATE:fix_variable_error = {
         set_variable = {name = $variable$ value = flag:$variable$} flag:$variable$ = {save_scope_as = $variable$}
     }
 }
+
+####---------- CMF Feature Effects ----------####
+com_block_exile_interaction = {
+    custom_tooltip = {
+        text = com_block_exile_interaction
+        set_variable = { 
+            name = com_block_exile_var
+            value = flag:com_block_exile_interaction_default
+        }
+    }
+}
+
+com_block_exile_interaction_with_reason = {
+    set_local_variable = { 
+        name = com_block_exile_interaction_with_reason_loc
+        value = flag:$effect_loc$
+    }
+    custom_tooltip = {
+        text = com_block_exile_interaction_effect_with_reason
+        set_variable = {
+            name = com_block_exile_var
+            value = flag:$flag$
+        }
+    }
+}
+
+com_block_retire_interaction = {
+    custom_tooltip = {
+        text = com_block_retire_interaction
+        set_variable = {
+            name = com_block_retire_var
+            value = flag:com_block_retire_interaction_default
+        }
+    }
+}
+
+com_block_retire_interaction_with_reason = {
+    set_local_variable = {
+        name = com_block_retire_interaction_with_reason_loc
+        value = flag:$effect_loc$
+    }
+    custom_tooltip = {
+        text = com_block_retire_interaction_effect_with_reason
+        set_variable = {
+            name = com_block_retire_var
+            value = flag:$flag$
+        }
+    }
+}

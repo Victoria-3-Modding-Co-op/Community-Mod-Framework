@@ -1,0 +1,722 @@
+﻿REPLACE_OR_CREATE:exile_character = {
+	clicksound = "event:/SFX/DLC/1.3_ip1/UI/exile_character"
+	
+	should_ai_evaluate = {
+		OR = {
+			has_law_or_variant = law_type:law_autocracy
+			has_law_or_variant = law_type:law_oligarchy
+			has_law_or_variant = law_type:law_single_party_state
+			has_law_or_variant = law_type:law_secret_police
+			has_law_or_variant = law_type:law_outlawed_dissent
+		}
+	}
+	
+	potential = {
+		is_in_exile_pool = no
+		is_in_void = no
+		is_ruler_of_own_country = no
+		is_heir_of_own_country = no
+		# Cannot exile pure commanders, we have the retire interaction for that
+		OR = {
+			has_role_of_type = executive
+			has_role_of_type = magnate
+			has_role_of_type = politician
+			has_role_of_type = agitator
+		}
+		trigger_if = {
+			limit = {
+				owner ?= {
+					c:JAP ?= this
+					NOT = {
+						has_variable = japan_restoration_complete
+					}
+				}
+			}
+			custom_tooltip = {
+				text = daimyo_not_tt
+				NOT = {
+					has_variable = daimyo_var
+				}
+			}
+		}
+	}
+	
+	show_requirements = yes
+	
+	possible = {
+		trigger_if = { 
+			limit = { 
+				has_variable = com_block_exile_var
+			}
+			custom_tooltip = { 
+				text = com_block_exile_interaction_trigger
+				NOT = {
+					has_variable = com_block_exile_var
+				}
+			}
+		}
+		owner ?= {
+			NOR = {
+				has_law_or_variant = law_type:law_protected_speech
+				has_law_or_variant = law_type:law_guaranteed_liberties
+			}
+		}
+		is_busy = no
+		trigger_if = {
+			limit = {
+				has_role_of_type = agitator
+			}
+			
+			political_movement ?= { is_insurrectionary = no }
+		}
+		trigger_else = {
+			interest_group ?= {
+				is_in_government = no
+				is_insurrectionary = no
+				ig_counts_as_marginal = no
+			}
+		}
+		custom_tooltip = {
+			text = ideology_not_too_close_tt
+			NOT = {
+				OR = {
+					AND = {
+						owner.ruler = {
+							has_socialist_ideology = yes
+						}
+						has_socialist_ideology = yes
+					}
+					AND = {
+						owner.ruler = {
+							has_progressive_ideology = yes
+						}
+						has_progressive_ideology = yes
+					}
+					AND = {
+						owner.ruler = {
+							has_liberal_ideology = yes
+						}
+						has_liberal_ideology = yes
+					}
+					AND = {
+						owner.ruler = {
+							has_reactionary_ideology = yes
+						}
+						has_reactionary_ideology = yes
+					}
+					AND = {
+						owner.ruler = {
+							has_conservative_ideology = yes
+						}
+						has_conservative_ideology = yes
+					}
+				}
+			}
+		}
+		custom_tooltip = {
+			text = pending_coup_event_tt
+			NOT = {
+				owner = {
+					has_variable = coup_event_active
+				}
+			}
+		}
+		trigger_if = {
+			limit = {
+				OR = {
+					has_dlc_feature = voice_of_the_people_content
+					has_dlc_feature = ip4_content
+				}
+			}
+			custom_tooltip = {
+				text = doing_coup_for_player_tt
+				NOT = {
+					has_variable = commander_doing_coup_on_player_behalf
+				}
+			}
+		}
+		trigger_if = {
+			limit = {
+				c:JAP ?= owner
+			}
+			trigger_if = {
+				limit = {
+					owner ?= {
+						has_law = law_type:law_bakufu
+					}
+				}
+				custom_tooltip = {
+					text = house_tokugawa_not_tt
+					NOT = {
+						has_variable = house_tokugawa
+					}
+				}
+			}
+			trigger_if = {
+				limit = {
+					owner ?= {
+						NOR = {
+							has_law_or_variant = law_type:law_council_republic
+							has_law_or_variant = law_type:law_corporate_state
+						}
+					}
+				}
+				custom_tooltip = {
+					text = house_yamato_not_tt
+					NOT = {
+						has_variable = house_yamato
+					}
+				}
+			}
+		}
+	}
+	
+	effect = {
+		this.interest_group ?= {
+			save_scope_as = relevant_ig
+		}
+		this = {
+			save_scope_as = exile_scope
+		}
+		owner ?= {
+			save_scope_as = exiling_country_scope
+		}
+		if = {
+			limit = {
+				owner = {
+					has_journal_entry = je_ip4_coup
+				}
+				root = {
+					has_variable = golpista_var
+				}
+			}
+			owner = {
+				set_variable = exile_golpista_var
+				character_execute_immediate_coup = yes
+			}
+		}
+		else = {
+			if = {
+				limit = {
+					has_role_of_type = politician
+				}
+				owner ?= {
+					scope:relevant_ig = {
+						add_modifier = {
+							name = modifier_exiled_leader
+							days = normal_modifier_time
+							is_decaying = yes
+						}
+					}
+				}
+			}
+			if = {
+				limit = {
+					owner ?= { has_journal_entry = je_caudillo }
+					interest_group ?= {
+						is_interest_group_type = ig_armed_forces
+					}
+				}
+				if = {
+					limit = {
+						interest_group ?= {
+							leader = {
+								this = ROOT
+							}
+						}
+					}
+					owner ?= {
+						custom_tooltip = {
+							text = lose_large_caudillo_points
+							je:je_caudillo ?= {
+								add_progress = { value = -200 name = je_caudillo_progress_bar }
+							}
+						}
+					}
+				}
+				else = {
+					owner ?= {
+						custom_tooltip = {
+							text = lose_caudillo_points
+							je:je_caudillo ?= {
+								add_progress = { value = -100 name = je_caudillo_progress_bar }
+							}
+						}
+					}
+				}
+			}
+			if = {
+				limit = {
+					owner ?= {
+						is_player = yes
+						NOT = { has_variable = achievement_agitate_elsewhere_var }
+					}
+					popularity >= 100
+				}
+				owner ?= { set_variable = achievement_agitate_elsewhere_var }
+			}
+			owner ?= {
+				custom_tooltip = exiling_dissident_radicals_factors
+			}
+			# Extra radical from exiling a popular character
+			if = {
+				limit = {
+					popularity >= 50
+				}
+				owner ?= {
+					add_radicals = {
+						value = small_radicals
+						interest_group = scope:relevant_ig
+					}
+				}
+			}
+			# Standard radicals from having Right of Assembly
+			if = {
+				limit = {
+					owner ?= { has_law_or_variant = law_type:law_right_of_assembly }
+				}
+				owner ?= {
+					add_radicals = {
+						value = medium_radicals
+						interest_group = scope:relevant_ig
+					}
+				}
+			}
+			# Fewer radicals from Censorship
+			else_if = {
+				limit = {
+					owner ?= { has_law_or_variant = law_type:law_censorship }
+				}
+				owner ?= {
+					add_radicals = {
+						value = small_radicals
+						interest_group = scope:relevant_ig
+					}
+				}
+			}
+			# Boring characters should be made interesting when being exiled
+			if = {
+				limit = {
+					OR = {
+						has_ideology = ideology:ideology_moderate
+						has_ideology = ideology:ideology_pacifist
+					}
+				}
+				adopt_random_antigovernment_ideology = yes
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						popularity > 15
+					}
+					add_modifier = {
+						name = in_exile_modifier
+					}
+					every_country = {
+						limit = {
+							has_diplomatic_relevance = scope:exiling_country_scope
+						}
+						post_notification = exile_notification
+					}
+				}
+				else = {
+					add_modifier = {
+						name = in_exile_modifier
+						multiplier = 3
+					}
+				}
+				if = {
+					limit = {
+						has_template = canonic_count_dracula
+					}
+					kill_character = {
+						hidden = yes
+					}
+					owner = {
+						create_character = {
+							template = exile_count_dracula
+							on_created = {
+								exile_character_with_role_cleanup = yes
+								set_character_immortal = yes
+							}
+						}
+					}
+				}
+			}
+			custom_tooltip = {
+				text = exile_dissident_tt
+				exile_character_with_martyrdom = yes
+			}
+		}
+	}
+	
+	cooldown = { days = normal_modifier_time }
+	show_confirmation_box = yes
+	
+	ai_chance = {
+		value = 0
+		
+		if = {
+			limit = {
+				OR = {
+					interest_group ?= {
+						ig_approval < 0
+					}
+					political_movement ?= {
+						is_being_suppressed = yes
+					}
+				}
+			}
+			
+			add = {
+				value = popularity
+				multiply = 0.2
+			}
+			
+			if = { # Dangerous agitators have a greater chance of getting booted
+				limit = {
+					has_role_of_type = agitator
+					OR = {
+						has_trait = ambitious
+						has_trait = wrathful
+						has_trait = ruthless
+						has_trait = bandit
+						has_trait = social_bandit
+						has_trait = special_character_luxemburg_in_exile
+					}
+				}
+				multiply = 1.5
+			}
+			
+			if = {
+				limit = {
+					scope:actor ?= {
+						has_law_or_variant = law_type:law_outlawed_dissent
+					}
+				}
+				multiply = 1.5
+			}
+			else_if = {
+				limit = {
+					scope:actor ?= {
+						has_law_or_variant = law_type:law_censorship
+					}
+				}
+				multiply = 1.25
+			}
+			else_if = {
+				limit = {
+					scope:actor ?= {
+						has_law_or_variant = law_type:law_right_of_assembly
+					}
+				}
+				multiply = 0.75
+			}
+			
+			if = {
+				limit = {
+					scope:actor ?= {
+						has_law_or_variant = law_type:law_secret_police
+					}
+				}
+				multiply = 1.5
+			}
+			else_if = {
+				limit = {
+					scope:actor ?= {
+						has_law_or_variant = law_type:law_national_guard
+					}
+				}
+				multiply = 1.25
+			}
+			else_if = {
+				limit = {
+					scope:actor ?= {
+						has_law_or_variant = law_type:law_no_home_affairs
+					}
+				}
+				multiply = 0.5
+			}
+			
+			if = {
+				limit = {
+					interest_group ?= {
+						ig_approval <= -5
+					}
+				}
+				multiply = 1.25
+			}
+			else_if = {
+				limit = {
+					interest_group ?= {
+						ig_approval <= -10
+					}
+				}
+				multiply = 1.5
+			}
+			
+			if = { # If we are Conservative dont immediately hang any Liberal politician and so on
+				limit = {
+					scope:actor ?= {
+						has_strategy = ai_strategy_conservative_agenda
+					}
+					has_liberal_ideology = yes
+				}
+				multiply = 0.5
+			}
+			else_if = {
+				limit = {
+					scope:actor ?= {
+						has_strategy = ai_strategy_progressive_agenda
+					}
+					OR = {
+						has_liberal_ideology = yes
+						has_progressive_ideology = yes
+					}
+				}
+				multiply = 0.5
+			}
+			else_if = {
+				limit = {
+					scope:actor ?= {
+						has_strategy = ai_strategy_egalitarian_agenda
+						NOT = { has_law_or_variant = law_type:law_council_republic }
+					}
+					OR = {
+						has_liberal_ideology = yes
+						has_progressive_ideology = yes
+						has_socialist_ideology = yes
+					}
+				}
+				multiply = 0.5
+			}
+			else_if = {
+				limit = {
+					scope:actor ?= {
+						has_strategy = ai_strategy_egalitarian_agenda
+					}
+					OR = {
+						has_progressive_ideology = yes
+						has_socialist_ideology = yes
+					}
+				}
+				multiply = 0.5
+			}
+			
+			if = { # Be less inclined to toss out politicians
+				limit = {
+					NOT = { has_role_of_type = agitator }
+				}
+				multiply = 0.25
+			}
+		}
+	}
+}
+
+REPLACE_OR_CREATE:retire_commander = {
+	# icon = ""
+	clicksound = "event:/SFX/UI/Military/commander_retire"
+	
+	potential = {
+		owner ?= scope:actor
+		is_commander = yes
+		is_ruler_of_own_country = no
+	}
+	
+	possible = {
+		trigger_if = {
+			limit = {
+				has_variable = com_block_retire_var
+			}
+			custom_tooltip = {
+				text = com_block_retire_interaction_trigger
+				NOT = {
+					has_variable = com_block_retire_var
+				}
+			}
+		}
+		is_ruler_of_own_country = no
+		interest_group ?= {
+			is_insurrectionary = no
+		}
+		commander_is_available = yes
+		years_of_service >= 1
+		custom_tooltip = {
+			text = pending_coup_event_tt
+			NOT = {
+				owner = {
+					has_variable = coup_event_active
+				}
+			}
+		}
+		custom_tooltip = {
+			text = pending_coup_event_tt
+			NOT = {
+				owner = {
+					has_variable = coup_event_active
+				}
+			}
+		}
+		trigger_if = {
+			limit = {
+				OR = {
+					has_dlc_feature = voice_of_the_people_content
+					has_dlc_feature = ip4_content
+				}
+			}
+			custom_tooltip = {
+				text = doing_coup_for_player_tt
+				NOT = {
+					has_variable = commander_doing_coup_on_player_behalf
+				}
+			}
+		}
+	}
+	
+	effect = {
+		if = {
+			limit = {
+				owner = {
+					has_journal_entry = je_ip4_coup
+				}
+				root = {
+					has_variable = golpista_var
+				}
+			}
+			owner = {
+				set_variable = retire_golpista_var
+				character_execute_immediate_coup = yes
+			}
+		}
+		else = {
+			hidden_effect = {
+				replace_character_roles = { remove = { general admiral } }
+				retire_character_if_should_be_culled = yes
+			}
+			
+			interest_group ?= {
+				add_modifier = {
+					name = retired_commander_interest_group_impact
+					multiplier = {
+						value = root.popularity
+						divide = 100
+						add = 1
+						min = 1
+						multiply = root.commander_rank
+						round = yes
+					}
+					years = 5
+					is_decaying = yes
+				}
+			}
+		}
+	}
+	
+	show_confirmation_box = yes
+	
+	ai_chance = {
+		value = -50
+		if = {
+			limit = {
+				popularity <= -50
+			}
+			add = 25
+		}
+		if = {
+			limit = {
+				popularity <= -75
+			}
+			add = 25
+		}
+		if = {
+			limit = {
+				age >= 75
+			}
+			add = 50
+		}
+		if = {
+			limit = {
+				OR = {
+					has_trait = psychological_affliction
+					has_trait = syphilis
+					has_trait = wounded
+					has_trait = kidney_stones
+				}
+			}
+			add = 25
+		}
+		if = {
+			limit = {
+				OR = {
+					has_trait = alcoholic
+					has_trait = cocaine_addiction
+					has_trait = opium_addiction
+				}
+			}
+			add = 25
+		}
+		if = {
+			limit = {
+				has_trait = shellshocked
+			}
+			add = 25
+		}
+		if = {
+			limit = {
+				OR = {
+					has_trait = trench_rat
+					has_trait = stalwart_defender
+					has_trait = defense_in_depth_specialist
+				}
+			}
+			add = -100
+		}
+		if = {
+			limit = {
+				OR = {
+					has_trait = expert_convoy_raider
+					has_trait = expert_artillery_commander
+					has_trait = expert_offensive_planner
+					has_trait = expert_defensive_strategist
+					has_trait = expert_naval_commander
+				}
+			}
+			add = -75
+		}
+		if = {
+			limit = {
+				OR = {
+					has_trait = experienced_convoy_raider
+					has_trait = experienced_artillery_commander
+					has_trait = experienced_offensive_planner
+					has_trait = experienced_defensive_strategist
+					has_trait = experienced_naval_commander
+				}
+			}
+			add = -50
+		}
+		if = {
+			limit = {
+				owner ?= {
+					OR = {
+						is_diplomatic_play_committed_participant = yes
+						is_at_war = yes
+					}
+				}
+			}
+			add = -50
+		}
+		if = {
+			limit = {
+				owner ?= {
+					any_scope_war = {
+						any_scope_front = {
+							is_vulnerable_front = root.owner
+						}
+					}
+				}
+			}
+			add = -150
+		}
+	}
+}

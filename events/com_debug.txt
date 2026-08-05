@@ -152,8 +152,8 @@ com_debug.1 = {
 		fix_variable_error = { variable = com_no_regencies }
 		
 		# CMF Interaction Blockers
-		fix_variable_error = { variable = com_block_exile_var }
-		fix_variable_error = { variable = com_block_retire_var }
+		fix_variable_error = { variable = com_block_exile_interaction_default }
+		fix_variable_error = { variable = com_block_retire_interaction_default }
 
 		# CMF Character Animations Framework
 		fix_variable_error = { variable = com_character_override }

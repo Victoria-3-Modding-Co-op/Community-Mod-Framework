@@ -1,0 +1,17 @@
+﻿####---------- CMF Character Interaction Blocker Triggers ----------####
+# Documentation: https://github.com/Victoria-3-Modding-Co-op/Community-Mod-Framework/wiki/Modding-Effects
+
+# All of these triggers must be run from the CHARACTER scope!!
+com_is_character_blocked_from_exile = {
+	custom_tooltip = {
+		text = com_is_character_blocked_from_exile
+		has_variable = com_block_exile_var
+	}
+}
+
+com_is_character_blocked_from_retire = {
+	custom_tooltip = {
+		text = com_is_character_blocked_from_retire
+		has_variable = com_block_retire_var
+	}
+}

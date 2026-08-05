@@ -1,4 +1,7 @@
-﻿REPLACE_OR_CREATE:exile_character = {
+﻿####---------- CMF Character Interactions Blocker Overrides ----------####
+## CMF VALIDATION: Last verified against base game patch 1.13.9 on 5-AUG-2026 by Alexedishi
+
+REPLACE_OR_CREATE:exile_character = {
 	clicksound = "event:/SFX/DLC/1.3_ip1/UI/exile_character"
 	
 	should_ai_evaluate = {
@@ -44,6 +47,7 @@
 	show_requirements = yes
 	
 	possible = {
+		### START CMF ADDITION - Vanilla script above this line
 		trigger_if = { 
 			limit = { 
 				has_variable = com_block_exile_var
@@ -55,6 +59,7 @@
 				}
 			}
 		}
+		### END CMF ADDITION - Vanilla script below this line
 		owner ?= {
 			NOR = {
 				has_law_or_variant = law_type:law_protected_speech
@@ -524,6 +529,7 @@ REPLACE_OR_CREATE:retire_commander = {
 	}
 	
 	possible = {
+		### START CMF ADDITION - Vanilla script above this line
 		trigger_if = {
 			limit = {
 				has_variable = com_block_retire_var
@@ -535,6 +541,7 @@ REPLACE_OR_CREATE:retire_commander = {
 				}
 			}
 		}
+		### END CMF ADDITION - Vanilla script below this line
 		is_ruler_of_own_country = no
 		interest_group ?= {
 			is_insurrectionary = no

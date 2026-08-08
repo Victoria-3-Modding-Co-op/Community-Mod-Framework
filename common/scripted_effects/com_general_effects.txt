@@ -1,6 +1,36 @@
 ﻿####---------- Quality of Life Effects ----------####
 # Documentation: https://github.com/Victoria-3-Modding-Co-op/Community-Mod-Framework/wiki/Modding-Effects
 
+REPLACE_OR_CREATE:com_change_global_variable = {
+    set_global_variable = {
+        name = $name$
+        value = {
+            if = {
+                limit = {
+                    has_global_variable = $name$
+                }
+                add = var:$name$
+            }
+            add = $value$
+        }
+    }
+}
+
+REPLACE_OR_CREATE:com_change_local_variable = {
+    set_local_variable = {
+        name = $name$
+        value = {
+            if = {
+                limit = {
+                    has_local_variable = $name$
+                }
+                add = var:$name$
+            }
+            add = $value$
+        }
+    }
+}
+
 REPLACE_OR_CREATE:com_change_variable = {
     set_variable = {
         name = $name$
@@ -13,26 +43,6 @@ REPLACE_OR_CREATE:com_change_variable = {
             }
             add = $value$
         }
-    }
-}
-
-REPLACE_OR_CREATE:com_update_value_in_variable_map = {
-    if = {
-        limit = {
-            is_key_in_variable_map = {
-                name = $name$
-                target = $key$
-            }
-        }
-        remove_from_variable_map = {
-            name = $name$
-            key = $key$
-        }
-    }
-    add_to_variable_map = {
-        name = $name$
-        key = $key$
-        value = $value$
     }
 }
 
@@ -56,9 +66,132 @@ REPLACE_OR_CREATE:com_update_value_in_global_variable_map = {
     }
 }
 
+REPLACE_OR_CREATE:com_update_value_in_local_variable_map = {
+    if = {
+        limit = {
+            is_key_in_local_variable_map = {
+                name = $name$
+                target = $key$
+            }
+        }
+        remove_from_local_variable_map = {
+            name = $name$
+            key = $key$
+        }
+    }
+    add_to_local_variable_map = {
+        name = $name$
+        key = $key$
+        value = $value$
+    }
+}
+
+REPLACE_OR_CREATE:com_update_value_in_variable_map = {
+    if = {
+        limit = {
+            is_key_in_variable_map = {
+                name = $name$
+                target = $key$
+            }
+        }
+        remove_from_variable_map = {
+            name = $name$
+            key = $key$
+        }
+    }
+    add_to_variable_map = {
+        name = $name$
+        key = $key$
+        value = $value$
+    }
+}
+
+####---------- CMF Variable / Flag Error Suppression Effect ----------####
 REPLACE_OR_CREATE:fix_variable_error = {
     if = {
-        limit = {has_variable = $variable$ var:$variable$ = flag:$variable$ exists = scope:$variable$ scope:$variable$ = flag:$variable$}
-        set_variable = {name = $variable$ value = flag:$variable$} flag:$variable$ = {save_scope_as = $variable$}
+        limit = {
+            has_variable = $variable$
+            var:$variable$ = flag:$variable$
+            exists = scope:$variable$
+            scope:$variable$ = flag:$variable$
+        }
+        set_variable = {
+            name = $variable$
+            value = flag:$variable$
+        }
+        flag:$variable$ = {
+            save_scope_as = $variable$
+        }
+    }
+}
+
+####---------- CMF Character Interaction Blocker Effects ----------####
+# All of these effects must be run from the CHARACTER scope!!
+
+com_block_exile_interaction = {
+    save_scope_as = com_interaction_blocker_scope
+    custom_tooltip = {
+        text = com_block_exile_interaction
+        set_variable = { 
+            name = com_block_exile_var
+            value = flag:com_block_exile_interaction_default
+        }
+    }
+}
+
+com_block_exile_interaction_with_reason = {
+    save_scope_as = com_interaction_blocker_scope
+    set_local_variable = {
+        name = com_block_exile_interaction_with_reason_loc
+        value = flag:$text$
+    }
+    custom_tooltip = {
+        text = com_block_exile_interaction_effect_with_reason
+        set_variable = {
+            name = com_block_exile_var
+            value = flag:$reason$
+        }
+    }
+}
+
+com_unblock_exile_interaction = {
+    save_scope_as = com_interaction_blocker_scope
+    custom_tooltip = {
+        text = com_unblock_exile_interaction
+        remove_variable = com_block_exile_var
+    }
+}
+
+com_block_retire_interaction = {
+    save_scope_as = com_interaction_blocker_scope
+    custom_tooltip = {
+        text = com_block_retire_interaction
+        set_variable = {
+            name = com_block_retire_var
+            value = flag:com_block_retire_interaction_default
+        }
+    }
+}
+
+com_block_retire_interaction_with_reason = {
+    save_scope_as = com_interaction_blocker_scope
+    set_local_variable = {
+        name = com_block_retire_interaction_with_reason_loc
+        value = flag:$text$
+    }
+    custom_tooltip = {
+        text = com_block_retire_interaction_effect_with_reason
+        set_variable = {
+            name = com_block_retire_var
+            value = flag:$reason$
+        }
+    }
+}
+
+com_unblock_retire_interaction = {
+    save_scope_as = com_interaction_blocker_scope
+    custom_tooltip = {
+        text = com_unblock_retire_interaction
+        remove_variable = com_block_retire_var
     }
 }

@@ -1,2 +1,16 @@
 ﻿l_simp_chinese:
  com_tooltip.disband_bloc: "[SCOPE.sPowerBloc('power_bloc').GetName]被解散"
+ 
+ com_block_exile_interaction: "[SCOPE.sCharacter('com_interaction_blocker_scope').GetFullName] will be blocked from being exiled"
+ com_block_exile_interaction_effect_with_reason: "[TopScope.GetLocalVariable('com_block_exile_interaction_with_reason_loc').GetFlagName]"
+ com_block_exile_interaction_trigger: "[Character.MakeScope.Var('com_block_exile_var').GetFlagName]"
+ com_is_character_blocked_from_exile: "[concept_character] has been blocked from being exiled"
+ com_block_exile_interaction_default: "[Character.GetFullName] has been blocked from being exiled"
+ com_unblock_exile_interaction: "[SCOPE.sCharacter('com_interaction_blocker_scope').GetFullName] will be unblocked from being exiled"
+ 
+ com_block_retire_interaction: "[SCOPE.sCharacter('com_interaction_blocker_scope').GetFullName] will be blocked from being retired"
+ com_block_retire_interaction_effect_with_reason: "[TopScope.GetLocalVariable('com_block_retire_interaction_with_reason_loc').GetFlagName]"
+ com_block_retire_interaction_trigger: "[Character.MakeScope.Var('com_block_retire_var').GetFlagName]"
+ com_is_character_blocked_from_retire: "[concept_character] has been blocked from being retired"
+ com_block_retire_interaction_default: "[Character.GetFullName] has been blocked from being retired"
+ com_unblock_retire_interaction: "[SCOPE.sCharacter('com_interaction_blocker_scope').GetFullName] will be unblocked from being retired"

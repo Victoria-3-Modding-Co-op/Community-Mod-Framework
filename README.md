@@ -34,6 +34,11 @@ To set this mod as a dependency to your own mod, you will need to add this to yo
 *Also remember to add the mod to your required items on your own mods steam page.*
 
 
+##  Philosophy
+- This framework aims to preserve base game behavior and balance by default. If no other mods are in use, this framework should be *invisible* to the player.
+- CMF is open to Pull Requests from the modding community. These are approved or rejected by consensus on the modding co-op. PRs will be rejected if they alter base game behavior. See [Our Contribution Rules](https://github.com/Victoria-3-Modding-Co-op/Community-Mod-Framework?tab=contributing-ov-file) for further details.
+
+
 ## Features
 *Below is a high level list of features CMF offers. For a more fine-grained list and documentation on how they are used or extended please check out the [Community Mod Framework Wiki](https://github.com/Victoria-3-Modding-Co-op/Community-Mod-Framework/wiki).*
 
@@ -62,9 +67,14 @@ To set this mod as a dependency to your own mod, you will need to add this to yo
 | [Universal Names Compatibility](https://github.com/Victoria-3-Modding-Co-op/Community-Mod-Framework/wiki/Universal-Names-Compatibility)               | Sets up seamless compatibility with FUN's Universal Names mod                   |
 
 
-##  Philosophy
-- This framework aims to preserve base game behavior and balance by default. If no other mods are in use, this framework should be *invisible* to the player.
-- CMF is open to Pull Requests from the modding community. These are approved or rejected by consensus on the modding co-op. PRs will be rejected if they alter base game behavior. See [Our Contribution Rules](https://github.com/Victoria-3-Modding-Co-op/Community-Mod-Framework?tab=contributing-ov-file) for further details.
+## Victoria 3 Mod Tools
+*Below is list of community-provided tools and assets to aid in modding:*
+
+| Feature                                                                                    | Description                                     |
+|--------------------------------------------------------------------------------------------|-------------------------------------------------|
+| [Tiger Validator](https://github.com/amtep/tiger)                                          | Checks for errors and correctness in mod script |
+| [Community Graphical Assets](https://github.com/Victoria-3-Modding-Co-op/Graphical-Assets) | Repository of gfx templates (PS, PDN, GIMP)     |
+| [PDX Flag Builder](https://github.com/kaiser-chris/pdx-flag-builder)                       | Tool to build flags for Victoria 3 and EU5      |
 
 
 ## Contributors

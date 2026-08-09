@@ -152,8 +152,12 @@ com_debug.1 = {
 		fix_variable_error = { variable = com_no_regencies }
 		
 		# CMF Interaction Blockers
+		fix_variable_error = { variable = com_block_exile_interaction }
 		fix_variable_error = { variable = com_block_exile_interaction_default }
+		fix_variable_error = { variable = com_block_exile_interaction_with_reason_loc }
+		fix_variable_error = { variable = com_block_retire_interaction }
 		fix_variable_error = { variable = com_block_retire_interaction_default }
+		fix_variable_error = { variable = com_block_retire_interaction_with_reason_loc }
 
 		# CMF Character Animations Framework
 		fix_variable_error = { variable = com_character_override }
@@ -305,7 +309,6 @@ com_debug.1 = {
 		fix_variable_error = { variable = com_hide_law_right_to_associate }
 		fix_variable_error = { variable = com_hide_law_corporatized_unions }
 		fix_variable_error = { variable = com_hide_law_factory_councils }
-
 		
 		# Float arrays
 		fix_variable_error = { variable = com_fa_index }

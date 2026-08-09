@@ -11,6 +11,7 @@
  com_red_bar: "com_red_bar"
  com_gold_bar: "com_gold_bar"
  com_white_bar: "com_white_bar"
+ com_transparent_bar: "com_transparent_bar"
  com_target_journal_icon: "com_target_journal_icon"
  com_target_gold_marker: "com_target_gold_marker"
  com_target_gold_bar: "com_target_gold_bar"
@@ -21,4 +22,3 @@
  com_target_blue_line: "com_target_blue_line"
  com_target_default_line: "com_target_blue_line"
  com_target_green_line: "com_target_green_line"
- com_transparent_bar: "com_transparent_bar"

@@ -1,0 +1,177 @@
+﻿####---------- REGENCY EVENT BLOCKER ----------####
+# Last validated against patch 1.13.9 by Alexedishi on 10 AUG 2026
+
+namespace = regency
+
+# Start of the regency
+regency.1 = {
+	type = country_event
+	placement = root
+	
+	duration = 3
+	
+	title = regency.1.t
+	desc = regency.1.d
+	flavor = regency.1.f
+	
+	event_image = {
+		video = "votp_monarch_holding_court"
+	}
+	
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+	
+	### No cooldown
+	
+	trigger = {
+		NOT = {
+			has_variable = com_no_regencies # CMF addition
+		}
+		# Is a monarchy, ruler is under age of majority
+		has_law = law_type:law_monarchy
+		has_gov_regency = no
+	}
+	
+	cancellation_trigger = {
+		OR = {
+			has_variable = com_no_regencies # CMF addition
+			NOT = {
+				has_law = law_type:law_monarchy
+			}
+			scope:monarch_scope ?= {
+				is_adult = yes
+			}
+		}
+	}
+	
+	immediate = {
+		ordered_interest_group = { # Just the most notable IG in government
+			limit = {
+				is_in_government = yes
+			}
+			order_by = ig_clout
+			position = 0
+			check_range_bounds = no
+			save_scope_as = ig_candidate_1
+		}
+		ordered_interest_group = { # Any pro-monarchy IG
+			limit = {
+				NOT = {
+					scope:ig_candidate_1 ?= this
+				}
+				law_stance = {
+					law = law_type:law_monarchy
+					value >= approve
+				}
+				ig_counts_as_marginal = no
+			}
+			order_by = ig_clout
+			position = 0
+			check_range_bounds = no
+			save_scope_as = ig_candidate_2
+		}
+		ordered_interest_group = {
+			limit = {
+				NOR = {
+					scope:ig_candidate_1 ?= this
+					scope:ig_candidate_2 ?= this
+				}
+				law_stance = {
+					law = law_type:law_monarchy
+					value >= neutral
+				}
+				ig_counts_as_marginal = no
+				is_insurrectionary = no
+			}
+			order_by = ig_clout
+			position = 0
+			check_range_bounds = no
+			save_scope_as = ig_candidate_3
+		}
+		ordered_interest_group = {
+			limit = {
+				NOR = {
+					scope:ig_candidate_1 ?= this
+					scope:ig_candidate_2 ?= this
+					scope:ig_candidate_3 ?= this
+				}
+				law_stance = {
+					law = law_type:law_monarchy
+					value >= neutral
+				}
+				ig_counts_as_marginal = no
+				is_insurrectionary = no
+			}
+			order_by = this.leader.popularity
+			position = 0
+			check_range_bounds = no
+			save_scope_as = ig_candidate_4
+		}
+		ruler ?= {
+			save_scope_as = monarch_scope
+		}
+	}
+	
+	option = {
+		name = regency.1.a
+		default_option = yes
+		add_regency_modifier = yes
+		set_variable = { name = hide_ruler_change_notification days = 3 }
+		scope:ig_candidate_1.leader = {
+			set_character_as_ruler = yes
+			designate_character_as_regent = {
+				YEARS = 0
+			}
+		}
+		set_heir = scope:monarch_scope
+	}
+	
+	option = {
+		name = regency.1.b
+		trigger = {
+			exists = scope:ig_candidate_2
+		}
+		add_regency_modifier = yes
+		set_variable = { name = hide_ruler_change_notification days = 3 }
+		scope:ig_candidate_2.leader = {
+			set_character_as_ruler = yes
+			designate_character_as_regent = {
+				YEARS = 0
+			}
+		}
+		set_heir = scope:monarch_scope
+	}
+	
+	option = {
+		name = regency.1.c
+		trigger = {
+			exists = scope:ig_candidate_3
+		}
+		add_regency_modifier = yes
+		set_variable = { name = hide_ruler_change_notification days = 3 }
+		scope:ig_candidate_3.leader = {
+			set_character_as_ruler = yes
+			designate_character_as_regent = {
+				YEARS = 0
+			}
+		}
+		set_heir = scope:monarch_scope
+	}
+	
+	option = {
+		name = regency.1.e
+		trigger = {
+			exists = scope:ig_candidate_4
+		}
+		add_regency_modifier = yes
+		set_variable = { name = hide_ruler_change_notification days = 3 }
+		scope:ig_candidate_4.leader = {
+			set_character_as_ruler = yes
+			designate_character_as_regent = {
+				YEARS = 0
+			}
+		}
+		set_heir = scope:monarch_scope
+	}
+}

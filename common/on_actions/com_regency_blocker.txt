@@ -11,7 +11,7 @@
 			}
 			
 			#### VANILLA SCRIPT BEYOND THIS POINT
-			# Last updated for patch 1.13.3 on 30 APR 2026
+			# Last updated for patch 1.13.9 on 9 AUG 2026
 			if = {
 				limit = {
 					owner = { # Assigning a regent should never fire this on_action
@@ -38,6 +38,8 @@
 					}
 					change_character_religion = owner.religion
 				}
+
+				# Setup regencies
 				if = {
 					limit = {
 						owner = {
@@ -55,6 +57,8 @@
 						}
 					}
 				}
+
+				# For handling the Sikh Maharaja achievement
 				if = {
 					limit = {
 						owner = {
@@ -62,23 +66,10 @@
 							has_journal_entry = je_sikh_sovereignty
 						}
 					}
-					if = {
-						limit = {
-							NOT = {
-								has_variable = sikh_maharaja_enthroned
-							}
-						}
-						owner = {
-							je:je_sikh_sovereignty = {
-								set_bar_progress = { value = 0 name = sikh_empire_progress_bar }
-							}
-						}
-						set_variable = sikh_maharaja_enthroned
-						owner = {
-							change_variable = { name = sikh_dead_maharajas_var add = 1 }
-						}
-					}
+					on_new_ruler_sikh_maharaja_effect = yes
 				}
+
+				# For transitioning Zanzibar out of Arab rule
 				if = {
 					limit = {
 						owner = {
@@ -98,7 +89,7 @@
 						trigger_event = { id = zanzibar.6 popup = yes }
 					}
 				}
-				
+
 				### Monarchial succession - add all successions here.
 				if = {
 					limit = {
@@ -216,7 +207,7 @@
 						character_japan_ruler_succession_chain_effect = yes
 					}
 				}
-				
+
 				if = { # For handling the Succession Rights treaty article in the case of ruler death
 					limit = {
 						exists = c:BRZ
@@ -238,71 +229,19 @@
 							}
 						}
 					}
-					save_temporary_scope_as = portuguese_monarch_scope
-					c:BRZ ?= {
-						heir ?= {
-							if = {
-								limit = {
-									is_character_alive = yes
-									NOT = { c:POR.ruler ?= this  }
-								}
-								kill_character = { hidden = yes }
-							}
-						}
-						set_heir = scope:portuguese_monarch_scope
-					}
+					# For handling the Succession Rights treaty article in the case of ruler death
+					on_new_ruler_brazil_succession_rights_effect = yes
 				}
-				
+
+				# For handling the assignment of emperor_var, shogun_var, and emperor traits
 				if = {
 					limit = {
 						c:JAP ?= owner
 					}
-					if = {
-						limit = {
-							has_variable = house_yamato
-						}
-						save_temporary_scope_as = emperor_to_be_scope
-						c:JAP ?= {
-							set_variable = { name = emperor_var value = scope:emperor_to_be_scope }
-						}
-						if = {
-							limit = {
-								NOT = {
-									has_trait = special_character_japanese_emperor
-								}
-							}
-							add_trait = special_character_japanese_emperor
-						}
-						if = {
-							limit = {
-								owner ?= {
-									has_law = law_type:law_bakufu # If a member of the Imperial Family somehow heads the Bakufu, end it instantly
-								}
-							}
-							owner ?= {
-								deactivate_law = law_type:law_bakufu
-								activate_law = law_type:law_oligarchy
-							}
-						}
-					}
-					if = { # Sitting Emperors don't need this role
-						limit = {
-							has_role = character_role_emperor_of_japan
-						}
-						remove_character_role = character_role_emperor_of_japan
-					}
-					if = { # Marks the Shogun as the Shogun
-						limit = {
-							owner = {
-								has_gov_regency = no
-								has_law = law_type:law_bakufu
-							}
-						}
-						set_variable = shogun_var
-					}
+					on_new_ruler_japan_effect = yes
 				}
 			}
-			
+
 			if = { # Handles total years in power, not consecutive years. Mostly for Japan.
 				limit = {
 					NOT = {

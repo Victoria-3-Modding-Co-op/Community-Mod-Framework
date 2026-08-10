@@ -1,0 +1,18 @@
+﻿on_new_ruler = {
+	on_actions = {
+		com_ruler_blocker
+	}
+}
+
+com_ruler_blocker = {
+	effect = {
+		if = {
+			limit = {
+				owner = {
+					has_variable = com_no_regencies
+				}
+			}
+			set_variable = regency_complete
+		}
+	}
+}

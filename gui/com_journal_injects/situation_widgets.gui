@@ -375,6 +375,48 @@ types com_journal_widget_types {
 				blockoverride "portrait_icons" { }
 				blockoverride "tooltip" {}
 			}
+			
+			# Left Faction Leader
+			textbox = {
+				visible = "[JournalEntry.MakeScope.Var('com_situation_left_title_var').IsSet]"
+				parentanchor = left|bottom
+				position = { 20 -10 }
+				autoresize = yes
+				text = "com_situation_left_title"
+				align = hcenter|nobaseline
+				using = fontsize_medium
+				
+				background = {
+					using = dark_area
+					alpha = 0.4
+					margin = { 5 5 }
+					
+					modify_texture = {
+						using = texture_velvet
+					}
+				}
+			}
+			
+			# Right Faction Leader
+			textbox = {
+				visible = "[JournalEntry.MakeScope.Var('com_situation_right_title_var').IsSet]"
+				parentanchor = right|bottom
+				position = { -20 -10 }
+				autoresize = yes
+				text = "com_situation_right_title"
+				align = hcenter|nobaseline
+				using = fontsize_medium
+				
+				background = {
+					using = dark_area
+					alpha = 0.4
+					margin = { 5 5 }
+					
+					modify_texture = {
+						using = texture_velvet
+					}
+				}
+			}
 		}
 	}
 	

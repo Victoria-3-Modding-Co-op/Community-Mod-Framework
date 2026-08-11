@@ -162,6 +162,36 @@ com_set_situation_right_character = {
 	}
 }
 
+com_set_situation_left_title = {
+	set_variable = { 
+		name = com_situation_left_title_var
+		value = flag:$title$
+	}
+}
+
+com_set_situation_right_title = {
+	set_variable = {
+		name = com_situation_right_title_var
+		value = flag:$title$
+	}
+}
+
+com_remove_situation_left_character = {
+	remove_variable = com_situation_character_left_var
+}
+
+com_remove_situation_right_character = {
+	remove_variable = com_situation_character_right_var
+}
+
+com_remove_situation_left_title = {
+	remove_variable = com_situation_left_title_var
+}
+
+com_remove_situation_right_title = {
+	remove_variable = com_situation_right_title_var
+}
+
 com_set_situation_phase_effect = {
 	set_variable = {
 		name = com_situation_phase_icon_var

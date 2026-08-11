@@ -1,34 +1,46 @@
 ﻿l_korean:
+ ####---------- International Situations Base Localization ----------####
  je_com_international_situation: "국제 정세"
  je_com_international_situation_reason: "이유 따위는 없다. 우리에겐 아무런 이유도 없다. 우리는 근거 없는 주장과 신성한 광기를 지닌 사람들이다. 자, 이제 누군가 눈치채기 전에 말리 동부에 장작을 좀 쌓아두어라."
  je_com_international_situation_status: "상태: 광산에서 비명을 지르고 있음."
+ 
  com_situation_toggle_involved: "$com_situation$ 관련 상황 보기"
  com_situation_involved_countries: "$com_involved$  [Concept('concept_country', '$concept_countries$')]"
  com_situation_interloper_countries: "$com_interloper$  [Concept('concept_country', '$concept_countries$')]"
+ 
  com_situation_complete_tooltip: "[JournalEntry.GetCompletionTooltip]$_ttdl$[JournalEntry.GetOnCompleteTooltip]"
  com_situation_timeout_tooltip: "[JournalEntry.GetTimeoutTooltip]$_ttdl$[JournalEntry.GetOnTimeoutTooltip]"
  com_situation_failure_tooltip: "[JournalEntry.GetFailureTooltip]$_ttdl$[JournalEntry.GetOnFailTooltip]"
+ 
  com_situation_current_phase: "현재 단계:"
  com_situation_phase_effects: "단계 효과:"
  com_view_situation_endings: "상황별 결과 보기"
+ 
  com_next_phase_progress: "다음 단계 진행도"
  com_situation_catalysts_header_1: "#bold #italic [JournalEntry.MakeScope.Var('com_situation_group_1_next_phase_name_var').GetFlagName]로 향하는 촉매#!#!"
  com_situation_catalysts_header_2: "#bold #italic [JournalEntry.MakeScope.Var('com_situation_group_2_next_phase_name_var').GetFlagName]로 향하는 촉매#!#!"
  com_situation_catalysts_header_3: "#bold #italic [JournalEntry.MakeScope.Var('com_situation_group_3_next_phase_name_var').GetFlagName]로 향하는 촉매#!#!"
  com_situation_catalysts_header_4: "#bold #italic [JournalEntry.MakeScope.Var('com_situation_group_4_next_phase_name_var').GetFlagName]로 향하는 촉매#!#!"
  com_catalysts_info: "#blue #italic 단계 진행도를 높이려면 촉매를 완료하십시오#!#!"
+ 
  com_situation_group_1_progress_bar_tooltip: "현재 진행도: #v [JournalEntry.MakeScope.Var('com_situation_group_1_next_phase_progress_var').GetValue]/[JournalEntry.MakeScope.Var('com_situation_group_1_next_phase_max_progress_var').GetValue]#!"
  com_situation_group_2_progress_bar_tooltip: "현재 진행도: #v [JournalEntry.MakeScope.Var('com_situation_group_2_next_phase_progress_var').GetValue]/[JournalEntry.MakeScope.Var('com_situation_group_2_next_phase_max_progress_var').GetValue]#!"
  com_situation_group_3_progress_bar_tooltip: "현재 진행도: #v [JournalEntry.MakeScope.Var('com_situation_group_3_next_phase_progress_var').GetValue]/[JournalEntry.MakeScope.Var('com_situation_group_3_next_phase_max_progress_var').GetValue]#!"
  com_situation_group_4_progress_bar_tooltip: "현재 진행도: #v [JournalEntry.MakeScope.Var('com_situation_group_4_next_phase_progress_var').GetValue]/[JournalEntry.MakeScope.Var('com_situation_group_4_next_phase_max_progress_var').GetValue]#!"
+ 
  com_situation_start_date_header: "#blue #bold 시작일:#!#!"
  com_situation_start_date: "#bold [JournalEntry.MakeScope.Var('com_situation_start_month_var').GetFlagName] [JournalEntry.MakeScope.Var('com_situation_start_year_var').GetValue]#!"
+ com_situation_left_title: "[JournalEntry.MakeScope.Var('com_situation_left_title_var').GetFlagName]"
+ com_situation_right_title: "[JournalEntry.MakeScope.Var('com_situation_right_title_var').GetFlagName]"
+ 
  com_situation_background_africa_construction_colony: "com_situation_background_africa_construction_colony"
  com_situation_background_asia_westerners_arriving: "com_situation_background_asia_westerners_arriving"
  com_situation_background_europenorthamerica_london_center: "com_situation_background_europenorthamerica_london_center"
  com_situation_background_europenorthamerica_political_extremism: "com_situation_background_europenorthamerica_political_extremism"
  com_situation_background_southamerica_aristocrats: "com_situation_background_southamerica_aristocrats"
  com_outcome_background_generic: "com_outcome_background_generic"
+ 
+ ####---------- International Situation Game Concepts ----------####
  concept_com_international_situation: "국제 정세"
  concept_com_international_situation_desc: "$concept_com_international_situations$은(는) 크고 작은 [Concept('concept_country','$concept_countries$')] 모두의 지속적인 관심을 요구하는 복잡하고 장기적인 사건입니다. 이는 전략적 기회를 제공할 수도 있고, 지정학적 위기로 번질 수도 있습니다.\n\n$concept_com_international_situations$은(는) 보통 둘 이상의 [Concept('concept_com_situation_faction','$concept_com_situation_factions$')]이(가) 관여하며, 각 진영은 저마다의 [concept_com_situation_leader]을(를) 보유합니다. 상황이 해결되면 해당 항목은 $concept_journal$에서 제거됩니다."
  concept_com_international_situations: "국제 정세"
@@ -38,6 +50,7 @@
  com_international_situations: "[Concept('concept_com_international_situation','$concept_com_international_situations$')]"
  com_situation: "[Concept('concept_com_international_situation','$concept_com_international_situation_short$')]"
  com_situations: "[Concept('concept_com_international_situation','$concept_com_international_situations_short$')]"
+ 
  concept_com_situation_involvement: "상황 관여"
  concept_com_situation_involvement_desc: ""
  concept_com_situation_involvement_short: "관여"
@@ -47,6 +60,7 @@
  com_involvement: "[Concept('concept_com_situation_involvement','$com_situation_involvement$')]"
  com_involved: "[Concept('concept_com_situation_involvement','$concept_com_situation_involved$')]"
  com_uninvolved: "[Concept('concept_com_situation_involvement','$concept_com_situation_uninvolved$')]"
+ 
  concept_com_situation_interloper: "상황 관여자"
  concept_com_situation_interloper_desc: ""
  concept_com_situation_interlopers: "상황 관여자들"

@@ -30,6 +30,8 @@
  
  com_situation_start_date_header: "#blue #bold Started In:#!#!"
  com_situation_start_date: "#bold [JournalEntry.MakeScope.Var('com_situation_start_month_var').GetFlagName] [JournalEntry.MakeScope.Var('com_situation_start_year_var').GetValue]#!"
+ com_situation_left_title: "[JournalEntry.MakeScope.Var('com_situation_left_title_var').GetFlagName]"
+ com_situation_right_title: "[JournalEntry.MakeScope.Var('com_situation_right_title_var').GetFlagName]"
  
  com_situation_background_africa_construction_colony: "com_situation_background_africa_construction_colony"
  com_situation_background_asia_westerners_arriving: "com_situation_background_asia_westerners_arriving"

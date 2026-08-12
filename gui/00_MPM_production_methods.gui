@@ -657,6 +657,82 @@ types production_methods
 						using = entry_bg_simple
 					}
 
+					blockoverride "building_progressbars" {
+
+						flowcontainer = {
+							parentanchor = right|vcenter
+							position = { -5 0 }
+							spacing = 10
+
+							widget = {
+								visible = "[BuildingType.IsConstructionSector]"
+								size = { 40 40 }
+								parentanchor = vcenter
+
+								icon = {
+									visible = "[Building.IsConstructionOutputPaused]"
+									using = rotate_glow_blue
+									size = { 130% 130% }
+									parentanchor = center
+									alwaystransparent = yes
+									using = default_fade_in_out
+								}
+
+								button_icon_round_action = {
+									visible = "[Not(Building.IsConstructionOutputPaused)]"
+									tooltip = "CONSTRUCTION_SECTOR_BUTTON_PAUSE_TOOLTIP"
+
+									blockoverride "size" {
+										size = { 100% 100% }
+									}
+
+									blockoverride "icon_size" {
+										size = { 75% 75% }
+									}
+
+									block "onclick" {
+										onclick = "[Execute( Building.PauseConstructionOutput )]"
+										enabled = "[IsValid( Building.PauseConstructionOutput )]"
+									}
+
+									blockoverride "icon" {
+										texture = "gfx/interface/production_methods/unpaused_government_construction.dds"
+									}
+								}
+
+								button_icon_round_action = {
+									visible = "[Building.IsConstructionOutputPaused]"
+									tooltip = "CONSTRUCTION_SECTOR_BUTTON_RESUME_TOOLTIP"
+
+									blockoverride "size" {
+										size = { 100% 100% }
+									}
+
+									blockoverride "icon_size" {
+										size = { 75% 75% }
+									}
+
+									block "onclick" {
+										onclick = "[Execute( Building.ResumeConstructionOutput )]"
+										enabled = "[IsValid( Building.ResumeConstructionOutput )]"
+									}
+
+									blockoverride "icon" {
+										texture = "gfx/interface/production_methods/paused_government_construction.dds"
+									}
+								}
+							}
+
+							building_progressbars = {
+								parentanchor = vcenter
+
+								blockoverride "progressbar_size" {
+									size = { 230 26 }
+								}
+							}
+						}
+					}
+
 					blockoverride "extra_items_in_production_methods_list" {
 						military_building_combat_unit_summary = {
 							parentanchor = right|vcenter

@@ -157,6 +157,7 @@ types com_ongoing_outliner_items {
 		flowcontainer = {
 			direction = vertical
 			parentanchor = hcenter
+			max_update_rate = 8
 			visible = "[Not(IsDataModelEmpty(AccessPlayer.AccessActivePinnedNonPlayerObjectiveJournalEntries))]"
 			datamodel = "[AccessPlayer.AccessActivePinnedNonPlayerObjectiveJournalEntries]"
 			
@@ -284,6 +285,7 @@ types com_ongoing_outliner_items {
 			flowcontainer = {
 				direction = vertical
 				parentanchor = hcenter
+				max_update_rate = 8
 				visible = "[Not(IsDataModelEmpty(AccessPlayer.AccessActivePinnedNonPlayerObjectiveJournalEntries))]"
 				datamodel = "[AccessPlayer.AccessActivePinnedNonPlayerObjectiveJournalEntries]"
 				
@@ -418,6 +420,7 @@ types com_ongoing_outliner_items {
 			flowcontainer = {
 				direction = vertical
 				parentanchor = hcenter
+				max_update_rate = 8
 				visible = "[Not(IsDataModelEmpty(AccessPlayer.AccessActivePinnedNonPlayerObjectiveJournalEntries))]"
 				datamodel = "[AccessPlayer.AccessActivePinnedNonPlayerObjectiveJournalEntries]"
 				

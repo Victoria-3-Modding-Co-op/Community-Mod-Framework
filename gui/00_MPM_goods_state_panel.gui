@@ -54,13 +54,13 @@ types goods_state_panel {
 			}
 
 			icon = {
-				visible = "[GoodsPanelValue.IsPiracy]"
+				visible = "[Or(GoodsPanelValue.IsPiracy,GoodsPanelValue.IsPiracyLoss)]"
 				texture = "gfx/interface/icons/commander_order_icons/piracy_privateering.dds"
 				size = { 25 25 }
 			}
 
 			icon = {
-				visible = "[And(Not(GoodsPanelValue.HasBuildingInfo),Not(GoodsPanelValue.IsPiracy))]"
+				visible = "[And3(Not(GoodsPanelValue.HasBuildingInfo),Not(GoodsPanelValue.IsPiracy),Not(GoodsPanelValue.IsPiracyLoss))]"
 				texture = "gfx/interface/icons/generic_icons/population.dds"
 				size = { 25 25 }
 			}

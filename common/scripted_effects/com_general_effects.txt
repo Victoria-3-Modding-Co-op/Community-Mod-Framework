@@ -1,23 +1,24 @@
 ﻿####---------- Quality of Life Effects ----------####
 # Documentation: https://github.com/Victoria-3-Modding-Co-op/Community-Mod-Framework/wiki/Modding-Effects
 
-REPLACE_OR_CREATE:com_save_journal_to_variable = {
-    scope:journal_entry = {
-        save_scope_as = $name$
-    }
-    set_variable = {
+REPLACE_OR_CREATE:com_save_journal_to_local_variable = {
+    set_local_variable = {
         name = $name$
-        value = scope:$name$
+        value = scope:journal_entry
     }
 }
 
 REPLACE_OR_CREATE:com_save_journal_to_global_variable = {
-    scope:journal_entry = {
-        save_scope_as = $name$
-    }
     set_global_variable = {
         name = $name$
-        value = scope:$name$
+        value = scope:journal_entry
+    }
+}
+
+REPLACE_OR_CREATE:com_save_journal_to_variable = {
+    set_variable = {
+        name = $name$
+        value = scope:journal_entry
     }
 }
 

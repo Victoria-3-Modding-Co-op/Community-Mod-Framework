@@ -451,8 +451,10 @@ REPLACE:movement_cultural_majority = {
 					has_technology_researched = nationalism
 					any_scope_homeland_state = {
 						NOT = {
-							owner = {
-								country_has_primary_culture = root.culture
+							this.owner ?= {
+								any_primary_culture = {
+									is_primary_culture_of = root.owner
+								}
 							}
 						}
 					}
@@ -463,8 +465,10 @@ REPLACE:movement_cultural_majority = {
 					every_scope_homeland_state = {
 						limit = {
 							NOT = {
-								owner = {
-									country_has_primary_culture = root.culture
+								this.owner ?= {
+									any_primary_culture = {
+										is_primary_culture_of = root.owner
+									}
 								}
 							}
 						}
@@ -483,7 +487,20 @@ REPLACE:movement_cultural_majority = {
 						owner = {
 							NOT = { THIS = ROOT.owner }
 							any_political_movement = {
-								culture ?= ROOT.culture
+								OR = {
+									AND = {
+										is_political_movement_type = movement_cultural_majority
+										prev = {
+											any_primary_culture = {
+												is_primary_culture_of = root.owner
+											}
+										}
+									}
+									AND = {
+										is_political_movement_type = movement_cultural_minority
+										culture ?= { is_primary_culture_of = root.owner }
+									}
+								}
 								is_insurrectionary = yes
 							}
 						}

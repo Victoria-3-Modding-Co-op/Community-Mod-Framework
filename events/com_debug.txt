@@ -49,7 +49,9 @@ com_debug.1 = {
 		fix_variable_error = { variable = com_situation_header_var }
 		fix_variable_error = { variable = com_situation_illustration_var }
 		fix_variable_error = { variable = com_situation_character_left_var }
+		fix_variable_error = { variable = com_situation_left_title_var }
 		fix_variable_error = { variable = com_situation_character_right_var }
+		fix_variable_error = { variable = com_situation_right_title_var }
 		fix_variable_error = { variable = com_situation_start_month_var }
 		fix_variable_error = { variable = com_situation_start_year_var }
 		

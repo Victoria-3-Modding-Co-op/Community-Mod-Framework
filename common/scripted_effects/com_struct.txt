@@ -17,3 +17,7 @@ destroy_struct = {
 		free_character_from_void = yes
 	}
 }
+
+destroy_named_container = {
+	container:$name$ = { destroy_container = yes }
+}

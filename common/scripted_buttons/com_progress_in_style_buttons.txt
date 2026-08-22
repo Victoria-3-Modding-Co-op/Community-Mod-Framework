@@ -65,9 +65,7 @@ sb_com_progress_in_style_test2 = {
 			fix_variable_error = { variable = com_white_bar }
 			fix_variable_error = { variable = com_blue_bar }
 		}
-		run_in_com_progress_bar_scope = {
-			progress_bar = spb_com_progress_in_style
-			effect = "
+		container:spb_com_progress_in_style = {
 			switch = {
 				trigger = var:com_left_color
 				flag:com_blue_bar = {
@@ -105,7 +103,7 @@ sb_com_progress_in_style_test2 = {
 						value = flag:com_blue_bar
 					}
 				}
-			}"
+			}
 		}
 	}
 }
@@ -115,9 +113,8 @@ sb_com_progress_in_style_test3 = {
 	desc = sb_com_rise_of_communism_test_desc
 
 	visible = {
-		test_in_com_progress_bar_scope = {
-			progress_bar = spb_com_progress_in_style
-			trigger = "has_variable = com_target_type"
+		container:spb_com_progress_in_style = {
+			has_variable = com_target_type
 		}
 	}
 	possible = {
@@ -137,9 +134,7 @@ sb_com_progress_in_style_test3 = {
 			fix_variable_error = { variable = com_target_white_line }
 			fix_variable_error = { variable = com_target_gold_bar }
 		}
-		run_in_com_progress_bar_scope = {
-			progress_bar = spb_com_progress_in_style
-			effect = "
+		container:spb_com_progress_in_style = {
 			switch = {
 				trigger = var:com_target_type
 				flag:com_target_gold_bar = {
@@ -177,7 +172,7 @@ sb_com_progress_in_style_test3 = {
 						value = flag:com_target_gold_bar
 					}
 				}
-			}"
+			}
 		}
 	}
 }
@@ -203,9 +198,7 @@ sb_com_progress_in_style_test4 = {
 			fix_variable_error = { variable = com_white_bar }
 			fix_variable_error = { variable = com_blue_bar }
 		}
-		run_in_com_progress_bar_scope = {
-			progress_bar = spb_com_progress_in_style
-			effect = "
+		container:spb_com_progress_in_style = {
 			switch = {
 				trigger = var:com_right_color
 				flag:com_transparent_bar = {
@@ -250,7 +243,7 @@ sb_com_progress_in_style_test4 = {
 						value = flag:com_transparent_bar
 					}
 				}
-			}"
+			}
 		}
 	}
 }
@@ -274,14 +267,11 @@ sb_com_progress_in_style_test5 = {
 		}
 		if = {
 			limit = {
-				test_in_com_progress_bar_scope = {
-					progress_bar = spb_com_progress_in_style
-					trigger = "has_variable = com_progress_bar_levels"
+				container:spb_com_progress_in_style = {
+					has_variable = com_progress_bar_levels
 				}
 			}
-			run_in_com_progress_bar_scope = {
-				progress_bar = spb_com_progress_in_style
-				effect = "
+			container:spb_com_progress_in_style = {
 				switch = {
 					trigger = var:com_progress_bar_levels
 					3 = {
@@ -302,7 +292,7 @@ sb_com_progress_in_style_test5 = {
 						custom_tooltip = com_progress_bar_levels_clear
 						remove_variable = com_progress_bar_levels
 					}
-				}"
+				}
 			}
 		}
 		else = {
@@ -320,26 +310,23 @@ sb_com_progress_in_style_test6 = {
 	desc = sb_com_progress_in_style_test_desc
 
 	visible = {
-		test_in_com_progress_bar_scope = {
-			progress_bar = spb_com_progress_in_style
-			trigger = "has_variable = com_progress_bar_levels"
+		container:spb_com_progress_in_style = {
+			has_variable = com_progress_bar_levels
 		}
 	}
 	possible = {
 		OR = {
 			custom_tooltip = {
 				text = sb_com_progress_in_style_test6_tt
-				test_in_com_progress_bar_scope = {
-					progress_bar = spb_com_progress_in_style
-					trigger = "has_variable = com_progress_bar_level_highlight"
+				container:spb_com_progress_in_style = {
+					has_variable = com_progress_bar_level_highlight
 				}
 			}
 			custom_tooltip = {
 				text = sb_com_progress_in_style_test6_tt2
 				NOT = {
-					test_in_com_progress_bar_scope = {
-						progress_bar = spb_com_progress_in_style
-						trigger = "has_variable = com_progress_bar_level_highlight"
+					container:spb_com_progress_in_style = {
+						has_variable = com_progress_bar_level_highlight
 					}
 				}
 			}

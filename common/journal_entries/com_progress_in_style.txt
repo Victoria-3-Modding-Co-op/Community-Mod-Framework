@@ -43,9 +43,12 @@ je_com_progress_in_style = {
 			name = com_progress_in_style_target
 			value = 0.75 #start at 75%
 		}
-		run_in_com_progress_bar_scope = { #wrapper scripted effect
+		set_com_progress_bar_target_icon = { #overwrites target type from above
 			progress_bar = spb_com_progress_in_style
-			effect = "set_ideology = ideology:com_icon_progress_in_style" #just add your effect here; here we set a custom ideology to use a custom icon as a target marker
+			target_icon = com_icon_progress_in_style #this points to the script name of a dummy ideology for the icon
+		}
+		container:spb_com_progress_in_style = {
+		#	<effects? #just add your effect here; progress bars are saved as named containers, so can be called directly with "container:<name>" for triggers and effects
 		}
 	}
 

@@ -30,7 +30,7 @@ types progressbar_overwrites {
 			container = {
 				#Vanilla like (no drift or target setting)
 				container = {
-					visible = "[Not(ComProgressBar.IsSet)]"
+					visible = "[Not(ComProgressBar.IsValid)]"
 					# Default
 					default_progressbar_horizontal = {
 						visible = "[ScriptedProgressBar.IsDefault]"
@@ -355,7 +355,7 @@ types progressbar_overwrites {
 				}
 				#New style, with drift and target setting
 				container = {
-					visible = "[And(ComProgressBar.IsSet, Not(ComProgressBar.Var('com_hide_progress_bar').IsSet))]"
+					visible = "[And(ComProgressBar.IsValid, Not(ComProgressBar.MakeScope.Var('com_hide_progress_bar').IsSet))]"
 					# Technicolor dream bar
 					com_progressbar = {
 						visible = "[ComProgressBarBaseColor.IsSet]"
@@ -472,7 +472,7 @@ types progressbar_overwrites {
 			container = {
 				#Vanilla like (no drift or target setting)
 				container = {
-					visible = "[Not(ComProgressBar.IsSet)]"
+					visible = "[Not(ComProgressBar.IsValid)]"
 					# Default
 					default_progressbar_horizontal = {
 						visible = "[ScriptedProgressBar.IsDefault]"
@@ -681,7 +681,7 @@ types progressbar_overwrites {
 				}
 				#New style, with drift and target setting
 				container = {
-					visible = "[And(ComProgressBar.IsSet, Not(ComProgressBar.Var('com_hide_progress_bar').IsSet))]"
+					visible = "[And(ComProgressBar.IsValid, Not(ComProgressBar.MakeScope.Var('com_hide_progress_bar').IsSet))]"
 					block "com_progressbar" {
 						# Technicolor dream bar
 						com_progressbar = {
@@ -1047,8 +1047,8 @@ types com_progressbars {
 		}
 		#levels
 		com_progressbar_levels = {
-			visible = "[ComProgressBar.Var('com_progress_bar_levels').IsSet]"
-			datamodel = "[DataModelRepeatedItem( FixedPointToInt( ComProgressBar.Var('com_progress_bar_levels').GetValue ) )]"
+			visible = "[ComProgressBar.MakeScope.Var('com_progress_bar_levels').IsSet]"
+			datamodel = "[DataModelRepeatedItem( FixedPointToInt( ComProgressBar.MakeScope.Var('com_progress_bar_levels').GetValue ) )]"
 		}
 		#target markers
 		block "com_progressbar_target" {
@@ -1083,7 +1083,7 @@ types com_progressbars {
 						parentanchor = vcenter
 						widgetanchor = center
 						block "com_target_progress_texture" {
-							texture = "[ComProgressBar.GetCharacter.GetIdeology.GetTexture]"
+							texture = "[GetIdeology(ComProgressBar.MakeScope.Var('com_target_icon_name').GetFlagName).GetTexture]"
 						}
 					}
 				}
@@ -1252,7 +1252,7 @@ types com_progressbars {
 						visible = "[Not(
 							EqualTo_int32(
 								IntToFrameIndex(PdxGuiWidget.GetIndexInDataModel),
-								FixedPointToInt( ComProgressBarInLevels.Var('com_progress_bar_levels').GetValue )
+								FixedPointToInt( ComProgressBarInLevels.MakeScope.Var('com_progress_bar_levels').GetValue )
 							)
 						)]" #IntToFrameIndex adds 1
 					}
@@ -1269,16 +1269,16 @@ types com_progressbars {
 					size = { 100% 100% }
 					block "level_active" {
 						visible = "[And(
-							ComProgressBarInLevels.Var('com_progress_bar_level_highlight').IsSet,
+							ComProgressBarInLevels.MakeScope.Var('com_progress_bar_level_highlight').IsSet,
 							BetweenInclusiveOfMax_float(
 								JournalEntry.GetCurrentBarProgress(ScriptedProgressBar.Self),
 								Divide_float(
 									IntToFloat(PdxGuiWidget.GetIndexInDataModel),
-									FixedPointToFloat(ComProgressBarInLevels.Var('com_progress_bar_levels').GetValue)
+									FixedPointToFloat(ComProgressBarInLevels.MakeScope.Var('com_progress_bar_levels').GetValue)
 								),
 								Divide_float(
 									IntToFloat(IntToFrameIndex(PdxGuiWidget.GetIndexInDataModel)),
-									FixedPointToFloat(ComProgressBarInLevels.Var('com_progress_bar_levels').GetValue)
+									FixedPointToFloat(ComProgressBarInLevels.MakeScope.Var('com_progress_bar_levels').GetValue)
 								)
 							)
 						)]" #IntToFrameIndex adds 1

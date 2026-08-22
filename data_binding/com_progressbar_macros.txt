@@ -7,31 +7,25 @@
 macro = {
     description = "Get progress bar struct"
     definition = "ComProgressBar"
-    replace_with = "JournalEntry.MakeScope.Var(ComProgressBarIndex)"
+    replace_with = "JournalEntry.MakeScope.Var(ComProgressBarIndex).GetScriptContainer"
 }
 
 macro = {
     description = "Get progress bar base color"
     definition = "ComProgressBarBaseColor"
-    replace_with = "ComProgressBar.Var('com_left_color')"
+    replace_with = "ComProgressBar.MakeScope.Var('com_left_color')"
 }
 
 macro = {
     description = "Get progress bar second color"
     definition = "ComProgressBarSecondColor"
-    replace_with = "ComProgressBar.Var('com_right_color')"
-}
-
-macro = {
-    description = "Set progress bar increase color"
-    definition = "ComProgressBarSetBaseColor(Color)"
-    replace_with = "And(ComProgressBarBaseColor.IsSet, ObjectsEqual(ComProgressBarBaseColor.GetFlagName, Color))"
+    replace_with = "ComProgressBar.MakeScope.Var('com_right_color')"
 }
 
 macro = {
     description = "Get progress bar drift"
     definition = "ComProgressBarDrift"
-    replace_with = "ComProgressBar.Var('com_drift_value')"
+    replace_with = "ComProgressBar.MakeScope.Var('com_drift_value')"
 }
 
 macro = {
@@ -55,7 +49,7 @@ macro = {
 macro = {
     description = "Get progress bar increase color"
     definition = "ComProgressBarIncreaseColor"
-    replace_with = "ComProgressBar.Var('com_bar_increase_color')"
+    replace_with = "ComProgressBar.MakeScope.Var('com_bar_increase_color')"
 }
 
 macro = {
@@ -67,7 +61,7 @@ macro = {
 macro = {
     description = "Get progress bar drift down color"
     definition = "ComProgressBarDecreaseColor"
-    replace_with = "ComProgressBar.Var('com_bar_decrease_color')"
+    replace_with = "ComProgressBar.MakeScope.Var('com_bar_decrease_color')"
 }
 
 macro = {
@@ -79,7 +73,7 @@ macro = {
 macro = {
     description = "Get progress bar target"
     definition = "ComProgressBarTarget"
-    replace_with = "ComProgressBar.Var('com_target_value')"
+    replace_with = "ComProgressBar.MakeScope.Var('com_target_value')"
 }
 
 macro = {
@@ -91,13 +85,13 @@ macro = {
 macro = {
     description = "Get progress bar target type"
     definition = "ComProgressBarTargetTypeCompare(Value)"
-    replace_with = "And3(ComProgressBarTarget.IsSet, ComProgressBar.Var('com_target_type').IsSet, ObjectsEqual(Localize(ComProgressBar.Var('com_target_type').GetFlagName), Value))"
+    replace_with = "And3(ComProgressBarTarget.IsSet, ComProgressBar.MakeScope.Var('com_target_type').IsSet, ObjectsEqual(Localize(ComProgressBar.MakeScope.Var('com_target_type').GetFlagName), Value))"
 }
 
 macro = {
     description = "Get progress bar target"
     definition = "ComProgressBarTargetColor"
-    replace_with = "ComProgressBar.Var('com_target_type')"
+    replace_with = "ComProgressBar.MakeScope.Var('com_target_type')"
 }
 
 macro = {
@@ -105,13 +99,13 @@ macro = {
     definition = "ComProgressBarTargetLine"
     replace_with = "And3(
         ComProgressBarTarget.IsSet,
-        ComProgressBar.Var('com_target_type').IsSet,
+        ComProgressBar.MakeScope.Var('com_target_type').IsSet,
         Or5(
-            ObjectsEqual(ComProgressBar.Var('com_target_type').GetFlagName, 'default'),
-            ObjectsEqual(ComProgressBar.Var('com_target_type').GetFlagName, 'bad'),
-            ObjectsEqual(ComProgressBar.Var('com_target_type').GetFlagName, 'green'),
-            ObjectsEqual(ComProgressBar.Var('com_target_type').GetFlagName, 'gold'),
-            ObjectsEqual(ComProgressBar.Var('com_target_type').GetFlagName, 'white')
+            ObjectsEqual(ComProgressBar.MakeScope.Var('com_target_type').GetFlagName, 'default'),
+            ObjectsEqual(ComProgressBar.MakeScope.Var('com_target_type').GetFlagName, 'bad'),
+            ObjectsEqual(ComProgressBar.MakeScope.Var('com_target_type').GetFlagName, 'green'),
+            ObjectsEqual(ComProgressBar.MakeScope.Var('com_target_type').GetFlagName, 'gold'),
+            ObjectsEqual(ComProgressBar.MakeScope.Var('com_target_type').GetFlagName, 'white')
         )
     )"
 }
@@ -125,5 +119,5 @@ macro = {
 macro = {
     description = "Get progress bar struct"
     definition = "ComProgressBarInLevels"
-    replace_with = "JournalEntry.MakeScope.Var(ComProgressBarIndexInLevels)"
+    replace_with = "JournalEntry.MakeScope.Var(ComProgressBarIndexInLevels).GetScriptContainer"
 }

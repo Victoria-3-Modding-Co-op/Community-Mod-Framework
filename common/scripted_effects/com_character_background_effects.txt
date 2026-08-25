@@ -1,0 +1,18 @@
+﻿####---------- Character Animation Framework Effects ----------####
+# Documentation: https://github.com/Victoria-3-Modding-Co-op/Community-Mod-Framework/wiki/Character-Animations-and-Environment
+
+set_com_character_background = {
+	set_variable = {
+		name = com_character_background
+		value = flag:$background$
+	}
+	fix_variable_error = { variable = $background$ }
+}
+
+add_com_character_background_vfx = {
+	add_to_variable_list = {
+		name = com_character_background_vfx
+		target = flag:$vfx$
+	}
+	fix_variable_error = { variable = $vfx$ }
+}

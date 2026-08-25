@@ -1,5 +1,5 @@
 ﻿####---------- Character Animation Framework Effects ----------####
-# Documentation: https://github.com/Victoria-3-Modding-Co-op/Community-Mod-Framework/wiki/Character-Animations-and-Environment
+# Documentation: https://github.com/Victoria-3-Modding-Co-op/Community-Mod-Framework/wiki/Character-Background,-Animations-and-Environment
 
 set_com_character_background = {
 	set_variable = {

@@ -1,0 +1,7 @@
+types com_gate_compatibility_event_windows {
+
+    type event_window_gate_dungeon = event_window {
+       name = event_window_gate_dungeon
+    }
+
+}

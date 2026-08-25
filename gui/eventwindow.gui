@@ -687,3 +687,6 @@ event_window_europa_2_char = {}
 event_window_form_government = {}
 event_window_choose_pm = {}
 bpm_event_window_superevent_newspaper = {}
+
+#### CMF Manaflow Compatibility
+event_window_gate_dungeon = {}

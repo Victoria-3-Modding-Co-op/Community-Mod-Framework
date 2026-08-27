@@ -353,6 +353,30 @@ com_remove_indexed_stiuation_phase_progress_details_effect = {
 	}
 }
 
+com_hide_indexed_stiuation_phase_progress_details_effect = {
+	# WARNING this effect assumes you have already set all other variables via com_set_indexed_stiuation_phase_progress_details_effect first!
+	# This only removes com_situation_group_$index$_next_phase_progress_var, which is used by the UI to hide and show the progress element for that index number
+	# This effect can be reversed by running any of the other effects that update com_situation_group_$index$_next_phase_progress_var
+	save_scope_value_as = {
+		name = com_index
+		value = $index$
+	}
+	if = {
+		limit = {
+			OR = {
+				scope:com_index = 1
+				scope:com_index = 2
+				scope:com_index = 3
+				scope:com_index = 4
+			}
+		}
+		remove_variable = com_situation_group_$index$_next_phase_progress_var
+	}
+	else = {
+		error_log = "Effect com_hide_indexed_stiuation_phase_progress_details_effect requires an index value of 1, 2, 3, or 4."
+	}
+}
+
 
 ####---------- Outdated Situation Effects ----------####
 # I will be reviewing this soon -Alexedishi JUN-30-2026

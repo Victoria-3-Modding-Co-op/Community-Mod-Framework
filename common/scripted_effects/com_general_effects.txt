@@ -30,7 +30,7 @@ REPLACE_OR_CREATE:com_change_global_variable = {
                 limit = {
                     has_global_variable = $name$
                 }
-                add = var:$name$
+                add = global_var:$name$
             }
             add = $value$
         }
@@ -45,7 +45,7 @@ REPLACE_OR_CREATE:com_change_local_variable = {
                 limit = {
                     has_local_variable = $name$
                 }
-                add = var:$name$
+                add = local_var:$name$
             }
             add = $value$
         }
@@ -75,7 +75,7 @@ REPLACE_OR_CREATE:com_change_and_clamp_global_variable = {
                 limit = {
                     has_global_variable = $name$
                 }
-                add = var:$name$
+                add = global_var:$name$
             }
             add = $value$
             max = $max$
@@ -92,7 +92,7 @@ REPLACE_OR_CREATE:com_change_and_clamp_local_variable = {
                 limit = {
                     has_local_variable = $name$
                 }
-                add = var:$name$
+                add = local_var:$name$
             }
             add = $value$
             max = $max$

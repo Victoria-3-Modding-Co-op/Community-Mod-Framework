@@ -1,4 +1,13 @@
-﻿# Check whether the currently scoped country is part of the given faction
+﻿com_has_indexed_situation_progress_bar_trigger = {
+    # This runs in a JOURNAL ENTRY scope
+    has_variable = com_situation_group_$index$_next_phase_progress_var
+}
+
+
+####---------- OLD Situation Triggers ----------####
+# I will start refactoring this after 1.14 - Alexedishi, 31 AUG '26
+
+# Check whether the currently scoped country is part of the given faction
 # This effect has to be run inside a scope where 'scope:com_situation' is available!
 # - side = 'left', 'right', or 'neutral'
 # - faction = localization key for the name of the faction

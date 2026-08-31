@@ -1,4 +1,13 @@
-﻿# Check whether the currently scoped country is part of the given faction
+﻿com_has_indexed_situation_progress_bar_trigger = {
+    # This runs in a JOURNAL ENTRY scope
+    has_variable = com_situation_group_$index$_next_phase_progress_var
+}
+
+
+####---------- OLD Situation Triggers ----------####
+# I will start refactoring this after 1.14 - Alexedishi, 31 AUG '26
+
+# Check whether the currently scoped country is part of the given faction
 # This effect has to be run inside a scope where 'scope:com_situation' is available!
 # - side = 'left', 'right', or 'neutral'
 # - faction = localization key for the name of the faction
@@ -7,7 +16,7 @@ is_com_situation_faction_member = {
         text = is_com_situation_faction_member
         subject = this
         object = scope:com_faction_temp
-
+        
         save_temporary_scope_as = com_country_temp
         scope:com_situation ?= {
             var:com_side_$side$ ?= {
@@ -32,7 +41,7 @@ is_in_any_com_situation_faction = {
     custom_description = {
         text = is_com_situation_faction_member
         subject = this
-
+        
         save_temporary_scope_as = com_country_temp
         scope:com_situation ?= {
             OR = {
@@ -74,7 +83,7 @@ is_party_in_com_situation = {
     custom_description = {
         text = is_party_in_com_situation
         subject = this
-
+        
         save_temporary_scope_as = com_country_temp
         scope:com_situation ?= {
             OR = {
@@ -102,14 +111,14 @@ is_party_in_com_situation = {
                         }
                     }
                 }
-				var:com_side_neutral ?= {
-					any_in_list = {
-						variable = com_factions
-						any_in_list = {
-							variable = com_countries
-							this = scope:com_country_temp
-						}
-					}
+                var:com_side_neutral ?= {
+                    any_in_list = {
+                        variable = com_factions
+                        any_in_list = {
+                            variable = com_countries
+                            this = scope:com_country_temp
+                        }
+                    }
                 }
             }
         }
@@ -124,7 +133,7 @@ is_com_situation_side_leader = {
         text = is_com_situation_side_leader
         subject = this
         object = scope:com_side_temp
-
+        
         save_temporary_scope_as = com_country_temp
         scope:com_situation ?= {
             var:com_side_$side$ ?= {
@@ -144,7 +153,7 @@ has_com_situation_faction = {
         text = has_com_situation_faction
         subject = scope:com_faction_temp
         object = scope:com_side_temp
-
+        
         scope:com_situation ?= {
             var:com_side_$side$ ?= {
                 save_temporary_scope_as = com_side_temp
@@ -169,7 +178,7 @@ num_com_situation_faction_members = {
         text = num_com_situation_faction_members
         subject = scope:com_faction_temp
         object = scope:com_side_temp
-
+        
         scope:com_situation ?= {
             var:com_side_$side$ ?= {
                 save_temporary_scope_as = com_side_temp
@@ -192,7 +201,7 @@ num_com_situation_faction_members = {
 has_any_com_situation_factions = {
     custom_description = {
         text = has_any_com_situation_factions
-
+        
         scope:com_situation ?= {
             OR = {
                 var:com_side_left ?= {

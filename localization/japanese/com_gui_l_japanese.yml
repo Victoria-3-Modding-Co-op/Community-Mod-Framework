@@ -35,5 +35,5 @@
   # Localization Shorthands
   com_nl: "\n"
   com_bp: "•"
-  com_nlpb: "\n • "
+  com_nlbp: "\n • "
   com_ttdl: "\n$TOOLTIP_DELIMITER$\n"

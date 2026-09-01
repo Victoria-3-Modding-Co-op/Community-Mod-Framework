@@ -22,5 +22,5 @@
  com_debug.james_tt: "#italic 제임스가 당신에게 미소 짓습니다...#!"
  com_nl: "\n"
  com_bp: "•"
- com_nlpb: "\n • "
+ com_nlbp: "\n • "
  com_ttdl: "\n$TOOLTIP_DELIMITER$\n"

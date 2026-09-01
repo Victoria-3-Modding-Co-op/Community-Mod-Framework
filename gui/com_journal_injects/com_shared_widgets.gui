@@ -225,21 +225,45 @@ types com_journal_widget_types {
 			parentanchor = vcenter
 		}
 	}
-
-	type com_journal_reason_text = textbox {
-		autoresize = yes
-		block "journal_reason_visibility" {}
-		block "journal_reason_text" {
+	
+	type com_journal_reason_text = flowcontainer {
+		parentanchor = top|hcenter
+		spacing = 5
+		
+		# Default Reason Text
+		textbox = {
+			visible = "[Not(StringIsEmpty(JournalEntry.GetReason))]"
+			
 			text = "[JournalEntry.GetReason]"
+			min_width = 535
+			max_width = 535
+			multiline = yes
+			using = default_list_position
+			align = nobaseline
+			margin = { 15 15 }
+			autoresize = yes
+			
+			background = {
+				using = entry_bg
+			}
 		}
-		min_width = 535
-		max_width = 535
-		multiline = yes
-		using = default_list_position
-		align = nobaseline
-		margin = { 15 15 }
-
-		block "journal_reason_background" {
+		
+		# Reason Text Box #2
+		textbox = {
+			visible = "[Not(ObjectsEqual(
+				Localize(Concatenate('JournalEntry.GetKey', '_reason_2')),
+				Concatenate(Localize('JournalEntry.GetKey'), '_reason_2'))
+			))]"
+			
+			text = "[Concatenate(Localize('JournalEntry.GetKey'), '_reason_2'))]"
+			min_width = 535
+			max_width = 535
+			multiline = yes
+			using = default_list_position
+			align = nobaseline
+			margin = { 15 15 }
+			autoresize = yes
+			
 			background = {
 				using = entry_bg
 			}

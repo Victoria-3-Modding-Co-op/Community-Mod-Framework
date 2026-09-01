@@ -228,6 +228,7 @@ types com_journal_widget_types {
 	
 	type com_journal_reason_text = flowcontainer {
 		parentanchor = top|hcenter
+		direction = vertical
 		spacing = 5
 		
 		# Default Reason Text
@@ -249,11 +250,179 @@ types com_journal_widget_types {
 		# Reason Text Box #2
 		textbox = {
 			visible = "[Not(ObjectsEqual(
-				Localize(Concatenate('JournalEntry.GetKey', '_reason_2')),
-				Concatenate(JournalEntry.GetKey, '_reason_2')
+				Localize(Concatenate(JournalEntry.GetType.GetKey, '_reason_2')),
+				Concatenate(JournalEntry.GetType.GetKey, '_reason_2')
 			))]"
 			
-			text = "[Concatenate(JournalEntry.GetKey, '_reason_2')]"
+			text = "[Localize(Concatenate(JournalEntry.GetType.GetKey, '_reason_2'))]"
+			min_width = 535
+			max_width = 535
+			multiline = yes
+			using = default_list_position
+			align = nobaseline
+			margin = { 15 15 }
+			autoresize = yes
+			
+			background = {
+				using = entry_bg
+			}
+		}
+		
+		# Reason Text Box #3
+		textbox = {
+			visible = "[Not(ObjectsEqual(
+				Localize(Concatenate(JournalEntry.GetType.GetKey, '_reason_3')),
+				Concatenate(JournalEntry.GetType.GetKey, '_reason_3')
+			))]"
+			
+			text = "[Localize(Concatenate(JournalEntry.GetType.GetKey, '_reason_3'))]"
+			min_width = 535
+			max_width = 535
+			multiline = yes
+			using = default_list_position
+			align = nobaseline
+			margin = { 15 15 }
+			autoresize = yes
+			
+			background = {
+				using = entry_bg
+			}
+		}
+		
+		# Reason Text Box #4
+		textbox = {
+			visible = "[Not(ObjectsEqual(
+				Localize(Concatenate(JournalEntry.GetType.GetKey, '_reason_4')),
+				Concatenate(JournalEntry.GetType.GetKey, '_reason_4')
+			))]"
+			
+			text = "[Localize(Concatenate(JournalEntry.GetType.GetKey, '_reason_4'))]"
+			min_width = 535
+			max_width = 535
+			multiline = yes
+			using = default_list_position
+			align = nobaseline
+			margin = { 15 15 }
+			autoresize = yes
+			
+			background = {
+				using = entry_bg
+			}
+		}
+		
+		# Reason Text Box #5
+		textbox = {
+			visible = "[Not(ObjectsEqual(
+				Localize(Concatenate(JournalEntry.GetType.GetKey, '_reason_5')),
+				Concatenate(JournalEntry.GetType.GetKey, '_reason_5')
+			))]"
+			
+			text = "[Localize(Concatenate(JournalEntry.GetType.GetKey, '_reason_5'))]"
+			min_width = 535
+			max_width = 535
+			multiline = yes
+			using = default_list_position
+			align = nobaseline
+			margin = { 15 15 }
+			autoresize = yes
+			
+			background = {
+				using = entry_bg
+			}
+		}
+		
+		# Reason Text Box #6
+		textbox = {
+			visible = "[Not(ObjectsEqual(
+				Localize(Concatenate(JournalEntry.GetType.GetKey, '_reason_6')),
+				Concatenate(JournalEntry.GetType.GetKey, '_reason_6')
+			))]"
+			
+			text = "[Localize(Concatenate(JournalEntry.GetType.GetKey, '_reason_6'))]"
+			min_width = 535
+			max_width = 535
+			multiline = yes
+			using = default_list_position
+			align = nobaseline
+			margin = { 15 15 }
+			autoresize = yes
+			
+			background = {
+				using = entry_bg
+			}
+		}
+		
+		# Reason Text Box #7
+		textbox = {
+			visible = "[Not(ObjectsEqual(
+				Localize(Concatenate(JournalEntry.GetType.GetKey, '_reason_7')),
+				Concatenate(JournalEntry.GetType.GetKey, '_reason_7')
+			))]"
+			
+			text = "[Localize(Concatenate(JournalEntry.GetType.GetKey, '_reason_7'))]"
+			min_width = 535
+			max_width = 535
+			multiline = yes
+			using = default_list_position
+			align = nobaseline
+			margin = { 15 15 }
+			autoresize = yes
+			
+			background = {
+				using = entry_bg
+			}
+		}
+		
+		# Reason Text Box #8
+		textbox = {
+			visible = "[Not(ObjectsEqual(
+				Localize(Concatenate(JournalEntry.GetType.GetKey, '_reason_8')),
+				Concatenate(JournalEntry.GetType.GetKey, '_reason_8')
+			))]"
+			
+			text = "[Localize(Concatenate(JournalEntry.GetType.GetKey, '_reason_8'))]"
+			min_width = 535
+			max_width = 535
+			multiline = yes
+			using = default_list_position
+			align = nobaseline
+			margin = { 15 15 }
+			autoresize = yes
+			
+			background = {
+				using = entry_bg
+			}
+		}
+		
+		# Reason Text Box #9
+		textbox = {
+			visible = "[Not(ObjectsEqual(
+				Localize(Concatenate(JournalEntry.GetType.GetKey, '_reason_9')),
+				Concatenate(JournalEntry.GetType.GetKey, '_reason_9')
+			))]"
+			
+			text = "[Localize(Concatenate(JournalEntry.GetType.GetKey, '_reason_9'))]"
+			min_width = 535
+			max_width = 535
+			multiline = yes
+			using = default_list_position
+			align = nobaseline
+			margin = { 15 15 }
+			autoresize = yes
+			
+			background = {
+				using = entry_bg
+			}
+		}
+		
+		# Reason Text Box #10
+		textbox = {
+			visible = "[Not(ObjectsEqual(
+				Localize(Concatenate(JournalEntry.GetType.GetKey, '_reason_10')),
+				Concatenate(JournalEntry.GetType.GetKey, '_reason_10')
+			))]"
+			
+			text = "[Localize(Concatenate(JournalEntry.GetType.GetKey, '_reason_10'))]"
 			min_width = 535
 			max_width = 535
 			multiline = yes

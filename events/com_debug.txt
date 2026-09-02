@@ -32,6 +32,8 @@ com_debug.1 = {
 		fix_variable_error = { variable = com_event_window_location_var }
 		fix_variable_error = { variable = com_journal_entry_building }
 		fix_variable_error = { variable = com_journal_entry_company }
+		fix_variable_error = { variable = com_character_background }
+		fix_variable_error = { variable = com_character_background_vfx }
 
 		# CMF Journal Entry Framework
 		fix_variable_error = { variable = com_hidden_journal_groups }

@@ -1,0 +1,601 @@
+# COPY-PASTED FOR NOW
+@panel_width_minus_10 = 530			# used to be 450
+@panel_width = 540  				# used to be 460
+@panel_width_half = 270				# used to be 230
+@panel_width_plus_10 = 550  		# used to be 470
+@panel_width_plus_14 = 554			# used to be 474
+@panel_width_plus_14_half = 277		# used to be 237
+@panel_width_plus_20 = 560			# used to be 480
+@panel_width_plus_30 = 570			# used to be 490
+@panel_width_plus_70 = 610			# used to be 530
+
+types com_character_panel_types {
+
+	type character_with_background = widget {
+
+		#CMF - Custom character background
+		widget = {
+			visible = "[Character.MakeScope.Var('com_character_background').IsSet]"
+			size = { 100% 100% }
+			position = { 0 1 }
+			using = Animation_Character_Panel_Refresh
+
+			hbox = {
+				size = { 100% 100% }
+
+				# Custom Background
+				background = {
+					texture = "[GetIdeology(Character.MakeScope.Var('com_character_background').GetFlagName).GetTexture]"
+					fittype = centercrop
+				}
+
+				# Custom VFX
+				datamodel = "[Character.MakeScope.GetList('com_character_background_vfx')]"
+				item = {
+					vfx = {
+						blockoverride "entity_instance" {
+							entity_instance = "[Scope.GetFlagName]"
+						}
+					}
+				}
+			}
+		}
+
+		# background
+		widget = {
+			visible = "[Not(Character.MakeScope.Var('com_character_background').IsSet)]" #CMF - hide original character background
+			size = { 100% 100% }
+			position = { 0 1 }
+			using = Animation_Character_Panel_Refresh
+
+			# Fallback
+			widget = {
+				visible = "[Not(Or8(Character.IsRulerOfOwnCountry, Character.IsHeirOfOwnCountry, Character.IsPolitician, Character.IsGeneral, Character.IsAdmiral, Character.IsMagnate, Character.IsExecutive, Character.IsAgitator) )]"
+				size = { 100% 100% }
+
+				background = {
+					texture = "gfx/interface/character_panel/backgrounds/char_role_politician.dds"
+					fittype = centercrop
+				}
+
+				# VFX
+				vfx = {
+					blockoverride "entity_instance" {
+						entity_instance = vfx_entity_ui_bg_char_politician_godrays
+					}
+				}
+
+				vfx = {
+					blockoverride "entity_instance" {
+						entity_instance = vfx_entity_ui_bg_politician_candles
+					}
+				}
+
+				vfx = {
+					blockoverride "entity_instance" {
+						entity_instance = vfx_entity_ui_bg_char_ruler_smoke
+					}
+				}
+			}
+
+			# Ruler General
+			widget = {
+				visible = "[And( Character.IsRulerOfOwnCountry, Character.IsGeneral )]"
+				size = { 100% 100% }
+
+				background = {
+					texture = "gfx/interface/character_panel/backgrounds/char_role_rulergeneral.dds"
+					fittype = centercrop
+				}
+
+				# VFX
+				vfx = {
+					blockoverride "entity_instance" {
+						entity_instance = vfx_entity_ui_bg_char_ruler_general_glow
+					}
+				}
+				vfx = {
+					blockoverride "entity_instance" {
+						entity_instance = vfx_entity_ui_bg_char_ruler_smoke
+					}
+				}
+			}
+
+			# Agitator
+			widget = {
+				visible = "[Character.IsAgitator]"
+				size = { 100% 100% }
+
+				background = {
+					texture = "gfx/interface/character_panel/backgrounds/char_role_agitator.dds"
+					fittype = centercrop
+				}
+			}
+
+			# Executive
+			widget = {
+				visible = "[Character.IsExecutive]"
+				size = { 100% 100% }
+
+				background = {
+					texture = "gfx/interface/character_panel/backgrounds/char_role_executive.dds"
+					fittype = centercrop
+				}
+
+				# VFX
+				vfx = {
+					blockoverride "camera_fov_y_degrees" {
+						camera_fov_y_degrees = 25
+					}
+					blockoverride "entity_instance" {
+						entity_instance = vfx_entity_ui_bg_executive_godrays
+					}
+				}
+			}
+
+			# Politician
+			widget = {
+				visible = "[And(And(And(Or(Or(Character.IsPolitician, Character.IsMagnate), Character.IsHeirOfOwnCountry), Not(Character.IsRulerOfOwnCountry)),Not(Character.IsAgitator)),Not(Character.IsExecutive))]"
+				size = { 100% 100% }
+
+				background = {
+					texture = "gfx/interface/character_panel/backgrounds/char_role_politician.dds"
+					fittype = centercrop
+				}
+
+				# VFX
+				vfx = {
+					blockoverride "entity_instance" {
+						entity_instance = vfx_entity_ui_bg_char_politician_godrays
+					}
+				}
+
+				vfx = {
+					blockoverride "entity_instance" {
+						entity_instance = vfx_entity_ui_bg_politician_candles
+					}
+				}
+
+				vfx = {
+					blockoverride "entity_instance" {
+						entity_instance = vfx_entity_ui_bg_char_ruler_smoke
+					}
+				}
+			}
+
+			# Magnate
+			widget = {
+				visible = "[And8(Character.IsMagnate, Not(Character.IsPolitician), Not(Character.IsHeirOfOwnCountry), Not(Character.IsRulerOfOwnCountry), Not(Character.IsAgitator),Not(Character.IsExecutive), Not(Character.IsGeneral), Not(Character.IsAdmiral))]"
+				size = { 100% 100% }
+
+				background = {
+					texture = "gfx/interface/character_panel/backgrounds/char_role_magnate.dds"
+					fittype = centercrop
+				}
+			}
+
+			# Ruler
+			widget = {
+				visible = "[And(Character.IsRulerOfOwnCountry, Not(Character.IsGeneral))]"
+				size = { 100% 100% }
+
+				background = {
+					texture = "gfx/interface/character_panel/backgrounds/char_role_ruler.dds"
+					fittype = centercrop
+				}
+
+				# VFX
+				vfx = {
+					blockoverride "entity_instance" {
+						entity_instance = vfx_entity_ui_bg_char_ruler
+					}
+				}
+
+				vfx = {
+					blockoverride "entity_instance" {
+						entity_instance = vfx_entity_ui_bg_char_ruler_smoke
+					}
+				}
+			}
+
+			# Ruler Heir
+			widget = {
+				visible = "[And(Character.IsRulerOfOwnCountry, Character.IsHeirOfOwnCountry)]"
+				size = { 100% 100% }
+
+				background = {
+					texture = "gfx/interface/character_panel/backgrounds/char_role_ruler.dds"
+					fittype = centercrop
+				}
+
+				# VFX
+				vfx = {
+					blockoverride "entity_instance" {
+						entity_instance = vfx_entity_ui_bg_char_ruler
+					}
+				}
+
+				vfx = {
+					blockoverride "entity_instance" {
+						entity_instance = vfx_entity_ui_bg_char_ruler_smoke
+					}
+				}
+			}
+
+			# General
+			widget = {
+				visible = "[And(And(And(Character.IsGeneral, And(Not(Character.IsRulerOfOwnCountry), Not(Character.IsHeirOfOwnCountry))), Not(Character.IsAgitator)), Not(Character.IsExecutive))]"
+				size = { 100% 100% }
+
+				background = {
+					texture = "gfx/interface/character_panel/backgrounds/char_role_general.dds"
+					fittype = centercrop
+				}
+
+				# VFX
+				vfx = {
+					blockoverride "entity_instance" {
+						entity_instance = vfx_entity_ui_bg_char_general_glow
+					}
+				}
+			}
+
+			# Admiral
+			widget = {
+				visible = "[And(And(Character.IsAdmiral,Not(Character.IsAgitator)), Not(Character.IsExecutive))]"
+				size = { 100% 100% }
+
+				background = {
+					texture = "gfx/interface/character_panel/backgrounds/char_role_admiral.dds"
+					fittype = centercrop
+				}
+
+				# VFX
+				vfx = {
+					blockoverride "entity_instance" {
+						entity_instance = vfx_entity_ui_bg_char_admiral_glow
+					}
+				}
+				vfx = {
+					blockoverride "entity_instance" {
+						entity_instance = vfx_entity_ui_bg_char_admiral_waves
+					}
+				}
+
+				# VFX birds
+				vfx = {
+					blockoverride "camera_position" {
+						camera_position = { 0 0 15 }
+					}
+					blockoverride "entity_instance" {
+						entity_instance = vfx_entity_ui_bg_char_admiral_seagulls
+					}
+				}
+			}
+
+			# Japanese Emperor - Pre-Meiji
+			widget = {
+				visible = "[GetScriptedGui('je_meiji_restoration_japanese_emperor_check_sgui').IsValid( GuiScope.SetRoot( Character.MakeScope ).AddScope( 'meiji_reform_state', MakeScopeBool( '(bool)no') ).End )]"
+				size = { 100% 100% }
+
+				background = {
+					texture = "gfx/interface/character_panel/backgrounds/char_role_ruler_japan_pre_meiji.dds"
+					fittype = centercrop
+				}
+
+				# VFX
+				vfx = {
+					blockoverride "entity_instance" {
+						entity_instance = vfx_entity_ui_bg_char_ruler
+					}
+				}
+
+				vfx = {
+					blockoverride "entity_instance" {
+						entity_instance = vfx_entity_ui_bg_char_ruler_smoke
+					}
+				}
+			}
+
+			# Japanese Emperor - Post-Meiji
+			widget = {
+				visible = "[GetScriptedGui('je_meiji_restoration_japanese_emperor_check_sgui').IsValid( GuiScope.SetRoot( Character.MakeScope ).AddScope( 'meiji_reform_state', MakeScopeBool( '(bool)yes') ).End )]"
+				size = { 100% 100% }
+
+				background = {
+					texture = "gfx/interface/character_panel/backgrounds/char_role_ruler_japan_post_meiji.dds"
+					fittype = centercrop
+				}
+
+				# VFX
+				vfx = {
+					blockoverride "entity_instance" {
+						entity_instance = vfx_entity_ui_bg_char_ruler
+					}
+				}
+
+				vfx = {
+					blockoverride "entity_instance" {
+						entity_instance = vfx_entity_ui_bg_char_ruler_smoke
+					}
+				}
+			}
+		}
+
+		# Fallback
+		character_portrait_base_no_mask = {
+			visible = "[Not(Or8(Character.IsRulerOfOwnCountry, Character.IsHeirOfOwnCountry, Character.IsPolitician, Character.IsGeneral, Character.IsAdmiral, Character.IsMagnate, Character.IsExecutive, Character.IsAgitator) )]"
+			ignore_in_debug_draw = yes
+			parentanchor = bottom
+
+			block "character_layout" {
+				position = { 50 10 }
+				size = { 250 400 }
+			}
+
+			blockoverride "portrait_size" {
+				block "character_portrait_size" {
+					size = { 575 575 }
+				}
+			}
+
+			blockoverride "portrait_texture" {
+				portrait_texture = "[Character.GetAnimatedPortrait('politician_environment', 'camera_leader', 'idle', GetPortraitRenderSize(PdxGuiWidget.Self))]"
+			}
+
+			blockoverride "portrait_icons" {}
+			blockoverride "tooltip" {}
+			blockoverride "show_hat" {}
+		}
+
+		# character
+		character_portrait_base_no_mask = {
+			visible = "[Character.IsAgitator]"
+			ignore_in_debug_draw = yes
+			parentanchor = bottom
+
+			block "character_layout" {
+				position = { 50 10 }
+				size = { 250 400 }
+			}
+
+			blockoverride "portrait_size" {
+				block "character_portrait_size" {
+					size = { 575 575 }
+				}
+			}
+
+			blockoverride "portrait_texture" {
+				portrait_texture = "[Character.GetAnimatedPortrait('agitator_main_environment', 'camera_leader', 'idle', GetPortraitRenderSize(PdxGuiWidget.Self))]"
+			}
+
+			blockoverride "portrait_icons" {}
+			blockoverride "tooltip" {}
+			blockoverride "show_hat" {}
+		}
+
+		# character
+		character_portrait_base_no_mask = {
+			visible = "[Character.IsExecutive]"
+			ignore_in_debug_draw = yes
+			parentanchor = bottom
+
+			block "character_layout" {
+				position = { 50 10 }
+				size = { 250 400 }
+			}
+
+			blockoverride "portrait_size" {
+				block "character_portrait_size" {
+					size = { 575 575 }
+				}
+			}
+
+			blockoverride "portrait_texture" {
+				portrait_texture = "[Character.GetAnimatedPortrait('agitator_main_environment_ceo', 'camera_leader', 'idle', GetPortraitRenderSize(PdxGuiWidget.Self))]"
+			}
+
+			blockoverride "portrait_icons" {}
+			blockoverride "tooltip" {}
+			blockoverride "show_hat" {}
+		}
+
+		character_portrait_base_no_mask = {
+			visible = "[Or(Or(Character.IsMagnate, Character.IsPolitician), Character.IsHeirOfOwnCountry)]"
+			ignore_in_debug_draw = yes
+			parentanchor = bottom
+
+			block "character_layout" {
+				position = { 50 10 }
+				size = { 250 400 }
+			}
+
+			blockoverride "portrait_size" {
+				block "character_portrait_size" {
+					size = { 575 575 }
+				}
+			}
+
+			blockoverride "portrait_texture" {
+				portrait_texture = "[Character.GetAnimatedPortrait('politician_environment', 'camera_leader', 'idle', GetPortraitRenderSize(PdxGuiWidget.Self))]"
+			}
+
+			blockoverride "portrait_icons" {}
+			blockoverride "tooltip" {}
+			blockoverride "show_hat" {}
+		}
+
+		character_portrait_base_no_mask = {
+			visible = "[Character.IsRulerOfOwnCountry]"
+			ignore_in_debug_draw = yes
+			parentanchor = left|bottom
+
+			block "character_layout" {
+				position = { 50 10 }
+				size = { 250 400 }
+			}
+
+			blockoverride "portrait_size" {
+				block "character_portrait_size" {
+					size = { 575 575 }
+				}
+			}
+
+			blockoverride "portrait_texture" {
+				portrait_texture = "[Character.GetAnimatedPortrait('ruler_environment', 'camera_leader', 'idle', GetPortraitRenderSize(PdxGuiWidget.Self))]"
+			}
+
+			blockoverride "portrait_icons" {}
+			blockoverride "tooltip" {}
+			blockoverride "show_hat" {}
+		}
+
+		character_portrait_base_no_mask = {
+			visible = "[Character.IsAdmiral]"
+			ignore_in_debug_draw = yes
+			parentanchor = bottom
+
+			block "character_layout" {
+				position = { 50 10 }
+				size = { 250 400 }
+			}
+
+			blockoverride "portrait_size" {
+				block "character_portrait_size" {
+					size = { 575 575 }
+				}
+			}
+
+			blockoverride "portrait_texture" {
+				portrait_texture = "[Character.GetAnimatedPortrait('admiral_environment', 'camera_leader', 'idle', GetPortraitRenderSize(PdxGuiWidget.Self))]"
+			}
+
+			blockoverride "portrait_icons" {}
+			blockoverride "tooltip" {}
+			blockoverride "show_hat" {}
+		}
+
+		character_portrait_base_no_mask = {
+			visible = "[And(Character.IsRulerOfOwnCountry, Character.IsGeneral)]"
+			ignore_in_debug_draw = yes
+			parentanchor = bottom
+
+			block "character_layout" {
+				position = { 50 10 }
+				size = { 250 400 }
+			}
+
+			blockoverride "portrait_size" {
+				block "character_portrait_size" {
+					size = { 575 575 }
+				}
+			}
+
+			blockoverride "portrait_texture" {
+				portrait_texture = "[Character.GetAnimatedPortrait('general_environment', 'camera_leader', 'idle', GetPortraitRenderSize(PdxGuiWidget.Self))]"
+			}
+
+			blockoverride "portrait_icons" {}
+			blockoverride "tooltip" {}
+			blockoverride "show_hat" {}
+		}
+
+		character_portrait_base_no_mask = {
+			visible = "[And(Character.IsGeneral,And(Not(Character.IsRulerOfOwnCountry),Not(Character.IsHeirOfOwnCountry)))]"
+			ignore_in_debug_draw = yes
+			parentanchor = bottom
+
+			block "character_layout" {
+				position = { 50 10 }
+				size = { 250 400 }
+			}
+
+			blockoverride "portrait_size" {
+				block "character_portrait_size" {
+					size = { 575 575 }
+				}
+			}
+
+			blockoverride "portrait_texture" {
+				portrait_texture = "[Character.GetAnimatedPortrait('general_environment_02', 'camera_leader', 'idle', GetPortraitRenderSize(PdxGuiWidget.Self))]"
+			}
+
+			blockoverride "portrait_icons" {}
+			blockoverride "tooltip" {}
+			blockoverride "show_hat" {}
+		}
+
+		# Executive VFX
+			widget = {
+				size = { 100% 100% }
+				visible = "[Character.IsExecutive]"
+
+
+				# VFX
+				vfx = {
+					blockoverride "camera_fov_y_degrees" {
+						camera_fov_y_degrees = 25
+					}
+					blockoverride "entity_instance" {
+						entity_instance = vfx_entity_ui_bg_executive_dust
+					}
+				}
+			}
+
+		icon = {
+			using = dark_area
+			parentanchor = bottom|hcenter
+			size = { 100% 40% }
+			alpha = 0.65
+			position = { 0 2 }
+
+			modify_texture = {
+				texture = "gfx/interface/masks/fade_vertical_top.dds"
+				spriteType = Corneredstretched
+				spriteborder = { 0 0 }
+				blend_mode = alphamultiply
+			}
+		}
+
+		widget = {
+			size = { 100% 100% }
+
+			background = {
+				texture = "gfx/interface/character_panel/char_bg_frame.dds"
+				margin_left = 18
+				margin_right = 10
+				margin_bottom = 10
+				spriteType = Corneredtiled
+
+				spriteborder_left = 200
+				spriteborder_right = 60
+				spriteborder_top = 170
+				spriteborder_bottom = 180
+
+				texture_density = 2
+			}
+		}
+
+		character_interactions_button = {
+			name = "tutorial_highlight_character_panel_interactions_button_1"
+		}
+
+		# Heir Portrait
+		widget = {
+			visible = "[And(Character.IsRulerOfOwnCountry, And(Not(Character.IsHeirOfOwnCountry), Country.AccessHeir.IsValid))]"
+			datacontext = "[Character.AccessInterestGroup.AccessCountry]"
+			parentanchor = bottom
+			size = { 110 110 }
+			position = { 10 -10 }
+
+			character_portrait_large = {
+				size = { 100% 100% }
+				datacontext = "[Country.AccessHeir]"
+
+				blockoverride "show_hat" {}
+				blockoverride "highlight" {}
+			}
+		}
+	}
+
+}

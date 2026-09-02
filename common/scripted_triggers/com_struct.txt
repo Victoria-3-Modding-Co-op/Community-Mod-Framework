@@ -1,5 +1,4 @@
-﻿is_struct_of_type = {
-	scope:$struct_scope$ = {
-		var:com_type ?= $struct_type$
-	}
+﻿# THE STRUCT FRAMEWORK HAS BEEN SUPERSEDED AS OF V3 PATCH 1.14; THESE ERROR LOGS ARE LEFT AS A COURTESY AND WILL BE REMOVED IN 1.15
+is_struct_of_type = {
+	error_log: "CMF: Trigger is_struct_of_type was called. Struct framework has been removed. Use scripted containers instead."
 }

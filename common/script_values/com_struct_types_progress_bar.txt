@@ -1,1 +1,0 @@
-﻿com_struct_progress_bar = 20001

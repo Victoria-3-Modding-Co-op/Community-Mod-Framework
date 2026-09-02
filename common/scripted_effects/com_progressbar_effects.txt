@@ -11,50 +11,41 @@ REPLACE_OR_CREATE:initialize_com_progress_bar = {
 	hidden_effect = {
 		if = {
 			limit = {
-				NOT = {
-					exists = scope:journal_entry
-				}
+				NOT = { exists = scope:journal_entry }
 			}
 			error_log = "CMF: No journal_entry scope defined! This effect should be run in the immediate block of a journal entry!"
 		}
 		else = {
 			if = {
 				limit = {
-					NOT = { exists_com_progress_bar = { progress_bar = $progress_bar$ } }
+					NOT = { container_exists = $progress_bar$ }
 				}
-				create_struct = {
-					struct_type = com_struct_progress_bar
-					struct_scope = com_$progress_bar$
+				create_container = {
+					name = $progress_bar$
+					tags = { com_progress_bar }
+					parent = scope:journal_entry
 				}
-				#root scope?
-				add_to_variable_list = {
-					name = com_progress_bar_cache
-					target = scope:com_$progress_bar$
-				}
-			}
-			else = {
-				save_com_progress_bar_scope = { progress_bar = $progress_bar$ }
 			}
 			fix_variable_error = { variable = com_progress_bar_$index$ }
-			fix_variable_error = { variable = com_$progress_bar$ }
 			fix_variable_error = { variable = $progress_bar$ }
 			fix_variable_error = { variable = com_right_color }
+			fix_variable_error = { variable = com_progress_bar_index }
 			# Set progress bar
 			scope:journal_entry = {
 				set_variable = {
 					name = com_progress_bar_$index$
-					value = scope:com_$progress_bar$
+					value = container:$progress_bar$
 				}
 			}
 			# save id
-			scope:com_$progress_bar$ = {
-				set_variable = {
-					name = com_id
-					value = flag:$progress_bar$
-				}
+			container:$progress_bar$ = {
 				set_variable = {
 					name = com_right_color
 					value = flag:com_transparent_bar
+				}
+				set_variable = {
+					name = com_progress_bar_index
+					value = $index$
 				}
 			}
 		}
@@ -164,33 +155,19 @@ REPLACE_OR_CREATE:remove_com_progress_bar = {
 	hidden_effect = {
 		if = {
 			limit = {
-				NOT = {
-					exists_com_progress_bar = { progress_bar = $progress_bar$ }
-				}
+				NOT = { container_exists = $progress_bar$ }
 			}
 			error_log = "CMF: Progress bar could not be found"
 		}
 		else = {
-			# Retrieve progress bar
-			random_in_list = {
-				variable = com_progress_bar_cache
-				limit = {
-					var:com_id ?= flag:$progress_bar$
-					var:com_type ?= com_struct_progress_bar
-				}
-				save_scope_as = com_internal_scope
-			}
-
 			# Remove progress bar from cache
 			remove_list_variable = {
 				name = com_progress_bar_cache
-				target = scope:com_internal_scope
+				target = container:$progress_bar$
 			}
 
 			# Destroy progress bar
-			destroy_struct = {
-				struct = scope:com_internal_scope
-			}
+			container:$progress_bar$ = { destroy_container = yes }
 		}
 	}
 }
@@ -203,21 +180,19 @@ REPLACE_OR_CREATE:set_com_progress_bar_color = {
 	hidden_effect = {
 		if = {
 			limit = {
-				NOT = {
-					exists_com_progress_bar = { progress_bar = $progress_bar$ }
-				}
+				NOT = { container_exists = $progress_bar$ }
 			}
 			error_log = error_no_progress_bar_scope
 		}
 		else = {
-			save_com_progress_bar_scope = { progress_bar = $progress_bar$ }
 			fix_variable_error = { variable = com_$side$_color }
 			fix_variable_error = { variable = com_$color$_bar }
-			scope:com_$progress_bar$ = {
+			container:$progress_bar$ = {
 				set_variable = {
 					name = com_$side$_color
 					value = flag:com_$color$_bar
 				}
+				add_tag = cpb_$side$_color_set
 			}
 		}
 	}
@@ -229,17 +204,16 @@ REPLACE_OR_CREATE:remove_com_progress_bar_color = {
 	hidden_effect = {
 		if = {
 			limit = {
-				NOT = {
-					exists_com_progress_bar = { progress_bar = $progress_bar$ }
-				}
+				NOT = { container_exists = $progress_bar$ }
 			}
 			error_log = error_no_progress_bar_scope
 		}
 		else = {
-			save_com_progress_bar_scope = { progress_bar = $progress_bar$ }
-			scope:com_$progress_bar$ = {
+			container:$progress_bar$ = {
 				remove_variable = com_left_color
 				remove_variable = com_right_color
+				remove_tag = cpb_left_color_set
+				remove_tag = cpb_right_color_set
 			}
 		}
 	}
@@ -253,21 +227,18 @@ REPLACE_OR_CREATE:set_com_progress_bar_drift = {
 	hidden_effect = {
 		if = {
 			limit = {
-				NOT = {
-					exists_com_progress_bar = { progress_bar = $progress_bar$ }
-				}
+				NOT = { container_exists = $progress_bar$ }
 			}
 			error_log = error_no_progress_bar_scope
 		}
 		else = {
-			save_com_progress_bar_scope = { progress_bar = $progress_bar$ }
 			fix_variable_error = { variable = com_bar_increase_color }
 			fix_variable_error = { variable = com_bar_decrease_color }
 			fix_variable_error = { variable = com_drift_value }
 			fix_variable_error = { variable = com_$bar_increase_color$_bar }
 			fix_variable_error = { variable = com_$bar_decrease_color$_bar }
 			fix_variable_error = { variable = $drift_value$ }
-			scope:com_$progress_bar$ = {
+			container:$progress_bar$ = {
 				set_variable = {
 					name = com_bar_increase_color
 					value = flag:com_$bar_increase_color$_bar
@@ -280,6 +251,7 @@ REPLACE_OR_CREATE:set_com_progress_bar_drift = {
 					name = com_drift_value
 					value = flag:$drift_value$
 				}
+				add_tag = cpb_drift_set
 			}
 		}
 	}
@@ -291,18 +263,16 @@ REPLACE_OR_CREATE:remove_com_progress_bar_drift = {
 	hidden_effect = {
 		if = {
 			limit = {
-				NOT = {
-					exists_com_progress_bar = { progress_bar = $progress_bar$ }
-				}
+				NOT = { container_exists = $progress_bar$ }
 			}
 			error_log = error_no_progress_bar_scope
 		}
 		else = {
-			save_com_progress_bar_scope = { progress_bar = $progress_bar$ }
-			scope:com_$progress_bar$ = {
+			container:$progress_bar$ = {
 				remove_variable = com_bar_increase_color
 				remove_variable = com_bar_decrease_color
 				remove_variable = com_drift_value
+				remove_tag = cpb_drift_set
 			}
 		}
 	}
@@ -316,19 +286,16 @@ REPLACE_OR_CREATE:set_com_progress_bar_target = {
 	hidden_effect = {
 		if = {
 			limit = {
-				NOT = {
-					exists_com_progress_bar = { progress_bar = $progress_bar$ }
-				}
+				NOT = { container_exists = $progress_bar$ }
 			}
 			error_log = error_no_progress_bar_scope
 		}
 		else = {
-			save_com_progress_bar_scope = { progress_bar = $progress_bar$ }
 			fix_variable_error = { variable = com_target_type }
 			fix_variable_error = { variable = com_target_value }
 			fix_variable_error = { variable = com_target_$target_type$ }
 			fix_variable_error = { variable = $target_value$ }
-			scope:com_$progress_bar$ = {
+			container:$progress_bar$ = {
 				set_variable = {
 					name = com_target_type
 					value = flag:com_target_$target_type$
@@ -337,28 +304,57 @@ REPLACE_OR_CREATE:set_com_progress_bar_target = {
 					name = com_target_value
 					value = flag:$target_value$
 				}
+				add_tag = cpb_target_set
 			}
 		}
 	}
 }
 
+# Sets the target custom icon
+# - progress_bar = name localization key of progress bar
+# - target_icon = icon name as flag which points to a dummy ideology
+REPLACE_OR_CREATE:set_com_progress_bar_target_icon = {
+	hidden_effect = {
+		if = {
+			limit = {
+				NOT = { container_exists = $progress_bar$ }
+			}
+			error_log = error_no_progress_bar_scope
+		}
+		else = {
+			fix_variable_error = { variable = com_target_type }
+			fix_variable_error = { variable = com_target_icon_name }
+			fix_variable_error = { variable = com_target_custom_icon }
+			fix_variable_error = { variable = $target_icon$ }
+			container:$progress_bar$ = {
+				set_variable = {
+					name = com_target_type
+					value = flag:com_target_custom_icon
+				}
+				set_variable = {
+					name = com_target_icon_name
+					value = flag:$target_icon$
+				}
+			}
+		}
+	}
+
+}
 # Removes the progress bar target
 # - progress_bar = name localization key of progress bar
 REPLACE_OR_CREATE:remove_com_progress_bar_target = {
 	hidden_effect = {
 		if = {
 			limit = {
-				NOT = {
-					exists_com_progress_bar = { progress_bar = $progress_bar$ }
-				}
+				NOT = { container_exists = $progress_bar$ }
 			}
 			error_log = error_no_progress_bar_scope
 		}
 		else = {
-			save_com_progress_bar_scope = { progress_bar = $progress_bar$ }
-			scope:com_$progress_bar$ = {
+			container:$progress_bar$ = {
 				remove_variable = com_target_type
 				remove_variable = com_target_value
+				remove_tag = cpb_target_set
 			}
 		}
 	}
@@ -371,20 +367,18 @@ REPLACE_OR_CREATE:set_com_progress_bar_levels = {
 	hidden_effect = {
 		if = {
 			limit = {
-				NOT = {
-					exists_com_progress_bar = { progress_bar = $progress_bar$ }
-				}
+				NOT = { container_exists = $progress_bar$ }
 			}
 			error_log = error_no_progress_bar_scope
 		}
 		else = {
-			save_com_progress_bar_scope = { progress_bar = $progress_bar$ }
 			fix_variable_error = { variable = com_progress_bar_levels }
-			scope:com_$progress_bar$ = {
+			container:$progress_bar$ = {
 				set_variable = {
 					name = com_progress_bar_levels
 					value = $levels$
 				}
+				add_tag = cpb_levels_set
 			}
 		}
 	}
@@ -396,16 +390,14 @@ REPLACE_OR_CREATE:remove_com_progress_bar_levels = {
 	hidden_effect = {
 		if = {
 			limit = {
-				NOT = {
-					exists_com_progress_bar = { progress_bar = $progress_bar$ }
-				}
+				NOT = { container_exists = $progress_bar$ }
 			}
 			error_log = error_no_progress_bar_scope
 		}
 		else = {
-			save_com_progress_bar_scope = { progress_bar = $progress_bar$ }
-			scope:com_$progress_bar$ = {
+			container:$progress_bar$ = {
 				remove_variable = com_progress_bar_levels
+				remove_tag = cpb_levels_set
 			}
 		}
 	}
@@ -417,17 +409,15 @@ REPLACE_OR_CREATE:set_com_progress_bar_level_highlight = {
 	hidden_effect = {
 		if = {
 			limit = {
-				NOT = {
-					exists_com_progress_bar = { progress_bar = $progress_bar$ }
-				}
+				NOT = { container_exists = $progress_bar$ }
 			}
 			error_log = error_no_progress_bar_scope
 		}
 		else = {
-			save_com_progress_bar_scope = { progress_bar = $progress_bar$ }
 			fix_variable_error = { variable = com_progress_bar_level_highlight }
-			scope:com_$progress_bar$ = {
+			container:$progress_bar$ = {
 				set_variable = com_progress_bar_level_highlight
+				add_tag = cpb_highlight_set
 			}
 		}
 	}
@@ -439,16 +429,14 @@ REPLACE_OR_CREATE:remove_com_progress_bar_level_highlight = {
 	hidden_effect = {
 		if = {
 			limit = {
-				NOT = {
-					exists_com_progress_bar = { progress_bar = $progress_bar$ }
-				}
+				NOT = { container_exists = $progress_bar$ }
 			}
 			error_log = error_no_progress_bar_scope
 		}
 		else = {
-			save_com_progress_bar_scope = { progress_bar = $progress_bar$ }
-			scope:com_$progress_bar$ = {
+			container:$progress_bar$ = {
 				remove_variable = com_progress_bar_level_highlight
+				remove_tag = cpb_highlight_set
 			}
 		}
 	}
@@ -460,17 +448,15 @@ REPLACE_OR_CREATE:hide_com_progress_bar = {
 	hidden_effect = {
 		if = {
 			limit = {
-				NOT = {
-					exists_com_progress_bar = { progress_bar = $progress_bar$ }
-				}
+				NOT = { container_exists = $progress_bar$ }
 			}
 			error_log = error_no_progress_bar_scope
 		}
 		else = {
-			save_com_progress_bar_scope = { progress_bar = $progress_bar$ }
 			fix_variable_error = { variable = com_hide_progress_bar }
-			scope:com_$progress_bar$ = {
+			container:$progress_bar$ = {
 				set_variable = com_hide_progress_bar
+				add_tag = cpb_hidden_set
 			}
 		}
 	}
@@ -482,56 +468,24 @@ REPLACE_OR_CREATE:unhide_com_progress_bar = {
 	hidden_effect = {
 		if = {
 			limit = {
-				NOT = {
-					exists_com_progress_bar = { progress_bar = $progress_bar$ }
-				}
+				NOT = { container_exists = $progress_bar$ }
 			}
 			error_log = error_no_progress_bar_scope
 		}
 		else = {
-			save_com_progress_bar_scope = { progress_bar = $progress_bar$ }
-			scope:com_$progress_bar$ = {
+			container:$progress_bar$ = {
 				remove_variable = com_hide_progress_bar
+				remove_tag = cpb_hidden_set
 			}
 		}
 	}
 }
 
-# Sets up an existing progress bar as an accessible scope
-# This allows using effects and triggers that rely on the 'scope:com_$progress_bar$' outside the event chain
+# A wrapper effect to easily run an effect inside 'scope:$progress_bar$'
 # - progress_bar = name localization key of progress bar
-REPLACE_OR_CREATE:save_com_progress_bar_scope = {
-	hidden_effect = {
-		if = {
-			limit = { NOT = { exists = scope:com_$progress_bar$ } }
-			if = {
-				limit = {
-					exists_com_progress_bar = { progress_bar = $progress_bar$ }
-				}
-				random_in_list = {
-					variable = com_progress_bar_cache
-					limit = {
-						var:com_id ?= flag:$progress_bar$
-						var:com_type ?= com_struct_progress_bar
-					}
-					save_scope_as = com_$progress_bar$
-				}
-			}
-			else = {
-				error_log = error_no_progress_bar_scope
-			}
-		}
-	}
-}
-
-# A wrapper effect to easily run an effect inside 'scope:com_$progress_bar$'
-# - progress_bar = name localization key of progress bar
-# - effect = effect or series of effects to be run inside 'scope:com_$progress_bar$'
+# - effect = effect or series of effects to be run inside 'scope:$progress_bar$'
 REPLACE_OR_CREATE:run_in_com_progress_bar_scope = {
-	save_com_progress_bar_scope = {
-		progress_bar = $progress_bar$
-	}
-	scope:com_$progress_bar$ ?= {
+	container:$progress_bar$ ?= {
 		$effect$
 	}
 }
@@ -554,48 +508,40 @@ REPLACE_OR_CREATE:run_in_com_progress_bar_scope = {
 ## Gold divider line - gold_line
 
 REPLACE_OR_CREATE:com_debug_progress_bar = {
-	random_in_list = {
-		limit = {
-			var:com_id ?= flag:$progress_bar$
-			var:com_type ?= com_struct_progress_bar
-		}
-		variable = com_progress_bar_cache
-		save_scope_as = com_test
-	}
 	set_variable = {
 		name = com_index
 		value = je:$je$.var:com_progress_bar_$index$
 	}
 	set_variable = {
 		name = com_id
-		value = scope:com_test.var:com_id
+		value = container:$progress_bar$.var:com_id
 	}
 	set_variable = {
 		name = com_left_color
-		value = scope:com_test.var:com_left_color
+		value = container:$progress_bar$.var:com_left_color
 	}
 	set_variable = {
 		name = com_right_color
-		value = scope:com_test.var:com_right_color
+		value = container:$progress_bar$.var:com_right_color
 	}
 	set_variable = {
 		name = com_bar_increase_color
-		value = scope:com_test.var:com_bar_increase_color
+		value = container:$progress_bar$.var:com_bar_increase_color
 	}
 	set_variable = {
 		name = com_bar_decrease_color
-		value = scope:com_test.var:com_bar_decrease_color
+		value = container:$progress_bar$.var:com_bar_decrease_color
 	}
 	set_variable = {
 		name = com_drift_value
-		value = scope:com_test.var:com_drift_value
+		value = container:$progress_bar$.var:com_drift_value
 	}
 	set_variable = {
 		name = com_target_type
-		value = scope:com_test.var:com_target_type
+		value = container:$progress_bar$.var:com_target_type
 	}
 	set_variable = {
 		name = com_target_value
-		value = scope:com_test.var:com_target_value
+		value = container:$progress_bar$.var:com_target_value
 	}
 }

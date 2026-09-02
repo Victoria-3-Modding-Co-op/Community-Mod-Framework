@@ -1,0 +1,7 @@
+﻿####---------- International Situation Framework ----------####
+# Documentation: https://github.com/Victoria-3-Modding-Co-op/Community-Mod-Framework/wiki/International-Situations
+
+com_has_indexed_situation_progress_bar_trigger = {
+    # This runs in a JOURNAL ENTRY scope
+    has_variable = com_situation_group_$index$_next_phase_progress_var
+}

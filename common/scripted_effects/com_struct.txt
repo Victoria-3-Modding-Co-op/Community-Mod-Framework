@@ -1,19 +1,8 @@
-﻿create_struct = {
-	create_character = {
-		template = struct_template
-		save_scope_as = $struct_scope$
-	}
-	scope:$struct_scope$ ?= {
-		set_variable = {
-			name = com_type
-			value = $struct_type$
-		}
-	}
+﻿# THE STRUCT FRAMEWORK HAS BEEN SUPERSEDED AS OF V3 PATCH 1.14; THESE ERROR LOGS ARE LEFT AS A COURTESY AND WILL BE REMOVED IN 1.15
+create_struct = {
+	error_log: "CMF: Effect create_struct was called. Struct framework has been removed. Use scripted containers instead."
 }
 
 destroy_struct = {
-	$struct$ ?= {
-		kill_character = yes
-		free_character_from_void = yes
-	}
+	error_log: "CMF: Effect destroy_struct was called. Struct framework has been removed. Use scripted containers instead."
 }

@@ -1,150 +1,21 @@
-﻿# Maps scopes to numeric values
+﻿# DICTIONARY EFFECTS HAVE BEEN SUPERSEDED AS OF V3 PATCH 1.14; THESE ERROR LOGS ARE LEFT AS A COURTESY AND WILL BE REMOVED IN 1.15
 
 add_to_scope_value_map = {
-	set_local_variable = {
-		name = map_key_scope
-		value = $key$
-	}
-    save_temporary_scope_value_as = {
-        name = map_value
-        value = $value$
-    }
-	add_to_variable_list = {
-		name = $name$_keys
-		target = local_var:map_key_scope
-	}
-	
-	save_temporary_scope_value_as = {
-		name = map_key_index
-		value = {
-			every_in_list = {
-				variable = $name$_keys
-				if = {
-					limit = {
-						this = local_var:map_key_scope
-					}
-					save_temporary_value_as = __index
-				}
-				add = 1
-			}
-			value = scope:__index
-		}
-	}
-	
-	add_to_dict = {
-		dict = $name$
-		key = scope:map_key_index
-		value = scope:map_value
-	}
-	
-	remove_local_variable = map_key_scope
-	clear_saved_scope = map_key_index
-	clear_saved_scope = map_value
-	clear_saved_scope = __index
+	error_log = "CMF: add_to_scope_value_map effect has been removed. Use variable maps instead."
 }
 
 every_in_scope_value_map = {
-	every_in_list = {
-		variable = $variable$
-		save_temporary_scope_value_as = {
-			name = kvp_key
-			value = this.kvp_to_key
-		}
-		prev = {
-			ordered_in_list = {
-				variable = $variable$_keys
-				position = scope:kvp_key
-				save_temporary_scope_as = key
-			}
-		}
-		save_temporary_scope_value_as = {
-			name = value
-			value = this.kvp_to_value
-		}
-		clear_saved_scope = kvp_key
-		if = {
-			limit = {
-				$limit$
-			}
-			$effects$
-		}
-		clear_saved_scope = key
-		clear_saved_scope = value
-	}
+	error_log = "CMF: every_in_scope_value_map effect has been removed. Use variable maps instead."
 }
 
-# Maps numeric keys to numeric values
-
 add_to_dict = {
-    save_temporary_scope_value_as = {
-        name = kvp_key
-        value = $key$
-    }
-    save_temporary_scope_value_as = {
-        name = kvp_value
-        value = $value$
-    }
-
-    # Clear current value for key (if any)
-    if = {
-        limit = {
-            has_variable_list = $dict$
-        }
-
-        remove_dict_variable = {
-            variable = $dict$
-            key = $key$
-        }
-    }
-
-    # Create new entry
-    set_local_variable = {
-        name = kvp
-        value = key_value_to_kvp
-    }
-    add_to_variable_list = {
-        name = $dict$
-        target = local_var:kvp
-    }
-	clear_saved_scope = kvp_key
-	clear_saved_scope = kvp_value
-	remove_local_variable = kvp
+	error_log = "CMF: add_to_dict effect has been removed. Use variable maps instead."
 }
 
 remove_dict_variable = {
-    every_in_list = {
-        variable = $variable$
-        limit = {
-			this.kvp_to_key = $key$
-        }
-        save_temporary_scope_value_as = {
-            name = kvp
-            value = this
-        }
-        PREV = {
-            remove_list_variable = {
-                name = $variable$
-                target = scope:kvp
-            }
-        }
-    }
-	clear_saved_scope = kvp
+	error_log = "CMF: remove_dict_variable effect has been removed. Use variable maps instead."
 }
 
 set_dict_id = {
-    if = {
-        limit = {
-            NOT = {
-                has_variable = dict_id
-            }
-        }
-        set_variable = {
-            name = dict_id
-            value = global_var:next_dict_id
-        }
-        change_global_variable = {
-            name = next_dict_id
-            add = 1
-        }
-    }
+	error_log = "CMF: set_dict_id effect has been removed. Use variable maps instead."
 }

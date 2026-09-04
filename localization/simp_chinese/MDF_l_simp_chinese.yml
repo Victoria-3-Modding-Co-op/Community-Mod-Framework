@@ -1,2 +1,2 @@
 ﻿l_simp_chinese:
-    MDF_MOD_DLC_BUTTON_TOOLTIP: "#T [Dlc.GetName]#!\n[Dlc.GetDesc]\n\n#low;emphasis @information! 此DLC被#blue;bold 模组#!#!启用"
+ MDF_MOD_DLC_BUTTON_TOOLTIP: "#T [Dlc.GetName]#!\n[Dlc.GetDesc]\n\n#low;emphasis @information!此DLC由#blue;bold 模组#!#!添加"

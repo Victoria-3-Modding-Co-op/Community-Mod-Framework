@@ -1,16 +1,14 @@
 ﻿l_simp_chinese:
-# Effects
-# Triggers
- trigger_exists_com_progress_bar: "指定的进度条存在"
+ trigger_exists_com_progress_bar: "指定的进度条已存在"
  trigger_exists_com_progress_bar_not: "指定的进度条不存在"
- trigger_is_com_progress_bar_hidden: "指定的进度条被隐藏"
+ trigger_is_com_progress_bar_hidden: "指定的进度条已隐藏"
  trigger_is_com_progress_bar_hidden_not: "指定的进度条可见"
- error_no_progress_bar_scope: "CMF：未定义 com_$progress_bar$ 作用域"
+ error_no_progress_bar_scope: "CMF：未定义com_$progress_bar$的容器"
  com_default_bar: "默认"
  com_blue_bar: "默认"
  com_green_bar: "绿色"
- com_bad_bar: "坏"
- com_red_bar: "坏"
+ com_bad_bar: "黑色"
+ com_red_bar: "红色"
  com_gold_bar: "金色"
  com_white_bar: "白色"
  com_transparent_bar: "透明"

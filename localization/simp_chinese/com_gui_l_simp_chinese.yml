@@ -1,40 +1,26 @@
 ﻿l_simp_chinese:
-  # Scripted gui used by button
-  gui_sidebar_example_button: "gui_sidebar_example_button"
-  # Name of the button that is shown in the hover popout
-  gui_sidebar_example_button_desc: "示例"
-  # Tooltip shown when hovering over the button
-  gui_sidebar_example_button_tooltip: "点击此按钮不会发生任何事情"
-  # Example Opinion Loc Key
-  gui_character_opinion_example: "示例好感度"
-
-  com_gui_total_building: "[Building.GetName]规模："
-
-  com_no_sandbox_warning: "@red_cross! 选择了目标时不允许使用$SANDBOX$"
-  
-  # COM Event Window Localization
-  com_event_location: "发生于[GetPlayer.MakeScope.Var('com_event_window_location_var').GetFlagName]的事件"
-  com_debug_deer: "#header #todo 调试信息#!#!\n$TOOLTIP_DELIMITER$\n#bold 事件 ID: [Event.GetKey|v]\n$TOOLTIP_DELIMITER$\n#bold 触发器描述:\n[Event.GetTriggerDesc]\n@information! 单击以在文本编辑器中打开事件"
-  
-  # COM Error Deer Localization
-  com_error_deer_tooltip: "#instruction 左键单击#! 打开错误日志\n#instruction Shift + 左键单击#! 打开资源管理器 (Explorer)\n#instruction Alt + 左键单击#! 打开慢速 Tick 操作 (Slow Tick Operations)\n#instruction 右键单击#! 使其消失 (直到你再次惹恼它)\n#instruction Shift + 右键单击#! 打开微调器 (Tweaker)\n#instruction Alt + 右键单击#! 打开 3D 统计信息 (3D Stats)"
-  com_error_counter: "#bold [ErrorDeer.NumberOrErrors|v] 个错误#!"
-  com_error_counter_tooltip: "[ErrorDeer.GetTooltip]"
-  
-  # Test Event Localization
-  com_debug.t: "社区 GUI 测试事件"
-  com_debug.d: "“维多利亚3简直是个烂游戏，它平淡无奇，毫无特色，无论国家大小玩起来都极其简单。在维多利亚2里内容更多，你必须实际管理建筑、人口，并进行多样化的外交。”"
-  com_debug.f: "“是的，不幸的是除了 james 没人会做 mod” -rskhm"
-  com_debug.tt: "#italic 无事发生……#!"
-  com_debug.a: "测试选项 1"
-  com_debug.b: "测试选项 2"
-  com_debug.c: "第三个测试选项"
-  com_debug.e: "测试与第 4"
-  com_debug.james: "“只管研究[GetTechnology('line_infantry').GetName]就行了” -1230james"
-  com_debug.james_tt: "#italic James 对你微笑……#!"
-  
-  # Localization Shorthands
-  com_nl: "\n"
-  com_bp: "•"
-  com_nlbp: "\n • "
-  com_ttdl: "\n$TOOLTIP_DELIMITER$\n"
+ gui_sidebar_example_button: "gui_sidebar_example_button"
+ gui_sidebar_example_button_desc: "展开"
+ gui_sidebar_example_button_tooltip: "单击此按钮时什么也不会发生"
+ gui_character_opinion_example: "好感展开"
+ com_gui_total_building: "[Building.GetName]规模："
+ com_no_sandbox_warning: "@red_cross!选定目标时不允许使用$SANDBOX$"
+ com_event_location: "在[GetPlayer.MakeScope.Var('com_event_window_location_var').GetFlagName]发生的事件"
+ com_debug_deer: "#header #todo 调试信息#!#!\n$TOOLTIP_DELIMITER$\n#bold 事件 ID：[Event.GetKey|v]\n$TOOLTIP_DELIMITER$\n#bold 触发器描述：\n[Event.GetTriggerDesc]\n@information!点击以在文本编辑器中打开事件"
+ com_debug.t: "社区 GUI 测试事件"
+ com_debug.d: "“V3就是个垃圾游戏，一个毫无亮点的平庸之作，没有任何独特之处，无论国家大小，玩起来都简单得要死。在V2里可不止这样，你得真正去管理建筑、人口，还要进行各种外交。”"
+ com_debug.f: "“是啊，可惜除了 James 没人能搞模组。”——rskhm"
+ com_debug.tt: "#italic 无事发生……#!"
+ com_debug.a: "测试"
+ com_debug.b: "测试"
+ com_debug.c: "测试"
+ com_debug.e: "测试"
+ com_debug.james: "测试"
+ com_debug.james_tt: "测试"
+ com_error_deer_tooltip: "#instruction 左键点击#!打开错误日志\n#instruction 左键点击 + Shift#!打开资源管理器\n#instruction 左键点击 + Alt#!打开慢速刻操作\n#instruction 右键点击#!让它消失（直到你再次惹恼它）\n#instruction 右键点击 + Shift#!打开调整器\n#instruction 右键点击 + Alt#!打开3D统计"
+ com_error_counter: "#bold [ErrorDeer.NumberOrErrors|v]个错误#!"
+ com_error_counter_tooltip: "[ErrorDeer.GetTooltip]"
+ com_nl: "\n"
+ com_bp: "•"
+ com_ttdl: "\n$TOOLTIP_DELIMITER$\n"
+ com_nlpb: "\n•"

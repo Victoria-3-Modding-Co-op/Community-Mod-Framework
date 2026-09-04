@@ -1,0 +1,3 @@
+﻿l_simp_chinese:
+ com_floatarray_set_index: "将数组索引变量设置为[TopScope.GetLocalVariable('com_fa_local_index').GetValue|v0]"
+ com_floatarray_set_value: "将数组数值变量设置为[TopScope.GetLocalVariable('com_fa_local_index').GetValue|v0]"

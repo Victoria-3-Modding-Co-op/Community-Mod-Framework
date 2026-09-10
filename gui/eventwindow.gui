@@ -690,3 +690,4 @@ bpm_event_window_superevent_newspaper = {}
 
 #### CMF Manaflow Compatibility
 event_window_gate_dungeon = {}
+event_window_gate_dungeon_setup = {}

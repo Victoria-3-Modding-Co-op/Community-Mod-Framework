@@ -4,4 +4,8 @@ types com_gate_compatibility_event_windows {
        name = event_window_gate_dungeon
     }
 
+    type event_window_gate_dungeon_setup = event_window {
+        name = event_window_gate_dungeon_setup
+    }
+
 }

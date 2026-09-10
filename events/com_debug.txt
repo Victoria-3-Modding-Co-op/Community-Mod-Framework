@@ -356,6 +356,10 @@ com_debug.1 = {
 		fix_variable_error = { variable = OCTOBER }
 		fix_variable_error = { variable = NOVEMBER }
 		fix_variable_error = { variable = DECEMBER }
+		
+		# Flags for use in macros
+		fix_variable_error = { variable = yes }
+		fix_variable_error = { variable = no }
 	}
 }
 

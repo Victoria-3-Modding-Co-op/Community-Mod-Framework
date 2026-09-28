@@ -1,7 +1,7 @@
 ﻿####---------- CMF Character Interactions Blocker Overrides ----------####
 ## CMF VALIDATION: Last verified against base game patch 1.13.9 on 5-AUG-2026 by Alexedishi
 
-REPLACE_OR_CREATE:exile_character = {
+REPLACE:exile_character = {
 	clicksound = "event:/SFX/DLC/1.3_ip1/UI/exile_character"
 	
 	should_ai_evaluate = {
@@ -518,7 +518,7 @@ REPLACE_OR_CREATE:exile_character = {
 	}
 }
 
-REPLACE_OR_CREATE:retire_commander = {
+REPLACE:retire_commander = {
 	# icon = ""
 	clicksound = "event:/SFX/UI/Military/commander_retire"
 	

@@ -19,7 +19,6 @@ types com_debug_types {
         state = {
             trigger_on_create = yes
             name = _show
-            #on_finish = "[GetScriptedGui('com_container_manager_collect').Execute(GuiScope.End)]"
         }
 
         vbox = {

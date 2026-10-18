@@ -47,8 +47,9 @@ je_com_progress_in_style = {
 			progress_bar = spb_com_progress_in_style
 			target_icon = com_icon_progress_in_style #this points to the script name of a dummy ideology for the icon
 		}
-		container:spb_com_progress_in_style = {
-		#	<effects? #just add your effect here; progress bars are saved as named containers, so can be called directly with "container:<name>" for triggers and effects
+		run_in_com_progress_bar_scope = {
+			progress_bar = spb_com_progress_in_style
+		#	"<effects>" #just add your effect here in quotes
 		}
 	}
 

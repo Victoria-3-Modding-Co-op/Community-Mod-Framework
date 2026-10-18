@@ -38,3 +38,7 @@
  com_bp: "•"
  com_nlbp: "\n • "
  com_ttdl: "\n$TOOLTIP_DELIMITER$\n"
+ 
+ # Flag Loc Keys (for use in scripted effects)
+ yes: "yes"
+ no: "no"

@@ -6,7 +6,7 @@
 # MoH - Mandate of Heaven
 
 radical_party = {
-	color = { 255 102 0 }
+	color = { 240 100 120 }
 	name = {
 		first_valid = {
 
@@ -366,7 +366,7 @@ radical_party = {
 			country_has_voting_franchise = yes
 			OR = {
 				py:radical_party ?= {
-					any_member = {}
+					party_has_members = yes
 				}
 				any_interest_group = {
 					ig_counts_as_marginal = no
@@ -374,12 +374,7 @@ radical_party = {
 						leader ?= {
 							has_ideology = ideology:ideology_radical
 						}
-						AND = {
-							is_interest_group_type = ig_trade_unions
-							NOT = {
-								has_ideology = ideology:ideology_socialist
-							}
-						}
+						is_interest_group_type = ig_trade_unions
 					}
 				}
 			}
@@ -390,18 +385,19 @@ radical_party = {
 			is_interest_group_type = ig_devout
 		}
 		leader ?= { # fascists and conservatives hate radicals
-			NOT = { 
+			NOR = {
 				has_ideology = ideology:ideology_fascist
 				has_ideology = ideology:ideology_integralist
 				has_ideology = ideology:ideology_ethno_nationalist
 				has_ideology = ideology:ideology_traditionalist
-				character_has_carlist_ideology = yes
 				has_ideology = ideology:ideology_royalist
 				has_ideology = ideology:ideology_orleanist
 				has_ideology = ideology:ideology_bonapartist
 				has_ideology = ideology:ideology_legitimist
 				has_ideology = ideology:ideology_theocrat
 				has_ideology = ideology:ideology_slaver
+				character_has_carlist_ideology = yes
+				character_has_miguelist_ideology = yes
 			}
 		}
 	}
@@ -489,8 +485,11 @@ radical_party = {
 		}
 		if = { # radicals will fall in line behind stronger liberals
 			limit = {
-				leader ?= {
-					has_ideology = ideology:ideology_radical
+				OR = {
+					has_ideology = ideology:ideology_egalitarian
+					leader ?= {
+						has_ideology = ideology:ideology_radical
+					}
 				}
 				is_powerful = no
 				owner = {
@@ -498,7 +497,9 @@ radical_party = {
 						is_powerful = yes
 						OR = {
 							has_ideology = ideology:ideology_liberal
+							has_ideology = ideology:ideology_universalist
 							has_ideology = ideology:ideology_liberal_modern
+							has_ideology = ideology:ideology_universalist_modern
 						}
 					}
 				}
@@ -513,7 +514,9 @@ radical_party = {
 				is_powerful = no
 				OR = {
 					has_ideology = ideology:ideology_liberal
+					has_ideology = ideology:ideology_universalist
 					has_ideology = ideology:ideology_liberal_modern
+					has_ideology = ideology:ideology_universalist_modern
 				}
 				owner = {
 					any_interest_group = {
@@ -533,11 +536,7 @@ radical_party = {
 			limit = {
 				is_powerful = no
 				leader ?= {
-					OR = {
-						has_ideology = ideology:ideology_communist
-						has_ideology = ideology:ideology_vanguardist
-						has_ideology = ideology:ideology_anarchist
-					}
+					has_socialist_ideology = yes
 				}
 				owner = {
 					NOT = { has_law_or_variant = law_type:law_council_republic }
@@ -560,7 +559,7 @@ radical_party = {
 					OR = {
 						has_ideology = ideology:ideology_feminist
 						has_ideology = ideology:ideology_abolitionist
-						has_ideology = ideology:ideology_social_democrat
+						has_ideology = ideology:ideology_state_socialist
 						has_ideology = ideology:ideology_republican_leader
 						has_ideology = ideology:ideology_nihilist
 						has_ideology = ideology:ideology_humanitarian
@@ -572,9 +571,56 @@ radical_party = {
 				desc = "from_progressives_radical"
 			}
 		}
+		if = { # early Trade Unions
+			limit = {
+				is_interest_group_type = ig_trade_unions
+				owner = {
+					NOT = {
+						has_technology_researched = socialism
+					}
+				}
+			}
+			add = {
+				desc = "from_early_trade_unions"
+				if = {
+					limit = {
+						owner = {
+							OR = {
+								has_law_or_variant = law_type:law_landed_voting
+								has_law_or_variant = law_type:law_wealth_voting
+							}
+						}
+					}
+					add = 15
+				}
+				else_if = {
+					limit = {
+						owner = {
+							has_law_or_variant = law_type:law_census_voting
+						}
+					}
+					add = 10
+				}
+				else_if = {
+					limit = {
+						owner = {
+							has_law_or_variant = law_type:law_universal_suffrage
+						}
+					}
+					add = 5
+				}
+			}
+		}
 		if = { # republican
 			limit = {
+				owner ?= {
+					OR = {
+						country_has_monarchy_law = yes
+						has_law_or_variant = law_type:law_theocracy
+					}
+				}
 				OR = {
+					has_ideology = ideology:ideology_republican
 					has_ideology = ideology:ideology_populist
 
 					# ANZFP
@@ -596,20 +642,20 @@ radical_party = {
 						}
 					}
 				}
-				owner = {
-					OR = {
-						has_law = law_type:law_monarchy
-						has_law_or_variant = law_type:law_theocracy
-					}
-				}
 			}
 			add = {
-				value = 10
+				value = 5
 				desc = "from_republican"
 			}
 		}
 		if = {
 			limit = { # particularists will join in when their issues are relevant
+				owner = {
+					OR = {
+						has_law_or_variant = law_type:law_serfdom
+						has_law_or_variant = law_type:law_debt_slavery
+					}
+				}
 				OR = {
 					has_ideology = ideology:ideology_particularist
 
@@ -621,12 +667,6 @@ radical_party = {
 						anz_particularist_ideologies = yes
 					}
 				}
-				owner = {
-					OR = {
-						has_law_or_variant = law_type:law_serfdom
-						has_law_or_variant = law_type:law_debt_slavery
-					}
-				}
 			}
 			add = {
 				value = 3
@@ -635,6 +675,7 @@ radical_party = {
 		}
 		if = { # moderates are scared of radical politics
 			limit = {
+				NOT = { is_interest_group_type = ig_trade_unions }
 				leader ?= {
 					has_ideology = ideology:ideology_moderate
 				}
@@ -650,8 +691,10 @@ radical_party = {
 					NOT = { has_law_or_variant = law_type:law_universal_suffrage }
 				}
 				OR = {
-					has_ideology = ideology:ideology_populist
-
+					law_enactment_stance = {
+						law = law_type:law_universal_suffrage
+						value > neutral
+					}
 					# ANZFP
 					trigger_if = {
 						limit = {
@@ -662,14 +705,6 @@ radical_party = {
 							anz_populist_ideologies = yes
 						}
 					}
-					
-					leader ?= {
-						OR = {
-							has_ideology = ideology:ideology_radical
-							has_ideology = ideology:ideology_social_democrat
-							has_ideology = ideology:ideology_humanitarian
-						}
-					}
 				}
 			}
 			add = {
@@ -677,20 +712,17 @@ radical_party = {
 				desc = "from_no_universal_suffrage"
 			}
 		}
-		if = { # radical anti-censorship
+		if = { # anti-censorship
 			limit = {
-				leader ?= {
+				owner ?= {
 					OR = {
-						has_ideology = ideology:ideology_radical
-						has_ideology = ideology:ideology_anarchist
-						has_ideology = ideology:ideology_humanitarian
+						has_law_or_variant = law_type:law_censorship
+						has_law_or_variant = law_type:law_outlawed_dissent
 					}
 				}
-				owner = {
-					OR = {
-						has_law_or_variant = law_type:law_outlawed_dissent
-						has_law_or_variant = law_type:law_censorship
-					}
+				law_stance = {
+					law = law_type:law_censorship
+					value < neutral
 				}
 			}
 			add = {
@@ -698,39 +730,14 @@ radical_party = {
 				desc = from_censorship
 			}
 		}
-		if = { # anti-censorship
+		if = { # opposition to secret police
 			limit = {
-				OR = {
-					has_ideology = ideology:ideology_liberal
-					has_ideology = ideology:ideology_egalitarian
-					has_ideology = ideology:ideology_egalitarian_modern
-					leader ?= {
-						has_ideology = ideology:ideology_humanitarian
-					}
-				}
-				owner = {
-					has_law_or_variant = law_type:law_outlawed_dissent
-				}
-			}
-			add = {
-				value = 6
-				desc = from_outlawed_dissent
-			}
-		}
-		if = { # opposition to secret police or national guard
-			limit = {
-				OR = {
-					has_ideology = ideology:ideology_liberal
-					has_ideology = ideology:ideology_liberal_modern
-					leader ?= {
-						OR = {	
-							has_ideology = ideology:ideology_humanitarian
-							has_ideology = ideology:ideology_radical
-						}
-					}
-				}
 				owner = {
 					has_law_or_variant = law_type:law_secret_police
+				}
+				law_stance = {
+					law = law_type:law_secret_police
+					value < neutral
 				}
 			}
 			add = {
@@ -740,7 +747,7 @@ radical_party = {
 		}
 		if = { # general anti-slavery
 			limit = {
-				owner = {
+				owner ?= {
 					OR = {
 						has_law_or_variant = law_type:law_legacy_slavery
 						has_law_or_variant = law_type:law_slave_trade
@@ -748,11 +755,10 @@ radical_party = {
 					}
 				}
 				OR = {
-					has_ideology = ideology:ideology_anti_slavery
-					leader ?= {
-						has_ideology = ideology:ideology_abolitionist
+					law_enactment_stance = {
+						law = law_type:law_slavery_banned
+						value > neutral
 					}
-
 					# ANZFP
 					trigger_if = {
 						limit = {
@@ -769,64 +775,17 @@ radical_party = {
 		}
 		if = { # anti-serfdom
 			limit = {
-				owner = {
+				owner ?= {
 					has_law_or_variant = law_type:law_serfdom
 				}
-				OR = {
-					has_ideology = ideology:ideology_egalitarian
-					has_ideology = ideology:ideology_egalitarian_modern
-					has_ideology = ideology:ideology_anti_slavery
-					has_ideology = ideology:ideology_laissez_faire
-					has_ideology = ideology:ideology_interventionist
-					has_ideology = ideology:ideology_particularist
-					leader ?= {
-						OR = {
-							character_is_anti_slavery = yes
-							has_ideology = ideology:ideology_social_democrat
-							has_ideology = ideology:ideology_communist
-							has_ideology = ideology:ideology_vanguardist
-						}
-					}
+				law_stance = {
+					law = law_type:law_serfdom
+					value < neutral
 				}
 			}
 			add = {
-				value = 3
+				value = 5
 				desc = "from_serfdom"
-			}
-		}
-		if = { # early Trade Unions
-			limit = {
-				scope:number >= 1 # If someone else is in this party first
-				is_interest_group_type = ig_trade_unions
-				owner = { has_technology_researched = labor_movement }
-				NOT = {
-					has_ideology = ideology:ideology_socialist
-				}
-				owner = {
-					NOT = { has_law_or_variant = law_type:law_universal_suffrage }
-				}
-			}
-			add = {
-				desc = "from_early_trade_unions"
-				if = {
-					limit = {
-						owner = {
-							OR = {
-								has_law_or_variant = law_type:law_landed_voting
-								has_law_or_variant = law_type:law_wealth_voting
-							}
-						}
-					}
-					add = 10
-				}
-				if = {
-					limit = {
-						owner = {
-							has_law_or_variant = law_type:law_census_voting
-						}
-					}
-					add = 5
-				}
 			}
 		}
 		if = {

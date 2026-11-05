@@ -104,3 +104,7 @@ is_com_progress_bar_hidden = {
     third = trigger_is_com_progress_bar_hidden
     third_not = trigger_is_com_progress_bar_hidden_not
 }
+
+### DELETE THIS SHOULD THE BASE GAME TRIGGER LOC ENTRY BE REMOVED
+### This is to fix save_temporary_scope_value_as being localized
+REPLACE:save_temporary_scope_value_as = {}

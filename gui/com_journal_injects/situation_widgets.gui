@@ -321,7 +321,10 @@ types com_journal_widget_types {
 				size = { 220 220 }
 				max_update_rate = 8
 				
-				visible = "[JournalEntry.MakeScope.Var('com_situation_character_left_var').IsSet]"
+				visible = "[And(
+					JournalEntry.MakeScope.Var('com_situation_character_left_var').IsSet,
+					JournalEntry.MakeScope.Var('com_situation_character_left_var').GetCharacter.IsValid
+				)]"
 				datacontext = "[JournalEntry.MakeScope.Var('com_situation_character_left_var').GetCharacter]"
 				
 				block "character_layout" {
@@ -352,7 +355,10 @@ types com_journal_widget_types {
 				size = { 220 220 }
 				max_update_rate = 8
 				
-				visible = "[JournalEntry.MakeScope.Var('com_situation_character_right_var').IsSet]"
+				visible = "[And(
+					JournalEntry.MakeScope.Var('com_situation_character_right_var').IsSet,
+					JournalEntry.MakeScope.Var('com_situation_character_right_var').GetCharacter.IsValid
+				)]"
 				datacontext = "[JournalEntry.MakeScope.Var('com_situation_character_right_var').GetCharacter]"
 				
 				block "character_layout" {
@@ -881,80 +887,107 @@ types com_journal_widget_types {
 			margin = { 5 5 }
 			visible = "[GetVariableSystem.Exists('com_show_situation_outomes')]"
 			
-			block "com_situation_completion_outcome" {
+			block "com_situation_outcome_0" {
 				com_international_situation_outcome_item = {
 					blockoverride "situation_outcome_visibility" {
-						visible = "[JournalEntry.CanComplete]"
+						visible = "[And(
+							GreaterThanOrEqualTo_int32(GetDataModelSize(JournalEntry.GetOutcomes), '(int32)0'),
+							JournalEntry.MakeScope.Var('com_situation_outcome_0_name_var').IsSet
+						)]"
+					}
+					blockoverride "situation_outcome_datacontext" {
+						datacontext_from_model = {
+							datamodel = "[JournalEntry.GetOutcomes]"
+							index = 0
+						}
 					}
 					blockoverride "situation_outcome_name" {
-						raw_text = "#bold [JournalEntry.MakeScope.Var('com_situation_complete_name_var').GetFlagName]#!"
+						raw_text = "#bold [JournalEntry.MakeScope.Var('com_situation_outcome_0_name_var').GetFlagName]#!"
 					}
 					blockoverride "situation_outcome_default_texture_visibity" {
-						visible = "[Not(JournalEntry.MakeScope.Var('com_situation_complete_illus_var').IsSet)]"
+						visible = "[Not(JournalEntry.MakeScope.Var('com_situation_outcome_0_illustration_var').IsSet)]"
 					}
 					blockoverride "situation_outcome_default_texture_path" {
 						texture = "gfx/interface/illustrations/situation_outcomes/situation_complete_illus.dds"
 					}
 					blockoverride "situation_outcome_custom_texture_visibity" {
-						visible = "[JournalEntry.MakeScope.Var('com_situation_complete_illus_var').IsSet]"
+						visible = "[JournalEntry.MakeScope.Var('com_situation_outcome_0_illustration_var').IsSet]"
 					}
 					blockoverride "situation_outcome_custom_texture_path" {
-						texture = "[JournalEntry.MakeScope.Var('com_situation_complete_illus_var').GetInterestGroupTrait.GetTexture]"
+						texture = "[JournalEntry.MakeScope.Var('com_situation_outcome_0_illustration_var').GetInterestGroupTrait.GetTexture]"
 					}
 					blockoverride "situation_outcome_tooltip" {
-						tooltip = "com_situation_complete_tooltip"
+						tooltip = "com_situation_outcome_tooltip"
 					}
 				}
 			}
 			
-			block "com_situation_timeout_outcome" {
+			block "com_situation_outcome_1" {
 				com_international_situation_outcome_item = {
 					blockoverride "situation_outcome_visibility" {
-						visible = "[JournalEntry.CanTimeOut]"
+						visible = "[And(
+							GreaterThanOrEqualTo_int32(GetDataModelSize(JournalEntry.GetOutcomes), '(int32)1'),
+							JournalEntry.MakeScope.Var('com_situation_outcome_1_name_var').IsSet
+						)]"
+					}
+					blockoverride "situation_outcome_datacontext" {
+						datacontext_from_model = {
+							datamodel = "[JournalEntry.GetOutcomes]"
+							index = 1
+						}
 					}
 					blockoverride "situation_outcome_name" {
-						raw_text = "#bold [JournalEntry.MakeScope.Var('com_situation_timeout_name_var').GetFlagName]#!"
+						raw_text = "#bold [JournalEntry.MakeScope.Var('com_situation_outcome_1_name_var').GetFlagName]#!"
 					}
 					blockoverride "situation_outcome_default_texture_visibity" {
-						visible = "[Not(JournalEntry.MakeScope.Var('com_situation_timeout_illus_var').IsSet)]"
+						visible = "[Not(JournalEntry.MakeScope.Var('com_situation_outcome_1_illustration_var').IsSet)]"
 					}
 					blockoverride "situation_outcome_default_texture_path" {
 						texture = "gfx/interface/illustrations/situation_outcomes/situation_timeout_illus.dds"
 					}
 					blockoverride "situation_outcome_custom_texture_visibity" {
-						visible = "[JournalEntry.MakeScope.Var('com_situation_timeout_illus_var').IsSet]"
+						visible = "[JournalEntry.MakeScope.Var('com_situation_outcome_1_illustration_var').IsSet]"
 					}
 					blockoverride "situation_outcome_custom_texture_path" {
-						texture = "[JournalEntry.MakeScope.Var('com_situation_timeout_illus_var').GetInterestGroupTrait.GetTexture]"
+						texture = "[JournalEntry.MakeScope.Var('com_situation_outcome_1_illustration_var').GetInterestGroupTrait.GetTexture]"
 					}
 					blockoverride "situation_outcome_tooltip" {
-						tooltip = "com_situation_timeout_tooltip"
+						tooltip = "com_situation_outcome_tooltip"
 					}
 				}
 			}
 			
-			block "com_situation_failure_outcome" {
+			block "com_situation_outcome_2" {
 				com_international_situation_outcome_item = {
 					blockoverride "situation_outcome_visibility" {
-						visible = "[Not(StringIsEmpty(JournalEntry.GetFailureTooltip))]" # We do not have a CanFail function
+						visible = "[And(
+							GreaterThanOrEqualTo_int32(GetDataModelSize(JournalEntry.GetOutcomes), '(int32)2'),
+							JournalEntry.MakeScope.Var('com_situation_outcome_2_name_var').IsSet
+						)]"
+					}
+					blockoverride "situation_outcome_datacontext" {
+						datacontext_from_model = {
+							datamodel = "[JournalEntry.GetOutcomes]"
+							index = 2
+						}
 					}
 					blockoverride "situation_outcome_name" {
-						raw_text = "#bold [JournalEntry.MakeScope.Var('com_situation_failure_name_var').GetFlagName]#!"
+						raw_text = "#bold [JournalEntry.MakeScope.Var('com_situation_outcome_2_name_var').GetFlagName]#!"
 					}
 					blockoverride "situation_outcome_default_texture_visibity" {
-						visible = "[Not(JournalEntry.MakeScope.Var('com_situation_failure_illus_var').IsSet)]"
+						visible = "[Not(JournalEntry.MakeScope.Var('com_situation_outcome_2_illustration_var').IsSet)]"
 					}
 					blockoverride "situation_outcome_default_texture_path" {
 						texture = "gfx/interface/illustrations/situation_outcomes/situation_failure_illus.dds"
 					}
 					blockoverride "situation_outcome_custom_texture_visibity" {
-						visible = "[JournalEntry.MakeScope.Var('com_situation_failure_illus_var').IsSet]"
+						visible = "[JournalEntry.MakeScope.Var('com_situation_outcome_2_illustration_var').IsSet]"
 					}
 					blockoverride "situation_outcome_custom_texture_path" {
-						texture = "[JournalEntry.MakeScope.Var('com_situation_failure_illus_var').GetInterestGroupTrait.GetTexture]"
+						texture = "[JournalEntry.MakeScope.Var('com_situation_outcome_2_illustration_var').GetInterestGroupTrait.GetTexture]"
 					}
 					blockoverride "situation_outcome_tooltip" {
-						tooltip = "com_situation_failure_tooltip"
+						tooltip = "com_situation_outcome_tooltip"
 					}
 				}
 			}

@@ -25,12 +25,7 @@
 	
 	on_activate = {
 		scripted_effect_parties_disappearence = yes
-		if = {
-			limit = {
-				has_modifier = missouri_compromise
-			}
-			remove_modifier = missouri_compromise
-		}
+		cleanup_voting_strength_modifiers = yes
 	}
 	
 	modifier = {
@@ -141,12 +136,7 @@ REPLACE_OR_CREATE:law_oligarchy = {
 	on_activate = {
 		scripted_effect_parties_disappearence = yes
 		handle_possible_absent_caciquismo_variables = yes
-		if = {
-			limit = {
-				has_modifier = missouri_compromise
-			}
-			remove_modifier = missouri_compromise
-		}
+		cleanup_voting_strength_modifiers = yes
 	}
 	
 	modifier = {
@@ -195,6 +185,16 @@ REPLACE_OR_CREATE:law_oligarchy = {
 		if = {
 			limit = { ai_has_enact_weight_modifier_journal_entries = yes }
 			add = 750
+		}
+
+		if = {
+			limit = {
+				owner ?= {
+					has_journal_entry = je_zaibatsu
+					has_variable = ai_zaibatsu_cement
+				}
+			}
+			add = 500
 		}
 	}
 	

@@ -1,7 +1,8 @@
-﻿## CMF VALIDATION: Last verified against base game patch 1.13.9 on 5-AUG-2026 by Alexedishi
+﻿## CMF VALIDATION: Validated against 1.14.0b by Alexedishi 8-SEP-26
 
-# COPY-PASTED FOR NOW
+# INHERITED FROM BASE GAME
 @panel_width_minus_10 = 530			# used to be 450
+@panel_width_minus_20 = 520
 @panel_width_minus_30 = 510
 @panel_width = 540  				# used to be 460
 @panel_width_half = 270				# used to be 230
@@ -12,7 +13,8 @@
 @panel_width_plus_30 = 570			# used to be 490
 @panel_width_plus_70 = 610			# used to be 530
 
-types journal_overwrites {
+
+types com_journal_overwrites {
 	type journal_panel = default_block_window {
 		name = "journal_panel"
 		
@@ -23,7 +25,7 @@ types journal_overwrites {
 					soundeffect = "event:/SFX/UI/SideBar/journal"
 				}
 			}
-
+			
 			state = {
 				name = _hide
 				start_sound = {
@@ -36,7 +38,7 @@ types journal_overwrites {
 		{
 			text = "JOURNAL_WINDOW_HEADER"
 		}
-
+		
 		blockoverride "fixed_top" {
 			tab_buttons = {
 				blockoverride "first_button" {
@@ -60,12 +62,12 @@ types journal_overwrites {
 				blockoverride "first_button_name" {
 					name = "tutorial_highlight_journal"
 				}
-
+				
 				blockoverride "second_button" {
-					text = "POTENTIAL"
+					text = "DECISIONS"
 				}
 				blockoverride "second_button_tooltip" {
-					tooltip = "POTENTIAL"
+					tooltip = "DECISIONS"
 				}
 				blockoverride "second_button_click" {
 					onclick = "[InformationPanel.SelectTab('inactive_journal_entries')]"
@@ -77,9 +79,9 @@ types journal_overwrites {
 					visible = "[Not( InformationPanel.IsTabSelected('inactive_journal_entries') )]"
 				}
 				blockoverride "second_button_selected" {
-					text = "POTENTIAL"
+					text = "DECISIONS"
 				}
-
+				
 				blockoverride "third_button" {
 					text = "NATION_FORMATION"
 				}
@@ -106,110 +108,340 @@ types journal_overwrites {
 			flowcontainer = {
 				direction = vertical
 				using = default_list_position
-				margin_top = 10
+				margin_top = 5
+				spacing = 5
 				
 				### JOURNAL
 				flowcontainer = {
 					visible = "[InformationPanel.IsTabSelected('default')]"
-					using = default_list_position
+					parentanchor = hcenter
 					direction = vertical
 					using = default_content_fade
 					
-					### GAME OBJECTIVES
-					default_header = {
-						visible = "[And(Not(GetGlobalVariable('community_gui_objective_var').IsSet),GetPlayer.HasObjective)]"
-						blockoverride "text" {
-							text = "[AccessPlayer.GetObjective.GetName]"
-						}
-					}
-
-					empty_state = {
-						blockoverride "visible" {
-							visible = "[And(
-								IsDataModelEmpty(AccessPlayer.AccessActivePlayerObjectiveJournalEntries),
-								And(
-									GetPlayer.HasObjective,
-									And(
-										Not(GetGlobalVariable('community_gui_objective_var').IsSet),
-										GetPlayer.IsObjectiveIdle
-									)
-								)
-							)]"
-						}
-						blockoverride "text" {
-							text = "[AccessPlayer.GetObjective.GetObjectiveType.GetIdleHeader]"
-						}
-						blockoverride "hint" {
-							text = "[AccessPlayer.GetObjective.GetObjectiveType.GetIdleHint]"
-						}
-					}
-
+					### Player Objective
+					## CMF OVERWRITE: Global variable community_gui_objective_var will hide this entire container
 					flowcontainer = {
-						visible = "[Not(IsDataModelEmpty(AccessPlayer.AccessActivePlayerObjectiveJournalEntries))]"
-						direction = vertical
-						spacing = 2
+						visible = "[And(
+						Not(GetGlobalVariable('community_gui_objective_var').IsSet),
+						GetPlayer.HasObjective
+					)]"
 						parentanchor = hcenter
-						datamodel = "[AccessPlayer.AccessActivePlayerObjectiveJournalEntries]"
+						direction = vertical
 						
-						item = {
-							journal_entry = {}
+						default_header = {
+							blockoverride "text" {
+								text = "concept_strategic_objective_short"
+							}
 						}
-					}
-
-					empty_state = {
-						blockoverride "visible" {
-							 visible = "[IsDataModelEmpty(AccessPlayer.AccessActiveNonPlayerObjectiveJournalEntries)]"
-						}
-						blockoverride "text" {
-							text = "NO_JOURNAL_ENTRIES"
-						}
-					}
-
-					flowcontainer = {
-						direction = vertical
-						parentanchor = hcenter
-						datamodel = "[AccessPlayer.GetGroupsForActiveJournalEntries]"
-						spacing = 10
-						margin_bottom = 10
-
-						item = {
-							flowcontainer = {
-								visible = "[Not(ComJournalGroupSGui('com_journal_entry_group_hidden'))]"
-								direction = vertical
-								textbox = {
-									text = "[JournalEntryGroup.GetName]"
-									autoresize = yes
-									align = nobaseline
-									default_format = "#title"
-									margin_left = 3
-								}							
+						
+						flowcontainer = {
+							direction = vertical
+							minimumsize = { @panel_width_plus_20 150 }
+							maximumsize = { @panel_width_plus_20 150 }
+							
+							background = {
+								using = simple_frame
+								alpha = 0.85
+								texture = "[AccessPlayer.GetObjective.GetIllustration]"
+								
+								modify_texture = {
+									using = simple_frame_mask
+								}
+							}
+							
+							### GAME OBJECTIVES
+							container = {
+								minimumsize = { @panel_width_plus_20 35 }
+								
+								background = {
+									margin = { -2 -2 }
+									using = dark_area
+									alpha = 0.65
+									
+									modify_texture = {
+										texture = "gfx/interface/masks/fade_vertical_bottom.dds"
+										blend_mode = alphamultiply
+										alpha = 0.6
+									}
+								}
+								
 								flowcontainer = {
-									direction = vertical
-									datamodel = "[JournalEntryGroup.GetActiveJournalEntryTypes(GetPlayer.Self)]"
-									spacing = 2
-									item = {
-										journal_entry = {
-											datacontext = "[AccessPlayer.GetJournalEntry(JournalEntryType.Self)]"
+									margin_top = 3
+									parentanchor = hcenter
+									
+									icon = {
+										texture = "[AccessPlayer.GetObjective.GetIcon]"
+										size = { 27 27 }
+									}
+									
+									textbox = {
+										text = "[AccessPlayer.GetObjective.GetName]"
+										default_format = "#header"
+										autoresize = yes
+										max_width = 200
+										margin_top = 4
+										using = elide_fontsize_min
+									}
+								}
+							}
+							
+							empty_state = {
+								minimumsize = { @panel_width 150 }
+								margin_top = 50
+								
+								blockoverride "visible" {
+									visible = "[And(IsDataModelEmpty(AccessPlayer.AccessActivePlayerObjectiveJournalEntries), GetPlayer.HasObjective)]"
+								}
+								
+								blockoverride "text" {
+									text = "[AccessPlayer.GetObjective.GetObjectiveType.GetIdleHeader]"
+									margin_bottom = 2
+									
+									background = {
+										using = dark_area
+										alpha = 0.35
+										
+										modify_texture = {
+											texture = "gfx/interface/masks/fade_horizontal_center.dds"
+											blend_mode = alphamultiply
+											alpha = 1
+										}
+									}
+								}
+								
+								blockoverride "hint_visibility" {
+									visible = yes
+								}
+								
+								blockoverride "hint" {
+									text = "[AccessPlayer.GetObjective.GetObjectiveType.GetIdleHint]"
+								}
+							}
+							
+							empty_state = {
+								blockoverride "visible" {
+									visible = "[And(IsDataModelEmpty(AccessPlayer.AccessActiveNonPlayerObjectiveJournalEntries), Not(GetPlayer.HasObjective))]"
+								}
+								
+								blockoverride "text" {
+									text = "NO_JOURNAL_ENTRIES"
+								}
+							}
+						}
+						
+						flowcontainer = {
+							direction = vertical
+							parentanchor = hcenter
+							
+							flowcontainer = {
+								visible = "[Not(IsDataModelEmpty(AccessPlayer.AccessActivePlayerObjectiveJournalEntries))]"
+								direction = vertical
+								spacing = 2
+								parentanchor = hcenter
+								datamodel = "[AccessPlayer.AccessActivePlayerObjectiveJournalEntries]"
+								
+								item = {
+									journal_entry = {}
+								}
+							}
+							
+							player_objective_additional_entries = {}
+						}
+					}
+					
+					flowcontainer = {
+						parentanchor = hcenter
+						direction = vertical
+						#spacing = 10
+						
+						default_header = {
+							blockoverride "text" {
+								text = "JOURNAL_ENTRIES_CONCEPT"
+							}
+						}
+						
+						flowcontainer = {
+							direction = vertical
+							
+							background = {
+								using = dropdown_background
+								margin = { 0 -2 }
+							}
+							
+							section_header_button = {
+								blockoverride "left_text" {
+									text = "FILTERS"
+									fontsize_min = 12
+									elide = right
+								}
+								
+								blockoverride "right_text" {
+									section_header_right_text = {
+										text = "[JournalPanel.GetFilterDesc]"
+									}
+								}
+								
+								blockoverride "onclick" {
+									onclick = "[GetVariableSystem.Toggle( 'characters_filters' )]"
+								}
+								
+								blockoverride "onclick_showmore" {
+									visible = "[Not(GetVariableSystem.Exists( 'characters_filters' ))]"
+								}
+								
+								blockoverride "onclick_showless" {
+									visible = "[GetVariableSystem.Exists( 'characters_filters' )]"
+								}
+							}
+							
+							flowcontainer = {
+								visible = "[GetVariableSystem.Exists( 'characters_filters' )]"
+								minimumsize = { @panel_width_plus_14 -1 }
+								parentanchor = hcenter
+								margin_top = 5
+								margin_bottom = 10
+								direction = vertical
+								
+								editbox = {
+									name = "journal_entries_search_bar"
+									parentanchor = hcenter
+									size = { @panel_width 40 }
+									margin_left = 10
+									alwaystransparent = no
+									focuspolicy = all
+									focus_on_visible = yes
+									align = nobaseline
+									maxcharacters = 120
+									
+									background = {
+										using = text_edit_bg
+									}
+									
+									textbox = {
+										visible = "[JournalPanel.GetSearchBar.IsQueryEmpty]"
+										parentanchor = vcenter
+										align = nobaseline
+										position = { 10 0 }
+										autoresize = yes
+										using = elide_fontsize_min
+										max_width = @panel_width
+										default_format = "#white"
+										alpha = 0.5
+										text = "JOURNAL_PANEL_SEARCH_BAR_EMPTY_TEXT"
+									}
+								}
+								
+								### Availability Filter
+								building_browser_filter_line = {
+									parentanchor = hcenter
+									blockoverride "line_background" {}
+									
+									blockoverride "line_size" {
+										size = { @panel_width 38 }
+									}
+									
+									blockoverride "filter_line_label"
+									{
+										text = "AVAILABILITY"
+									}
+									
+									blockoverride "filter_line_buttons"
+									{
+										building_browser_filter_line_button = {
+											text = "ACTIVE"
+											align = hcenter|nobaseline
+											
+											blockoverride "line_button_tooltip"{
+												tooltip = "ACTIVE_JOURNAL_ENTRIES_FILTER_TOOLTIP"
+											}
+											
+											blockoverride "line_button_onclick" {
+												onclick = "[JournalPanel.SetAvailabilityFilter('active')]"
+											}
+											
+											blockoverride "line_button_icon_texture" {
+												visible = no
+											}
+											
+											blockoverride "line_button_selected" {
+												visible = "[JournalPanel.IsAvailabilityFilterSelected('active')]"
+											}
+										}
+										
+										building_browser_filter_line_button = {
+											text = "POTENTIAL"
+											align = hcenter|nobaseline
+											
+											blockoverride "line_button_tooltip"{
+												tooltip = "POTENTIAL_JOURNAL_ENTRIES_FILTER_TOOLTIP"
+											}
+											
+											blockoverride "line_button_onclick" {
+												onclick = "[JournalPanel.SetAvailabilityFilter('potential')]"
+											}
+											
+											blockoverride "line_button_icon_texture" {
+												visible = no
+											}
+											
+											blockoverride "line_button_selected" {
+												visible = "[JournalPanel.IsAvailabilityFilterSelected('potential')]"
+											}
+										}
+										
+										building_browser_filter_line_button = {
+											text = "CONCLUDED"
+											align = hcenter|nobaseline
+											
+											blockoverride "line_button_tooltip"{
+												tooltip = "CONCLUDED_JOURNAL_ENTRIES_FILTER_TOOLTIP"
+											}
+											
+											blockoverride "line_button_onclick" {
+												onclick = "[JournalPanel.SetAvailabilityFilter('concluded')]"
+											}
+											
+											blockoverride "line_button_icon_texture" {
+												visible = no
+											}
+											
+											blockoverride "line_button_selected" {
+												visible = "[JournalPanel.IsAvailabilityFilterSelected('concluded')]"
+											}
 										}
 									}
 								}
 							}
 						}
-					}
 						
+						### Journal Entry Groups
+						journal_entry_groups_list = {}
+					}
+				}
+				
+				### DECISIONS
+				flowcontainer = {
+					visible = "[InformationPanel.IsTabSelected('inactive_journal_entries')]"
+					using = default_list_position
+					using = default_content_fade
+					direction = vertical
+					spacing = 10
+					parentanchor = hcenter
+					
 					### DECISIONS
 					default_header = {
+						
 						blockoverride "text" {
 							text = "DECISIONS"
 						}
+						
 					}
-
+					
 					flowcontainer = {
 						using = default_list_position
 						direction = vertical
 						margin_bottom = 10
 						using = default_content_fade
-
 						
 						textbox = {
 							visible = "[IsDataModelEmpty(GetPlayer.GetDecisions)]"
@@ -222,10 +454,11 @@ types journal_overwrites {
 							margin_top = 10
 							alpha = 0.3
 						}
-
+						
 						dynamicgridbox = {
 							parentanchor = hcenter
 							datamodel = "[GetPlayer.GetDecisions]"
+							
 							item = {
 								flowcontainer = {
 									margin = { 0 2 }
@@ -239,76 +472,21 @@ types journal_overwrites {
 						}
 					}
 				}
-
-				### INACTIVE JOURNAL ENTRIES
-				flowcontainer = {
-					visible = "[InformationPanel.IsTabSelected('inactive_journal_entries')]"
-					using = default_list_position
-					direction = vertical
-					using = default_content_fade
-
-					spacing = 10
-					parentanchor = hcenter
-					datamodel = "[AccessPlayer.GetGroupsForInActiveJournalEntries]"
-
-
-					empty_state = {
-						parentanchor = vcenter
-						blockoverride "visible" {
-							visible = "[IsDataModelEmpty(AccessPlayer.GetGroupsForInActiveJournalEntries)]"
-						}
-						blockoverride "text" {
-							text = "NO_INACTIVE_JOURNAL_ENTRIES"
-						}
-					}
-
-					item = {
-						flowcontainer = {
-							direction = vertical
-							visible = "[Not(ComJournalGroupSGui('com_journal_entry_group_hidden'))]"
-							textbox = {
-								text = "[JournalEntryGroup.GetName]"
-								autoresize = yes
-								align = nobaseline
-								default_format = "#title"
-								margin_left = 3
-							}							
-							flowcontainer = {
-								direction = vertical
-								datamodel = "[JournalEntryGroup.GetInactiveJournalEntryTypes(GetPlayer.Self)]"
-								spacing = 2
-								item = {
-									journal_entry = {
-										datacontext = "[AccessPlayer.GetJournalEntry(JournalEntryType.Self)]"
-										alpha = 0.75
-										blockoverride "fontsize" {}
-										blockoverride "iconsize" {
-											size = { 35 35 }
-										}
-										blockoverride "scripted_progress_bars_visibility" {
-											visible = no
-										}
-									}
-								}
-							}
-						}
-					}
-				}
-
+				
 				### NATION FORMATION
 				flowcontainer = {
 					visible = "[InformationPanel.IsTabSelected('nation_formation')]"
 					using = default_list_position
 					direction = vertical
 					using = default_content_fade
-
+					
 					flowcontainer = {
 						using = default_list_position
 						direction = vertical
 						margin_bottom = 10
 						using = default_content_fade
-
-
+						
+						
 						empty_state = {
 							blockoverride "visible" {
 								visible = "[IsDataModelEmpty(AccessPlayer.AccessFormableCountries)]"
@@ -316,15 +494,15 @@ types journal_overwrites {
 							blockoverride "text" {
 								text = "NO_FORMABLE_COUNTRIES"
 							}
-						}	
-
+						}
+						
 						flowcontainer = {
 							parentanchor = hcenter
 							direction = vertical
 							visible = "[Not(IsDataModelEmpty(AccessPlayer.AccessFormableCountries))]"
 							datamodel = "[AccessPlayer.AccessFormableCountries]"
 							using = default_content_fade
-
+							
 							item = {
 								formable_country_button = {}
 							}
@@ -334,213 +512,128 @@ types journal_overwrites {
 			}
 		}
 	}
-
-	type journal_entry = button {
-		highlight_tutorial_ui = {
-			visible = "[JournalEntry.IsBeingTutorialHighlighted]"
+	
+	type journal_entry_group_with_illustration = flowcontainer {
+		parentanchor = hcenter
+		direction = vertical
+		margin_bottom = 5
+		
+		## CMF Overwrite: Hidden Journal and Interorg Features
+		visible = "[And(
+			Not(ComJournalGroupSGui('com_journal_entry_group_hidden')),
+			Not(ComJournalGroupSGui('com_international_organization_journal_entry_group_sgui'))
+		)]"
+		
+		background = {
+			using = entry_bg_fancy_dark
+			using = frame_small_mask
+			alpha = 0.85
 		}
-
-		block "button_style" {
-			using = default_button
+		
+		background = {
+			using = frame_small
 		}
-		onclick = "[InformationPanelBar.OpenJournalEntryPanel(JournalEntry.AccessSelf)]"
-		enabled = "[JournalEntry.IsActive]"
-
-		tooltipwidget = {
-			FancyTooltip_JournalEntry = {}
-		}
-
-		onmousehierarchyenter = "[PdxGuiWidget.FindChild('journal_pin_button').InterruptThenTriggerAnimation('hide_journal_pin_button','show_journal_pin_button')]"
-		onmousehierarchyleave = "[PdxGuiWidget.FindChild('journal_pin_button').InterruptThenTriggerAnimation('show_journal_pin_button','hide_journal_pin_button')]"
-
-		block "background" {}
-
+		
 		flowcontainer = {
-			resizeparent = yes
-			block "minimumsize" {
-				minimumsize = { @panel_width -1 }
+			direction = vertical
+			minimumsize = { @panel_width 100 }
+			maximumsize = { @panel_width 100 }
+			
+			background = {
+				margin = { -1 -1 }
+				margin_top = -1
+				texture = "[JournalEntryGroup.GetIllustration]"
+				using = frame_small_mask_top
 			}
-			block "flowcontainer_properties" {
-				margin = { 10 8 }
-				spacing = 10
-			}
-
-			flowcontainer = {
-				direction = vertical
-
-				# journal entry icon
-				icon = {
-					texture = "[JournalEntry.GetIcon]"
-					block "iconsize" {
-						size = { 40 40 }
-					}
-				}
-
-				# completion in progress
-				icon = {
-					visible = "[JournalEntry.IsProgressing]"
-					parentanchor = hcenter
-					block "completing_iconsize" {
-						size = { 20 20 }
-					}
-					texture = "gfx/interface/icons/generic_icons/green_checkmark.dds"
-					tooltip = "JOURNAL_ENTRY_IN_PROGRESS"
-					using = shimmer
-
-					icon = {
-						parentanchor = center
-						using = rotate_glow_animation_02
-						size = { 300% 300% }
-						alpha = 0.5
-					}
-				}
-			}
-
-			flowcontainer = {
-				direction = vertical
-				parentanchor = vcenter
-
-				# title
-				textbox = {
-					text = "[JournalEntry.GetName]"
-					autoresize = yes
-					align = left|nobaseline
-					multiline = yes
-					default_format = "#header"
-
-					block "fontsize" {
-						using = fontsize_large
-					}
-
-					block "textsize" {
-						maximumsize = { 420 -1 }
-						minimumsize = { 420 -1 }
-					}
-				}
-
-				# status description
-				textbox = {
-					text = "[JournalEntry.GetStatusDesc]"
-					visible = "[Not(StringIsEmpty(JournalEntry.GetStatusDesc))]"
-					autoresize = yes
-					align = left|nobaseline
-					multiline = yes
-					block "textsize" {
-						maximumsize = { 420 -1 }
-						minimumsize = { 420 -1 }
-					}
-				}
-
-				# number of possible actions
-				textbox = {
-					text = "JOURNAL_ENTRY_POSSIBLE_ACTIONS"
-					visible = "[GreaterThan_int32(JournalEntry.GetNumPossibleScriptedButtons, '(int32)0')]"
-					autoresize = yes
-					align = left|nobaseline
-					multiline = yes
-					block "textsize" {
-						maximumsize = { 420 -1 }
-						minimumsize = { 420 -1 }
-					}
-				}
-
-				textbox = {
-
-					autoresize = yes
-				}
-
-				# progress description
-				textbox = {
-					text = "[JournalEntry.GetProgressDesc]"
-					tooltip = "[JournalEntry.GetGoalDesc]"
-					autoresize = yes
-					align = left|nobaseline
-					multiline = yes
-					block "textsize" {
-						maximumsize = { 420 -1 }
-						minimumsize = { 420 -1 }
-					}
-				}
-
-				# progress bar
-				flowcontainer = {
-					visible = "[And(JournalEntry.HasProgressBar, JournalEntry.IsActive)]"
-					margin = { 0 10 }
-					default_progressbar_horizontal = {
-						block "progressbar_size" {
-							size = { 420 6 }
-						}
-						blockoverride "values" {
-							value = "[FixedPointToFloat(JournalEntry.GetGoalProgressPercent)]"
-							min = 0
-							max = 1
-						}
-					}
-				}
-
-				# scripted progress bars
-				com_journal_outliner_progress_bars = {}
-
-				# time out info
-				flowcontainer = {
-					visible = "[And(JournalEntry.CanTimeOut, JournalEntry.IsActive)]"
-					spacing = 5
-
-					icon = {
-						size = { 18 18 }
-						texture = "gfx/interface/icons/generic_icons/clock.dds"
-						parentanchor = vcenter
-					}
-					textbox = {
-						text = "[JournalEntry.GetTimeoutTooltip]"
-						autoresize = yes
-						align = left|nobaseline
-						parentanchor = vcenter
-					}
+			
+			textbox = {
+				minimumsize = { @panel_width_half 40 }
+				margin_left = 13
+				default_format = "#bold"
+				align = nobaseline
+				using = elide_fontsize_min
+				text = "[JournalEntryGroup.GetName]"
+				
+				background = {
+					margin_bottom = 30
+					using = dark_area
+					alpha = 1
+					using = frame_small_mask_top
+					using = fade_right_simple
+					using = fade_down_simple
 				}
 			}
 		}
-
-		# pin button
-		widget = {
-			size = { 23 23 }
-			parentanchor = vcenter|right
-			position = { -5 0 }
-			visible = "[JournalEntry.IsActive]"
-
-			button = {
-				name = "journal_pin_button"
-				texture = "gfx/interface/outliner/unpinned_icon.dds"
-				using = check_button_sound
-				size = { 100% 100% }
-				visible = "[Not(JournalEntry.IsPinnedInOutliner)]"
-				onclick = "[JournalEntry.TogglePinInOutliner]"
-				tooltip = "PIN"
-				parentanchor = center
-
-				state = {
-					name = hide_journal_pin_button
-					trigger_on_create = yes
-					alpha = 0
-					duration = 0.2
-					scale = 0.5
-				}
-
-				state = {
-					name = show_journal_pin_button
-					alpha = 1
-					duration = 0.15
-					scale = 1
+		
+		flowcontainer = {
+			direction = vertical
+			parentanchor = hcenter
+			spacing = 2
+			margin = { 0 2 }
+			margin_top = -5
+			
+			### ACTIVE
+			flowcontainer = {
+				direction = vertical
+				spacing = 2
+				datamodel = "[JournalPanel.GetFilteredActiveJournalEntryTypes(JournalEntryGroup.AccessSelf)]"
+				
+				item = {
+					flowcontainer = {
+						datacontext = "[AccessPlayer.GetJournalEntry(JournalEntryType.Self)]"
+						direction = vertical
+						
+						journal_entry = {
+							visible = "[JournalEntry.IsHighlighted]"
+							
+							blockoverride "minimumsize" {
+								minimumsize = { @panel_width_minus_20 56 }
+							}
+							
+							blockoverride "button_style" {
+								using = default_button_primary
+							}
+						}
+						
+						journal_entry = {
+							visible = "[Not(JournalEntry.IsHighlighted)]"
+							
+							blockoverride "minimumsize" {
+								minimumsize = { @panel_width_minus_20 -1 }
+							}
+						}
+					}
 				}
 			}
-			button = {
-				using = check_button_sound
-				texture = "gfx/interface/outliner/pinned_icon.dds"
-				size = { 100% 100% }
-				visible = "[JournalEntry.IsPinnedInOutliner]"
-				onclick = "[JournalEntry.TogglePinInOutliner]"
-				tooltip = "UNPIN"
-				parentanchor = center
+			
+			### POTENTIAL
+			flowcontainer = {
+				direction = vertical
+				spacing = 2
+				datamodel = "[JournalPanel.GetFilteredInactiveJournalEntryTypes(JournalEntryGroup.AccessSelf)]"
+				
+				item = {
+					potential_journal_entry = {
+						blockoverride "minimumsize" {
+							minimumsize = { @panel_width_minus_20 -1 }
+						}
+					}
+				}
+			}
+			
+			### CONCLUDED
+			flowcontainer = {
+				direction = vertical
+				spacing = 2
+				datamodel = "[JournalPanel.GetFilteredConcludedJournalEntries(JournalEntryGroup.AccessSelf)]"
+				
+				item = {
+					concluded_journal_entry = {
+						blockoverride "minimumsize" {
+							minimumsize = { @panel_width_minus_20 -1 }
+						}
+					}
+				}
 			}
 		}
 	}

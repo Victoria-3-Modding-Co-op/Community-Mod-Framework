@@ -11,9 +11,9 @@ com_journal_entry_characters = {}
 com_style_two_characters = {}
 
 # Situation Elements
-com_situation_header_versus = {}
-com_situation_header_single = {}
-com_situation_header_no_side = {}
-com_situation_header_text = {}
-com_situation_victory_conditions = {}
-com_situation_faction_list = {}
+# com_situation_header_versus = {}
+# com_situation_header_single = {}
+# com_situation_header_no_side = {}
+# com_situation_header_text = {}
+# com_situation_victory_conditions = {}
+# com_situation_faction_list = {}

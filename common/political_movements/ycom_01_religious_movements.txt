@@ -36,14 +36,20 @@
 		}
 	}
 	on_created = {}
-	
-	disband_trigger = {
-		scope:political_movement ?= {
-			religion = {
-				NOT = { is_state_religion = root }
-			}
-		}
-	}
+
+    disband_trigger = {
+        OR = {
+            scope:political_movement ?= {
+                religion = {
+                    NOT = { is_state_religion = root }
+                }
+            }
+            has_council_republic_law = yes
+        }
+    }
+    on_disbanded = {
+        fold_movement_into_anti_communist_movement_effect = yes
+    }
 	
 	religion_selection_trigger = {
 		is_state_religion = scope:country
@@ -385,57 +391,16 @@
 			desc = "STANDARD_OF_LIVING_FOR_RELIGION"
 		}
 
-		if = {
-			limit = {
-				religion = rel:catholic
-				exists = c:PAP
-				c:PAP ?= {
-					country_has_state_religion = rel:catholic
-					has_law_or_variant = law_type:law_theocracy
-				}
-				"owner.relations(c:PAP)" < 0
-			}
-			add = {
-				desc = "POOR_RELATIONS_WITH_PAPACY"
-				value = "owner.relations(c:PAP)"
-				divide = 100
-				multiply = -0.25
-			}
-		}
-		
-		if = {
-			limit = {
-				owner = {
-					any_neighbouring_state = {
-						owner = {
-							NOT = { THIS = ROOT.owner }
-							any_political_movement = {
-								religion ?= ROOT.religion
-								is_insurrectionary = yes
-							}
-						}
-					}
-				}
-			}
-			add = {
-				desc = "NEIGHBOURING_COUNTRY_WITH_RELIGIOUS_REVOLUTION"
-				value = 0.15
-			}
-		}
         if = {
             limit = {
-                this.days_since_movement_defeated <= very_long_modifier_time
+                religion = rel:catholic
             }
-            add = { # (x-y)/y - ([1, 7300]-7300)/7300
-                desc = "movement_suppressed_after_civil_war"
-                value = this.days_since_movement_defeated
-                subtract = very_long_modifier_time
-                divide = {
-                    value = very_long_modifier_time
-                }
-            }
+            add = movement_radicalism_poor_papal_relations
         }
-	}
+
+        add = movement_radicalism_neighboring_religious_revolution
+        add = movement_radicalism_suppressed_after_civil_war
+    }
 }
 
 REPLACE:movement_religious_minority = {
@@ -767,19 +732,19 @@ REPLACE:movement_religious_minority = {
 			}
 			if = {
 				limit = {
-					owner = { cultural_acceptance_base = { target = root.culture value <= acceptance_status_1 } }    # BugFix from PLP (root.culture, not culture)
+					owner = { cultural_acceptance_base = { target = root.culture value <= acceptance_status_1 } }
 				}
 				multiply = 0.1
 			}
 			else_if = {
 				limit = {
-					owner = { cultural_acceptance_base = { target = root.culture value <= acceptance_status_2 } }    # BugFix from PLP (root.culture, not culture)
+					owner = { cultural_acceptance_base = { target = root.culture value <= acceptance_status_2 } }
 				}
 				multiply = 0.25
 			}
 			else_if = {
 				limit = {
-					owner = { cultural_acceptance_base = { target = root.culture value <= acceptance_status_3 } }    # BugFix from PLP (root.culture, not culture)
+					owner = { cultural_acceptance_base = { target = root.culture value <= acceptance_status_3 } }
 				}
 				multiply = 0.5
 			}
@@ -896,99 +861,24 @@ REPLACE:movement_religious_minority = {
 			min = 0
 			desc = "STANDARD_OF_LIVING_FOR_RELIGION"
 		}
-		
-		subtract = {
-			value = 0.5
-			subtract = political_movement_identity_support
-			min = 0
-			desc = "LOW_MOVEMENT_IDENTITY_SUPPORT"
-		}
 
-		if = {
-			limit = {
-				religion = rel:catholic
-				exists = c:PAP
-				c:PAP ?= {
-					country_has_state_religion = rel:catholic
-					has_law_or_variant = law_type:law_theocracy
-				}
-				"owner.relations(c:PAP)" < 0
-			}
-			add = {
-				desc = "POOR_RELATIONS_WITH_PAPACY"
-				value = "owner.relations(c:PAP)"
-				divide = 100
-				multiply = -0.25
-			}
-		}
-		
-		if = {
-			limit = {
-				owner = {
-					any_neighbouring_state = {
-						owner = {
-							NOT = { THIS = ROOT.owner }
-							any_political_movement = {
-								religion ?= ROOT.religion
-								is_insurrectionary = yes
-							}
-						}
-					}
-				}
-			}
-			add = {
-				desc = "NEIGHBOURING_COUNTRY_WITH_RELIGIOUS_REVOLUTION"
-				value = 0.15
-			}
-		}
-		
-		if = {
-			limit = {
-				owner = {
-					any_political_movement = {
-						NOT = { this = root } # Insurrectionary movements should not make themselves more insurrectionary
-						is_insurrectionary = yes
-					}
-				}
-			}
-			add = {
-				desc = "SIMULTANEOUS_INSURRECTIONARY_MOVEMENTS"
-				owner = {
-					every_political_movement = {
-						limit = {
-							NOT = { this = root } # Insurrectionary movements should not make themselves more insurrectionary
-							is_insurrectionary = yes
-						}
-						if = {
-							limit = {
-								exists = this.political_movement_identity_support
-							}
-							add = { # Identity support can get a bit high
-								value = this.political_movement_identity_support
-								multiply = 0.5
-							}
-						}
-						else = {
-							add = this.political_movement_support
-						}
-					}
-				}
-				min = 0.05
-				max = 0.25
-			}
-		}
+        subtract = {
+            value = 0.5
+            subtract = political_movement_identity_support
+            min = 0
+            desc = "LOW_MOVEMENT_IDENTITY_SUPPORT"
+        }
+
         if = {
             limit = {
-                this.days_since_movement_defeated <= very_long_modifier_time
+                religion = rel:catholic
             }
-            add = { # (x-y)/y - ([1, 7300]-7300)/7300
-                desc = "movement_suppressed_after_civil_war"
-                value = this.days_since_movement_defeated
-                subtract = very_long_modifier_time
-                divide = {
-                    value = very_long_modifier_time
-                }
-            }
+            add = movement_radicalism_poor_papal_relations
         }
+
+        add = movement_radicalism_neighboring_religious_revolution
+
+        add = movement_radicalism_simultaneous_insurrections
+        add = movement_radicalism_suppressed_after_civil_war
 	}
 }

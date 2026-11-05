@@ -11,6 +11,7 @@ REPLACE_OR_CREATE:exile_character = {
 			has_law_or_variant = law_type:law_single_party_state
 			has_law_or_variant = law_type:law_secret_police
 			has_law_or_variant = law_type:law_outlawed_dissent
+			divided_monarchists_ai_active = yes
 		}
 	}
 	
@@ -153,7 +154,7 @@ REPLACE_OR_CREATE:exile_character = {
 				custom_tooltip = {
 					text = house_tokugawa_not_tt
 					NOT = {
-						has_variable = house_tokugawa
+						var:dynasty_var ?= flag:house_tokugawa
 					}
 				}
 			}
@@ -169,7 +170,7 @@ REPLACE_OR_CREATE:exile_character = {
 				custom_tooltip = {
 					text = house_yamato_not_tt
 					NOT = {
-						has_variable = house_yamato
+						var:dynasty_var ?= flag:house_yamato
 					}
 				}
 			}
@@ -199,6 +200,12 @@ REPLACE_OR_CREATE:exile_character = {
 				set_variable = exile_golpista_var
 				character_execute_immediate_coup = yes
 			}
+		}
+		else_if = {
+			limit = {
+				rlit_pushkin_needed_for_golden_age = yes
+			}
+			rlit_pushkin_force_duel_effect = yes
 		}
 		else = {
 			if = {
@@ -514,6 +521,91 @@ REPLACE_OR_CREATE:exile_character = {
 				}
 				multiply = 0.25
 			}
+
+			if = {
+				limit = {
+					owner ?= {
+						has_journal_entry = je_tp_tsar_unshakable_autocracy
+						NOT = { has_variable = je_tp_tsar_unshakable_autocracy_button_1_complete }
+					}
+					has_role_of_type = agitator
+					OR = {
+						has_socialist_ideology = yes
+						has_progressive_ideology = yes
+						has_liberal_ideology = yes
+					}
+				}
+				add = 15
+			}
+			if = {
+				limit = {
+					save_temporary_scope_as = tp_exile_candidate_scope
+					owner ?= {
+						has_journal_entry = je_tp_fav_bootlicker
+						OR = {
+							var:tp_bootlicker_rival_1 ?= scope:tp_exile_candidate_scope
+							var:tp_bootlicker_rival_2 ?= scope:tp_exile_candidate_scope
+							var:tp_bootlicker_rival_3 ?= scope:tp_exile_candidate_scope
+						}
+					}
+				}
+				add = 25
+			}
+			if = {
+				limit = {
+					character_is_rival_french_house = yes
+				}
+				add = 50
+			}
+			if = {
+				limit = {
+					character_is_rival_french_house = yes
+					is_interest_group_leader = yes
+					interest_group ?= {
+						any_scope_character = {
+							has_role_of_type = politician
+							is_interest_group_leader = no
+							character_matches_divided_monarchists_ai_path = yes
+						}
+					}
+				}
+				add = 25
+			}
+			if = {
+				limit = {
+					owner ?= {
+						divided_monarchists_ai_backs_monarchist = yes
+					}
+					has_role_of_type = agitator
+					OR = {
+						has_ideology = ideology:ideology_republican_leader
+						has_ideology = ideology:ideology_radical
+						has_ideology = ideology:ideology_positivist
+					}
+				}
+				add = 25
+			}
+			if = {
+				limit = {
+					owner ?= {
+						ai_wants_radicals = yes
+					}
+					character_is_french_house = yes
+				}
+				add = 50
+			}
+			if = {
+				limit = {
+					has_template = RUS_alexander_pushkin
+				}
+				multiply = 0
+			}
+			if = {
+				limit = {
+					character_matches_divided_monarchists_ai_path = yes
+				}
+				multiply = 0
+			}
 		}
 	}
 }
@@ -594,6 +686,12 @@ REPLACE_OR_CREATE:retire_commander = {
 				set_variable = retire_golpista_var
 				character_execute_immediate_coup = yes
 			}
+		}
+		else_if = {
+			limit = {
+				rlit_pushkin_needed_for_golden_age = yes
+			}
+			rlit_pushkin_force_duel_effect = yes
 		}
 		else = {
 			hidden_effect = {
@@ -724,6 +822,42 @@ REPLACE_OR_CREATE:retire_commander = {
 				}
 			}
 			add = -150
+		}
+		if = {
+			limit = {
+				save_temporary_scope_as = tp_retire_candidate_scope
+				owner ?= {
+					has_journal_entry = je_tp_fav_bootlicker
+					is_at_war = no
+					OR = {
+						var:tp_bootlicker_rival_1 ?= scope:tp_retire_candidate_scope
+						var:tp_bootlicker_rival_2 ?= scope:tp_retire_candidate_scope
+						var:tp_bootlicker_rival_3 ?= scope:tp_retire_candidate_scope
+					}
+				}
+			}
+			add = 100
+		}
+		if = {
+			limit = {
+				character_is_rival_french_house = yes
+				owner ?= {
+					is_at_war = no
+				}
+			}
+			add = 50
+		}
+		if = {
+			limit = {
+				has_template = RUS_alexander_pushkin
+			}
+			multiply = 0
+		}
+		if = {
+			limit = {
+				character_matches_divided_monarchists_ai_path = yes
+			}
+			multiply = 0
 		}
 	}
 }

@@ -19,6 +19,36 @@ texticon = {
 }
 
 texticon = {
+	icon = com_maplist_btn
+	iconsize = {
+		texture = "gfx/interface/main_hud/maplist_btn.dds"
+		size = { 25 25 }
+		offset = { 0 7 }
+		fontsize = 18
+	}
+}
+
+texticon = {
+	icon = com_journal_btn
+	iconsize = {
+		texture = "gfx/interface/main_hud/journal_btn.dds"
+		size = { 25 25 }
+		offset = { 0 7 }
+		fontsize = 18
+	}
+}
+
+texticon = {
+	icon = pol_btn
+	iconsize = {
+		texture = "gfx/interface/main_hud/pol_btn.dds"
+		size = { 25 25 }
+		offset = { 0 7 }
+		fontsize = 18
+	}
+}
+
+texticon = {
 	icon = com_error_deer
 	iconsize = {
 		texture = gfx/interface/error_deer.dds

@@ -9,7 +9,7 @@ types event_window_types {
 			visible = "[EventIcon.IsPortrait]"
 			datacontext = "[EventIcon.GetCharacter]"
 			parentanchor = center
-			blockoverride "show_hat" {}
+			blockoverride "show_hat" { }
 		}
 		
 		flag = {
@@ -49,7 +49,7 @@ types event_window_types {
 			raw_text = "#BOLD [EventWindow.GetTitle]#!"
 		}
 		
-		blockoverride "content" {}
+		blockoverride "content" { }
 		
 		blockoverride "second_text" {
 			text = "EVENT_WINDOW_EVENT_LOCATION"
@@ -186,7 +186,7 @@ types event_window_types {
 						righttoleft = yes
 						position = { 10 0 }
 						tooltip = "EVENT_DLC_TOOLTIP"
-
+						
 						textbox = {
 							autoresize = yes
 							align = vcenter
@@ -195,7 +195,7 @@ types event_window_types {
 							using = elide_fontsize_min
 							alpha = 0.7
 							text = "[Event.GetDLCName]"
-
+							
 							background = {
 								using = dark_area
 								margin = { 10 5 }
@@ -203,7 +203,7 @@ types event_window_types {
 								alpha = 1
 							}
 						}
-
+						
 						icon = {
 							parentanchor = vcenter
 							size = { 50 50 }
@@ -241,7 +241,7 @@ types event_window_types {
 							raw_text = "#bold [EventWindow.GetDescription]#!"
 						}
 						
-						divider_decorative = {}
+						divider_decorative = { }
 						
 						textbox = {
 							name = "flavortext"
@@ -255,7 +255,7 @@ types event_window_types {
 							raw_text = "[EventWindow.GetFlavor]"
 						}
 						
-						widget = { size = { 20 10 }}
+						widget = { size = { 20 10 } }
 						
 						flowcontainer = {
 							direction = vertical
@@ -400,7 +400,7 @@ event_window = {
 			character_portrait_situation_1char = {
 				visible = "[EventIcon.IsPortrait]"
 				datacontext = "[EventIcon.GetCharacter]"
-				blockoverride "show_hat" {}
+				blockoverride "show_hat" { }
 				blockoverride "portrait_mask" {
 					mask = "gfx/event_pictures/1character_banner_mask.dds"
 				}
@@ -432,11 +432,11 @@ event_window = {
 			character_portrait_situation_1char = {
 				visible = "[EventIcon.IsPortrait]"
 				datacontext = "[EventIcon.GetCharacter]"
-				blockoverride "show_hat" {}
+				blockoverride "show_hat" { }
 				blockoverride "portrait_mask" {
 					mask = "gfx/event_pictures/1character_2flags_mask.dds"
 				}
-				blockoverride "portrait_icons" {}
+				blockoverride "portrait_icons" { }
 			}
 		}
 	}
@@ -463,11 +463,11 @@ event_window = {
 			character_portrait_situation_1char = {
 				visible = "[EventIcon.IsPortrait]"
 				datacontext = "[EventIcon.GetCharacter]"
-				blockoverride "show_hat" {}
+				blockoverride "show_hat" { }
 				blockoverride "portrait_mask" {
 					mask = "gfx/event_pictures/1character_4flags_mask.dds"
 				}
-				blockoverride "portrait_icons" {}
+				blockoverride "portrait_icons" { }
 			}
 		}
 	}
@@ -495,11 +495,11 @@ event_window = {
 			character_portrait_duel_01 = {
 				visible = "[EventIcon.IsPortrait]"
 				datacontext = "[EventIcon.GetCharacter]"
-				blockoverride "show_hat" {}
+				blockoverride "show_hat" { }
 				blockoverride "portrait_mask" {
 					mask = "gfx/event_pictures/2characters_mask.dds"
 				}
-				blockoverride "portrait_icons" {}
+				blockoverride "portrait_icons" { }
 			}
 		}
 		
@@ -511,11 +511,11 @@ event_window = {
 			character_portrait_duel_02 = {
 				visible = "[EventIcon.IsPortrait]"
 				datacontext = "[EventIcon.GetCharacter]"
-				blockoverride "show_hat" {}
+				blockoverride "show_hat" { }
 				blockoverride "portrait_mask" {
 					mask = "gfx/event_pictures/2characters_mask.dds"
 				}
-				blockoverride "portrait_icons" {}
+				blockoverride "portrait_icons" { }
 			}
 		}
 	}
@@ -543,11 +543,11 @@ event_window = {
 			character_portrait_duel_01 = {
 				visible = "[EventIcon.IsPortrait]"
 				datacontext = "[EventIcon.GetCharacter]"
-				blockoverride "show_hat" {}
+				blockoverride "show_hat" { }
 				blockoverride "portrait_mask" {
 					mask = "gfx/event_pictures/2characters_halloween_mask.dds"
 				}
-				blockoverride "portrait_icons" {}
+				blockoverride "portrait_icons" { }
 			}
 		}
 		
@@ -559,11 +559,11 @@ event_window = {
 			character_portrait_duel_02 = {
 				visible = "[EventIcon.IsPortrait]"
 				datacontext = "[EventIcon.GetCharacter]"
-				blockoverride "show_hat" {}
+				blockoverride "show_hat" { }
 				blockoverride "portrait_mask" {
 					mask = "gfx/event_pictures/2characters_halloween_mask.dds"
 				}
-				blockoverride "portrait_icons" {}
+				blockoverride "portrait_icons" { }
 			}
 		}
 	}
@@ -574,6 +574,7 @@ event_window = {
 	name = "event_window_1char_tabloid_halloween"
 	
 	blockoverride "event_content" {
+		position = { 40 5 }
 		# bg
 		icon = {
 			texture = "gfx/event_pictures/1character_banner_halloween.dds"
@@ -590,11 +591,44 @@ event_window = {
 			character_portrait_frankenstein_situation_1char = {
 				visible = "[EventIcon.IsPortrait]"
 				datacontext = "[EventIcon.GetCharacter]"
-				blockoverride "show_hat" {}
+				blockoverride "show_hat" { }
 				blockoverride "portrait_mask" {
 					mask = "gfx/event_pictures/1character_banner_halloween_mask.dds"
 				}
 				
+				blockoverride "portrait_icons" { }
+			}
+		}
+	}
+}
+
+### 1 CHAR TABLOID HALLOWEEN NEMO
+event_window = {
+	name = "event_window_1char_tabloid_halloween_nemo"
+
+	blockoverride "event_content" {
+		position = { 40 5 }
+		# bg
+		icon = {
+			texture = "gfx/event_pictures/1character_banner_halloween_nemo.dds"
+			alwaystransparent = yes
+			size = { 620 600 }
+			alpha = 0.9
+		}
+
+		#char
+		container = {
+			position = { 0 0 }
+			datacontext = "[Event.GetIcon('left_icon')]"
+
+			character_portrait_frankenstein_situation_1char = {
+				visible = "[EventIcon.IsPortrait]"
+				datacontext = "[EventIcon.GetCharacter]"
+				blockoverride "show_hat" {}
+				blockoverride "portrait_mask" {
+					mask = "gfx/event_pictures/1character_banner_halloween_mask_nemo.dds"
+				}
+
 				blockoverride "portrait_icons" { }
 			}
 		}
@@ -633,61 +667,56 @@ event_window = {
 ########################################
 
 
-#### CMF Vanilla Event Window Variants
-event_window_com_base = {}
-event_window_com_1char_tabloid = {}
-event_window_com_1char_propaganda = {}
-event_window_com_1char_lord_kitchener = {}
-event_window_com_2char = {}
-event_window_com_2char_halloween = {}
-event_window_com_1char_tabloid_halloween = {}
-event_window_com_big_icon_center = {}
-event_window_com_fixed_image_size = {}
+#### CMF Base Event Window
+event_window_com_base = { }
 
 #### CMF Character Window Variants
-event_window_1char_adventure = {}
-event_window_2char_adventure = {}
-event_window_2char_duel = {}
-event_window_2char_discussion = {}
-event_window_highlander = {}
-event_window_3char = {}
-event_window_3char_selection = {}
+event_window_1char_adventure = { }
+event_window_2char_adventure = { }
+event_window_2char_duel = { }
+event_window_2char_discussion = { }
+event_window_highlander = { }
+event_window_3char = { }
+event_window_3char_selection = { }
 
 #### CMF Superevent Window Variants
-event_window_superevent_newspaper = {}
-event_window_superevent_newspaper_full = {}
-event_window_superevent_classic = {}
-event_window_superevent_classic_full = {}
-event_window_superevent_modern = {}
-event_window_superevent_modern_full = {}
-event_window_superevent_crisis = {}
+event_window_superevent_newspaper = { }
+event_window_superevent_newspaper_full = { }
+event_window_superevent_classic = { }
+event_window_superevent_classic_full = { }
+event_window_superevent_modern = { }
+event_window_superevent_modern_full = { }
+event_window_superevent_crisis = { }
 
 #### CMF Widescreen Window Variants
-event_window_widescreen_classic = {}
-event_window_widescreen_newspaper = {}
+event_window_widescreen_classic = { }
+event_window_widescreen_newspaper = { }
 
 #### CMF Special Window Variants
-event_window_ethics = {}
-event_window_com_focus_text = {}
+event_window_com_introduction_victoria = { }
+event_window_com_introduction_europa = { }
+event_window_ethics = { }
+event_window_com_focus_text = { }
 
 #### CMF Letter Window Variants
-com_event_window_letter_simple = {}
-com_event_window_letter_paper = {}
-com_event_window_letter_image = {}
-com_event_window_telegram = {}
-com_event_window_newspaper = {}
+com_event_window_letter_simple = { }
+com_event_window_letter_paper = { }
+com_event_window_letter_image = { }
+com_event_window_letter_image_box = { }
+com_event_window_telegram = { }
+com_event_window_newspaper = { }
 
 #### CMF Europa Universalis Variants
-event_window_europa_classic = {}
-event_window_europa_1_char = {}
-event_window_europa_1_char_portrait = {}
-event_window_europa_2_char = {}
+event_window_europa_classic = { }
+event_window_europa_1_char = { }
+event_window_europa_1_char_portrait = { }
+event_window_europa_2_char = { }
 
 #### CMF BPM Compatibility
-event_window_form_government = {}
-event_window_choose_pm = {}
-bpm_event_window_superevent_newspaper = {}
+event_window_form_government = { }
+event_window_choose_pm = { }
+bpm_event_window_superevent_newspaper = { }
 
 #### CMF Manaflow Compatibility
-event_window_gate_dungeon = {}
-event_window_gate_dungeon_setup = {}
+event_window_gate_dungeon = { }
+event_window_gate_dungeon_setup = { }

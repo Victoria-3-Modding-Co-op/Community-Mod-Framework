@@ -385,7 +385,7 @@ fascist_party = {
 			country_has_voting_franchise = yes
 			OR = {
 				py:fascist_party ?= {
-					any_member = {}
+					party_has_members = yes
 				}
 				any_interest_group = {
 					leader ?= {
@@ -513,12 +513,9 @@ fascist_party = {
 			limit = {
 				leader ?= {
 					OR = {
-						has_ideology = ideology:ideology_communist
-						has_ideology = ideology:ideology_vanguardist
-						has_ideology = ideology:ideology_anarchist
-						has_ideology = ideology:ideology_social_democrat
+						has_socialist_ideology = yes
+						has_ideology = ideology:ideology_state_socialist
 						has_ideology = ideology:ideology_radical
-						has_ideology = ideology:ideology_nihilist
 					}
 				}
 			}
@@ -547,7 +544,7 @@ fascist_party = {
 				desc = "from_progressive_fascism"
 			}
 		}
-		if = { # trade unions usually dislike fascism
+		if = { # Trade Unions usually dislike fascism
 			limit = {
 				is_interest_group_type = ig_trade_unions
 			}
@@ -558,8 +555,9 @@ fascist_party = {
 		}
 		if = { # free trade advocates don't love protectionism
 			limit = {
-				leader ?= {
-					has_ideology = ideology:ideology_market_liberal
+				law_stance = {
+					law = law_type:law_free_trade
+					value > neutral
 				}
 			}
 			add = {
@@ -608,6 +606,7 @@ fascist_party = {
 				OR = {
 					has_ideology = ideology:ideology_military_absolutist
 					has_ideology = ideology:ideology_patriotic
+					has_ideology = ideology:ideology_militarist
 				}
 			}
 			add = {
@@ -615,11 +614,16 @@ fascist_party = {
 				desc = "from_patriot"
 			}
 		}
-		if = { # rural folk will ally with anti-migration faction
+		if = { # anti-immigration alliance
 			limit = {
 				OR = {
-					has_ideology = ideology:ideology_isolationist
-
+					owner = {
+						has_law_or_variant = law_type:law_no_migration_controls
+					}
+					law_stance = {
+						law = law_type:law_no_migration_controls
+						value < neutral
+					}
 					# ANZFP
 					trigger_if = {
 						limit = {
@@ -628,22 +632,23 @@ fascist_party = {
 						anz_isolationist_ideologies = yes
 					}
 				}
-				owner = {
-					has_law_or_variant = law_type:law_no_migration_controls
-				}
 			}
 			add = {
 				value = 5
-				desc = "from_isolationist"
+				desc = "from_migration_law"
 			}
 		}
 		if = { # conservatives like police
 			limit = {
+				owner = {
+					has_technology_researched = law_enforcement
+					has_law_or_variant = law_type:law_no_police
+				}
 				OR = {
-					has_paternalist_ideology = yes
-					has_ideology = ideology:ideology_patriotic
-					has_ideology = ideology:ideology_military_absolutist
-
+					law_stance = {
+						law = law_type:law_no_police
+						value < neutral
+					}
 					# ANZFP
 					trigger_if = {
 						limit = {
@@ -652,29 +657,22 @@ fascist_party = {
 						anz_paternalistic_ideologies = yes
 					}
 				}
-				owner = {
-					has_technology_researched = law_enforcement
-					has_law_or_variant = law_type:law_no_police
-				}
 			}
 			add = {
 				value = 3
 				desc = "from_no_police"
 			}
 		}
-		if = { # opposition to peasant levies
+		if = { # anti-peasant levies
 			limit = {
+				owner ?= {
+					has_law_or_variant = law_type:law_peasant_levies
+				}
 				OR = {
-					has_ideology = ideology:ideology_jingoist
-					has_ideology = ideology:ideology_particularist
-					has_ideology = ideology:ideology_sikh_moralist
-					leader ?= {
-						OR = {
-							has_ideology = ideology:ideology_fascist
-							has_ideology = ideology:ideology_jingoist_leader
-						}
+					law_stance = {
+						law = law_type:law_peasant_levies
+						value < neutral
 					}
-
 					# ANZFP
 					trigger_if = {
 						limit = {
@@ -683,37 +681,27 @@ fascist_party = {
 						anz_particularist_ideologies = yes
 					}
 				}
-				owner = {
-					has_law_or_variant = law_type:law_peasant_levies
-				}
 			}
 			add = {
 				value = 3
 				desc = "from_peasant_levies"
 			}
 		}
-		if = { # loyalist-meritocratic alliance for tax reform
+		if = { # loyalist/proletarian/meritocratic alliance for tax reform
 			limit = {
-				OR = {
-					has_ideology = ideology:ideology_meritocratic
-					has_ideology = ideology:ideology_cartist
-					AND = {
-						has_ideology = ideology:ideology_loyalist
-						owner = {
-							NOT = { has_law_or_variant = law_type:law_graduated_taxation }
-						}
+				owner ?= {
+					NOT = {
+						has_law_or_variant = law_type:law_proportional_taxation
 					}
 				}
-				owner = {
-					NOR = {
-						has_law_or_variant = law_type:law_proportional_taxation
-						has_law_or_variant = law_type:law_per_capita_based_taxation
-					}
+				law_enactment_stance = {
+					law = law_type:law_proportional_taxation
+					value > neutral
 				}
 			}
 			add = {
 				value = 3
-				desc = "from_no_proportional_or_per_capita_tax"
+				desc = "from_lacking_tax_laws"
 			}
 		}
 		if = { # authoritarians inclined towards fascism
@@ -725,6 +713,75 @@ fascist_party = {
 			add = {
 				value = 3
 				desc = "from_authoritarian"
+			}
+		}
+		if = { # French Monarchists
+			limit = {
+				OR = {
+					AND = {
+						leader ?= {
+							has_ideology = ideology:ideology_legitimist
+						}
+						owner.py:fascist_party ?= {
+							any_member = {
+								is_powerful = yes
+								leader ?= {
+									OR = {
+										has_ideology = ideology:ideology_bonapartist
+										has_ideology = ideology:ideology_orleanist
+									}
+								}
+							}
+						}
+					}
+					AND = {
+						leader ?= {
+							has_ideology = ideology:ideology_bonapartist
+						}
+						owner.py:fascist_party ?= {
+							any_member = {
+								is_powerful = yes
+								leader ?= {
+									OR = {
+										has_ideology = ideology:ideology_legitimist
+										has_ideology = ideology:ideology_orleanist
+									}
+								}
+							}
+						}
+					}
+					AND = {
+						leader ?= {
+							has_ideology = ideology:ideology_orleanist
+						}
+						owner.py:fascist_party ?= {
+							any_member = {
+								is_powerful = yes
+								leader ?= {
+									OR = {
+										has_ideology = ideology:ideology_bonapartist
+										has_ideology = ideology:ideology_legitimist
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			add = {
+				value = -5
+				desc = "from_french_monarchist_rival"
+			}
+		}
+		if = {
+			limit = {
+				leader ?= {
+					has_variable = caudillo_fascist
+				}
+			}
+			add = {
+				value = 20
+				desc = "caudillo_support"
 			}
 		}
 		if = {
@@ -754,95 +811,6 @@ fascist_party = {
 			multiply = {
 				value = 0.0
 				desc = "from_three_or_more_prior_members"
-			}
-		}
-		if = { # anti-orleanist
-			limit = {
-				leader ?= {
-					OR = {
-						has_ideology = ideology:ideology_bonapartist
-						has_ideology = ideology:ideology_legitimist
-					}
-				}
-				owner = {
-					any_interest_group = {
-						has_party = yes
-						party = {
-							is_party_type = fascist_party
-						}
-						is_powerful = yes
-						leader ?= {
-							has_ideology = ideology:ideology_orleanist
-						}
-					}
-				}
-			}
-			add = {
-				value = -5
-				desc = "from_french_monarchist_rival"
-			}
-		}
-		if = { # anti-legitimist
-			limit = {
-				leader ?= {
-					OR = {
-						has_ideology = ideology:ideology_bonapartist
-						has_ideology = ideology:ideology_orleanist
-					}
-				}
-				owner = {
-					any_interest_group = {
-						has_party = yes
-						party = {
-							is_party_type = fascist_party
-						}
-						is_powerful = yes
-						leader ?= {
-							has_ideology = ideology:ideology_legitimist
-						}
-					}
-				}
-			}
-			add = {
-				value = -5
-				desc = "from_french_monarchist_rival"
-			}
-		}
-		if = { # anti-bonapartist
-			limit = {
-				leader ?= {
-					OR = {
-						has_ideology = ideology:ideology_legitimist
-						has_ideology = ideology:ideology_orleanist
-					}
-				}
-				owner = {
-					any_interest_group = {
-						has_party = yes
-						party = {
-							is_party_type = fascist_party
-						}
-						is_powerful = yes
-						leader ?= {
-							has_ideology = ideology:ideology_bonapartist
-						}
-					}
-				}
-			}
-			add = {
-				value = -5
-				desc = "from_french_monarchist_rival"
-			}
-		}
-		if = {
-			limit = {
-				leader ?= {
-					has_variable = caudillo_fascist
-				}
-			}
-			add = {
-				value = 20
-				desc = "caudillo_support"
 			}
 		}
 	}

@@ -1,0 +1,2010 @@
+####---------- Victoria 3 Country Introduction Event Windows ----------####
+# These event windows are meant to fire once at the start of the game.
+# These make heavy use of the GetPlayer function which will throw errors in observer mode.
+
+types com_introduction_window_types {
+	
+	type event_window_com_introduction_victoria = event_window_com_base {
+		name = "event_window_com_introduction_victoria"
+		
+		blockoverride "window_header_name" {
+			text = "com_intro_window_header"
+		}
+		
+		blockoverride "second_line" {
+			textbox = {
+				text = "com_intro_window_sub_header"
+				position = { 0 50 }
+				parentanchor = hcenter
+				autoresize = yes
+				align = nobaseline
+			}
+		}
+		
+		blockoverride "event_content" {
+			flowcontainer = {
+				resizeparent = yes
+				margin = { 35 0 }
+				margin_bottom = 25
+				
+				### VIDEO/IMAGE + TEXT/OPTIONS
+				container = {
+					### HEADER FLAGS / PORTRAITS / ICONS
+					event_icon = {
+						position = { 20 0 }
+						datacontext = "[Event.GetIcon('minor_left_icon')]"
+					}
+					event_icon = {
+						parentanchor = right
+						position = { -25 0 }
+						datacontext = "[Event.GetIcon('minor_right_icon')]"
+					}
+					
+					container = {
+						minimumsize = { 1120 -1 }
+						position = { 0 90 }
+						
+						### EVENT IMAGE / CONTENT
+						widget = {
+							position = { 3 3 }
+							size = { 1120 600 }
+							
+							icon = {
+								visible = "[Event.HasTexture]"
+								texture = "[Event.GetTexture]"
+								alwaystransparent = yes
+								size = { 100% 100% }
+							}
+							
+							video_icon = {
+								visible = "[Event.HasVideo]"
+								video = "[Event.GetVideo]"
+								size = { 100% 100% }
+								alwaystransparent = yes
+								loop = no
+							}
+						}
+						
+						### INNER FRAME + FADE OVER THE IMAGE
+						icon = {
+							texture = "gfx/interface/event_window/event_inner_frame_fullscreen_clear.dds"
+							size = { 100% 100% }
+							spriteType = Corneredtiled
+							spriteborder = { 25 25 }
+							spriteborder_right = 610
+							spriteborder_top = 600
+							texture_density = 2
+							
+							modify_texture = {
+								using = texture_velvet
+							}
+						}
+						
+						### TITLE / TEXT / OPTIONS
+						flowcontainer = {
+							parentanchor = center
+							direction = vertical
+							spacing = 10
+							
+							background = {
+								using = dark_area
+								alpha = 0.75
+								margin = { 20 20 }
+							}
+							divider_decorative = {}
+							com_introduction_europa_tab_buttons = {}
+							com_introduction_europa_situation_tab = {}
+							com_introduction_europa_government_tab = {}
+							com_introduction_europa_society_tab = {}
+							com_introduction_europa_environment_tab = {}
+							com_introduction_europa_content_tab = {}
+							com_introduction_europa_option_button = {}
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	type event_window_com_introduction_europa = event_window_com_base {
+		name = "event_window_com_introduction_europa"
+		
+		blockoverride "window_header_name" {
+			text = "com_intro_window_header"
+		}
+		
+		blockoverride "second_line" {
+			textbox = {
+				text = "com_intro_window_sub_header"
+				position = { 0 50 }
+				parentanchor = hcenter
+				autoresize = yes
+				align = nobaseline
+			}
+		}
+		
+		blockoverride "event_content" {
+			flowcontainer = {
+				parentanchor = top|hcenter
+				direction = vertical
+				resizeparent = yes
+				margin_top = 80
+				margin_left = 5
+				margin_right = 5
+				margin_bottom = 15
+				spacing = 6
+				
+				com_introduction_europa_illustration = {}
+				com_introduction_europa_tab_buttons = {}
+				com_introduction_europa_situation_tab = {}
+				com_introduction_europa_government_tab = {}
+				com_introduction_europa_society_tab = {}
+				com_introduction_europa_environment_tab = {}
+				com_introduction_europa_content_tab = {}
+				com_introduction_europa_option_button = {}
+			}
+		}
+	}
+	
+	type com_introduction_europa_illustration = widget {
+		parentanchor = top|hcenter
+		size = { 800 220 }
+		
+		icon = {
+			parentanchor = center
+			position = { 5 -1 }
+			visible = "[Event.HasTexture]"
+			texture = "[Event.GetTexture]"
+			alwaystransparent = yes
+			size = { 90% 98% }
+		}
+		
+		video_icon = {
+			parentanchor = center
+			position = { 5 -1 }
+			visible = "[Event.HasVideo]"
+			video = "[Event.GetVideo]"
+			size = { 90% 98% }
+			alwaystransparent = yes
+			loop = no
+		}
+		
+		container = {
+			parentanchor = bottom|left
+			position = { 160 -5 }
+			
+			character_portrait_base_torso = {
+				datacontext = "[GetPlayer.GetRuler]"
+				blockoverride "show_hat" {}
+				blockoverride "portrait_mask" {
+					mask = "gfx/interface/portraits/portrait_mask_no_fade_bottom.dds"
+				}
+				blockoverride "portrait_icons" {}
+				blockoverride "portrait_size" {
+					size = { 188 244 }
+				}
+				blockoverride "portrait_texture" {
+					portrait_texture = "[Character.GetAnimatedPortrait(
+                         ComSelectPortraitVar('com_character_environment','environment_standard'),
+                         ComSelectPortraitVar('com_character_camera','camera_event_left'),
+                         ComSelectPortraitVar('com_character_animation','idle'),
+                         GetPortraitRenderSize(PdxGuiWidget.Self)
+                     )]"
+				}
+				
+				default_header_clean_faded = {
+					parentanchor = center
+					size = { 240 35 }
+					position = { 10 -20 }
+					
+					textbox = {
+						raw_text = "[Character.GetFullName]"
+						parentanchor = center
+						position = { 0 -2 }
+						autoresize = yes
+						elide = right
+						using = fontsize_large
+					}
+					blockoverride "text" {}
+				}
+			}
+		}
+		
+		icon = {
+			parentanchor = center
+			position = { 5 -1 }
+			size = { 90% 98% }
+			texture = "gfx/interface/event_window/event_inner_frame_fullscreen_horizontal.dds"
+			alpha = 0.9
+		}
+		
+		icon = {
+			parentanchor = center
+			size = { 95% 100% }
+			texture = "gfx/interface/character_panel/char_bg_frame.dds"
+			
+			modify_texture = {
+				using = texture_velvet
+			}
+		}
+	}
+	
+	type com_introduction_europa_tab_buttons = widget {
+		parentanchor = top|hcenter
+		size = { 700 40 }
+		
+		tab_buttons = {
+			parentanchor = center
+			
+			blockoverride "first_button" {
+				text = "com_intro_window_situation_tab_button"
+			}
+			blockoverride "first_button_selected" {
+				text = "com_intro_window_situation_tab_button"
+			}
+			blockoverride "first_button_visibility_checked" {
+				visible = "[And(
+					Not(GetVariableSystem.HasValue('com_introduction_europa_tab', 'situation')),
+					GetVariableSystem.Exists('com_introduction_europa_tab')
+				)]"
+			}
+			blockoverride "first_button_visibility" {
+				visible = "[Or(
+					GetVariableSystem.HasValue('com_introduction_europa_tab', 'situation'),
+					Not(GetVariableSystem.Exists('com_introduction_europa_tab'))
+				)]"
+			}
+			blockoverride "first_button_click" {
+				onclick = "[GetVariableSystem.Set('com_introduction_europa_tab', 'situation')]"
+			}
+			
+			blockoverride "second_button" {
+				text = "com_intro_window_politics_tab_button"
+			}
+			blockoverride "second_button_selected" {
+				text = "com_intro_window_politics_tab_button"
+			}
+			blockoverride "second_button_visibility_checked" {
+				visible = "[Not(GetVariableSystem.HasValue('com_introduction_europa_tab', 'government'))]"
+			}
+			blockoverride "second_button_visibility" {
+				visible = "[GetVariableSystem.HasValue('com_introduction_europa_tab', 'government')]"
+			}
+			blockoverride "second_button_click" {
+				onclick = "[GetVariableSystem.Set('com_introduction_europa_tab', 'government')]"
+			}
+			
+			blockoverride "third_button" {
+				text = "com_intro_window_society_tab_button"
+			}
+			blockoverride "third_button_selected" {
+				text = "com_intro_window_society_tab_button"
+			}
+			blockoverride "third_button_visibility_checked" {
+				visible = "[Not(GetVariableSystem.HasValue('com_introduction_europa_tab', 'society'))]"
+			}
+			blockoverride "third_button_visibility" {
+				visible = "[GetVariableSystem.HasValue('com_introduction_europa_tab', 'society')]"
+			}
+			blockoverride "third_button_click" {
+				onclick = "[GetVariableSystem.Set('com_introduction_europa_tab', 'society')]"
+			}
+			
+			blockoverride "fourth_button" {
+				text = "com_intro_window_environment_tab_button"
+			}
+			blockoverride "fourth_button_selected" {
+				text = "com_intro_window_environment_tab_button"
+			}
+			blockoverride "fourth_button_visibility_checked" {
+				visible = "[Not(GetVariableSystem.HasValue('com_introduction_europa_tab', 'environment'))]"
+			}
+			blockoverride "fourth_button_visibility" {
+				visible = "[GetVariableSystem.HasValue('com_introduction_europa_tab', 'environment')]"
+			}
+			blockoverride "fourth_button_click" {
+				onclick = "[GetVariableSystem.Set('com_introduction_europa_tab', 'environment')]"
+			}
+			
+			blockoverride "fifth_button" {
+				text = "com_intro_window_content_tab_button"
+			}
+			blockoverride "fifth_button_selected" {
+				text = "com_intro_window_content_tab_button"
+			}
+			blockoverride "fifth_button_visibility_checked" {
+				visible = "[Not(GetVariableSystem.HasValue('com_introduction_europa_tab', 'content'))]"
+			}
+			blockoverride "fifth_button_visibility" {
+				visible = "[GetVariableSystem.HasValue('com_introduction_europa_tab', 'content')]"
+			}
+			blockoverride "fifth_button_click" {
+				onclick = "[GetVariableSystem.Set('com_introduction_europa_tab', 'content')]"
+			}
+		}
+	}
+	
+	type com_introduction_europa_situation_tab = widget {
+		parentanchor = top|hcenter
+		size = { 700 400 }
+		
+		visible = "[Or(
+            GetVariableSystem.HasValue('com_introduction_europa_tab', 'situation'),
+            Not(GetVariableSystem.Exists('com_introduction_europa_tab'))
+        )]"
+		
+		background = {
+			margin = { 10 10 }
+			using = light_bg
+			using = frame_small_mask
+			
+			block "entry_bg_fancy_bg_alpha" {
+				alpha = 0.8
+			}
+		}
+		
+		background = {
+			margin = { 10 10 }
+			using = frame_small
+		}
+		
+		scrollarea = {
+			parentanchor = top|hcenter
+			minimumsize = { 720 400 }
+			maximumsize = { 720 -1 }
+			
+			using = default_list_position
+			layoutpolicy_vertical = expanding
+			layoutpolicy_horizontal = preferred
+			
+			scrollbarpolicy_horizontal = always_off
+			
+			scrollbar_vertical = {
+				using = vertical_scrollbar
+			}
+			
+			scrollwidget = {
+				flowcontainer = {
+					parentanchor = top|hcenter
+					direction = vertical
+					margin = { 0 5 }
+					spacing = 5
+					
+					textbox = {
+						maximumsize = { 710 -1 }
+						parentanchor = top|hcenter
+						multiline = yes
+						autoresize = yes
+						align = nobaseline
+						margin = { 10 10 }
+						using = fontsize_medium
+						text = "com_intro_window_flavor_text"
+						
+						background = {
+							using = entry_bg
+						}
+						
+						background = {
+							using = dark_area
+							margin = { 120 15 }
+							alpha = 0.5
+							
+							modify_texture = {
+								texture = "gfx/interface/masks/fade_horizontal_center.dds"
+								blend_mode = alphamultiply
+							}
+							modify_texture = {
+								texture = "gfx/interface/masks/fade_vertical_center.dds"
+								translate_uv = { 0 0 }
+								blend_mode = alphamultiply
+							}
+						}
+					}
+					widget = {
+						size = { 5 5 }
+						parentanchor = top|hcenter
+					}
+					divider_clean = {
+						visible = "[Or(
+							GetPlayer.MakeScope.Var('com_intro_window_situation_text').IsSet,
+							Not(StringIsEmpty(EventWindow.GetDescription))
+						)]"
+						parentanchor = top|hcenter
+					}
+					textbox = {
+						maximumsize = { 710 -1 }
+						visible = "[Not(StringIsEmpty(EventWindow.GetDescription))]"
+						multiline = yes
+						autoresize = yes
+						parentanchor = top|hcenter
+						align = nobaseline
+						raw_text = "#bold [EventWindow.GetDescription]#!"
+						margin = { 10 0 }
+						using = fontsize_medium
+					}
+					textbox = {
+						maximumsize = { 710 -1 }
+						visible = "[GetPlayer.MakeScope.Var('com_intro_window_situation_text').IsSet]"
+						parentanchor = top|hcenter
+						multiline = yes
+						autoresize = yes
+						align = nobaseline
+						margin = { 15 5 }
+						using = fontsize_medium
+						text = "com_intro_window_situation_text"
+					}
+				}
+			}
+		}
+	}
+	
+	type com_introduction_europa_government_tab = widget {
+		parentanchor = top|hcenter
+		size = { 700 400 }
+		
+		visible = "[GetVariableSystem.HasValue('com_introduction_europa_tab', 'government')]"
+		
+		background = {
+			margin = { 10 10 }
+			using = light_bg
+			using = frame_small_mask
+			
+			block "entry_bg_fancy_bg_alpha" {
+				alpha = 0.8
+			}
+		}
+		
+		background = {
+			margin = { 10 10 }
+			using = frame_small
+		}
+		
+		scrollarea = {
+			parentanchor = top|hcenter
+			minimumsize = { 720 400 }
+			maximumsize = { 720 -1 }
+			
+			using = default_list_position
+			layoutpolicy_vertical = expanding
+			layoutpolicy_horizontal = preferred
+			
+			scrollbarpolicy_horizontal = always_off
+			
+			scrollbar_vertical = {
+				using = vertical_scrollbar
+			}
+			
+			scrollwidget = {
+				flowcontainer = {
+					parentanchor = top|hcenter
+					direction = vertical
+					spacing = 5
+					
+					default_header_clean_faded = {
+						parentanchor = top|hcenter
+						size = { 710 40 }
+						position = { 10 -20 }
+						
+						textbox = {
+							text = "com_intro_window_government_composition"
+							parentanchor = center
+							position = { 0 -2 }
+							autoresize = yes
+							elide = right
+							using = fontsize_xl
+						}
+						blockoverride "text" {}
+					}
+					
+					widget = {
+						parentanchor = top|hcenter
+						size = { 710 120 }
+						using = entry_bg_fancy
+						
+						datacontext = "[AccessPlayer]"
+						
+						icon = {
+							size = { 40 40 }
+							parentanchor = left|top
+							position = { 10 8 }
+							texture = "gfx/interface/icons/generic_icons/in_government_icon.dds"
+							tooltip = "INTEREST_GROUPS_IN_GOVERNMENT"
+							using = tooltip_below
+							using = in_government_tooltip_with_graph
+						}
+						
+						textbox = {
+							text = "com_intro_window_in_goverment"
+							parentanchor = left|top
+							position = { 55 10 }
+							autoresize = yes
+							align = left|nobaseline
+							elide = right
+							using = fontsize_xl
+						}
+						
+						icon = {
+							size = { 40 40 }
+							parentanchor = right|top
+							position = { -10 8 }
+							texture = "gfx/interface/icons/generic_icons/in_opposition_icon.dds"
+							tooltip = "INTEREST_GROUPS_IN_GOVERNMENT"
+							using = tooltip_below
+							using = in_government_tooltip_with_graph
+						}
+						
+						textbox = {
+							text = "com_intro_window_in_opposition"
+							parentanchor = right|top
+							position = { -55 10 }
+							autoresize = yes
+							align = right|nobaseline
+							elide = right
+							using = fontsize_xl
+						}
+						
+						hbox = {
+							parentanchor = center
+							position = { 0 20 }
+							layoutpolicy_horizontal = expanding
+							layoutpolicy_vertical = preferred
+							margin = { 10 10 }
+							spacing = 5
+							
+							# IGs In Government
+							hbox = {
+								visible = "[Not(IsDataModelEmpty(Country.AccessInterestGroupsInGovernment))]"
+								layoutpolicy_horizontal = expanding
+								layoutpolicy_vertical = preferred
+								maximumsize = { -1 60 }
+								margin = { 5 5 }
+								margin_left = 0
+								layoutstretchfactor_horizontal = "[FixedPointToInt(Multiply_CFixedPoint(Country.GetTotalGovernmentClout, '(CFixedPoint)100'))]"
+								
+								background = {
+									using = dark_area
+								}
+								background = {
+									using = simple_frame
+								}
+								
+								datamodel = "[Country.AccessInterestGroupsInGovernment]"
+								
+								item = {
+									ig_item_bar = {
+										margin = { 0 5 }
+										minimumsize = { 75 -1 }
+										
+										blockoverride "ig_icon_size" {
+											size = { 30 30 }
+										}
+										
+										blockoverride "background_alpha" {
+											alpha = 0.1
+										}
+									}
+								}
+							}
+							
+							# IGs in Opposition
+							hbox = {
+								visible = "[Not(IsDataModelEmpty(Country.AccessInterestGroupsInOpposition))]"
+								layoutpolicy_horizontal = expanding
+								layoutpolicy_vertical = preferred
+								maximumsize = { -1 60 }
+								margin = { 5 0 }
+								layoutstretchfactor_horizontal = "[FixedPointToInt(Multiply_CFixedPoint(Country.GetTotalOppositionClout, '(CFixedPoint)100'))]"
+								
+								datamodel = "[Country.AccessInterestGroupsInOpposition]"
+								
+								background = {
+									using = entry_bg
+									margin = { 0 0 }
+								}
+								
+								item = {
+									ig_item_bar = {
+										margin = { 0 5 }
+										minimumsize = { 75 -1 }
+										
+										blockoverride "ig_icon_size" {
+											size = { 30 30 }
+										}
+										
+										blockoverride "background_alpha" {
+											alpha = 0.1
+										}
+									}
+								}
+							}
+						}
+					}
+					
+					default_header_clean_faded = {
+						parentanchor = top|hcenter
+						size = { 710 40 }
+						position = { 10 -20 }
+						
+						textbox = {
+							text = "com_intro_window_laws_in_country"
+							parentanchor = center
+							position = { 0 -2 }
+							autoresize = yes
+							elide = right
+							using = fontsize_xl
+						}
+						blockoverride "text" {}
+					}
+					
+					flowcontainer = {
+						parentanchor = top|hcenter
+						direction = horizontal
+						spacing = 5
+						
+						flowcontainer = {
+							parentanchor = top|hcenter
+							direction = vertical
+							minimumsize = { 230 -1 }
+							margin_top = 5
+							
+							using = entry_bg_fancy
+							
+							datamodel = "[AccessPlayer.AccessActivePowerStructureLaws]"
+							
+							item = {
+								com_introduction_europa_law_item = {}
+							}
+						}
+						
+						flowcontainer = {
+							parentanchor = top|hcenter
+							direction = vertical
+							minimumsize = { 230 -1 }
+							margin_top = 5
+							
+							using = entry_bg_fancy
+							
+							datamodel = "[AccessPlayer.AccessActiveEconomyLaws]"
+							
+							item = {
+								com_introduction_europa_law_item = {}
+							}
+						}
+						
+						flowcontainer = {
+							parentanchor = top|hcenter
+							direction = vertical
+							minimumsize = { 230 -1 }
+							margin_top = 5
+							
+							using = entry_bg_fancy
+							
+							datamodel = "[AccessPlayer.AccessActiveHumanRightsLaws]"
+							
+							item = {
+								com_introduction_europa_law_item = {}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	type com_introduction_europa_law_item = widget {
+		parentanchor = hcenter
+		size = { 220 55 }
+		
+		background = {
+			using = entry_bg_simple
+			margin = { -5 -5 }
+		}
+		
+		icon = {
+			parentanchor = left|vcenter
+			size = { 30 30 }
+			position = { 5 0 }
+			texture = "[Law.GetTexture]"
+		}
+		
+		textbox = {
+			text = "com_intro_window_law_group_name"
+			parentanchor = left|vcenter
+			position = { 40 -8 }
+			maximumsize = { 200 -1 }
+			autoresize = yes
+			elide = right
+			using = fontsize_medium
+		}
+		
+		textbox = {
+			text = "com_intro_window_law_name"
+			parentanchor = left|vcenter
+			position = { 40 9 }
+			maximumsize = { 200 -1 }
+			autoresize = yes
+			elide = right
+			using = fontsize_medium
+		}
+	}
+	
+	type com_introduction_europa_society_tab = widget {
+		parentanchor = top|hcenter
+		size = { 700 400 }
+		
+		visible = "[GetVariableSystem.HasValue('com_introduction_europa_tab', 'society')]"
+		
+		datacontext = "[AccessPlayer]"
+		
+		background = {
+			margin = { 10 10 }
+			using = light_bg
+			using = frame_small_mask
+			
+			block "entry_bg_fancy_bg_alpha" {
+				alpha = 0.8
+			}
+		}
+		
+		background = {
+			margin = { 10 10 }
+			using = frame_small
+		}
+		
+		scrollarea = {
+			parentanchor = top|hcenter
+			minimumsize = { 720 400 }
+			maximumsize = { 720 -1 }
+			
+			using = default_list_position
+			layoutpolicy_vertical = expanding
+			layoutpolicy_horizontal = preferred
+			
+			scrollbarpolicy_horizontal = always_off
+			
+			scrollbar_vertical = {
+				using = vertical_scrollbar
+			}
+			
+			scrollwidget = {
+				flowcontainer = {
+					parentanchor = top|hcenter
+					direction = vertical
+					spacing = 5
+					
+					# Country Statistics
+					flowcontainer = {
+						parentanchor = top|hcenter
+						direction = vertical
+						margin_top = 10
+						margin_bottom = 10
+						spacing = 10
+						
+						default_header_clean_faded = {
+							parentanchor = top|hcenter
+							size = { 710 40 }
+							position = { 10 -20 }
+							
+							textbox = {
+								text = "com_intro_window_population_in_country"
+								parentanchor = center
+								position = { 0 -2 }
+								autoresize = yes
+								elide = right
+								using = fontsize_xl
+							}
+							blockoverride "text" {}
+						}
+						
+						flowcontainer = {
+							parentanchor = top|hcenter
+							direction = horizontal
+							spacing = 10
+							
+							container = {
+								minimumsize = { 265 -1 }
+								maximumsize = { 265 -1 }
+								parentanchor = vcenter
+								
+								background = {
+									using = entry_bg
+								}
+								
+								flowcontainer = {
+									margin = { 5 10 }
+									spacing = 5
+									parentanchor = center
+									using = population_tooltip_with_graph
+									
+									icon = {
+										texture = "gfx/interface/icons/generic_icons/population.dds"
+										size = { 25 25 }
+									}
+									
+									textbox = {
+										text = "com_intro_window_population"
+										autoresize = yes
+										using = fontsize_large
+										align = nobaseline
+										parentanchor = vcenter
+										max_width = 150
+										fontsize_min = 14
+										elide = right
+									}
+									
+									textbox = {
+										text = "com_intro_window_total_population"
+										autoresize = yes
+										using = fontsize_large
+										align = nobaseline
+										parentanchor = vcenter
+									}
+								}
+								
+							}
+							
+							widget = {
+								size = { 265 45 }
+								background = {
+									using = entry_bg
+								}
+								
+								flowcontainer = {
+									margin = { 5 10 }
+									spacing = 5
+									parentanchor = center
+									tooltip = "LITERACY_TOOLTIP"
+									
+									textbox = {
+										parentanchor = vcenter
+										text = "com_intro_window_sol_icon"
+										autoresize = yes
+										align = left|nobaseline
+										fontsize = 21
+									}
+									
+									textbox = {
+										text = "com_intro_window_sol"
+										autoresize = yes
+										using = fontsize_large
+										align = nobaseline
+										parentanchor = vcenter
+										max_width = 170
+										fontsize_min = 14
+										elide = right
+									}
+									
+									textbox = {
+										using = average_standard_of_living_tooltip_with_graph
+										text = "com_intro_window_average_sol_value"
+										autoresize = yes
+										using = fontsize_large
+										align = nobaseline
+										parentanchor = vcenter
+									}
+								}
+							}
+						}
+						
+						flowcontainer = {
+							parentanchor = top|hcenter
+							direction = horizontal
+							spacing = 10
+							
+							container = {
+								minimumsize = { 265 -1 }
+								maximumsize = { 265 -1 }
+								parentanchor = vcenter
+								
+								background = {
+									using = entry_bg
+								}
+								
+								flowcontainer = {
+									margin = { 5 10 }
+									spacing = 5
+									parentanchor = center
+									tooltip = "LITERACY_TOOLTIP"
+									
+									icon = {
+										texture = "gfx/interface/icons/generic_icons/literacy.dds"
+										size = { 25 25 }
+										parentanchor = vcenter
+									}
+									
+									textbox = {
+										text = "com_intro_window_literacy"
+										autoresize = yes
+										using = fontsize_large
+										align = nobaseline
+										parentanchor = vcenter
+										max_width = 170
+										fontsize_min = 14
+										elide = right
+									}
+									
+									textbox = {
+										text = "com_intro_window_literacy_rate"
+										autoresize = yes
+										using = fontsize_large
+										align = nobaseline
+										parentanchor = vcenter
+									}
+								}
+							}
+							
+							container = {
+								minimumsize = { 265 -1 }
+								maximumsize = { 265 -1 }
+								parentanchor = vcenter
+								
+								background = {
+									using = entry_bg
+								}
+								
+								flowcontainer = {
+									margin = { 5 10 }
+									spacing = 5
+									parentanchor = center
+									tooltip = "POLITICALLY_INVOLVED_POPULATION_TOOLTIP"
+									
+									icon = {
+										texture = "gfx/interface/icons/generic_icons/negotiate.dds"
+										size = { 25 25 }
+										parentanchor = vcenter
+									}
+									
+									textbox = {
+										text = "com_intro_window_politically_involved"
+										autoresize = yes
+										using = fontsize_large
+										align = nobaseline
+										parentanchor = vcenter
+										max_width = 170
+										fontsize_min = 14
+										elide = right
+									}
+									
+									textbox = {
+										text = "com_intro_window_politically_involved_population"
+										autoresize = yes
+										using = fontsize_large
+										align = nobaseline
+										parentanchor = vcenter
+									}
+								}
+							}
+						}
+					}
+					
+					default_header_clean_faded = {
+						parentanchor = top|hcenter
+						size = { 710 40 }
+						position = { 10 -20 }
+						
+						textbox = {
+							text = "com_intro_window_cultures_in_country"
+							parentanchor = center
+							position = { 0 -2 }
+							autoresize = yes
+							elide = right
+							using = fontsize_xl
+						}
+						blockoverride "text" {}
+					}
+					
+					widget = {
+						parentanchor = top|hcenter
+						size = { 700 80 }
+						background = {
+							texture = "gfx/interface/illustrations/top_illus/top_illu_cultures.dds"
+							
+							modify_texture = {
+								texture = "gfx/interface/illustrations/top_illus/top_illu_mask.dds"
+								spriteType = Corneredstretched
+								spriteborder = { 80 80 }
+								texture_density = 2
+								blend_mode = alphamultiply
+							}
+							modify_texture = {
+								using = texture_velvet
+							}
+						}
+						
+						hbox = {
+							parentanchor = top|hcenter
+							
+							widget = {
+								size = { 200 80 }
+								background = {
+									using = dark_area
+									alpha = 0.5
+									
+									modify_texture = {
+										texture = "gfx/interface/masks/fade_horizontal_center.dds"
+										blend_mode = alphamultiply
+									}
+									modify_texture = {
+										texture = "gfx/interface/masks/fade_vertical_center.dds"
+										translate_uv = { 0 0 }
+										blend_mode = alphamultiply
+									}
+								}
+								textbox = {
+									text = "com_intro_window_cultures"
+									parentanchor = top|hcenter
+									position = { 0 10 }
+									autoresize = yes
+									align = right|nobaseline
+									elide = right
+									fontsize = 18
+								}
+								textbox = {
+									text = "com_intro_window_primary_cultures"
+									parentanchor = bottom|hcenter
+									position = { 0 -15 }
+									autoresize = yes
+									elide = right
+									using = fontsize_xl
+								}
+							}
+							
+							widget = {
+								size = { 200 80 }
+								background = {
+									using = dark_area
+									alpha = 0.5
+									
+									modify_texture = {
+										texture = "gfx/interface/masks/fade_horizontal_center.dds"
+										blend_mode = alphamultiply
+									}
+									modify_texture = {
+										texture = "gfx/interface/masks/fade_vertical_center.dds"
+										translate_uv = { 0 0 }
+										blend_mode = alphamultiply
+									}
+								}
+								textbox = {
+									text = "com_intro_window_citizenship_law"
+									parentanchor = top|hcenter
+									position = { 0 10 }
+									autoresize = yes
+									align = right|nobaseline
+									elide = right
+									fontsize = 18
+								}
+								textbox = {
+									text = "com_intro_window_active_citizenship_law"
+									parentanchor = bottom|hcenter
+									position = { 0 -15 }
+									autoresize = yes
+									elide = right
+									using = fontsize_xl
+								}
+							}
+						}
+					}
+					
+					flowcontainer = {
+						parentanchor = top|hcenter
+						spacing = 5
+						margin = { 10 10 }
+						
+						background = {
+							using = entry_bg
+						}
+						
+						flowcontainer = {
+							parentanchor = left|vcenter
+							direction = vertical
+							
+							textbox = {
+								text = "com_intro_window_acceptance_in_country"
+								parentanchor = top|hcenter
+								autoresize = yes
+								align = right|nobaseline
+								elide = right
+								using = fontsize_large
+							}
+							
+							flowcontainer = {
+								parentanchor = top|hcenter
+								direction = horizontal
+								spacing = 5
+								
+								datamodel = "[AccessPlayer.GetAllAcceptanceStatusSegments]"
+								
+								item = {
+									widget = {
+										size = { 80 60 }
+										
+										datacontext = "[AcceptanceStatusSegment.GetStatus]"
+										
+										widget = {
+											size = { 100% 100% }
+											block "barchart_item_background" {
+												
+												button = {
+													size = { 100% 100% }
+													alwaystransparent = yes
+													texture = "gfx/interface/tooltip/tooltip_title_bg.dds"
+													mirror = horizontal
+													
+													modify_texture = {
+														using = simple_frame_mask
+													}
+													
+													color = "[AcceptanceStatusSegment.GetColor]"
+													alpha = "[TransparentIfTrue(EqualTo_int64(AcceptanceStatusSegment.GetTotalPopulation, '(int64)0'))]"
+													
+													block "barchart_item_bg_texture_fade_left" {
+														using = progressbar_texture_properties
+													}
+												}
+												
+												button = {
+													size = { 100% 100% }
+													alwaystransparent = yes
+													texture = "gfx/interface/tooltip/tooltip_title_bg.dds"
+													
+													modify_texture = {
+														using = simple_frame_mask
+													}
+													
+													color = "[AcceptanceStatusSegment.GetColor]"
+													alpha = "[TransparentIfTrue(EqualTo_int64(AcceptanceStatusSegment.GetTotalPopulation, '(int64)0'))]"
+													
+													block "barchart_item_bg_texture_fade_right" {
+														using = progressbar_texture_properties
+													}
+												}
+												
+												button = {
+													size = { 100% 100% }
+													alwaystransparent = yes
+													using = entry_bg_simple_colored
+													color = "[AcceptanceStatusSegment.GetColor]"
+													alpha = "[TransparentIfTrue(EqualTo_int64(AcceptanceStatusSegment.GetTotalPopulation, '(int64)0'))]"
+												}
+												
+												icon = {
+													size = { 100% 100% }
+													alwaystransparent = yes
+													using = simple_frame
+												}
+											}
+										}
+										
+										widget = {
+											size = { 100% 100% }
+											acceptance_status_large_icon = {
+												parentanchor = center
+												scale = 0.7
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+					
+					default_header_clean_faded = {
+						parentanchor = top|hcenter
+						size = { 710 40 }
+						position = { 10 -20 }
+						
+						textbox = {
+							text = "com_intro_window_religion_in_country"
+							parentanchor = center
+							position = { 0 -2 }
+							autoresize = yes
+							elide = right
+							using = fontsize_xl
+						}
+						blockoverride "text" {}
+					}
+					
+					widget = {
+						parentanchor = top|hcenter
+						size = { 700 80 }
+						background = {
+							texture = "gfx/interface/illustrations/top_illus/top_illu_cultures.dds"
+							
+							modify_texture = {
+								texture = "gfx/interface/illustrations/top_illus/top_illu_mask.dds"
+								spriteType = Corneredstretched
+								spriteborder = { 80 80 }
+								texture_density = 2
+								blend_mode = alphamultiply
+							}
+							modify_texture = {
+								using = texture_velvet
+							}
+						}
+						
+						hbox = {
+							parentanchor = center
+							
+							widget = {
+								size = { 200 80 }
+								
+								background = {
+									using = dark_area
+									alpha = 0.5
+									
+									modify_texture = {
+										texture = "gfx/interface/masks/fade_horizontal_center.dds"
+										blend_mode = alphamultiply
+									}
+									modify_texture = {
+										texture = "gfx/interface/masks/fade_vertical_center.dds"
+										translate_uv = { 0 0 }
+										blend_mode = alphamultiply
+									}
+								}
+								
+								textbox = {
+									text = "com_intro_window_state_religion_header"
+									parentanchor = top|hcenter
+									position = { 0 10 }
+									autoresize = yes
+									align = right|nobaseline
+									elide = right
+									fontsize = 18
+								}
+								textbox = {
+									text = "com_intro_window_state_religion_name"
+									parentanchor = bottom|hcenter
+									position = { 0 -15 }
+									autoresize = yes
+									elide = right
+									using = fontsize_xl
+								}
+							}
+							
+							widget = {
+								size = { 200 80 }
+								
+								background = {
+									using = dark_area
+									alpha = 0.5
+									
+									modify_texture = {
+										texture = "gfx/interface/masks/fade_horizontal_center.dds"
+										blend_mode = alphamultiply
+									}
+									modify_texture = {
+										texture = "gfx/interface/masks/fade_vertical_center.dds"
+										translate_uv = { 0 0 }
+										blend_mode = alphamultiply
+									}
+								}
+								
+								textbox = {
+									text = "com_intro_window_church_and_state_header"
+									parentanchor = top|hcenter
+									position = { 0 10 }
+									autoresize = yes
+									align = right|nobaseline
+									elide = right
+									fontsize = 18
+								}
+								textbox = {
+									text = "com_intro_window_church_and_state_law"
+									parentanchor = bottom|hcenter
+									position = { 0 -15 }
+									autoresize = yes
+									elide = right
+									using = fontsize_xl
+								}
+							}
+						}
+					}
+					
+					default_header_clean_faded = {
+						parentanchor = top|hcenter
+						size = { 710 40 }
+						position = { 10 -20 }
+						
+						textbox = {
+							text = "com_intro_window_social_classes_in_country"
+							parentanchor = center
+							position = { 0 -2 }
+							autoresize = yes
+							elide = right
+							using = fontsize_xl
+						}
+						blockoverride "text" {}
+					}
+					
+					widget = {
+						parentanchor = top|hcenter
+						size = { 700 80 }
+						
+						background = {
+							texture = "gfx/interface/illustrations/top_illus/top_illu_population.dds"
+							
+							modify_texture = {
+								texture = "gfx/interface/illustrations/top_illus/top_illu_mask.dds"
+								spriteType = Corneredstretched
+								spriteborder = { 80 80 }
+								texture_density = 2
+								blend_mode = alphamultiply
+							}
+							modify_texture = {
+								using = texture_velvet
+							}
+						}
+						
+						textbox = {
+							text = "NO_SOCIAL_HIERARCHY"
+							visible = "[Not(GetPlayer.HasSpecialSocialHierarchy)]"
+							parentanchor = center
+							position = { 0 -2 }
+							autoresize = yes
+							elide = right
+							using = fontsize_xl
+						}
+						
+						flowcontainer = {
+							visible = "[GetPlayer.HasSpecialSocialHierarchy]"
+							parentanchor = hcenter
+							margin = { 10 10 }
+							
+							flowcontainer = {
+								parentanchor = vcenter
+								direction = vertical
+								margin_left = 10
+								
+								textbox = {
+									autoresize = yes
+									minimumsize = { 250 -1 }
+									maximumsize = { 250 -1 }
+									multiline = yes
+									align = nobaseline
+									text = "SOCIAL_HIERARCHY_TRIGGER_HEADING"
+								}
+								
+								textbox = {
+									autoresize = yes
+									minimumsize = { 250 -1 }
+									maximumsize = { 250 -1 }
+									multiline = yes
+									align = nobaseline
+									text = "[SocialHierarchy.GetPopTriggerDesc]"
+								}
+							}
+							
+							flowcontainer = {
+								parentanchor = vcenter
+								spacing = 10
+								margin_left = 30
+								
+								icon = {
+									parentanchor = vcenter
+									size = { 60 60 }
+									texture = "gfx/interface/icons/generic_icons/population.dds"
+								}
+								
+								textbox = {
+									parentanchor = vcenter
+									autoresize = yes
+									minimumsize = { 180 -1 }
+									maximumsize = { 180 -1 }
+									multiline = yes
+									align = nobaseline
+									text = "SOCIAL_HIERARCHY_POPULATION"
+								}
+							}
+						}
+					}
+					
+					flowcontainer = {
+						using = society_panel_tab_contents_properties
+						minimumsize = { 554 -1 }
+						maximumsize = { 554 -1 }
+						spacing = 5
+						datacontext = "[AccessPlayer.GetSocialHierarchy]"
+						
+						divider_decorative = {
+							visible = "[GetPlayer.HasSpecialSocialHierarchy]"
+						}
+						
+						flowcontainer = {
+							visible = "[GetPlayer.HasSpecialSocialHierarchy]"
+							parentanchor = hcenter
+							margin = { 10 10 }
+							
+							flowcontainer = {
+								parentanchor = vcenter
+								direction = vertical
+								margin_left = 10
+								
+								textbox = {
+									autoresize = yes
+									minimumsize = { 250 -1 }
+									maximumsize = { 250 -1 }
+									multiline = yes
+									align = nobaseline
+									text = "SOCIAL_HIERARCHY_TRIGGER_HEADING"
+								}
+								
+								textbox = {
+									autoresize = yes
+									minimumsize = { 250 -1 }
+									maximumsize = { 250 -1 }
+									multiline = yes
+									align = nobaseline
+									text = "[SocialHierarchy.GetPopTriggerDesc]"
+								}
+							}
+							
+							flowcontainer = {
+								parentanchor = vcenter
+								spacing = 10
+								margin_left = 30
+								
+								icon = {
+									parentanchor = vcenter
+									size = { 60 60 }
+									texture = "gfx/interface/icons/generic_icons/population.dds"
+								}
+								
+								textbox = {
+									parentanchor = vcenter
+									autoresize = yes
+									minimumsize = { 180 -1 }
+									maximumsize = { 180 -1 }
+									multiline = yes
+									align = nobaseline
+									text = "SOCIAL_HIERARCHY_POPULATION"
+								}
+							}
+						}
+						
+						widget = {
+							parentanchor = hcenter
+							size = { 0 0 }
+							visible = no
+							
+							widget = {
+								parentanchor = hcenter
+								size = { 550  700 }
+								
+								background = {
+									alpha = 0.3
+									fittype = end
+									texture = "gfx/interface/icons/acceptance_icons/bg_illu_social_classes.dds"
+									
+									modify_texture = {
+										spriteType = Corneredstretched
+										spriteborder = { 0 0 }
+										blend_mode = alphamultiply
+										texture = "gfx/interface/masks/fade_vertical_center.dds"
+									}
+									
+									modify_texture = {
+										spriteType = Corneredstretched
+										spriteborder = { 0 0 }
+										blend_mode = alphamultiply
+										texture = "gfx/interface/masks/fade_horizontal_less_right.dds"
+									}
+								}
+							}
+						}
+						
+						flowcontainer = {
+							social_class_strata_column_flowcontainer = {
+								name = "lower_strata_classes"
+								
+								blockoverride "strata_icon"
+								{
+									texture = "gfx/interface/icons/pops_icons/sol_poor_icon.dds"
+								}
+								
+								blockoverride "strata_name"
+								{
+									raw_text = "LOWER_NO_ICON"
+								}
+								
+								blockoverride "social_class_strata_datamodel"
+								{
+									datamodel = "[SocialHierarchy.GetLowerStrataSocialClasses]"
+								}
+								
+								
+							}
+							social_class_strata_column_flowcontainer = {
+								name = "middle_strata_classes"
+								
+								blockoverride "strata_icon"
+								{
+									texture = "gfx/interface/icons/pops_icons/sol_middle_icon.dds"
+								}
+								
+								blockoverride "strata_name"
+								{
+									raw_text = "MIDDLE_NO_ICON"
+								}
+								
+								blockoverride "social_class_strata_datamodel"
+								{
+									datamodel = "[SocialHierarchy.GetMiddleStrataSocialClasses]"
+								}
+							}
+							social_class_strata_column_flowcontainer = {
+								name = "upper_strata_classes"
+								
+								blockoverride "strata_icon"
+								{
+									texture = "gfx/interface/icons/pops_icons/sol_upper_icon.dds"
+								}
+								
+								blockoverride "strata_name"
+								{
+									raw_text = "UPPER_NO_ICON"
+								}
+								
+								blockoverride "social_class_strata_datamodel"
+								{
+									datamodel = "[SocialHierarchy.GetUpperStrataSocialClasses]"
+								}
+							}
+						}
+						
+					}
+				}
+			}
+		}
+	}
+	
+	type com_introduction_europa_environment_tab = widget {
+		parentanchor = top|hcenter
+		size = { 700 400 }
+		
+		visible = "[GetVariableSystem.HasValue('com_introduction_europa_tab', 'environment')]"
+		
+		background = {
+			margin = { 10 10 }
+			using = light_bg
+			using = frame_small_mask
+			
+			block "entry_bg_fancy_bg_alpha" {
+				alpha = 0.8
+			}
+		}
+		
+		background = {
+			margin = { 10 10 }
+			using = frame_small
+		}
+		
+		flowcontainer = {
+			parentanchor = top|hcenter
+			direction = vertical
+			spacing = 10
+			
+			scrollarea = {
+				parentanchor = top|hcenter
+				minimumsize = { 720 400 }
+				maximumsize = { 720 -1 }
+				
+				using = default_list_position
+				layoutpolicy_vertical = expanding
+				layoutpolicy_horizontal = preferred
+				
+				scrollbarpolicy_horizontal = always_off
+				
+				scrollbar_vertical = {
+					using = vertical_scrollbar
+				}
+				
+				scrollwidget = {
+					flowcontainer = {
+						parentanchor = top|hcenter
+						direction = vertical
+						
+						default_header_clean_faded = {
+							parentanchor = top|hcenter
+							size = { 710 40 }
+							position = { 10 -20 }
+							
+							textbox = {
+								text = "com_intro_window_region_header"
+								parentanchor = center
+								position = { 0 -2 }
+								autoresize = yes
+								elide = right
+								using = fontsize_xl
+							}
+							blockoverride "text" { }
+						}
+						
+						textbox = {
+							maximumsize = { 720 -1 }
+							parentanchor = top|hcenter
+							multiline = yes
+							autoresize = yes
+							align = nobaseline
+							margin = { 10 0 }
+							using = fontsize_medium
+							text = "com_intro_window_region_body"
+						}
+						
+						default_header_clean_faded = {
+							parentanchor = top|hcenter
+							size = { 710 40 }
+							position = { 10 -20 }
+							
+							visible = "[Not(IsDataModelEmpty(AccessPlayer.GetSubjects))]"
+							
+							textbox = {
+								raw_text = "Subjects and Dependencies"
+								parentanchor = center
+								position = { 0 -2 }
+								autoresize = yes
+								elide = right
+								using = fontsize_xl
+							}
+							blockoverride "text" { }
+						}
+						
+						flowcontainer = {
+							parentanchor = top|hcenter
+							direction = vertical
+							spacing = 5
+							
+							visible = "[Not(IsDataModelEmpty(AccessPlayer.GetSubjects))]"
+							
+							datamodel = "[AccessPlayer.GetSubjects]"
+							
+							item = {
+								flowcontainer = {
+									visible = "[Country.IsSubject]"
+									
+									textbox = {
+										minimumsize = { 250 -1 }
+										maximumsize = { 250 -1 }
+										autoresize = yes
+										align = nobaseline
+										elide = right
+										fontsize_min = 12
+										using = fontsize_large
+										raw_text = "[Country.GetName]"
+									}
+									
+									textbox = {
+										minimumsize = { 100 -1 }
+										maximumsize = { 100 -1 }
+										autoresize = yes
+										align = nobaseline
+										raw_text = "[Country.GetDefinition.GetTier]"
+									}
+									
+									textbox = {
+										minimumsize = { 200 -1 }
+										maximumsize = { 200 -1 }
+										autoresize = yes
+										align = nobaseline
+										raw_text = "[Country.GetSubjectType.GetName]"
+									}
+									
+									textbox = {
+										minimumsize = { 100 -1 }
+										maximumsize = { 100 -1 }
+										autoresize = yes
+										align = nobaseline
+										raw_text = "[Country.GetCapital.GetStateRegion.GetStrategicRegion.GetName]"
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	type com_introduction_europa_content_tab = widget {
+		parentanchor = top|hcenter
+		size = { 700 400 }
+		
+		visible = "[GetVariableSystem.HasValue('com_introduction_europa_tab', 'content')]"
+		
+		background = {
+			margin = { 10 10 }
+			using = light_bg
+			using = frame_small_mask
+			
+			block "entry_bg_fancy_bg_alpha" {
+				alpha = 0.8
+			}
+		}
+		
+		background = {
+			margin = { 10 10 }
+			using = frame_small
+		}
+		
+		flowcontainer = {
+			parentanchor = top|hcenter
+			direction = vertical
+			spacing = 10
+			
+			scrollarea = {
+				parentanchor = top|hcenter
+				minimumsize = { 720 400 }
+				maximumsize = { 720 -1 }
+				
+				using = default_list_position
+				layoutpolicy_vertical = expanding
+				layoutpolicy_horizontal = preferred
+				
+				scrollbarpolicy_horizontal = always_off
+				
+				scrollbar_vertical = {
+					using = vertical_scrollbar
+				}
+				
+				scrollwidget = {
+					flowcontainer = {
+						parentanchor = top|hcenter
+						direction = vertical
+						
+						flowcontainer = {
+							parentanchor = top|hcenter
+							direction = vertical
+							visible = "[Not(IsDataModelEmpty(AccessPlayer.GetLobbyJournalEntries))]"
+							
+							default_header_clean_faded = {
+								parentanchor = top|hcenter
+								size = { 710 40 }
+								position = { 10 -20 }
+								
+								textbox = {
+									text = "LOBBY_JOURNAL_ENTRIES"
+									parentanchor = center
+									position = { 0 -2 }
+									autoresize = yes
+									elide = right
+									using = fontsize_xl
+								}
+								blockoverride "text" { }
+							}
+							
+							flowcontainer = {
+								datamodel = "[AccessPlayer.GetLobbyJournalEntries]"
+								direction = vertical
+								margin_left = 10
+								spacing = 5
+								
+								item = {
+									flowcontainer = {
+										direction = horizontal
+										margin_left = 5
+										tooltip = "LOBBY_JOURNAL_ENTRY_TOOLTIP"
+										
+										background = {
+											using = dark_area
+											alpha = 0.2
+											
+											modify_texture = {
+												texture = "gfx/interface/masks/fade_horizontal_right.dds"
+												spriteType = Corneredstretched
+												spriteborder = { 0 0 }
+												blend_mode = alphamultiply
+											}
+										}
+										
+										icon = {
+											size = { 30 30 }
+											texture = "[JournalEntryType.GetIcon]"
+											parentanchor = vcenter
+										}
+										
+										widget = {
+											size = { 600 40 }
+											textbox = {
+												text = "[JournalEntryType.GetName]"
+												position = { 10 0 }
+												parentanchor = vcenter
+												autoresize = yes
+												align = nobaseline
+											}
+										}
+									}
+								}
+							}
+						}
+						
+						flowcontainer = {
+							parentanchor = top|hcenter
+							direction = vertical
+							visible = "[Not(IsDataModelEmpty(AccessPlayer.AccessActiveJournalEntries))]"
+							margin_top = 15
+							margin_left = 15
+							spacing = 5
+							
+							default_header_clean_faded = {
+								parentanchor = top|hcenter
+								size = { 710 40 }
+								
+								textbox = {
+									text = "com_intro_window_active_journal_entries"
+									parentanchor = center
+									position = { 0 -2 }
+									autoresize = yes
+									elide = right
+									using = fontsize_xl
+								}
+								blockoverride "text" { }
+							}
+							
+							flowcontainer = {
+								direction = vertical
+								parentanchor = left|top
+								margin_top = 5
+								minimumsize = { 680 -11 }
+								spacing = 10
+								margin_left = 10
+								margin_bottom = 10
+								
+								datamodel = "[AccessPlayer.GetGroupsForActiveJournalEntries]"
+								
+								background = {
+									using = entry_bg_fancy_dark
+									margin = { 5 5 }
+								}
+								
+								item = {
+									flowcontainer = {
+										direction = vertical
+										
+										textbox = {
+											text = "[JournalEntryGroup.GetName]"
+											autoresize = yes
+											align = nobaseline
+											default_format = "#title"
+											margin_left = 3
+										}
+										
+										flowcontainer = {
+											direction = vertical
+											datamodel = "[JournalEntryGroup.GetActiveJournalEntryTypes(GetPlayer.Self)]"
+											spacing = 2
+											
+											background = {
+												using = dark_area
+												alpha = 0.2
+												
+												modify_texture = {
+													texture = "gfx/interface/masks/fade_horizontal_right.dds"
+													spriteType = Corneredstretched
+													spriteborder = { 0 0 }
+													blend_mode = alphamultiply
+												}
+											}
+											
+											item = {
+												flowcontainer = {
+													direction = horizontal
+													margin_left = 5
+													datacontext = "[AccessPlayer.GetJournalEntry(JournalEntryType.Self)]"
+													
+													icon = {
+														size = { 30 30 }
+														texture = "[JournalEntryType.GetIcon]"
+														parentanchor = vcenter
+													}
+													
+													widget = {
+														size = { 560 40 }
+														textbox = {
+															text = "[JournalEntryType.GetName]"
+															position = { 10 0 }
+															parentanchor = vcenter
+															autoresize = yes
+															align = nobaseline
+														}
+													}
+													
+													icon = {
+														datacontext = "[AccessPlayer.GetJournalEntry(JournalEntryType.GetKey)]"
+														size = { 30 30 }
+														parentanchor = right|vcenter
+														visible = "[JournalEntry.IsDLCContent]"
+														texture = "[JournalEntry.GetDLCIcon]"
+														tooltip = "JOURNAL_ENTRY_DLC_TOOLTIP"
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+						
+						default_header_clean_faded = {
+							parentanchor = top|hcenter
+							size = { 710 40 }
+							visible = "[Or(
+								GetPlayer.MakeScope.Var('com_intro_window_content_text').IsSet,
+								Not(StringIsEmpty(EventWindow.GetFlavor))
+							)]"
+							
+							textbox = {
+								text = "com_intro_window_content_header"
+								parentanchor = center
+								position = { 0 -2 }
+								autoresize = yes
+								elide = right
+								using = fontsize_xl
+							}
+							blockoverride "text" { }
+						}
+						
+						textbox = {
+							maximumsize = { 710 -1 }
+							visible = "[Not(StringIsEmpty(EventWindow.GetFlavor))]"
+							multiline = yes
+							autoresize = yes
+							parentanchor = top|hcenter
+							align = nobaseline
+							raw_text = "#bold [EventWindow.GetFlavor]#!"
+							margin = { 10 0 }
+							using = fontsize_medium
+						}
+						
+						textbox = {
+							maximumsize = { 720 -1 }
+							visible = "[GetPlayer.MakeScope.Var('com_intro_window_content_text').IsSet]"
+							parentanchor = top|hcenter
+							multiline = yes
+							autoresize = yes
+							align = nobaseline
+							margin = { 10 0 }
+							using = fontsize_medium
+							text = "com_intro_window_content_text"
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	type com_introduction_europa_option_button = flowcontainer {
+		parentanchor = top|hcenter
+		direction = vertical
+		using = default_list_position
+		datamodel = "[EventWindow.GetOptions]"
+		margin_top = 10
+		
+		item = {
+			container = {
+				widget = {
+					button = {
+						size = { 96% 90% }
+						parentanchor = hcenter
+						using = default_button_primary_action
+						tooltip = "[EventOption.GetDesc]"
+						using = tooltip_ws
+						using = confirm_button_sound
+						onclick = "[EventOption.Select]"
+					}
+					
+					textbox = {
+						position = { 0 -2 }
+						resizeparent = yes
+						minimumsize = { 500 42 }
+						maximumsize = { 500 -1 }
+						align = "center"
+						autoresize = yes
+						margin = { 30 10 }
+						text = "com_intro_window_event_option"
+					}
+				}
+			}
+		}
+	}
+}

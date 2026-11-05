@@ -12,9 +12,28 @@
 
  com_no_sandbox_warning: "@red_cross! $SANDBOX$ is not allowed when an Objective is selected"
  
+ # CMF Community Mod Menu
+ com_community_mod_menu_header: "Community Mod Menu"
+ 
+ com_debug_features_header: "Debug Functions"
+ com_debug_mode_toggle: "Toggle Debug Mode"
+ com_debug_mode_toggle_tooltip_ON: "Activate #bold Debug Mode#!"
+ com_debug_mode_toggle_tooltip_OFF: "Deactivate #bold Debug mode#!"
+ com_debug_variable_toggle: "Toggle Global Debug Variable"
+ com_debug_variable_toggle_tooltip_ON: "Set the #bold com_debug#! global variable"
+ com_debug_variable_toggle_tooltip_OFF: "Remove the #bold com_debug#! global variable"
+ 
+ com_mod_debug_manager_header: "Mod Debug Menu Manager"
+ com_mod_debug_manager_datamodel_empty: "@warning! #red #bold No mods present in datamodel!#!#!"
+ com_mod_debug_manager_mod_name: "[ScriptContainer.MakeScope.Var('com_mod_name').GetFlagName]"
+ com_mod_debug_manager_mod_tooltip: "This will open the debug menu for [ScriptContainer.MakeScope.Var('com_mod_name').GetFlagName]"
+ com_mod_debug_manager_mod_tooltip_missing_command: "@warning! #red #bold Variable for console command not set!#!#!"
+ 
  # COM Event Window Localization
  com_event_location: "Event in [GetPlayer.MakeScope.Var('com_event_window_location_var').GetFlagName]"
  com_debug_deer: "#header #todo Debug Information#!#!\n$TOOLTIP_DELIMITER$\n#bold Event ID: [Event.GetKey|v]\n$TOOLTIP_DELIMITER$\n#bold Trigger Description:\n[Event.GetTriggerDesc]\n@information! Click to open Event in text editor"
+ com_release_manul: "Click to the hide the error counter while unpaused"
+ com_contain_manul: "Click to lock the error counter while unpaused"
  
  # Error Deer Localization
  com_error_deer_tooltip: "#instruction Left-Click#! to open Error Log\n#instruction Left-Click + Shift#! to open Explorer\n#instruction Left-Click + Alt#! to open Slow Tick Operations\n#instruction Right-Click#! to make it go away (until you upset it again)\n#instruction Right-Click + Shift#! to open Tweaker\n#instruction Right-Click + Alt#! to open 3D Stats"
@@ -32,13 +51,13 @@
  com_debug.e: "Test & 4ious"
  com_debug.james: ""just research [GetTechnology('line_infantry').GetName]" -1230james"
  com_debug.james_tt: "#italic James smiles upon you...#!"
+ com_placeholder_text: "#todo Placeholder Text#!"
+
+ com_ipsum_lorem: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus pretium elementum lorem sit amet fermentum. Nunc euismod velit id magna interdum, id aliquam velit venenatis. Nunc vitae odio maximus, sollicitudin massa nec, tristique dolor. Vivamus vitae tellus eu enim vehicula faucibus. Donec imperdiet porttitor dui ac vehicula. In hac habitasse platea dictumst. In neque nunc, posuere a ipsum ac, finibus aliquam ligula. Nulla at libero felis. Nullam porta posuere orci in cursus. Ut feugiat, orci gravida semper ornare, odio nisl laoreet leo, at commodo ipsum tellus vel ipsum. Suspendisse imperdiet ultricies ipsum vitae pulvinar.$com_lb$Aenean a nibh quis mauris maximus fringilla vel et dui. Cras at ipsum nulla. Nulla id finibus nunc. Proin vitae sapien odio. Nullam nec mi ante. Sed hendrerit ligula odio, in varius ligula sodales at. Fusce ut neque et lectus suscipit lobortis. Cras posuere tincidunt orci, nec mollis velit imperdiet ac. Sed sagittis auctor scelerisque.$com_lb$Ut neque odio, imperdiet at ultricies ut, vestibulum ac ligula. Nunc pharetra ante vel diam lacinia feugiat. Proin commodo dictum diam id aliquet. Quisque ultrices vitae nunc at congue. Nunc quis iaculis purus. Quisque mattis lectus eu cursus consectetur. Maecenas a ligula eu quam pharetra efficitur. Aliquam sapien purus, vulputate et viverra et, interdum iaculis massa. Nullam aliquet blandit elit ornare tempor. Quisque porttitor iaculis metus vel blandit. Mauris tempor nunc sit amet bibendum sollicitudin. Ut laoreet mi ac sagittis posuere. Morbi accumsan ante vitae nulla convallis, sed iaculis nisi hendrerit.$com_lb$Sed aliquam mauris massa, at laoreet turpis ullamcorper et. Nulla rutrum enim at sapien venenatis, a cursus nulla accumsan. Sed nec elementum sem. Sed et neque vitae ipsum consectetur pretium. Praesent luctus ex euismod, maximus ante consequat, volutpat nisi. Vivamus interdum purus vel luctus lobortis. Ut vitae est eget risus tempus eleifend vel et tellus. Phasellus ut lobortis tortor. Phasellus vulputate, lorem in consectetur ultrices, velit tellus suscipit arcu, at tempus ex nulla vitae libero. Etiam felis ante, lobortis vitae venenatis vitae, ultricies sed magna. Nullam venenatis lacus nec diam luctus, aliquam aliquam risus feugiat. Quisque sed tellus commodo, consequat odio sit amet, ultrices lorem. Vivamus leo risus, porta ut dignissim vitae, maximus in ex. Nullam luctus lacus dolor, quis malesuada nisi tristique ac. Maecenas in finibus est. Etiam porttitor felis at augue tincidunt, non porta magna laoreet.$com_lb$Maecenas eleifend justo vitae massa porttitor, a condimentum orci malesuada. In pretium nulla eu leo mollis, efficitur semper lorem suscipit. Suspendisse tincidunt iaculis urna nec dapibus. In metus libero, ullamcorper at mi sit amet, tincidunt sagittis tortor. Sed bibendum, risus sit amet blandit sodales, dolor metus sodales ex, vel tempus augue neque at nisi. Nunc mattis urna sit amet consectetur bibendum. Vivamus dapibus mi sit amet diam porta, eu dapibus elit consequat. Nam nulla diam, efficitur sit amet eleifend eu, vulputate sed nulla. Quisque imperdiet scelerisque orci ac rutrum."
  
  # Localization Shorthands
  com_nl: "\n"
+ com_lb: "\n\n"
  com_bp: "•"
  com_nlbp: "\n • "
  com_ttdl: "\n$TOOLTIP_DELIMITER$\n"
- 
- # Flag Loc Keys (for use in scripted effects)
- yes: "yes"
- no: "no"

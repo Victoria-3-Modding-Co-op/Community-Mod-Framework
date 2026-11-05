@@ -61,16 +61,12 @@ com_hide_all_journal_elements_for_interorg_effect = {
 	set_variable = com_hide_scripted_buttons
 	set_variable = com_hide_journal_reason
 	set_variable = com_hide_involved_countries
-	set_variable = com_hide_complete_triggers
-	set_variable = com_hide_fail_triggers
 	set_variable = com_hide_modifiers
 }
 
 com_hide_non_button_journal_elements_for_interorg_effect = {
 	set_variable = com_hide_journal_reason
 	set_variable = com_hide_involved_countries
-	set_variable = com_hide_complete_triggers
-	set_variable = com_hide_fail_triggers
 	set_variable = com_hide_modifiers
 }
 

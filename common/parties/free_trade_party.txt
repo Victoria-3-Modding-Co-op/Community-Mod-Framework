@@ -5,7 +5,7 @@
 # USFP etc..
 
 free_trade_party = {
-	color = { 150 20 20 }
+	color = { 240 110 60 }
 	name = {
 		first_valid = {
 
@@ -224,7 +224,7 @@ free_trade_party = {
 			country_has_voting_franchise = yes
 			OR = {
 				py:free_trade_party ?= {
-					any_member = {}
+					party_has_members = yes
 				}
 				any_interest_group = {
 					ig_counts_as_marginal = no
@@ -328,7 +328,7 @@ free_trade_party = {
 					leader ?= {
 						has_ideology = ideology:ideology_market_liberal
 					}
-					has_ideology = ideology:ideology_laissez_faire
+					has_ideology = ideology:ideology_plutocratic
 					# Vic1877
 					leader ?= {
 						vic1877_leader_is_propertarian = yes
@@ -389,7 +389,7 @@ free_trade_party = {
 					leader ?= {
 						has_ideology = ideology:ideology_market_liberal
 					}
-					has_ideology = ideology:ideology_laissez_faire
+					has_ideology = ideology:ideology_plutocratic
 					# Vic1877
 					leader ?= {
 						vic1877_leader_is_propertarian = yes
@@ -433,17 +433,18 @@ free_trade_party = {
 		}
 		if = { # landowners and industrialists hate labor rights
 			limit = {
-				OR = {
-					has_hierarchic_ideology = yes
-					has_ideology = ideology:ideology_laissez_faire
-					has_ideology = ideology:ideology_interventionist
-					vic1877_ig_is_defense_contractor = yes
-				}
 				owner = {
 					OR = {
 						has_law_or_variant = law_type:law_regulatory_bodies
 						has_law_or_variant = law_type:law_worker_protections
 					}
+				}
+				OR = {
+					law_enactment_stance = {
+						law = law_type:law_no_workers_rights
+						value > neutral
+					}
+					vic1877_ig_is_defense_contractor = yes
 				}
 			}
 			add = {
@@ -453,15 +454,18 @@ free_trade_party = {
 		}
 		if = { # conservatives hate welfare
 			limit = {
-				OR = {
-                    has_hierarchic_ideology = yes
-					has_ideology = ideology:ideology_individualist
-				}
 				owner = {
 					OR = {
 						has_law_or_variant = law_type:law_wage_subsidies
 						has_law_or_variant = law_type:law_old_age_pension
 					}
+				}
+				OR = {
+					law_enactment_stance = {
+						law = law_type:law_poor_laws
+						value > neutral
+					}
+					has_ideology = ideology:ideology_individualist
 				}
 			}
 			add = {
@@ -475,11 +479,10 @@ free_trade_party = {
 					NOT = { has_law_or_variant = law_type:law_child_labor_allowed }
 				}
 				OR = {
-					leader ?= {
-						has_ideology = ideology:ideology_market_liberal
+					law_enactment_stance = {
+						law = law_type:law_child_labor_allowed
+						value > neutral
 					}
-					has_ideology = ideology:ideology_laissez_faire
-					has_ideology = ideology:ideology_interventionist
 					# Vic1877
 					leader ?= {
 						vic1877_leader_is_propertarian = yes
@@ -497,8 +500,9 @@ free_trade_party = {
 					NOT = { has_law_or_variant = law_type:law_free_trade }
 				}
 				OR = {
-					leader ?= {
-						has_ideology = ideology:ideology_market_liberal
+					law_enactment_stance = {
+						law = law_type:law_free_trade
+						value > neutral
 					}
 
 					# ANZFP
@@ -510,8 +514,6 @@ free_trade_party = {
 							has_ideology = ideology:ideology_anz_georgist
 						}
 					}
-
-					has_ideology = ideology:ideology_laissez_faire
 
 					# Vic1877
 					leader ?= {
@@ -555,8 +557,10 @@ free_trade_party = {
 					has_law_or_variant = law_type:law_autocracy
 				}
 				OR = {
-					has_ideology = ideology:ideology_republican
-
+					law_enactment_stance = {
+						law = law_type:law_wealth_voting
+						value > neutral
+					}
 					# ANZFP
 					trigger_if = {
 						limit = {
@@ -577,15 +581,9 @@ free_trade_party = {
 					has_law_or_variant = law_type:law_universal_suffrage
 				}
 				OR = {
-					has_ideology = ideology:ideology_paternalistic
-					has_ideology = ideology:ideology_magnatial
-					ig_has_carlist_ideology = yes
-					has_ideology = ideology:ideology_moderantist
-					leader ?= {
-						has_ideology = ideology:ideology_fascist
-					}
-					leader ?= {
-						has_ideology = ideology:ideology_integralist
+					law_stance = {
+						law = law_type:law_universal_suffrage
+						value < neutral
 					}
 					# ANZFP
 					trigger_if = {
@@ -606,12 +604,12 @@ free_trade_party = {
 				owner = {
 					has_technology_researched = currency_standards
 					NOT = { has_law_or_variant = law_type:law_per_capita_based_taxation }
-					NOT = { has_law_or_variant = law_type:law_consumption_based_taxation }
 				}
 				OR = {
-					has_ideology = ideology:ideology_plutocratic
-					has_ideology = ideology:ideology_meritocratic
-					has_ideology = ideology:ideology_cartist
+					law_enactment_stance = {
+						law = law_type:law_per_capita_based_taxation
+						value > neutral
+					}
 
 					# ANZFP
 					trigger_if = {
@@ -640,13 +638,10 @@ free_trade_party = {
 				owner = {
 					has_law_or_variant = law_type:law_graduated_taxation
 				}
-				OR = {
-					has_ideology = ideology:ideology_plutocratic
-					has_ideology = ideology:ideology_meritocratic
-					has_ideology = ideology:ideology_cartist
-                    has_hierarchic_ideology = yes
+				law_stance = {
+					law = law_type:law_graduated_taxation
+					value < neutral
 				}
-				
 				# ANZFP
 				trigger_if = {
 					limit = {
@@ -657,56 +652,23 @@ free_trade_party = {
 				trigger_else = { 
 					always = no
 				}
-
 			}
 			add = {
 				value = 3
 				desc = "from_graduated_taxation"
 			}
 		}
-		if = { # alliance for consumption taxes
-			limit = {
-				owner = {
-					NOT = { has_law_or_variant = law_type:law_consumption_based_taxation }
-					NOT = { has_law_or_variant = law_type:law_per_capita_based_taxation }
-				}
-				OR = {
-					has_ideology = ideology:ideology_agrarian
-                    has_hierarchic_ideology = yes
-				}
-
-				# ANZFP
-				trigger_if = {
-					limit = {
-						anzfp_is_active = yes
-					}
-					NOT = { leader = { has_ideology = ideology:ideology_anz_georgist } }
-				}
-				trigger_else = { 
-					always = no
-				}
-
-			}
-			add = {
-				value = 3
-				desc = "from_no_consumption_tax"
-			}
-		}
 		if = { # opposition to command economy
 			limit = {
 				owner = {
-					has_law_or_variant = law_type:law_command_economy
 					has_technology_researched = central_planning
+					has_law_or_variant = law_type:law_command_economy
 				}
 				OR = {
-					has_ideology = ideology:ideology_paternalistic
-					has_ideology = ideology:ideology_magnatial
-					ig_has_carlist_ideology = yes
-					has_ideology = ideology:ideology_moderantist
-					has_ideology = ideology:ideology_laissez_faire
-					has_ideology = ideology:ideology_interventionist
-					has_ideology = ideology:ideology_agrarian
-				
+					law_stance = {
+						law = law_type:law_command_economy
+						value < neutral
+					}
 					# ANZFP
 					trigger_if = {
 						limit = {
@@ -717,10 +679,6 @@ free_trade_party = {
 							anz_laissez_faire_ideologies = yes
 							anz_agrarian_ideologies = yes
 						}
-					}
-
-					leader ?= {
-						has_ideology = ideology:ideology_market_liberal
 					}
 					# Vic1877
 					leader ?= {
@@ -737,14 +695,13 @@ free_trade_party = {
 			limit = {
 				owner = {
 					has_technology_researched = academia
-					OR = {
-						has_law_or_variant = law_type:law_no_schools
-						has_law_or_variant = law_type:law_religious_schools
+					NOT = {
+						has_law_or_variant = law_type:law_private_schools
 					}
 				}
-				OR = {
-					has_ideology = ideology:ideology_individualist
-					has_ideology = ideology:ideology_anti_clerical
+				law_enactment_stance = {
+					law = law_type:law_private_schools
+					value > neutral
 				}
 			}
 			add = {

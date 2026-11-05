@@ -1,63 +1,63 @@
 ﻿@entry_width = 350
 @entry_height = 30
 
-types com_ongoing_outliner_items {
+types com_ongoing_outliner_items_overwrites {
 	# Changes are marked with CMF
 	
-	### JOURNAL ENTRIES LIST
+	### JOURNAL ENTRY
 	type outliner_journal_entries = flowcontainer {
 		direction = vertical
 		parentanchor = hcenter
 		
 		# OBJECTIVES / TUTORIAL
-		textbox = {
-			# CMF Hide objective
+		widget = {
 			visible = "[And(
                 Not(GetGlobalVariable('community_gui_objective_var').IsSet),
                 GetPlayer.HasObjective
             )]"
-			raw_text = "#title [AccessPlayer.GetObjective.GetName]#!"
-			autoresize = yes
-			multiline = yes
-			align = left|nobaseline
-			minimumsize = { 340 -1 }
-			maximumsize = { 340 -1 }
-			margin = { 10 6 }
+			size = { 340 35 }
 			
 			background = {
 				using = default_header_bg
 				margin = { -2 0 }
 			}
 			
-			flowcontainer = {
-				visible = "[Not(AccessPlayer.IsObjectiveIdle)]"
-				parentanchor = right|vcenter
-				position = { -3 0 }
+			hbox = {
 				spacing = 5
-				
-				flowcontainer = {
-					visible = "[And(GetPlayer.HasObjective, Not(IsDataModelEmpty(AccessPlayer.AccessActivePlayerObjectiveJournalEntries)))]"
-					
-					flowcontainer = {
-						visible = "[NotEqualTo_int32(GetDataModelSize(AccessPlayer.AccessActivePlayerObjectiveJournalEntries), GetDataModelSize(AccessPlayer.AccessActivePinnedPlayerObjectiveJournalEntries))]"
-						spacing = 5
-						
-						textbox = {
-							text = "NUMBER_OF_PLAYER_OBJECTIVE_JOURNAL_ENTRIES_SHORT"
-							autoresize = yes
-							align = left|nobaseline
-						}
-					}
+				margin_left = 10
+				margin_right = 3
+
+				textbox = {
+					layoutpolicy_horizontal = expanding
+					size = { 0 25 }
+					align = nobaseline
+					using = elide_fontsize_min
+					tooltip = "[AccessPlayer.GetObjective.GetName]"
+					raw_text = "#title [AccessPlayer.GetObjective.GetName]#!"
 				}
+					
+				flowcontainer = {
+					visible = "[Not(AccessPlayer.IsObjectiveIdle)]"
+					spacing = 5
+
+					textbox = {
+						visible = "[And(Not(IsDataModelEmpty(AccessPlayer.AccessActivePlayerObjectiveJournalEntries)), NotEqualTo_int32(GetDataModelSize(AccessPlayer.AccessActivePlayerObjectiveJournalEntries), GetDataModelSize(AccessPlayer.AccessActivePinnedPlayerObjectiveJournalEntries)))]"
+						parentanchor = vcenter
+						autoresize = yes
+						align = nobaseline
+						tooltip = "NUMBER_OF_PLAYER_OBJECTIVE_JOURNAL_ENTRIES"
+						text = "NUMBER_OF_PLAYER_OBJECTIVE_JOURNAL_ENTRIES_SHORT"
+					}
 				
-				button_icon_goto = {
-					size = { 25 25 }
-					onclick = "[InformationPanelBar.OpenPanelTab('journal', 'default')]"
-					tooltip = "GO_TO_BUTTON_JOURNAL"
+					button_icon_goto = {
+						size = { 25 25 }
+						onclick = "[InformationPanelBar.OpenPanelTab('journal', 'default')]"
+						tooltip = "GO_TO_BUTTON_JOURNAL"
+					}
 				}
 			}
 		}
-		
+
 		textbox = {
 			# CMF Hide objective
 			visible = "[And(
@@ -91,7 +91,7 @@ types com_ongoing_outliner_items {
 			margin_bottom = 5
 		}
 		
-		
+
 		flowcontainer = {
 			direction = vertical
 			# CMF Hide objective
@@ -108,52 +108,56 @@ types com_ongoing_outliner_items {
 		}
 		
 		# OTHER JOURNAL ENTRIES
-		textbox = {
-			text = "ACTIVE_JOURNAL_ENTRIES"
-			autoresize = yes
-			multiline = yes
-			align = left|nobaseline
-			minimumsize = { 340 -1 }
-			maximumsize = { 340 -1 }
-			margin = { 10 6 }
+		widget = {
+			size = { 340 35 }
 			
 			background = {
 				using = default_header_bg
 				margin = { -2 0 }
 			}
 			
-			flowcontainer = {
-				parentanchor = right|vcenter
-				position = { -3 0 }
+			hbox = {
 				spacing = 5
-				
+				margin_left = 10
+				margin_right = 3
+
 				textbox = {
-					visible = "[And( Not( IsDataModelEmpty(AccessPlayer.AccessActiveNonPlayerObjectiveJournalEntries) ), NotEqualTo_int32( GetDataModelSize(AccessPlayer.AccessActiveNonPlayerObjectiveJournalEntries), GetDataModelSize(AccessPlayer.AccessActivePinnedNonPlayerObjectiveJournalEntries)))]"
-					text = "NUMBER_OF_NON_PLAYER_OBJECTIVE_JOURNAL_ENTRIES_SHORT"
-					autoresize = yes
-					parentanchor = vcenter
-					align = right|nobaseline
-					elide = right
-					fontsize_min = 14
-					minimumsize = { 180 -1 }
-					maximumsize = { 180 -1 }
-				}
-				
-				textbox = {
-					visible = "[IsDataModelEmpty(AccessPlayer.AccessActiveNonPlayerObjectiveJournalEntries)]"
-					text = "NO_JOURNAL_ENTRIES_OUTLINER"
-					autoresize = yes
+					layoutpolicy_horizontal = expanding
+					size = { 0 25 }
 					align = nobaseline
+					using = elide_fontsize_min
+					text = "ACTIVE_JOURNAL_ENTRIES"
 				}
-				
-				button_icon_goto = {
-					size = { 25 25 }
-					onclick = "[InformationPanelBar.OpenPanelTab('journal', 'default')]"
-					tooltip = "GO_TO_BUTTON_JOURNAL"
+
+				flowcontainer = {
+					spacing = 5
+
+					textbox = {
+						visible = "[And( Not( IsDataModelEmpty(AccessPlayer.AccessActiveNonPlayerObjectiveJournalEntries) ), NotEqualTo_int32( GetDataModelSize(AccessPlayer.AccessActiveNonPlayerObjectiveJournalEntries), GetDataModelSize(AccessPlayer.AccessActivePinnedNonPlayerObjectiveJournalEntries)))]"
+						parentanchor = vcenter
+						autoresize = yes
+						align = nobaseline
+						tooltip = "NUMBER_OF_NON_PLAYER_OBJECTIVE_JOURNAL_ENTRIES"
+						text = "NUMBER_OF_NON_PLAYER_OBJECTIVE_JOURNAL_ENTRIES_SHORT"
+					}
+
+					textbox = {
+						visible = "[IsDataModelEmpty(AccessPlayer.AccessActiveNonPlayerObjectiveJournalEntries)]"
+						parentanchor = vcenter
+						autoresize = yes
+						align = nobaseline
+						text = "NO_JOURNAL_ENTRIES_OUTLINER"
+					}
+
+					button_icon_goto = {
+						size = { 25 25 }
+						onclick = "[InformationPanelBar.OpenPanelTab('journal', 'default')]"
+						tooltip = "GO_TO_BUTTON_JOURNAL"
+					}
 				}
 			}
 		}
-		
+
 		flowcontainer = {
 			direction = vertical
 			parentanchor = hcenter
@@ -162,7 +166,11 @@ types com_ongoing_outliner_items {
 			datamodel = "[AccessPlayer.AccessActivePinnedNonPlayerObjectiveJournalEntries]"
 			
 			item = {
-				com_outliner_journal_entry = { } # CMF Hide Journal Entries
+				flowcontainer = {
+					direction = vertical
+					
+					com_outliner_journal_entry = { } # CMF Hide Journal Entries
+				}
 			}
 		}
 		
@@ -171,66 +179,120 @@ types com_ongoing_outliner_items {
 		com_outliner_international_organization_entries_container = { }
 	}
 	
-	# Standard Journal Entry Container
 	type com_outliner_journal_entry = journal_entry {
-		using = default_list_position
-		blockoverride "button_style" {
-			using = glow_button
-		}
-		blockoverride "background" {
-			background = {
-				using = dark_area
-				alpha = 0.3
-				
-				modify_texture = {
-					texture = "gfx/interface/masks/fade_horizontal_center.dds"
-					blend_mode = alphamultiply
-					alpha = 1
-				}
-			}
-			
-			divider_clean = {
-				size = { 95% 2 }
-				parentanchor = hcenter|bottom
-			}
-		}
-		
 		visible = "[And4(
 			JournalEntry.IsValid,
 			JournalEntry.IsPinnedInOutliner,
 			Not(ComJournalEntryGroupSGui('com_international_organization_journal_entry_group_sgui')),
 			Not(ComJournalEntryGroupSGui('com_international_situation_journal_entry_group_sgui'))
 		)]"
-		
+		using = default_list_position
+
+		blockoverride "button_style" {
+			using = glow_button
+		}
+
+		blockoverride "status_desc_visibility" {
+			visible = "[And(JournalEntry.IsActive, Not(StringIsEmpty(JournalEntry.GetStatusDesc)))]"
+		}
+
+		blockoverride "status_desc_textsize" {
+			maximumsize = { 275 50 }
+			minimumsize = { 275 -1 }
+		}
+
+		blockoverride "possible_actions_visibility" {
+			visible = "[And(JournalEntry.IsActive, GreaterThan_int32(JournalEntry.GetNumPossibleScriptedButtons, '(int32)0'))]"
+		}
+
+		blockoverride "possible_actions_textsize" {
+			maximumsize = { 275 -1 }
+			minimumsize = { 275 -1 }
+		}
+
+		blockoverride "scripted_progress_bars_visibility_below_title" {
+			visible = "[Not( IsDataModelEmpty( JournalEntry.GetScriptedProgressBars ) )]"
+		}
+
+		blockoverride "scripted_progress_bars_visibility_to_the_right" {
+			visible = no
+		}
+
+		blockoverride "scripted_progress_bars_margins" {
+			margin = { 5 5 }
+		}
+
+		blockoverride "background" {
+			background = {
+				using = dark_area
+				alpha = 0.3
+
+				modify_texture = {
+					texture = "gfx/interface/masks/fade_horizontal_center.dds"
+					blend_mode = alphamultiply
+					alpha = 1
+				}
+			}
+
+			divider_clean = {
+				size = { 95% 2 }
+				parentanchor = hcenter|bottom
+			}
+		}
+
 		blockoverride "flowcontainer_properties" {
 			margin = { 4 4 }
 			spacing = 4
 		}
+
 		blockoverride "minimumsize" {
 			minimumsize = { 340 -1 }
 		}
+
 		blockoverride "textsize" {
 			maximumsize = { 275 50 }
 			minimumsize = { 275 -1 }
 			fontsize_min = 14
 		}
-		blockoverride "fontsize" { }
+
+		blockoverride "fontsize" {}
+
 		blockoverride "iconsize" {
 			size = { 27 27 }
 		}
+
 		blockoverride "completing_iconsize" {
 			size = { 18 18 }
 		}
-		blockoverride "progressbar_size" {
-			size = { 265 10 }
+
+		blockoverride "goal_progress_bar_visibility_below_title" {
+			visible = "[And(JournalEntry.HasProgressBar, JournalEntry.IsActive)]"
 		}
+
+		blockoverride "goal_progress_bar_visibility_to_the_right" {
+			visible = no
+		}
+
+		blockoverride "goal_progress_bar_margins" {
+			margin = { 5 5 }
+		}
+
+		blockoverride "goal_progressbar_size" {
+			size = { 265 12 }
+		}
+
+		blockoverride "progressbar_size" {
+			size = { 265 12 }
+		}
+
+		blockoverride "progressbars_spacing" {}
 	}
 	
 	# International Situations Container
 	type com_outliner_international_situations_container = flowcontainer {
 		direction = vertical
 		parentanchor = hcenter
-
+		
 		flowcontainer = {
 			max_height = 0
 			datamodel = "[AccessPlayer.AccessActivePinnedNonPlayerObjectiveJournalEntries]"
@@ -305,9 +367,32 @@ types com_ongoing_outliner_items {
 		)]"
 		
 		using = default_list_position
+		
 		blockoverride "button_style" {
 			using = glow_button
 		}
+		
+		blockoverride "status_desc_visibility" {
+			visible = "[And(JournalEntry.IsActive, Not(StringIsEmpty(JournalEntry.GetStatusDesc)))]"
+		}
+		
+		blockoverride "status_desc_textsize" {
+			maximumsize = { 275 50 }
+			minimumsize = { 275 -1 }
+		}
+		
+		blockoverride "scripted_progress_bars_visibility_below_title" {
+			visible = "[Not( IsDataModelEmpty( JournalEntry.GetScriptedProgressBars ) )]"
+		}
+		
+		blockoverride "scripted_progress_bars_visibility_to_the_right" {
+			visible = no
+		}
+		
+		blockoverride "scripted_progress_bars_margins" {
+			margin = { 5 5 }
+		}
+		
 		blockoverride "background" {
 			background = {
 				using = dark_area
@@ -330,31 +415,39 @@ types com_ongoing_outliner_items {
 			margin = { 4 4 }
 			spacing = 4
 		}
+		
 		blockoverride "minimumsize" {
 			minimumsize = { 340 -1 }
 		}
+		
 		blockoverride "textsize" {
 			maximumsize = { 275 50 }
 			minimumsize = { 275 -1 }
 			fontsize_min = 14
 		}
-		blockoverride "fontsize" { }
+		
+		blockoverride "fontsize" {}
+		
 		blockoverride "iconsize" {
 			size = { 27 27 }
 		}
+		
 		blockoverride "completing_iconsize" {
 			size = { 18 18 }
 		}
+		
 		blockoverride "progressbar_size" {
-			size = { 265 10 }
+			size = { 265 12 }
 		}
+		
+		blockoverride "progressbars_spacing" {}
 	}
 	
 	# International Organizations Container
 	type com_outliner_international_organization_entries_container = flowcontainer {
 		direction = vertical
 		parentanchor = hcenter
-
+		
 		visible = "[DataModelHasItems(GetGlobalList('com_international_organization_journal_groups'))]"
 		
 		flowcontainer = {
@@ -440,9 +533,32 @@ types com_ongoing_outliner_items {
 		)]"
 		
 		using = default_list_position
+		
 		blockoverride "button_style" {
 			using = glow_button
 		}
+		
+		blockoverride "status_desc_visibility" {
+			visible = "[And(JournalEntry.IsActive, Not(StringIsEmpty(JournalEntry.GetStatusDesc)))]"
+		}
+		
+		blockoverride "status_desc_textsize" {
+			maximumsize = { 275 50 }
+			minimumsize = { 275 -1 }
+		}
+		
+		blockoverride "scripted_progress_bars_visibility_below_title" {
+			visible = "[Not( IsDataModelEmpty( JournalEntry.GetScriptedProgressBars ) )]"
+		}
+		
+		blockoverride "scripted_progress_bars_visibility_to_the_right" {
+			visible = no
+		}
+		
+		blockoverride "scripted_progress_bars_margins" {
+			margin = { 5 5 }
+		}
+		
 		blockoverride "background" {
 			background = {
 				using = dark_area
@@ -465,23 +581,31 @@ types com_ongoing_outliner_items {
 			margin = { 4 4 }
 			spacing = 4
 		}
+		
 		blockoverride "minimumsize" {
 			minimumsize = { 340 -1 }
 		}
+		
 		blockoverride "textsize" {
 			maximumsize = { 275 50 }
 			minimumsize = { 275 -1 }
 			fontsize_min = 14
 		}
-		blockoverride "fontsize" { }
+		
+		blockoverride "fontsize" {}
+		
 		blockoverride "iconsize" {
 			size = { 27 27 }
 		}
+		
 		blockoverride "completing_iconsize" {
 			size = { 18 18 }
 		}
+		
 		blockoverride "progressbar_size" {
-			size = { 265 10 }
+			size = { 265 12 }
 		}
+		
+		blockoverride "progressbars_spacing" {}
 	}
 }

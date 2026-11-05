@@ -6,12 +6,11 @@ com_hide_all_journal_elements_for_situation_effect = {
 	set_variable = com_hide_scripted_buttons
 	set_variable = com_hide_journal_reason
 	set_variable = com_hide_involved_countries
-	set_variable = com_hide_complete_triggers
-	set_variable = com_hide_fail_triggers
 	set_variable = com_hide_modifiers
 	set_variable = com_hide_status_desc
 }
 
+####---------- Situation Illustration Effects ----------####
 com_situation_start_date_today_effect = {
 	if = {
 		limit = {
@@ -192,6 +191,7 @@ com_remove_situation_right_title = {
 	remove_variable = com_situation_right_title_var
 }
 
+####---------- Situation Phase Effects ----------####
 com_set_situation_phase_effect = {
 	set_variable = {
 		name = com_situation_phase_icon_var
@@ -200,31 +200,6 @@ com_set_situation_phase_effect = {
 	set_variable = {
 		name = com_situation_phase_name_var
 		value = flag:$phase_name$
-	}
-}
-
-com_set_situation_outcome_name_effect = {
-	set_variable = {
-		name = com_situation_$type$_name_var
-		value = flag:$name$
-	}
-}
-
-com_set_situation_outcome_texture_effect = {
-	set_variable = {
-		name = com_situation_$type$_illus_var
-		value = ig_trait:$texture$
-	}
-}
-
-com_set_situation_outcome_details_effect = {
-	set_variable = {
-		name = com_situation_$type$_name_var
-		value = flag:$name$
-	}
-	set_variable = {
-		name = com_situation_$type$_illus_var
-		value = ig_trait:$texture$
 	}
 }
 
@@ -374,5 +349,79 @@ com_hide_indexed_situation_phase_progress_details_effect = {
 	}
 	else = {
 		error_log = "Effect com_hide_indexed_situation_phase_progress_details_effect requires an index value of 1, 2, 3, or 4."
+	}
+}
+
+####---------- Situation Outcome Effects ----------####
+com_create_indexed_situation_outcome_details_effect = {
+	save_scope_value_as = {
+		name = com_index
+		value = $index$
+	}
+	if = {
+		limit = {
+			OR = {
+				scope:com_index = 0
+				scope:com_index = 1
+				scope:com_index = 2
+			}
+		}
+		set_variable = {
+			name = com_situation_outcome_$index$_name_var
+			value = flag:$name$
+		}
+		set_variable = {
+			name = com_situation_outcome_$index$_illustration_var
+			value = ig_trait:$texture$
+		}
+	}
+	else = {
+		error_log = "Effect com_create_indexed_situation_outcome_details_effect requires an index value of 0, 1, or 2. This must match the index of the journal outcome, starting from 0."
+	}
+}
+
+com_set_indexed_situation_outcome_name_effect = {
+	save_scope_value_as = {
+		name = com_index
+		value = $index$
+	}
+	if = {
+		limit = {
+			OR = {
+				scope:com_index = 0
+				scope:com_index = 1
+				scope:com_index = 2
+			}
+		}
+		set_variable = {
+			name = com_situation_outcome_$index$_name_var
+			value = flag:$name$
+		}
+	}
+	else = {
+		error_log = "Effect com_set_indexed_situation_outcome_name_effect requires an index value of 0, 1, or 2. This must match the index of the journal outcome, starting from 0."
+	}
+}
+
+com_set_indexed_situation_outcome_illustration_effect = {
+	save_scope_value_as = {
+		name = com_index
+		value = $index$
+	}
+	if = {
+		limit = {
+			OR = {
+				scope:com_index = 0
+				scope:com_index = 1
+				scope:com_index = 2
+			}
+		}
+		set_variable = {
+			name = com_situation_outcome_$index$_illustration_var
+			value = ig_trait:$texture$
+		}
+	}
+	else = {
+		error_log = "Effect com_set_indexed_situation_outcome_illustration_effect requires an index value of 0, 1, or 2. This must match the index of the journal outcome, starting from 0."
 	}
 }

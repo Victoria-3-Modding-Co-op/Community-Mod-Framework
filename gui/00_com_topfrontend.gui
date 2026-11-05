@@ -10,7 +10,7 @@ types com_topfrontend_overwrites {
 
 		### SITUATIONS + ALERTS
 		hbox = {
-			using = hud_visibility
+			visible = "[And4( GetMetaPlayer.GetPlayedOrObservedCountry.Exists, IsInGame, Not( IsPauseMenuShown ), Not( IsGameOverScreenShown ))]"
 			using = default_fade_in_out
 			spacing = 5
 			margin_left = 15

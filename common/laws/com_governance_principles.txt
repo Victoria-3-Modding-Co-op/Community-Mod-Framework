@@ -139,21 +139,13 @@
 				}
 			}
 		}
-		crown_land_republic_effect = yes
-		if = {
-			limit = {
-				has_law = law_type:law_neo_absolutism
-			}
-			deactivate_law = law_type:law_neo_absolutism
-			activate_law = law_type:law_autocracy
-		}
 	}
 	
 	on_deactivate = {
 		if = {
 			limit = {
 				AND = {
-					has_law = law_type:law_subjecthood
+					has_law_or_variant = law_type:law_subjecthood
 					NOR = {
 						has_law = law_type:law_theocracy
 						is_enacting_law = law_type:law_theocracy
@@ -167,6 +159,7 @@
 						is_in_government = yes
 						any_preferred_law = {
 							is_citizenship_law = yes
+							law_is_available = yes
 							NOT = {
 								type ?= law_type:law_subjecthood
 							}
@@ -178,6 +171,7 @@
 						is_in_government = yes
 						any_preferred_law = {
 							is_citizenship_law = yes
+							law_is_available = yes
 							NOT = {
 								type ?= law_type:law_subjecthood
 							}
@@ -189,6 +183,7 @@
 					ordered_preferred_law = {
 						limit = {
 							is_citizenship_law = yes
+							law_is_available = yes
 							NOT = {
 								type ?= law_type:law_subjecthood
 							}

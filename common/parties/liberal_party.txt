@@ -489,7 +489,7 @@ liberal_party = {
 			country_has_voting_franchise = yes
 			OR = {
 				py:liberal_party ?= {
-					any_member = {}
+					party_has_members = yes
 				}
 				ig:ig_intelligentsia ?= {
 					ig_counts_as_marginal = no
@@ -516,7 +516,7 @@ liberal_party = {
 				has_ideology = ideology:ideology_fascist
 				has_ideology = ideology:ideology_integralist
 				has_ideology = ideology:ideology_ethno_nationalist
-				has_ideology = ideology:ideology_communist
+				has_ideology = ideology:ideology_communist_leader
 				has_ideology = ideology:ideology_vanguardist
 				has_ideology = ideology:ideology_anarchist
 			}
@@ -556,13 +556,11 @@ liberal_party = {
 			limit = {
 				leader ?= {
 					OR = {
+						has_ideology = ideology:ideology_reformer
+						has_ideology = ideology:ideology_liberal_leader
+						has_ideology = ideology:ideology_market_liberal
 						has_ideology = ideology:ideology_republican_leader
 						has_ideology = ideology:ideology_radical
-						has_ideology = ideology:ideology_reformer
-						has_ideology = ideology:ideology_market_liberal
-						has_ideology = ideology:ideology_liberal_leader
-						has_ideology = ideology:ideology_humanitarian
-						has_ideology = ideology:ideology_humanitarian_royalist
 					}
 				}
 			}
@@ -602,8 +600,8 @@ liberal_party = {
 		}
 		if = { # liberals love liberalism - Vanilla removed this block but ANZFP is leftover
 			limit = {
-						anz_laissez_faire_ideologies = yes
-				}
+				anz_laissez_faire_ideologies = yes
+			}
             add = {
 				value = 5
 				desc = "from_liberalism"
@@ -616,7 +614,6 @@ liberal_party = {
 						has_ideology = ideology:ideology_feminist
 						character_is_anti_slavery = yes
 						has_ideology = ideology:ideology_pacifist
-						has_ideology = ideology:ideology_social_democrat
 						has_ideology = ideology:ideology_humanitarian
 						has_ideology = ideology:ideology_humanitarian_royalist
 						has_ideology = ideology:ideology_usfp_progressive
@@ -626,6 +623,15 @@ liberal_party = {
 			add = {
 				value = 5
 				desc = "from_progressivism"
+			}
+		}
+		if = { # modernizer
+			limit = {
+				has_ideology = ideology:ideology_modernizer # The IG ideology
+			}
+			add = {
+				value = 10
+				desc = "from_modernizer"
 			}
 		}
 		if = { # various conservatives dislike liberalism
@@ -651,13 +657,12 @@ liberal_party = {
 		}
 		if = { # against hereditary bureacrats
 			limit = {
-				OR = {
-					has_ideology = ideology:ideology_meritocratic
-					has_ideology = ideology:ideology_cartist
-					has_ideology = ideology:ideology_anti_clerical
-				}
 				owner = {
 					has_law_or_variant = law_type:law_hereditary_bureaucrats
+				}
+				law_stance = {
+					law = law_type:law_hereditary_bureaucrats
+					value < neutral
 				}
 			}
 			add = {
@@ -667,10 +672,9 @@ liberal_party = {
 		}
 		if = { # for greater suffrage
 			limit = {
-				OR = {
-					has_ideology = ideology:ideology_meritocratic
-					has_ideology = ideology:ideology_republican
-					has_ideology = ideology:ideology_populist
+				law_enactment_stance = {
+					law = law_type:law_census_voting
+					value > neutral
 				}
 			}
 			if = {
@@ -809,15 +813,15 @@ liberal_party = {
 		}
 		if = { # against illiteracy and religious education
 			limit = {
-				OR = {
-					has_ideology = ideology:ideology_individualist
-					has_ideology = ideology:ideology_proletarian
-				}
-				owner = {
+				owner ?= {
 					OR = {
 						has_law_or_variant = law_type:law_religious_schools
 						has_law_or_variant = law_type:law_no_schools
 					}
+				}
+				law_enactment_stance = {
+					law = law_type:law_private_schools
+					value > neutral
 				}
 			}
 			add = {
@@ -827,17 +831,12 @@ liberal_party = {
 		}
 		if = { # lack of women's rights
 			limit = {
-				OR = {
-					leader ?= {
-						has_ideology = ideology:ideology_feminist
-					}
-					has_ideology = ideology:ideology_liberal
-					has_ideology = ideology:ideology_liberal_modern
-					has_ideology = ideology:ideology_egalitarian
-					has_ideology = ideology:ideology_egalitarian_modern
-				}
 				owner = {
 					has_law_or_variant = law_type:law_no_womens_rights
+				}
+				law_stance = {
+					law = law_type:law_no_womens_rights
+					value < neutral
 				}
 			}
 			add = {
@@ -847,23 +846,16 @@ liberal_party = {
 		}
 		if = { # anti-racism
 			limit = {
-				OR = {
-					leader ?= {
-						OR = {
-							has_ideology = ideology:ideology_reformer
-							has_ideology = ideology:ideology_humanitarian
-							has_ideology = ideology:ideology_humanitarian_royalist
-						}
-					}
-					has_ideology = ideology:ideology_liberal
-					has_ideology = ideology:ideology_liberal_modern
-				}
 				owner = {
 					OR = {
 						has_law_or_variant = law_type:law_ethnostate
 						has_law_or_variant = law_type:law_national_supremacy
 						has_law_or_variant = law_type:law_racial_segregation
 					}
+				}
+				law_enactment_stance = {
+					law = law_type:law_cultural_exclusion
+					value > neutral
 				}
 			}
 			add = {
@@ -873,37 +865,37 @@ liberal_party = {
 		}
 		if = { # anti-censorship
 			limit = {
-				OR = {
-					has_ideology = ideology:ideology_liberal
-					has_ideology = ideology:ideology_liberal_modern
-					has_ideology = ideology:ideology_egalitarian
-					has_ideology = ideology:ideology_egalitarian_modern
-					leader ?= {
-						has_ideology = ideology:ideology_humanitarian
-						has_ideology = ideology:ideology_humanitarian_royalist
+				owner ?= {
+					OR = {
+						has_law_or_variant = law_type:law_censorship
+						has_law_or_variant = law_type:law_outlawed_dissent
 					}
 				}
-				owner = {
-					has_law_or_variant = law_type:law_outlawed_dissent
+				law_stance = {
+					law = law_type:law_censorship
+					value < neutral
 				}
 			}
 			add = {
 				value = 3
-				desc = from_outlawed_dissent
+				desc = from_censorship
 			}
 		}
 		if = { # against arbitrary or militarized policing
 			limit = {
-				OR = {
-					has_ideology = ideology:ideology_liberal
-					has_ideology = ideology:ideology_liberal_modern
-					has_ideology = ideology:ideology_particularist
-				}
-				owner = {
-					OR = {	
+				owner ?= {
+					OR = {
 						has_law_or_variant = law_type:law_local_police
 						has_law_or_variant = law_type:law_militarized_police
 					}
+				}
+				law_stance = {
+					law = law_type:law_militarized_police
+					value < neutral
+				}
+				law_enactment_stance = {
+					law = law_type:law_dedicated_police
+					value > neutral
 				}
 			}
 			add = {
@@ -913,14 +905,9 @@ liberal_party = {
 		}
 		if = { # anticlerical
 			limit = {
-				OR = {
-					has_ideology = ideology:ideology_anti_clerical
-					leader ?= {
-						has_ideology = ideology:ideology_nihilist
-					}
-				}
-				owner = {
-					has_law_or_variant = law_type:law_state_religion
+				law_enactment_stance = {
+					law = law_type:law_total_separation
+					value > neutral
 				}
 			}
 			add = {
@@ -930,6 +917,12 @@ liberal_party = {
 		}
 		if = { # republican
 			limit = {
+				owner ?= {
+					OR = {
+						country_has_monarchy_law = yes
+						has_law_or_variant = law_type:law_theocracy
+					}
+				}
 				OR = {
 					has_ideology = ideology:ideology_republican
 					has_ideology = ideology:ideology_populist
@@ -946,16 +939,10 @@ liberal_party = {
 						limit = {
 							anzfp_is_active = yes
 						}
-						or = {
+						OR = {
 							anz_republican_ideologies = yes
 							anz_populist_ideologies = yes
 						}
-					}
-				}
-				owner = {
-					OR = {
-						has_law = law_type:law_monarchy
-						has_law_or_variant = law_type:law_theocracy
 					}
 				}
 			}
@@ -964,24 +951,15 @@ liberal_party = {
 				desc = "from_republican"
 			}
 		}
-		if = { # peasants opposition to debt slavery
+		if = { # peasants opposition to debt slavery - Vanilla removed this block, but ANZFP is left over
 			limit = {
-				owner = {
-					has_law_or_variant = law_type:law_debt_slavery
+				trigger_if = {
+					limit = {
+						anzfp_is_active = yes
+					}
 				}
-				OR = {
-					has_ideology = ideology:ideology_particularist
-					leader ?= {
-						character_is_anti_slavery = yes
-					}
-
-					# ANZFP
-					trigger_if = {
-						limit = {
-							anzfp_is_active = yes
-						}
-						anz_particularist_ideologies = yes
-					}
+				trigger_else = {
+					always = no
 				}
 			}
 			add = {
@@ -989,9 +967,24 @@ liberal_party = {
 				desc = "from_debt_slavery"
 			}
 		}
+		if = { # anti-serfdom
+			limit = {
+				owner ?= {
+					has_law_or_variant = law_type:law_serfdom
+				}
+				law_stance = {
+					law = law_type:law_serfdom
+					value < neutral
+				}
+			}
+			add = {
+				value = 5
+				desc = "from_serfdom"
+			}
+		}
 		if = { # general anti-slavery
 			limit = {
-				owner = {
+				owner ?= {
 					OR = {
 						has_law_or_variant = law_type:law_legacy_slavery
 						has_law_or_variant = law_type:law_slave_trade
@@ -999,11 +992,10 @@ liberal_party = {
 					}
 				}
 				OR = {
-					has_ideology = ideology:ideology_anti_slavery
-					leader ?= {
-						character_is_anti_slavery = yes
+					law_enactment_stance = {
+						law = law_type:law_slavery_banned
+						value > neutral
 					}
-
 					# ANZFP
 					trigger_if = {
 						limit = {
@@ -1018,55 +1010,13 @@ liberal_party = {
 				desc = "from_slavery"
 			}
 		}
-		if = { # anti-serfdom
-			limit = {
-				owner = {
-					has_law_or_variant = law_type:law_serfdom
-				}
-				OR = {
-					has_ideology = ideology:ideology_egalitarian
-					has_ideology = ideology:ideology_egalitarian_modern
-					has_ideology = ideology:ideology_anti_slavery
-					has_ideology = ideology:ideology_laissez_faire
-					has_ideology = ideology:ideology_interventionist
-					has_ideology = ideology:ideology_particularist
-					leader ?= {
-						OR = {
-							character_is_anti_slavery = yes
-							has_ideology = ideology:ideology_social_democrat
-							has_ideology = ideology:ideology_communist
-							has_ideology = ideology:ideology_vanguardist
-						}
-					}
-				}
-			}
-			add = {
-				value = 5
-				desc = "from_serfdom"
-			}
-		}
-		if = { # modernizer
-			limit = {
-				has_ideology = ideology:ideology_modernizer
-			}
-			add = {
-				value = 10
-				desc = "from_modernizer"
-			}
-		}
 		if = { # early Trade Unions
 			limit = {
 				is_interest_group_type = ig_trade_unions
-				is_powerful = no
-				owner = { has_technology_researched = labor_movement }
-				NOT = {
-					has_ideology = ideology:ideology_socialist
-				}
-				NOT = {
-					c:USA ?= owner
-				}
 				owner = {
-					NOT = { has_law_or_variant = law_type:law_universal_suffrage }
+					NOT = {
+						has_technology_researched = socialism
+					}
 				}
 			}
 			add = {
@@ -1082,7 +1032,7 @@ liberal_party = {
 					}
 					add = 10
 				}
-				if = {
+				else_if = {
 					limit = {
 						owner = {
 							has_law_or_variant = law_type:law_census_voting
@@ -1100,7 +1050,6 @@ liberal_party = {
 						has_journal_entry = je_acw_countdown 
 						has_journal_entry = je_acw_war #vanilla bugfix
 						AND = { # JE not active yet at initialization
-							exists = c:USA
 							c:USA ?= THIS
 							year < 1837						
 						}
@@ -1122,75 +1071,55 @@ liberal_party = {
 				}					
 			}
 		}
-		if = { # anti-orleanist
+		if = { # French Monarchists
 			limit = {
-				leader ?= {
-					OR = {
-						has_ideology = ideology:ideology_bonapartist
-						has_ideology = ideology:ideology_legitimist
-					}
-				}
-				owner = {
-					any_interest_group = {
-						has_party = yes
-						party = {
-							is_party_type = liberal_party
-						}
-						is_powerful = yes
-						leader ?= {
-							has_ideology = ideology:ideology_orleanist
-						}
-					}
-				}
-			}
-			add = {
-				value = -5
-				desc = "from_french_monarchist_rival"
-			}
-		}
-		if = { # anti-legitimist
-			limit = {
-				leader ?= {
-					OR = {
-						has_ideology = ideology:ideology_bonapartist
-						has_ideology = ideology:ideology_orleanist
-					}
-				}
-				owner = {
-					any_interest_group = {
-						has_party = yes
-						party = {
-							is_party_type = liberal_party
-						}
-						is_powerful = yes
+				OR = {
+					AND = {
 						leader ?= {
 							has_ideology = ideology:ideology_legitimist
 						}
-					}
-				}
-			}
-			add = {
-				value = -5
-				desc = "from_french_monarchist_rival"
-			}
-		}
-		if = { # anti-bonapartist
-			limit = {
-				leader ?= {
-					OR = {
-						has_ideology = ideology:ideology_legitimist
-						has_ideology = ideology:ideology_orleanist
-					}
-				}
-				owner = {
-					any_interest_group = {
-						has_party = yes
-						party = {
-							is_party_type = liberal_party
+						owner.py:liberal_party ?= {
+							any_member = {
+								is_powerful = yes
+								leader ?= {
+									OR = {
+										has_ideology = ideology:ideology_bonapartist
+										has_ideology = ideology:ideology_orleanist
+									}
+								}
+							}
 						}
-						is_powerful = yes
+					}
+					AND = {
 						leader ?= {
 							has_ideology = ideology:ideology_bonapartist
+						}
+						owner.py:liberal_party ?= {
+							any_member = {
+								is_powerful = yes
+								leader ?= {
+									OR = {
+										has_ideology = ideology:ideology_legitimist
+										has_ideology = ideology:ideology_orleanist
+									}
+								}
+							}
+						}
+					}
+					AND = {
+						leader ?= {
+							has_ideology = ideology:ideology_orleanist
+						}
+						owner.py:liberal_party ?= {
+							any_member = {
+								is_powerful = yes
+								leader ?= {
+									OR = {
+										has_ideology = ideology:ideology_bonapartist
+										has_ideology = ideology:ideology_legitimist
+									}
+								}
+							}
 						}
 					}
 				}
@@ -1205,9 +1134,13 @@ liberal_party = {
 				owner = {
 					c:FRA ?= this
 					has_law = law_type:law_monarchy
+					ruler ?= {
+						has_ideology = ideology:ideology_orleanist
+					}
 				}
 				OR = {
 					has_ideology = ideology:ideology_liberal
+					has_ideology = ideology:ideology_universalist
 					has_ideology = ideology:ideology_populist
 					leader ?= {
 						OR = {
@@ -1307,22 +1240,6 @@ liberal_party = {
 				}
 			}
 		}
-		if = { # Carlists and Miguelists were against participating in electoral politics for a good while
-			limit = {
-				NOT = { owner = { has_technology_researched = corporatism } }
-				leader = {
-					OR = {
-						character_has_carlist_ideology = yes
-						character_has_miguelist_ideology = yes
-					}
-				}
-			}
-			add = {
-				value = -20
-				desc = "from_traditionalist_monarchism"
-			}
-		}
-
 		if = {
 			limit = {
 				owner = {
@@ -1355,6 +1272,21 @@ liberal_party = {
 			add = {
 				value = 20
 				desc = "caudillo_support"
+			}
+		}
+		if = { # Carlists and Miguelists were against participating in electoral politics for a good while
+			limit = {
+				NOT = { owner = { has_technology_researched = corporatism } }
+				leader = {
+					OR = {
+						character_has_carlist_ideology = yes
+						character_has_miguelist_ideology = yes
+					}
+				}
+			}
+			add = {
+				value = -20
+				desc = "from_traditionalist_monarchism"
 			}
 		}
 		if = {

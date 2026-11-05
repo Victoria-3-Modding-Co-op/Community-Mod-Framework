@@ -1,4 +1,4 @@
-﻿character_is_anti_slavery = {
+﻿REPLACE_OR_CREATE:character_is_anti_slavery = {
 	OR = {
 		has_ideology = ideology:ideology_abolitionist
 		has_ideology = ideology:ideology_humanitarian
@@ -18,7 +18,7 @@
 	}
 }
 
-character_is_pro_slavery = {
+REPLACE_OR_CREATE:character_is_pro_slavery = {
 	OR = {
 		has_ideology = ideology:ideology_slaver
 		has_ideology = ideology:ideology_jacksonian_democrat
@@ -29,7 +29,7 @@ character_is_pro_slavery = {
 	}
 }
 
-character_is_pro_religious_majority = {
+REPLACE_OR_CREATE:character_is_pro_religious_majority = {
 	OR = {
 		has_ideology = ideology:ideology_traditionalist
 		has_ideology = ideology:ideology_theocrat
@@ -42,7 +42,7 @@ character_is_pro_religious_majority = {
 	}
 }
 
-character_is_pro_religious_minority = {
+REPLACE_OR_CREATE:character_is_pro_religious_minority = {
 	OR = {
 		has_ideology = ideology:ideology_traditionalist_minoritarian
 		has_ideology = ideology:ideology_usfp_universalist
@@ -50,7 +50,7 @@ character_is_pro_religious_minority = {
 	}
 }
 
-character_hates_state_atheism = {
+REPLACE_OR_CREATE:character_hates_state_atheism = {
 	OR = {
 		has_ideology = ideology:ideology_traditionalist
 		has_ideology = ideology:ideology_theocrat
@@ -61,7 +61,7 @@ character_hates_state_atheism = {
 	}
 }
 
-character_is_pro_fascist = {
+REPLACE_OR_CREATE:character_is_pro_fascist = {
 	OR = {
 		has_ideology = ideology:ideology_fascist
 		has_ideology = ideology:ideology_integralist
@@ -75,7 +75,7 @@ character_is_pro_fascist = {
 	}
 }
 
-character_is_pro_cultural_majority = {
+REPLACE_OR_CREATE:character_is_pro_cultural_majority = {
 	OR = {
 		has_ideology = ideology:ideology_fascist
 		has_ideology = ideology:ideology_jingoist_leader		
@@ -88,7 +88,7 @@ character_is_pro_cultural_majority = {
 	}
 }
 
-character_is_pro_labor_movement = {
+REPLACE_OR_CREATE:character_is_pro_labor_movement = {
 	OR = {
 		has_ideology = ideology:ideology_reformer
 		has_ideology = ideology:ideology_radical
@@ -105,7 +105,7 @@ character_is_pro_labor_movement = {
 	}
 }
 
-character_is_pro_socialist_movement = {
+REPLACE_OR_CREATE:character_is_pro_socialist_movement = {
 	OR = {
 		has_ideology = ideology:ideology_communist
 		has_ideology = ideology:ideology_anarchist
@@ -119,7 +119,7 @@ character_is_pro_socialist_movement = {
 	}
 }
 
-character_is_pro_liberal_movement = {
+REPLACE_OR_CREATE:character_is_pro_liberal_movement = {
 	OR = {
 		has_ideology = ideology:ideology_market_liberal
 		has_ideology = ideology:ideology_liberal_leader
@@ -139,7 +139,7 @@ character_is_pro_liberal_movement = {
 	}
 }
 
-character_is_pro_radical_movement = {
+REPLACE_OR_CREATE:character_is_pro_radical_movement = {
 	OR = {
 		has_ideology = ideology:ideology_radical
 		has_ideology = ideology:ideology_nihilist
@@ -152,7 +152,7 @@ character_is_pro_radical_movement = {
 	}
 }
 
-character_is_pro_nihilism_movement = {
+REPLACE_OR_CREATE:character_is_pro_nihilism_movement = {
 	OR = {
 		has_ideology = ideology:ideology_nihilist
 		has_ideology = ideology:ideology_positivist
@@ -166,7 +166,7 @@ character_is_pro_nihilism_movement = {
 	}
 }
 
-character_is_pro_land_reform_movement = {
+REPLACE_OR_CREATE:character_is_pro_land_reform_movement = {
 	OR = {
 		has_ideology = ideology:ideology_land_reformer
 		has_ideology = ideology:ideology_luddite
@@ -189,7 +189,7 @@ character_is_pro_land_reform_movement = {
 	}
 }
 
-character_is_pro_feminist_movement = {
+REPLACE_OR_CREATE:character_is_pro_feminist_movement = {
 	OR = {
 		has_ideology = ideology:ideology_feminist
 		has_ideology = ideology:ideology_humanitarian
@@ -202,7 +202,7 @@ character_is_pro_feminist_movement = {
 	}
 }
 
-character_is_pro_reactionary_movement = {
+REPLACE_OR_CREATE:character_is_pro_reactionary_movement = {
 	OR = {
 		has_ideology = ideology:ideology_traditionalist
 		has_ideology = ideology:ideology_protectionist
@@ -216,7 +216,7 @@ character_is_pro_reactionary_movement = {
 	}
 }
 
-character_is_pro_modernizer_movement = {
+REPLACE_OR_CREATE:character_is_pro_modernizer_movement = {
 	OR = {
 		has_ideology = ideology:ideology_reformer
 		has_ideology = ideology:ideology_protectionist

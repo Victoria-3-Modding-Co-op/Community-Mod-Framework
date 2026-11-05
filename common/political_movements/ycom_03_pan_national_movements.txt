@@ -4,7 +4,7 @@
 	ideology = ideology_sovereignist_movement
 	character_ideologies = {
 		ideology_sovereignist_leader
-		ideology_social_democrat
+		ideology_state_socialist
 		ideology_humanitarian
 	}
 	
@@ -45,7 +45,7 @@
 				OR = {
 					has_ideology = ideology:ideology_sovereignist
 					has_ideology = ideology:ideology_humanitarian
-					has_ideology = ideology:ideology_social_democrat
+					has_ideology = ideology:ideology_state_socialist
 				}
 			}
 			multiply = {
@@ -374,36 +374,14 @@
 		
 		if = {
 			limit = {
-				owner = {
-					any_neighbouring_state = {
-						owner = {
-							NOT = { THIS = ROOT.owner }
-							any_political_movement = {
-								is_political_movement_type = movement_india_pan_national
-								is_insurrectionary = yes
-							}
-						}
-					}
-				}
+				neighboring_country_has_insurrectionary_movement_trigger = { TYPE = movement_india_pan_national }
 			}
 			add = {
 				desc = "NEIGHBOURING_COUNTRY_WITH_REVOLUTION"
 				value = 0.15
 			}
 		}
-		if = {
-			limit = {
-				this.days_since_movement_defeated <= very_long_modifier_time
-			}
-			add = { # (x-y)/y - ([1, 7300]-7300)/7300
-				desc = "movement_suppressed_after_civil_war"
-				value = this.days_since_movement_defeated
-				subtract = very_long_modifier_time
-				divide = {
-					value = very_long_modifier_time
-				}
-			}
-		}
+		add = movement_radicalism_suppressed_after_civil_war
 	}
 }
 
@@ -431,8 +409,9 @@ REPLACE:movement_german_national = {
 			cu:north_german.culture_current_fervor > 10
 			cu:south_german.culture_current_fervor > 10
 		}
-		NOT = {
+		NOR = {
 			c:GER ?= this
+			c:HRE ?= this
 		}
 	}
 	creation_weight = {
@@ -460,13 +439,19 @@ REPLACE:movement_german_national = {
 	}
 	
 	disband_trigger = {
-		c:GER ?= this
+		OR = {
+		    c:GER ?= this
+			c:HRE ?= this
+		}
 	}
 	
 	on_disbanded = {
 		if = {
 			limit = {
-				c:GER ?= owner
+				OR = {
+				    c:GER ?= owner
+					c:HRE ?= owner
+				}
 			}
 			owner ?= {
 				create_political_movement = { type = movement_cultural_majority }
@@ -816,18 +801,8 @@ REPLACE:movement_german_national = {
 	}
 	
 	additional_radicalism_factors = {
-		if = {
-			limit = {
-				owner.ruler ?= {
-					NOT = { culture = { is_primary_culture_of = root.owner } }
-				}
-			}
-			
-			add = {
-				value = 0.1
-				desc = "RULER_NOT_PRIMARY_CULTURE"
-			}
-		}
+		add = movement_radicalism_lack_of_suffrage
+		add = movement_radicalism_ruler_not_primary_culture
 		if = {
 			limit = {
 				owner = {
@@ -850,7 +825,7 @@ REPLACE:movement_german_national = {
 				limit = {
 					owner ?= {
 						is_unification_candidate = GER
-						any_diplomatically_relevant_country = {
+						any_country_in_german_confederation = {
 							is_unification_candidate = GER
 						}
 					}
@@ -866,7 +841,7 @@ REPLACE:movement_german_national = {
 						NOT = {
 							is_unification_candidate = GER
 						}
-						any_diplomatically_relevant_country = {
+						any_country_in_german_confederation = {
 							is_unification_candidate = GER
 						}
 					}
@@ -911,17 +886,7 @@ REPLACE:movement_german_national = {
 		
 		if = {
 			limit = {
-				owner = {
-					any_neighbouring_state = {
-						owner = {
-							NOT = { THIS = ROOT.owner }
-							any_political_movement = {
-								is_political_movement_type = movement_german_national
-								is_insurrectionary = yes
-							}
-						}
-					}
-				}
+				neighboring_country_has_insurrectionary_movement_trigger = { TYPE = movement_german_national }
 			}
 			add = {
 				desc = "NEIGHBOURING_COUNTRY_WITH_REVOLUTION"
@@ -934,19 +899,7 @@ REPLACE:movement_german_national = {
 			value = owner.average_german_fervor
 			divide = 400
 		}
-		if = {
-			limit = {
-				this.days_since_movement_defeated <= very_long_modifier_time
-			}
-			add = { # (x-y)/y - ([1, 7300]-7300)/7300
-				desc = "movement_suppressed_after_civil_war"
-				value = this.days_since_movement_defeated
-				subtract = very_long_modifier_time
-				divide = {
-					value = very_long_modifier_time
-				}
-			}
-		}
+		add = movement_radicalism_suppressed_after_civil_war
 	}
 }
 
@@ -970,11 +923,8 @@ REPLACE:movement_italian_national = {
 			country_has_primary_culture = cu:north_italian
 			country_has_primary_culture = cu:south_italian
 		}
-		NOR = {
-			c:AUS ?= this
-			c:KUK ?= this
-			c:HRE ?= this
-			c:ITA ?= this
+		NOT = {
+			country_tier = empire
 		}
 		OR = {
 			cu:north_italian.culture_current_fervor > 10
@@ -1006,7 +956,7 @@ REPLACE:movement_italian_national = {
 	}
 	
 	disband_trigger = {
-		c:ITA ?= this
+		country_tier = empire
 	}
 	
 	on_disbanded = {
@@ -1351,18 +1301,8 @@ REPLACE:movement_italian_national = {
 	}
 	
 	additional_radicalism_factors = {
-		if = {
-			limit = {
-				owner.ruler ?= {
-					NOT = { culture = { is_primary_culture_of = root.owner } }
-				}
-			}
-			
-			add = {
-				value = 0.1
-				desc = "RULER_NOT_PRIMARY_CULTURE"
-			}
-		}
+		add = movement_radicalism_lack_of_suffrage
+		add = movement_radicalism_ruler_not_primary_culture
 		if = {
 			limit = {
 				owner ?= {
@@ -1373,7 +1313,7 @@ REPLACE:movement_italian_national = {
 				limit = {
 					owner ?= {
 						is_unification_candidate = ITA
-						any_diplomatically_relevant_country = {
+						any_country_in_italy_old = {
 							is_unification_candidate = ITA
 						}
 					}
@@ -1389,7 +1329,7 @@ REPLACE:movement_italian_national = {
 						NOT = {
 							is_unification_candidate = ITA
 						}
-						any_diplomatically_relevant_country = {
+						any_country_in_italy_old = {
 							is_unification_candidate = ITA
 						}
 					}
@@ -1434,17 +1374,7 @@ REPLACE:movement_italian_national = {
 		
 		if = {
 			limit = {
-				owner = {
-					any_neighbouring_state = {
-						owner = {
-							NOT = { THIS = ROOT.owner }
-							any_political_movement = {
-								is_political_movement_type = movement_italian_national
-								is_insurrectionary = yes
-							}
-						}
-					}
-				}
+				neighboring_country_has_insurrectionary_movement_trigger = { TYPE = movement_italian_national }
 			}
 			add = {
 				desc = "NEIGHBOURING_COUNTRY_WITH_REVOLUTION"
@@ -1457,19 +1387,7 @@ REPLACE:movement_italian_national = {
 			value = owner.average_italian_fervor
 			divide = 400
 		}
-		if = {
-			limit = {
-				this.days_since_movement_defeated <= very_long_modifier_time
-			}
-			add = { # (x-y)/y - ([1, 7300]-7300)/7300
-				desc = "movement_suppressed_after_civil_war"
-				value = this.days_since_movement_defeated
-				subtract = very_long_modifier_time
-				divide = {
-					value = very_long_modifier_time
-				}
-			}
-		}
+		add = movement_radicalism_suppressed_after_civil_war
 	}
 }
 
@@ -1888,18 +1806,8 @@ REPLACE:movement_yugoslav_national = {
 	}
 	
 	additional_radicalism_factors = {
-		if = {
-			limit = {
-				owner.ruler ?= {
-					NOT = { culture = { is_primary_culture_of = root.owner } }
-				}
-			}
-			
-			add = {
-				value = 0.1
-				desc = "RULER_NOT_PRIMARY_CULTURE"
-			}
-		}
+		add = movement_radicalism_lack_of_suffrage
+		add = movement_radicalism_ruler_not_primary_culture
 		
 		if = {
 			limit = {
@@ -1911,7 +1819,7 @@ REPLACE:movement_yugoslav_national = {
 				limit = {
 					owner ?= {
 						is_unification_candidate = YUG
-						any_diplomatically_relevant_country = {
+						any_country_in_balkans = {
 							is_unification_candidate = YUG
 						}
 					}
@@ -1927,7 +1835,7 @@ REPLACE:movement_yugoslav_national = {
 						NOT = {
 							is_unification_candidate = YUG
 						}
-						any_diplomatically_relevant_country = {
+						any_country_in_balkans = {
 							is_unification_candidate = YUG
 						}
 					}
@@ -1974,17 +1882,7 @@ REPLACE:movement_yugoslav_national = {
 		
 		if = {
 			limit = {
-				owner = {
-					any_neighbouring_state = {
-						owner = {
-							NOT = { THIS = ROOT.owner }
-							any_political_movement = {
-								is_political_movement_type = movement_yugoslav_national
-								is_insurrectionary = yes
-							}
-						}
-					}
-				}
+				neighboring_country_has_insurrectionary_movement_trigger = { TYPE = movement_yugoslav_national }
 			}
 			add = {
 				desc = "NEIGHBOURING_COUNTRY_WITH_REVOLUTION"
@@ -1997,19 +1895,7 @@ REPLACE:movement_yugoslav_national = {
 			value = owner.average_south_slavic_fervor
 			divide = 400
 		}
-		if = {
-			limit = {
-				this.days_since_movement_defeated <= very_long_modifier_time
-			}
-			add = { # (x-y)/y - ([1, 7300]-7300)/7300
-				desc = "movement_suppressed_after_civil_war"
-				value = this.days_since_movement_defeated
-				subtract = very_long_modifier_time
-				divide = {
-					value = very_long_modifier_time
-				}
-			}
-		}
+		add = movement_radicalism_suppressed_after_civil_war
 	}
 }
 
@@ -2389,18 +2275,7 @@ REPLACE:movement_dominican_national = {
 	}
 	
 	additional_radicalism_factors = {
-		if = {
-			limit = {
-				this.days_since_movement_defeated <= very_long_modifier_time
-			}
-			add = { # (x-y)/y - ([1, 7300]-7300)/7300
-				desc = "movement_suppressed_after_civil_war"
-				value = this.days_since_movement_defeated
-				subtract = very_long_modifier_time
-				divide = {
-					value = very_long_modifier_time
-				}
-			}
-		}
+		add = movement_radicalism_lack_of_suffrage
+		add = movement_radicalism_suppressed_after_civil_war
 	}
 }

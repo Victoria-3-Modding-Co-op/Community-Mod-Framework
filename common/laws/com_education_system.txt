@@ -31,7 +31,7 @@
 
 	# AI will never abolish institutions entirely
 	ai_will_do = {
-		always = no
+		has_journal_entry = je_tp_tsar_gendarme_of_europe
 	}
 
 	ai_enact_weight_modifier = { #Petitions

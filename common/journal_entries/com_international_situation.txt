@@ -5,6 +5,11 @@ je_com_international_situation = {
 	group = je_group_global_international_situations
 	icon = "gfx/interface/icons/generic_icons/international_organizations.dds"
 	weight = 100
+	
+	activation_description = {
+		always = yes # TODO Figure out what this does
+	}
+	
 	should_be_pinned_by_default_involved = yes
 	
 	widget = {
@@ -37,34 +42,57 @@ je_com_international_situation = {
 		debug_influence
 	}
 	
-	complete = {
-		always = no
+	outcome = {
+		header = je_standard_completion_header
+		effect_header = je_standard_on_completion_header
+		conclusion_desc = je_standard_completion_conclusion_desc
+		color = gold_positive
+		
+		trigger = {
+			always = no
+		}
+		effect = {
+			custom_tooltip = com_debug.tt
+		}
 	}
 	
-	on_complete = {
-		custom_tooltip = com_debug.tt
+	outcome = {
+		header = je_standard_failure_header
+		effect_header = je_standard_on_failure_header
+		conclusion_desc = je_standard_failure_conclusion_desc
+		color = blue_negative
+		
+		trigger = {
+			always = no
+		}
+		effect = {
+			custom_tooltip = com_debug.tt
+		}
 	}
 	
-	fail = {
-		always = no
+	outcome = {
+		header = JOURNAL_ENTRY_TIMEOUT
+		effect_header = JOURNAL_ENTRY_ON_TIMEOUT
+		conclusion_desc = je_standard_failure_completion_desc/je_standard_failure_conclusion_desc
+		
+		flags = { timeout }
+		
+		effect = {
+			custom_tooltip = com_debug.tt
+		}
 	}
-	
-	on_fail = {
-		custom_tooltip = com_debug.tt
-	}
-	
 	timeout = very_long_modifier_time
 	
-	on_timeout = {
-		custom_tooltip = com_debug.tt
-	}
-	
-	invalid = {
-		always = no
-	}
-	
-	on_invalid = {
-		custom_tooltip = com_debug.tt
+	outcome = {
+		conclusion_desc = je_standard_failure_conclusion_desc
+		flags = { hidden invalid_outcome }
+		
+		trigger = {
+			always = no
+		}
+		effect = {
+			custom_tooltip = com_debug.tt
+		}
 	}
 	
 	status_desc = {

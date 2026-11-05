@@ -54,6 +54,7 @@ types com_journal_widget_types {
 					
 					scripted_journal_entry_button = {
 						parentanchor = center
+						block "button_visibility" {}
 					}
 				}
 			}

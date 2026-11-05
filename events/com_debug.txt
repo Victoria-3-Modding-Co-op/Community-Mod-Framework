@@ -13,7 +13,7 @@ com_debug.1 = {
 	type = country_event
 	hidden = yes
 	orphan = yes
-
+	
 	trigger = {
 		always = no # DO NOT CALL THIS EVENT
 	}
@@ -34,7 +34,15 @@ com_debug.1 = {
 		fix_variable_error = { variable = com_journal_entry_company }
 		fix_variable_error = { variable = com_character_background }
 		fix_variable_error = { variable = com_character_background_vfx }
-
+		fix_variable_error = { variable = com_intro_window_situation_text }
+		fix_variable_error = { variable = com_intro_window_content_text }
+		fix_variable_error = { variable = com_ipsum_lorem }
+		
+		## CMF Community Mod Menu
+		fix_variable_error = { variable = com_mod_debug_manager_list }
+		fix_variable_error = { variable = com_mod_name }
+		fix_variable_error = { variable = com_mod_command }
+		
 		# CMF Journal Entry Framework
 		fix_variable_error = { variable = com_hidden_journal_groups }
 		fix_variable_error = { variable = com_header_var }
@@ -44,8 +52,6 @@ com_debug.1 = {
 		fix_variable_error = { variable = com_hide_scripted_buttons }
 		fix_variable_error = { variable = com_hide_journal_reason }
 		fix_variable_error = { variable = com_hide_involved_countries }
-		fix_variable_error = { variable = com_hide_complete_triggers }
-		fix_variable_error = { variable = com_hide_fail_triggers }
 		
 		# CMF International Situations Framework
 		fix_variable_error = { variable = com_situation_header_var }
@@ -61,12 +67,12 @@ com_debug.1 = {
 		fix_variable_error = { variable = com_situation_phase_name_var }
 		fix_variable_error = { variable = com_involvement_status_var }
 		fix_variable_error = { variable = com_situation_reason_var }
-		fix_variable_error = { variable = com_situation_complete_name_var }
-		fix_variable_error = { variable = com_situation_complete_illus_var }
-		fix_variable_error = { variable = com_situation_timeout_name_var }
-		fix_variable_error = { variable = com_situation_timeout_illus_var }
-		fix_variable_error = { variable = com_situation_failure_name_var }
-		fix_variable_error = { variable = com_situation_failure_illus_var }
+		fix_variable_error = { variable = com_situation_outcome_0_name_var }
+		fix_variable_error = { variable = com_situation_outcome_0_illustration_var }
+		fix_variable_error = { variable = com_situation_outcome_1_name_var }
+		fix_variable_error = { variable = com_situation_outcome_1_illustration_var }
+		fix_variable_error = { variable = com_situation_outcome_2_name_var }
+		fix_variable_error = { variable = com_situation_outcome_2_illustration_var }
 		
 		fix_variable_error = { variable = com_situation_group_1_next_phase_progress_var }
 		fix_variable_error = { variable = com_situation_group_1_next_phase_name_var }
@@ -110,7 +116,7 @@ com_debug.1 = {
 		fix_variable_error = { variable = com_victory_effect }
 		fix_variable_error = { variable = com_reason_location }
 		fix_variable_error = { variable = com_enactment_widget }
-
+		
 		# CMF International Organizations Framework
 		fix_variable_error = { variable = com_international_organizations_sgui }
 		fix_variable_error = { variable = com_show_international_organizations }
@@ -120,7 +126,7 @@ com_debug.1 = {
 		fix_variable_error = { variable = com_interorg_chair_var }
 		fix_variable_error = { variable = com_interorg_headquarters_var }
 		fix_variable_error = { variable = com_interorg_chair_title_var }
-
+		
 		fix_variable_error = { variable = je_group_com_hidden }
 		fix_variable_error = { variable = je_group_com_contextless_hidden }
 		fix_variable_error = { variable = je_group_com_supranational_organizations }
@@ -132,16 +138,16 @@ com_debug.1 = {
 		fix_variable_error = { variable = je_group_global_international_situations }
 		fix_variable_error = { variable = je_group_british_india }
 		fix_variable_error = { variable = je_group_iberia }
-
+		
 		# CMF Sidebar Framework
 		fix_variable_error = { variable = custom_button_list }
 		fix_variable_error = { variable = custom_button_list_flag }
 		fix_variable_error = { variable = com_toggle_debug_sgui }
-
+		
 		# CMF Structs Framework
 		fix_variable_error = { variable = is_struct }
 		fix_variable_error = { variable = com_type }
-
+		
 		# CMF Progressbar Framework
 		fix_variable_error = { variable = com_transparent_bar }
 		fix_variable_error = { variable = com_double_bad_gold_marker }
@@ -149,7 +155,7 @@ com_debug.1 = {
 		fix_variable_error = { variable = com_double_bad_gold_bar }
 		fix_variable_error = { variable = com_bear_spray_applied }
 		fix_variable_error = { variable = com_moon_moon_on_deck }
-
+		
 		# CMF on_action Overrides
 		fix_variable_error = { variable = no_heirs }
 		fix_variable_error = { variable = com_no_formation_events }
@@ -162,13 +168,13 @@ com_debug.1 = {
 		fix_variable_error = { variable = com_block_retire_interaction }
 		fix_variable_error = { variable = com_block_retire_interaction_default }
 		fix_variable_error = { variable = com_block_retire_interaction_with_reason_loc }
-
+		
 		# CMF Character Animations Framework
 		fix_variable_error = { variable = com_character_override }
 		fix_variable_error = { variable = com_character_animation }
 		fix_variable_error = { variable = com_character_camera }
 		fix_variable_error = { variable = com_character_environment }
-
+		
 		# CMF Law Blocker Framework
 		## Power Laws
 		#Bureaucracy
@@ -186,7 +192,7 @@ com_debug.1 = {
 		fix_variable_error = { variable = com_hide_law_social_monarchy }
 		#Distribution of Power
 		fix_variable_error = { variable = com_hide_law_autocracy }
-		fix_variable_error = { variable = com_hide_law_oligarchy}
+		fix_variable_error = { variable = com_hide_law_oligarchy }
 		fix_variable_error = { variable = com_hide_law_technocracy }
 		fix_variable_error = { variable = com_hide_law_landed_voting }
 		fix_variable_error = { variable = com_hide_law_wealth_voting }
@@ -221,7 +227,7 @@ com_debug.1 = {
 		fix_variable_error = { variable = com_hide_law_national_guard }
 		fix_variable_error = { variable = com_hide_law_secret_police }
 		fix_variable_error = { variable = com_hide_law_guaranteed_liberties }
-
+		
 		## Economy Laws
 		#Economic Systems
 		fix_variable_error = { variable = com_hide_law_traditionalism }
@@ -262,7 +268,7 @@ com_debug.1 = {
 		fix_variable_error = { variable = com_hide_law_dedicated_police }
 		fix_variable_error = { variable = com_hide_law_militarized_police }
 		#Education Systems
-		fix_variable_error = { variable = com_hide_law_no_schools}
+		fix_variable_error = { variable = com_hide_law_no_schools }
 		fix_variable_error = { variable = com_hide_law_religious_school }
 		fix_variable_error = { variable = com_hide_law_private_school }
 		fix_variable_error = { variable = com_hide_law_public_school }
@@ -271,7 +277,7 @@ com_debug.1 = {
 		fix_variable_error = { variable = com_hide_law_charitable_health_system }
 		fix_variable_error = { variable = com_hide_law_private_health_insurance }
 		fix_variable_error = { variable = com_hide_law_public_health_insurance }
-
+		
 		## Human Rights Laws
 		#Free Speech
 		fix_variable_error = { variable = com_hide_law_outlawed_dissent }
@@ -288,7 +294,7 @@ com_debug.1 = {
 		fix_variable_error = { variable = com_hide_law_compulsory_primary_school }
 		#Women's Rights
 		fix_variable_error = { variable = com_hide_law_no_womens_rights }
-		fix_variable_error = { variable = com_hide_law_women_own_property}
+		fix_variable_error = { variable = com_hide_law_women_own_property }
 		fix_variable_error = { variable = com_hide_law_women_in_the_workplace }
 		fix_variable_error = { variable = com_hide_law_womens_suffrage }
 		#Welfare
@@ -299,7 +305,7 @@ com_debug.1 = {
 		#Migration
 		fix_variable_error = { variable = com_hide_law_no_migration_controls }
 		fix_variable_error = { variable = com_hide_law_migration_controls }
-		fix_variable_error = { variable = com_hide_law_closed_borders}
+		fix_variable_error = { variable = com_hide_law_closed_borders }
 		#Slavery
 		fix_variable_error = { variable = com_hide_law_slavery_banned }
 		fix_variable_error = { variable = com_hide_law_colonial_slavery }
@@ -318,7 +324,7 @@ com_debug.1 = {
 		fix_variable_error = { variable = com_fa_index }
 		fix_variable_error = { variable = com_fa_return }
 		fix_variable_error = { variable = com_fa_value }
-
+		
 		# Miscellaneous
 		fix_variable_error = { variable = had_progressive_era }
 		fix_variable_error = { variable = ccp_land_revolution_ig }
@@ -331,7 +337,7 @@ com_debug.1 = {
 		fix_variable_error = { variable = whigs_party }
 		fix_variable_error = { variable = com_sidebar_button_sgui }
 		fix_variable_error = { variable = com_disbanding_blocs }
-
+		
 		# Character Name Extraction
 		fix_variable_error = { variable = com_character_name_extract }
 		fix_variable_error = { variable = com_name_full }
@@ -356,10 +362,6 @@ com_debug.1 = {
 		fix_variable_error = { variable = OCTOBER }
 		fix_variable_error = { variable = NOVEMBER }
 		fix_variable_error = { variable = DECEMBER }
-		
-		# Flags for use in macros
-		fix_variable_error = { variable = yes }
-		fix_variable_error = { variable = no }
 	}
 }
 
@@ -368,7 +370,7 @@ com_debug.2 = {
 	type = country_event
 	hidden = yes
 	orphan = yes
-
+	
 	trigger = {
 		# TEST EVENT. DO NOT CALL.
 	}
@@ -385,28 +387,28 @@ com_debug.3 = {
 	type = country_event
 	placement = root
 	orphan = yes
-
+	
 	title = com_debug.t
 	desc = com_debug.d
 	flavor = com_debug.f
-
+	
 	gui_window = event_window_europa_1_char_portrait
 	left_icon = scope:left_icon
-
+	
 	event_image = {
 		video = "unspecific_ruler_speaking_to_people"
 	}
-
+	
 	icon = "gfx/interface/icons/event_icons/event_default.dds"
-
+	
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
-
+	
 	duration = 3
-
+	
 	trigger = {
 		# Testing only
 	}
-
+	
 	immediate = {
 		ruler = {
 			save_scope_as = left_icon
@@ -420,30 +422,140 @@ com_debug.3 = {
 		save_scope_as = minor_left_icon
 		save_scope_as = minor_right_icon
 	}
-
+	
 	option = {
 		name = com_debug.a
 		default_option = yes
 		custom_tooltip = com_debug.tt
 	}
-
+	
 	option = {
 		name = com_debug.b
 		custom_tooltip = com_debug.tt
 	}
-
+	
 	option = {
 		name = com_debug.c
 		custom_tooltip = com_debug.tt
 	}
-
+	
 	option = {
 		name = com_debug.e
 		custom_tooltip = com_debug.tt
 	}
-
+	
 	option = {
 		name = com_debug.james
 		custom_tooltip = com_debug.james_tt
+	}
+}
+
+# GUI window testing
+com_debug.4 = {
+	type = country_event
+	placement = root
+	orphan = yes
+	
+	title = com_debug.t
+	desc = com_ipsum_lorem
+	flavor = com_debug.f
+	
+	gui_window = event_window_com_introduction_europa
+	
+	event_image = {
+		video = "unspecific_ruler_speaking_to_people"
+	}
+	
+	icon = "gfx/interface/icons/event_icons/event_default.dds"
+	
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	
+	duration = 3
+	
+	trigger = {
+		# Testing only
+	}
+	
+	immediate = {
+		set_variable = {
+			name = com_intro_window_situation_text
+			value = flag:com_ipsum_lorem
+		}
+		set_variable = {
+			name = com_intro_window_content_text
+			value = flag:com_ipsum_lorem
+		}
+		ruler = {
+			save_scope_as = left_icon
+		}
+		ruler = {
+			save_scope_as = center_icon
+		}
+		ruler = {
+			save_scope_as = right_icon
+		}
+		save_scope_as = minor_left_icon
+		save_scope_as = minor_right_icon
+	}
+	
+	option = {
+		name = com_debug.a
+		default_option = yes
+		custom_tooltip = com_debug.tt
+	}
+}
+
+# GUI window testing
+com_debug.5 = {
+	type = country_event
+	placement = root
+	orphan = yes
+	
+	title = com_debug.t
+	desc = com_ipsum_lorem
+	flavor = com_debug.f
+	
+	gui_window = event_window_com_introduction_victoria
+	
+	event_image = {
+		video = "europenorthamerica_london_center"
+	}
+	
+	icon = "gfx/interface/icons/event_icons/event_default.dds"
+	
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	
+	duration = 3
+	
+	trigger = {
+		# Testing only
+	}
+	
+	immediate = {
+		set_variable = {
+			name = com_intro_window_situation_text
+			value = flag:com_ipsum_lorem
+		}
+		set_variable = {
+			name = com_intro_window_content_text
+			value = flag:com_ipsum_lorem
+		}
+		ruler = {
+			save_scope_as = left_icon
+		}
+		ruler = {
+			save_scope_as = center_icon
+		}
+		ruler = {
+			save_scope_as = right_icon
+		}
+		save_scope_as = minor_left_icon
+		save_scope_as = minor_right_icon
+	}
+	
+	option = {
+		name = com_debug.a
+		default_option = yes
+		custom_tooltip = com_debug.tt
 	}
 }

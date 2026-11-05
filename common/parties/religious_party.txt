@@ -5,7 +5,7 @@
 # USFP etc..
 
 religious_party = {
-	color = { 100 100 100 }
+	color = { 200 200 200 }
 	name = {
 		first_valid = {
 
@@ -288,6 +288,7 @@ religious_party = {
 	
 	# Root - IG considering joining
 	# scope:number - the number of IGs that would join this party before the root IG
+	# scope:founding_party - yes if the root IG would be founding this party rather than joining an existing one
 	join_weight = {
 		value = {
 			value = -5
@@ -347,12 +348,12 @@ religious_party = {
 		if = {
 			limit = {
 				owner = {
+					NOT = {
+						has_technology_researched = corporatism
+					}
 					any_interest_group = {
 						is_interest_group_type = ig_landowners
 						ig_counts_as_marginal = no
-					}
-					NOT = {
-						has_technology_researched = corporatism
 					}
 				}
 			}
@@ -363,9 +364,12 @@ religious_party = {
 		}
 		if = {
 			limit = {
-				is_interest_group_type = ig_devout
 				owner = {
 					has_law_or_variant = law_type:law_theocracy
+				}
+				law_stance = {
+					law = law_type:law_theocracy
+					value > neutral
 				}
 			}
 			add = {
@@ -389,6 +393,7 @@ religious_party = {
 		}
 		if = { # nobody will join if the devout don't join
 			limit = {
+				scope:founding_party = no
 				NOT = { is_interest_group_type = ig_devout }
 				OR = {
 					NOT = { exists = owner.py:religious_party }
@@ -429,6 +434,7 @@ religious_party = {
 					OR = {
 						has_ideology = ideology:ideology_traditionalist
 						character_has_carlist_ideology = yes
+						character_has_miguelist_ideology = yes
 						has_ideology = ideology:ideology_theocrat
 						has_ideology = ideology:ideology_corporatist_leader
 					}
@@ -441,11 +447,9 @@ religious_party = {
 		}
 		if = { # antireligious characters and IG's will never join
 			limit = {
-				OR = {
-					has_ideology = ideology:ideology_anti_clerical
-					leader ?= {
-						has_ideology = ideology:ideology_nihilist
-					}
+				law_stance = {
+					law = law_type:law_total_separation
+					value > neutral
 				}
 			}
 			add = {	
@@ -472,9 +476,14 @@ religious_party = {
 		}
 		if = { # patriarchs more likely to join conservatives with women's suffrage
 			limit = {
+				owner = {
+					has_law_or_variant = law_type:law_womens_suffrage
+				}
 				OR = {
-					has_ideology = ideology:ideology_patriarchal
-
+					law_stance = {
+						law = law_type:law_womens_suffrage
+						value < neutral
+					}
 					# ANZFP
 					trigger_if = {
 						limit = {
@@ -482,9 +491,6 @@ religious_party = {
 						}
 						anz_particularist_ideologies = yes
 					}
-				}
-				owner = {
-					has_law_or_variant = law_type:law_womens_suffrage
 				}
 			}
 			add = {
@@ -536,6 +542,64 @@ religious_party = {
 				desc = "from_archetype_party"
 			}
 		}
+		if = { # French Monarchists
+			limit = {
+				OR = {
+					AND = {
+						leader ?= {
+							has_ideology = ideology:ideology_legitimist
+						}
+						owner.py:religious_party ?= {
+							any_member = {
+								is_powerful = yes
+								leader ?= {
+									OR = {
+										has_ideology = ideology:ideology_bonapartist
+										has_ideology = ideology:ideology_orleanist
+									}
+								}
+							}
+						}
+					}
+					AND = {
+						leader ?= {
+							has_ideology = ideology:ideology_bonapartist
+						}
+						owner.py:religious_party ?= {
+							any_member = {
+								is_powerful = yes
+								leader ?= {
+									OR = {
+										has_ideology = ideology:ideology_legitimist
+										has_ideology = ideology:ideology_orleanist
+									}
+								}
+							}
+						}
+					}
+					AND = {
+						leader ?= {
+							has_ideology = ideology:ideology_orleanist
+						}
+						owner.py:religious_party ?= {
+							any_member = {
+								is_powerful = yes
+								leader ?= {
+									OR = {
+										has_ideology = ideology:ideology_bonapartist
+										has_ideology = ideology:ideology_legitimist
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			add = {
+				value = -5
+				desc = "from_french_monarchist_rival"
+			}
+		}
 		if = {
 			limit = {
 				scope:number = 1
@@ -563,84 +627,6 @@ religious_party = {
 			multiply = {
 				value = 0.0
 				desc = "from_three_or_more_prior_members"
-			}
-		}
-		if = { # anti-orleanist
-			limit = {
-				leader ?= {
-					OR = {
-						has_ideology = ideology:ideology_bonapartist
-						has_ideology = ideology:ideology_legitimist
-					}
-				}
-				owner = {
-					any_interest_group = {
-						has_party = yes
-						party = {
-							is_party_type = religious_party
-						}
-						is_powerful = yes
-						leader ?= {
-							has_ideology = ideology:ideology_orleanist
-						}
-					}
-				}
-			}
-			add = {
-				value = -5
-				desc = "from_french_monarchist_rival"
-			}
-		}
-		if = { # anti-legitimist
-			limit = {
-				leader ?= {
-					OR = {
-						has_ideology = ideology:ideology_bonapartist
-						has_ideology = ideology:ideology_orleanist
-					}
-				}
-				owner = {
-					any_interest_group = {
-						has_party = yes
-						party = {
-							is_party_type = religious_party
-						}
-						is_powerful = yes
-						leader ?= {
-							has_ideology = ideology:ideology_legitimist
-						}
-					}
-				}
-			}
-			add = {
-				value = -5
-				desc = "from_french_monarchist_rival"
-			}
-		}
-		if = { # anti-bonapartist
-			limit = {
-				leader ?= {
-					OR = {
-						has_ideology = ideology:ideology_legitimist
-						has_ideology = ideology:ideology_orleanist
-					}
-				}
-				owner = {
-					any_interest_group = {
-						has_party = yes
-						party = {
-							is_party_type = religious_party
-						}
-						is_powerful = yes
-						leader ?= {
-							has_ideology = ideology:ideology_bonapartist
-						}
-					}
-				}
-			}
-			add = {
-				value = -5
-				desc = "from_french_monarchist_rival"
 			}
 		}
 	}

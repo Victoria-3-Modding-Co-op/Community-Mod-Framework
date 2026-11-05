@@ -1,0 +1,140 @@
+﻿com_intro_window_macroregion_type = {
+	type = country
+	
+	text = {
+		localization_key = com_intro_window_macroregion_europe
+		trigger = {
+			is_in_geographic_region = geographic_region_europe
+		}
+	}
+	text = {
+		localization_key = com_intro_window_macroregion_americas
+		trigger = {
+			is_in_geographic_region = geographic_region_americas
+		}
+	}
+	text = {
+		localization_key = com_intro_window_macroregion_mena
+		trigger = {
+			OR = {
+				is_in_geographic_region = geographic_region_middle_east
+				is_in_geographic_region = geographic_region_north_africa
+			}
+		}
+	}
+	text = {
+		localization_key = com_intro_window_macroregion_asia
+		trigger = {
+			capital = {
+				region = {
+					OR = {
+						# Central Asia
+						sr:region_himalayas = this
+						sr:region_central_asia = this
+						# India
+						sr:region_north_india = this
+						sr:region_south_india = this
+						# East Asia and Siberia
+						sr:region_south_china = this
+						sr:region_north_china = this
+						sr:region_northeast_asia = this
+						sr:region_siberia = this
+						sr:region_indonesia = this
+						sr:region_indochina = this
+					}
+				}
+			}
+		}
+	}
+	text = {
+		localization_key = com_intro_window_macroregion_africa
+		trigger = {
+			is_in_geographic_region = geographic_region_subsaharan_africa
+		}
+	}
+	text = {
+		localization_key = com_intro_window_macroregion_oceania
+		trigger = {
+			is_in_geographic_region = geographic_region_oceania
+		}
+	}
+}
+
+com_intro_window_subregion_type = {
+	type = country
+	
+	text = {
+		localization_key = com_intro_window_subregion_north_america
+		trigger = {
+			is_in_geographic_region = geographic_region_north_america
+		}
+	}
+	text = {
+		localization_key = com_intro_window_subregion_south_america
+		trigger = {
+			is_in_geographic_region = geographic_region_south_america
+		}
+	}
+	text = {
+		localization_key = com_intro_window_subregion_western_europe
+		trigger = {
+			is_in_geographic_region = geographic_region_western_europe
+		}
+	}
+	text = {
+		localization_key = com_intro_window_subregion_eastern_europe
+		trigger = {
+			is_in_geographic_region = geographic_region_eastern_europe
+		}
+	}
+	text = {
+		localization_key = com_intro_window_subregion_balkans
+		trigger = {
+			is_in_geographic_region = geographic_region_balkans
+		}
+	}
+	text = {
+		localization_key = com_intro_window_subregion_east_asia
+		trigger = {
+			is_in_geographic_region = geographic_region_east_asia
+		}
+	}
+}
+
+com_intro_window_rank_type = {
+	type = country
+	
+	text = {
+		localization_key = com_intro_window_rank_great_power
+		trigger = {
+			country_rank = rank_value:great_power
+		}
+	}
+	text = {
+		localization_key = com_intro_window_rank_major_minor
+		trigger = {
+			country_rank = rank_value:major_power
+		}
+	}
+	text = {
+		localization_key = com_intro_window_rank_minor_insigificant_power
+		trigger = {
+			OR = {
+				country_rank = rank_value:minor_power
+				country_rank = rank_value:insignificant_power
+			}
+		}
+	}
+	text = {
+		localization_key = com_intro_window_rank_unrecognized
+		trigger = {
+			is_country_type = unrecognized
+		}
+	}
+	text = {
+		localization_key = com_intro_window_rank_decentralized
+		trigger = {
+			is_country_type = decentralized
+		}
+	}
+}

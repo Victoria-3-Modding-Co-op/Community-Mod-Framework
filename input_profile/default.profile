@@ -6,7 +6,7 @@ input_context={
 	input_action = {
 		name = "pause"
 		text = "SETTING_INPUT_ACTION_PAUSE"
-		scancode = 44			# Space
+		scancode = 44	# Space
 		mouse_button = MOUSE_X2	# Mouse 5 AKA forward
 	}
 
@@ -77,6 +77,13 @@ input_context={
 		text = "SETTING_INPUT_ACTION_NEXT_MUSIC_TRACK"
 		scancode = 97	# Keypad 9
 		scancode = 258	# AUDIONEXT
+	}
+
+	input_action = {
+		name = "music_previous_track"
+		text = "SETTING_INPUT_ACTION_PREVIOUS_MUSIC_TRACK"
+		scancode = 95	# Keypad 7
+		scancode = 259	# AUDIOPREV
 	}
 
 	input_action = {
@@ -344,7 +351,7 @@ input_context={
 	input_action = {
 		name = "construction_queue"
 		text = "SETTING_INPUT_ACTION_CONSTRUCTION_QUEUE"
-		scancode = 5 			# B
+		scancode = 5	# B
 	}
 
 	input_action = {
@@ -365,37 +372,37 @@ input_context={
 	input_action = {
 		name = "confirm"
 		text = "SETTING_INPUT_ACTION_CONFIRM"
-		scancode = 6 			# C
+		scancode = 6	# C
 	}
 
 	input_action = {
 		name = "dismiss_toast"
 		text = "SETTING_INPUT_ACTION_DISMISS_TOAST"
-		scancode = 41			# Escape
+		scancode = 41	# Escape
 	}
 
 	input_action = {
 		name = "current_situation"
 		text = "SETTING_INPUT_ACTION_CURRENT_SITUATION"
-		scancode = 8 			# E
+		scancode = 8	# E
 	}
 
 	input_action = {
 		name = "go_to_details"
 		text = "SETTING_INPUT_ACTION_GO_TO_DETAILS"
-		scancode = 10 			# G
+		scancode = 10	# G
 	}
 
 	input_action = {
 		name = "merge"
 		text = "SETTING_INPUT_ACTION_MERGE"
-		scancode = 16 			# M
+		scancode = 16	# M
 	}
 
 	input_action = {
 		name = "country_panel"
 		text = "SETTING_INPUT_ACTION_COUNTRY_PANEL"
-		scancode = 21 			# R
+		scancode = 21	# R
 	}
 
 	input_action = {
@@ -417,19 +424,19 @@ input_context={
 	input_action = {
 		name = "scroll_up"
 		text = "SETTING_INPUT_ACTION_SCROLL_UP"
-		scancode = 75 			# Page Up
+		scancode = 75	# Page Up
 	}
 
 	input_action = {
 		name = "scroll_down"
 		text = "SETTING_INPUT_ACTION_SCROLL_DOWN"
-		scancode = 78 			# Page Down
+		scancode = 78	# Page Down
 	}
 
 	input_action = {
 		name = "toggle_gui_debug"
 		text = "SETTING_INPUT_ACTION_TOGGLE_GUI_DEBUG"
-		scancode = 18 			# O
+		scancode = 18	# O
 	}
 
 	###MOD ADDED###
@@ -439,7 +446,7 @@ input_context={
 
 	input_action = {
 		name = "input_ctrl_alt_d"
-		text = "SETTING_INPUT_ACTION_CTRL_ALT_D" # Set com_debug global variable
+		text = "SETTING_INPUT_ACTION_CTRL_ALT_D" # Toggles the "com_debug" global variable
 		binding = { # ctrl + alt + d
 			scancode = 7
 			modifier = ctrl
@@ -448,73 +455,83 @@ input_context={
 	}
 
 	input_action = {
-    		name = "input_ctrl_alt_q"
-    		text = "SETTING_INPUT_ACTION_CTRL_ALT_Q" # Execute the debug_mode console command
-    		binding = { # ctrl + alt + q
-    			scancode = 20	# Q
-    			modifier = ctrl
-    			modifier = alt
-    		}
-    	}
+		name = "input_ctrl_alt_q"
+		text = "SETTING_INPUT_ACTION_CTRL_ALT_Q" # Executes the "debug_mode" console command
+		binding = { # ctrl + alt + q
+			scancode = 20	# Q
+			modifier = ctrl
+			modifier = alt
+		}
+	}
+	
+	input_action = {
+		name = "input_ctrl_alt_m"
+		text = "SETTING_INPUT_ACTION_CTRL_ALT_M" # Toggles the "com_show_mod_debug_manager" global variable
+		binding = { # ctrl + alt + q
+			scancode = 16	# M
+			modifier = ctrl
+			modifier = alt
+		}
+	}
 
 	input_action = {
 		name = "input_h"
 		text = "SETTING_INPUT_ACTION_H"
-		scancode = 11			# H
+		scancode = 11	# H
 	}
 
 	input_action = {
 		name = "input_i"
 		text = "SETTING_INPUT_ACTION_I"
-		scancode = 12			# I
+		scancode = 12	# I
 	}
 
 	input_action = {
 		name = "input_k"
 		text = "SETTING_INPUT_ACTION_K"
-		scancode = 14			# K
+		scancode = 14	# K
 	}
 
 	input_action = {
 		name = "input_l"
 		text = "SETTING_INPUT_ACTION_L"
-		scancode = 15			# L
+		scancode = 15	# L
 	}
 
 	input_action = {
 		name = "input_n"
 		text = "SETTING_INPUT_ACTION_N"
-		scancode = 17			# N
+		scancode = 17	# N
 	}
 
 	input_action = {
 		name = "input_p"
 		text = "SETTING_INPUT_ACTION_P"
-		scancode = 19			# P
+		scancode = 19	# P
 	}
 
 	input_action = {
 		name = "input_t"
 		text = "SETTING_INPUT_ACTION_T"
-		scancode = 23			# T
+		scancode = 23	# T
 	}
 
 	input_action = {
 		name = "input_u"
 		text = "SETTING_INPUT_ACTION_U"
-		scancode = 24			# U
+		scancode = 24	# U
 	}
 
 	input_action = {
 		name = "input_v"
 		text = "SETTING_INPUT_ACTION_V"
-		scancode = 25			# V
+		scancode = 25	# V
 	}
 
 	input_action = {
 		name = "input_y"
 		text = "SETTING_INPUT_ACTION_Y"
-		scancode = 28			# Y
+		scancode = 28	# Y
 	}
 
 	input_action = {
@@ -531,7 +548,7 @@ input_context={
 		text = "SETTING_INPUT_ACTION_CTRL_K" # Reserved for Kingdom of God
 		binding = { # ctrl + k
 			scancode = 14
-        	modifier = ctrl
+			modifier = ctrl
 		}
 	}
 

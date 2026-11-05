@@ -7,7 +7,14 @@
 	character_ideologies = {
 		ideology_utilitarian_leader
 	}
-	
+
+    disband_trigger = {
+        has_council_republic_law = yes
+    }
+    on_disbanded = {
+        fold_movement_into_anti_communist_movement_effect = yes
+    }
+
 	creation_trigger = {
 		OR = {
 			country_has_primary_culture = cu:british
@@ -87,6 +94,7 @@
 			is_pop_type = peasants
 			is_pop_type = slaves
 		}
+		mog_plp_movement_mainland_general_pop_support_trigger = yes    # Grey_PLP
 	}
 	
 	pop_support_factors = {
@@ -219,6 +227,11 @@
 			value = pop_acceptance
 			divide = 75
 		}
+		
+		# Grey_PLP - always put last
+		multiply = {
+			value = mog_plp_movement_mainland_general_pop_support_weight_incorporation_percent_mult
+		}
 	}
 	
 	revolution = {
@@ -309,56 +322,17 @@
 	}
 	
 	additional_radicalism_factors = {
-		owner = {
-			if = {
-				limit = { has_institution = institution_schools }
-				
-				add = {
-					value = 3
-					subtract = "institution_investment_level(institution_schools)"
-					multiply = 0.05
-					desc = "INSTITUTION_FUNDING_LEVEL_schools"
-				}
-			}
-			else = {
-				add = {
-					value = 0.05
-					desc = "NO_INSTITUTION_schools"
-				}
-			}
-		}
+		add = movement_radicalism_schools_funding
 		if = {
 			limit = {
-				owner = {
-					any_neighbouring_state = {
-						owner = {
-							NOT = { THIS = ROOT.owner }
-							any_political_movement = {
-								is_political_movement_type = movement_utilitarian
-								is_insurrectionary = yes
-							}
-						}
-					}
-				}
+				neighboring_country_has_insurrectionary_movement_trigger = { TYPE = movement_utilitarian }
 			}
 			add = {
 				desc = "NEIGHBOURING_COUNTRY_WITH_REVOLUTION"
 				value = 0.15
 			}
 		}
-		if = {
-			limit = {
-				this.days_since_movement_defeated <= very_long_modifier_time
-			}
-			add = { # (x-y)/y - ([1, 7300]-7300)/7300
-				desc = "movement_suppressed_after_civil_war"
-				value = this.days_since_movement_defeated
-				subtract = very_long_modifier_time
-				divide = {
-					value = very_long_modifier_time
-				}
-			}
-		}
+		add = movement_radicalism_suppressed_after_civil_war
 	}
 }
 
@@ -421,9 +395,13 @@ REPLACE:movement_orleanist = {
 				}
 				has_variable = one_true_french_dynasty
 			}
+			has_council_republic_law = yes
 		}
 	}
-	
+	on_disbanded = {
+		fold_movement_into_anti_communist_movement_effect = yes
+	}
+
 	character_support_trigger = {
 		OR = {
 			has_ideology = ideology:ideology_orleanist
@@ -457,6 +435,7 @@ REPLACE:movement_orleanist = {
 		NOT = {
 			is_pop_type = slaves
 		}
+		mog_plp_movement_mainland_general_pop_support_trigger = yes    # Grey_PLP
 	}
 	
 	pop_support_factors = {
@@ -606,6 +585,11 @@ REPLACE:movement_orleanist = {
 			value = literacy_rate
 			add = 0.10
 		}
+		
+		# Grey_PLP - always put last
+		multiply = {
+			value = mog_plp_movement_mainland_general_pop_support_weight_incorporation_percent_mult
+		}
 	}
 	
 	revolution = {
@@ -648,6 +632,7 @@ REPLACE:movement_orleanist = {
 	}
 	
 	additional_radicalism_factors = {
+		add = movement_radicalism_lack_of_suffrage
 		if = {
 			limit = {
 				owner ?= {
@@ -666,36 +651,14 @@ REPLACE:movement_orleanist = {
 		}
 		if = {
 			limit = {
-				owner = {
-					any_neighbouring_state = {
-						owner = {
-							NOT = { THIS = ROOT.owner }
-							any_political_movement = {
-								is_political_movement_type = movement_orleanist
-								is_insurrectionary = yes
-							}
-						}
-					}
-				}
+				neighboring_country_has_insurrectionary_movement_trigger = { TYPE = movement_orleanist }
 			}
 			add = {
 				desc = "NEIGHBOURING_COUNTRY_WITH_REVOLUTION"
 				value = 0.15
 			}
 		}
-		if = {
-			limit = {
-				this.days_since_movement_defeated <= very_long_modifier_time
-			}
-			add = { # (x-y)/y - ([1, 7300]-7300)/7300
-				desc = "movement_suppressed_after_civil_war"
-				value = this.days_since_movement_defeated
-				subtract = very_long_modifier_time
-				divide = {
-					value = very_long_modifier_time
-				}
-			}
-		}
+		add = movement_radicalism_suppressed_after_civil_war
 	}
 }
 
@@ -758,9 +721,13 @@ REPLACE:movement_bonapartist = {
 				}
 				has_variable = one_true_french_dynasty
 			}
+			has_council_republic_law = yes
 		}
 	}
-	
+	on_disbanded = {
+		fold_movement_into_anti_communist_movement_effect = yes
+	}
+
 	character_support_trigger = {
 		OR = {
 			has_ideology = ideology:ideology_bonapartist
@@ -795,6 +762,7 @@ REPLACE:movement_bonapartist = {
 		NOT = {
 			is_pop_type = slaves
 		}
+		mog_plp_movement_mainland_general_pop_support_trigger = yes    # Grey_PLP
 	}
 	
 	pop_support_factors = {
@@ -957,6 +925,11 @@ REPLACE:movement_bonapartist = {
 			value = literacy_rate
 			add = 0.10
 		}
+		
+		# Grey_PLP - always put last
+		multiply = {
+			value = mog_plp_movement_mainland_general_pop_support_weight_incorporation_percent_mult
+		}
 	}
 	
 	revolution = {
@@ -999,6 +972,7 @@ REPLACE:movement_bonapartist = {
 	}
 	
 	additional_radicalism_factors = {
+		add = movement_radicalism_lack_of_suffrage
 		if = {
 			limit = {
 				owner ?= {
@@ -1017,36 +991,14 @@ REPLACE:movement_bonapartist = {
 		}
 		if = {
 			limit = {
-				owner = {
-					any_neighbouring_state = {
-						owner = {
-							NOT = { THIS = ROOT.owner }
-							any_political_movement = {
-								is_political_movement_type = movement_bonapartist
-								is_insurrectionary = yes
-							}
-						}
-					}
-				}
+				neighboring_country_has_insurrectionary_movement_trigger = { TYPE = movement_bonapartist }
 			}
 			add = {
 				desc = "NEIGHBOURING_COUNTRY_WITH_REVOLUTION"
 				value = 0.15
 			}
 		}
-		if = {
-			limit = {
-				this.days_since_movement_defeated <= very_long_modifier_time
-			}
-			add = { # (x-y)/y - ([1, 7300]-7300)/7300
-				desc = "movement_suppressed_after_civil_war"
-				value = this.days_since_movement_defeated
-				subtract = very_long_modifier_time
-				divide = {
-					value = very_long_modifier_time
-				}
-			}
-		}
+		add = movement_radicalism_suppressed_after_civil_war
 	}
 }
 
@@ -1109,9 +1061,13 @@ REPLACE:movement_legitimist = {
 				}
 				has_variable = one_true_french_dynasty
 			}
+			has_council_republic_law = yes
 		}
 	}
-	
+	on_disbanded = {
+		fold_movement_into_anti_communist_movement_effect = yes
+	}
+
 	character_support_trigger = {
 		OR = {
 			has_ideology = ideology:ideology_legitimist
@@ -1148,6 +1104,7 @@ REPLACE:movement_legitimist = {
 			is_pop_type = slaves
 		}
 		religion = rel:catholic
+		mog_plp_movement_mainland_general_pop_support_trigger = yes    # Grey_PLP
 	}
 	
 	pop_support_factors = {
@@ -1262,6 +1219,11 @@ REPLACE:movement_legitimist = {
 			add = 0.2
 			max = 0.7 # Starts more powerful but caps out early
 		}
+		
+		# Grey_PLP - always put last
+		multiply = {
+			value = mog_plp_movement_mainland_general_pop_support_weight_incorporation_percent_mult
+		}
 	}
 	
 	revolution = {
@@ -1321,54 +1283,17 @@ REPLACE:movement_legitimist = {
 				desc = "NON_LEGITIMIST_MONARCH"
 			}
 		}
+		add = movement_radicalism_poor_papal_relations
 		if = {
 			limit = {
-				exists = c:PAP
-				c:PAP ?= {
-					country_has_state_religion = rel:catholic
-					has_law_or_variant = law_type:law_theocracy
-				}
-				"owner.relations(c:PAP)" < 0
-			}
-			add = {
-				desc = "POOR_RELATIONS_WITH_PAPACY"
-				value = "owner.relations(c:PAP)"
-				divide = 100
-				multiply = -0.25
-			}
-		}
-		if = {
-			limit = {
-				owner = {
-					any_neighbouring_state = {
-						owner = {
-							NOT = { THIS = ROOT.owner }
-							any_political_movement = {
-								is_political_movement_type = movement_legitimist
-								is_insurrectionary = yes
-							}
-						}
-					}
-				}
+				neighboring_country_has_insurrectionary_movement_trigger = { TYPE = movement_legitimist }
 			}
 			add = {
 				desc = "NEIGHBOURING_COUNTRY_WITH_REVOLUTION"
 				value = 0.15
 			}
 		}
-		if = {
-			limit = {
-				this.days_since_movement_defeated <= very_long_modifier_time
-			}
-			add = { # (x-y)/y - ([1, 7300]-7300)/7300
-				desc = "movement_suppressed_after_civil_war"
-				value = this.days_since_movement_defeated
-				subtract = very_long_modifier_time
-				divide = {
-					value = very_long_modifier_time
-				}
-			}
-		}
+		add = movement_radicalism_suppressed_after_civil_war
 	}
 }
 
@@ -1414,9 +1339,13 @@ REPLACE:movement_carlist = {
 					is_in_geographic_region = geographic_region_iberia_old
 				}
 			}
+			has_council_republic_law = yes
 		}
 	}
-	
+	on_disbanded = {
+		fold_movement_into_anti_communist_movement_effect = yes
+	}
+
 	character_support_trigger = {
 		OR = {
 			character_has_carlist_ideology = yes
@@ -1453,6 +1382,7 @@ REPLACE:movement_carlist = {
 			is_pop_type = slaves
 		}
 		religion = rel:catholic
+		mog_plp_movement_mainland_general_pop_support_trigger = yes    # Grey_PLP
 	}
 	
 	pop_support_factors = {
@@ -1572,6 +1502,11 @@ REPLACE:movement_carlist = {
 			add = 0.2
 			max = 0.7 # Starts more powerful but caps out early
 		}
+		
+		# Grey_PLP - always put last
+		multiply = {
+			value = mog_plp_movement_mainland_general_pop_support_weight_incorporation_percent_mult
+		}
 	}
 	
 	revolution = {
@@ -1639,22 +1574,7 @@ REPLACE:movement_carlist = {
 				desc = "NON_CARLIST_MONARCH"
 			}
 		}
-		if = {
-			limit = {
-				exists = c:PAP
-				c:PAP ?= {
-					country_has_state_religion = rel:catholic
-					has_law_or_variant = law_type:law_theocracy
-				}
-				"owner.relations(c:PAP)" < 0
-			}
-			add = {
-				desc = "POOR_RELATIONS_WITH_PAPACY"
-				value = "owner.relations(c:PAP)"
-				divide = 100
-				multiply = -0.25
-			}
-		}
+		add = movement_radicalism_poor_papal_relations
 		if = {
 			limit = {
 				owner ?= {
@@ -1667,19 +1587,7 @@ REPLACE:movement_carlist = {
 				desc = "INSURRECTIONARY_CARLISTS"
 			}
 		}
-		if = {
-			limit = {
-				this.days_since_movement_defeated <= very_long_modifier_time
-			}
-			add = { # (x-y)/y - ([1, 7300]-7300)/7300
-				desc = "movement_suppressed_after_civil_war"
-				value = this.days_since_movement_defeated
-				subtract = very_long_modifier_time
-				divide = {
-					value = very_long_modifier_time
-				}
-			}
-		}
+		add = movement_radicalism_suppressed_after_civil_war
 	}
 }
 
@@ -1723,9 +1631,13 @@ REPLACE:movement_miguelist = {
 					is_in_geographic_region = geographic_region_iberia_old
 				}
 			}
+			has_council_republic_law = yes
 		}
 	}
-	
+	on_disbanded = {
+		fold_movement_into_anti_communist_movement_effect = yes
+	}
+
 	character_support_trigger = {
 		OR = {
 			character_has_miguelist_ideology = yes
@@ -1762,6 +1674,7 @@ REPLACE:movement_miguelist = {
 			is_pop_type = slaves
 		}
 		religion = rel:catholic
+		mog_plp_movement_mainland_general_pop_support_trigger = yes    # Grey_PLP
 	}
 	
 	pop_support_factors = {
@@ -1839,6 +1752,11 @@ REPLACE:movement_miguelist = {
 			add = 0.2
 			max = 0.7 # Starts more powerful but caps out early
 		}
+		
+		# Grey_PLP - always put last
+		multiply = {
+			value = mog_plp_movement_mainland_general_pop_support_weight_incorporation_percent_mult
+		}
 	}
 	
 	revolution = {
@@ -1897,35 +1815,8 @@ REPLACE:movement_miguelist = {
 				desc = "NON_MIGUELIST_MONARCH"
 			}
 		}
-		if = {
-			limit = {
-				exists = c:PAP
-				c:PAP ?= {
-					country_has_state_religion = rel:catholic
-					has_law_or_variant = law_type:law_theocracy
-				}
-				"owner.relations(c:PAP)" < 0
-			}
-			add = {
-				desc = "POOR_RELATIONS_WITH_PAPACY"
-				value = "owner.relations(c:PAP)"
-				divide = 100
-				multiply = -0.25
-			}
-		}
-		if = {
-			limit = {
-				this.days_since_movement_defeated <= very_long_modifier_time
-			}
-			add = { # (x-y)/y - ([1, 7300]-7300)/7300
-				desc = "movement_suppressed_after_civil_war"
-				value = this.days_since_movement_defeated
-				subtract = very_long_modifier_time
-				divide = {
-					value = very_long_modifier_time
-				}
-			}
-		}
+		add = movement_radicalism_poor_papal_relations
+		add = movement_radicalism_suppressed_after_civil_war
 	}
 }
 
@@ -1964,7 +1855,11 @@ REPLACE:movement_meiji_restorationist = {
 		OR = {
 			has_variable = monarchy_stamped_out_var
 			has_variable = meiji_reforms_complete_var
+			has_council_republic_law = yes
 		}
+	}
+	on_disbanded = {
+		fold_movement_into_anti_communist_movement_effect = yes
 	}
 
 	character_support_trigger = {
@@ -1984,7 +1879,9 @@ REPLACE:movement_meiji_restorationist = {
 					has_ideology = ideology:ideology_cartist
 					has_ideology = ideology:ideology_modernizer
 					has_ideology = ideology:ideology_liberal
+					has_ideology = ideology:ideology_universalist
 					has_ideology = ideology:ideology_liberal_modern
+					has_ideology = ideology:ideology_universalist_modern
 					has_ideology = ideology:ideology_plutocratic
 				}
 			}
@@ -2003,6 +1900,7 @@ REPLACE:movement_meiji_restorationist = {
 		NOT = {
 			is_pop_type = slaves
 		}
+		mog_plp_movement_mainland_general_pop_support_trigger = yes    # Grey_PLP
 	}
 
 	pop_support_factors = {
@@ -2228,6 +2126,11 @@ REPLACE:movement_meiji_restorationist = {
 				divide = 100
 			}
 		}
+		
+		# Grey_PLP - always put last
+		multiply = {
+			value = mog_plp_movement_mainland_general_pop_support_weight_incorporation_percent_mult
+		}
 	}
 
 	revolution = {
@@ -2248,6 +2151,11 @@ REPLACE:movement_meiji_restorationist = {
 			}
 			else = {
 				multiply = 0
+			}
+			
+			# Grey_PLP
+			multiply = {
+				value = mog_plp_movement_all_general_state_weight_mult
 			}
 		}
 	}
@@ -2344,7 +2252,7 @@ REPLACE:movement_meiji_restorationist = {
 					any_interest_group = {
 						is_in_government = yes
 						leader = {
-							has_variable = house_tokugawa
+							var:dynasty_var ?= flag:house_tokugawa
 						}
 					}
 				}
@@ -2457,19 +2365,7 @@ REPLACE:movement_meiji_restorationist = {
 				}
 			}
 		}
-		if = {
-			limit = {
-				this.days_since_movement_defeated <= very_long_modifier_time
-			}
-			add = { # (x-y)/y - ([1, 7300]-7300)/7300
-				desc = "movement_suppressed_after_civil_war"
-				value = this.days_since_movement_defeated
-				subtract = very_long_modifier_time
-				divide = {
-					value = very_long_modifier_time
-				}
-			}
-		}
+		add = movement_radicalism_suppressed_after_civil_war
 	}
 }
 
@@ -2485,11 +2381,12 @@ REPLACE:movement_tokugawa_loyalist = {
 		OR = {
 			has_variable = monarchy_stamped_out_var
 			has_variable = japan_emperor_restored
+			has_council_republic_law = yes
 		}
 	}
 
 	on_disbanded = {
-
+		fold_movement_into_anti_communist_movement_effect = yes
 	}
 
 	creation_trigger = {
@@ -2558,6 +2455,7 @@ REPLACE:movement_tokugawa_loyalist = {
 		NOT = {
 			is_pop_type = slaves
 		}
+		mog_plp_movement_mainland_general_pop_support_trigger = yes    # Grey_PLP
 	}
 
 	pop_support_factors = {
@@ -2733,6 +2631,11 @@ REPLACE:movement_tokugawa_loyalist = {
 			add = state.state_daimyo_loyalty
 			desc = "LOYALTY_OF_STATE_DAIMYO"
 		}
+		
+		# Grey_PLP - always put last
+		multiply = {
+			value = mog_plp_movement_mainland_general_pop_support_weight_incorporation_percent_mult
+		}
 	}
 
 	revolution = {
@@ -2753,6 +2656,11 @@ REPLACE:movement_tokugawa_loyalist = {
 			}
 			else = {
 				multiply = 0
+			}
+			
+			# Grey_PLP
+			multiply = {
+				value = mog_plp_movement_all_general_state_weight_mult
 			}
 		}
 	}
@@ -2792,7 +2700,7 @@ REPLACE:movement_tokugawa_loyalist = {
 						any_interest_group = {
 							is_in_government = yes
 							leader = {
-								has_variable = house_tokugawa
+								var:dynasty_var ?= flag:house_tokugawa
 							}
 						}
 					}
@@ -2803,18 +2711,369 @@ REPLACE:movement_tokugawa_loyalist = {
 				}
 			}
 		}
+        add = movement_radicalism_suppressed_after_civil_war
+	}
+}
+
+REPLACE:movement_cossack = {
+	category = movement_category_ideological
+
+	ideology = ideology_cossack_movement
+	character_ideologies = {
+		ideology_traditionalist
+		ideology_protectionist
+		ideology_jingoist_leader
+	}
+
+	creation_trigger = {
+		OR = {
+			has_building = building_cossack_host
+			any_scope_state = {
+				has_recently_removed_cossack_host = yes
+			}
+		}
+
+	}
+	creation_weight = {
+		value = 100
 		if = {
 			limit = {
-				this.days_since_movement_defeated <= very_long_modifier_time
+				owner ?= { # If a movement of this type exists in a neighbouring country, make it more likely to spawn here as well
+					any_neighbouring_state = {
+						owner = {
+							prestige > ROOT.owner.prestige
+							any_political_movement = {
+								is_political_movement_type = movement_cossack
+							}
+						}
+					}
+				}
 			}
-			add = { # (x-y)/y - ([1, 7300]-7300)/7300
-				desc = "movement_suppressed_after_civil_war"
-				value = this.days_since_movement_defeated
-				subtract = very_long_modifier_time
-				divide = {
-					value = very_long_modifier_time
+			multiply = {
+				value = 2
+			}
+		}
+	}
+	on_created = {
+		add_movement_enthusiasm_modifier = yes
+	}
+
+	character_support_trigger = {
+		OR = {
+			has_ideology = ideology:ideology_traditionalist
+			has_ideology = ideology:ideology_protectionist
+			has_ideology = ideology:ideology_jingoist_leader
+			scope:interest_group ?= {
+				has_ideology = ideology:ideology_particularist
+			}
+		}
+	}
+	character_support_weight = {
+		value = 0
+
+		if = {
+			limit = {
+				home_state ?= {
+					has_building = building_cossack_host
+				}
+				culture = {
+					has_discrimination_trait = heritage_east_slavic
+				}
+			}
+			add = 200
+
+			if = {
+				limit = {
+					OR = {
+						is_interest_group_type = ig_rural_folk
+						is_interest_group_type = ig_armed_forces
+					}
+				}
+				multiply = 3
+			}
+			else_if = {
+				limit = {
+					OR = {
+						is_interest_group_type = ig_landowners
+						is_interest_group_type = ig_petty_bourgeoisie
+					}
+				}
+				multiply = 1.5
+			}
+		}
+	}
+
+	pop_support_trigger = {
+		culture = {
+			OR = {
+				has_discrimination_trait = heritage_east_slavic
+				has_discrimination_trait = tradition_cossacks
+			}
+		}
+		state = {
+			OR = {
+				has_building = building_cossack_host
+				has_recently_removed_cossack_host = yes
+			}
+		}
+		OR = {
+			pop_employment_building = building_cossack_host
+			pop_employment_building = building_barrack
+			pop_employment_building = building_conscription_center
+			pop_employment_building = building_manor_house
+			pop_employment_building_group = bg_agriculture
+		}
+		mog_plp_movement_mainland_general_pop_support_trigger = yes    # Grey_PLP
+	}
+
+	pop_support_factors = {
+		movement_support_cossack_host
+		movement_support_farmers
+		movement_support_laborers
+		movement_support_soldiers
+		movement_support_peasants
+	}
+
+	pop_support_weight = {
+		if = {
+			limit = {
+				exists = scope:political_movement
+				scope:political_movement ?= {
+					OR = {
+						is_being_suppressed = yes
+						is_being_bolstered = yes
+					}
+				}
+			}
+			if = {
+				limit = {
+					scope:political_movement = {
+						is_being_suppressed = yes
+					}
+				}
+				add = {
+					value = suppression_base_value
+					multiply = {
+						value = -0.5
+						add = owner.modifier:country_suppression_attraction_factor
+					}
+					desc = "concept_suppressed"
+				}
+			}
+			else = {
+				add = {
+					value = bolstering_base_value
+					multiply = {
+						value = 0.5
+						add = owner.modifier:country_bolster_attraction_factor
+					}
+					desc = "concept_bolstered"
 				}
 			}
 		}
+
+		if = { # Cossacks at home
+			limit = {
+				pop_employment_building = building_cossack_host
+			}
+			add = {
+				value = 30
+				desc = "POP_SUPPORT_COSSACKS"
+			}
+		}
+		else_if = {
+			limit = {
+				state = {
+					has_recently_removed_cossack_host = yes
+				}
+				OR = {
+					is_pop_type = farmers
+					is_pop_type = laborers
+				}
+			}
+			add = {
+				value = 10
+				desc = "POP_SUPPORT_COSSACKS_REMOVED"
+			}
+		}
+		else_if = { # Cossacks at the front
+			limit = {
+				OR = {
+					pop_employment_building = building_barrack
+					pop_employment_building = building_conscription_center
+				}
+			}
+			add = {
+				value = 15
+				desc = "POP_SUPPORT_COSSACKS_MILITARY"
+			}
+		}
+		else = { # Everyone else in the neighborhood
+			add = {
+				value = 1
+				desc = "POP_SUPPORT_COSSACKS_PRESENT"
+			}
+
+			if = {
+				limit = {
+					strata = lower
+				}
+
+				add = {
+					value = 2
+					desc = "LOWER_NO_ICON"
+				}
+			}
+		}
+
+		if = {
+			limit = {
+				owner ?= {
+					NOT = {
+						any_primary_culture = {
+							OR = {
+								has_discrimination_trait = heritage_east_slavic
+								has_discrimination_trait = tradition_cossacks
+							}
+						}
+					}
+				}
+			}
+			multiply = {
+				value = 1.5
+				desc = "COSSACKS_UNDER_NON_COSSACK_COUNTRY"
+			}
+		}
+		
+		# Grey_PLP - always put last
+		multiply = {
+			value = mog_plp_movement_mainland_general_pop_support_weight_incorporation_percent_mult
+		}
+	}
+
+	revolution = {
+		possible = {
+			political_movement_support >= 0.05
+		}
+
+		weight = {
+			value = 100
+		}
+
+		state_weight = {
+			value = 0
+
+			if = {
+				limit = {
+					OR = {
+						has_building = building_cossack_host
+						has_recently_removed_cossack_host = yes
+					}
+				}
+				add = scope:clout
+			}
+			
+			# Grey_PLP
+			multiply = {
+				value = mog_plp_movement_all_general_state_weight_mult
+			}
+		}
+	}
+
+	secession = {
+		possible = {
+			OR = {
+				AND = {
+					political_movement_support >= 0.05
+					scope:clout <= 0
+				}
+				owner = {
+					NOT = {
+						any_primary_culture = {
+							OR = {
+								has_discrimination_trait = heritage_east_slavic
+								has_discrimination_trait = tradition_cossacks
+							}
+						}
+					}
+				}
+			}
+		}
+
+		weight = {
+			value = 1000
+		}
+
+		state_weight = {
+			value = 0
+
+			if = {
+				limit = {
+					OR = {
+						has_building = building_cossack_host
+						has_recently_removed_cossack_host = yes
+					}
+				}
+				add = 0.5
+			}
+			
+			# Grey_PLP
+			multiply = {
+				value = mog_plp_movement_all_general_state_weight_mult
+			}
+		}
+	}
+
+	additional_radicalism_factors = {
+		if = {
+			limit = {
+				owner ?= {
+					NOT = {
+						any_primary_culture = {
+							OR = {
+								has_discrimination_trait = heritage_east_slavic
+								has_discrimination_trait = tradition_cossacks
+							}
+						}
+					}
+				}
+			}
+			add = {
+				value = 0.15
+				desc = "COSSACKS_UNDER_NON_COSSACK_COUNTRY"
+			}
+		}
+
+		if = {
+			limit = {
+				owner ?= {
+					any_scope_state = {
+						has_recently_removed_cossack_host = yes
+					}
+				}
+			}
+			owner ?= {
+				every_scope_state = {
+					limit = {
+						has_recently_removed_cossack_host = yes
+					}
+					add = {
+						value = 0.1
+						desc = "RECENTLY_REMOVED_COSSACKS_HOST"
+					}
+				}
+			}
+		}
+
+		if = {
+			limit = {
+				neighboring_country_has_insurrectionary_movement_trigger = { TYPE = movement_cossack }
+			}
+			add = {
+				desc = "NEIGHBOURING_COUNTRY_WITH_REVOLUTION"
+				value = 0.15
+			}
+		}
+		add = movement_radicalism_suppressed_after_civil_war
 	}
 }

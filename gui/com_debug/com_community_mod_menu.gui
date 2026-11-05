@@ -1,0 +1,409 @@
+com_community_mod_menu = {
+	name = "com_community_mod_menu"
+}
+
+com_community_mod_menu_fancy = {
+	name = "com_community_mod_menu_fancy"
+}
+
+types com_debug_types {
+	
+	type com_community_mod_menu = vbox {
+		layoutpolicy_horizontal = shrinking
+		layoutpolicy_vertical = shrinking
+		spacing = 15
+		margin_bottom = 5
+		
+		using = dockable_background
+		layer = popups
+		using = clickthrough_blocker
+		filter_mouse = all
+		
+		datacontext = "[GetMetaPlayer.GetPlayedOrObservedCountry]"
+		
+		vbox = {
+			layoutpolicy_horizontal = shrinking
+			layoutpolicy_vertical = shrinking
+			spacing = 5
+			
+			editor_textbox = {
+				text = "com_debug_mode_toggle"
+				align = center|nobaseline
+				autoresize = yes
+			}
+			
+			editor_button = {
+				size = { 220 30 }
+				layoutpolicy_horizontal = expanding
+				using = editor_font
+				fontweight = bold
+				text = "com_debug_features_header"
+				align = center|nobaseline
+				
+				onclick = "[ExecuteConsoleCommand('debug_mode')]"
+				
+				widget = {
+					size = { 100% 100% }
+					parentanchor = center
+					visible = "[Not(InDebugMode)]"
+					tooltip = "com_debug_mode_toggle_tooltip_ON"
+					
+					icon = {
+						parentanchor = left|vcenter
+						size = { 20 20 }
+						texture = "gfx/interface/icons/generic_icons/checkbox_simple.dds"
+					}
+				}
+				
+				widget = {
+					size = { 100% 100% }
+					parentanchor = center
+					visible = "[InDebugMode]"
+					tooltip = "com_debug_mode_toggle_tooltip_OFF"
+					
+					icon = {
+						parentanchor = left|vcenter
+						size = { 20 20 }
+						texture = "gfx/interface/icons/generic_icons/checkbox_greencheck.dds"
+					}
+				}
+			}
+			
+			editor_button = {
+				size = { 220 30 }
+				layoutpolicy_horizontal = expanding
+				using = editor_font
+				fontweight = bold
+				text = "com_debug_variable_toggle"
+				align = center|nobaseline
+				
+				onclick = "[GetScriptedGui('com_toggle_debug').Execute(GuiScope.End)]"
+				
+				widget = {
+					size = { 100% 100% }
+					parentanchor = center
+					visible = "[GetGlobalVariable('com_debug').IsSet]"
+					tooltip = "com_debug_variable_toggle_tooltip_OFF"
+					
+					icon = {
+						parentanchor = left|vcenter
+						size = { 20 20 }
+						texture = "gfx/interface/icons/generic_icons/checkbox_greencheck.dds"
+					}
+				}
+				
+				widget = {
+					size = { 100% 100% }
+					parentanchor = center
+					visible = "[Not(GetGlobalVariable('com_debug').IsSet)]"
+					tooltip = "com_debug_variable_toggle_tooltip_ON"
+					
+					icon = {
+						parentanchor = left|vcenter
+						size = { 20 20 }
+						texture = "gfx/interface/icons/generic_icons/checkbox_simple.dds"
+					}
+				}
+			}
+		}
+		
+		vbox = {
+			layoutpolicy_horizontal = shrinking
+			layoutpolicy_vertical = shrinking
+			spacing = 5
+			
+			editor_textbox = {
+				text = "com_mod_debug_manager_header"
+				align = center|nobaseline
+				autoresize = yes
+			}
+			
+			editor_textbox = {
+				visible = "[IsDataModelEmpty(GetGlobalList('com_mod_debug_manager_list'))]"
+				max_width = 150
+				autoresize = yes
+				multiline = yes
+				text = "com_mod_debug_manager_datamodel_empty"
+				elide = right
+				align = nobaseline|hcenter
+				using = fontsize_medium
+				
+				using = look_at_me_animation
+			}
+			
+			vbox = {
+				layoutpolicy_horizontal = shrinking
+				layoutpolicy_vertical = shrinking
+				visible = "[Not(IsDataModelEmpty(GetGlobalList('com_mod_debug_manager_list')))]"
+				datamodel = "[GetGlobalList('com_mod_debug_manager_list')]"
+				
+				item = {
+					editor_button = {
+						size = { 220 30 }
+						layoutpolicy_horizontal = expanding
+						using = editor_font
+						fontweight = bold
+						text = "com_mod_debug_manager_mod_name"
+						align = center|nobaseline
+						
+						datacontext = "[Scope.GetScriptContainer]"
+						
+						enabled = "[ScriptContainer.MakeScope.Var('com_mod_command').IsSet]"
+						onclick = "[ExecuteConsoleCommand(ScriptContainer.MakeScope.Var('com_mod_command').GetFlagName)]"
+						
+						widget = {
+							parentanchor = center
+							size = { 100% 100% }
+							visible = "[ScriptContainer.MakeScope.Var('com_mod_command').IsSet]"
+							tooltip = "com_mod_debug_manager_mod_tooltip"
+						}
+						
+						widget = {
+							parentanchor = center
+							size = { 100% 100% }
+							visible = "[Not(ScriptContainer.MakeScope.Var('com_mod_command').IsSet)]"
+							tooltip = "com_mod_debug_manager_mod_tooltip_missing_command"
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	type com_community_mod_menu_fancy = flowcontainer {
+		direction = horizontal
+		maximumsize = { 600 600 }
+		minimumsize = { 600 600 }
+		margin = { 20 20 }
+		
+		using = dockable_background
+		layer = popups
+		using = clickthrough_blocker
+		filter_mouse = all
+		
+		datacontext = "[GetMetaPlayer.GetPlayedOrObservedCountry]"
+		
+		background = {
+			texture = "gfx/interface/backgrounds/vic2_default_frame.dds"
+		}
+		
+		## Main Menu Options
+		flowcontainer = {
+			parentanchor = top|hcenter
+			direction = vertical
+			minimumsize = { 200 560 }
+			maximumsize = { 200 560 }
+			
+			background = {
+				texture = "gfx/interface/backgrounds/vic2_menu_bg.dds"
+				modify_texture = {
+					using = texture_velvet
+				}
+			}
+			
+			flowcontainer = {
+				parentanchor = top|hcenter
+				direction = vertical
+				minimumsize = { 200 410 }
+				maximumsize = { 200 410 }
+				spacing = 5
+				
+				default_header_clean_faded = {
+					size = { 200 50 }
+					position = { 0 0 }
+					parentanchor = top|hcenter
+					blockoverride "text" {}
+					textbox = {
+						text = "com_community_mod_menu_header"
+						parentanchor = center
+						position = { 0 -2 }
+						autoresize = yes
+						max_width = 200
+						elide = right
+						using = fontsize_large
+					}
+				}
+				com_mod_debug_manager_button = {
+					blockoverride "com_button_text" {
+						text = "com_mod_debug_manager_header"
+					}
+				}
+				com_mod_debug_manager_button = {}
+				com_mod_debug_manager_button = {}
+			}
+			
+			### MUH QWEEN
+			widget = {
+				parentanchor = top|hcenter
+				size = { 128 148 }
+				
+				background = {
+					using = dark_area
+					alpha = 0.6
+					margin = { 50 25 }
+					
+					modify_texture = {
+						texture = "gfx/interface/masks/fade_horizontal_center.dds"
+						spriteType = Corneredstretched
+						spriteborder = { 0 0 }
+						blend_mode = alphamultiply
+					}
+					modify_texture = {
+						texture = "gfx/interface/masks/fade_vertical_center.dds"
+						spriteType = Corneredstretched
+						spriteborder = { 0 0 }
+						blend_mode = alphamultiply
+					}
+				}
+				
+				icon = {
+					parentanchor = center
+					size = { 250 250 }
+					position = { 0 -35 }
+					using = rotate_glow_animation_02
+					alwaystransparent = yes
+					using = default_fade_in_out
+				}
+				
+				icon = {
+					parentanchor = center
+					size = { 128 148 }
+					texture = "gfx/interface/queen_vic.dds"
+				}
+			}
+		}
+		
+		## Sub-menu Options
+		flowcontainer = {
+			parentanchor = top|hcenter
+			direction = vertical
+			minimumsize = { 360 560 }
+			maximumsize = { 360 560 }
+			
+			background = {
+				texture = "gfx/interface/backgrounds/vic2_default_bg.dds"
+				modify_texture = {
+					using = texture_velvet
+				}
+			}
+			
+			### Mod Debug Menu Options
+			flowcontainer = {
+				parentanchor = top|hcenter
+				direction = vertical
+				spacing = 5
+				margin_left = 10
+				
+				default_header_clean_faded = {
+					size = { 400 40 }
+					position = { 0 0 }
+					parentanchor = top|hcenter
+					blockoverride "text" {}
+					textbox = {
+						text = "com_mod_debug_manager_header"
+						parentanchor = center
+						autoresize = yes
+						max_width = 200
+						elide = right
+						using = fontsize_medium
+						default_format = "#b; lore"
+					}
+				}
+				
+				widget = {
+					size = { 128 148 }
+					visible = "[IsDataModelEmpty(GetGlobalList('com_mod_debug_manager_list'))]"
+					
+					textbox = {
+						parentanchor = top|hcenter
+						max_width = 120
+						autoresize = yes
+						multiline = yes
+						text = "com_mod_debug_manager_datamodel_empty"
+						elide = right
+						align = nobaseline|hcenter
+						using = fontsize_medium
+						
+						using = look_at_me_animation
+					}
+				}
+				
+				flowcontainer = {
+					parentanchor = top|hcenter
+					spacing = 2
+					direction = vertical
+					
+					visible = "[Not(IsDataModelEmpty(GetGlobalList('com_mod_debug_manager_list')))]"
+					datamodel = "[GetGlobalList('com_mod_debug_manager_list')]"
+					
+					item = {
+						button = {
+							parentanchor = top|hcenter
+							datacontext = "[Scope.GetScriptContainer]"
+							
+							enabled = "[ScriptContainer.MakeScope.Var('com_mod_command').IsSet]"
+							onclick = "[ExecuteConsoleCommand(ScriptContainer.MakeScope.Var('com_mod_command').GetFlagName)]"
+							using = default_button
+							size = { 200 35 }
+							
+							textbox = {
+								max_width = 200
+								autoresize = yes
+								multiline = yes
+								text = "com_mod_debug_manager_mod_name"
+								elide = right
+								align = nobaseline|hcenter
+								using = fontsize_medium
+								parentanchor = center
+							}
+							
+							widget = {
+								parentanchor = center
+								size = { 100% 100% }
+								visible = "[ScriptContainer.MakeScope.Var('com_mod_command').IsSet]"
+								tooltip = "com_mod_debug_manager_mod_tooltip"
+							}
+							
+							widget = {
+								parentanchor = center
+								size = { 100% 100% }
+								visible = "[Not(ScriptContainer.MakeScope.Var('com_mod_command').IsSet)]"
+								tooltip = "com_mod_debug_manager_mod_tooltip_missing_command"
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	type com_mod_debug_manager_button = button {
+		parentanchor = top|hcenter
+		size = { 180 40 }
+		
+		using = com_default_button_debug_menu
+		
+		textbox = {
+			parentanchor = center
+			autoresize = yes
+			align = center|nobaseline
+			block "com_button_text" {}
+		}
+	}
+}
+
+template com_default_button_debug_menu
+{
+	using = default_button
+	texture = "gfx/interface/buttons/com_button_bg_debug_menu.dds"
+	blockoverride "bevel_texture" {
+		texture = "gfx/interface/buttons/default_button_bevel_map_interaction.dds"
+	}
+	blockoverride "frame_visible" {}
+	blockoverride "frame_texture" {
+		texture = "gfx/interface/buttons/default_button_frame_map_interaction.dds"
+	}
+	blockoverride "bevel_margin" {
+		margin = { 3 3 }
+	}
+}

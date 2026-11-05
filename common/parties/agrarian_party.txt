@@ -1,4 +1,8 @@
-﻿# ANZFP - Australia & New Zealand Flavor Pack
+﻿# Fallback party for Rural Folk
+# Occasionally used for an anti-serfdom alliance
+# More popular in Nordic countries
+
+# ANZFP - Australia & New Zealand Flavor Pack
 # USFP - Hail, Columbia!
 # MoH - Mandate of Heaven
 
@@ -202,7 +206,7 @@ agrarian_party = {
 						leader ?= {
 							OR = {
 								has_socialist_ideology = yes
-								has_ideology = ideology:ideology_social_democrat
+								has_ideology = ideology:ideology_state_socialist
 							}
 						}
 					}
@@ -223,7 +227,7 @@ agrarian_party = {
 						leader ?= {
 							OR = {
 								has_socialist_ideology = yes
-								has_ideology = ideology:ideology_social_democrat
+								has_ideology = ideology:ideology_state_socialist
 							}
 						}
 					}
@@ -239,7 +243,7 @@ agrarian_party = {
 							leader ?= {
 								OR = {
 									has_socialist_ideology = yes
-									has_ideology = ideology:ideology_social_democrat
+									has_ideology = ideology:ideology_state_socialist
 								}
 							}
 						}
@@ -271,7 +275,7 @@ agrarian_party = {
 			country_has_voting_franchise = yes
 			OR = {
 				py:agrarian_party ?= {
-					any_member = {}
+					party_has_members = yes
 				}
 				ig:ig_rural_folk ?= {
 					ig_counts_as_marginal = no
@@ -283,6 +287,7 @@ agrarian_party = {
 	
 	# Root - IG considering joining
 	# scope:number - the number of IGs that would join this party before the root IG
+	# scope:founding_party - yes if the root IG would be founding this party rather than joining an existing one
 	join_weight = {
 		value = {
 			value = -5
@@ -396,11 +401,12 @@ agrarian_party = {
 		}
 		if = { # pacifist anti-colonial alliance
 			limit = {
-				leader ?= {
-					has_ideology = ideology:ideology_pacifist
-				}
 				owner = {
 					NOT = { has_law_or_variant = law_type:law_no_colonial_affairs }
+				}
+				law_enactment_stance = {
+					law = law_type:law_no_colonial_affairs
+					value > neutral
 				}
 			}
 			add = {
@@ -410,26 +416,27 @@ agrarian_party = {
 		}
 		if = { # anti-immigration alliance
 			limit = {
-				OR = {
-					has_ideology = ideology:ideology_isolationist
-					has_ideology = ideology:ideology_populist
-					has_ideology = ideology:ideology_reactionary
-
-					# ANZFP
-					trigger_if = {
-						limit = {
-							anzfp_is_active = yes
-						}
-						OR = {
-							anz_isolationist_ideologies = yes
-							anz_populist_ideologies = yes
-							anz_reactionary_ideologies = yes
-						}
-					}		
-				}
 				owner = {
 					has_law_or_variant = law_type:law_no_migration_controls
 				}
+                OR = {
+                    law_stance = {
+                        law = law_type:law_no_migration_controls
+                        value < neutral
+                    }
+
+                    # ANZFP
+                    trigger_if = {
+                        limit = {
+                            anzfp_is_active = yes
+                        }
+                        OR = {
+                            anz_isolationist_ideologies = yes
+                            anz_populist_ideologies = yes
+                            anz_reactionary_ideologies = yes
+                        }
+                    }
+                }
 			}
 			add = {
 				value = 6
@@ -468,40 +475,42 @@ agrarian_party = {
 		}
 		if = { # against arbitrary or militarized policing
 			limit = {
-				OR = {
-					has_ideology = ideology:ideology_liberal
-					has_ideology = ideology:ideology_liberal_modern
-					has_ideology = ideology:ideology_particularist
-
-					# ANZFP
-					trigger_if = {
-						limit = {
-							anzfp_is_active = yes
-						}
-						anz_particularist_ideologies = yes
-					}	
-				}
-				owner = {
+				owner ?= {
 					OR = {	
 						has_law_or_variant = law_type:law_local_police
 						has_law_or_variant = law_type:law_militarized_police
 					}
 				}
+                OR = {
+                    law_enactment_stance = {
+                        law = law_type:law_no_police
+                        value > neutral
+                    }
+
+                    # ANZFP
+                    trigger_if = {
+                        limit = {
+                            anzfp_is_active = yes
+                        }
+                        anz_particularist_ideologies = yes
+                    }
+                }
 			}
 			add = {
-				value = 6
-				desc = "from_bad_police"
+				value = 3
+				desc = from_bad_police
 			}
 		}
 		if = { # against land-based taxation
 			limit = {
+                owner ?= {
+                    has_law_or_variant = law_type:law_land_based_taxation
+                }
 				OR = {
-					has_ideology = ideology:ideology_meritocratic
-					has_ideology = ideology:ideology_cartist
-					has_ideology = ideology:ideology_agrarian
-					leader ?= {
-						has_ideology = ideology:ideology_social_democrat
-					}
+                    law_stance = {
+                        law = law_type:law_land_based_taxation
+                        value < neutral
+                    }
 
 					# ANZFP
 					trigger_if = {
@@ -516,23 +525,22 @@ agrarian_party = {
 						}
 					}
                 }
-
-				owner = {
-					has_law_or_variant = law_type:law_land_based_taxation
-				}
 			}
 			add = {
-				value = 6
+				value = 3
 				desc = "from_land_tax"
 			}
 		}
 		if = { # against free trade - peasant/socialist alliance
 			limit = {
+                owner ?= {
+                    has_law_or_variant = law_type:law_free_trade
+                }
 				OR = {
-					has_ideology = ideology:ideology_proletarian
-					has_ideology = ideology:ideology_agrarian
-					has_ideology = ideology:ideology_paternalistic
-					has_ideology = ideology:ideology_magnatial
+                    law_stance = {
+                        law = law_type:law_free_trade
+                        value < neutral
+                    }
 					# ANZFP
 					trigger_if = {
 						limit = {
@@ -544,38 +552,33 @@ agrarian_party = {
 						}
 					}
 				}
-				owner = {
-					has_law_or_variant = law_type:law_free_trade
-				}
-				NOR = {
-					leader ?= {
-						has_ideology = ideology:ideology_market_liberal
+				# ANZFP
+				trigger_if = {
+					limit = {
+						anzfp_is_active = yes
 					}
-
-					# ANZFP
-					trigger_if = {
-						limit = {
-							anzfp_is_active = yes
-						}
-						leader = { 
+					NOT = {
+						leader = {
 							has_ideology = ideology:ideology_anz_georgist
 						}
 					}
 				}
 			}
 			add = {
-				value = 6
+				value = 3
 				desc = "from_anti_free_trade"
 			}
 		}
 		if = { # against laissez-faire - peasant/socialist alliance
 			limit = {
+                owner ?= {
+                    has_law_or_variant = law_type:law_laissez_faire
+                }
 				OR = {
-					has_ideology = ideology:ideology_proletarian
-					has_ideology = ideology:ideology_agrarian
-					leader ?= {
-						has_ideology = ideology:ideology_protectionist
-					}
+                    law_stance = {
+                        law = law_type:law_laissez_faire
+                        value < neutral
+                    }
 					# ANZFP
 					trigger_if = {
 						limit = {
@@ -584,88 +587,60 @@ agrarian_party = {
 						anz_agrarian_ideologies = yes
 					}
 				}
-				owner = {
-					has_law_or_variant = law_type:law_laissez_faire
-				}
-				NOT = {
-					leader ?= {
-						has_ideology = ideology:ideology_market_liberal
-					}
-				}
 			}
 			add = {
-				value = 6
-				desc = "from_anti_free_trade"
+				value = 3
+				desc = "from_anti_laissez_faire"
 			}
 		}
-		if = { # opposition to peasant levies
+		if = { # anti-peasant levies
 			limit = {
-				OR = {
-					has_ideology = ideology:ideology_jingoist
-					has_ideology = ideology:ideology_particularist
-					has_ideology = ideology:ideology_sikh_moralist
-					leader ?= {
-						OR = {
-							has_ideology = ideology:ideology_fascist
-							has_ideology = ideology:ideology_anarchist
-							has_ideology = ideology:ideology_pacifist
-							has_ideology = ideology:ideology_jingoist_leader
-						}
-					}
-
-					# ANZFP
-					trigger_if = {
-						limit = {
-							anzfp_is_active = yes
-						}
-						anz_particularist_ideologies = yes
-					}
-				}
-				owner = {
+				owner ?= {
 					has_law_or_variant = law_type:law_peasant_levies
 				}
+                OR = {
+                    law_stance = {
+                        law = law_type:law_peasant_levies
+                        value < neutral
+                    }
+                    # ANZFP
+                    trigger_if = {
+                        limit = {
+                            anzfp_is_active = yes
+                        }
+                        anz_particularist_ideologies = yes
+                    }
+                }
 			}
 			add = {
-				value = 6
+				value = 3
 				desc = "from_peasant_levies"
 			}
 		}
 		if = { # anti-serfdom
 			limit = {
-				owner = {
+				owner ?= {
 					has_law_or_variant = law_type:law_serfdom
 				}
-				OR = {
-					has_ideology = ideology:ideology_egalitarian
-					has_ideology = ideology:ideology_egalitarian_modern
-					has_ideology = ideology:ideology_anti_slavery
-					has_ideology = ideology:ideology_laissez_faire
-					has_ideology = ideology:ideology_interventionist
-					has_ideology = ideology:ideology_particularist
-					leader ?= {
-						OR = {
-						character_is_anti_slavery = yes
-						has_ideology = ideology:ideology_social_democrat
-						has_ideology = ideology:ideology_communist
-						has_ideology = ideology:ideology_vanguardist
-						}
-					}
+				law_stance = {
+					law = law_type:law_serfdom
+					value < neutral
 				}
 			}
 			add = {
-				value = 10
+				value = 5
 				desc = "from_serfdom"
 			}
 		}
 		if = { # opposition to debt slavery
 			limit = {
-				owner = {
+				owner ?= {
 					has_law_or_variant = law_type:law_debt_slavery
 				}
 				OR = {
-					has_ideology = ideology:ideology_anti_slavery
-					leader ?= {
-						character_is_anti_slavery = yes
+					law_stance = {
+						law = law_type:law_debt_slavery
+						value < neutral
 					}
 					# ANZFP
 					trigger_if = {
@@ -677,12 +652,13 @@ agrarian_party = {
 				}
 			}
 			add = {
-				value = 10
+				value = 5
 				desc = "from_debt_slavery"
 			}
 		}
 		if = { # nobody will join if the rural folk don't join
 			limit = {
+				scope:founding_party = no
 				NOT = { is_interest_group_type = ig_rural_folk }
 				OR = {
 					NOT = { exists = owner.py:agrarian_party }

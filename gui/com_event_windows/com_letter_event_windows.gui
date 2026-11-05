@@ -87,7 +87,9 @@ types com_window_types {
                         direction = vertical
                         spacing = 20
                         parentanchor = right|vcenter
-                        margin = { 40 50 }
+                        block "margin_content" {
+                            margin = { 40 50 }
+                        }
 
                         block "text_header" {}
 
@@ -334,7 +336,148 @@ types com_window_types {
                     blend_mode = alphamultiply
                 }
             }
+
+            widget = {
+                size = { 90% 85% }
+                parentanchor = center
+                visible = "[Event.HasVideo]"
+
+                video_icon = {
+                    video = "[Event.GetVideo]"
+                    size = { 100% 100% }
+                    position = { 0 -10 }
+                    alwaystransparent = yes
+                    loop = no
+
+                    modify_texture = {
+                        texture = "gfx/interface/masks/fade_horizontal_center.dds"
+                        spriteType = Corneredstretched
+                        blend_mode = alphamultiply
+                    }
+
+                    modify_texture = {
+                        texture = "gfx/interface/masks/fade_vertical_center.dds"
+                        spriteType = Corneredstretched
+                        blend_mode = alphamultiply
+                    }
+
+                    modify_texture = {
+                        using = texture_velvet
+                    }
+                }
+            }
         }
+    }
+
+    type com_event_window_letter_image_box = com_event_window_letter_simple {
+        blockoverride "event_name" {
+            name = "com_event_window_letter_image_box"
+        }
+        blockoverride "margin_content" {
+            margin = { 40 50 }
+            margin_top = 30
+        }
+        blockoverride "text_background" {
+            background = {
+                using = entry_bg_simple_solid
+                margin = { -15 -20 }
+            }
+            background = {
+                visible = "[Event.HasTexture]"
+                texture = "[Event.GetTexture]"
+                alpha = 0.5
+
+                spriteType = Corneredtiled
+                spriteborder = { 0 0 }
+
+                modify_texture = {
+                    texture = "gfx/interface/masks/fade_vertical_center.dds"
+                    spriteType = Corneredstretched
+                    spriteborder = { 0 0 }
+                    blend_mode = alphamultiply
+                }
+
+                modify_texture = {
+                    texture = "gfx/interface/masks/fade_horizontal_center.dds"
+                    spriteType = Corneredstretched
+                    spriteborder = { 0 0 }
+                    blend_mode = alphamultiply
+                }
+            }
+
+            widget = {
+                size = { 90% 85% }
+                parentanchor = center
+                visible = "[Event.HasVideo]"
+
+                video_icon = {
+                    video = "[Event.GetVideo]"
+                    size = { 100% 100% }
+                    position = { 0 -10 }
+                    alwaystransparent = yes
+                    loop = no
+
+                    modify_texture = {
+                        texture = "gfx/interface/masks/fade_horizontal_center.dds"
+                        spriteType = Corneredstretched
+                        blend_mode = alphamultiply
+                    }
+
+                    modify_texture = {
+                        texture = "gfx/interface/masks/fade_vertical_center.dds"
+                        spriteType = Corneredstretched
+                        blend_mode = alphamultiply
+                    }
+
+                    modify_texture = {
+                        using = texture_velvet
+                    }
+                }
+            }
+        }
+        blockoverride "text_content" {
+            flowcontainer = {
+                margin = { 10 30 }
+                direction = vertical
+                spacing = 20
+                background = {
+                    using = entry_bg_fancy_dark
+                    alpha = 0.8
+                }
+
+                textbox = {
+                    name = "description"
+                    multiline = yes
+                    autoresize = yes
+                    minimumsize = { 500 -1 }
+                    maximumsize = { 520 -1 }
+                    parentanchor = top|hcenter
+                    align = hcenter|nobaseline
+                    text = "[EventWindow.GetDescription]"
+                    margin = { 10 0 }
+                    using = fontsize_large
+                }
+
+                divider_decorative = {
+                    minimumsize = { 480 -1 }
+                    maximumsize = { 480 -1 }
+                    parentanchor = hcenter
+                }
+
+                textbox = {
+                    name = "flavortext"
+                    multiline = yes
+                    autoresize = yes
+                    minimumsize = { 500 -1 }
+                    maximumsize = { 500 -1 }
+                    parentanchor = top|hcenter
+                    align = top|left
+                    text = "[EventWindow.GetFlavor]"
+                    margin = { 30 0 }
+                }
+            }
+        }
+        blockoverride "text_button_spacing" {}
     }
 
     type com_event_window_letter_paper = com_event_window_letter_simple {

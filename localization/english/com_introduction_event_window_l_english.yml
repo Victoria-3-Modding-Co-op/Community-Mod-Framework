@@ -1,0 +1,83 @@
+﻿l_english:
+ ####---------- General Window Localization ----------####
+ com_intro_window_header: "#bold The [GetPlayer.GetGovernment.GetName] of [GetPlayer.GetNameNoFormatting], [TimeKeeper.GetCurrentDate.Format('wy')]#!"
+ com_intro_window_sub_header: "[GetPlayer.GetRank] in [GetPlayer.GetCapital.GetStateRegion.GetName]"
+ com_intro_window_event_option: "Onward!"
+
+
+ ####---------- Situation Tab Localization ----------####
+ com_intro_window_situation_tab_button: "@prestige! Situation"
+ com_intro_window_flavor_text: "#lore #italic [GetPlayer.GetFlavorText]#!#!"
+ com_intro_window_situation_text: "#lore #bold [GetPlayer.MakeScope.Var('com_intro_window_situation_text').GetFlagName]#!#!"
+
+
+ ####---------- Politics Tab Localization ----------####
+ com_intro_window_politics_tab_button: "@pol_btn! Politics"
+ com_intro_window_government_composition: "[concept_government] Composition"
+ com_intro_window_in_goverment: "[concept_in_government]"
+ com_intro_window_in_opposition: "[concept_in_opposition]"
+ com_intro_window_laws_in_country: "Laws in [GetPlayer.GetNameNoFormatting]"
+ com_intro_window_law_group_name: "[Law.GetGroup.GetNameNoFormatting]"
+ com_intro_window_law_name: "#bold [Law.GetName]#!"
+
+
+ ####---------- Society Tab Localization ----------####
+ com_intro_window_society_tab_button: "@national_awakening! Society"
+ com_intro_window_population_in_country: "Population in [GetPlayer.GetNameNoFormatting]"
+ com_intro_window_population: "$concept_population$"
+ com_intro_window_total_population: "#variable [Country.GetTotalPopulation|D]#!"
+ com_intro_window_sol_icon: "[LabelingHelper.GetIconForStandardOfLivingCFixedPoint(Country.GetAverageSoLByPopulation)|v]"
+ com_intro_window_sol: "$concept_sol$"
+ com_intro_window_average_sol_value: "[Country.GetFormattedStandardOfLivingAll|v]"
+ com_intro_window_literacy: "$concept_literacy$"
+ com_intro_window_literacy_rate: "#variable [Country.GetIncorporatedLiteracyRate|%1]#!"
+ com_intro_window_politically_involved: "$concept_politically_involved$"
+ com_intro_window_politically_involved_population: "#variable [Country.GetPoliticallyInvolvedPopulation|D]#!"
+ com_intro_window_cultures_in_country: "Cultures in [GetPlayer.GetNameNoFormatting]"
+ com_intro_window_cultures: "#title [concept_primary_cultures]#!"
+ com_intro_window_primary_cultures: "[GetPlayer.GetPrimaryCulturesDesc]"
+ com_intro_window_citizenship_law: "[GetLawGroup('lawgroup_citizenship').GetNameNoFormatting] [concept_law]"
+ com_intro_window_active_citizenship_law: "[GetPlayer.GetActiveLawFromGroup('lawgroup_citizenship').GetName]"
+ com_intro_window_acceptance_in_country: "[concept_acceptance_status] of [Concept('concept_pop', '$concept_pops|q$')] in [GetPlayer.GetNameNoFormatting]"
+ com_intro_window_religion_in_country: "[concept_religion] in [GetPlayer.GetNameNoFormatting]"
+ com_intro_window_state_religion_header: "[concept_state_religion]"
+ com_intro_window_state_religion_name: "[GetPlayer.GetStateReligion.GetName]"
+ com_intro_window_church_and_state_header: "[GetLawGroup('lawgroup_church_and_state').GetNameNoFormatting] Law"
+ com_intro_window_church_and_state_law: "[GetPlayer.GetActiveLawFromGroup('lawgroup_church_and_state').GetName]"
+ com_intro_window_social_classes_in_country: "Social Classes in [GetPlayer.GetNameNoFormatting]"
+
+
+ ####---------- Environment Tab Localization ----------####
+ com_intro_window_environment_tab_button: "@com_maplist_btn! Environment"
+ com_intro_window_region_header: "Environs of [GetPlayer.GetCapital.GetStateRegion.GetStrategicRegion.GetNameNoFormatting]"
+ com_intro_window_region_body: "[GetPlayer.GetCustom('com_intro_window_macroregion_type')][GetPlayer.GetCustom('com_intro_window_subregion_type')][GetPlayer.GetCustom('com_intro_window_rank_type')]$com_intro_window_government_summary$"
+
+ com_intro_window_macroregion_europe: "Europe finds itself in the midst of a various economic and social transformations. Industry has been revolutionized by the spread of steam-powered production, improving metallurgy, and increasing mechanization. Society grapples with explosive population growth and emerging class consciousness as peasants are drawn from their ancestral villages towards urban centers."
+ com_intro_window_macroregion_americas: "The Americas are undergoing a rapid transformation. The influence of the burgeoning United States has seen the collapse of the New World Empires with the increasingly autonomous Canada and small territories along the Caribbean being the last outposts of direct European control. The new nations grapple with both their identities and the question of what to do with the countless Indigenous Americans who show little interest in cooperating with these new states."
+ com_intro_window_macroregion_mena: "The Middle East and the Maghreb are increasingly in disarray. The ongoing stagnation of the Ottoman Empire has opened power vacuums across the Mediterranean while the Guarded Domains of Iran buckle under pressure from Russian expansion. As the Eastern Question and Great Game take root in European thought, the Great Powers seek to reduce Western Asia to little more than colonial outposts of their growing empires."
+ com_intro_window_macroregion_asia: "Eastern Asian lingers in the growing shadow of European imperialism. The Qing dynasty, long the hegemon in the East, finds itself challenged by European interlopers. Japan remains closed outsiders while the Indian subcontinent and the islands of Indonesia have been carved up among colonial powers. In Central Asia, the Great Game has fractured the balance of power as Russia and Great Britain compete for dominance."
+ com_intro_window_macroregion_africa: "#todo com_intro_window_macroregion_africa#!"
+ com_intro_window_macroregion_oceania: "#todo com_intro_window_macroregion_oceania#!"
+
+ com_intro_window_subregion_north_america: "$com_lb$#todo com_intro_window_subregion_north_america#!"
+ com_intro_window_subregion_south_america: "$com_lb$#todo com_intro_window_subregion_south_america#!"
+ com_intro_window_subregion_western_europe: "$com_lb$#todo com_intro_window_subregion_western_europe#!"
+ com_intro_window_subregion_eastern_europe: "$com_lb$#todo com_intro_window_subregion_eastern_europe#!"
+ com_intro_window_subregion_balkans: "$com_lb$#todo com_intro_window_subregion_balkans#!"
+ com_intro_window_subregion_east_asia: "$com_lb$#todo com_intro_window_subregion_east_asia#!"
+
+ com_intro_window_rank_header: "[GetPlayer.GetRank.GetNameNoFormatting]"
+ com_intro_window_rank_body: "[GetPlayer.GetCustom('com_intro_window_rank_body')]"
+ com_intro_window_rank_great_power: "$com_lb$As a [concept_great_power], [GetPlayer.GetNameNoFlag] enjoys a position of dominance in the world order. Locked in an endless competition with her peers, the state seeks to extract the most from weaker countries while guarding themselves against upstart wary [Concept('concept_major_power','$concept_major_powers|q$')] trying to ascend to greatness at their expense."
+ com_intro_window_rank_major_minor: "$com_lb$As a [concept_major_power], [GetPlayer.GetNameNoFlag] is recognized as an essential actor in its [concept_strategic_region] and outsiders seeking greater involvement in the region must deal with her in some way. While not yet strong enough to project power on a global scale, the [Concept('concept_great_power','$concept_great_powers|q$')] watch her with cautious eyes."
+ com_intro_window_rank_minor_insigificant_power: "$com_lb$As a [GetPlayer.GetRank], [GetPlayer.GetNameNoFlag] is little more than a pawn in the political machinations of the [Concept('concept_major_power','$concept_major_powers|q$')] and [Concept('concept_great_power','$concept_great_powers|q$')]. With little ability to enforce their her abroad, the states struggled for the right to self-determination while trying not to appear too inconvenient to foreign empires."
+ com_intro_window_rank_unrecognized: "$com_lb$As an [concept_unrecognized_power], [GetPlayer.GetNameNoFlag] is perceived as inferior and uncivilized by the reigning [Concept('concept_great_power','$concept_great_powers|q$')], who regard them as little more than potential future conquests. With most diplomatic avenues closed to her, the country must seek [Concept('concept_recognized_power','$concept_recognition|q$')] lest she fall to imperialist designs."
+ com_intro_window_rank_decentralized: "$com_lb$#red #bold As a [concept_decentralized_nation], [GetPlayer.GetNameNoFlag] should not be seeing this event. Ping Alexedishi on the Victoria 3 Modding Co-op if you see this.#!#!"
+ 
+ com_intro_window_government_summary: "$com_lb$As a [GetPlayer.GetGovernment.GetName], [GetPlayer.GetNameNoFlag] vests its political authority in the [GetPlayer.GetRuler.GetPrimaryRoleTitle] with a [GetPlayer.GetGovernment.GetTransferOfPowerName] [concept_transfer_of_power]."
+
+ ####---------- Content Tab Localization ----------####
+ com_intro_window_content_tab_button: "@com_journal_btn! Content"
+ com_intro_window_active_journal_entries: "Active [Concept('concept_journal_entry', '$concept_journal_entries|q$')]"
+ com_intro_window_content_header: "Content Available to [GetPlayer.GetNameNoFormatting]"
+ com_intro_window_content_text: "[GetPlayer.MakeScope.Var('com_intro_window_content_text').GetFlagName]"

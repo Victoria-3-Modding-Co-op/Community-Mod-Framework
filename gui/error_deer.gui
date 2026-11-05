@@ -10,7 +10,10 @@ widget = {
 	onmousehierarchyenter = "[SetCanOpenRightClickContextMenu( '(bool)no' )]"
 	onmousehierarchyleave = "[SetCanOpenRightClickContextMenu( '(bool)yes' )]"
 	container = {
-		visible = "[IsGamePaused]"
+		visible = "[Or(
+			IsGamePaused,
+			Not(GetVariableSystem.Exists('com_debug_deer_unlocked'))
+		)]"
 		state = {
 			name = _show
 			duration = 0.1
@@ -85,6 +88,29 @@ widget = {
 				using = fontsize_large
 				margin = { 10 5 }
 				tooltip = "com_error_counter_tooltip"
+			}
+		}
+		button = {
+			texture = "gfx/interface/backgrounds/round_button_bg.dds"
+			size = { 30 30 }
+			position = { 0 75 }
+			onclick = "[GetVariableSystem.Toggle('com_debug_deer_unlocked')]"
+			
+			icon = {
+				size = { 25 25 }
+				position = { 1 0 }
+				parentanchor = center
+				texture = "gfx/interface/buttons/button_icons/lock.dds"
+				visible = "[Not(GetVariableSystem.Exists('com_debug_deer_unlocked'))]"
+				tooltip = "com_release_manul"
+			}
+			icon = {
+				size = { 25  25 }
+				position = { 1 0 }
+				parentanchor = center
+				texture = "gfx/interface/buttons/button_icons/unlock.dds"
+				visible = "[GetVariableSystem.Exists('com_debug_deer_unlocked')]"
+				tooltip = "com_contain_manul" # MANUL CANNOT BE TAMED
 			}
 		}
 	}

@@ -2,7 +2,6 @@
  party_american_party: "아메리카당"
  party_free_soil_party: "자유토지당"
  party_radical_democracy_party: "급진민주당"
- party_socialist: "사회노동당"
  intelligentsia_missing: "자유당에서 $ig_intelligentsia$이 빠졌습니다"
  industrialists_missing: "자유무역당에서 $ig_industrialists$가 빠졌습니다"
  join_existing_party: "우리는 [concept_party]에 가담해야 합니다"

@@ -1490,7 +1490,7 @@ REPLACE:movement_royalist_absolutist = {
 			max = 0.7 # Starts more powerful but caps out early
 		}
 		
-		# Grey_PLP
+		# Grey_PLP - always put last
 		multiply = {
 			value = mog_plp_movement_mainland_general_pop_support_weight_incorporation_percent_mult
 		}
@@ -1903,7 +1903,7 @@ REPLACE:movement_royalist_constitutional = {
 			add = 0.10
 		}
 		
-		# Grey_PLP
+		# Grey_PLP - always put last
 		multiply = {
 			value = mog_plp_movement_mainland_general_pop_support_weight_incorporation_percent_mult
 		}
@@ -2361,7 +2361,7 @@ REPLACE:movement_labor = { # Explicitly non-socialist labour movement
 			}
 		}
 		
-		# Grey_PLP
+		# Grey_PLP - always put last
 		multiply = {
 			value = mog_plp_movement_mainland_general_pop_support_weight_incorporation_percent_mult
 		}
@@ -2791,7 +2791,7 @@ REPLACE:movement_socialist = {
 			desc = "harlem_renaissance_movement_attraction"
 		}
 		
-		# Grey_PLP
+		# Grey_PLP - always put last
 		multiply = {
 			value = mog_plp_movement_mainland_general_pop_support_weight_incorporation_percent_mult
 		}
@@ -3705,7 +3705,7 @@ REPLACE:movement_communist = {
 			desc = "harlem_renaissance_movement_attraction"
 		}
 		
-		# Grey_PLP
+		# Grey_PLP - always put last
 		multiply = {
 			value = mog_plp_movement_mainland_general_pop_support_weight_incorporation_percent_mult
 		}
@@ -4287,7 +4287,7 @@ REPLACE:movement_fascist = {
 			}
 		}
 		
-		# Grey_PLP
+		# Grey_PLP - always put last
 		multiply = {
 			value = mog_plp_movement_mainland_general_pop_support_weight_incorporation_percent_mult
 		}
@@ -4731,7 +4731,7 @@ REPLACE:movement_corporatist = {
 			desc = "ACCEPTANCE"
 		}
 		
-		# Grey_PLP
+		# Grey_PLP - always put last
 		multiply = {
 			value = mog_plp_movement_mainland_general_pop_support_weight_incorporation_percent_mult
 		}
@@ -5171,7 +5171,7 @@ REPLACE:movement_liberal = {
 			add = 0.10
 		}
 
-		# Grey_PLP
+		# Grey_PLP - always put last
 		multiply = {
 			value = mog_plp_movement_mainland_general_pop_support_weight_incorporation_percent_mult
 		}
@@ -5671,7 +5671,7 @@ REPLACE:movement_radical = {
 			add = 1
 		}
 		
-		# Grey_PLP
+		# Grey_PLP - always put last
 		multiply = {
 			value = mog_plp_movement_mainland_general_pop_support_weight_incorporation_percent_mult
 		}
@@ -6487,7 +6487,7 @@ REPLACE:movement_positivist = {
 			add = 0.10
 		}
 		
-		# Grey_PLP
+		# Grey_PLP - always put last
 		multiply = {
 			value = mog_plp_movement_mainland_general_pop_support_weight_incorporation_percent_mult
 		}
@@ -7540,7 +7540,7 @@ REPLACE:movement_reactionary = {
 			}
 		}
 		
-		# Grey_PLP
+		# Grey_PLP - always put last
 		multiply = {
 			value = mog_plp_movement_mainland_general_pop_support_weight_incorporation_percent_mult
 		}
@@ -8013,7 +8013,7 @@ REPLACE:movement_modernizer = { # This movement loves you and wants you to succe
 			}
 		}
 		
-		# Grey_PLP
+		# Grey_PLP - always put last
 		multiply = {
 			value = mog_plp_movement_mainland_general_pop_support_weight_incorporation_percent_mult
 		}

@@ -1,23 +1,44 @@
 ﻿je_group_com_hidden = {
 	context = country
+	illustration = "gfx/interface/illustrations/journal/je_group_illu_hidden.dds"
+	themed = yes
 }
 
 je_group_com_contextless_hidden = {
 	context = none
+	illustration = "gfx/interface/illustrations/journal/je_group_illu_hidden.dds"
+	themed = yes
+}
+
+REPLACE_OR_CREATE:je_group_global_international_situations = {
+	context = none
+	updates_strategic_region_stances = yes
+	illustration = "gfx/interface/illustrations/journal/je_group_illu_international_situations.dds"
+	themed = yes # Overwritten specifically to introduce this parameter since we empahsize these journals in CMF
 }
 
 je_group_com_supranational_organizations = {
 	context = none
+	illustration = "gfx/interface/illustrations/journal/je_group_illu_international_situations.dds"
+	themed = yes
 }
 je_group_com_regional_organizations = {
 	context = none
+	illustration = "gfx/interface/illustrations/journal/je_group_illu_international_situations.dds"
+	themed = yes
 }
 je_group_com_religious_organizations = {
 	context = none
+	illustration = "gfx/interface/illustrations/journal/je_group_illu_international_situations.dds"
+	themed = yes
 }
 je_group_com_non_governmental_organizations = {
 	context = none
+	illustration = "gfx/interface/illustrations/journal/je_group_illu_international_situations.dds"
+	themed = yes
 }
 je_group_com_sporting_organizations = {
 	context = none
+	illustration = "gfx/interface/illustrations/journal/je_group_illu_international_situations.dds"
+	themed = yes
 }

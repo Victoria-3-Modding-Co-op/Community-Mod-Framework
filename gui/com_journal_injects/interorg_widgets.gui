@@ -243,7 +243,10 @@ types com_journal_widget_types {
 			ignore_in_debug_draw = yes
 			size = { 340 340 }
 
-			visible = "[ComJournalVar('com_interorg_chair_var').IsSet]"
+			visible = "[And(
+				ComJournalVar('com_interorg_chair_var').IsSet,
+				ComJournalVar('com_interorg_chair_var').GetCharacter.IsValid
+			)]"
 			datacontext = "[ComJournalVar('com_interorg_chair_var').GetCharacter]"
 
 			block "character_layout" {
@@ -279,7 +282,10 @@ types com_journal_widget_types {
 			margin = { 5 5 }
 			margin_left = 15
 
-			visible = "[ComJournalVar('com_interorg_chair_var').IsSet]"
+			visible = "[And(
+				ComJournalVar('com_interorg_chair_var').IsSet,
+				ComJournalVar('com_interorg_chair_var').GetCharacter.IsValid
+			)]"
 			datacontext = "[ComJournalVar('com_interorg_chair_var').GetCharacter]"
 
 			background = {

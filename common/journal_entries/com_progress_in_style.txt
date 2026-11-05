@@ -2,9 +2,17 @@
 # Documentation: https://github.com/Victoria-3-Modding-Co-op/Community-Mod-Framework/wiki/Stylized-Journal-Progress-Bars
 
 je_com_progress_in_style = {
-	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
-
 	group = je_group_tutorial
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+	weight = 200
+	
+	activation_description = {
+		always = yes # TODO Figure out what this does
+	}
+	
+	should_be_pinned_by_default_uninvolved_or_context = no
+	transferable = no
+	can_revolution_inherit = yes
 
 	scripted_button = sb_com_progress_in_style_test
 	scripted_button = sb_com_progress_in_style_test2
@@ -114,23 +122,11 @@ je_com_progress_in_style = {
 			}
 		}
 	}
-	on_complete = {
+	
+	outcome = {
+		conclusion_desc = je_standard_failure_conclusion_desc
+		flags = { hidden invalid_outcome }
 		
+		trigger = { always = no }
 	}
-
-	on_fail = {
-		
-	}
-
-	complete = {
-	}
-
-	fail = {
-	}
-
-	transferable = no
-	can_revolution_inherit = yes
-
-	weight = 200
-	should_be_pinned_by_default_uninvolved_or_context = no
 }

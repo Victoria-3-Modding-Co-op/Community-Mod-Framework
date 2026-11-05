@@ -267,3 +267,26 @@ com_unblock_retire_interaction = {
         remove_variable = com_block_retire_var
     }
 }
+
+####---------- Mod Debug Menu Manager Effects ----------####
+com_add_mod_to_debug_manager_effect = {
+    create_container = {
+        name = $mod_name$
+        tags = { mod_debug }
+        save_scope_as = com_mod_container_scope
+        on_created = {
+            set_variable = {
+                name = com_mod_name
+                value = flag:$mod_name$
+            }
+            set_variable = {
+                name = com_mod_command
+                value = flag:$mod_command$
+            }
+        }
+    }
+    add_to_global_variable_list = {
+        name = com_mod_debug_manager_list
+        target = scope:com_mod_container_scope
+    }
+}

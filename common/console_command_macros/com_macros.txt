@@ -13,3 +13,19 @@ com_container = {
     }
     description = "toggle container viewer"
 }
+
+com_interorg_debug = {
+    args = 0
+    commands = {
+        "event com_debug.2"
+    }
+    description = "Activates the interorg sidebar panel and the interorg debug journal entries"
+}
+
+com_community_mod_menu = {
+    args = 0
+    commands = {
+        "GUI.CreateDockable gui/com_debug/com_community_mod_menu.gui com_community_mod_menu Community_Mod_Menu 240 200"
+    }
+    description = "Toggles the Community Mod Menu"
+}

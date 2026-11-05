@@ -14,10 +14,11 @@ macro = {
             EqualTo_string(Dlc.GetName,Localize('dlc004')),
             EqualTo_string(Dlc.GetName,Localize('dlc003'))
         ),
-        Or3(
+        Or4(
             EqualTo_string(Dlc.GetName,Localize('dlc007')),
             EqualTo_string(Dlc.GetName,Localize('dlc008')),
-            EqualTo_string(Dlc.GetName,Localize('dlc015'))
+            EqualTo_string(Dlc.GetName,Localize('dlc015')),
+            EqualTo_string(Dlc.GetName,Localize('dlc019'))
         )
     )"
 }

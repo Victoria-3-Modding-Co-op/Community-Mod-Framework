@@ -4,7 +4,7 @@
 # Basic setup for progress bar styling on the current journal
 # This effect has to be run inside a scope where 'scope:journal_entry' is available!
 # Parameters:
-# - progress_bar = name localization key of progress bar
+# - progress_bar = localization key of progress bar
 # - index = 0-indexed position of the given progress bar in the journal
 # THIS DOES NOT REPLACE THE VANILLA SETUP
 REPLACE_OR_CREATE:initialize_com_progress_bar = {
@@ -18,27 +18,35 @@ REPLACE_OR_CREATE:initialize_com_progress_bar = {
 		else = {
 			if = {
 				limit = {
-					NOT = { container_exists = $progress_bar$ }
+					NOT = {
+						exists_com_progress_bar = {
+							progress_bar = $progress_bar$
+						}
+					}
 				}
 				create_container = {
-					name = $progress_bar$
-					tags = { com_progress_bar }
+					tags = { com_progress_bar com_$progress_bar$ }
 					parent = scope:journal_entry
+					save_scope_as = com_$progress_bar$
+				}
+				add_to_variable_list = {
+					name = com_progress_bar_cache
+					target = scope:com_$progress_bar$
 				}
 			}
 			fix_variable_error = { variable = com_progress_bar_$index$ }
-			fix_variable_error = { variable = $progress_bar$ }
+			fix_variable_error = { variable = com_$progress_bar$ }
 			fix_variable_error = { variable = com_right_color }
 			fix_variable_error = { variable = com_progress_bar_index }
 			# Set progress bar
 			scope:journal_entry = {
 				set_variable = {
 					name = com_progress_bar_$index$
-					value = container:$progress_bar$
+					value = scope:com_$progress_bar$
 				}
 			}
 			# save id
-			container:$progress_bar$ = {
+			scope:com_$progress_bar$ = {
 				set_variable = {
 					name = com_right_color
 					value = flag:com_transparent_bar
@@ -55,7 +63,7 @@ REPLACE_OR_CREATE:initialize_com_progress_bar = {
 # Basic setup for progress bar styling on the current journal
 # This effect has to be run inside a scope where 'scope:journal_entry' is available!
 # Parameters:
-# - progress_bar = name localization key of progress bar
+# - progress_bar = localization key of progress bar
 # - index = 0-indexed position of the given progress bar in the journal
 # - color = color of base bar
 # THIS DOES NOT REPLACE THE VANILLA SETUP
@@ -74,7 +82,7 @@ REPLACE_OR_CREATE:create_com_progress_bar = {
 # General setup for progress bar styling on the current journal
 # This effect has to be run inside a scope where 'scope:journal_entry' is available!
 # Parameters:
-# - progress_bar = name localization key of progress bar
+# - progress_bar = localization key of progress bar
 # - index = 0-indexed position of the given progress bar in the journal
 # - color = color of base bar
 # - bar_increase_color = color of drift bar when increasing
@@ -98,7 +106,7 @@ REPLACE_OR_CREATE:create_com_progress_bar_with_drift = {
 # General setup for progress bar styling on the current journal
 # This effect has to be run inside a scope where 'scope:journal_entry' is available!
 # Parameters:
-# - progress_bar = name localization key of progress bar
+# - progress_bar = localization key of progress bar
 # - index = 0-indexed position of the given progress bar in the journal
 # - color = color of base bar
 # - target_type = icon type for target value
@@ -120,7 +128,7 @@ REPLACE_OR_CREATE:create_com_progress_bar_with_target = {
 # Full setup for progress bar styling on the current journal
 # This effect has to be run inside a scope where 'scope:journal_entry' is available!
 # Parameters:
-# - progress_bar = name localization key of progress bar
+# - progress_bar = localization key of progress bar
 # - index = 0-indexed position of the given progress bar in the journal
 # - color = color of base bar
 # - bar_increase_color = color of drift bar when increasing
@@ -150,44 +158,50 @@ REPLACE_OR_CREATE:create_com_progress_bar_with_both = {
 
 # This effect should be run when the journal entry concludes
 # Parameters:
-# - progress_bar = name localization key of progress bar
+# - progress_bar = localization key of progress bar
 REPLACE_OR_CREATE:remove_com_progress_bar = {
 	hidden_effect = {
 		if = {
 			limit = {
-				NOT = { container_exists = $progress_bar$ }
+				NOT = {
+					exists_com_progress_bar = { progress_bar = $progress_bar$ }
+				}
 			}
-			error_log = "CMF: Progress bar could not be found"
+			error_log = error_no_progress_bar_scope
 		}
 		else = {
+			save_com_progress_bar_scope = { progress_bar = $progress_bar$ }
 			# Remove progress bar from cache
 			remove_list_variable = {
 				name = com_progress_bar_cache
-				target = container:$progress_bar$
+				target = scope:com_$progress_bar$
 			}
 
 			# Destroy progress bar
-			container:$progress_bar$ = { destroy_container = yes }
+			scope:com_$progress_bar$ = { destroy_container = yes }
 		}
 	}
 }
 
 # Sets the color of progress bar
-# - progress_bar = name localization key of progress bar
+# - progress_bar = localization key of progress bar
 # - color = color of bar
 # - side = 'left' or 'right'
 REPLACE_OR_CREATE:set_com_progress_bar_color = {
 	hidden_effect = {
 		if = {
 			limit = {
-				NOT = { container_exists = $progress_bar$ }
+				NOT = {
+					exists_com_progress_bar = { progress_bar = $progress_bar$ }
+				}
 			}
 			error_log = error_no_progress_bar_scope
 		}
 		else = {
+			save_com_progress_bar_scope = { progress_bar = $progress_bar$ }
 			fix_variable_error = { variable = com_$side$_color }
 			fix_variable_error = { variable = com_$color$_bar }
-			container:$progress_bar$ = {
+			scope:com_$progress_bar$ = {
 				set_variable = {
 					name = com_$side$_color
 					value = flag:com_$color$_bar
@@ -199,17 +213,20 @@ REPLACE_OR_CREATE:set_com_progress_bar_color = {
 }
 
 # Unsets the color of progress bar
-# - progress_bar = name localization key of progress bar
+# - progress_bar = localization key of progress bar
 REPLACE_OR_CREATE:remove_com_progress_bar_color = {
 	hidden_effect = {
 		if = {
 			limit = {
-				NOT = { container_exists = $progress_bar$ }
+				NOT = {
+					exists_com_progress_bar = { progress_bar = $progress_bar$ }
+				}
 			}
 			error_log = error_no_progress_bar_scope
 		}
 		else = {
-			container:$progress_bar$ = {
+			save_com_progress_bar_scope = { progress_bar = $progress_bar$ }
+			scope:com_$progress_bar$ = {
 				remove_variable = com_left_color
 				remove_variable = com_right_color
 				remove_tag = cpb_left_color_set
@@ -219,7 +236,7 @@ REPLACE_OR_CREATE:remove_com_progress_bar_color = {
 	}
 }
 # Sets the drift colors and the value to be used
-# - progress_bar = name localization key of progress bar
+# - progress_bar = localization key of progress bar
 # - bar_increase_color = color of drift bar when increasing
 # - bar_decrease_color = color of drift bar when decreasing
 # - drift_value = a 0-1 script value which sets the size and direction of the drift 
@@ -227,18 +244,21 @@ REPLACE_OR_CREATE:set_com_progress_bar_drift = {
 	hidden_effect = {
 		if = {
 			limit = {
-				NOT = { container_exists = $progress_bar$ }
+				NOT = {
+					exists_com_progress_bar = { progress_bar = $progress_bar$ }
+				}
 			}
 			error_log = error_no_progress_bar_scope
 		}
 		else = {
+			save_com_progress_bar_scope = { progress_bar = $progress_bar$ }
 			fix_variable_error = { variable = com_bar_increase_color }
 			fix_variable_error = { variable = com_bar_decrease_color }
 			fix_variable_error = { variable = com_drift_value }
 			fix_variable_error = { variable = com_$bar_increase_color$_bar }
 			fix_variable_error = { variable = com_$bar_decrease_color$_bar }
 			fix_variable_error = { variable = $drift_value$ }
-			container:$progress_bar$ = {
+			scope:com_$progress_bar$ = {
 				set_variable = {
 					name = com_bar_increase_color
 					value = flag:com_$bar_increase_color$_bar
@@ -258,17 +278,20 @@ REPLACE_OR_CREATE:set_com_progress_bar_drift = {
 }
 
 # Removes the progress bar drift effect
-# - progress_bar = name localization key of progress bar
+# - progress_bar = localization key of progress bar
 REPLACE_OR_CREATE:remove_com_progress_bar_drift = {
 	hidden_effect = {
 		if = {
 			limit = {
-				NOT = { container_exists = $progress_bar$ }
+				NOT = {
+					exists_com_progress_bar = { progress_bar = $progress_bar$ }
+				}
 			}
 			error_log = error_no_progress_bar_scope
 		}
 		else = {
-			container:$progress_bar$ = {
+			save_com_progress_bar_scope = { progress_bar = $progress_bar$ }
+			scope:com_$progress_bar$ = {
 				remove_variable = com_bar_increase_color
 				remove_variable = com_bar_decrease_color
 				remove_variable = com_drift_value
@@ -279,23 +302,26 @@ REPLACE_OR_CREATE:remove_com_progress_bar_drift = {
 }
 
 # Sets the target icon/style and the value to be used
-# - progress_bar = name localization key of progress bar
+# - progress_bar = localization key of progress bar
 # - target_type = icon type for target value
 # - target_value = a 0-1 script value which sets the position of the target
 REPLACE_OR_CREATE:set_com_progress_bar_target = {
 	hidden_effect = {
 		if = {
 			limit = {
-				NOT = { container_exists = $progress_bar$ }
+				NOT = {
+					exists_com_progress_bar = { progress_bar = $progress_bar$ }
+				}
 			}
 			error_log = error_no_progress_bar_scope
 		}
 		else = {
+			save_com_progress_bar_scope = { progress_bar = $progress_bar$ }
 			fix_variable_error = { variable = com_target_type }
 			fix_variable_error = { variable = com_target_value }
 			fix_variable_error = { variable = com_target_$target_type$ }
 			fix_variable_error = { variable = $target_value$ }
-			container:$progress_bar$ = {
+			scope:com_$progress_bar$ = {
 				set_variable = {
 					name = com_target_type
 					value = flag:com_target_$target_type$
@@ -311,22 +337,25 @@ REPLACE_OR_CREATE:set_com_progress_bar_target = {
 }
 
 # Sets the target custom icon
-# - progress_bar = name localization key of progress bar
+# - progress_bar = localization key of progress bar
 # - target_icon = icon name as flag which points to a dummy ideology
 REPLACE_OR_CREATE:set_com_progress_bar_target_icon = {
 	hidden_effect = {
 		if = {
 			limit = {
-				NOT = { container_exists = $progress_bar$ }
+				NOT = {
+					exists_com_progress_bar = { progress_bar = $progress_bar$ }
+				}
 			}
 			error_log = error_no_progress_bar_scope
 		}
 		else = {
+			save_com_progress_bar_scope = { progress_bar = $progress_bar$ }
 			fix_variable_error = { variable = com_target_type }
 			fix_variable_error = { variable = com_target_icon_name }
 			fix_variable_error = { variable = com_target_custom_icon }
 			fix_variable_error = { variable = $target_icon$ }
-			container:$progress_bar$ = {
+			scope:com_$progress_bar$ = {
 				set_variable = {
 					name = com_target_type
 					value = flag:com_target_custom_icon
@@ -341,17 +370,20 @@ REPLACE_OR_CREATE:set_com_progress_bar_target_icon = {
 
 }
 # Removes the progress bar target
-# - progress_bar = name localization key of progress bar
+# - progress_bar = localization key of progress bar
 REPLACE_OR_CREATE:remove_com_progress_bar_target = {
 	hidden_effect = {
 		if = {
 			limit = {
-				NOT = { container_exists = $progress_bar$ }
+				NOT = {
+					exists_com_progress_bar = { progress_bar = $progress_bar$ }
+				}
 			}
 			error_log = error_no_progress_bar_scope
 		}
 		else = {
-			container:$progress_bar$ = {
+			save_com_progress_bar_scope = { progress_bar = $progress_bar$ }
+			scope:com_$progress_bar$ = {
 				remove_variable = com_target_type
 				remove_variable = com_target_value
 				remove_tag = cpb_target_set
@@ -361,19 +393,22 @@ REPLACE_OR_CREATE:remove_com_progress_bar_target = {
 }
 
 # Sets the number of levels for the progress bar
-# - progress_bar = name localization key of progress bar
+# - progress_bar = localization key of progress bar
 # - levels = number of levels/parts to the progress bar, evenly spaced
 REPLACE_OR_CREATE:set_com_progress_bar_levels = {
 	hidden_effect = {
 		if = {
 			limit = {
-				NOT = { container_exists = $progress_bar$ }
+				NOT = {
+					exists_com_progress_bar = { progress_bar = $progress_bar$ }
+				}
 			}
 			error_log = error_no_progress_bar_scope
 		}
 		else = {
+			save_com_progress_bar_scope = { progress_bar = $progress_bar$ }
 			fix_variable_error = { variable = com_progress_bar_levels }
-			container:$progress_bar$ = {
+			scope:com_$progress_bar$ = {
 				set_variable = {
 					name = com_progress_bar_levels
 					value = $levels$
@@ -385,17 +420,20 @@ REPLACE_OR_CREATE:set_com_progress_bar_levels = {
 }
 
 # Removes the levels for the progress bar
-# - progress_bar = name localization key of progress bar
+# - progress_bar = localization key of progress bar
 REPLACE_OR_CREATE:remove_com_progress_bar_levels = {
 	hidden_effect = {
 		if = {
 			limit = {
-				NOT = { container_exists = $progress_bar$ }
+				NOT = {
+					exists_com_progress_bar = { progress_bar = $progress_bar$ }
+				}
 			}
 			error_log = error_no_progress_bar_scope
 		}
 		else = {
-			container:$progress_bar$ = {
+			save_com_progress_bar_scope = { progress_bar = $progress_bar$ }
+			scope:com_$progress_bar$ = {
 				remove_variable = com_progress_bar_levels
 				remove_tag = cpb_levels_set
 			}
@@ -404,18 +442,21 @@ REPLACE_OR_CREATE:remove_com_progress_bar_levels = {
 }
 
 # Sets level highlight for the progress bar
-# - progress_bar = name localization key of progress bar
+# - progress_bar = localization key of progress bar
 REPLACE_OR_CREATE:set_com_progress_bar_level_highlight = {
 	hidden_effect = {
 		if = {
 			limit = {
-				NOT = { container_exists = $progress_bar$ }
+				NOT = {
+					exists_com_progress_bar = { progress_bar = $progress_bar$ }
+				}
 			}
 			error_log = error_no_progress_bar_scope
 		}
 		else = {
+			save_com_progress_bar_scope = { progress_bar = $progress_bar$ }
 			fix_variable_error = { variable = com_progress_bar_level_highlight }
-			container:$progress_bar$ = {
+			scope:com_$progress_bar$ = {
 				set_variable = com_progress_bar_level_highlight
 				add_tag = cpb_highlight_set
 			}
@@ -424,17 +465,20 @@ REPLACE_OR_CREATE:set_com_progress_bar_level_highlight = {
 }
 
 # Removes level highlight for the progress bar
-# - progress_bar = name localization key of progress bar
+# - progress_bar = localization key of progress bar
 REPLACE_OR_CREATE:remove_com_progress_bar_level_highlight = {
 	hidden_effect = {
 		if = {
 			limit = {
-				NOT = { container_exists = $progress_bar$ }
+				NOT = {
+					exists_com_progress_bar = { progress_bar = $progress_bar$ }
+				}
 			}
 			error_log = error_no_progress_bar_scope
 		}
 		else = {
-			container:$progress_bar$ = {
+			save_com_progress_bar_scope = { progress_bar = $progress_bar$ }
+			scope:com_$progress_bar$ = {
 				remove_variable = com_progress_bar_level_highlight
 				remove_tag = cpb_highlight_set
 			}
@@ -443,18 +487,21 @@ REPLACE_OR_CREATE:remove_com_progress_bar_level_highlight = {
 }
 
 # Hides the progress bar, so it is no longer shown
-# - progress_bar = name localization key of progress bar
+# - progress_bar = localization key of progress bar
 REPLACE_OR_CREATE:hide_com_progress_bar = {
 	hidden_effect = {
 		if = {
 			limit = {
-				NOT = { container_exists = $progress_bar$ }
+				NOT = {
+					exists_com_progress_bar = { progress_bar = $progress_bar$ }
+				}
 			}
 			error_log = error_no_progress_bar_scope
 		}
 		else = {
+			save_com_progress_bar_scope = { progress_bar = $progress_bar$ }
 			fix_variable_error = { variable = com_hide_progress_bar }
-			container:$progress_bar$ = {
+			scope:com_$progress_bar$ = {
 				set_variable = com_hide_progress_bar
 				add_tag = cpb_hidden_set
 			}
@@ -463,17 +510,20 @@ REPLACE_OR_CREATE:hide_com_progress_bar = {
 }
 
 # Unhides the progress bar
-# - progress_bar = name localization key of progress bar
+# - progress_bar = localization key of progress bar
 REPLACE_OR_CREATE:unhide_com_progress_bar = {
 	hidden_effect = {
 		if = {
 			limit = {
-				NOT = { container_exists = $progress_bar$ }
+				NOT = {
+					exists_com_progress_bar = { progress_bar = $progress_bar$ }
+				}
 			}
 			error_log = error_no_progress_bar_scope
 		}
 		else = {
-			container:$progress_bar$ = {
+			save_com_progress_bar_scope = { progress_bar = $progress_bar$ }
+			scope:com_$progress_bar$ = {
 				remove_variable = com_hide_progress_bar
 				remove_tag = cpb_hidden_set
 			}
@@ -481,11 +531,36 @@ REPLACE_OR_CREATE:unhide_com_progress_bar = {
 	}
 }
 
-# A wrapper effect to easily run an effect inside 'scope:$progress_bar$'
-# - progress_bar = name localization key of progress bar
-# - effect = effect or series of effects to be run inside 'scope:$progress_bar$'
+# Sets up an existing progress bar as an accessible scope
+# This allows using effects and triggers that rely on the 'scope:com_$progress_bar$' outside the event chain
+# - progress_bar = localization key of progress bar
+REPLACE_OR_CREATE:save_com_progress_bar_scope = {
+	hidden_effect = {
+		if = {
+			limit = { NOT = { exists = scope:com_$progress_bar$ } }
+			if = {
+				limit = {
+					exists_com_progress_bar = { progress_bar = $progress_bar$ }
+				}
+				random_in_list = {
+					variable = com_progress_bar_cache
+					limit = { has_tag = com_$progress_bar$ }
+					save_scope_as = com_$progress_bar$
+				}
+			}
+			else = {
+				error_log = error_no_progress_bar_scope
+			}
+		}
+	}
+}
+
+# A wrapper effect to easily run an effect inside 'scope:com_$progress_bar$'
+# - progress_bar = localization key of progress bar
+# - effect = effect or series of effects to be run inside 'scope:com_$progress_bar$'
 REPLACE_OR_CREATE:run_in_com_progress_bar_scope = {
-	container:$progress_bar$ ?= {
+	save_com_progress_bar_scope = { progress_bar = $progress_bar$ }
+	scope:com_$progress_bar$ ?= {
 		$effect$
 	}
 }
@@ -508,40 +583,41 @@ REPLACE_OR_CREATE:run_in_com_progress_bar_scope = {
 ## Gold divider line - gold_line
 
 REPLACE_OR_CREATE:com_debug_progress_bar = {
+	save_com_progress_bar_scope = { progress_bar = $progress_bar$ }
 	set_variable = {
 		name = com_index
 		value = je:$je$.var:com_progress_bar_$index$
 	}
 	set_variable = {
 		name = com_id
-		value = container:$progress_bar$.var:com_id
+		value = scope:com_$progress_bar$.var:com_id
 	}
 	set_variable = {
 		name = com_left_color
-		value = container:$progress_bar$.var:com_left_color
+		value = scope:com_$progress_bar$.var:com_left_color
 	}
 	set_variable = {
 		name = com_right_color
-		value = container:$progress_bar$.var:com_right_color
+		value = scope:com_$progress_bar$.var:com_right_color
 	}
 	set_variable = {
 		name = com_bar_increase_color
-		value = container:$progress_bar$.var:com_bar_increase_color
+		value = scope:com_$progress_bar$.var:com_bar_increase_color
 	}
 	set_variable = {
 		name = com_bar_decrease_color
-		value = container:$progress_bar$.var:com_bar_decrease_color
+		value = scope:com_$progress_bar$.var:com_bar_decrease_color
 	}
 	set_variable = {
 		name = com_drift_value
-		value = container:$progress_bar$.var:com_drift_value
+		value = scope:com_$progress_bar$.var:com_drift_value
 	}
 	set_variable = {
 		name = com_target_type
-		value = container:$progress_bar$.var:com_target_type
+		value = scope:com_$progress_bar$.var:com_target_type
 	}
 	set_variable = {
 		name = com_target_value
-		value = container:$progress_bar$.var:com_target_value
+		value = scope:com_$progress_bar$.var:com_target_value
 	}
 }

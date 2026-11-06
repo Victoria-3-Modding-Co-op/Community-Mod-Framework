@@ -1996,7 +1996,7 @@ REPLACE:movement_labor = { # Non-communist labour movement
 				OR = {
 					has_ideology = ideology:ideology_anarchist
 					has_ideology = ideology:ideology_vanguardist
-					has_ideology = ideology:ideology_communist
+					has_ideology = ideology:ideology_communist_leader
 				}
 			}
 			multiply = {

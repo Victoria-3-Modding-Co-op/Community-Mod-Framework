@@ -365,81 +365,105 @@ types com_ongoing_outliner_items_overwrites {
 			Not(ComJournalEntryGroupSGui('com_international_organization_journal_entry_group_sgui')),
 			ComJournalEntryGroupSGui('com_international_situation_journal_entry_group_sgui')
 		)]"
-		
 		using = default_list_position
-		
+
 		blockoverride "button_style" {
 			using = glow_button
 		}
-		
+
 		blockoverride "status_desc_visibility" {
 			visible = "[And(JournalEntry.IsActive, Not(StringIsEmpty(JournalEntry.GetStatusDesc)))]"
 		}
-		
+
 		blockoverride "status_desc_textsize" {
 			maximumsize = { 275 50 }
 			minimumsize = { 275 -1 }
 		}
-		
+
+		blockoverride "possible_actions_visibility" {
+			visible = "[And(JournalEntry.IsActive, GreaterThan_int32(JournalEntry.GetNumPossibleScriptedButtons, '(int32)0'))]"
+		}
+
+		blockoverride "possible_actions_textsize" {
+			maximumsize = { 275 -1 }
+			minimumsize = { 275 -1 }
+		}
+
 		blockoverride "scripted_progress_bars_visibility_below_title" {
 			visible = "[Not( IsDataModelEmpty( JournalEntry.GetScriptedProgressBars ) )]"
 		}
-		
+
 		blockoverride "scripted_progress_bars_visibility_to_the_right" {
 			visible = no
 		}
-		
+
 		blockoverride "scripted_progress_bars_margins" {
 			margin = { 5 5 }
 		}
-		
+
 		blockoverride "background" {
 			background = {
 				using = dark_area
 				alpha = 0.3
-				
+
 				modify_texture = {
 					texture = "gfx/interface/masks/fade_horizontal_center.dds"
 					blend_mode = alphamultiply
 					alpha = 1
 				}
 			}
-			
+
 			divider_clean = {
 				size = { 95% 2 }
 				parentanchor = hcenter|bottom
 			}
 		}
-		
+
 		blockoverride "flowcontainer_properties" {
 			margin = { 4 4 }
 			spacing = 4
 		}
-		
+
 		blockoverride "minimumsize" {
 			minimumsize = { 340 -1 }
 		}
-		
+
 		blockoverride "textsize" {
 			maximumsize = { 275 50 }
 			minimumsize = { 275 -1 }
 			fontsize_min = 14
 		}
-		
+
 		blockoverride "fontsize" {}
-		
+
 		blockoverride "iconsize" {
 			size = { 27 27 }
 		}
-		
+
 		blockoverride "completing_iconsize" {
 			size = { 18 18 }
 		}
-		
+
+		blockoverride "goal_progress_bar_visibility_below_title" {
+			visible = "[And(JournalEntry.HasProgressBar, JournalEntry.IsActive)]"
+		}
+
+		blockoverride "goal_progress_bar_visibility_to_the_right" {
+			visible = no
+		}
+
+		blockoverride "goal_progress_bar_margins" {
+			margin = { 5 5 }
+		}
+
+		blockoverride "goal_progressbar_size" {
+			size = { 265 12 }
+		}
+
 		blockoverride "progressbar_size" {
 			size = { 265 12 }
 		}
-		
+
 		blockoverride "progressbars_spacing" {}
 	}
 	
@@ -531,81 +555,105 @@ types com_ongoing_outliner_items_overwrites {
 			ComJournalEntryGroupSGui('com_international_organization_journal_entry_group_sgui'),
 			Not(ComJournalEntryGroupSGui('com_international_situation_journal_entry_group_sgui'))
 		)]"
-		
 		using = default_list_position
-		
+
 		blockoverride "button_style" {
 			using = glow_button
 		}
-		
+
 		blockoverride "status_desc_visibility" {
 			visible = "[And(JournalEntry.IsActive, Not(StringIsEmpty(JournalEntry.GetStatusDesc)))]"
 		}
-		
+
 		blockoverride "status_desc_textsize" {
 			maximumsize = { 275 50 }
 			minimumsize = { 275 -1 }
 		}
-		
+
+		blockoverride "possible_actions_visibility" {
+			visible = "[And(JournalEntry.IsActive, GreaterThan_int32(JournalEntry.GetNumPossibleScriptedButtons, '(int32)0'))]"
+		}
+
+		blockoverride "possible_actions_textsize" {
+			maximumsize = { 275 -1 }
+			minimumsize = { 275 -1 }
+		}
+
 		blockoverride "scripted_progress_bars_visibility_below_title" {
 			visible = "[Not( IsDataModelEmpty( JournalEntry.GetScriptedProgressBars ) )]"
 		}
-		
+
 		blockoverride "scripted_progress_bars_visibility_to_the_right" {
 			visible = no
 		}
-		
+
 		blockoverride "scripted_progress_bars_margins" {
 			margin = { 5 5 }
 		}
-		
+
 		blockoverride "background" {
 			background = {
 				using = dark_area
 				alpha = 0.3
-				
+
 				modify_texture = {
 					texture = "gfx/interface/masks/fade_horizontal_center.dds"
 					blend_mode = alphamultiply
 					alpha = 1
 				}
 			}
-			
+
 			divider_clean = {
 				size = { 95% 2 }
 				parentanchor = hcenter|bottom
 			}
 		}
-		
+
 		blockoverride "flowcontainer_properties" {
 			margin = { 4 4 }
 			spacing = 4
 		}
-		
+
 		blockoverride "minimumsize" {
 			minimumsize = { 340 -1 }
 		}
-		
+
 		blockoverride "textsize" {
 			maximumsize = { 275 50 }
 			minimumsize = { 275 -1 }
 			fontsize_min = 14
 		}
-		
+
 		blockoverride "fontsize" {}
-		
+
 		blockoverride "iconsize" {
 			size = { 27 27 }
 		}
-		
+
 		blockoverride "completing_iconsize" {
 			size = { 18 18 }
 		}
-		
+
+		blockoverride "goal_progress_bar_visibility_below_title" {
+			visible = "[And(JournalEntry.HasProgressBar, JournalEntry.IsActive)]"
+		}
+
+		blockoverride "goal_progress_bar_visibility_to_the_right" {
+			visible = no
+		}
+
+		blockoverride "goal_progress_bar_margins" {
+			margin = { 5 5 }
+		}
+
+		blockoverride "goal_progressbar_size" {
+			size = { 265 12 }
+		}
+
 		blockoverride "progressbar_size" {
 			size = { 265 12 }
 		}
-		
+
 		blockoverride "progressbars_spacing" {}
 	}
 }

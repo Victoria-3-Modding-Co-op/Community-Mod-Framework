@@ -52,6 +52,7 @@ com_debug.1 = {
 		fix_variable_error = { variable = com_hide_scripted_buttons }
 		fix_variable_error = { variable = com_hide_journal_reason }
 		fix_variable_error = { variable = com_hide_involved_countries }
+		fix_variable_error = { variable = com_hide_progress_conditions }
 		
 		# CMF International Situations Framework
 		fix_variable_error = { variable = com_situation_header_var }

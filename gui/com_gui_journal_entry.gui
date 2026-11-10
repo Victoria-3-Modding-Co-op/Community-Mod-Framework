@@ -695,7 +695,11 @@ types journal_entry_overwrites {
 					
 					# PROGRESS BAR CONDITIONS
                     flowcontainer = {
-                        visible = "[Or(Not(StringIsEmpty(JournalEntry.GetAdvanceDesc)), Not(StringIsEmpty(JournalEntry.GetDepleteDesc)))]"
+						## CMF Overwrite: variable com_hide_progress_conditions will hide the status_desc
+						visible = "[And(
+							Not(ComJournalVar('com_hide_progress_conditions').IsSet),
+							Or(Not(StringIsEmpty(JournalEntry.GetAdvanceDesc)), Not(StringIsEmpty(JournalEntry.GetDepleteDesc)))
+						)]"
                         direction = vertical
 
                         background = {

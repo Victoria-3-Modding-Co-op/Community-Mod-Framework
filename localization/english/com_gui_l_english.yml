@@ -37,8 +37,17 @@
  
  # Error Deer Localization
  com_error_deer_tooltip: "#instruction Left-Click#! to open Error Log\n#instruction Left-Click + Shift#! to open Explorer\n#instruction Left-Click + Alt#! to open Slow Tick Operations\n#instruction Right-Click#! to make it go away (until you upset it again)\n#instruction Right-Click + Shift#! to open Tweaker\n#instruction Right-Click + Alt#! to open 3D Stats"
- com_error_counter: "#bold [ErrorDeer.NumberOrErrors|v] Errors#!"
+ com_error_counter: "[AddLocalizationIf(Not(GetVariableSystem.Exists('error_deer_icon')),'com_error_counter_base')][AddLocalizationIf(GetVariableSystem.HasValue('error_deer_icon', 'deer'),'com_error_counter_deer')][AddLocalizationIf(GetVariableSystem.HasValue('error_deer_icon', 'manul'),'com_error_counter_manul')][AddLocalizationIf(GetVariableSystem.HasValue('error_deer_icon', 'lion'),'com_error_counter_lion')][AddLocalizationIf(GetVariableSystem.HasValue('error_deer_icon', 'muh_qween'),'com_error_counter_queen')][AddLocalizationIf(GetVariableSystem.HasValue('error_deer_icon', 'frog'),'com_error_counter_frog')][AddLocalizationIf(GetVariableSystem.HasValue('error_deer_icon', 'fix_bug'),'com_error_counter_fix_bug')][AddLocalizationIf(GetVariableSystem.HasValue('error_deer_icon', 'dynamic'),'com_error_counter_dynamic')]"
  com_error_counter_tooltip: "[ErrorDeer.GetTooltip]"
+ 
+ com_error_counter_base: "#bold #italic We have [ErrorDeer.NumberOrErrors|v] Error(s)!#!#!"
+ com_error_counter_deer: "#bold #italic Oh deer, we have [ErrorDeer.NumberOrErrors|v] Error(s)!#!#!"
+ com_error_counter_manul: "#bold #italic We have [ErrorDeer.NumberOrErrors|v] Error(s). Let me check the Manul!#!#!"
+ com_error_counter_lion: "#bold #italic We have [ErrorDeer.NumberOrErrors|v] Error(s)!#!#!"
+ com_error_counter_queen: "#bold #italic We have [ErrorDeer.NumberOrErrors|v] Error(s). Unamusing.#!#!"
+ com_error_counter_frog: "#bold #italic We have [ErrorDeer.NumberOrErrors|v] Violation(s). Straight to jail.#!#!"
+ com_error_counter_fix_bug: "#bold #italic We have [ErrorDeer.NumberOrErrors|v] Bug(s). Pls Fix.#!#!"
+ com_error_counter_dynamic: "#bold #italic [ErrorDeer.NumberOrErrors|v] [GetGlobalVariable('com_error_deer_icon_var').GetInterestGroupTrait.GetDesc]#!"
  
  # Test Event Localization
  com_debug.t: "Community GUI Test Event"

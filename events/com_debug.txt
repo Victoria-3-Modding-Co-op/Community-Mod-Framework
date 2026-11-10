@@ -37,6 +37,7 @@ com_debug.1 = {
 		fix_variable_error = { variable = com_intro_window_situation_text }
 		fix_variable_error = { variable = com_intro_window_content_text }
 		fix_variable_error = { variable = com_ipsum_lorem }
+		fix_variable_error = { variable = com_error_deer_icon_var }
 		
 		## CMF Community Mod Menu
 		fix_variable_error = { variable = com_mod_debug_manager_list }

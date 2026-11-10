@@ -57,6 +57,7 @@ je_com_progress_in_style = {
 		}
 		run_in_com_progress_bar_scope = {
 			progress_bar = spb_com_progress_in_style
+			effect = ""
 		#	"<effects>" #just add your effect here in quotes
 		}
 	}

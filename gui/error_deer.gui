@@ -44,7 +44,7 @@ widget = {
 	# As of 1.15.0, it is gfx/interface/error_lion.dds
 	com_error_deer_button = {
 		blockoverride "icon_visibility" {
-			visible = "[Not(GetVariableSystem.Exists('error_deer_icon'))]"
+			visible = "[Not(GetGlobalVariable('com_error_deer_icon_var').IsSet)]"
 		}
 		blockoverride "icon_texture" {
 			texture = "gfx/interface/error_lion.dds" # Accurate as of patch 1.15.0
@@ -52,55 +52,7 @@ widget = {
 	}
 	com_error_deer_button = {
 		blockoverride "icon_visibility" {
-			visible = "[GetVariableSystem.HasValue('error_deer_icon', 'deer')]"
-		}
-		blockoverride "icon_texture" {
-			texture = "gfx/interface/error_deer.dds"
-		}
-	}
-	com_error_deer_button = {
-		blockoverride "icon_visibility" {
-			visible = "[GetVariableSystem.HasValue('error_deer_icon', 'manul')]"
-		}
-		blockoverride "icon_texture" {
-			texture = "gfx/interface/error_manul.dds"
-		}
-	}
-	com_error_deer_button = {
-		blockoverride "icon_visibility" {
-			visible = "[GetVariableSystem.HasValue('error_deer_icon', 'lion')]"
-		}
-		blockoverride "icon_texture" {
-			texture = "gfx/interface/error_lion.dds"
-		}
-	}
-	com_error_deer_button = {
-		blockoverride "icon_visibility" {
-			visible = "[GetVariableSystem.HasValue('error_deer_icon', 'muh_qween')]"
-		}
-		blockoverride "icon_texture" {
-			texture = "gfx/interface/queen_vic.dds"
-		}
-	}
-	com_error_deer_button = {
-		blockoverride "icon_visibility" {
-			visible = "[GetVariableSystem.HasValue('error_deer_icon', 'frog')]"
-		}
-		blockoverride "icon_texture" {
-			texture = "gfx/interface/error_frog.dds"
-		}
-	}
-	com_error_deer_button = {
-		blockoverride "icon_visibility" {
-			visible = "[GetVariableSystem.HasValue('error_deer_icon', 'fix_bug')]"
-		}
-		blockoverride "icon_texture" {
-			texture = "gfx/interface/error_fix_bug.dds"
-		}
-	}
-	com_error_deer_button = {
-		blockoverride "icon_visibility" {
-			visible = "[GetVariableSystem.HasValue('error_deer_icon', 'dynamic')]"
+			visible = "[GetGlobalVariable('com_error_deer_icon_var').IsSet]"
 		}
 		blockoverride "icon_texture" {
 			texture = "[GetGlobalVariable('com_error_deer_icon_var').GetInterestGroupTrait.GetTexture]"
@@ -276,9 +228,10 @@ types com_error_deer_icon_types {
 			spacing = 2
 			
 			button = {
+				parentanchor = top|hcenter
 				texture = "gfx/interface/backgrounds/round_button_bg.dds"
 				size = { 40 40 }
-				onclick = "[GetVariableSystem.Clear('error_deer_icon')]"
+				onclick = "[GetScriptedGui('com_reset_error_deer_sgui').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 				onclick = "[GetVariableSystem.Clear('com_show_icon_config')]"
 				icon = {
 					size = { 35 35 }
@@ -288,111 +241,35 @@ types com_error_deer_icon_types {
 				}
 			}
 			
-			vertical_divider_stronger_full = {}
-			
-			button = {
-				texture = "gfx/interface/backgrounds/round_button_bg.dds"
-				size = { 40 40 }
-				onclick = "[GetVariableSystem.Set('error_deer_icon', 'deer')]"
-				onclick = "[GetVariableSystem.Clear('com_show_icon_config')]"
-				icon = {
-					size = { 25 25 }
-					position = { 1 0 }
-					parentanchor = center
-					texture = "gfx/interface/error_deer.dds"
-				}
+			vertical_divider_stronger_full = {
+				parentanchor = top|hcenter
 			}
 			
-			button = {
-				texture = "gfx/interface/backgrounds/round_button_bg.dds"
-				size = { 40 40 }
-				onclick = "[GetVariableSystem.Set('error_deer_icon', 'manul')]"
-				onclick = "[GetVariableSystem.Clear('com_show_icon_config')]"
-				icon = {
-					size = { 25 25 }
-					position = { 1 0 }
-					parentanchor = center
-					texture = "gfx/interface/error_manul.dds"
-				}
-			}
-			
-			button = {
-				texture = "gfx/interface/backgrounds/round_button_bg.dds"
-				size = { 40 40 }
-				onclick = "[GetVariableSystem.Set('error_deer_icon', 'lion')]"
-				onclick = "[GetVariableSystem.Clear('com_show_icon_config')]"
-				icon = {
-					size = { 25 25 }
-					position = { 1 0 }
-					parentanchor = center
-					texture = "gfx/interface/error_lion.dds"
-				}
-			}
-			
-			button = {
-				texture = "gfx/interface/backgrounds/round_button_bg.dds"
-				size = { 40 40 }
-				onclick = "[GetVariableSystem.Set('error_deer_icon', 'muh_qween')]"
-				onclick = "[GetVariableSystem.Clear('com_show_icon_config')]"
-				icon = {
-					size = { 25 25 }
-					position = { 1 0 }
-					parentanchor = center
-					texture = "gfx/interface/queen_vic.dds"
-				}
-			}
-			
-			button = {
-				texture = "gfx/interface/backgrounds/round_button_bg.dds"
-				size = { 40 40 }
-				onclick = "[GetVariableSystem.Set('error_deer_icon', 'frog')]"
-				onclick = "[GetVariableSystem.Clear('com_show_icon_config')]"
-				icon = {
-					size = { 25 25 }
-					position = { 1 0 }
-					parentanchor = center
-					texture = "gfx/interface/error_frog.dds"
-				}
-			}
-		}
-		
-		
-		flowcontainer = {
-			direction = horizontal
-			parentanchor = top|hcenter
-			minimumsize = { 255 -1 }
-			spacing = 2
-			
-			widget = {
-				size = { 40 40 }
-			}
-			
-			vertical_divider_stronger_full = {}
-			
-			button = {
-				texture = "gfx/interface/backgrounds/round_button_bg.dds"
-				size = { 40 40 }
-				onclick = "[GetVariableSystem.Set('error_deer_icon', 'fix_bug')]"
-				onclick = "[GetVariableSystem.Clear('com_show_icon_config')]"
-				icon = {
-					size = { 25 25 }
-					position = { 1 0 }
-					parentanchor = center
-					texture = "gfx/interface/error_fix_bug.dds"
-				}
-			}
-			
-			button = {
-				texture = "gfx/interface/backgrounds/round_button_bg.dds"
-				size = { 40 40 }
-				visible = "[GetGlobalVariable('com_error_deer_icon_var').IsSet]"
-				onclick = "[GetVariableSystem.Set('error_deer_icon', 'dynamic')]"
-				onclick = "[GetVariableSystem.Clear('com_show_icon_config')]"
-				icon = {
-					size = { 35 35 }
-					position = { 1 0 }
-					parentanchor = center
-					texture = "[GetGlobalVariable('com_error_deer_icon_var').GetInterestGroupTrait.GetTexture]"
+			dynamicgridbox = {
+				parentanchor = top|hcenter
+				datamodel = "[GetGlobalList('com_error_deer_icon_list')]"
+				datamodel_wrap = 5
+				flipdirection = yes
+				
+				item = {
+					widget = {
+						size = { 45 40 } # spacing buffer; it doesn't need much
+						button = {
+							size = { 40 40 }
+							texture = "gfx/interface/backgrounds/round_button_bg.dds"
+							datacontext = "[Scope.GetInterestGroupTrait]"
+							
+							onclick = "[GetScriptedGui('com_set_error_deer_sgui').Execute( GuiScope.SetRoot( GetPlayer.MakeScope ).AddScope( 'icon', InterestGroupTrait.MakeScope).End )]"
+							onclick = "[GetVariableSystem.Clear('com_show_icon_config')]"
+							
+							icon = {
+								size = { 25 25 }
+								position = { 1 0 }
+								parentanchor = center
+								texture = "[InterestGroupTrait.GetTexture]"
+							}
+						}
+					}
 				}
 			}
 		}

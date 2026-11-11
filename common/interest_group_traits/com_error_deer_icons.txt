@@ -1,0 +1,18 @@
+﻿com_error_deer = {
+	icon = gfx/interface/error_deer.dds
+}
+com_error_manul = {
+	icon = gfx/interface/error_manul.dds
+}
+com_error_lion = {
+	icon = gfx/interface/error_lion.dds
+}
+com_muh_qween = {
+	icon = gfx/interface/queen_vic.dds
+}
+com_error_frog = {
+	icon = gfx/interface/error_frog.dds
+}
+com_error_fix_bug = {
+	icon = gfx/interface/error_fix_bug.dds
+}

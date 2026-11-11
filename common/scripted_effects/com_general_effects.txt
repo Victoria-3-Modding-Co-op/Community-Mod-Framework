@@ -294,8 +294,43 @@ com_add_mod_to_debug_manager_effect = {
 ####---------- Custom Error Deer Icon Effects ----------####
 # NOTE: I will refactor this to add to a global list; functionality will be unchanged from the user perspective -Alexedishi
 com_add_custom_error_deer_icon = {
+    if = {
+        limit = {
+            NOT = {
+                is_target_in_global_variable_list = {
+                    name = com_error_deer_icon_list
+                    target = ig_trait:$icon$
+                }
+            }
+        }
+        add_to_global_variable_list = {
+            name = com_error_deer_icon_list
+            target = ig_trait:$icon$
+        }
+    }
     set_global_variable = {
         name = com_error_deer_icon_var
         value = ig_trait:$icon$
     }
+}
+
+com_set_custom_error_deer_icon = {
+    if = {
+        limit = {
+            is_target_in_global_variable_list = {
+                name = com_error_deer_icon_list
+                target = ig_trait:$icon$
+            }
+        }
+        set_global_variable = {
+            name = com_error_deer_icon_var
+            value = ig_trait:$icon$
+        }
+    }
+    else = {
+        error_log = "Provided ig_trait was not found in global list com_error_deer_icon_list"
+    }
+}
+com_reset_custom_error_deer_icon = {
+    remove_global_variable = com_error_deer_icon_var
 }

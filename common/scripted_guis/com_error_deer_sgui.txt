@@ -1,0 +1,19 @@
+﻿com_reset_error_deer_sgui = {
+	scope = none
+	effect = {
+		com_reset_custom_error_deer_icon = yes
+	}
+}
+
+com_set_error_deer_sgui = {
+	scope = none
+	saved_scopes = {
+		icon
+	}
+	effect = {
+		set_global_variable = {
+			name = com_error_deer_icon_var
+			value = scope:icon
+		}
+	}
+}

@@ -43,4 +43,25 @@
 	com_add_journal_group_to_interorg_list = {
 		name = je_group_com_sporting_organizations
 	}
+	
+	## Build Custom Error Icons List
+	com_add_custom_error_deer_icon = {
+		icon = com_error_deer
+	}
+	com_add_custom_error_deer_icon = {
+		icon = com_error_manul
+	}
+	com_add_custom_error_deer_icon = {
+		icon = com_error_lion
+	}
+	com_add_custom_error_deer_icon = {
+		icon = com_muh_qween
+	}
+	com_add_custom_error_deer_icon = {
+		icon = com_error_frog
+	}
+	com_add_custom_error_deer_icon = {
+		icon = com_error_fix_bug
+	}
+	com_reset_custom_error_deer_icon = yes # Ideally, this makes it in before downstream mods
 }

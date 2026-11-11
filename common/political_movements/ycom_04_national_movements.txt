@@ -253,6 +253,8 @@
 	}
 	
 	secession = {
+        can_secede_during_revolution = yes
+
 		possible = {
 			scope:clout <= 0
 		}
@@ -560,6 +562,8 @@ REPLACE:movement_muslim_nationalist = {
 		}
 	}
 	secession = {
+        can_secede_during_revolution = yes
+
 		weight = {
 			value = 1000
 		}

@@ -350,6 +350,8 @@
 	}
 
 	secession = {
+        can_secede_during_revolution = yes
+
 		possible = {
 			OR = {
 				political_movement_support >= 0.05

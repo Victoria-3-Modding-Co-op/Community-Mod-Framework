@@ -678,6 +678,7 @@ event_window_2char_discussion = { }
 event_window_highlander = { }
 event_window_3char = { }
 event_window_3char_selection = { }
+event_window_com_fixed_image_size = { }
 
 #### CMF Superevent Window Variants
 event_window_superevent_newspaper = { }

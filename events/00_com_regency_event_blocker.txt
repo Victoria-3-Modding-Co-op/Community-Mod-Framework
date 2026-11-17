@@ -1,5 +1,7 @@
 ﻿####---------- REGENCY EVENT BLOCKER ----------####
-# Last validated against patch 1.13.9 by Alexedishi on 10 AUG 2026
+# Last validated against patch 1.15.1 by Alexedishi on 17 NOV 2026
+# regency.1 is modified to be blocked by the variable "com_no_regencies" on the country scope
+# regency.3 is modified to be blocked by the variable "com_extended_regency" on the country scope
 
 namespace = regency
 
@@ -110,6 +112,7 @@ regency.1 = {
 		}
 		ruler ?= {
 			save_scope_as = monarch_scope
+			set_temporary_event_immortality = { DURATION = 3 }
 		}
 	}
 	
@@ -173,5 +176,84 @@ regency.1 = {
 			}
 		}
 		set_heir = scope:monarch_scope
+	}
+	
+	after = {
+		revoke_temporary_event_immortality = { CHARACTER = scope:monarch_scope }
+	}
+}
+
+# End of the regency
+regency.3 = {
+	type = country_event
+	placement = root
+	
+	duration = 3
+	
+	title = regency.3.t
+	desc = regency.3.d
+	flavor = regency.3.f
+	
+	gui_window = event_window_1char_tabloid
+	
+	left_icon = scope:monarch_scope
+	
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	on_opened_soundeffect = "event:/SFX/Events/misc/2Characters"
+	
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+	
+	cooldown = { days = 100 }
+	
+	trigger = {
+		NOT = {
+			has_variable = com_extended_regency # CMF addition
+		}
+		# triggered by on_action - on_monthly_pulse_country
+		has_gov_regency = yes
+		heir ?= {
+			is_adult = yes
+		}
+	}
+	
+	cancellation_trigger = {
+		has_variable = com_extended_regency # CMF addition
+	}
+	
+	immediate = {
+		ruler ?= {
+			save_scope_as = regent_scope
+			set_temporary_event_immortality = { DURATION = 3 }
+		}
+		heir ?= {
+			save_scope_as = monarch_scope
+			set_temporary_event_immortality = { DURATION = 3 }
+		}
+	}
+	
+	option = {
+		name = regency.3.a
+		default_option = yes
+		remove_regency_modifier = yes
+		scope:monarch_scope ?= {
+			set_character_as_ruler = yes
+			set_variable = regency_complete
+		}
+	}
+	
+	after = {
+		revoke_temporary_event_immortality = { CHARACTER = scope:regent_scope }
+		revoke_temporary_event_immortality = { CHARACTER = scope:monarch_scope }
+		if = {
+			limit = {
+				scope:monarch_scope ?= {
+					has_template = JAP_iemochi_tokugawa
+				}
+				scope:regent_scope ?= {
+					has_template = JAP_yoshinobu_tokugawa
+				}
+			}
+			set_heir = scope:regent_scope # Prevent cloning Yoshinobu
+		}
 	}
 }

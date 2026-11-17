@@ -277,6 +277,16 @@ com_block_regencies = {
     }
 }
 
+com_block_regencies_with_duration = {
+    custom_tooltip = {
+        text = com_block_regencies
+        set_variable = {
+            name = com_no_regencies
+            $duration$
+        }
+    }
+}
+
 com_unblock_regencies = {
     if = {
         limit = {

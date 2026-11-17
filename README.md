@@ -93,6 +93,7 @@ To set this mod as a dependency to your own mod, you will need to add this to yo
 - Marmot
 - MasterofGrey
 - Mori
+- PPsyrius
 - rskhm
 - Taylor
 - Xier

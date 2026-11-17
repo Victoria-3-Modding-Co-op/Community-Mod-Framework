@@ -331,7 +331,6 @@ com_debug.1 = {
 		fix_variable_error = { variable = ccp_land_revolution_ig }
 		fix_variable_error = { variable = com_local_goods }
 		fix_variable_error = { variable = example_on_action_weekly_run_date }
-		fix_variable_error = { variable = next_dict_id }
 		fix_variable_error = { variable = kvp_key }
 		fix_variable_error = { variable = kvp_value }
 		fix_variable_error = { variable = kvp }

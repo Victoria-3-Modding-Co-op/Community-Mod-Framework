@@ -268,6 +268,51 @@ com_unblock_retire_interaction = {
     }
 }
 
+####---------- CMF Regency Event Blockers ----------####
+# All of these effects must be run from the COUNTRY scope!!
+com_block_regencies = {
+    custom_tooltip = {
+        text = com_block_regencies
+        set_variable = com_no_regencies
+    }
+}
+
+com_unblock_regencies = {
+    if = {
+        limit = {
+            has_variable = com_no_regencies
+        }
+        custom_tooltip = {
+            text = com_unblock_regencies
+            remove_variable = com_no_regencies
+        }
+    }
+}
+
+com_extend_regency = {
+    custom_tooltip = {
+        text = com_extend_regency
+        set_variable = com_extended_regency
+    }
+}
+
+com_extend_regency_with_duration = {
+    custom_tooltip = {
+        text = com_extend_regency
+        set_variable = {
+            name = com_extended_regency
+            $duration$
+        }
+    }
+}
+
+com_clear_regency_extension = {
+    custom_tooltip = {
+        text = com_clear_regency_extension
+        remove_variable = com_extended_regency
+    }
+}
+
 ####---------- Mod Debug Menu Manager Effects ----------####
 com_add_mod_to_debug_manager_effect = {
     create_container = {
@@ -331,6 +376,7 @@ com_set_custom_error_deer_icon = {
         error_log = "Provided ig_trait was not found in global list com_error_deer_icon_list"
     }
 }
+
 com_reset_custom_error_deer_icon = {
     remove_global_variable = com_error_deer_icon_var
 }

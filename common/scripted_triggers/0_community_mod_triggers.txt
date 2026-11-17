@@ -102,6 +102,11 @@ is_usfp_active = {
 	always = no
 }
 
+# Historical Siam Flavor - Clothing
+hsfc_is_active = {
+	always = no
+}
+
 # Industry Expanded
 IEX_is_active_trigger = {
 	always = no
@@ -167,8 +172,18 @@ rule_britannia_is_active_trigger = {
 	always = no
 }
 
+# Siamese Renaissance
+srm_is_active = {
+	always = no
+}
+
 # States That Make Sense
 STMS_is_active_trigger = {
+	always = no
+}
+
+# Tech & Res
+technres_is_active = {
 	always = no
 }
 

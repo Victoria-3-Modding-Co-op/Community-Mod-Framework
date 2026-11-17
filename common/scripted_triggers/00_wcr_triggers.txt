@@ -1,0 +1,20 @@
+﻿# Western Clothes: Redux third-party compatibility defaults.
+# WCR's zz_WCR_compatibility_triggers.txt replaces these when WCR is active.
+
+WCR_TPM_has_completed_westernization_trigger = {
+	always = no
+}
+
+WCR_TPM_branch_has_influence_type_trigger = {
+    always = no
+    has_variable = $BRANCH$ # Consume parameters when WCR is absent.
+    has_variable = $TYPE$
+}
+
+WCR_TPM_army_clothes_trigger = {
+    always = no
+}
+
+WCR_TPM_navy_clothes_trigger = {
+    always = no
+}

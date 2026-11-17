@@ -14,3 +14,8 @@
  com_is_character_blocked_from_retire: "[concept_character] has been blocked from being retired"
  com_block_retire_interaction_default: "[Character.GetFullName] has been blocked from being retired"
  com_unblock_retire_interaction: "[SCOPE.sCharacter('com_interaction_blocker_scope').GetFullName] will be unblocked from being retired"
+ 
+ com_block_regencies: "Establishment of #bold Regencies#! will be blocked in [GetPlayer.GetNameNoFlag]"
+ com_unblock_regencies: "Establishment of #bold Regencies#! will be allowed in [GetPlayer.GetNameNoFlag]"
+ com_extend_regency: "Termination of #bold Regencies#! will be blocked in [GetPlayer.GetNameNoFlag]"
+ com_clear_regency_extension: "Termination of #bold Regencies#! will be allowed in [GetPlayer.GetNameNoFlag]"

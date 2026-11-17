@@ -12,3 +12,8 @@
  com_is_character_blocked_from_retire: "[concept_character]은 은퇴되지 않도록 보호됩니다."
  com_block_retire_interaction_default: "[Character.GetFullName]은 은퇴되지 않도록 보호됩니다."
  com_unblock_retire_interaction: "[SCOPE.sCharacter('com_interaction_blocker_scope').GetFullName]은 은퇴 방지 상태가 해제됩니다."
+ 
+ com_block_regencies: "Establishment of #bold Regencies#! will be blocked in [GetPlayer.GetNameNoFlag]"
+ com_unblock_regencies: "Establishment of #bold Regencies#! will be allowed in [GetPlayer.GetNameNoFlag]"
+ com_extend_regency: "Termination of #bold Regencies#! will be blocked in [GetPlayer.GetNameNoFlag]"
+ com_clear_regency_extension: "Termination of #bold Regencies#! will be allowed in [GetPlayer.GetNameNoFlag]"

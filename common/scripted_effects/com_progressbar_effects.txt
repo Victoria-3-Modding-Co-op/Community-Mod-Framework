@@ -531,6 +531,56 @@ REPLACE_OR_CREATE:unhide_com_progress_bar = {
 	}
 }
 
+# Sets the color of progress bar
+# - progress_bar = localization key of progress bar
+# - icon = icon name as flag which points to a dummy ideology
+# - side = 'left' or 'right'
+REPLACE_OR_CREATE:set_com_progress_bar_side_icon = {
+	hidden_effect = {
+		if = {
+			limit = {
+				NOT = {
+					exists_com_progress_bar = { progress_bar = $progress_bar$ }
+				}
+			}
+			error_log = error_no_progress_bar_scope
+		}
+		else = {
+			save_com_progress_bar_scope = { progress_bar = $progress_bar$ }
+			fix_variable_error = { variable = com_$side$_icon }
+			fix_variable_error = { variable = $icon$ }
+			scope:com_$progress_bar$ = {
+				set_variable = {
+					name = com_$side$_icon
+					value = flag:$icon$
+				}
+				add_tag = cpb_$side$_icon_set
+			}
+		}
+	}
+}
+
+# Unsets the color of progress bar
+# - progress_bar = localization key of progress bar
+REPLACE_OR_CREATE:remove_com_progress_bar_side_icon = {
+	hidden_effect = {
+		if = {
+			limit = {
+				NOT = {
+					exists_com_progress_bar = { progress_bar = $progress_bar$ }
+				}
+			}
+			error_log = error_no_progress_bar_scope
+		}
+		else = {
+			save_com_progress_bar_scope = { progress_bar = $progress_bar$ }
+			scope:com_$progress_bar$ = {
+				remove_variable = com_$side$_icon
+				remove_tag = cpb_$side$_icon_set
+			}
+		}
+	}
+}
 # Sets up an existing progress bar as an accessible scope
 # This allows using effects and triggers that rely on the 'scope:com_$progress_bar$' outside the event chain
 # - progress_bar = localization key of progress bar

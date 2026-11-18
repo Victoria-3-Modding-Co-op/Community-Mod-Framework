@@ -259,6 +259,7 @@ types mobilization_options {
 				blockoverride "text_margin" {
 					margin_left = 34
 					margin_right = 8
+				}
 			}
 		}
 	}

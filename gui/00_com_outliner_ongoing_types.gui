@@ -452,6 +452,8 @@ types com_ongoing_outliner_items_overwrites {
 			size = { 265 12 }
 		}
 
-		blockoverride "progressbars_spacing" {}
+		blockoverride "progressbars_spacing" {
+			spacing = 6
+		}
 	}
 }

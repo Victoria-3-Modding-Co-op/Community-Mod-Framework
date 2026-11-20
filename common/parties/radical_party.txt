@@ -362,46 +362,54 @@ radical_party = {
 		always = yes
 	}
 	available_for_interest_group = {
-		owner = {
-			country_has_voting_franchise = yes
-			OR = {
-				py:radical_party ?= {
-					party_has_members = yes
-				}
-				any_interest_group = {
-					ig_counts_as_marginal = no
-					OR = {
-						leader ?= {
-							has_ideology = ideology:ideology_radical
-						}
-						is_interest_group_type = ig_trade_unions
-					}
-				}
+		trigger_if = {
+			limit = {
+				ig_is_member_of_dominant_party = { PARTY = radical }
 			}
-			vic1877_country_uses_alternate_parties = no
+			always = yes
 		}
-		NOR = {
-			is_interest_group_type = ig_landowners
-			is_interest_group_type = ig_devout
-		}
-		leader ?= { # fascists and conservatives hate radicals
-			NOR = {
-				has_ideology = ideology:ideology_fascist
-				has_ideology = ideology:ideology_integralist
-				has_ideology = ideology:ideology_ethno_nationalist
-				has_ideology = ideology:ideology_traditionalist
-				has_ideology = ideology:ideology_royalist
-				has_ideology = ideology:ideology_orleanist
-				has_ideology = ideology:ideology_bonapartist
-				has_ideology = ideology:ideology_legitimist
-				has_ideology = ideology:ideology_theocrat
-				has_ideology = ideology:ideology_slaver
-				character_has_carlist_ideology = yes
-				character_has_miguelist_ideology = yes
-			}
-		}
+		trigger_else = {
+            owner = {
+                country_has_voting_franchise = yes
+                OR = {
+                    py:radical_party ?= {
+                        party_has_members = yes
+                    }
+                    any_interest_group = {
+                        ig_counts_as_marginal = no
+                        OR = {
+                            leader ?= {
+                                has_ideology = ideology:ideology_radical
+                            }
+                            is_interest_group_type = ig_trade_unions
+                        }
+                    }
+                }
+                vic1877_country_uses_alternate_parties = no
+            }
+            NOR = {
+                is_interest_group_type = ig_landowners
+                is_interest_group_type = ig_devout
+            }
+            leader ?= { # fascists and conservatives hate radicals
+                NOR = {
+                    has_ideology = ideology:ideology_fascist
+                    has_ideology = ideology:ideology_integralist
+                    has_ideology = ideology:ideology_ethno_nationalist
+                    has_ideology = ideology:ideology_traditionalist
+                    has_ideology = ideology:ideology_royalist
+                    has_ideology = ideology:ideology_orleanist
+                    has_ideology = ideology:ideology_bonapartist
+                    has_ideology = ideology:ideology_legitimist
+                    has_ideology = ideology:ideology_theocrat
+                    has_ideology = ideology:ideology_slaver
+                    character_has_carlist_ideology = yes
+                    character_has_miguelist_ideology = yes
+                }
+            }
+        }
 	}
-	
+
 	# Root - IG considering joining
 	# scope:number - the number of IGs that would join this party before the root IG
 	join_weight = {
@@ -786,6 +794,15 @@ radical_party = {
 			add = {
 				value = 5
 				desc = "from_serfdom"
+			}
+		}
+		if = {
+			limit = {
+				ig_is_member_of_dominant_party = { PARTY = radical }
+			}
+			add = {
+				value = 1000
+				desc = "amendment_radical_party_dominance"
 			}
 		}
 		if = {

@@ -547,36 +547,44 @@ conservative_party = {
 		always = yes
 	}
 	available_for_interest_group = {
-		owner = {
-			country_has_voting_franchise = yes
-			OR = {
-				py:conservative_party ?= {
-					party_has_members = yes
-				}			
-				ig:ig_landowners ?= {
-					ig_counts_as_marginal = no
-				}
-				ig:ig_devout ?= {
-					ig_counts_as_marginal = no
-				}
-				ig:ig_petty_bourgeoisie ?= {
-					ig_counts_as_marginal = no
-				}
+		trigger_if = {
+			limit = {
+				ig_is_member_of_dominant_party = { PARTY = conservative }
 			}
-			#USFP: replace with custom party
-			trigger_if = {
-				limit = {
-					is_usfp_active = yes
-					c:USA ?= this
-				}
-				usfp_has_constitutional_government = no
-			}
-			vic1877_country_uses_alternate_parties = no
+			always = yes
 		}
-		# unions can never be conservative
-		NOT = { is_interest_group_type = ig_trade_unions }
+		trigger_else = {
+            owner = {
+                country_has_voting_franchise = yes
+                OR = {
+                    py:conservative_party ?= {
+                        party_has_members = yes
+                    }
+                    ig:ig_landowners ?= {
+                        ig_counts_as_marginal = no
+                    }
+                    ig:ig_devout ?= {
+                        ig_counts_as_marginal = no
+                    }
+                    ig:ig_petty_bourgeoisie ?= {
+                        ig_counts_as_marginal = no
+                    }
+                }
+                #USFP: replace with custom party
+                trigger_if = {
+                    limit = {
+                        is_usfp_active = yes
+                        c:USA ?= this
+                    }
+                    usfp_has_constitutional_government = no
+                }
+                vic1877_country_uses_alternate_parties = no
+            }
+            # unions can never be conservative
+            NOT = { is_interest_group_type = ig_trade_unions }
+        }
 	}
-	
+
 	# Root - IG considering joining
 	# scope:number - the number of IGs that would join this party before the root IG
 	join_weight = {
@@ -1420,6 +1428,15 @@ conservative_party = {
 			}
 		}
 
+		if = {
+			limit = {
+				ig_is_member_of_dominant_party = { PARTY = conservative }
+			}
+			add = {
+				value = 1000
+				desc = "amendment_conservative_party_dominance"
+			}
+		}
 		if = {
 			limit = {
 				is_interest_group_type = ig_landowners

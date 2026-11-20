@@ -117,32 +117,40 @@ anarchist_party = {
 		always = yes
 	}
 	available_for_interest_group = {
-		owner = {
-			country_has_voting_franchise = yes
-			OR = {
-				py:anarchist_party ?= {
-					party_has_members = yes
-				}
-				any_interest_group = {
-					ig_counts_as_marginal = no
-					leader ?= {
-						OR = {
-							has_ideology = ideology:ideology_anarchist
-							has_ideology = ideology:ideology_nihilist
-						}
-					}
-				}
+		trigger_if = {
+			limit = {
+				ig_is_member_of_dominant_party = { PARTY = anarchist }
 			}
-			vic1877_country_uses_alternate_parties = no
+			always = yes
 		}
-		leader ?= {
-			OR = {
-				has_ideology = ideology:ideology_anarchist
-				has_ideology = ideology:ideology_nihilist
-			}
-		}
+		trigger_else = {
+            owner = {
+                country_has_voting_franchise = yes
+                OR = {
+                    py:anarchist_party ?= {
+                        party_has_members = yes
+                    }
+                    any_interest_group = {
+                        ig_counts_as_marginal = no
+                        leader ?= {
+                            OR = {
+                                has_ideology = ideology:ideology_anarchist
+                                has_ideology = ideology:ideology_nihilist
+                            }
+                        }
+                    }
+                }
+                vic1877_country_uses_alternate_parties = no
+            }
+            leader ?= {
+                OR = {
+                    has_ideology = ideology:ideology_anarchist
+                    has_ideology = ideology:ideology_nihilist
+                }
+            }
+        }
 	}
-	
+
 	# Root - IG considering joining
 	# scope:number - the number of IGs that would join this party before the root IG
 	join_weight = {
@@ -337,6 +345,15 @@ anarchist_party = {
 			add = {
 				value = 3
 				desc = "from_slavery"
+			}
+		}
+		if = {
+			limit = {
+				ig_is_member_of_dominant_party = { PARTY = anarchist }
+			}
+			add = {
+				value = 1000
+				desc = "amendment_anarchist_party_dominance"
 			}
 		}
 		if = {

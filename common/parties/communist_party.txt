@@ -346,47 +346,55 @@ communist_party = {
 		always = yes
 	}
 	available_for_interest_group = {
-		owner = {
-			country_has_voting_franchise = yes
-			had_reformist_socialism_victory = yes
-			OR = {
-				py:communist_party ?= {
-					party_has_members = yes
-				}
-			any_interest_group = {
-				leader ?= {
-					OR = {
-							has_ideology = ideology:ideology_communist_leader
-						has_ideology = ideology:ideology_vanguardist
-						has_ideology = ideology:ideology_anarchist
-						}
-					}
-				}
+		trigger_if = {
+			limit = {
+				ig_is_member_of_dominant_party = { PARTY = communist }
 			}
-			vic1877_country_uses_alternate_parties = no
+			always = yes
 		}
-		NOR = {
-			is_interest_group_type = ig_industrialists
-			is_interest_group_type = ig_landowners
-		}
-		leader ?= { # fascists, conservatives, and capitalists hate communism
-			NOR = {
-				has_ideology = ideology:ideology_fascist
-				has_ideology = ideology:ideology_integralist
-				has_ideology = ideology:ideology_ethno_nationalist
-				has_ideology = ideology:ideology_market_liberal
-				has_ideology = ideology:ideology_traditionalist
-				character_has_carlist_ideology = yes
-				has_ideology = ideology:ideology_royalist
-				has_ideology = ideology:ideology_orleanist
-				has_ideology = ideology:ideology_bonapartist
-				has_ideology = ideology:ideology_legitimist
-				has_ideology = ideology:ideology_theocrat
-				has_ideology = ideology:ideology_corporatist_leader
-			}
-		}
+		trigger_else = {
+            owner = {
+                country_has_voting_franchise = yes
+                had_reformist_socialism_victory = yes
+                OR = {
+                    py:communist_party ?= {
+                        party_has_members = yes
+                    }
+                any_interest_group = {
+                    leader ?= {
+                        OR = {
+                                has_ideology = ideology:ideology_communist_leader
+                            has_ideology = ideology:ideology_vanguardist
+                            has_ideology = ideology:ideology_anarchist
+                            }
+                        }
+                    }
+                }
+                vic1877_country_uses_alternate_parties = no
+            }
+            NOR = {
+                is_interest_group_type = ig_industrialists
+                is_interest_group_type = ig_landowners
+            }
+            leader ?= { # fascists, conservatives, and capitalists hate communism
+                NOR = {
+                    has_ideology = ideology:ideology_fascist
+                    has_ideology = ideology:ideology_integralist
+                    has_ideology = ideology:ideology_ethno_nationalist
+                    has_ideology = ideology:ideology_market_liberal
+                    has_ideology = ideology:ideology_traditionalist
+                    character_has_carlist_ideology = yes
+                    has_ideology = ideology:ideology_royalist
+                    has_ideology = ideology:ideology_orleanist
+                    has_ideology = ideology:ideology_bonapartist
+                    has_ideology = ideology:ideology_legitimist
+                    has_ideology = ideology:ideology_theocrat
+                    has_ideology = ideology:ideology_corporatist_leader
+                }
+            }
+        }
 	}
-	
+
 	# Root - IG considering joining
 	# scope:number - the number of IGs that would join this party before the root IG
 	join_weight = {
@@ -731,6 +739,15 @@ communist_party = {
 			add = {
 				value = 3
 				desc = "from_slavery"
+			}
+		}
+		if = {
+			limit = {
+				ig_is_member_of_dominant_party = { PARTY = communist }
+			}
+			add = {
+				value = 1000
+				desc = "amendment_communist_party_dominance"
 			}
 		}
 		if = {

@@ -318,42 +318,51 @@ socialist_party = {
 		always = yes
 	}
 	available_for_interest_group = {
-		owner ?= {
-			country_has_voting_franchise = yes
-			OR = {
-				py:socialist_party ?= {
-					party_has_members = yes
-				}
-				any_interest_group = {
-					ig_counts_as_marginal = no
-					leader ?= {
-						has_ideology = ideology:ideology_state_socialist
-					}
-				}
-				ig:ig_trade_unions ?= {
-					ig_counts_as_marginal = no
-				}
+		trigger_if = {
+			limit = {
+				ig_is_member_of_dominant_party = { PARTY = socialist }
 			}
-			vic1877_country_uses_alternate_parties = no
+			always = yes
 		}
-		NOR = { # these ig's are inherently anti-worker
-			is_interest_group_type = ig_landowners
-			is_interest_group_type = ig_industrialists
-		}
-		leader ?= { # fascists and conservatives hate social democracy
-			NOR = {
-				has_ideology = ideology:ideology_fascist
-				has_ideology = ideology:ideology_integralist
-				has_ideology = ideology:ideology_ethno_nationalist
-				has_ideology = ideology:ideology_traditionalist
-				character_has_carlist_ideology = yes
-				has_ideology = ideology:ideology_royalist
-				has_ideology = ideology:ideology_orleanist
-				has_ideology = ideology:ideology_bonapartist
-				has_ideology = ideology:ideology_legitimist
-				has_ideology = ideology:ideology_theocrat
-				has_ideology = ideology:ideology_unt_traditionalist #ANZFP
-			}
+		trigger_else = {
+            owner ?= {
+                country_has_voting_franchise = yes
+                OR = {
+                    py:socialist_party ?= {
+                        party_has_members = yes
+                    }
+                    any_interest_group = {
+                        ig_counts_as_marginal = no
+                        leader ?= {
+                            has_ideology = ideology:ideology_state_socialist
+                        }
+                    }
+                    ig:ig_trade_unions ?= {
+                        ig_counts_as_marginal = no
+                    }
+                }
+                vic1877_country_uses_alternate_parties = no
+            }
+            NOR = { # these ig's are inherently anti-worker
+                is_interest_group_type = ig_landowners
+                is_interest_group_type = ig_industrialists
+            }
+            leader ?= {
+                # fascists and conservatives hate social democracy
+                NOR = {
+                    has_ideology = ideology:ideology_fascist
+                    has_ideology = ideology:ideology_integralist
+                    has_ideology = ideology:ideology_ethno_nationalist
+                    has_ideology = ideology:ideology_traditionalist
+                    character_has_carlist_ideology = yes
+                    has_ideology = ideology:ideology_royalist
+                    has_ideology = ideology:ideology_orleanist
+                    has_ideology = ideology:ideology_bonapartist
+                    has_ideology = ideology:ideology_legitimist
+                    has_ideology = ideology:ideology_theocrat
+                    has_ideology = ideology:ideology_unt_traditionalist #ANZFP
+                }
+            }
 		}
 	}
 	
@@ -767,6 +776,15 @@ socialist_party = {
 			add = {
 				value = 5
 				desc = "from_slavery"
+			}
+		}
+		if = {
+			limit = {
+				ig_is_member_of_dominant_party = { PARTY = socialist }
+			}
+			add = {
+				value = 1000
+				desc = "amendment_socialist_party_dominance"
 			}
 		}
 		if = {

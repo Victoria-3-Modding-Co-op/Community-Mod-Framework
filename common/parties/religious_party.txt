@@ -281,11 +281,19 @@ religious_party = {
 		always = yes
 	}
 	available_for_interest_group = {
-		owner = {
-			country_has_voting_franchise = yes
+		trigger_if = {
+			limit = {
+				ig_is_member_of_dominant_party = { PARTY = religious }
+			}
+			always = yes
 		}
+		trigger_else = {
+            owner = {
+                country_has_voting_franchise = yes
+            }
+        }
 	}
-	
+
 	# Root - IG considering joining
 	# scope:number - the number of IGs that would join this party before the root IG
 	# scope:founding_party - yes if the root IG would be founding this party rather than joining an existing one
@@ -529,6 +537,15 @@ religious_party = {
 				desc = "traditionalist_or_theocrat"
 			}
 		}
+        if = {
+            limit = {
+                ig_is_member_of_dominant_party = { PARTY = religious }
+            }
+            add = {
+                value = 1000
+                desc = "amendment_religious_party_dominance"
+            }
+        }
 		if = {
 			limit = {
 				is_interest_group_type = ig_devout

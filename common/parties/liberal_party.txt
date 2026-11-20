@@ -485,44 +485,52 @@ liberal_party = {
 		always = yes
 	}
 	available_for_interest_group = {
-		owner = {
-			country_has_voting_franchise = yes
-			OR = {
-				py:liberal_party ?= {
-					party_has_members = yes
-				}
-				ig:ig_intelligentsia ?= {
-					ig_counts_as_marginal = no
-				}
-				ig:ig_petty_bourgeoisie ?= {
-					ig_counts_as_marginal = no
-				}
-				ig:ig_industrialists ?= {
-					ig_counts_as_marginal = no
-				}
+		trigger_if = {
+			limit = {
+				ig_is_member_of_dominant_party = { PARTY = liberal }
 			}
-			#USFP: replace with custom party
-			trigger_if = {
-				limit = {
-					is_usfp_active = yes
-					c:USA ?= this
-				}
-				usfp_has_constitutional_government = no
-			}
-			vic1877_country_uses_alternate_parties = no
+			always = yes
 		}
-		leader ?= { # far right and far left won't join liberal parties
-			NOR = {
-				has_ideology = ideology:ideology_fascist
-				has_ideology = ideology:ideology_integralist
-				has_ideology = ideology:ideology_ethno_nationalist
-				has_ideology = ideology:ideology_communist_leader
-				has_ideology = ideology:ideology_vanguardist
-				has_ideology = ideology:ideology_anarchist
-			}
-		}
+		trigger_else = {
+            owner = {
+                country_has_voting_franchise = yes
+                OR = {
+                    py:liberal_party ?= {
+                        party_has_members = yes
+                    }
+                    ig:ig_intelligentsia ?= {
+                        ig_counts_as_marginal = no
+                    }
+                    ig:ig_petty_bourgeoisie ?= {
+                        ig_counts_as_marginal = no
+                    }
+                    ig:ig_industrialists ?= {
+                        ig_counts_as_marginal = no
+                    }
+                }
+                #USFP: replace with custom party
+                trigger_if = {
+                    limit = {
+                        is_usfp_active = yes
+                        c:USA ?= this
+                    }
+                    usfp_has_constitutional_government = no
+                }
+                vic1877_country_uses_alternate_parties = no
+            }
+            leader ?= { # far right and far left won't join liberal parties
+                NOR = {
+                    has_ideology = ideology:ideology_fascist
+                    has_ideology = ideology:ideology_integralist
+                    has_ideology = ideology:ideology_ethno_nationalist
+                    has_ideology = ideology:ideology_communist_leader
+                    has_ideology = ideology:ideology_vanguardist
+                    has_ideology = ideology:ideology_anarchist
+                }
+            }
+        }
 	}
-	
+
 	# Root - IG considering joining
 	# scope:number - the number of IGs that would join this party before the root IG
 	join_weight = {
@@ -1287,6 +1295,15 @@ liberal_party = {
 			add = {
 				value = -20
 				desc = "from_traditionalist_monarchism"
+			}
+		}
+		if = {
+			limit = {
+				ig_is_member_of_dominant_party = { PARTY = liberal }
+			}
+			add = {
+				value = 1000
+				desc = "amendment_liberal_party_dominance"
 			}
 		}
 		if = {

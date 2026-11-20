@@ -177,19 +177,27 @@ military_party = {
 		always = yes
 	}
 	available_for_interest_group = {
-		owner = {
-			country_has_voting_franchise = yes
-			OR = {
-				py:military_party ?= {
-					party_has_members = yes
-				}
-				ig:ig_armed_forces ?= {
-					ig_counts_as_marginal = no
-				}
-			}
-		}
+        trigger_if = {
+            limit = {
+                ig_is_member_of_dominant_party = { PARTY = military }
+            }
+            always = yes
+        }
+        trigger_else = {
+            owner = {
+                country_has_voting_franchise = yes
+                OR = {
+                    py:military_party ?= {
+                        party_has_members = yes
+                    }
+                    ig:ig_armed_forces ?= {
+                        ig_counts_as_marginal = no
+                    }
+                }
+            }
+        }
 	}
-	
+
 	# Root - IG considering joining
 	# scope:number - the number of IGs that would join this party before the root IG
 	# scope:founding_party - yes if the root IG would be founding this party rather than joining an existing one
@@ -550,6 +558,15 @@ military_party = {
 			add = {
 				value = -10
 				desc = "from_monarchist_leanings"
+			}
+		}
+		if = {
+			limit = {
+				ig_is_member_of_dominant_party = { PARTY = military }
+			}
+			add = {
+				value = 1000
+				desc = "amendment_military_party_dominance"
 			}
 		}
 		if = {

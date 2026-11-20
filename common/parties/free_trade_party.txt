@@ -220,29 +220,37 @@ free_trade_party = {
 		always = yes
 	}
 	available_for_interest_group = {
-		owner = {
-			country_has_voting_franchise = yes
-			OR = {
-				py:free_trade_party ?= {
-					party_has_members = yes
-				}
-				any_interest_group = {
-					ig_counts_as_marginal = no
-					OR = {
-						is_interest_group_type = ig_industrialists
-						leader ?= {
-							has_ideology = ideology:ideology_market_liberal
-						}
-						# Vic1877: propertarian capitalists & defense contractors also belong here
-						leader ?= {
-							vic1877_leader_is_propertarian = yes
-						}
-						vic1877_ig_is_defense_contractor = yes
-					}
-				}
+		trigger_if = {
+			limit = {
+				ig_is_member_of_dominant_party = { PARTY = free_trade }
 			}
-			vic1877_country_uses_alternate_parties = no
+			always = yes
 		}
+		trigger_else = {
+            owner = {
+                country_has_voting_franchise = yes
+                OR = {
+                    py:free_trade_party ?= {
+                        party_has_members = yes
+                    }
+                    any_interest_group = {
+                        ig_counts_as_marginal = no
+                        OR = {
+                            is_interest_group_type = ig_industrialists
+                            leader ?= {
+                                has_ideology = ideology:ideology_market_liberal
+                            }
+                            # Vic1877: propertarian capitalists & defense contractors also belong here
+                            leader ?= {
+                                vic1877_leader_is_propertarian = yes
+                            }
+                            vic1877_ig_is_defense_contractor = yes
+                        }
+                    }
+                }
+                vic1877_country_uses_alternate_parties = no
+            }
+        }
 	}
 	
 	# Root - IG considering joining
@@ -749,6 +757,15 @@ free_trade_party = {
 					}
 					add = -5
 				}
+			}
+		}
+		if = {
+			limit = {
+				ig_is_member_of_dominant_party = { PARTY = free_trade }
+			}
+			add = {
+				value = 1000
+				desc = "amendment_free_trade_party_dominance"
 			}
 		}
 		if = {
